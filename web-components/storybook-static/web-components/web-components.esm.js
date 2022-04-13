@@ -1,0 +1,1 @@
+import{p as t,b as e}from"./p-2e66238d.js";(()=>{const e=import.meta.url,a={};return""!==e&&(a.resourcesUrl=new URL(".",e).href),t(a)})().then((t=>e([["p-bffb04ad",[[1,"gv-button"]]],["p-dc917412",[[0,"gv-person",{name:[1],lastname:[1],birthdate:[1],mode:[32]}]]]],t)));

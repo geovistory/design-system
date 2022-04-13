@@ -1,0 +1,14 @@
+{
+    "scripts": {
+        "============================ START  ===========================": "",
+        "start": "npm run start:components",
+        "build": "npm run build:components",
+        "test": "npm run test:components",
+        "======================= COMPONENTS ======================": "",
+        "generate": "cd web-components && npm run generate",
+        "start:components": "cd web-components && npm run start",
+        "build:components": "cd web-components && npm run build",
+        "test:components": "cd web-components && npm run test",
+        "======================= LINT ======================": ""
+    }
+}

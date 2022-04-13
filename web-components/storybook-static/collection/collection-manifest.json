@@ -1,0 +1,13 @@
+{
+  "entries": [
+    "./components/base/gv-button/gv-button.js",
+    "./components/classes/gv-person/gv-person.js"
+  ],
+  "compiler": {
+    "name": "@stencil/core",
+    "version": "2.15.0",
+    "typescriptVersion": "4.5.4"
+  },
+  "collections": [],
+  "bundles": []
+}
