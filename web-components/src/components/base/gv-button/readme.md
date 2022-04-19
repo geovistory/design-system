@@ -9,12 +9,12 @@
 
 ### Used by
 
- - [gv-person](../../classes/gv-person)
+ - [gv-test](../../classes/gv-test)
 
 ### Graph
 ```mermaid
 graph TD;
-  gv-person --> gv-button
+  gv-test --> gv-button
   style gv-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

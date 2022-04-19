@@ -8,7 +8,13 @@ import { HTMLStencilElement, JSXBase } from "./stencil-public-runtime";
 export namespace Components {
     interface GvButton {
     }
-    interface GvPerson {
+    interface GvNumber {
+        "attributeNumber": number;
+    }
+    interface GvPersonRdf {
+        "pkEntity": string;
+    }
+    interface GvTest {
         "birthdate": string;
         "lastname": string;
         "name": string;
@@ -21,28 +27,50 @@ declare global {
         prototype: HTMLGvButtonElement;
         new (): HTMLGvButtonElement;
     };
-    interface HTMLGvPersonElement extends Components.GvPerson, HTMLStencilElement {
+    interface HTMLGvNumberElement extends Components.GvNumber, HTMLStencilElement {
     }
-    var HTMLGvPersonElement: {
-        prototype: HTMLGvPersonElement;
-        new (): HTMLGvPersonElement;
+    var HTMLGvNumberElement: {
+        prototype: HTMLGvNumberElement;
+        new (): HTMLGvNumberElement;
+    };
+    interface HTMLGvPersonRdfElement extends Components.GvPersonRdf, HTMLStencilElement {
+    }
+    var HTMLGvPersonRdfElement: {
+        prototype: HTMLGvPersonRdfElement;
+        new (): HTMLGvPersonRdfElement;
+    };
+    interface HTMLGvTestElement extends Components.GvTest, HTMLStencilElement {
+    }
+    var HTMLGvTestElement: {
+        prototype: HTMLGvTestElement;
+        new (): HTMLGvTestElement;
     };
     interface HTMLElementTagNameMap {
         "gv-button": HTMLGvButtonElement;
-        "gv-person": HTMLGvPersonElement;
+        "gv-number": HTMLGvNumberElement;
+        "gv-person-rdf": HTMLGvPersonRdfElement;
+        "gv-test": HTMLGvTestElement;
     }
 }
 declare namespace LocalJSX {
     interface GvButton {
     }
-    interface GvPerson {
+    interface GvNumber {
+        "attributeNumber"?: number;
+    }
+    interface GvPersonRdf {
+        "pkEntity"?: string;
+    }
+    interface GvTest {
         "birthdate"?: string;
         "lastname"?: string;
         "name"?: string;
     }
     interface IntrinsicElements {
         "gv-button": GvButton;
-        "gv-person": GvPerson;
+        "gv-number": GvNumber;
+        "gv-person-rdf": GvPersonRdf;
+        "gv-test": GvTest;
     }
 }
 export { LocalJSX as JSX };
@@ -50,7 +78,9 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "gv-button": LocalJSX.GvButton & JSXBase.HTMLAttributes<HTMLGvButtonElement>;
-            "gv-person": LocalJSX.GvPerson & JSXBase.HTMLAttributes<HTMLGvPersonElement>;
+            "gv-number": LocalJSX.GvNumber & JSXBase.HTMLAttributes<HTMLGvNumberElement>;
+            "gv-person-rdf": LocalJSX.GvPersonRdf & JSXBase.HTMLAttributes<HTMLGvPersonRdfElement>;
+            "gv-test": LocalJSX.GvTest & JSXBase.HTMLAttributes<HTMLGvTestElement>;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const index = require('./index-e58dabe7.js');
+const index = require('./index-11dd8fae.js');
 
 const gvButtonCss = ":host{display:block}button{height:40px;padding-left:20px;padding-right:20px;font-size:15px;border:none;border-radius:99999px;background-color:lightblue}";
 

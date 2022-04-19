@@ -1,4 +1,4 @@
-import { r as registerInstance, h, H as Host } from './index-5113fe84.js';
+import { r as registerInstance, h, H as Host } from './index-e81b4cbd.js';
 
 const gvButtonCss = ":host{display:block}button{height:40px;padding-left:20px;padding-right:20px;font-size:15px;border:none;border-radius:99999px;background-color:lightblue}";
 
