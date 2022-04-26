@@ -1,0 +1,16 @@
+{
+    "collectionName": "components_gv_gv_numbers",
+    "info": {
+        "displayName": "gv-number",
+        "icon": "align-center"
+    },
+    "options": {},
+    "attributes": {
+        "content": {
+            "type": "number"
+        },
+        "attribute": {
+            "type": "number"
+        }
+    }
+}

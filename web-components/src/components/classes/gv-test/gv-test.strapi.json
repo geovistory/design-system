@@ -1,0 +1,19 @@
+{
+    "collectionName": "components_gv_gv_tests",
+    "info": {
+        "displayName": "gv-test",
+        "icon": "align-center"
+    },
+    "options": {},
+    "attributes": {
+        "name": {
+            "type": "string"
+        },
+        "lastname": {
+            "type": "string"
+        },
+        "birthdate": {
+            "type": "string"
+        }
+    }
+}

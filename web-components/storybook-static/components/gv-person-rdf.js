@@ -25,7 +25,7 @@ const GvPersonRdf$1 = /*@__PURE__*/ proxyCustomElement(class extends HTMLElement
       .replace(/{{this.pkEntity}}/g, this.pkEntity + ''));
     this.rdf = await fetch(this.SPARQL_endpoint + '?query=' + this.query, {
       method: 'POST',
-      headers: { 'Accept': 'text/turtle' }
+      headers: { 'Accept': 'application/rdf+json' }
     }).then(r => r.text());
     console.log(this.rdf);
   }

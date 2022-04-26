@@ -2,7 +2,7 @@
     "scripts": {
         "============================ START  ===========================": "",
         "start": "npm run start:components",
-        "build": "npm run build:components",
+        "build": "npm run build:components; node ./strapi-jsons.js",
         "test": "npm run test:components",
         "======================= COMPONENTS ======================": "",
         "generate": "cd web-components && npm run generate",
