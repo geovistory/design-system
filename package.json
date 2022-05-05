@@ -1,27 +1,12 @@
 {
-    "scripts": {
-        "============================ START  ===========================": "",
-        "start": "npm run start:components",
-        "build": "npm run build:components; node ./strapi-jsons.js",
-        "test": "npm run test:components",
-        "======================= COMPONENTS ======================": "",
-        "generate": "cd web-components && npm run generate",
-        "start:components": "cd web-components && npm run start",
-        "build:components": "cd web-components && npm run build",
-        "test:components": "cd web-components && npm run test",
-        "======================= LINT ======================": ""
-    },
-    "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^5.19.0",
-        "@typescript-eslint/parser": "^5.19.0",
-        "eslint": "^7.32.0",
-        "eslint-config-standard": "^16.0.3",
-        "eslint-plugin-import": "^2.26.0",
-        "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-promise": "^5.2.0",
-        "eslint-plugin-react": "^7.29.4"
-    },
-    "dependencies": {
-        "typescript": "^4.6.3"
-    }
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "============================== PUBLISH NPM PACKAGES ==============================": "",
+    "publish:prepare": "lerna bootstrap",
+    "publish:publish": "lerna publish"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
 }
