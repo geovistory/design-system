@@ -1,0 +1,70 @@
+:root {
+  --color-primary: #805AD5;
+  --color-primary-light: #E9D8FD;
+  --color-grey: rgba(0, 0, 0, 0.48);
+  --color-text: rgb(45, 55, 72);
+
+  --font-family: 'Roboto', 'sans-serif';
+
+  --font-size-xsmall: 12px;
+  --font-size-small: 16px;
+  --font-size-medium: 26px ;
+  --font-size-large: 36px;
+}
+
+.geov-button {
+  cursor: pointer;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+
+  width: 100%;
+  height: 100%;
+  min-height: 2.5rem;
+
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+
+  border-radius: 5px;
+
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.geov-button:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.solid {
+  border-color: transparent;
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.outline {
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--color-primary);
+  background-color: transparent;
+  color: var(--color-primary);
+}
+
+.ghost {
+  border-color: transparent;
+  background-color: transparent;
+  color: var(--color-primary);
+}
+
+.icon {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.rounded {
+  border-radius: 9999px;
+  padding-left: 20px;
+  padding-right: 20px;
+}

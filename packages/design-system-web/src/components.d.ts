@@ -5,57 +5,236 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { IconNames, IconSizes } from "./components/basic/geov-icon/geov-icon";
+import { IconNames as IconNames1, IconSizes as IconSizes1 } from "./components/basic/geov-icon/geov-icon";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface GeovButton {
+        "href"?: string;
+        "icon"?: IconNames;
+        "iconPos": 'start' | 'end';
+        "iconSize"?: IconSizes;
+        "rounded": boolean;
+        "variant": 'solid' | 'outline' | 'ghost' | 'solid';
+    }
+    interface GeovCard {
+        "height": string;
+        "justify": 'start' | 'end' | 'center' | 'space-around' | 'space-between';
+        "width": string;
+    }
+    interface GeovColumn {
+        "justify": 'start' | 'end' | 'center' | 'space-around' | 'space-between';
+    }
+    interface GeovCompanyCard {
+        "description": string;
+        "imageUrl": string;
+        "name": string;
+        "websiteUrl": string;
+    }
+    interface GeovDivider {
+        "height": string;
+        "horizontal": boolean;
+        "vertical": boolean;
+        "width": string;
+    }
+    interface GeovHeading {
+        "variant": 'h1' | 'h2' | 'h3';
+    }
+    interface GeovIcon {
+        "name": IconNames;
+        "size": IconSizes;
+    }
+    interface GeovLink {
+        "href": string;
+    }
+    interface GeovLogo {
+        "name": string;
+    }
+    interface GeovProjectCard {
+        "projectDesc": string;
+        "projectPageUrl": string;
+        "projectTitle": string;
+    }
+    interface GeovRow {
+        "justify": 'start' | 'end' | 'center' | 'space-around' | 'space-between';
+    }
+    interface GeovText {
+        "justify": 'start' | 'center' | 'left';
+        "variant": 'subtitle' | 'description' | 'text' | 'caption';
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLGeovButtonElement extends Components.GeovButton, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLGeovButtonElement: {
+        prototype: HTMLGeovButtonElement;
+        new (): HTMLGeovButtonElement;
+    };
+    interface HTMLGeovCardElement extends Components.GeovCard, HTMLStencilElement {
+    }
+    var HTMLGeovCardElement: {
+        prototype: HTMLGeovCardElement;
+        new (): HTMLGeovCardElement;
+    };
+    interface HTMLGeovColumnElement extends Components.GeovColumn, HTMLStencilElement {
+    }
+    var HTMLGeovColumnElement: {
+        prototype: HTMLGeovColumnElement;
+        new (): HTMLGeovColumnElement;
+    };
+    interface HTMLGeovCompanyCardElement extends Components.GeovCompanyCard, HTMLStencilElement {
+    }
+    var HTMLGeovCompanyCardElement: {
+        prototype: HTMLGeovCompanyCardElement;
+        new (): HTMLGeovCompanyCardElement;
+    };
+    interface HTMLGeovDividerElement extends Components.GeovDivider, HTMLStencilElement {
+    }
+    var HTMLGeovDividerElement: {
+        prototype: HTMLGeovDividerElement;
+        new (): HTMLGeovDividerElement;
+    };
+    interface HTMLGeovHeadingElement extends Components.GeovHeading, HTMLStencilElement {
+    }
+    var HTMLGeovHeadingElement: {
+        prototype: HTMLGeovHeadingElement;
+        new (): HTMLGeovHeadingElement;
+    };
+    interface HTMLGeovIconElement extends Components.GeovIcon, HTMLStencilElement {
+    }
+    var HTMLGeovIconElement: {
+        prototype: HTMLGeovIconElement;
+        new (): HTMLGeovIconElement;
+    };
+    interface HTMLGeovLinkElement extends Components.GeovLink, HTMLStencilElement {
+    }
+    var HTMLGeovLinkElement: {
+        prototype: HTMLGeovLinkElement;
+        new (): HTMLGeovLinkElement;
+    };
+    interface HTMLGeovLogoElement extends Components.GeovLogo, HTMLStencilElement {
+    }
+    var HTMLGeovLogoElement: {
+        prototype: HTMLGeovLogoElement;
+        new (): HTMLGeovLogoElement;
+    };
+    interface HTMLGeovProjectCardElement extends Components.GeovProjectCard, HTMLStencilElement {
+    }
+    var HTMLGeovProjectCardElement: {
+        prototype: HTMLGeovProjectCardElement;
+        new (): HTMLGeovProjectCardElement;
+    };
+    interface HTMLGeovRowElement extends Components.GeovRow, HTMLStencilElement {
+    }
+    var HTMLGeovRowElement: {
+        prototype: HTMLGeovRowElement;
+        new (): HTMLGeovRowElement;
+    };
+    interface HTMLGeovTextElement extends Components.GeovText, HTMLStencilElement {
+    }
+    var HTMLGeovTextElement: {
+        prototype: HTMLGeovTextElement;
+        new (): HTMLGeovTextElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "geov-button": HTMLGeovButtonElement;
+        "geov-card": HTMLGeovCardElement;
+        "geov-column": HTMLGeovColumnElement;
+        "geov-company-card": HTMLGeovCompanyCardElement;
+        "geov-divider": HTMLGeovDividerElement;
+        "geov-heading": HTMLGeovHeadingElement;
+        "geov-icon": HTMLGeovIconElement;
+        "geov-link": HTMLGeovLinkElement;
+        "geov-logo": HTMLGeovLogoElement;
+        "geov-project-card": HTMLGeovProjectCardElement;
+        "geov-row": HTMLGeovRowElement;
+        "geov-text": HTMLGeovTextElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface GeovButton {
+        "href"?: string;
+        "icon"?: IconNames;
+        "iconPos"?: 'start' | 'end';
+        "iconSize"?: IconSizes;
+        "rounded"?: boolean;
+        "variant"?: 'solid' | 'outline' | 'ghost' | 'solid';
+    }
+    interface GeovCard {
+        "height"?: string;
+        "justify"?: 'start' | 'end' | 'center' | 'space-around' | 'space-between';
+        "width"?: string;
+    }
+    interface GeovColumn {
+        "justify"?: 'start' | 'end' | 'center' | 'space-around' | 'space-between';
+    }
+    interface GeovCompanyCard {
+        "description"?: string;
+        "imageUrl"?: string;
+        "name"?: string;
+        "websiteUrl"?: string;
+    }
+    interface GeovDivider {
+        "height"?: string;
+        "horizontal"?: boolean;
+        "vertical"?: boolean;
+        "width"?: string;
+    }
+    interface GeovHeading {
+        "variant"?: 'h1' | 'h2' | 'h3';
+    }
+    interface GeovIcon {
+        "name"?: IconNames;
+        "size"?: IconSizes;
+    }
+    interface GeovLink {
+        "href"?: string;
+    }
+    interface GeovLogo {
+        "name"?: string;
+    }
+    interface GeovProjectCard {
+        "projectDesc"?: string;
+        "projectPageUrl"?: string;
+        "projectTitle"?: string;
+    }
+    interface GeovRow {
+        "justify"?: 'start' | 'end' | 'center' | 'space-around' | 'space-between';
+    }
+    interface GeovText {
+        "justify"?: 'start' | 'center' | 'left';
+        "variant"?: 'subtitle' | 'description' | 'text' | 'caption';
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "geov-button": GeovButton;
+        "geov-card": GeovCard;
+        "geov-column": GeovColumn;
+        "geov-company-card": GeovCompanyCard;
+        "geov-divider": GeovDivider;
+        "geov-heading": GeovHeading;
+        "geov-icon": GeovIcon;
+        "geov-link": GeovLink;
+        "geov-logo": GeovLogo;
+        "geov-project-card": GeovProjectCard;
+        "geov-row": GeovRow;
+        "geov-text": GeovText;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "geov-button": LocalJSX.GeovButton & JSXBase.HTMLAttributes<HTMLGeovButtonElement>;
+            "geov-card": LocalJSX.GeovCard & JSXBase.HTMLAttributes<HTMLGeovCardElement>;
+            "geov-column": LocalJSX.GeovColumn & JSXBase.HTMLAttributes<HTMLGeovColumnElement>;
+            "geov-company-card": LocalJSX.GeovCompanyCard & JSXBase.HTMLAttributes<HTMLGeovCompanyCardElement>;
+            "geov-divider": LocalJSX.GeovDivider & JSXBase.HTMLAttributes<HTMLGeovDividerElement>;
+            "geov-heading": LocalJSX.GeovHeading & JSXBase.HTMLAttributes<HTMLGeovHeadingElement>;
+            "geov-icon": LocalJSX.GeovIcon & JSXBase.HTMLAttributes<HTMLGeovIconElement>;
+            "geov-link": LocalJSX.GeovLink & JSXBase.HTMLAttributes<HTMLGeovLinkElement>;
+            "geov-logo": LocalJSX.GeovLogo & JSXBase.HTMLAttributes<HTMLGeovLogoElement>;
+            "geov-project-card": LocalJSX.GeovProjectCard & JSXBase.HTMLAttributes<HTMLGeovProjectCardElement>;
+            "geov-row": LocalJSX.GeovRow & JSXBase.HTMLAttributes<HTMLGeovRowElement>;
+            "geov-text": LocalJSX.GeovText & JSXBase.HTMLAttributes<HTMLGeovTextElement>;
         }
     }
 }

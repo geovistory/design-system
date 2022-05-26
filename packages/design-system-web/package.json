@@ -46,15 +46,16 @@
   },
   "dependencies": {
     "@stencil/core": "^2.13.0",
-    "@stencil/react-output-target": "^0.3.1"
+    "@stencil/react-output-target": "^0.3.1",
+    "react-icons": "^4.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
     "@stencil/angular-output-target": "^0.4.0",
-    "@storybook/addon-actions": "^6.4.22",
-    "@storybook/addon-essentials": "^6.4.22",
-    "@storybook/addon-links": "^6.4.22",
-    "@storybook/html": "^6.4.22",
+    "@storybook/addon-actions": "^6.5.5",
+    "@storybook/addon-essentials": "^6.5.5",
+    "@storybook/addon-links": "^6.5.5",
+    "@storybook/html": "^6.5.5",
     "@types/jest": "^27.0.3",
     "babel-loader": "^8.2.5",
     "jest": "^27.4.5",

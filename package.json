@@ -4,7 +4,13 @@
   "scripts": {
     "============================== PUBLISH NPM PACKAGES ==============================": "",
     "publish:prepare": "lerna bootstrap",
-    "publish:publish": "lerna publish"
+    "publish:publish": "lerna publish",
+    "=========================== STENCIL ==========================": "",
+    "generate": "cd packages/design-system-web && npm run generate",
+    "start": "cd packages/design-system-web && npm run start",
+    "dev": "cd packages/design-system-web && npm run dev",
+    "build": "cd packages/design-system-web && npm run build",
+    "test": "cd packages/design-system-web && npm run test"
   },
   "devDependencies": {
     "lerna": "^4.0.0"
