@@ -7,11 +7,12 @@
 
 ## Properties
 
-| Property  | Attribute | Description | Type                                                                | Default     |
-| --------- | --------- | ----------- | ------------------------------------------------------------------- | ----------- |
-| `height`  | `height`  |             | `string`                                                            | `undefined` |
-| `justify` | `justify` |             | `"center" \| "end" \| "space-around" \| "space-between" \| "start"` | `'center'`  |
-| `width`   | `width`   |             | `string`                                                            | `undefined` |
+| Property    | Attribute    | Description | Type                                                                | Default     |
+| ----------- | ------------ | ----------- | ------------------------------------------------------------------- | ----------- |
+| `geovStyle` | `geov-style` |             | `string`                                                            | `''`        |
+| `height`    | `height`     |             | `string`                                                            | `undefined` |
+| `justify`   | `justify`    |             | `"center" \| "end" \| "space-around" \| "space-between" \| "start"` | `'center'`  |
+| `width`     | `width`      |             | `string`                                                            | `undefined` |
 
 
 ## Dependencies

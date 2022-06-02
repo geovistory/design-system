@@ -1,8 +1,7 @@
 :root {
-  --color-primary: #805AD5;
-  --color-primary-light: #E9D8FD;
   --color-grey: rgba(0, 0, 0, 0.48);
   --color-text: rgb(45, 55, 72);
+  --color-text-light: white;
 
   --font-family: 'Roboto', 'sans-serif';
 
@@ -36,4 +35,8 @@
   font-size: var(--font-size-xsmall);
   color: var(--color-text);
   font-style: italic;
+}
+
+.light {
+  color: var(--color-text-light);
 }

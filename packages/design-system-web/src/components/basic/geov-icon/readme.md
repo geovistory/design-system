@@ -7,10 +7,15 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type                                  | Default     |
-| -------- | --------- | ----------- | ------------------------------------- | ----------- |
-| `name`   | `name`    |             | `"arrow-right" \| "github" \| "link"` | `undefined` |
-| `size`   | `size`    |             | `"large" \| "medium" \| "small"`      | `'medium'`  |
+| Property     | Attribute     | Description | Type      | Default |
+| ------------ | ------------- | ----------- | --------- | ------- |
+| `arrowRight` | `arrow-right` |             | `boolean` | `false` |
+| `geovStyle`  | `geov-style`  |             | `string`  | `''`    |
+| `github`     | `github`      |             | `boolean` | `false` |
+| `large`      | `large`       |             | `boolean` | `false` |
+| `link`       | `link`        |             | `boolean` | `false` |
+| `medium`     | `medium`      |             | `boolean` | `false` |
+| `small`      | `small`       |             | `boolean` | `false` |
 
 
 ## Dependencies

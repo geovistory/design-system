@@ -5,61 +5,124 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { IconNames, IconSizes } from "./components/basic/geov-icon/geov-icon";
-import { IconNames as IconNames1, IconSizes as IconSizes1 } from "./components/basic/geov-icon/geov-icon";
 export namespace Components {
     interface GeovButton {
+        "geovStyle": string;
+        "ghost": boolean;
         "href"?: string;
-        "icon"?: IconNames;
-        "iconPos": 'start' | 'end';
-        "iconSize"?: IconSizes;
+        "leftIcon": string;
+        "outline": boolean;
+        "rightIcon": string;
         "rounded": boolean;
-        "variant": 'solid' | 'outline' | 'ghost' | 'solid';
+        "solid": boolean;
     }
     interface GeovCard {
+        "geovStyle": string;
         "height": string;
         "justify": 'start' | 'end' | 'center' | 'space-around' | 'space-between';
         "width": string;
     }
+    interface GeovCarousel {
+        "height": string;
+        "interval": number;
+        "transition": number;
+        "width": string;
+    }
     interface GeovColumn {
-        "justify": 'start' | 'end' | 'center' | 'space-around' | 'space-between';
+        "alignCenter": boolean;
+        "alignEnd": boolean;
+        "alignStart": boolean;
+        "center": boolean;
+        "end": boolean;
+        "fh": boolean;
+        "fw": boolean;
+        "geovStyle": string;
+        "spaceAround": boolean;
+        "spaceBetween": boolean;
+        "start": boolean;
     }
     interface GeovCompanyCard {
         "description": string;
+        "geovStyle": string;
         "imageUrl": string;
         "name": string;
         "websiteUrl": string;
     }
     interface GeovDivider {
+        "geovStyle": string;
         "height": string;
         "horizontal": boolean;
         "vertical": boolean;
         "width": string;
     }
+    interface GeovFooterGeovistory {
+        "featuredProjects": string;
+        "geovStyle": string;
+    }
     interface GeovHeading {
-        "variant": 'h1' | 'h2' | 'h3';
+        "geovStyle": string;
+        "h1": boolean;
+        "h2": boolean;
+        "h3": boolean;
+        "light": boolean;
     }
     interface GeovIcon {
-        "name": IconNames;
-        "size": IconSizes;
+        "arrowRight": boolean;
+        "geovStyle": string;
+        "github": boolean;
+        "large": boolean;
+        "link": boolean;
+        "medium": boolean;
+        "small": boolean;
     }
     interface GeovLink {
+        "geovStyle": string;
+        "grey": boolean;
         "href": string;
+        "light": boolean;
     }
     interface GeovLogo {
-        "name": string;
+        "geovStyle": string;
+        "geovistory": boolean;
+        "geovistoryWhite": boolean;
+    }
+    interface GeovNavbar {
+        "geovStyle": string;
+        "height": string;
+        "links": string;
+        "login": string;
+        "login_href": string;
+        "logo": string;
     }
     interface GeovProjectCard {
+        "geovStyle": string;
         "projectDesc": string;
         "projectPageUrl": string;
         "projectTitle": string;
     }
     interface GeovRow {
-        "justify": 'start' | 'end' | 'center' | 'space-around' | 'space-between';
+        "alignCenter": boolean;
+        "alignEnd": boolean;
+        "alignStart": boolean;
+        "center": boolean;
+        "end": boolean;
+        "fh": boolean;
+        "fw": boolean;
+        "geovStyle": string;
+        "spaceAround": boolean;
+        "spaceBetween": boolean;
+        "start": boolean;
     }
     interface GeovText {
-        "justify": 'start' | 'center' | 'left';
-        "variant": 'subtitle' | 'description' | 'text' | 'caption';
+        "caption": boolean;
+        "center": boolean;
+        "description": boolean;
+        "end": boolean;
+        "geovStyle": string;
+        "light": boolean;
+        "start": boolean;
+        "subtitle": boolean;
+        "text": boolean;
     }
 }
 declare global {
@@ -74,6 +137,12 @@ declare global {
     var HTMLGeovCardElement: {
         prototype: HTMLGeovCardElement;
         new (): HTMLGeovCardElement;
+    };
+    interface HTMLGeovCarouselElement extends Components.GeovCarousel, HTMLStencilElement {
+    }
+    var HTMLGeovCarouselElement: {
+        prototype: HTMLGeovCarouselElement;
+        new (): HTMLGeovCarouselElement;
     };
     interface HTMLGeovColumnElement extends Components.GeovColumn, HTMLStencilElement {
     }
@@ -92,6 +161,12 @@ declare global {
     var HTMLGeovDividerElement: {
         prototype: HTMLGeovDividerElement;
         new (): HTMLGeovDividerElement;
+    };
+    interface HTMLGeovFooterGeovistoryElement extends Components.GeovFooterGeovistory, HTMLStencilElement {
+    }
+    var HTMLGeovFooterGeovistoryElement: {
+        prototype: HTMLGeovFooterGeovistoryElement;
+        new (): HTMLGeovFooterGeovistoryElement;
     };
     interface HTMLGeovHeadingElement extends Components.GeovHeading, HTMLStencilElement {
     }
@@ -117,6 +192,12 @@ declare global {
         prototype: HTMLGeovLogoElement;
         new (): HTMLGeovLogoElement;
     };
+    interface HTMLGeovNavbarElement extends Components.GeovNavbar, HTMLStencilElement {
+    }
+    var HTMLGeovNavbarElement: {
+        prototype: HTMLGeovNavbarElement;
+        new (): HTMLGeovNavbarElement;
+    };
     interface HTMLGeovProjectCardElement extends Components.GeovProjectCard, HTMLStencilElement {
     }
     var HTMLGeovProjectCardElement: {
@@ -138,13 +219,16 @@ declare global {
     interface HTMLElementTagNameMap {
         "geov-button": HTMLGeovButtonElement;
         "geov-card": HTMLGeovCardElement;
+        "geov-carousel": HTMLGeovCarouselElement;
         "geov-column": HTMLGeovColumnElement;
         "geov-company-card": HTMLGeovCompanyCardElement;
         "geov-divider": HTMLGeovDividerElement;
+        "geov-footer-geovistory": HTMLGeovFooterGeovistoryElement;
         "geov-heading": HTMLGeovHeadingElement;
         "geov-icon": HTMLGeovIconElement;
         "geov-link": HTMLGeovLinkElement;
         "geov-logo": HTMLGeovLogoElement;
+        "geov-navbar": HTMLGeovNavbarElement;
         "geov-project-card": HTMLGeovProjectCardElement;
         "geov-row": HTMLGeovRowElement;
         "geov-text": HTMLGeovTextElement;
@@ -152,68 +236,136 @@ declare global {
 }
 declare namespace LocalJSX {
     interface GeovButton {
+        "geovStyle"?: string;
+        "ghost"?: boolean;
         "href"?: string;
-        "icon"?: IconNames;
-        "iconPos"?: 'start' | 'end';
-        "iconSize"?: IconSizes;
+        "leftIcon"?: string;
+        "outline"?: boolean;
+        "rightIcon"?: string;
         "rounded"?: boolean;
-        "variant"?: 'solid' | 'outline' | 'ghost' | 'solid';
+        "solid"?: boolean;
     }
     interface GeovCard {
+        "geovStyle"?: string;
         "height"?: string;
         "justify"?: 'start' | 'end' | 'center' | 'space-around' | 'space-between';
         "width"?: string;
     }
+    interface GeovCarousel {
+        "height"?: string;
+        "interval"?: number;
+        "transition"?: number;
+        "width"?: string;
+    }
     interface GeovColumn {
-        "justify"?: 'start' | 'end' | 'center' | 'space-around' | 'space-between';
+        "alignCenter"?: boolean;
+        "alignEnd"?: boolean;
+        "alignStart"?: boolean;
+        "center"?: boolean;
+        "end"?: boolean;
+        "fh"?: boolean;
+        "fw"?: boolean;
+        "geovStyle"?: string;
+        "spaceAround"?: boolean;
+        "spaceBetween"?: boolean;
+        "start"?: boolean;
     }
     interface GeovCompanyCard {
         "description"?: string;
+        "geovStyle"?: string;
         "imageUrl"?: string;
         "name"?: string;
         "websiteUrl"?: string;
     }
     interface GeovDivider {
+        "geovStyle"?: string;
         "height"?: string;
         "horizontal"?: boolean;
         "vertical"?: boolean;
         "width"?: string;
     }
+    interface GeovFooterGeovistory {
+        "featuredProjects"?: string;
+        "geovStyle"?: string;
+    }
     interface GeovHeading {
-        "variant"?: 'h1' | 'h2' | 'h3';
+        "geovStyle"?: string;
+        "h1"?: boolean;
+        "h2"?: boolean;
+        "h3"?: boolean;
+        "light"?: boolean;
     }
     interface GeovIcon {
-        "name"?: IconNames;
-        "size"?: IconSizes;
+        "arrowRight"?: boolean;
+        "geovStyle"?: string;
+        "github"?: boolean;
+        "large"?: boolean;
+        "link"?: boolean;
+        "medium"?: boolean;
+        "small"?: boolean;
     }
     interface GeovLink {
+        "geovStyle"?: string;
+        "grey"?: boolean;
         "href"?: string;
+        "light"?: boolean;
     }
     interface GeovLogo {
-        "name"?: string;
+        "geovStyle"?: string;
+        "geovistory"?: boolean;
+        "geovistoryWhite"?: boolean;
+    }
+    interface GeovNavbar {
+        "geovStyle"?: string;
+        "height"?: string;
+        "links"?: string;
+        "login"?: string;
+        "login_href"?: string;
+        "logo"?: string;
     }
     interface GeovProjectCard {
+        "geovStyle"?: string;
         "projectDesc"?: string;
         "projectPageUrl"?: string;
         "projectTitle"?: string;
     }
     interface GeovRow {
-        "justify"?: 'start' | 'end' | 'center' | 'space-around' | 'space-between';
+        "alignCenter"?: boolean;
+        "alignEnd"?: boolean;
+        "alignStart"?: boolean;
+        "center"?: boolean;
+        "end"?: boolean;
+        "fh"?: boolean;
+        "fw"?: boolean;
+        "geovStyle"?: string;
+        "spaceAround"?: boolean;
+        "spaceBetween"?: boolean;
+        "start"?: boolean;
     }
     interface GeovText {
-        "justify"?: 'start' | 'center' | 'left';
-        "variant"?: 'subtitle' | 'description' | 'text' | 'caption';
+        "caption"?: boolean;
+        "center"?: boolean;
+        "description"?: boolean;
+        "end"?: boolean;
+        "geovStyle"?: string;
+        "light"?: boolean;
+        "start"?: boolean;
+        "subtitle"?: boolean;
+        "text"?: boolean;
     }
     interface IntrinsicElements {
         "geov-button": GeovButton;
         "geov-card": GeovCard;
+        "geov-carousel": GeovCarousel;
         "geov-column": GeovColumn;
         "geov-company-card": GeovCompanyCard;
         "geov-divider": GeovDivider;
+        "geov-footer-geovistory": GeovFooterGeovistory;
         "geov-heading": GeovHeading;
         "geov-icon": GeovIcon;
         "geov-link": GeovLink;
         "geov-logo": GeovLogo;
+        "geov-navbar": GeovNavbar;
         "geov-project-card": GeovProjectCard;
         "geov-row": GeovRow;
         "geov-text": GeovText;
@@ -225,13 +377,16 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "geov-button": LocalJSX.GeovButton & JSXBase.HTMLAttributes<HTMLGeovButtonElement>;
             "geov-card": LocalJSX.GeovCard & JSXBase.HTMLAttributes<HTMLGeovCardElement>;
+            "geov-carousel": LocalJSX.GeovCarousel & JSXBase.HTMLAttributes<HTMLGeovCarouselElement>;
             "geov-column": LocalJSX.GeovColumn & JSXBase.HTMLAttributes<HTMLGeovColumnElement>;
             "geov-company-card": LocalJSX.GeovCompanyCard & JSXBase.HTMLAttributes<HTMLGeovCompanyCardElement>;
             "geov-divider": LocalJSX.GeovDivider & JSXBase.HTMLAttributes<HTMLGeovDividerElement>;
+            "geov-footer-geovistory": LocalJSX.GeovFooterGeovistory & JSXBase.HTMLAttributes<HTMLGeovFooterGeovistoryElement>;
             "geov-heading": LocalJSX.GeovHeading & JSXBase.HTMLAttributes<HTMLGeovHeadingElement>;
             "geov-icon": LocalJSX.GeovIcon & JSXBase.HTMLAttributes<HTMLGeovIconElement>;
             "geov-link": LocalJSX.GeovLink & JSXBase.HTMLAttributes<HTMLGeovLinkElement>;
             "geov-logo": LocalJSX.GeovLogo & JSXBase.HTMLAttributes<HTMLGeovLogoElement>;
+            "geov-navbar": LocalJSX.GeovNavbar & JSXBase.HTMLAttributes<HTMLGeovNavbarElement>;
             "geov-project-card": LocalJSX.GeovProjectCard & JSXBase.HTMLAttributes<HTMLGeovProjectCardElement>;
             "geov-row": LocalJSX.GeovRow & JSXBase.HTMLAttributes<HTMLGeovRowElement>;
             "geov-text": LocalJSX.GeovText & JSXBase.HTMLAttributes<HTMLGeovTextElement>;

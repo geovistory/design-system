@@ -1,5 +1,5 @@
 export default {
-    title: 'Advanced Components/Company Card',
+    title: '04 - Advanced Components/Company Card',
 }
 
 const Template = (args) => `

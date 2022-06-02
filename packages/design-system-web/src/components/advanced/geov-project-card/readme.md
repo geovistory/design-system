@@ -9,6 +9,7 @@
 
 | Property         | Attribute          | Description | Type     | Default     |
 | ---------------- | ------------------ | ----------- | -------- | ----------- |
+| `geovStyle`      | `geov-style`       |             | `string` | `''`        |
 | `projectDesc`    | `project-desc`     |             | `string` | `undefined` |
 | `projectPageUrl` | `project-page-url` |             | `string` | `undefined` |
 | `projectTitle`   | `project-title`    |             | `string` | `undefined` |

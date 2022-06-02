@@ -11,26 +11,35 @@ export class GeovProjectCard {
   @Prop() projectDesc: string;
   @Prop() projectPageUrl: string;
 
+  // other css properties
+  @Prop() geovStyle: string = ''
+
+
+
 
   render() {
+
+    const opt = {};
+    this.geovStyle.split(';').forEach(pStr => {
+      const name = pStr.substring(0, pStr.indexOf(':')).trim()
+      const value = pStr.substring(pStr.indexOf(':') + 1).trim()
+      if (name && value) opt[name] = value;
+    })
+
     return (
-      <Host>
+      <Host style={{ ...opt }}>
         <geov-card justify="space-between" height="230px" width="250px">
 
-          <geov-row justify='start'>
-            <geov-button
-              variant="solid"
-              rounded
-              icon="arrow-right"
-              icon-pos='end'
-              icon-size='small'
+          <geov-row start>
+            <geov-button solid rounded
+              rightIcon="arrow-right"
               href={this.projectPageUrl}
             >Open</geov-button>
           </geov-row>
 
-          <geov-column justify='start'>
-            <geov-heading variant="h3">{this.projectTitle}</geov-heading>
-            <geov-text variant="description" justify={'start'}>{this.projectDesc}</geov-text>
+          <geov-column start>
+            <geov-heading h3>{this.projectTitle}</geov-heading>
+            <geov-text description start>{this.projectDesc}</geov-text>
           </geov-column>
 
 

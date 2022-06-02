@@ -7,10 +7,17 @@
 
 ## Properties
 
-| Property  | Attribute | Description | Type                                                 | Default     |
-| --------- | --------- | ----------- | ---------------------------------------------------- | ----------- |
-| `justify` | `justify` |             | `"center" \| "left" \| "start"`                      | `undefined` |
-| `variant` | `variant` |             | `"caption" \| "description" \| "subtitle" \| "text"` | `undefined` |
+| Property      | Attribute     | Description | Type      | Default |
+| ------------- | ------------- | ----------- | --------- | ------- |
+| `caption`     | `caption`     |             | `boolean` | `false` |
+| `center`      | `center`      |             | `boolean` | `false` |
+| `description` | `description` |             | `boolean` | `false` |
+| `end`         | `end`         |             | `boolean` | `false` |
+| `geovStyle`   | `geov-style`  |             | `string`  | `''`    |
+| `light`       | `light`       |             | `boolean` | `false` |
+| `start`       | `start`       |             | `boolean` | `false` |
+| `subtitle`    | `subtitle`    |             | `boolean` | `false` |
+| `text`        | `text`        |             | `boolean` | `false` |
 
 
 ## Dependencies

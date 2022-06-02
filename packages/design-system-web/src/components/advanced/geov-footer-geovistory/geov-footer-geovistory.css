@@ -1,0 +1,32 @@
+:root {
+  --color-primary-bg: #6B46C1;
+  --color-primary-light: #E9D8FD;
+  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.footer-col {
+  width: 33%;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.first-col {
+  background-color: var(--color-primary-bg);
+}
+
+.box {
+  height: 150%;
+
+  margin-inline-end: 10%;
+  margin-inline-start: 10%;
+  margin-top: 16px;
+
+  border: 1px solid black;
+  border-radius: 16px;
+  border-width: 2px;
+  border-color: white;
+  
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 5px 10px 0px, rgba(0, 0, 0, 0.4) 0px 15px 40px 0px;
+}

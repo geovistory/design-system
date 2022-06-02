@@ -12,24 +12,31 @@ export class GeovCompanyCard {
   @Prop() description: string;
   @Prop() websiteUrl: string;
 
+  // other css properties
+  @Prop() geovStyle: string = ''
+
 
   render() {
+
+    const opt = {};
+    this.geovStyle.split(';').forEach(pStr => {
+      const name = pStr.substring(0, pStr.indexOf(':')).trim()
+      const value = pStr.substring(pStr.indexOf(':') + 1).trim()
+      if (name && value) opt[name] = value;
+    })
+
     return (
-      <Host>
+      <Host style={{...opt}}>
         <geov-card width="500px" height="200px" justify="space-between">
 
           <geov-row>
-            <geov-button
-              icon='link'
-              iconPos='end'
-              iconSize='small'
+            <geov-button outline rounded
               href={this.websiteUrl}
-              rounded
-              variant='outline'
+              rightIcon='link'
             >Visit Website</geov-button>
           </geov-row>
 
-          <geov-heading variant="h1">{this.name}</geov-heading>
+          <geov-heading h1>{this.name}</geov-heading>
 
           <geov-row style={{flexGrow: '1',}}>
             <geov-column style={{ width: '125px', flexGrow: '1', marginRight: '10px'}}>
@@ -37,7 +44,7 @@ export class GeovCompanyCard {
             </geov-column>
 
             <geov-column>
-                <geov-text variant="description" justify="start">{this.description}</geov-text>
+                <geov-text description start>{this.description}</geov-text>
             </geov-column>
           </geov-row>
 

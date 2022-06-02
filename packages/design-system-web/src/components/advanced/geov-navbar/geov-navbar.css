@@ -1,3 +1,20 @@
-:host {
-  display: block;
+:root {
+  --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.navbar {
+  display: flex;
+  box-shadow: var(--box-shadow);
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.gap {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.gap-more {
+  margin-left: 40px;
+  margin-right: 40px;
 }

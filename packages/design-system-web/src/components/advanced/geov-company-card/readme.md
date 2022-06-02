@@ -10,6 +10,7 @@
 | Property      | Attribute     | Description | Type     | Default     |
 | ------------- | ------------- | ----------- | -------- | ----------- |
 | `description` | `description` |             | `string` | `undefined` |
+| `geovStyle`   | `geov-style`  |             | `string` | `''`        |
 | `imageUrl`    | `image-url`   |             | `string` | `undefined` |
 | `name`        | `name`        |             | `string` | `undefined` |
 | `websiteUrl`  | `website-url` |             | `string` | `undefined` |

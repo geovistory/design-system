@@ -7,14 +7,16 @@
 
 ## Properties
 
-| Property   | Attribute   | Description | Type                                  | Default     |
-| ---------- | ----------- | ----------- | ------------------------------------- | ----------- |
-| `href`     | `href`      |             | `string`                              | `undefined` |
-| `icon`     | `icon`      |             | `"arrow-right" \| "github" \| "link"` | `undefined` |
-| `iconPos`  | `icon-pos`  |             | `"end" \| "start"`                    | `'start'`   |
-| `iconSize` | `icon-size` |             | `"large" \| "medium" \| "small"`      | `'medium'`  |
-| `rounded`  | `rounded`   |             | `boolean`                             | `undefined` |
-| `variant`  | `variant`   |             | `"ghost" \| "outline" \| "solid"`     | `'solid'`   |
+| Property    | Attribute    | Description | Type      | Default |
+| ----------- | ------------ | ----------- | --------- | ------- |
+| `geovStyle` | `geov-style` |             | `string`  | `''`    |
+| `ghost`     | `ghost`      |             | `boolean` | `false` |
+| `href`      | `href`       |             | `string`  | `''`    |
+| `leftIcon`  | `left-icon`  |             | `string`  | `''`    |
+| `outline`   | `outline`    |             | `boolean` | `false` |
+| `rightIcon` | `right-icon` |             | `string`  | `''`    |
+| `rounded`   | `rounded`    |             | `boolean` | `false` |
+| `solid`     | `solid`      |             | `boolean` | `false` |
 
 
 ## Dependencies
@@ -22,6 +24,8 @@
 ### Used by
 
  - [geov-company-card](../../advanced/geov-company-card)
+ - [geov-footer-geovistory](../../advanced/geov-footer-geovistory)
+ - [geov-navbar](../../advanced/geov-navbar)
  - [geov-project-card](../../advanced/geov-project-card)
 
 ### Depends on
@@ -37,6 +41,8 @@ graph TD;
   geov-button --> geov-icon
   geov-button --> geov-text
   geov-company-card --> geov-button
+  geov-footer-geovistory --> geov-button
+  geov-navbar --> geov-button
   geov-project-card --> geov-button
   style geov-button fill:#f9f,stroke:#333,stroke-width:4px
 ```

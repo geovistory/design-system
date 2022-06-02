@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/addon-docs'
+import * as Icons from 'react-icons/go'
+import { GoAlert, GoMarkGithub } from 'react-icons/go';
+
+<Meta title="01 - Dev Helper/Styling Web component" parameters={{ previewTabs: { canvas: { hidden: true }, }, }} />
+
+
+<geov-heading>Styling Geovistory Web component</geov-heading>
+
+To allow users to style our component as they wish, we have a dedicated property. It is called ```geov-styling``` and is
+available on all our web components. In this attribute you can put CSS properties to style the component as you want.
+The CSS you put there is applied directly to the component (the host) and is not propagated.
+Why did we do that? Let's say you want to add a special margin to a geovistory web component. Since this web component
+has no attribute named "margin", normally you would need to encapsulate this component into a div and apply the margin
+to the div. With our "geov-style" you can do that directly on the wanted component, without needing additionals tags.
+The property you put there has to be written as traditional CSS properties, only with pascalCase name. See following
+exemples:
+
+<geov-heading h-3>Exemples:</geov-heading>
+
+<geov-row geov-style="border: 1px solid black">
+    <geov-column>
+        <p>Here is a &lt;geov-row&gt; with an additional border property</p>
+        <p><i>&lt;geov-row <strong>geov-style="border: 1px solid black"</strong>&gt;</i></p>
+    </geov-column>
+</geov-row>
+
+<br />
+
+<geov-row geov-style="border: 1px solid black; borderRadius: 16px">
+    <geov-column>
+        <p>Here is a &lt;geov-row&gt; with an additional border property</p>
+        <p><i>&lt;geov-row <strong>geov-style="border: 1px solid black; borderRadius: 16px;"</strong>&gt;</i></p>
+    </geov-column>
+</geov-row>

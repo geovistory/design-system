@@ -8,26 +8,41 @@ import { Component, Host, h, Prop } from '@stencil/core';
 })
 export class GeovLogo {
 
-  @Prop() name: string
+  @Prop() geovistory: boolean = false;
+  @Prop() geovistoryWhite: boolean = false;
 
-  private getLogo = (name: string) => {
-    if (name == 'geovistory') return this.getGeovistoryLogo()
-    if (name == 'geovistory-white') return this.getGeovistoryWhiteLogo()
-  }
-
+  // other css properties
+  @Prop() geovStyle: string = ''
 
   render() {
-    const logo = this.getLogo(this.name)
-    console.log(logo)
+
+    const opt = {};
+    this.geovStyle.split(';').forEach(pStr => {
+      const name = pStr.substring(0, pStr.indexOf(':')).trim()
+      const value = pStr.substring(pStr.indexOf(':') + 1).trim()
+      if (name && value) opt[name] = value;
+    })
+
+    const logo = this.getLogo()
 
     return (
-      <Host>
+      <Host style={{...opt}}>
         <geov-link href={logo.link}>
           {logo.jsx}
         </geov-link>
       </Host>
     );
   }
+
+
+  private getLogo = () => {
+    if (this.geovistory) return this.getGeovistoryLogo()
+    if (this.geovistoryWhite) return this.getGeovistoryWhiteLogo()
+
+    // default 
+    return this.getGeovistoryLogo()
+  }
+
 
   private getGeovistoryLogo() {
     return {
