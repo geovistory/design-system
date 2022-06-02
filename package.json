@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "============================== PUBLISH NPM PACKAGES ==============================": "",
+    "postinstall": "lerna bootstrap",
     "publish:prepare": "lerna bootstrap",
     "publish:publish": "lerna publish",
     "=========================== STENCIL ==========================": "",
@@ -13,6 +14,10 @@
     "test": "cd packages/design-system-web && npm run test"
   },
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "storybook-design-token": "^2.2.0"
+  },
+  "dependencies": {
+    "stencil": "^0.0.5"
   }
 }

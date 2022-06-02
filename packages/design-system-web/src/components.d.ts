@@ -49,6 +49,12 @@ export namespace Components {
     interface GeovLogo {
         "name": string;
     }
+    interface GeovNavbar {
+        "height": string;
+        "links1": Array<string>;
+        "links2": Array<string>;
+        "logo": string;
+    }
     interface GeovProjectCard {
         "projectDesc": string;
         "projectPageUrl": string;
@@ -117,6 +123,12 @@ declare global {
         prototype: HTMLGeovLogoElement;
         new (): HTMLGeovLogoElement;
     };
+    interface HTMLGeovNavbarElement extends Components.GeovNavbar, HTMLStencilElement {
+    }
+    var HTMLGeovNavbarElement: {
+        prototype: HTMLGeovNavbarElement;
+        new (): HTMLGeovNavbarElement;
+    };
     interface HTMLGeovProjectCardElement extends Components.GeovProjectCard, HTMLStencilElement {
     }
     var HTMLGeovProjectCardElement: {
@@ -145,6 +157,7 @@ declare global {
         "geov-icon": HTMLGeovIconElement;
         "geov-link": HTMLGeovLinkElement;
         "geov-logo": HTMLGeovLogoElement;
+        "geov-navbar": HTMLGeovNavbarElement;
         "geov-project-card": HTMLGeovProjectCardElement;
         "geov-row": HTMLGeovRowElement;
         "geov-text": HTMLGeovTextElement;
@@ -192,6 +205,12 @@ declare namespace LocalJSX {
     interface GeovLogo {
         "name"?: string;
     }
+    interface GeovNavbar {
+        "height"?: string;
+        "links1"?: Array<string>;
+        "links2"?: Array<string>;
+        "logo"?: string;
+    }
     interface GeovProjectCard {
         "projectDesc"?: string;
         "projectPageUrl"?: string;
@@ -214,6 +233,7 @@ declare namespace LocalJSX {
         "geov-icon": GeovIcon;
         "geov-link": GeovLink;
         "geov-logo": GeovLogo;
+        "geov-navbar": GeovNavbar;
         "geov-project-card": GeovProjectCard;
         "geov-row": GeovRow;
         "geov-text": GeovText;
@@ -232,6 +252,7 @@ declare module "@stencil/core" {
             "geov-icon": LocalJSX.GeovIcon & JSXBase.HTMLAttributes<HTMLGeovIconElement>;
             "geov-link": LocalJSX.GeovLink & JSXBase.HTMLAttributes<HTMLGeovLinkElement>;
             "geov-logo": LocalJSX.GeovLogo & JSXBase.HTMLAttributes<HTMLGeovLogoElement>;
+            "geov-navbar": LocalJSX.GeovNavbar & JSXBase.HTMLAttributes<HTMLGeovNavbarElement>;
             "geov-project-card": LocalJSX.GeovProjectCard & JSXBase.HTMLAttributes<HTMLGeovProjectCardElement>;
             "geov-row": LocalJSX.GeovRow & JSXBase.HTMLAttributes<HTMLGeovRowElement>;
             "geov-text": LocalJSX.GeovText & JSXBase.HTMLAttributes<HTMLGeovTextElement>;
