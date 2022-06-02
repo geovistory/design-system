@@ -1,0 +1,12 @@
+:root {
+    --geov-primary: #fff    
+}
+
+
+
+@import 'node_modules/bulma/bulma.sass';
+
+
+.is-primary {
+    background-color: var(--geov-primary, $primary);
+}

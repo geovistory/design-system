@@ -113,6 +113,8 @@ export namespace Components {
         "spaceBetween": boolean;
         "start": boolean;
     }
+    interface GeovTabs {
+    }
     interface GeovText {
         "caption": boolean;
         "center": boolean;
@@ -210,6 +212,12 @@ declare global {
         prototype: HTMLGeovRowElement;
         new (): HTMLGeovRowElement;
     };
+    interface HTMLGeovTabsElement extends Components.GeovTabs, HTMLStencilElement {
+    }
+    var HTMLGeovTabsElement: {
+        prototype: HTMLGeovTabsElement;
+        new (): HTMLGeovTabsElement;
+    };
     interface HTMLGeovTextElement extends Components.GeovText, HTMLStencilElement {
     }
     var HTMLGeovTextElement: {
@@ -231,6 +239,7 @@ declare global {
         "geov-navbar": HTMLGeovNavbarElement;
         "geov-project-card": HTMLGeovProjectCardElement;
         "geov-row": HTMLGeovRowElement;
+        "geov-tabs": HTMLGeovTabsElement;
         "geov-text": HTMLGeovTextElement;
     }
 }
@@ -342,6 +351,8 @@ declare namespace LocalJSX {
         "spaceBetween"?: boolean;
         "start"?: boolean;
     }
+    interface GeovTabs {
+    }
     interface GeovText {
         "caption"?: boolean;
         "center"?: boolean;
@@ -368,6 +379,7 @@ declare namespace LocalJSX {
         "geov-navbar": GeovNavbar;
         "geov-project-card": GeovProjectCard;
         "geov-row": GeovRow;
+        "geov-tabs": GeovTabs;
         "geov-text": GeovText;
     }
 }
@@ -389,6 +401,7 @@ declare module "@stencil/core" {
             "geov-navbar": LocalJSX.GeovNavbar & JSXBase.HTMLAttributes<HTMLGeovNavbarElement>;
             "geov-project-card": LocalJSX.GeovProjectCard & JSXBase.HTMLAttributes<HTMLGeovProjectCardElement>;
             "geov-row": LocalJSX.GeovRow & JSXBase.HTMLAttributes<HTMLGeovRowElement>;
+            "geov-tabs": LocalJSX.GeovTabs & JSXBase.HTMLAttributes<HTMLGeovTabsElement>;
             "geov-text": LocalJSX.GeovText & JSXBase.HTMLAttributes<HTMLGeovTextElement>;
         }
     }

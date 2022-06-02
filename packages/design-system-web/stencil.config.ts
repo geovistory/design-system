@@ -1,4 +1,5 @@
 import { Config } from '@stencil/core';
+import { sass } from '@stencil/sass';
 import { angularOutputTarget } from '@stencil/angular-output-target';
 import { reactOutputTarget as react } from '@stencil/react-output-target';
 
@@ -31,4 +32,5 @@ export const config: Config = {
       includeDefineCustomElements: true,
     }),
   ],
+  plugins: [sass()]
 };

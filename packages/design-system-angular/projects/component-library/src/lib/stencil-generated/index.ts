@@ -16,5 +16,6 @@ export const DIRECTIVES = [
   d.GeovNavbar,
   d.GeovProjectCard,
   d.GeovRow,
+  d.GeovTabs,
   d.GeovText
 ];

@@ -302,6 +302,25 @@ export class GeovRow {
 }
 
 
+export declare interface GeovTabs extends Components.GeovTabs {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined
+})
+@Component({
+  selector: 'geov-tabs',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>'
+})
+export class GeovTabs {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
 export declare interface GeovText extends Components.GeovText {}
 
 @ProxyCmp({
