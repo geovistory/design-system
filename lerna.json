@@ -1,8 +1,10 @@
 {
-  "version": "0.0.0",
+  "version": "0.0.1-issue-{github.event.inputs.issue-nr}.0",
   "command": {
     "publish": {
-      "ignoreChanges": ["*.md"],
+      "ignoreChanges": [
+        "*.md"
+      ],
       "message": "chore(release): publish"
     },
     "bootstrap": {}
