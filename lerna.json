@@ -1,6 +1,12 @@
 {
   "version": null,
   "command": {
+    "version": {
+      "message": "chore(release): %s",
+      "createRelease": "github",
+      "exact": true,
+      "forcePublish": true
+    },
     "publish": {
       "ignoreChanges": [
         "*.md"
