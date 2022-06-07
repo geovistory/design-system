@@ -31,18 +31,21 @@
   "scripts": {
     "start": "npm run start:storybook",
     "dev": "npm run build-watch:stencil & start-storybook -p 6006 -s dist",
-    "build": "npm run build:stencil && npm run build:storybook",
-    "test": "npm run test:stencil",
     "=========================== STENCIL ==========================": "",
     "generate": "stencil generate",
     "start:stencil": "stencil build --dev --watch --serve",
+    "==================== BUILD ====================": "================================",
+    "build": "stencil build",
+    "build:docs": "npm run build:stencil && build-storybook -o ../../storybook  --quiet",
     "build:stencil": "stencil build --docs",
     "build-watch:stencil": "stencil build --watch",
+    "build:storybook": "build-storybook",
+    "==================== TEST =====================": "================================",
+    "test": "npm run test:stencil",
     "test:stencil": "stencil test --spec --e2e",
     "test-watch:stencil": "stencil test --spec --e2e --watchAll",
     "========================== STORYBOOK =========================": "",
-    "start:storybook": "start-storybook -p 6006",
-    "build:storybook": "build-storybook"
+    "start:storybook": "start-storybook -p 6006"
   },
   "dependencies": {
     "@stencil/core": "^2.13.0",

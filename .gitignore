@@ -1,1 +1,7 @@
 node_modules/
+
+
+# Generate output
+storybook/
+storybook-static/
+stencil-generated

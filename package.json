@@ -9,10 +9,18 @@
     "generate": "cd packages/design-system-web && npm run generate",
     "start": "cd packages/design-system-web && npm run start",
     "dev": "cd packages/design-system-web && npm run dev",
-    "build": "cd packages/design-system-web && npm run build",
-    "test": "cd packages/design-system-web && npm run test"
+    "test": "cd packages/design-system-web && npm run test",
+    "==================== BUILD ====================": "================================",
+    "build": "npm run build:components",
+    "build:docs": "npm run build:components && npm --prefix packages/design-system-web run build:docs",
+    "build:components": "npm --prefix packages/design-system-web run build",
+
+    "==================== DOCUMENTATION ====================": "================================",
+    "storybook": "node .build/banner.js storybook:build && npm run build:docs"
   },
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "chalk": "^4.1.2",
+    "figlet": "^1.5.2"
   }
 }

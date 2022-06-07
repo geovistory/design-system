@@ -197,6 +197,27 @@ export class GeovLogo {
 }
 
 
+export declare interface GeovNavbar extends Components.GeovNavbar {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['height', 'links1', 'links2', 'logo']
+})
+@Component({
+  selector: 'geov-navbar',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['height', 'links1', 'links2', 'logo']
+})
+export class GeovNavbar {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
 export declare interface GeovProjectCard extends Components.GeovProjectCard {}
 
 @ProxyCmp({
