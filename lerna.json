@@ -4,6 +4,8 @@
     "version": {
       "message": "chore(release): %s",
       "createRelease": "github",
+      "conventionalCommits": true,
+      "changelogPreset": "conventionalcommits",
       "exact": true,
       "forcePublish": true
     },
