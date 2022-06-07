@@ -1,5 +1,5 @@
 {
-  "version": "0.0.1-issue-{github.event.inputs.issue-nr}.0",
+  "version": null,
   "command": {
     "publish": {
       "ignoreChanges": [
