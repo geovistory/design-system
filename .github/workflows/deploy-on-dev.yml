@@ -92,7 +92,7 @@ jobs:
         with:
           workflow: update-docker-image-tag
           repo: geovistory/public-chart
-          ref: ${{needs.extract-metadata.outputs.release_environment}}
+          ref: dev
           token: ${{ secrets.GEOVBOT_PAT_REPO }}
           inputs: |
             {
