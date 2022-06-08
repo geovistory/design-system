@@ -16,6 +16,16 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Send Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_GITHUB_CHANNEL_WEBHOOK }}
+          title: "Deploy design-system on dev: Starting"
+          description: "Tag: ${{github.event.inputs.issue-nr}}"
+          color: 0xffed2b
+          username: GitHub Actions
+
       - name: Checkout Repository
         uses: actions/checkout@v2
         
@@ -100,3 +110,13 @@ jobs:
               "tag": "${{steps.lerna.outputs.tag}}",
               "environment": "dev"
             }
+            
+      - name: Send Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_GITHUB_CHANNEL_WEBHOOK }}
+          title: "Deploy design-system on dev > Done"
+          description: "Tag: ${{github.event.inputs.issue-nr}}"
+          color: 0x0000ff
+          username: GitHub Actions
