@@ -14,6 +14,7 @@ on:
         - major
         - minor
         - patch 
+        
 jobs:
   dockerize:
     # The type of runner that the job will run on
