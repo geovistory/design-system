@@ -29,9 +29,6 @@ jobs:
           
       - name: Install Lerna globally
         run: npm install lerna --global
-        
-      - name: Update npm registry
-        run: npm run update:registry
       
       - uses: actions/setup-node@v2
         with:
