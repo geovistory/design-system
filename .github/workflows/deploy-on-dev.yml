@@ -85,3 +85,18 @@ jobs:
         with:
           push: true
           tags: ghcr.io/geovistory/design-system:${{steps.lerna.outputs.tag}}
+      
+      
+      - name: Invoke workflow in public-chart to make a dev release
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: update-docker-image-tag
+          repo: geovistory/public-chart
+          ref: ${{needs.extract-metadata.outputs.release_environment}}
+          token: ${{ secrets.GEOVBOT_PAT_REPO }}
+          inputs: |
+            {
+              "service": "design-system",
+              "tag": "${{steps.lerna.outputs.tag}}",
+              "environment": "dev"
+            }
