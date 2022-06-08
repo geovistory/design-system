@@ -1,13 +1,16 @@
 {
   "name": "root",
   "private": true,
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "============================== INSTALLATION / SETUP ==============================": "",
-    "postinstall": "npm run bootstrap",
+    "postinstall": "lerna bootstrap",
     "bootstrap": "lerna bootstrap",
     "update:lock": "lerna exec -- npm install --package-lock-only",
     "============================== PUBLISH NPM PACKAGES ==============================": "",
-    "postinstall": "lerna bootstrap",
     "publish:prepare": "lerna bootstrap",
     "publish:publish": "lerna publish",
     "=========================== STENCIL ==========================": "",

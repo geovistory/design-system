@@ -3,9 +3,9 @@
 /* auto-generated react proxies */
 import { createReactComponent } from './react-component-lib';
 
-import type { JSX } from 'design-system-web';
+import type { JSX } from '@geovistory/design-system-web';
 
-import { defineCustomElements } from 'design-system-web/loader';
+import { defineCustomElements } from '@geovistory/design-system-web/loader';
 
 defineCustomElements();
 export const GeovButton = /*@__PURE__*/createReactComponent<JSX.GeovButton, HTMLGeovButtonElement>('geov-button');
