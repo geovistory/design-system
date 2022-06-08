@@ -30,6 +30,9 @@ jobs:
       - name: Install Lerna globally
         run: npm install lerna --global
         
+      - name: Show lerna.json 
+        run: cat lerna.json
+        
       - name: Tag this commit with issue-tag 
         run: lerna version prepatch --preid issue-${{github.event.inputs.issue-nr}} --yes
         env:
