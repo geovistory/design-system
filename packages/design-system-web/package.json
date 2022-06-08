@@ -1,6 +1,6 @@
 {
   "name": "@geovistory/design-system-web",
-  "version": "0.0.8-staging.0",
+  "version": "0.0.9-issue-add-design-token.0",
   "description": "geovistory.org's design system: web components",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -59,12 +59,12 @@
     "@storybook/addon-essentials": "^6.5.5",
     "@storybook/addon-links": "^6.5.5",
     "@storybook/html": "^6.5.5",
-    "storybook-design-token": "^2.2.0",
     "@types/jest": "^27.0.3",
     "babel-loader": "^8.2.5",
     "jest": "^27.4.5",
     "jest-cli": "^27.4.5",
-    "puppeteer": "^10.0.0"
+    "puppeteer": "^10.0.0",
+    "storybook-design-token": "^2.2.0"
   },
   "license": "MIT"
 }
