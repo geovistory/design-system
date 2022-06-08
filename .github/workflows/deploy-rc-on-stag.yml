@@ -93,7 +93,7 @@ jobs:
           tags: ghcr.io/geovistory/design-system:${{steps.lerna.outputs.tag}}
       
       
-      - name: Invoke workflow in public-chart to make a dev release
+      - name: Invoke workflow in public-chart to make a staging release
         uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: update-docker-image-tag
