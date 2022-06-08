@@ -1,6 +1,6 @@
 {
   "name": "@geovistory/design-system-web",
-  "version": "0.0.9-issue-add-design-token.0",
+  "version": "0.0.10-staging.0",
   "description": "geovistory.org's design system: web components",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",

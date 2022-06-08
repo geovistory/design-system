@@ -1,7 +1,7 @@
 {
   "name": "@geovistory/design-system-react",
   "sideEffects": false,
-  "version": "0.0.9-issue-add-design-token.0",
+  "version": "0.0.10-staging.0",
   "private": true,
   "description": "geovistory.org's design system: React components",
   "repository": {
@@ -44,7 +44,7 @@
     "typescript": "^3.3.4000"
   },
   "dependencies": {
-    "@geovistory/design-system-web": "0.0.9-issue-add-design-token.0"
+    "@geovistory/design-system-web": "0.0.10-staging.0"
   },
   "peerDependencies": {
     "react": "^17.0.2",
