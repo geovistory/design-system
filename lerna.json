@@ -1,5 +1,5 @@
 {
-  "version": "0.0.3-issue-test.0",
+  "version": "0.0.4-issue-test.0",
   "command": {
     "version": {
       "message": "chore(release): %s",
