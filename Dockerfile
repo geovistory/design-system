@@ -4,8 +4,8 @@ WORKDIR /app
 
 COPY . .
 
-#RUN CYPRESS_INSTALL_BINARY=0 npm ci --unsafe-perm
-RUN npm ci
+RUN CYPRESS_INSTALL_BINARY=0 npm ci --unsafe-perm
+#RUN npm ci
 RUN npm run storybook
 
 FROM bitnami/nginx:latest
