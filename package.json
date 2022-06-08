@@ -15,9 +15,12 @@
     "dev": "cd packages/design-system-web && npm run dev",
     "test": "cd packages/design-system-web && npm run test",
     "==================== BUILD ====================": "================================",
-    "build": "npm run build:components",
+    "build": "npm run build:components && npm run build:post",
     "build:docs": "npm run build:components && npm --prefix packages/design-system-web run build:docs",
     "build:components": "npm --prefix packages/design-system-web run build",
+    "build:post": "node .build/banner.js build:post && concurrently \"npm:build:post:*\"",
+    "build:post:react__": "npm --prefix packages/design-system-react run build",
+    "build:post:angular": "npm --prefix packages/design-system-angular run build",
     "==================== DOCUMENTATION ====================": "================================",
     "storybook": "node .build/banner.js storybook:build && npm run build:docs"
   },
@@ -25,6 +28,7 @@
     "chalk": "^4.1.2",
     "conventional-changelog-conventionalcommits": "^5.0.0",
     "figlet": "^1.5.2",
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "concurrently": "^7.0.0"
   }
 }
