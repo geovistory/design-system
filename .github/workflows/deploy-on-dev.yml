@@ -54,7 +54,13 @@ jobs:
         run: lerna version prepatch --preid issue-${{github.event.inputs.issue-nr}} --yes
         env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+     
+      - uses: EndBug/add-and-commit@v5
+        with:
+          message: 'chore(): update lock files'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
