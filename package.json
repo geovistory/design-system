@@ -2,6 +2,10 @@
   "name": "root",
   "private": true,
   "scripts": {
+    "============================== INSTALLATION / SETUP ==============================": "",
+    "postinstall": "npm run bootstrap",
+    "bootstrap": "lerna bootstrap",
+    "update:lock": "lerna exec -- npm install --package-lock-only",
     "============================== PUBLISH NPM PACKAGES ==============================": "",
     "postinstall": "lerna bootstrap",
     "publish:prepare": "lerna bootstrap",
@@ -10,14 +14,22 @@
     "generate": "cd packages/design-system-web && npm run generate",
     "start": "cd packages/design-system-web && npm run start",
     "dev": "cd packages/design-system-web && npm run dev",
-    "build": "cd packages/design-system-web && npm run build",
-    "test": "cd packages/design-system-web && npm run test"
+    "test": "cd packages/design-system-web && npm run test",
+    "==================== BUILD ====================": "================================",
+    "build": "npm run build:components && npm run build:post",
+    "build:docs": "npm run build:components && npm --prefix packages/design-system-web run build:docs",
+    "build:components": "npm --prefix packages/design-system-web run build",
+    "build:post": "node .build/banner.js build:post && concurrently \"npm:build:post:*\"",
+    "build:post:react__": "npm --prefix packages/design-system-react run build",
+    "build:post:angular": "npm --prefix packages/design-system-angular run build",
+    "==================== DOCUMENTATION ====================": "================================",
+    "storybook": "node .build/banner.js storybook:build && npm run build:docs"
   },
   "devDependencies": {
+    "chalk": "^4.1.2",
+    "conventional-changelog-conventionalcommits": "^5.0.0",
+    "figlet": "^1.5.2",
     "lerna": "^4.0.0",
-    "storybook-design-token": "^2.2.0"
-  },
-  "dependencies": {
-    "stencil": "^0.0.5"
+    "concurrently": "^7.0.0"
   }
 }

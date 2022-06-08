@@ -1,8 +1,18 @@
 {
-  "version": "0.0.0",
+  "version": "0.0.8-staging.0",
   "command": {
+    "version": {
+      "message": "chore(release): %s",
+      "createRelease": "github",
+      "conventionalCommits": true,
+      "changelogPreset": "conventionalcommits",
+      "exact": true,
+      "forcePublish": true
+    },
     "publish": {
-      "ignoreChanges": ["*.md"],
+      "ignoreChanges": [
+        "*.md"
+      ],
       "message": "chore(release): publish"
     },
     "bootstrap": {}
