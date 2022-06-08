@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/addon-docs'
 import * as Icons from 'react-icons/go'
 import { GoAlert, GoMarkGithub } from 'react-icons/go';
+import { version } from '../package.json';
 
 <Meta
   title="Welcome"
@@ -11,7 +12,10 @@ import { GoAlert, GoMarkGithub } from 'react-icons/go';
   }}
 />
 
+
 <geov-heading variant="h1">Geovistory Design System</geov-heading>
+
+<p>v{version}</p>
 
 The Geovistory Design System consists of two types of components:
 
@@ -19,8 +23,8 @@ The Geovistory Design System consists of two types of components:
 - Advanced UI Components (likes tables, cards, ...) which use the Basic UI Components and put them together to create components for more complex needs
 - Data Components (Like family trees, populated maps, entities descriptions, ...) which are components providing a visual view of Geovistory's data.
 
-All this components are open, free to use everywhere on the internet. 
-We, at Geovistory, we created the firsts components for each category, and we are constently updating them, enhancing the behavior, and adding new ones. 
+All this components are open, free to use everywhere on the internet.
+We, at Geovistory, we created the firsts components for each category, and we are constently updating them, enhancing the behavior, and adding new ones.
 We also encourage our community to participate to this development by creating commponents which answer to their specific needs. We will be glad to add them to the Geovistory project!
 
 The components are coded as Stencil components. Doing so, we have Angular, React and Web component versions of each component made, without having to redevelop everything for each technology.
