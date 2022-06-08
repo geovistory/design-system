@@ -31,11 +31,13 @@ jobs:
         run: npm install lerna --global
         
       - name: Tag this commit with issue-tag 
-        run: |
-          lerna version prepatch --preid issue-${{github.event.inputs.issue-nr}} --yes
-          cat lerna-debug.log
+        run: lerna version prepatch --preid issue-${{github.event.inputs.issue-nr}} --yes
         env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           
+      - name: Print lerna logs
+        if: always()
+        run: cat lerna-debug.log
         
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
