@@ -52,7 +52,9 @@ jobs:
         
       - name: Tag this commit with issue-tag 
         id: lerna
-        run: echo ::set-output name=tag::$(lerna version prepatch --preid issue-${{github.event.inputs.issue-nr}} --yes)
+        run: |
+          lerna version prepatch --preid issue-${{github.event.inputs.issue-nr}} --yes
+          echo ::set-output name=tag::$(cd ./packages/design-system-web && cat package.json | jq -r '.version')
         env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
      
