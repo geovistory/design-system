@@ -31,7 +31,9 @@ jobs:
         run: npm install lerna --global
         
       - name: Tag this commit with issue-tag 
-        run: lerna version prepatch --preid issue-${{github.event.inputs.issue-nr}} --yes
+        run: |
+          lerna version prepatch --preid issue-${{github.event.inputs.issue-nr}} --yes
+          cat lerna-debug.log
         env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
