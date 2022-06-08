@@ -51,10 +51,14 @@ jobs:
         run: cat lerna.json
         
       - name: Tag this commit with issue-tag 
-        run: lerna version prepatch --preid issue-${{github.event.inputs.issue-nr}} --yes
+        id: lerna
+        run: echo ::set-output name=tag::$(lerna version prepatch --preid issue-${{github.event.inputs.issue-nr}} --yes)
         env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
      
+      - name: Echo tag created by lerna
+        run: echo your branch is '${{steps.lerna.outputs.tag}}'
+
       - uses: EndBug/add-and-commit@v5
         with:
           message: 'chore(): update lock files'
@@ -78,4 +82,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/geovistory/design-system:issue-${{github.event.inputs.issue-nr}}
+          tags: ghcr.io/geovistory/design-system:issue-${{steps.lerna.outputs.tag}}
