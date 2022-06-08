@@ -1,3 +1,7 @@
+# Script to check if main branch is ahead of --branch
+# If yes: it exits with 1
+# else: it goes on
+
 
 # exit when any command fails
 set -e
