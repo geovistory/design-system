@@ -53,11 +53,11 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       # install only dependencies from root package (ignoring postinstall script)
-      - name: Install dev dependencies
-        run: npm i --ignore-scripts
+#      - name: Install dev dependencies
+#        run: npm i --ignore-scripts
 
-#      - name: Clean install dependencies
-#        run: npm ci
+      - name: Clean install dependencies
+        run: npm ci
 #
 #      - name: Build
 #        run: npm run build
