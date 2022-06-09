@@ -66,10 +66,13 @@ jobs:
      
       - name: Echo tag created by lerna
         run: echo your branch is '${{steps.lerna.outputs.tag}}'
+     
+      - name: Update Lock files
+        run: 'npm run update:lock'
 
       - uses: EndBug/add-and-commit@v5
         with:
-          message: 'chore(): update package versions'
+          message: 'chore(): update lock files'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
