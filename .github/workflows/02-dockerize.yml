@@ -45,7 +45,7 @@ jobs:
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #          
       - name: Install Lerna globally
-        run: npm install lerna --location=global
+        run: npm install lerna@4 --location=global
 #      
 #      - uses: actions/setup-node@v2
 #        with:
