@@ -16,14 +16,17 @@ jobs:
 
       - name: Node Version
         run: node -v
-
-      - name: Restore lerna
-        uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+ 
+      - name: Npm Version
+        run: npm -v
+  
+ #     - name: Restore lerna
+ #       uses: actions/cache@v2
+ #       with:
+ #         path: |
+ #           node_modules
+ #           */*/node_modules
+ #         key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install dependencies
         run: npm ci
