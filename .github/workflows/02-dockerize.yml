@@ -23,7 +23,7 @@ jobs:
           echo ::set-output name=number::$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
         
       - name: Prints number of pull request
-        run: echo Pull request branch is '${{ steps.pull_request.number }}'
+        run: echo Pull request branch is '${{ steps.pull_request.outputs.number }}'
 
       - name: Send Discord Notification
         uses: sarisia/actions-status-discord@v1
