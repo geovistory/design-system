@@ -4,7 +4,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
-      environment:
+      env:
           description: "Deploy to Environment"
           required: true
           default: 'dev' 
@@ -25,7 +25,10 @@ jobs:
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
         
       - name: Echo version
-        run: echo ${steps.get_version.outputs.VERSION}
+        run: echo ${{steps.get_version.outputs.VERSION}}
+      
+      - name: Echo env
+        run: echo {{github.event.inputs.env}}
             
 #      - name: Invoke workflow in public-chart to make a dev release
 #        uses: benc-uk/workflow-dispatch@v1
