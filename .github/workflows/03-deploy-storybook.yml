@@ -22,25 +22,31 @@ jobs:
 
       - name: Get the version
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        run: echo ::set-output name=tag::${GITHUB_REF/refs\/tags\/v/}
         
-      - name: Echo version
-        run: echo ${{steps.get_version.outputs.VERSION}}
+      - name: Echo tag
+        run: echo ${{steps.get_version.outputs.tag}}
       
       - name: Echo env
         run: echo {{github.event.inputs.env}}
-            
-#      - name: Invoke workflow in public-chart to make a dev release
-#        uses: benc-uk/workflow-dispatch@v1
-#        with:
-#          workflow: update-docker-image-tag
-#          repo: geovistory/public-chart
-#          ref: dev
-#          token: ${{ secrets.GEOVBOT_PAT_REPO }}
-#          inputs: |
-#            {
-#              "service": "design-system",
-#              "tag": "${{steps.lerna.outputs.tag}}",
-#              "environment": "dev"
-#            }
-#
+
+      - name: Validate tag
+        run: |
+          echo "No tag specified. Choose a tag from workflow dispatch UI."
+          exit 1
+        if: "${{ steps.get_version.outputs.tag == '' }}"
+
+     - name: Invoke workflow in public-chart to make a dev release
+       uses: benc-uk/workflow-dispatch@v1
+       with:
+         workflow: update-docker-image-tag
+         repo: geovistory/public-chart
+         ref: ${{github.event.inputs.env}}
+         token: ${{ secrets.GEOVBOT_PAT_REPO }}
+         inputs: |
+           {
+             "service": "design-system",
+             "tag": "${{steps.get_version.outputs.tag}}",
+             "environment": "${{github.event.inputs.env}}"
+           }
+
