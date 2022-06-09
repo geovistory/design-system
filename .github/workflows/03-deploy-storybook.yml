@@ -24,7 +24,11 @@ jobs:
         run: |
           echo "No tag specified. Choose a tag from workflow dispatch UI."
           exit 1
-        if: ${{ github.ref_type != 'tag' }} 
+        if: ${{ github.ref_type != 'tag' }}
+        
+      - name: Deploy only on staging if up to date with main branch
+        run: bash .scripts/main-not-ahead-of.sh --branch ''
+        if: ${{ github.event.inputs.env == 'stag' }}
         
       - name: Get the tag
         id: get_version
