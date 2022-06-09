@@ -2,7 +2,6 @@
   "name": "@geovistory/design-system-react",
   "sideEffects": false,
   "version": "0.1.0",
-  "private": true,
   "description": "geovistory.org's design system: React components",
   "repository": {
     "type": "git",
