@@ -9,16 +9,21 @@ on:
 jobs:
   dockerize:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    if: github.event_name == 'pull_request'
+    
     steps:
 
       - name: Checkout Repository
         uses: actions/checkout@v2
         
-      - name: Step that prints name of pull request's branch name
-        run: echo Pull request branch is '${{ github.head_ref }}'
-        if: github.event_name == 'pull_request'
+      
+      - name: Extract number of pull request
+        id: pull_request
+        run: |
+          echo ::set-output name=number::$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+        
+      - name: Prints number of pull request
+        run: echo Pull request branch is '${{ steps.pull_request.number }}'
 
       - name: Send Discord Notification
         uses: sarisia/actions-status-discord@v1
@@ -26,7 +31,7 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_GITHUB_CHANNEL_WEBHOOK }}
           title: "Dockerize PR"
-          description: "PR: ${{github.base_ref}}"
+          description: "PR: ${{ steps.pull_request.number }}"
           color: 0xffed2b
           username: GitHub Actions
           
