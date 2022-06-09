@@ -43,7 +43,9 @@
     "react-dom": "^17.0.2",
     "typescript": "^3.3.4000"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@geovistory/design-system-web": "0.0.8-staging.0"
+  },
   "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
