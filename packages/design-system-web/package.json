@@ -63,7 +63,8 @@
     "babel-loader": "^8.2.5",
     "jest": "^27.4.5",
     "jest-cli": "^27.4.5",
-    "puppeteer": "^10.0.0"
+    "puppeteer": "^10.0.0",
+    "storybook-design-token": "^2.2.0"
   },
   "license": "MIT"
 }

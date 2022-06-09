@@ -1,4 +1,10 @@
 :root {
+
+	/**
+	* @tokens Colors
+	* @presenter Color
+	*/
+	
 	--ion-color-primary: #9643b3;
 	--ion-color-primary-rgb: 150,67,179;
 	--ion-color-primary-contrast: #ffffff;
@@ -55,4 +61,48 @@
 	--ion-color-light-shade: #d7d8da;
 	--ion-color-light-tint: #f5f6f9;
 
+
+
+	--geov-font-family: 'Roboto', sans-serif;
+
+	--geov-h1-font-weight: 600;
+	--geov-h1-font-size: 60px;
+
+	--geov-h2-margin-top: 30px;
+	--geov-h2-font-weight: 500;
+	--geov-h2-font-size: 36px;
+
+	--geov-p-font-size: 20px;
+	--geov-p-font-weight: 500;
+
+	--geov-a-font-weight: 600;
+}
+
+h1 {
+	color: var(--ion-color-primary) !important;
+	font-family: var(--geov-font-family) !important;
+	font-weight: var(--geov-h1-font-weight) !important;
+	font-size: var(--geov-h1-font-size) !important;
+}
+
+h2 {
+	margin-top: var(--geov-h2-margin-top) !important;
+	color: var(--ion-color-medium) !important;
+	font-family: var(--geov-font-family) !important;
+	font-weight: var(--geov-h2-font-weight) !important;
+	font-size: var(--geov-h2-font-size) !important;
+}
+
+a {
+	color: var(--ion-color-primary-tint) !important;
+	font-family: var(--geov-font-family) !important;
+	text-decoration: none !important;
+	cursor: pointer !important;
+	font-weight: var(--geov-a-font-weight);
+}
+
+p {
+	color: var(--ion-color-medium) !important;
+	font-size: var(--geov-p-font-size) !important;
+	font-weight: var(--geov-p-font-weight) !important;
 }
