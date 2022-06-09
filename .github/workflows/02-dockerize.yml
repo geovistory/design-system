@@ -68,7 +68,7 @@ jobs:
       - name: Tag this commit with pr 
         id: lerna
         run: |
-          lerna version prerelease --preid pr-${{steps.pull_request.outputs.number}} --yes
+          lerna version patch --conventional-prerelease --preid pr-${{steps.pull_request.outputs.number}} --yes
           echo ::set-output name=tag::$(cd ./packages/design-system-web && cat package.json | jq -r '.version')
         env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
