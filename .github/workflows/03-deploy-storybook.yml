@@ -24,7 +24,7 @@ jobs:
         run: |
           echo "No tag specified. Choose a tag from workflow dispatch UI."
           exit 1
-        if: "${{ $GITHUB_REF == 'refs/tags*' }}"
+        if: ${{ github.ref_type != 'tag' }} 
         
       - name: Get the tag
         id: get_version
