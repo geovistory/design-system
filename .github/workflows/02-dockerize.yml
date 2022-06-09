@@ -51,7 +51,7 @@ jobs:
           node-version: '16.13.2'
           registry-url: 'https://registry.npmjs.org'
 
-      # install only dependencies from root package (ignoring postinstall script)
+# install only dependencies from root package (ignoring postinstall script)
 #      - name: Install dev dependencies
 #        run: npm i --ignore-scripts
 
