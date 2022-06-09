@@ -17,8 +17,7 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Step that prints name of pull request's branch name
-        run: |
-          echo "Pull request's base branch is: ${github.head_ref}"
+        run: echo Pull request branch is '${{ github.head_ref }}'
         if: github.event_name == 'pull_request'
 
       - name: Send Discord Notification
