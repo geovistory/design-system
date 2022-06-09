@@ -1,6 +1,6 @@
 {
   "name": "@geovistory/design-system-angular",
-  "version": "0.0.8-staging.0",
+  "version": "0.0.9-pr-9.8",
   "description": "geovistory.org's design system: web components",
   "repository": {
     "type": "git",
@@ -32,10 +32,10 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
+    "@geovistory/design-system-web": "0.0.9-pr-9.8",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4",
-    "@geovistory/design-system-web": "0.0.8-staging.0"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.3.5",
