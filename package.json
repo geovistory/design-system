@@ -1,9 +1,13 @@
 {
   "name": "root",
   "private": true,
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "============================== INSTALLATION / SETUP ==============================": "",
-    "postinstall": "npm run bootstrap",
+    "postinstall": "lerna bootstrap",
     "bootstrap": "lerna bootstrap",
     "update:lock": "npm run lock:rm && npm run lock:create",
     "lock:rm": "lerna exec -- rm -f package-lock.json",

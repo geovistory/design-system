@@ -1,6 +1,6 @@
 {
   "name": "@geovistory/design-system-web",
-  "version": "0.1.0",
+  "version": "0.1.1-pr-11.0",
   "description": "geovistory.org's design system: web components",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -63,7 +63,8 @@
     "babel-loader": "^8.2.5",
     "jest": "^27.4.5",
     "jest-cli": "^27.4.5",
-    "puppeteer": "^10.0.0"
+    "puppeteer": "^10.0.0",
+    "storybook-design-token": "^2.2.0"
   },
   "license": "MIT"
 }
