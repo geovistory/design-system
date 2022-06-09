@@ -1,7 +1,10 @@
-name: Tests
+name: Test Pull Request
 
-on: [push]
-
+on:
+  pull_request:
+    branches:    
+      - main
+      
 jobs:
   BuildAndTest:
     runs-on: ubuntu-latest
