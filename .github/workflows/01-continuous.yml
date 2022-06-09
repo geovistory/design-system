@@ -1,0 +1,47 @@
+name: Continuous
+
+on: [push]
+
+jobs:
+  BuildAndTest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Node Version
+        run: node -v
+
+      - name: Restore lerna
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Update npm registry
+        run: npm run update:registry
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+#      - name: Format
+#        run: npm run format:check
+#
+#      - name: Lint
+#        run: npm run lint:check
+#
+#      - name: Spell Check
+#        run: npm run spell
+#
+      - name: Test
+        run: npm run test
