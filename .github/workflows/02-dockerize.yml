@@ -16,7 +16,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          ref: ${github.head_ref}
+          ref: ${{ github.head_ref }}
       
       - name: Extract number of pull request
         id: pull_request
