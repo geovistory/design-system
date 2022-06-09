@@ -1,0 +1,50 @@
+name: Test Pull Request
+
+on:
+  pull_request:
+    branches:    
+      - main
+      
+jobs:
+  BuildAndTest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.13.2'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Node Version
+        run: node -v
+ 
+      - name: Npm Version
+        run: npm -v
+  
+ #     - name: Restore lerna
+ #       uses: actions/cache@v2
+ #       with:
+ #         path: |
+ #           node_modules
+ #           */*/node_modules
+ #         key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+#      - name: Format
+#        run: npm run format:check
+#
+#      - name: Lint
+#        run: npm run lint:check
+#
+#      - name: Spell Check
+#        run: npm run spell
+#
+      - name: Test
+        run: npm run test

@@ -70,6 +70,9 @@ jobs:
      
       - name: Echo tag created by lerna
         run: echo your branch is '${{steps.lerna.outputs.tag}}'
+     
+      - name: Update Lock files
+        run: 'npm run update:lock'
 
       - uses: EndBug/add-and-commit@v5
         with:
