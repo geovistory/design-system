@@ -1,0 +1,43 @@
+name: Deploy Storybook
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      environment:
+          description: "Deploy to Environment"
+          required: true
+          default: 'dev' 
+          type: choice
+          options:
+          - dev
+          - stag
+
+jobs:
+  inform-public-charts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        
+      - name: Echo version
+        run: echo ${steps.get_version.outputs.VERSION}
+            
+#      - name: Invoke workflow in public-chart to make a dev release
+#        uses: benc-uk/workflow-dispatch@v1
+#        with:
+#          workflow: update-docker-image-tag
+#          repo: geovistory/public-chart
+#          ref: dev
+#          token: ${{ secrets.GEOVBOT_PAT_REPO }}
+#          inputs: |
+#            {
+#              "service": "design-system",
+#              "tag": "${{steps.lerna.outputs.tag}}",
+#              "environment": "dev"
+#            }
+#
