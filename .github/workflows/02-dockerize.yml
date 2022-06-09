@@ -29,7 +29,7 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_GITHUB_CHANNEL_WEBHOOK }}
           title: "Dockerize PR"
-          description: "PR: ${{GITHUB_BASE_REF}}"
+          description: "PR: ${{github.base_ref}}"
           color: 0xffed2b
           username: GitHub Actions
           
