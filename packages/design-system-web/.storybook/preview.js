@@ -10,4 +10,16 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  options: {
+    storySort: {
+      order: [
+        'Welcome',
+        'Design',
+        'Advanced Components',
+        'Basic Components',
+        'Grid Components',
+        'Contributing',
+      ],
+    },
+  },
 }
