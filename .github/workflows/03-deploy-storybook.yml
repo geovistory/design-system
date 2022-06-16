@@ -19,15 +19,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       
       - name: Validate tag
         run: |
           echo "No tag specified. Choose a tag from workflow dispatch UI."
           exit 1
         if: ${{ github.ref_type != 'tag' }}
-
-      - name: Fetch all tags
-        run: git fetch --tags --force
         
       - name: Deploy only on staging if up to date with main branch
         run: bash .scripts/main-not-ahead-of.sh --branch ${GITHUB_REF/refs\/tags\//}
