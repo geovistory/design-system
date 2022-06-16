@@ -19,6 +19,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       
       - name: Validate tag
         run: |
@@ -27,7 +29,7 @@ jobs:
         if: ${{ github.ref_type != 'tag' }}
         
       - name: Deploy only on staging if up to date with main branch
-        run: bash .scripts/main-not-ahead-of.sh --branch ''
+        run: bash .scripts/main-not-ahead-of.sh --branch ${GITHUB_REF/refs\/tags\//}
         if: ${{ github.event.inputs.env == 'stag' }}
         
       - name: Get the tag

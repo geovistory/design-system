@@ -76,7 +76,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
      
       - name: Echo tag created by lerna
-        run: echo your branch is '${{steps.lerna.outputs.tag}}'
+        run: echo your tag is '${{steps.lerna.outputs.tag}}'
         
       - name: Update Lock files
         run: 'npm run update:lock'
