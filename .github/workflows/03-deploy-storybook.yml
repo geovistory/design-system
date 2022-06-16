@@ -29,7 +29,9 @@ jobs:
         if: ${{ github.ref_type != 'tag' }}
         
       - name: Deploy only on staging if up to date with main branch
-        run: bash .scripts/main-not-ahead-of.sh --branch ${GITHUB_REF/refs\/tags\//}
+        run: |
+          git pull
+          bash .scripts/main-not-ahead-of.sh --branch ${GITHUB_REF/refs\/tags\//}
         if: ${{ github.event.inputs.env == 'stag' }}
         
       - name: Get the tag
