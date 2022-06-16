@@ -31,7 +31,7 @@ set -- "${POSITIONAL_ARGS[@]}" # restore positional parameters
 
 
 
-if [[  -z $(git log $branch..main) ]] 
+if [[  -z $(git log $branch..origin/main) ]] 
 then
     echo Ok, $branch is up to date with main
 else
