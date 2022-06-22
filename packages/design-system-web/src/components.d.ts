@@ -36,6 +36,13 @@ export namespace Components {
         "vertical": boolean;
         "width": string;
     }
+    interface GeovEntityLabel {
+        /**
+          * id number of entity. i
+         */
+        "entityId": string;
+        "sparqlEndpoint": string;
+    }
     interface GeovHeading {
         "variant": 'h1' | 'h2' | 'h3';
     }
@@ -99,6 +106,12 @@ declare global {
         prototype: HTMLGeovDividerElement;
         new (): HTMLGeovDividerElement;
     };
+    interface HTMLGeovEntityLabelElement extends Components.GeovEntityLabel, HTMLStencilElement {
+    }
+    var HTMLGeovEntityLabelElement: {
+        prototype: HTMLGeovEntityLabelElement;
+        new (): HTMLGeovEntityLabelElement;
+    };
     interface HTMLGeovHeadingElement extends Components.GeovHeading, HTMLStencilElement {
     }
     var HTMLGeovHeadingElement: {
@@ -153,6 +166,7 @@ declare global {
         "geov-column": HTMLGeovColumnElement;
         "geov-company-card": HTMLGeovCompanyCardElement;
         "geov-divider": HTMLGeovDividerElement;
+        "geov-entity-label": HTMLGeovEntityLabelElement;
         "geov-heading": HTMLGeovHeadingElement;
         "geov-icon": HTMLGeovIconElement;
         "geov-link": HTMLGeovLinkElement;
@@ -192,6 +206,13 @@ declare namespace LocalJSX {
         "vertical"?: boolean;
         "width"?: string;
     }
+    interface GeovEntityLabel {
+        /**
+          * id number of entity. i
+         */
+        "entityId"?: string;
+        "sparqlEndpoint"?: string;
+    }
     interface GeovHeading {
         "variant"?: 'h1' | 'h2' | 'h3';
     }
@@ -229,6 +250,7 @@ declare namespace LocalJSX {
         "geov-column": GeovColumn;
         "geov-company-card": GeovCompanyCard;
         "geov-divider": GeovDivider;
+        "geov-entity-label": GeovEntityLabel;
         "geov-heading": GeovHeading;
         "geov-icon": GeovIcon;
         "geov-link": GeovLink;
@@ -248,6 +270,7 @@ declare module "@stencil/core" {
             "geov-column": LocalJSX.GeovColumn & JSXBase.HTMLAttributes<HTMLGeovColumnElement>;
             "geov-company-card": LocalJSX.GeovCompanyCard & JSXBase.HTMLAttributes<HTMLGeovCompanyCardElement>;
             "geov-divider": LocalJSX.GeovDivider & JSXBase.HTMLAttributes<HTMLGeovDividerElement>;
+            "geov-entity-label": LocalJSX.GeovEntityLabel & JSXBase.HTMLAttributes<HTMLGeovEntityLabelElement>;
             "geov-heading": LocalJSX.GeovHeading & JSXBase.HTMLAttributes<HTMLGeovHeadingElement>;
             "geov-icon": LocalJSX.GeovIcon & JSXBase.HTMLAttributes<HTMLGeovIconElement>;
             "geov-link": LocalJSX.GeovLink & JSXBase.HTMLAttributes<HTMLGeovLinkElement>;

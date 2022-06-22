@@ -17,7 +17,8 @@
     "jsxFactory": "h"
   },
   "include": [
-    "src"
+    "src",
+    ".storybook/lib"
   ],
   "exclude": [
     "node_modules"
