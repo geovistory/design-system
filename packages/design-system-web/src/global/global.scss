@@ -1,0 +1,38 @@
+/* Core CSS required for Ionic components to work properly */
+@import '~@ionic/core/css/core.css';
+
+/* Basic CSS for apps built with Ionic */
+@import '~@ionic/core/css/normalize.css';
+// @import '~@ionic/core/css/structure.css';
+@import '~@ionic/core/css/typography.css';
+@import '~@ionic/core/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import '~@ionic/core/css/padding.css';
+@import '~@ionic/core/css/float-elements.css';
+@import '~@ionic/core/css/text-alignment.css';
+@import '~@ionic/core/css/text-transformation.css';
+@import '~@ionic/core/css/flex-utils.css';
+
+:root {
+  --ion-font-family: 'Roboto', sans-serif;
+
+  /*
+   *  Colors Generated with
+   *  https://ionicframework.com/docs/theming/color-generator
+   */
+
+  --ion-color-primary: #6b46c1;
+  --ion-color-primary-rgb: 107, 70, 193;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #5e3eaa;
+  --ion-color-primary-tint: #7a59c7;
+
+  --ion-color-secondary: #00f0b8;
+  --ion-color-secondary-rgb: 0, 240, 184;
+  --ion-color-secondary-contrast: #000000;
+  --ion-color-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-secondary-shade: #00d3a2;
+  --ion-color-secondary-tint: #1af2bf;
+}

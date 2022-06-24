@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "start": "npm run start:storybook",
-    "dev": "npm run build-watch:stencil & start-storybook -p 6006 -s dist",
+    "dev": "npm run build-watch:stencil & start-storybook -p 6006",
     "=========================== STENCIL ==========================": "",
     "generate": "npx stencil generate",
     "start:stencil": "npx stencil build --dev --watch --serve",
@@ -54,6 +54,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
+    "@ionic/core": "^6.1.11",
+    "@stencil/sass": "^1.5.2",
     "@stencil/angular-output-target": "^0.4.0",
     "@storybook/addon-actions": "^6.5.5",
     "@storybook/addon-essentials": "^6.5.5",
@@ -61,6 +63,7 @@
     "@storybook/html": "^6.5.5",
     "@types/jest": "^27.0.3",
     "babel-loader": "^8.2.5",
+    "ionicons": "^6.0.2",
     "jest": "^27.4.5",
     "jest-cli": "^27.4.5",
     "puppeteer": "^10.0.0",

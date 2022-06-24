@@ -9,5 +9,7 @@ module.exports = {
     "@storybook/addon-essentials",
     'storybook-design-token'
   ],
-  "framework": "@storybook/html"
+  "framework": "@storybook/html",
+  "staticDirs": ["../dist/design-system-web"],
+
 }

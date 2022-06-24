@@ -1,0 +1,45 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta
+  title="Design/Basic Components (ionic)"
+  parameters={{
+    previewTabs: {
+      canvas: { hidden: true },
+    },
+  }}
+/>
+
+# Basic Components (ionic)
+
+Geovistory design system uses [ionic UI Components](https://ionicframework.com/docs/components) (buttons, cards, checkboxes, lists etc.) as basic building blocks to create more complex components. Ionic UI components are [open source](https://github.com/ionic-team/ionic-framework), shipped as [web components](https://www.webcomponents.org/introduction) (w3c standard), integrate perfectly with [Stencil](https://stenciljs.com/), are easy and fully [stylable](https://ionicframework.com/docs/theming/basics), are well [documented](https://ionicframework.com/docs/components), mature and look good! To see all available compontents click the button below:
+
+<ion-button expand="block" target="_blank" href="https://ionicframework.com/docs/components">Official ionic components documentation</ion-button>
+
+## Examples
+
+Some examples are included here:
+
+### Icons
+<ion-icon name="heart"></ion-icon>
+
+### Buttons
+
+Here some examples (for all variants see [official documentation](https://ionicframework.com/docs/api/button)):
+
+<ion-button>Default</ion-button>
+<ion-button color="primary">Primary</ion-button>
+<ion-button color="secondary">Secondary</ion-button>
+<ion-button color="tertiary">Tertiary</ion-button>
+<ion-button shape="round">Round Button</ion-button>
+<ion-button>
+  <ion-icon slot="start" name="star"></ion-icon>
+  Left Icon
+</ion-button>
+<ion-button size="small">Small</ion-button>
+<ion-button expand="block" fill="outline">Outline + Block</ion-button>
+
+### Searchbar
+
+<ion-searchbar></ion-searchbar>
+
+
