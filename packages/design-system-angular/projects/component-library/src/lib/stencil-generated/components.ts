@@ -7,328 +7,6 @@ import { Components } from '@geovistory/design-system-web';
 
 
 
-
-export declare interface GeovButton extends Components.GeovButton {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['href', 'icon', 'iconPos', 'iconSize', 'rounded', 'variant']
-})
-@Component({
-  selector: 'geov-button',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['href', 'icon', 'iconPos', 'iconSize', 'rounded', 'variant']
-})
-export class GeovButton {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface GeovCard extends Components.GeovCard {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['height', 'justify', 'width']
-})
-@Component({
-  selector: 'geov-card',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['height', 'justify', 'width']
-})
-export class GeovCard {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface GeovColumn extends Components.GeovColumn {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['justify']
-})
-@Component({
-  selector: 'geov-column',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['justify']
-})
-export class GeovColumn {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface GeovCompanyCard extends Components.GeovCompanyCard {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['description', 'imageUrl', 'name', 'websiteUrl']
-})
-@Component({
-  selector: 'geov-company-card',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['description', 'imageUrl', 'name', 'websiteUrl']
-})
-export class GeovCompanyCard {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface GeovDivider extends Components.GeovDivider {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['height', 'horizontal', 'vertical', 'width']
-})
-@Component({
-  selector: 'geov-divider',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['height', 'horizontal', 'vertical', 'width']
-})
-export class GeovDivider {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface GeovHeading extends Components.GeovHeading {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['variant']
-})
-@Component({
-  selector: 'geov-heading',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['variant']
-})
-export class GeovHeading {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface GeovIcon extends Components.GeovIcon {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['name', 'size']
-})
-@Component({
-  selector: 'geov-icon',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['name', 'size']
-})
-export class GeovIcon {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface GeovLink extends Components.GeovLink {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['href']
-})
-@Component({
-  selector: 'geov-link',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['href']
-})
-export class GeovLink {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface GeovLogo extends Components.GeovLogo {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['name']
-})
-@Component({
-  selector: 'geov-logo',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['name']
-})
-export class GeovLogo {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface GeovNavbar extends Components.GeovNavbar {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['height', 'links1', 'links2', 'logo']
-})
-@Component({
-  selector: 'geov-navbar',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['height', 'links1', 'links2', 'logo']
-})
-export class GeovNavbar {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface GeovProjectCard extends Components.GeovProjectCard {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['projectDesc', 'projectPageUrl', 'projectTitle']
-})
-@Component({
-  selector: 'geov-project-card',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['projectDesc', 'projectPageUrl', 'projectTitle']
-})
-export class GeovProjectCard {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface GeovRow extends Components.GeovRow {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['justify']
-})
-@Component({
-  selector: 'geov-row',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['justify']
-})
-export class GeovRow {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface GeovText extends Components.GeovText {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['justify', 'variant']
-})
-@Component({
-  selector: 'geov-text',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['justify', 'variant']
-})
-export class GeovText {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface IonAccordion extends Components.IonAccordion {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['disabled', 'readonly', 'toggleIcon', 'toggleIconSlot', 'value']
-})
-@Component({
-  selector: 'ion-accordion',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['disabled', 'readonly', 'toggleIcon', 'toggleIconSlot', 'value']
-})
-export class IonAccordion {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-import type { AccordionGroupChangeEventDetail as IAccordionGroupAccordionGroupChangeEventDetail } from '@geovistory/design-system-web';
-export declare interface IonAccordionGroup extends Components.IonAccordionGroup {
-  /**
-   * Emitted when the value property has changed. 
-   */
-  ionChange: EventEmitter<CustomEvent<IAccordionGroupAccordionGroupChangeEventDetail>>;
-
-}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['animated', 'disabled', 'expand', 'multiple', 'readonly', 'value']
-})
-@Component({
-  selector: 'ion-accordion-group',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['animated', 'disabled', 'expand', 'multiple', 'readonly', 'value']
-})
-export class IonAccordionGroup {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['ionChange']);
-  }
-}
-
 import type { OverlayEventDetail as IActionSheetOverlayEventDetail } from '@geovistory/design-system-web';
 export declare interface IonActionSheet extends Components.IonActionSheet {
   /**
@@ -516,66 +194,6 @@ export class IonBadge {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface IonBreadcrumb extends Components.IonBreadcrumb {
-  /**
-   * Emitted when the breadcrumb has focus. 
-   */
-  ionFocus: EventEmitter<CustomEvent<void>>;
-  /**
-   * Emitted when the breadcrumb loses focus. 
-   */
-  ionBlur: EventEmitter<CustomEvent<void>>;
-
-}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['active', 'color', 'disabled', 'download', 'href', 'rel', 'routerAnimation', 'routerDirection', 'separator', 'target']
-})
-@Component({
-  selector: 'ion-breadcrumb',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['active', 'color', 'disabled', 'download', 'href', 'rel', 'routerAnimation', 'routerDirection', 'separator', 'target']
-})
-export class IonBreadcrumb {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['ionFocus', 'ionBlur']);
-  }
-}
-
-import type { BreadcrumbCollapsedClickEventDetail as IBreadcrumbsBreadcrumbCollapsedClickEventDetail } from '@geovistory/design-system-web';
-export declare interface IonBreadcrumbs extends Components.IonBreadcrumbs {
-  /**
-   * Emitted when the collapsed indicator is clicked on. 
-   */
-  ionCollapsedClick: EventEmitter<CustomEvent<IBreadcrumbsBreadcrumbCollapsedClickEventDetail>>;
-
-}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['color', 'itemsAfterCollapse', 'itemsBeforeCollapse', 'maxItems']
-})
-@Component({
-  selector: 'ion-breadcrumbs',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['color', 'itemsAfterCollapse', 'itemsBeforeCollapse', 'maxItems']
-})
-export class IonBreadcrumbs {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['ionCollapsedClick']);
   }
 }
 
@@ -817,18 +435,16 @@ import type { ScrollBaseDetail as IContentScrollBaseDetail } from '@geovistory/d
 import type { ScrollDetail as IContentScrollDetail } from '@geovistory/design-system-web';
 export declare interface IonContent extends Components.IonContent {
   /**
-   * Emitted when the scroll has started. This event is disabled by default.
-Set `scrollEvents` to `true` to enable. 
+   * Emitted when the scroll has started. 
    */
   ionScrollStart: EventEmitter<CustomEvent<IContentScrollBaseDetail>>;
   /**
    * Emitted while scrolling. This event is disabled by default.
-Set `scrollEvents` to `true` to enable. 
+Look at the property: `scrollEvents` 
    */
   ionScroll: EventEmitter<CustomEvent<IContentScrollDetail>>;
   /**
-   * Emitted when the scroll has ended. This event is disabled by default.
-Set `scrollEvents` to `true` to enable. 
+   * Emitted when the scroll has ended. 
    */
   ionScrollEnd: EventEmitter<CustomEvent<IContentScrollBaseDetail>>;
 
@@ -877,14 +493,14 @@ export declare interface IonDatetime extends Components.IonDatetime {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['cancelText', 'clearText', 'color', 'dayValues', 'disabled', 'doneText', 'firstDayOfWeek', 'hourCycle', 'hourValues', 'isDateEnabled', 'locale', 'max', 'min', 'minuteValues', 'monthValues', 'name', 'presentation', 'readonly', 'showClearButton', 'showDefaultButtons', 'showDefaultTimeLabel', 'showDefaultTitle', 'size', 'value', 'yearValues'],
-  methods: ['confirm', 'reset', 'cancel']
+  inputs: ['cancelText', 'dayNames', 'dayShortNames', 'dayValues', 'disabled', 'displayFormat', 'displayTimezone', 'doneText', 'hourValues', 'max', 'min', 'minuteValues', 'monthNames', 'monthShortNames', 'monthValues', 'name', 'pickerFormat', 'pickerOptions', 'placeholder', 'readonly', 'value', 'yearValues'],
+  methods: ['open']
 })
 @Component({
   selector: 'ion-datetime',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['cancelText', 'clearText', 'color', 'dayValues', 'disabled', 'doneText', 'firstDayOfWeek', 'hourCycle', 'hourValues', 'isDateEnabled', 'locale', 'max', 'min', 'minuteValues', 'monthValues', 'name', 'presentation', 'readonly', 'showClearButton', 'showDefaultButtons', 'showDefaultTimeLabel', 'showDefaultTitle', 'size', 'value', 'yearValues']
+  inputs: ['cancelText', 'dayNames', 'dayShortNames', 'dayValues', 'disabled', 'displayFormat', 'displayTimezone', 'doneText', 'hourValues', 'max', 'min', 'minuteValues', 'monthNames', 'monthShortNames', 'monthValues', 'name', 'pickerFormat', 'pickerOptions', 'placeholder', 'readonly', 'value', 'yearValues']
 })
 export class IonDatetime {
   protected el: HTMLElement;
@@ -975,13 +591,13 @@ export declare interface IonFooter extends Components.IonFooter {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['collapse', 'translucent']
+  inputs: ['translucent']
 })
 @Component({
   selector: 'ion-footer',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['collapse', 'translucent']
+  inputs: ['translucent']
 })
 export class IonFooter {
   protected el: HTMLElement;
@@ -1148,7 +764,7 @@ export declare interface IonInput extends Components.IonInput {
   /**
    * Emitted when a keyboard input occurred. 
    */
-  ionInput: EventEmitter<CustomEvent<InputEvent>>;
+  ionInput: EventEmitter<CustomEvent<KeyboardEvent>>;
   /**
    * Emitted when the value has changed. 
    */
@@ -1189,13 +805,13 @@ export declare interface IonItem extends Components.IonItem {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['button', 'color', 'counter', 'counterFormatter', 'detail', 'detailIcon', 'disabled', 'download', 'fill', 'href', 'lines', 'rel', 'routerAnimation', 'routerDirection', 'shape', 'target', 'type']
+  inputs: ['button', 'color', 'detail', 'detailIcon', 'disabled', 'download', 'href', 'lines', 'rel', 'routerAnimation', 'routerDirection', 'target', 'type']
 })
 @Component({
   selector: 'ion-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['button', 'color', 'counter', 'counterFormatter', 'detail', 'detailIcon', 'disabled', 'download', 'fill', 'href', 'lines', 'rel', 'routerAnimation', 'routerDirection', 'shape', 'target', 'type']
+  inputs: ['button', 'color', 'detail', 'detailIcon', 'disabled', 'download', 'href', 'lines', 'rel', 'routerAnimation', 'routerDirection', 'target', 'type']
 })
 export class IonItem {
   protected el: HTMLElement;
@@ -1512,7 +1128,6 @@ export class IonMenuToggle {
 }
 
 import type { OverlayEventDetail as IModalOverlayEventDetail } from '@geovistory/design-system-web';
-import type { ModalBreakpointChangeEventDetail as IModalModalBreakpointChangeEventDetail } from '@geovistory/design-system-web';
 export declare interface IonModal extends Components.IonModal {
   /**
    * Emitted after the modal has presented. 
@@ -1530,50 +1145,26 @@ export declare interface IonModal extends Components.IonModal {
    * Emitted after the modal has dismissed. 
    */
   ionModalDidDismiss: EventEmitter<CustomEvent<IModalOverlayEventDetail>>;
-  /**
-   * Emitted after the modal breakpoint has changed. 
-   */
-  ionBreakpointDidChange: EventEmitter<CustomEvent<IModalModalBreakpointChangeEventDetail>>;
-  /**
-   * Emitted after the modal has presented.
-Shorthand for ionModalWillDismiss. 
-   */
-  didPresent: EventEmitter<CustomEvent<void>>;
-  /**
-   * Emitted before the modal has presented.
-Shorthand for ionModalWillPresent. 
-   */
-  willPresent: EventEmitter<CustomEvent<void>>;
-  /**
-   * Emitted before the modal has dismissed.
-Shorthand for ionModalWillDismiss. 
-   */
-  willDismiss: EventEmitter<CustomEvent<IModalOverlayEventDetail>>;
-  /**
-   * Emitted after the modal has dismissed.
-Shorthand for ionModalDidDismiss. 
-   */
-  didDismiss: EventEmitter<CustomEvent<IModalOverlayEventDetail>>;
 
 }
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['animated', 'backdropBreakpoint', 'backdropDismiss', 'breakpoints', 'canDismiss', 'enterAnimation', 'handle', 'htmlAttributes', 'initialBreakpoint', 'isOpen', 'keyboardClose', 'leaveAnimation', 'presentingElement', 'showBackdrop', 'swipeToClose', 'trigger'],
-  methods: ['present', 'dismiss', 'onDidDismiss', 'onWillDismiss', 'setCurrentBreakpoint', 'getCurrentBreakpoint']
+  inputs: ['animated', 'backdropDismiss', 'component', 'componentProps', 'cssClass', 'enterAnimation', 'htmlAttributes', 'keyboardClose', 'leaveAnimation', 'presentingElement', 'showBackdrop', 'swipeToClose'],
+  methods: ['present', 'dismiss', 'onDidDismiss', 'onWillDismiss']
 })
 @Component({
   selector: 'ion-modal',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['animated', 'backdropBreakpoint', 'backdropDismiss', 'breakpoints', 'canDismiss', 'enterAnimation', 'handle', 'htmlAttributes', 'initialBreakpoint', 'isOpen', 'keyboardClose', 'leaveAnimation', 'presentingElement', 'showBackdrop', 'swipeToClose', 'trigger']
+  inputs: ['animated', 'backdropDismiss', 'component', 'componentProps', 'cssClass', 'enterAnimation', 'htmlAttributes', 'keyboardClose', 'leaveAnimation', 'presentingElement', 'showBackdrop', 'swipeToClose']
 })
 export class IonModal {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['ionModalDidPresent', 'ionModalWillPresent', 'ionModalWillDismiss', 'ionModalDidDismiss', 'ionBreakpointDidChange', 'didPresent', 'willPresent', 'willDismiss', 'didDismiss']);
+    proxyOutputs(this, this.el, ['ionModalDidPresent', 'ionModalWillPresent', 'ionModalWillDismiss', 'ionModalDidDismiss']);
   }
 }
 
@@ -1714,60 +1305,6 @@ export class IonPickerColumn {
   }
 }
 
-import type { PickerColumnItem as IPickerColumnInternalPickerColumnItem } from '@geovistory/design-system-web';
-export declare interface IonPickerColumnInternal extends Components.IonPickerColumnInternal {
-  /**
-   * Emitted when the value has changed. 
-   */
-  ionChange: EventEmitter<CustomEvent<IPickerColumnInternalPickerColumnItem>>;
-
-}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['color', 'items', 'value']
-})
-@Component({
-  selector: 'ion-picker-column-internal',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['color', 'items', 'value']
-})
-export class IonPickerColumnInternal {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['ionChange']);
-  }
-}
-
-import type { PickerInternalChangeEventDetail as IPickerInternalPickerInternalChangeEventDetail } from '@geovistory/design-system-web';
-export declare interface IonPickerInternal extends Components.IonPickerInternal {
-  /**
-   *  
-   */
-  ionInputModeChange: EventEmitter<CustomEvent<IPickerInternalPickerInternalChangeEventDetail>>;
-
-}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined
-})
-@Component({
-  selector: 'ion-picker-internal',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>'
-})
-export class IonPickerInternal {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['ionInputModeChange']);
-  }
-}
-
 import type { OverlayEventDetail as IPopoverOverlayEventDetail } from '@geovistory/design-system-web';
 export declare interface IonPopover extends Components.IonPopover {
   /**
@@ -1786,46 +1323,26 @@ export declare interface IonPopover extends Components.IonPopover {
    * Emitted after the popover has dismissed. 
    */
   ionPopoverDidDismiss: EventEmitter<CustomEvent<IPopoverOverlayEventDetail>>;
-  /**
-   * Emitted after the popover has presented.
-Shorthand for ionPopoverWillDismiss. 
-   */
-  didPresent: EventEmitter<CustomEvent<void>>;
-  /**
-   * Emitted before the popover has presented.
-Shorthand for ionPopoverWillPresent. 
-   */
-  willPresent: EventEmitter<CustomEvent<void>>;
-  /**
-   * Emitted before the popover has dismissed.
-Shorthand for ionPopoverWillDismiss. 
-   */
-  willDismiss: EventEmitter<CustomEvent<IPopoverOverlayEventDetail>>;
-  /**
-   * Emitted after the popover has dismissed.
-Shorthand for ionPopoverDidDismiss. 
-   */
-  didDismiss: EventEmitter<CustomEvent<IPopoverOverlayEventDetail>>;
 
 }
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['alignment', 'animated', 'arrow', 'backdropDismiss', 'component', 'componentProps', 'dismissOnSelect', 'enterAnimation', 'event', 'htmlAttributes', 'isOpen', 'keyboardClose', 'leaveAnimation', 'reference', 'showBackdrop', 'side', 'size', 'translucent', 'trigger', 'triggerAction'],
+  inputs: ['animated', 'backdropDismiss', 'component', 'componentProps', 'cssClass', 'enterAnimation', 'event', 'htmlAttributes', 'keyboardClose', 'leaveAnimation', 'showBackdrop', 'translucent'],
   methods: ['present', 'dismiss', 'onDidDismiss', 'onWillDismiss']
 })
 @Component({
   selector: 'ion-popover',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['alignment', 'animated', 'arrow', 'backdropDismiss', 'component', 'componentProps', 'dismissOnSelect', 'enterAnimation', 'event', 'htmlAttributes', 'isOpen', 'keyboardClose', 'leaveAnimation', 'reference', 'showBackdrop', 'side', 'size', 'translucent', 'trigger', 'triggerAction']
+  inputs: ['animated', 'backdropDismiss', 'component', 'componentProps', 'cssClass', 'enterAnimation', 'event', 'htmlAttributes', 'keyboardClose', 'leaveAnimation', 'showBackdrop', 'translucent']
 })
 export class IonPopover {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['ionPopoverDidPresent', 'ionPopoverWillPresent', 'ionPopoverWillDismiss', 'ionPopoverDidDismiss', 'didPresent', 'willPresent', 'willDismiss', 'didDismiss']);
+    proxyOutputs(this, this.el, ['ionPopoverDidPresent', 'ionPopoverWillPresent', 'ionPopoverWillDismiss', 'ionPopoverDidDismiss']);
   }
 }
 
@@ -1911,8 +1428,6 @@ export class IonRadioGroup {
 }
 
 import type { RangeChangeEventDetail as IRangeRangeChangeEventDetail } from '@geovistory/design-system-web';
-import type { RangeKnobMoveStartEventDetail as IRangeRangeKnobMoveStartEventDetail } from '@geovistory/design-system-web';
-import type { RangeKnobMoveEndEventDetail as IRangeRangeKnobMoveEndEventDetail } from '@geovistory/design-system-web';
 export declare interface IonRange extends Components.IonRange {
   /**
    * Emitted when the value property has changed. 
@@ -1926,35 +1441,25 @@ export declare interface IonRange extends Components.IonRange {
    * Emitted when the range loses focus. 
    */
   ionBlur: EventEmitter<CustomEvent<void>>;
-  /**
-   * Emitted when the user starts moving the range knob, whether through
-mouse drag, touch gesture, or keyboard interaction. 
-   */
-  ionKnobMoveStart: EventEmitter<CustomEvent<IRangeRangeKnobMoveStartEventDetail>>;
-  /**
-   * Emitted when the user finishes moving the range knob, whether through
-mouse drag, touch gesture, or keyboard interaction. 
-   */
-  ionKnobMoveEnd: EventEmitter<CustomEvent<IRangeRangeKnobMoveEndEventDetail>>;
 
 }
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['color', 'debounce', 'disabled', 'dualKnobs', 'max', 'min', 'name', 'pin', 'pinFormatter', 'snaps', 'step', 'ticks', 'value']
+  inputs: ['color', 'debounce', 'disabled', 'dualKnobs', 'max', 'min', 'name', 'pin', 'snaps', 'step', 'ticks', 'value']
 })
 @Component({
   selector: 'ion-range',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['color', 'debounce', 'disabled', 'dualKnobs', 'max', 'min', 'name', 'pin', 'pinFormatter', 'snaps', 'step', 'ticks', 'value']
+  inputs: ['color', 'debounce', 'disabled', 'dualKnobs', 'max', 'min', 'name', 'pin', 'snaps', 'step', 'ticks', 'value']
 })
 export class IonRange {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['ionChange', 'ionFocus', 'ionBlur', 'ionKnobMoveStart', 'ionKnobMoveEnd']);
+    proxyOutputs(this, this.el, ['ionChange', 'ionFocus', 'ionBlur']);
   }
 }
 
@@ -2305,13 +1810,13 @@ dragging pointer has been released from `ion-segment`.
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['color', 'disabled', 'scrollable', 'selectOnFocus', 'swipeGesture', 'value']
+  inputs: ['color', 'disabled', 'scrollable', 'swipeGesture', 'value']
 })
 @Component({
   selector: 'ion-segment',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['color', 'disabled', 'scrollable', 'selectOnFocus', 'swipeGesture', 'value']
+  inputs: ['color', 'disabled', 'scrollable', 'swipeGesture', 'value']
 })
 export class IonSegment {
   protected el: HTMLElement;
@@ -2354,10 +1859,6 @@ export declare interface IonSelect extends Components.IonSelect {
    */
   ionCancel: EventEmitter<CustomEvent<void>>;
   /**
-   * Emitted when the overlay is dismissed. 
-   */
-  ionDismiss: EventEmitter<CustomEvent<void>>;
-  /**
    * Emitted when the select has focus. 
    */
   ionFocus: EventEmitter<CustomEvent<void>>;
@@ -2384,7 +1885,7 @@ export class IonSelect {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['ionChange', 'ionCancel', 'ionDismiss', 'ionFocus', 'ionBlur']);
+    proxyOutputs(this, this.el, ['ionChange', 'ionCancel', 'ionFocus', 'ionBlur']);
   }
 }
 
@@ -2414,13 +1915,13 @@ export declare interface IonSelectPopover extends Components.IonSelectPopover {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['header', 'message', 'multiple', 'options', 'subHeader']
+  inputs: ['header', 'message', 'options', 'subHeader']
 })
 @Component({
   selector: 'ion-select-popover',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['header', 'message', 'multiple', 'options', 'subHeader']
+  inputs: ['header', 'message', 'options', 'subHeader']
 })
 export class IonSelectPopover {
   protected el: HTMLElement;
@@ -2585,7 +2086,7 @@ export declare interface IonSplitPane extends Components.IonSplitPane {
   /**
    * Expression to be called when the split-pane visibility has changed 
    */
-  ionSplitPaneVisible: EventEmitter<CustomEvent<{ visible: boolean }>>;
+  ionSplitPaneVisible: EventEmitter<CustomEvent<{visible: boolean}>>;
 
 }
 
@@ -2677,11 +2178,11 @@ export declare interface IonTabs extends Components.IonTabs {
   /**
    * Emitted when the navigation is about to transition to a new component. 
    */
-  ionTabsWillChange: EventEmitter<CustomEvent<{ tab: string }>>;
+  ionTabsWillChange: EventEmitter<CustomEvent<{tab: string}>>;
   /**
    * Emitted when the navigation has finished transitioning to a new component. 
    */
-  ionTabsDidChange: EventEmitter<CustomEvent<{ tab: string }>>;
+  ionTabsDidChange: EventEmitter<CustomEvent<{tab: string}>>;
 
 }
 
@@ -2733,7 +2234,7 @@ export declare interface IonTextarea extends Components.IonTextarea {
   /**
    * Emitted when a keyboard input occurred. 
    */
-  ionInput: EventEmitter<CustomEvent<InputEvent>>;
+  ionInput: EventEmitter<CustomEvent<KeyboardEvent>>;
   /**
    * Emitted when the input loses focus. 
    */
@@ -2828,14 +2329,14 @@ export declare interface IonToast extends Components.IonToast {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['animated', 'buttons', 'color', 'cssClass', 'duration', 'enterAnimation', 'header', 'htmlAttributes', 'icon', 'keyboardClose', 'leaveAnimation', 'message', 'position', 'translucent'],
+  inputs: ['animated', 'buttons', 'color', 'cssClass', 'duration', 'enterAnimation', 'header', 'htmlAttributes', 'keyboardClose', 'leaveAnimation', 'message', 'position', 'translucent'],
   methods: ['present', 'dismiss', 'onDidDismiss', 'onWillDismiss']
 })
 @Component({
   selector: 'ion-toast',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['animated', 'buttons', 'color', 'cssClass', 'duration', 'enterAnimation', 'header', 'htmlAttributes', 'icon', 'keyboardClose', 'leaveAnimation', 'message', 'position', 'translucent']
+  inputs: ['animated', 'buttons', 'color', 'cssClass', 'duration', 'enterAnimation', 'header', 'htmlAttributes', 'keyboardClose', 'leaveAnimation', 'message', 'position', 'translucent']
 })
 export class IonToast {
   protected el: HTMLElement;

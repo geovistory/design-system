@@ -19,6 +19,7 @@
   "homepage": "",
   "scripts": {
     "build": "npm run clean && npm run compile",
+    "build:watch": "npm run clean && tsc -p . --watch",
     "clean": "rm -rf dist",
     "compile": "npm run tsc",
     "tsc": "tsc -p .",

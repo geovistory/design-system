@@ -22,6 +22,10 @@
    *  https://ionicframework.com/docs/theming/color-generator
    */
 
+  /**
+  * @tokens Colors
+  * @presenter Color
+  */
   --ion-color-primary: #6b46c1;
   --ion-color-primary-rgb: 107, 70, 193;
   --ion-color-primary-contrast: #ffffff;
@@ -35,4 +39,81 @@
   --ion-color-secondary-contrast-rgb: 0, 0, 0;
   --ion-color-secondary-shade: #00d3a2;
   --ion-color-secondary-tint: #1af2bf;
+
+  --ion-color-tertiary: #5260ff;
+  --ion-color-tertiary-rgb: 82,96,255;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255,255,255;
+  --ion-color-tertiary-shade: #4854e0;
+  --ion-color-tertiary-tint: #6370ff;
+
+  --ion-color-success: #2dd36f;
+  --ion-color-success-rgb: 45,211,111;
+  --ion-color-success-contrast: #000000;
+  --ion-color-success-contrast-rgb: 0,0,0;
+  --ion-color-success-shade: #28ba62;
+  --ion-color-success-tint: #42d77d;
+
+  --ion-color-warning: #ffc409;
+  --ion-color-warning-rgb: 255,196,9;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0,0,0;
+  --ion-color-warning-shade: #e0ac08;
+  --ion-color-warning-tint: #ffca22;
+
+  --ion-color-danger: #eb445a;
+  --ion-color-danger-rgb: 235,68,90;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255,255,255;
+  --ion-color-danger-shade: #cf3c4f;
+  --ion-color-danger-tint: #ed576b;
+  
+  --ion-color-dark: #222428;
+  --ion-color-dark-rgb: 34,36,40;
+  --ion-color-dark-contrast: #fff;
+  --ion-color-dark-contrast-rgb: 255,255,255;
+  --ion-color-dark-shade: #1e2023;
+  --ion-color-dark-tint: #383a3e;
+
+  --ion-color-medium: #92949c;
+  --ion-color-medium-rgb: 146,148,156;
+  --ion-color-medium-contrast: #000000;
+  --ion-color-medium-contrast-rgb: 0,0,0;
+  --ion-color-medium-shade: #808289;
+  --ion-color-medium-tint: #9d9fa6;
+
+  --ion-color-light: #f4f5f8;
+  --ion-color-light-rgb: 244,245,248;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0,0,0;
+  --ion-color-light-shade: #d7d8da;
+  --ion-color-light-tint: #f5f6f9;
 }
+
+
+// For more see https://ionicframework.com/docs/api/action-sheet
+ ion-action-sheet {
+    --backdrop-opacity: // Opacity of the backdrop
+    --background: // Background of the action sheet group
+    --button-background: // Background of the action sheet button
+    --button-background-activated: // Background of the action sheet button when pressed. Note: setting this will interfere with the Material Design ripple.
+    --button-background-activated-opacity: // Opacity of the action sheet button background when pressed
+    --button-background-focused: // Background of the action sheet button when tabbed to
+    --button-background-focused-opacity: // Opacity of the action sheet button background when tabbed to
+    --button-background-hover: // Background of the action sheet button on hover
+    --button-background-hover-opacity: // Opacity of the action sheet button background on hover
+    --button-background-selected: // Background of the selected action sheet button
+    --button-background-selected-opacity: // Opacity of the selected action sheet button background
+    --button-color: // Color of the action sheet button
+    --button-color-activated: // Color of the action sheet button when pressed
+    --button-color-focused: // Color of the action sheet button when tabbed to
+    --button-color-hover: // Color of the action sheet button on hover
+    --button-color-selected: // Color of the selected action sheet button
+    --color: // Color of the action sheet text
+    --height: // height of the action sheet
+    --max-height: // Maximum height of the action sheet
+    --max-width: // Maximum width of the action sheet
+    --min-height: // Minimum height of the action sheet
+    --min-width: // Minimum width of the action sheet
+    --width: // Width of the action sheet
+ }
