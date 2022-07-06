@@ -1,3 +1,19 @@
+/* Core CSS required for Ionic components to work properly */
+@import '~@ionic/core/css/core.css';
+
+/* Basic CSS for apps built with Ionic */
+@import '~@ionic/core/css/normalize.css';
+@import '~@ionic/core/css/structure.css';
+@import '~@ionic/core/css/display.css';
+@import './typography.css';
+
+/* Optional CSS utils that can be commented out */
+@import '~@ionic/core/css/padding.css';
+@import '~@ionic/core/css/float-elements.css';
+@import '~@ionic/core/css/text-alignment.css';
+@import '~@ionic/core/css/text-transformation.css';
+@import '~@ionic/core/css/flex-utils.css';
+
 :root {
   /***************************/
   /***** Color variables *****/
@@ -88,7 +104,7 @@
   --ion-safe-area-left: 0px;
   /*--ion-margin: ;*/
   /*--ion-padding: ;*/
- 
+
 
   /***************************/
   /***** Grid variables ******/
@@ -109,4 +125,10 @@
   --ion-grid-column-padding-md: ;
   --ion-grid-column-padding-lg: ;
   --ion-grid-column-padding-xl: ;
+
+  /* --ion-grid-width-xs: 100%;
+  --ion-grid-width-sm: 540px;
+  --ion-grid-width-md: 720px;
+  --ion-grid-width-lg: 720px;
+  --ion-grid-width-xl: 720px; */
 }

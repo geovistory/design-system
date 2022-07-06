@@ -14,7 +14,7 @@ export const parameters = {
     storySort: {
       order: [
         'Welcome',
-        'Design', ['Overview', 'Layout', 'Theming', 'Theme Generator', 'Theme Generator Color'],
+        'Design', ['Overview', 'Layout', 'Typography', 'Theming', 'Theme Generator', 'Theme Generator Color'],
         'Contributing'
       ],
     },
