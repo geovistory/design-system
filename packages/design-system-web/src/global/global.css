@@ -90,21 +90,18 @@
     */
   --ion-font-family: 'Roboto', sans-serif;
 
-
-
-  /*--ion-statusbar-padding: ;*/
-
   /**
-    * @tokens Safe area
+    * @tokens Spacing
     * @presenter Spacing
     */
   --ion-safe-area-top: 0px;
   --ion-safe-area-top: 0px;
   --ion-safe-area-right: 0px;
   --ion-safe-area-left: 0px;
-  /*--ion-margin: ;*/
-  /*--ion-padding: ;*/
-
+  --ion-statusbar-padding: ;
+  --ion-margin: ;
+  --ion-padding: ;
+ 
 
   /***************************/
   /***** Grid variables ******/
@@ -112,23 +109,23 @@
 
   /**
     * @tokens Grid Variables
-    *
+    * @presenter Spacing
     */
-  --ion-grid-columns: ;
+  /*--ion-grid-width:;*/
+  /*--ion-grid-columns: ;*/
+  --ion-grid-width-xs: 100%;
+  --ion-grid-width-sm: 540px;
+  --ion-grid-width-md: 720px;
+  --ion-grid-width-lg: 960px;
+  --ion-grid-width-xl: 1140px;
   --ion-grid-padding-xs: ;
   --ion-grid-padding-sm: ;
   --ion-grid-padding-md: ;
   --ion-grid-padding-lg: ;
   --ion-grid-padding-xl: ;
-  --ion-grid-column-padding-xs: ;
+  --ion-grid-column-padding-xs: ; 
   --ion-grid-column-padding-sm: ;
   --ion-grid-column-padding-md: ;
   --ion-grid-column-padding-lg: ;
   --ion-grid-column-padding-xl: ;
-
-  /* --ion-grid-width-xs: 100%;
-  --ion-grid-width-sm: 540px;
-  --ion-grid-width-md: 720px;
-  --ion-grid-width-lg: 720px;
-  --ion-grid-width-xl: 720px; */
 }
