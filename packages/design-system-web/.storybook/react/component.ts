@@ -7,6 +7,8 @@ import type { JSX } from '../../dist/types';
 
 
 
+export const IonAccordion = /*@__PURE__*/createReactComponent<JSX.IonAccordion, HTMLIonAccordionElement>('ion-accordion');
+export const IonAccordionGroup = /*@__PURE__*/createReactComponent<JSX.IonAccordionGroup, HTMLIonAccordionGroupElement>('ion-accordion-group');
 export const IonActionSheet = /*@__PURE__*/createReactComponent<JSX.IonActionSheet, HTMLIonActionSheetElement>('ion-action-sheet');
 export const IonAlert = /*@__PURE__*/createReactComponent<JSX.IonAlert, HTMLIonAlertElement>('ion-alert');
 export const IonApp = /*@__PURE__*/createReactComponent<JSX.IonApp, HTMLIonAppElement>('ion-app');
@@ -14,6 +16,8 @@ export const IonAvatar = /*@__PURE__*/createReactComponent<JSX.IonAvatar, HTMLIo
 export const IonBackButton = /*@__PURE__*/createReactComponent<JSX.IonBackButton, HTMLIonBackButtonElement>('ion-back-button');
 export const IonBackdrop = /*@__PURE__*/createReactComponent<JSX.IonBackdrop, HTMLIonBackdropElement>('ion-backdrop');
 export const IonBadge = /*@__PURE__*/createReactComponent<JSX.IonBadge, HTMLIonBadgeElement>('ion-badge');
+export const IonBreadcrumb = /*@__PURE__*/createReactComponent<JSX.IonBreadcrumb, HTMLIonBreadcrumbElement>('ion-breadcrumb');
+export const IonBreadcrumbs = /*@__PURE__*/createReactComponent<JSX.IonBreadcrumbs, HTMLIonBreadcrumbsElement>('ion-breadcrumbs');
 export const IonButton = /*@__PURE__*/createReactComponent<JSX.IonButton, HTMLIonButtonElement>('ion-button');
 export const IonButtons = /*@__PURE__*/createReactComponent<JSX.IonButtons, HTMLIonButtonsElement>('ion-buttons');
 export const IonCard = /*@__PURE__*/createReactComponent<JSX.IonCard, HTMLIonCardElement>('ion-card');
@@ -56,6 +60,8 @@ export const IonNavLink = /*@__PURE__*/createReactComponent<JSX.IonNavLink, HTML
 export const IonNote = /*@__PURE__*/createReactComponent<JSX.IonNote, HTMLIonNoteElement>('ion-note');
 export const IonPicker = /*@__PURE__*/createReactComponent<JSX.IonPicker, HTMLIonPickerElement>('ion-picker');
 export const IonPickerColumn = /*@__PURE__*/createReactComponent<JSX.IonPickerColumn, HTMLIonPickerColumnElement>('ion-picker-column');
+export const IonPickerColumnInternal = /*@__PURE__*/createReactComponent<JSX.IonPickerColumnInternal, HTMLIonPickerColumnInternalElement>('ion-picker-column-internal');
+export const IonPickerInternal = /*@__PURE__*/createReactComponent<JSX.IonPickerInternal, HTMLIonPickerInternalElement>('ion-picker-internal');
 export const IonPopover = /*@__PURE__*/createReactComponent<JSX.IonPopover, HTMLIonPopoverElement>('ion-popover');
 export const IonProgressBar = /*@__PURE__*/createReactComponent<JSX.IonProgressBar, HTMLIonProgressBarElement>('ion-progress-bar');
 export const IonRadio = /*@__PURE__*/createReactComponent<JSX.IonRadio, HTMLIonRadioElement>('ion-radio');

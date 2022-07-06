@@ -5,10 +5,10 @@ module.exports = {
     "../src/**/*.stories.@(js|jsx|ts|tsx)"
   ],
   "addons": [
+    'storybook-design-token',
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
-    'storybook-design-token'
+    "@storybook/addon-interactions"
   ],
   "framework": "@storybook/react",
   "staticDirs": ["../dist/design-system-web"],

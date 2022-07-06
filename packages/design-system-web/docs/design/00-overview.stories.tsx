@@ -4,6 +4,7 @@ export default {
   title: 'Design/Overview',
   parameters: {
     previewTabs: { canvas: { hidden: true } },
+    options: { showPanel: false },
   },
 };
 
@@ -11,12 +12,15 @@ export const Overview = () => (
   <IonApp>
     <IonContent>
       <IonGrid fixed>
-        <h1>Design System Overview</h1>
+        <IonText color="primary">
+          <h1>Design System Overview</h1>
+        </IonText>
 
         <p>
           Geovistory design system uses <a href="https://ionicframework.com/docs/components">ionic UI Components</a> (buttons, cards, checkboxes, lists etc.) as basic building
           blocks to create more complex components.
         </p>
+
         <p>
           Ionic UI components are <a href="https://github.com/ionic-team/ionic-framework">open source</a>, shipped as{' '}
           <a href="https://www.webcomponents.org/introduction">web components</a> (<a href="https://www.w3.org/TR/components-intro/">w3c standard</a>), integrate perfectly with{' '}

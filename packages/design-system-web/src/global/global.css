@@ -1,0 +1,112 @@
+:root {
+  /***************************/
+  /***** Color variables *****/
+  /***************************/
+
+  /**
+    * @tokens Colors
+    * @presenter Color
+    */
+  --ion-color-primary: #6b46c1;
+  --ion-color-primary-rgb: 107, 70, 193;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #5e3eaa;
+  --ion-color-primary-tint: #7a59c7;
+
+  --ion-color-secondary: #00f0b8;
+  --ion-color-secondary-rgb: 0, 240, 184;
+  --ion-color-secondary-contrast: #000000;
+  --ion-color-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-secondary-shade: #00d3a2;
+  --ion-color-secondary-tint: #1af2bf;
+
+  --ion-color-tertiary: #5260ff;
+  --ion-color-tertiary-rgb: 82, 96, 255;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #4854e0;
+  --ion-color-tertiary-tint: #6370ff;
+
+  --ion-color-success: #2dd36f;
+  --ion-color-success-rgb: 45, 211, 111;
+  --ion-color-success-contrast: #000000;
+  --ion-color-success-contrast-rgb: 0, 0, 0;
+  --ion-color-success-shade: #28ba62;
+  --ion-color-success-tint: #42d77d;
+
+  --ion-color-danger: #eb445a;
+  --ion-color-danger-rgb: 235, 68, 90;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #cf3c4f;
+  --ion-color-danger-tint: #ed576b;
+
+  --ion-color-dark: #222428;
+  --ion-color-dark-rgb: 34, 36, 40;
+  --ion-color-dark-contrast: #fff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #1e2023;
+  --ion-color-dark-tint: #383a3e;
+
+  --ion-color-medium: #92949c;
+  --ion-color-medium-rgb: 146, 148, 156;
+  --ion-color-medium-contrast: #000000;
+  --ion-color-medium-contrast-rgb: 0, 0, 0;
+  --ion-color-medium-shade: #808289;
+  --ion-color-medium-tint: #9d9fa6;
+
+  --ion-color-light: #f4f5f8;
+  --ion-color-light-rgb: 244, 245, 248;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #d7d8da;
+  --ion-color-light-tint: #f5f6f9;
+
+
+  /***************************/
+  /** Application variables **/
+  /***************************/
+
+  /**
+    * @tokens Font
+    * @presenter FontFamily
+    */
+  --ion-font-family: 'Roboto', sans-serif;
+
+
+
+  /*--ion-statusbar-padding: ;*/
+
+  /**
+    * @tokens Safe area
+    * @presenter Spacing
+    */
+  --ion-safe-area-top: 0px;
+  --ion-safe-area-top: 0px;
+  --ion-safe-area-right: 0px;
+  --ion-safe-area-left: 0px;
+  /*--ion-margin: ;*/
+  /*--ion-padding: ;*/
+ 
+
+  /***************************/
+  /***** Grid variables ******/
+  /***************************/
+
+  /**
+    * @tokens Grid Variables
+    *
+    */
+  --ion-grid-columns: ;
+  --ion-grid-padding-xs: ;
+  --ion-grid-padding-sm: ;
+  --ion-grid-padding-md: ;
+  --ion-grid-padding-lg: ;
+  --ion-grid-padding-xl: ;
+  --ion-grid-column-padding-xs: ;
+  --ion-grid-column-padding-sm: ;
+  --ion-grid-column-padding-md: ;
+  --ion-grid-column-padding-lg: ;
+  --ion-grid-column-padding-xl: ;
+}

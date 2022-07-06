@@ -6,6 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+
 }
 declare global {
     interface HTMLElementTagNameMap {
