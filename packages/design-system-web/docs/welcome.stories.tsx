@@ -17,7 +17,7 @@ export const Welcome = () => (
         </IonText>
 
         <p>
-          The Geovistory Design System consists of two types of components: Ionic components and Geovistory components
+          The Geovistory Design System consists of two types of components: Ionic components and Geovistory components.
           <br />
           At Geovistory, we create components to display data from our research projects, and we are constently updating them, enhancing the behavior, and adding new ones.
           <br />
@@ -30,13 +30,13 @@ export const Welcome = () => (
           for each technology. They are available through npm packages:
           <IonList>
             <IonItem>
-              <a href="https://www.npmjs.com/package/@geovistory/design-system-web">@geovistory/design-system-web</a>: web components
+              <a href="https://www.npmjs.com/package/@geovistory/design-system-web">@geovistory/design-system-web</a>: Web components
             </IonItem>
             <IonItem>
-              <a href="https://www.npmjs.com/package/@geovistory/design-system-react">@geovistory/design-system-react</a>: react components
+              <a href="https://www.npmjs.com/package/@geovistory/design-system-react">@geovistory/design-system-react</a>: React components
             </IonItem>
             <IonItem>
-              <a href="https://www.npmjs.com/package/@geovistory/design-system-angular">@geovistory/design-system-angular</a>: angular components
+              <a href="https://www.npmjs.com/package/@geovistory/design-system-angular">@geovistory/design-system-angular</a>: Angular components
             </IonItem>
           </IonList>
         </p>
