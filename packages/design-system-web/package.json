@@ -39,7 +39,7 @@
     "generate": "npx stencil generate",
     "start:stencil": "npx stencil build --dev --watch --serve",
     "==================== BUILD ====================": "================================",
-    "build": "npx stencil build",
+    "build": "npx stencil build && node .build/stencil.post-build.js",
     "build:docs": "npm run build:stencil && build-storybook -o ../../storybook  --quiet",
     "build:stencil": "npx stencil build --docs",
     "build-watch:stencil": "npx stencil build --watch",
