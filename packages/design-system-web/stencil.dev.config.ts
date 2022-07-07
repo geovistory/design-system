@@ -23,6 +23,6 @@ export const config: Config = {
       serviceWorker: null, // disable service workers
     },
     angularGenerator(),
-    reactGenerator('../../dist/types', './.storybook/react/component.ts'),
+    reactGenerator('../../dist/types', '../../loader',  './.storybook/react/component.ts'),
   ],
 };
