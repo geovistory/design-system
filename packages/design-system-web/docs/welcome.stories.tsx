@@ -1,5 +1,5 @@
 import { IonApp, IonContent, IonGrid, IonItem, IonList, IonText, IonCol, IonRow, IonButton, IonIcon } from '../.storybook/react/component';
-
+import { version } from '../package.json';
 export default {
   title: 'Welcome',
   parameters: {
@@ -10,9 +10,9 @@ export default {
 
 export const Welcome = () => (
   <IonApp>
-    <IonContent>
+    <IonContent class="ion-padding">
       <IonGrid fixed>
-        <h1>Geovistory Design System</h1>
+        <h1>Geovistory Design System <IonText color="medium" style={{fontSize: '1rem'}}>v{version}</IonText></h1>
         <p className="lead">Geovistory Design System is a collection components displaying semantic research data created by Geovistory projects.</p>
         <h2>Philosophy</h2>
         <p>

@@ -10,7 +10,7 @@ export default {
 
 export const Overview = () => (
   <IonApp>
-    <IonContent>
+    <IonContent class="ion-padding">
       <IonGrid fixed>
         <h1>Design Overview</h1>
         <p className="lead">

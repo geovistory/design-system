@@ -10,7 +10,7 @@ export default {
 
 export const CI_andCDWorkflow = () => (
   <IonApp>
-    <IonContent>
+    <IonContent class="ion-padding">
       <IonGrid fixed>
         <h1>CI/CD Workflow</h1>
         <p className="lead">
