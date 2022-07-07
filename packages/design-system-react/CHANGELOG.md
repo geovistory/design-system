@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.0.2 (2022-07-07)
+
+**Note:** Version bump only for package @geovistory/design-system-react
+
+
+
+
+
 ## [1.0.1](https://github.com/geovistory/design-system/compare/v1.0.0...v1.0.1) (2022-07-07)
 
 **Note:** Version bump only for package @geovistory/design-system-react
