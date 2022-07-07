@@ -12,31 +12,37 @@ export const Welcome = () => (
   <IonApp>
     <IonContent>
       <IonGrid fixed>
-        <IonText color="primary">
-          <h1>Geovistory Design System</h1>
-        </IonText>
-
+        <h1>Geovistory Design System</h1>
+        <p className="lead">Geovistory Design System is a collection components displaying semantic research data created by Geovistory projects.</p>
+        <h2>Philosophy</h2>
         <p>
-          The Geovistory Design System consists of two types of components: Ionic components and Geovistory components
-          <br />
-          At Geovistory, we create components to display data from our research projects, and we are constently updating them, enhancing the behavior, and adding new ones.
-          <br />
-          We also encourage our community to participate to this development by creating commponents which answer to their specific needs. We will be glad to add them to the
-          Geovistory project!
+          Geovistory Design System is{' '}
+          <a target="_blank" href="https://github.com/geovistory/design-system">
+            open source
+          </a>{' '}
+          and community driven. The Geovistory <a href="https://www.geovistory.org/about-us">team</a> manages and pushes the development of the design system and encourages
+           community contributions of any kind. We will be glad to welcome you're contribution!
         </p>
-
+        <h2>Types of componets</h2>
+        <p>The system consists of two types of components: Ionic components and Geovistory components.</p>
+        <h2>Technology</h2>
         <p>
-          The components are coded as Stencil components. Doing so, we have Angular, React and Web component versions of each component made, without having to redevelop everything
-          for each technology. They are available through npm packages:
+          The components are coded as Stencil components. Doing so, we generate and publis framework agnostic Web component (w3c standard) as well as Angular and React components. They are published as npm packages.
+        </p>
+        <h2>Npm packages </h2>
+        <p>
           <IonList>
-            <IonItem>
-              <a href="https://www.npmjs.com/package/@geovistory/design-system-web">@geovistory/design-system-web</a>: web components
+            <IonItem href="https://www.npmjs.com/package/@geovistory/design-system-web" target="_blank" lines="full">
+              @geovistory/design-system-web: web components
+              <IonIcon name="open-outline" slot="end"></IonIcon>
             </IonItem>
-            <IonItem>
-              <a href="https://www.npmjs.com/package/@geovistory/design-system-react">@geovistory/design-system-react</a>: react components
+            <IonItem href="https://www.npmjs.com/package/@geovistory/design-system-react" target="_blank" lines="full">
+              @geovistory/design-system-react: react components
+              <IonIcon name="open-outline" slot="end"></IonIcon>
             </IonItem>
-            <IonItem>
-              <a href="https://www.npmjs.com/package/@geovistory/design-system-angular">@geovistory/design-system-angular</a>: angular components
+            <IonItem href="https://www.npmjs.com/package/@geovistory/design-system-angular" target="_blank" lines="full">
+              @geovistory/design-system-angular: angular components
+              <IonIcon name="open-outline" slot="end"></IonIcon>
             </IonItem>
           </IonList>
         </p>
@@ -45,11 +51,11 @@ export const Welcome = () => (
           <IonRow>
             {/* <IonCol><IonButton>How to use?</IonButton></IonCol> */}
             <IonCol className="ion-text-center">
-              <IonButton href="/?path=/story/contributing-ci-cd-workflow--page">Contribute</IonButton>
+              <IonButton href="/?path=/story/contributing-ci-and-cd-workflow--ci-and-cd-workflow">Contribute</IonButton>
             </IonCol>
             <IonCol className="ion-text-center">
-              <IonButton href="https://github.com/geovistory">
-                <IonIcon name="logo-github"></IonIcon>&nbsp;Check our GitHub
+              <IonButton href="https://github.com/geovistory/design-system">
+                <IonIcon name="logo-github"></IonIcon>&nbsp; Code on GitHub
               </IonButton>
             </IonCol>
           </IonRow>

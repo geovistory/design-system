@@ -12,9 +12,7 @@ export const Layout = () => (
   <IonApp>
     <IonContent class="ion-padding">
       <IonGrid fixed>
-        <IonText color="primary">
-          <h1>Layouts</h1>
-        </IonText>
+        <h1>Layouts</h1>
 
         <p>
           Ionic has, built in, differents layouts usable out of the box (<code>ion-app</code>, <code>ion-header</code>, <code>ion-content</code>, <code>ion-footer</code>,{' '}
