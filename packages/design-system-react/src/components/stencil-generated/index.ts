@@ -5,8 +5,9 @@ import { createReactComponent } from './react-component-lib';
 
 import type { JSX } from '@geovistory/design-system-web';
 
+import { defineCustomElements } from '@geovistory/design-system-web/loader';
 
-
+defineCustomElements();
 export const IonAccordion = /*@__PURE__*/createReactComponent<JSX.IonAccordion, HTMLIonAccordionElement>('ion-accordion');
 export const IonAccordionGroup = /*@__PURE__*/createReactComponent<JSX.IonAccordionGroup, HTMLIonAccordionGroupElement>('ion-accordion-group');
 export const IonActionSheet = /*@__PURE__*/createReactComponent<JSX.IonActionSheet, HTMLIonActionSheetElement>('ion-action-sheet');
