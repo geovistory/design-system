@@ -12,19 +12,13 @@ export const CI_andCDWorkflow = () => (
   <IonApp>
     <IonContent>
       <IonGrid fixed>
-        <IonText color="primary">
-          <h1>CI & CD Workflow</h1>
-        </IonText>
-
-        <p>
-          In software engineering, CI & CD stands for continuous integration and continuous development (see [wikipedia](https://en.wikipedia.org/wiki/CI/CD)). We use Github to
-          realize a simple and powerful CI & CD workflow for the development and shipping of this design system.
+        <h1>CI/CD Workflow</h1>
+        <p className="lead">
+          CI/CD stands for continuous integration and continuous delivery (<a target="_blank" href="https://en.wikipedia.org/wiki/CI/CD">wikipedia</a>). We use GitHub to
+          realize a simple and powerful CI/CD workflow for the integration and delivery of this design system.
         </p>
 
-        <IonText color="primary">
-          <h4>Working with Pull Request</h4>
-        </IonText>
-
+        <h4>Pull Request</h4>
         <p>
           For new developments (features or fixes) we use separated branches resulting in pull-requests. Our development platform listens to pull requests triggering two Github
           workflows:
@@ -44,10 +38,7 @@ export const CI_andCDWorkflow = () => (
           version tag. (Both workflows are triggered automatically on push to pull request branch.)
         </p>
 
-        <IonText color="primary">
-          <h4>Deploy to preview environment</h4>
-        </IonText>
-
+        <h4>Deploy to preview environment</h4>
         <p>
           Our deployment platform allows us (the maintainers) to dispatch a workflow to deploy the documentation (storybook) of a version tag to two preview environments. There,
           other developers, data and UX specialists can easily review a pull request and comment, approve or decline changes in the thread of the GitHub pull request.
@@ -70,19 +61,13 @@ export const CI_andCDWorkflow = () => (
           To deploy a version to a preview environment, a maintainer has to manually start the workflow <code>Deploy Storybook</code>, and choose the tag and environment.
         </p>
 
-        <IonText color="primary">
-          <h4>Merge Pull Request</h4>
-        </IonText>
-
+        <h4>Merge Pull Request</h4>
         <p>
           After a pull request was approved (using <code>design-stag.geovistory.org</code>), it will be merged into the <code>main</code> branch. A maintainer has to merge the pull
           request using the GitHub UI and delete the branch.
         </p>
 
-        <IonText color="primary">
-          <h4>Release npm packages</h4>
-        </IonText>
-
+        <h4>Release npm packages</h4>
         <p>
           Now a new version can be released. A maintainer has to run the Workflow <code>Release</code> from <code>main</code> branch, choosing the <code>type of increment</code>:{' '}
           <code>[patch | minor | major]</code> as specified by <a href="https://semver.org/">https://semver.org/</a>.
@@ -129,10 +114,7 @@ export const CI_andCDWorkflow = () => (
           </ol>
         </p>
 
-        <IonText color="primary">
-          <h4>Deploy to production environment</h4>
-        </IonText>
-
+        <h4>Deploy to production environment</h4>
         <p>
           Regarding the deployed docker images, the production environment of <code>geovistory.org</code> is an exact copy of the staging environment. Thus, the deployment of
           <code>design-stag.geovistory.org</code> to <code>design.geovistory.org</code> underlies the general mechanism of promoting geovistory apps from staging to production.

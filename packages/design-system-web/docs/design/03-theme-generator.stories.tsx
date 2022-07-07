@@ -142,30 +142,26 @@ export const ThemeGenerator = () => {
 
       <IonContent class="ion-padding">
         <IonGrid fixed>
-          <IonText color="primary">
-            <h1>Theme Generator</h1>
-          </IonText>
-
-          <p>
-            As described in the previous page, we made a theme generator where you can play with all CSS variables, see the result, and copy the related CSS to put directly in your
-            app.
-            <br />
-            <br />
-            Moreover, if you want related colors, Ionic has a <a href="https://ionicframework.com/docs/theming/color-generator">Color Generator</a> that, given the principales
-            colors, creates associated shades and tints. They also provide a{' '}
-            <a href="https://ionicframework.com/docs/theming/themes#stepped-color-generator">stepped color generator</a>. with which you can step your colors. And then the CSS on
-            these pages can replace the<code>{code}</code> Column in a rows.
+          <h1>Theme Generator</h1>
+          <p className="lead">
+            This theme generator let you play with the <a href="https://ionicframework.com/docs/theming/css-variables#global-variables-1">global CSS variables</a>, see the result,
+            and copy the related CSS to put directly in your app.
           </p>
-
-          <IonText color="primary">
-            <h4>
-              Colors &nbsp;&nbsp;
-              <CopyToClipboard text={eval(embedCSS(getColorCSS()))} onCopy={() => alert('Colors variables in clibboard!')}>
-                <IonIcon name="copy-outline"></IonIcon>
-              </CopyToClipboard>
-            </h4>
-          </IonText>
-
+          <h2>Color palettes</h2>
+          <p>
+            For the creation color palettes we recommend the <a href="https://ionicframework.com/docs/theming/color-generator">theme color generator</a> and{' '}
+            <a href="https://ionicframework.com/docs/theming/themes#stepped-color-generator">stepped color generator</a>. with which you can step your colors.
+          </p>
+          <h2>Global CSS variables</h2>
+          <p>
+            Use the Design Tokens on this page to play around and see the effect of the global CSS variables. To apply it on your page, place the result in css <code>{code}</code> selector.
+          </p>
+          <h4>
+            Colors &nbsp;&nbsp;
+            <CopyToClipboard text={eval(embedCSS(getColorCSS()))} onCopy={() => alert('Colors variables in clibboard!')}>
+              <IonIcon name="copy-outline"></IonIcon>
+            </CopyToClipboard>
+          </h4>
           <table style={{ borderCollapse: 'separate', borderSpacing: '5px' }}>
             <tr style={{ height: '50px', width: '150px' }}>
               <td className="box" style={{ background: 'var(--ion-color-primary)', color: 'var(--ion-color-primary-contrast)', textAlign: 'center' }}>
@@ -256,15 +252,12 @@ export const ThemeGenerator = () => {
             </tr>
           </table>
 
-          <IonText color="primary">
-            <h4>
-              Application Variables&nbsp;&nbsp;
-              <CopyToClipboard text={eval(embedCSS(getApplicationVariablesCSS()))} onCopy={() => alert('Application variables in clibboard!')}>
-                <IonIcon name="copy-outline"></IonIcon>
-              </CopyToClipboard>
-            </h4>
-          </IonText>
-
+          <h4>
+            Application Variables&nbsp;&nbsp;
+            <CopyToClipboard text={eval(embedCSS(getApplicationVariablesCSS()))} onCopy={() => alert('Application variables in clibboard!')}>
+              <IonIcon name="copy-outline"></IonIcon>
+            </CopyToClipboard>
+          </h4>
           <p>
             Lorem ipsum dolor sit amet,&nbsp;
             <strong>consectetur adipiscing elit,</strong>&nbsp; sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&nbsp;
@@ -273,15 +266,12 @@ export const ThemeGenerator = () => {
             <u>Excepteur sint occaecat cupidatat non proident</u>, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
 
-          <IonText color="primary">
-            <h4>
-              Grid variables&nbsp;&nbsp;
-              <CopyToClipboard text={eval(embedCSS(getGridVariablesCSS()))} onCopy={() => alert('Grid variables in clibboard!')}>
-                <IonIcon name="copy-outline"></IonIcon>
-              </CopyToClipboard>
-            </h4>
-          </IonText>
-
+          <h4>
+            Grid variables&nbsp;&nbsp;
+            <CopyToClipboard text={eval(embedCSS(getGridVariablesCSS()))} onCopy={() => alert('Grid variables in clibboard!')}>
+              <IonIcon name="copy-outline"></IonIcon>
+            </CopyToClipboard>
+          </h4>
           <IonGrid style={{ border: '1px solid black' }}>
             <IonRow style={{ border: '1px dashed red' }}>
               <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
