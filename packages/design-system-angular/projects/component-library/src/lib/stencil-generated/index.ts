@@ -2,6 +2,8 @@
 import * as d from './components';
 
 export const DIRECTIVES = [
+  d.IonAccordion,
+  d.IonAccordionGroup,
   d.IonActionSheet,
   d.IonAlert,
   d.IonApp,
@@ -9,6 +11,8 @@ export const DIRECTIVES = [
   d.IonBackButton,
   d.IonBackdrop,
   d.IonBadge,
+  d.IonBreadcrumb,
+  d.IonBreadcrumbs,
   d.IonButton,
   d.IonButtons,
   d.IonCard,
@@ -51,6 +55,8 @@ export const DIRECTIVES = [
   d.IonNote,
   d.IonPicker,
   d.IonPickerColumn,
+  d.IonPickerColumnInternal,
+  d.IonPickerInternal,
   d.IonPopover,
   d.IonProgressBar,
   d.IonRadio,
