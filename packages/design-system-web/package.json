@@ -41,7 +41,7 @@
     "==================== BUILD ====================": "================================",
     "build": "npx stencil build && node .build/stencil.post-build.js",
     "build:docs": "npm run build:stencil && build-storybook -o ../../storybook  --quiet",
-    "build:stencil": "npx stencil build --docs",
+    "build:stencil": "npx stencil build --docs --config stencil.dev.config.ts && node .build/stencil.post-build.js",
     "build-watch:stencil": "npx stencil build --watch",
     "build:storybook": "build-storybook",
     "==================== TEST =====================": "================================",
@@ -79,7 +79,8 @@
     "ionicons": "^6.0.2",
     "jest": "^27.4.5",
     "jest-cli": "^27.4.5",
-    "puppeteer": "^10.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "storybook-design-token": "^2.2.0"
   },
   "license": "MIT"

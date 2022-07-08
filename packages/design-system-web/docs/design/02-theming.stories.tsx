@@ -1,4 +1,4 @@
-import { IonApp, IonContent, IonGrid, IonHeader, IonItem, IonList, IonText, IonTitle } from '../../.storybook/react/component';
+import { IonApp, IonContent, IonGrid, IonHeader, IonItem, IonList, IonText, IonTitle } from '../../.storybook/stencil-generated/component';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
 export default {

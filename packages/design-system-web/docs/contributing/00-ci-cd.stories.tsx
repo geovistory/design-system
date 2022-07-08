@@ -1,4 +1,4 @@
-import { IonApp, IonContent, IonGrid, IonItem, IonList, IonText } from '../../.storybook/react/component';
+import { IonApp, IonContent, IonGrid, IonItem, IonList, IonText } from '../../.storybook/stencil-generated/component';
 
 export default {
   title: 'Contributing/CI And CD Workflow',

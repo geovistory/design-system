@@ -1,4 +1,4 @@
-import { IonApp, IonContent, IonGrid, IonItem, IonList, IonIcon } from '../../.storybook/react/component';
+import { IonApp, IonContent, IonGrid, IonItem, IonList, IonIcon } from '../../.storybook/stencil-generated/component';
 
 export default {
   title: 'Design/Overview',

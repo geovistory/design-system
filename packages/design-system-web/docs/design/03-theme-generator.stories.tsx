@@ -1,4 +1,4 @@
-import { IonApp, IonButton, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonList, IonRow, IonText, IonTitle } from '../../.storybook/react/component';
+import { IonApp, IonButton, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonList, IonRow, IonText, IonTitle } from '../../.storybook/stencil-generated/component';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 export default {

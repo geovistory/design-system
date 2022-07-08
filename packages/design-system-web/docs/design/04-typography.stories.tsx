@@ -1,6 +1,6 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
-import { IonApp, IonContent, IonGrid } from '../../.storybook/react/component';
+import { IonApp, IonContent, IonGrid } from '../../.storybook/stencil-generated/component';
 
 export default {
   title: 'Design/Typography',

@@ -1,7 +1,6 @@
 import { Config } from '@stencil/core';
 import { angularGenerator } from './.build/stencil.bindings.angular';
 import { stencilBasicConfig } from './.build/stencil/stencil.basic.config';
-import { reactOutputTarget as react } from "@stencil/react-output-target";
 import { reactGenerator } from './.build/stencil.bindings.react';
 
 
