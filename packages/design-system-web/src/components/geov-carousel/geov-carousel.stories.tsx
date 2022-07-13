@@ -2,7 +2,8 @@ import { Components } from '../..';
 import { GeovCarousel } from '../../../.storybook/stencil-generated/component';
 
 export default {
-  title: 'Basic Components/Carousel',
+  title: 'Components/Carousel',
+  component: GeovCarousel,
 };
 const Template = (args: Components.GeovCarousel) => <GeovCarousel style={{height:400, maxWidth:600}} {...args}></GeovCarousel>;
 

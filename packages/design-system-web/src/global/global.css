@@ -3,7 +3,7 @@
 
 /* Basic CSS for apps built with Ionic */
 @import '~@ionic/core/css/normalize.css';
-@import '~@ionic/core/css/structure.css';
+/* @import '~@ionic/core/css/structure.css'; */
 @import '~@ionic/core/css/display.css';
 @import './typography.css';
 

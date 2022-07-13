@@ -31,7 +31,7 @@
   "scripts": {
     "start": "npm run start:storybook",
     "=========================== DEV ==========================": "",
-    "dev": "npm run dev:build && concurrently --names \"🧩_STENCIL__,📕_STORYBOOK\" -c \"blue,magenta\" \"npm:dev:watch\" \"npm:dev:docs\"",
+    "dev": "concurrently --names \"🧩_STENCIL__,📕_STORYBOOK\" -c \"blue,magenta\" \"npm:dev:watch\" \"npm:dev:docs\"",
     "dev:build": "npx stencil build --config stencil.dev.config.ts",
     "dev:watch": "stencil build --config stencil.dev.config.ts --watch",
     "dev:docs": "start-storybook -p 6006 --quiet",
