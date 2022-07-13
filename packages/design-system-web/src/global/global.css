@@ -108,7 +108,7 @@
   --ion-statusbar-padding: ;
   --ion-margin: ;
   --ion-padding: ;
- 
+
 
   /***************************/
   /***** Grid variables ******/
@@ -130,9 +130,14 @@
   --ion-grid-padding-md: ;
   --ion-grid-padding-lg: ;
   --ion-grid-padding-xl: ;
-  --ion-grid-column-padding-xs: ; 
+  --ion-grid-column-padding-xs: ;
   --ion-grid-column-padding-sm: ;
   --ion-grid-column-padding-md: ;
   --ion-grid-column-padding-lg: ;
   --ion-grid-column-padding-xl: ;
+
+
+  /** Swiper colors */
+  --swiper-theme-color: var(--ion-color-primary);
+
 }
