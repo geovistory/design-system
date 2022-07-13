@@ -2,6 +2,7 @@
 import * as d from './components';
 
 export const DIRECTIVES = [
+  d.GeovCarousel,
   d.IonAccordion,
   d.IonAccordionGroup,
   d.IonActionSheet,

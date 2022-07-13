@@ -8,6 +8,27 @@ import { Components } from '@geovistory/design-system-web';
 
 
 
+export declare interface GeovCarousel extends Components.GeovCarousel {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['images']
+})
+@Component({
+  selector: 'geov-carousel',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['images']
+})
+export class GeovCarousel {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
 export declare interface IonAccordion extends Components.IonAccordion {}
 
 @ProxyCmp({
