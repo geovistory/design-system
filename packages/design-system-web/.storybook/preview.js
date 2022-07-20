@@ -1,7 +1,3 @@
-import { defineCustomElements } from '../loader'
-
-defineCustomElements()
-
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -14,11 +10,8 @@ export const parameters = {
     storySort: {
       order: [
         'Welcome',
-        'Design',
-        'Advanced Components',
-        'Basic Components',
-        'Grid Components',
-        'Contributing',
+        'Design', ['Overview', 'Layout', 'Typography', 'Theming', 'Theme Generator', 'Theme Generator Color'],
+        'Contributing'
       ],
     },
   },

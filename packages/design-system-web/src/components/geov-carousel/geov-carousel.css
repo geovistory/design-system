@@ -1,0 +1,17 @@
+@import '~swiper/swiper.min.css';
+@import '~swiper/modules/autoplay/autoplay.min.css';
+@import '~swiper/modules/pagination/pagination.min.css';
+
+:host,
+.swiper {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
