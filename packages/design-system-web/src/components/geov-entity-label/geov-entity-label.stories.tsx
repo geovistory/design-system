@@ -16,3 +16,14 @@ const args: Components.GeovEntityLabel = {
 };
 EntityLabel.args = args;
 
+export const EntityLabelPreloaded = Template.bind({});
+const preloaded: Components.GeovEntityLabel = {
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  entityId: 'i315800',
+  data: {
+    loading: false,
+    error: false,
+    label: 'This is preloaded!',
+  },
+};
+EntityLabelPreloaded.args = preloaded;

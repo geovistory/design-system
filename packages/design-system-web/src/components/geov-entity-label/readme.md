@@ -7,10 +7,24 @@
 
 ## Properties
 
-| Property         | Attribute         | Description            | Type     | Default     |
-| ---------------- | ----------------- | ---------------------- | -------- | ----------- |
-| `entityId`       | `entity-id`       | id number of entity. i | `string` | `undefined` |
-| `sparqlEndpoint` | `sparql-endpoint` |                        | `string` | `undefined` |
+| Property         | Attribute         | Description            | Type     | Default             |
+| ---------------- | ----------------- | ---------------------- | -------- | ------------------- |
+| `data`           | --                |                        | `Data`   | `{ loading: true }` |
+| `entityId`       | `entity-id`       | id number of entity. i | `string` | `undefined`         |
+| `sparqlEndpoint` | `sparql-endpoint` |                        | `string` | `undefined`         |
+
+
+## Methods
+
+### `fetchData() => Promise<Data>`
+
+
+
+#### Returns
+
+Type: `Promise<Data>`
+
+
 
 
 ----------------------------------------------

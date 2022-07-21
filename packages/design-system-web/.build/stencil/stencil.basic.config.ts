@@ -1,6 +1,6 @@
 import { Config } from '@stencil/core';
 import { angularOutputTarget } from '@stencil/angular-output-target';
-import { reactOutputTarget as react } from '@stencil/react-output-target';
+import { reactOutputTarget as react } from '@geovistory/react-output-target';
 import { sass } from '@stencil/sass';
 
 export const stencilBasicConfig: Config = {
