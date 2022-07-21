@@ -70,10 +70,10 @@ jobs:
 #      - name: Show lerna.json 
 #        run: cat lerna.json
         
-      - name: Tag this commit with pr 
+      - name: Tag this commit with pr and publish to npm
         id: lerna
         run: |
-          npx lerna version prerelease --conventional-prerelease --preid pr-${{steps.pull_request.outputs.number}} --yes
+          npx lerna publish prerelease --canary --no-changelog --conventional-prerelease --preid pr-${{steps.pull_request.outputs.number}} --dist-tag ${{steps.pull_request.outputs.number} --yes
           echo ::set-output name=tag::$(cd ./packages/design-system-web && cat package.json | jq -r '.version')
         env:
            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
