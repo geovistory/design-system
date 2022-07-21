@@ -29,6 +29,28 @@ export class GeovCarousel {
 }
 
 
+export declare interface GeovEntityLabel extends Components.GeovEntityLabel {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['data', 'entityId', 'sparqlEndpoint'],
+  methods: ['fetchData']
+})
+@Component({
+  selector: 'geov-entity-label',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['data', 'entityId', 'sparqlEndpoint']
+})
+export class GeovEntityLabel {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
 export declare interface IonAccordion extends Components.IonAccordion {}
 
 @ProxyCmp({
