@@ -1,6 +1,6 @@
 {
   "name": "@geovistory/design-system-web",
-  "version": "1.1.0",
+  "version": "1.1.1-pr-18.0",
   "description": "geovistory.org's design system: web components",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -55,7 +55,6 @@
   },
   "dependencies": {
     "@stencil/core": "2.13.0",
-    "@stencil/react-output-target": "^0.3.1",
     "react-copy-to-clipboard": "^5.1.0",
     "react-icons": "^4.3.1",
     "react-syntax-highlighter": "^15.5.0",
@@ -63,6 +62,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
+    "@geovistory/react-output-target": "^0.4.0",
     "@ionic/core": "6.0.14",
     "@stencil/angular-output-target": "^0.4.0",
     "@stencil/sass": "^1.5.2",

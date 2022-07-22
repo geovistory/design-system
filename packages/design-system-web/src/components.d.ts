@@ -7,12 +7,23 @@ import { JSX as IonJSX } from '@ionic/core';
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Data } from "./components/geov-entity-label/geov-entity-label";
+import { SparqlBinding } from "./lib/sparqlJson";
 export namespace Components {
     interface GeovCarousel {
         /**
           * array of image URLs passed to src attribute of the <img src="">
          */
         "images": string[];
+    }
+    interface GeovEntityLabel {
+        "data"?: Data;
+        /**
+          * id number of entity. i
+         */
+        "entityId": string;
+        "fetchData": () => Promise<Data>;
+        "sparqlEndpoint": string;
     }
 }
 declare global {
@@ -22,8 +33,15 @@ declare global {
         prototype: HTMLGeovCarouselElement;
         new (): HTMLGeovCarouselElement;
     };
+    interface HTMLGeovEntityLabelElement extends Components.GeovEntityLabel, HTMLStencilElement {
+    }
+    var HTMLGeovEntityLabelElement: {
+        prototype: HTMLGeovEntityLabelElement;
+        new (): HTMLGeovEntityLabelElement;
+    };
     interface HTMLElementTagNameMap {
         "geov-carousel": HTMLGeovCarouselElement;
+        "geov-entity-label": HTMLGeovEntityLabelElement;
     }
 }
 
@@ -130,8 +148,17 @@ declare namespace LocalJSX {
          */
         "images"?: string[];
     }
+    interface GeovEntityLabel {
+        "data"?: Data;
+        /**
+          * id number of entity. i
+         */
+        "entityId"?: string;
+        "sparqlEndpoint"?: string;
+    }
     interface IntrinsicElements {
         "geov-carousel": GeovCarousel;
+        "geov-entity-label": GeovEntityLabel;
     }
 }
 export { LocalJSX as JSX };
@@ -139,6 +166,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "geov-carousel": LocalJSX.GeovCarousel & JSXBase.HTMLAttributes<HTMLGeovCarouselElement>;
+            "geov-entity-label": LocalJSX.GeovEntityLabel & JSXBase.HTMLAttributes<HTMLGeovEntityLabelElement>;
         }
     }
 }

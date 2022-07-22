@@ -1,4 +1,4 @@
-import { reactOutputTarget as react } from "@stencil/react-output-target";
+import { reactOutputTarget as react } from "@geovistory/react-output-target";
 
 
 export const reactGenerator = (
