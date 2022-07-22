@@ -15,6 +15,9 @@ export const config: Config = {
       type: 'dist-custom-elements',
     },
     {
+      type: 'dist-hydrate-script',
+    },
+    {
       type: 'docs-readme',
     },
     {
