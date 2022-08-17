@@ -1,6 +1,6 @@
 # Geovistory Design System
 
-The Geovistory Design System consists of two types of components: Ionic components and Geovistory components.
+Geovistory Design System consists of two types of components: Ionic components and Geovistory components.
 
 At Geovistory, we create components to display data from our research projects, and we are constently updating them, enhancing the behavior, and adding new ones.
 
