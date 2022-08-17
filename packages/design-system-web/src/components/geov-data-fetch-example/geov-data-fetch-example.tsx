@@ -13,22 +13,22 @@ WHERE {
 LIMIT 1
 `;
 
-export interface GeovEntityLabelData extends FetchResponse {
+export interface GeovDataFetchExampleData extends FetchResponse {
   label?: string;
   error?: boolean;
 }
 
 @Component({
-  tag: 'geov-entity-label',
-  styleUrl: 'geov-entity-label.css',
+  tag: 'geov-data-fetch-example',
+  styleUrl: 'geov-data-fetch-example.css',
   // shadow: true,
 })
-export class GeovEntityLabel {
+export class GeovDataFetchExample {
   /**
    * data (optional)
    * if provided, component won't fetchData()
    */
-  @Prop({ mutable: true }) data?: GeovEntityLabelData | string;
+  @Prop({ mutable: true }) data?: GeovDataFetchExampleData | string;
   /**
    * sparqlEndpoint
    * URL of the sparql endpoint
@@ -41,19 +41,21 @@ export class GeovEntityLabel {
   @Prop() entityId: string;
 
 
-  @State() d?: GeovEntityLabelData;
+  @State() d?: GeovDataFetchExampleData;
   @State() msg: string;
 
   componentWillLoad() {
     if (this.data) {
       // parse data given by the @Prop 'data'
       this.parseDataProp();
+      this.msg = 'component data was given by Input';
     } else {
       // fetch data via http
       this.d = { loading: true };
       this.fetchData()
       .then(d => (this.d = d))
       .catch(d => (this.d = d));
+      this.msg = 'component data was fetched by component';
     }
   }
 
@@ -70,12 +72,13 @@ export class GeovEntityLabel {
    * @returns a Promise with the data for this component
    */
   @Method()
-  async fetchData(): Promise<GeovEntityLabelData> {
+  async fetchData(): Promise<GeovDataFetchExampleData> {
     return sparqlJson<{ o: SparqlBinding<string> }>(this.sparqlEndpoint, qrLabel(this.entityId))
       .then(res => {
         return {
           ...this.d,
-          label: res?.results?.bindings?.[0]?.o?.value,
+          // TODO: remove timestamp
+          label: res?.results?.bindings?.[0]?.o?.value + ' fetched at: ' + new Date().toTimeString(),
           loading: false,
         };
       })
@@ -91,10 +94,13 @@ export class GeovEntityLabel {
   render() {
     return (
       <Host>
+        <div>{this.msg}</div>
         {this.d.label}
         {this.d.loading ? `loading...` : ``}
         {this.d.error ? `error!` : ``}
         {!this.d.label && !this.d.loading && !this.d.error ? <span class="no-label-found">no label found</span> : ``}
+        <button onClick={()=>this.msg="clicked"}>click me!</button>
+        <slot></slot>
       </Host>
     );
   }

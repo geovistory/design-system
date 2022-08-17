@@ -25,6 +25,12 @@ export const config: Config = {
       serviceWorker: null, // disable service workers
     },
     angularGenerator(),
-    reactGenerator(),
+    reactGenerator({
+      customElementsDir: 'dist/components',
+      enableSSR: true,
+      individualComponentFiles: true,
+      individualComponentFilesDir: '../design-system-react/src/components',
+      individualComponentDefineCustomElement: true
+    }),
   ],
 };

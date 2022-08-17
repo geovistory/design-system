@@ -62,3 +62,6 @@ typings/
 
 # Produced build files
 dist
+
+# Generated source files
+src/components/

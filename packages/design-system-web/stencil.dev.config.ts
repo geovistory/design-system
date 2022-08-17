@@ -22,6 +22,10 @@ export const config: Config = {
       serviceWorker: null, // disable service workers
     },
     angularGenerator(),
-    reactGenerator('../../dist/types', '../../loader',  './.storybook/stencil-generated/component.ts'),
+    reactGenerator({
+      componentCorePackage: '../../dist/types',
+      loaderDir: '../../loader',
+      proxiesFile: './.storybook/stencil-generated/component.ts'
+    }),
   ],
 };

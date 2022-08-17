@@ -7,24 +7,24 @@
 
 ## Properties
 
-| Property         | Attribute         | Description            | Type     | Default             |
-| ---------------- | ----------------- | ---------------------- | -------- | ------------------- |
-| `data`           | --                |                        | `Data`   | `{ loading: true }` |
-| `entityId`       | `entity-id`       | id number of entity. i | `string` | `undefined`         |
-| `sparqlEndpoint` | `sparql-endpoint` |                        | `string` | `undefined`         |
+| Property         | Attribute         | Description                                              | Type                            | Default     |
+| ---------------- | ----------------- | -------------------------------------------------------- | ------------------------------- | ----------- |
+| `data`           | `data`            | data (optional) if provided, component won't fetchData() | `GeovEntityLabelData \| string` | `undefined` |
+| `entityId`       | `entity-id`       | entityId ID number of entity, e.g. 'i315800'             | `string`                        | `undefined` |
+| `sparqlEndpoint` | `sparql-endpoint` | sparqlEndpoint URL of the sparql endpoint                | `string`                        | `undefined` |
 
 
 ## Methods
 
-### `fetchData() => Promise<Data>`
+### `fetchData() => Promise<GeovEntityLabelData>`
 
-
+does the sparql request(s)
 
 #### Returns
 
-Type: `Promise<Data>`
+Type: `Promise<GeovEntityLabelData>`
 
-
+a Promise with the data for this component
 
 
 ----------------------------------------------
