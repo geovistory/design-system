@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 1.1.1-pr-18.0 (2022-07-21)
+## 1.1.1-pr-18.1 (2022-07-21)
 
 **Note:** Version bump only for package @geovistory/design-system-react
 
