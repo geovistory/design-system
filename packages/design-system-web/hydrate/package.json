@@ -1,6 +1,0 @@
-{
-  "name": "@geovistory/design-system-web/hydrate",
-  "description": "DesignSystemWeb component hydration app.",
-  "main": "index.js",
-  "types": "index.d.ts"
-}
