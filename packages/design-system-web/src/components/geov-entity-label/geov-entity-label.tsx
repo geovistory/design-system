@@ -1,5 +1,10 @@
-import { Component, h, Host, Method, Prop, State, Watch } from '@stencil/core';
+import { Component, h, Host, Method, Prop, State, Element } from '@stencil/core';
 import { FetchResponse } from '../../lib/FetchResponse';
+import { createHappyDomId } from '../../lib/happyDOM/createHappyDomId';
+import { endHappyDomTask } from '../../lib/happyDOM/endHappyDomTask';
+import { getHappyDomData } from '../../lib/happyDOM/getHappyDomData';
+import { setHappyDomData } from '../../lib/happyDOM/setHappyDomData';
+import { startHappyDomTask } from '../../lib/happyDOM/startHappyDomTask';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
 
 const qrLabel = (id: string) => `
@@ -24,11 +29,14 @@ export interface GeovEntityLabelData extends FetchResponse {
   // shadow: true,
 })
 export class GeovEntityLabel {
-  /**
-   * data (optional)
-   * if provided, component won't fetchData()
-   */
-  @Prop({ mutable: true }) data?: GeovEntityLabelData | string;
+  @Prop({ reflect: true }) _happy_dom_id?: string = createHappyDomId();
+  @Element() private element: HTMLElement;
+
+  // /**
+  //  * data (optional)
+  //  * if provided, component won't fetchData()
+  //  */
+  // @Prop({ mutable: true }) data?: GeovEntityLabelData | string;
   /**
    * sparqlEndpoint
    * URL of the sparql endpoint
@@ -40,30 +48,37 @@ export class GeovEntityLabel {
    */
   @Prop() entityId: string;
 
-
   @State() d?: GeovEntityLabelData;
   @State() msg: string;
 
   componentWillLoad() {
-    if (this.data) {
-      // parse data given by the @Prop 'data'
-      this.parseDataProp();
-    } else {
+    this.d = getHappyDomData(this._happy_dom_id);
+    if (!this.d) {
+      //   // parse data given by the @Prop 'data'
+      //   this.parseDataProp();
+      // } else {
       // fetch data via http
       this.d = { loading: true };
+
+      const t = startHappyDomTask();
+
       this.fetchData()
-      .then(d => (this.d = d))
-      .catch(d => (this.d = d));
+        .then(d => {
+          this.d = d;
+          setHappyDomData(d, this._happy_dom_id, this.element);
+          endHappyDomTask(t);
+        })
+        .catch(d => (this.d = d));
     }
   }
 
-  @Watch('data')
-  parseDataProp() {
-    if (this.data) {
-      if (typeof this.data === 'string') this.d = JSON.parse(this.data);
-      else this.d = {...this.data};
-    }
-  }
+  // @Watch('data')
+  // parseDataProp() {
+  //   if (this.data) {
+  //     if (typeof this.data === 'string') this.d = JSON.parse(this.data);
+  //     else this.d = { ...this.data };
+  //   }
+  // }
 
   /**
    * does the sparql request(s)

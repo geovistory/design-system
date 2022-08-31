@@ -55,6 +55,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@geovistory/happy-dom-output-target": "^1.0.1-2",
     "@stencil/core": "2.13.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-icons": "^4.3.1",
@@ -63,7 +64,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
-    "@geovistory/react-output-target": "^0.4.3-1",
+    "@geovistory/react-output-target": "^0.4.3-9",
     "@ionic/core": "6.0.14",
     "@stencil/angular-output-target": "^0.4.0",
     "@stencil/sass": "^1.5.2",

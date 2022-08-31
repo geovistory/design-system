@@ -133,10 +133,7 @@ export namespace Components {
         "sparqlEndpoint": string;
     }
     interface GeovEntityLabel {
-        /**
-          * data (optional) if provided, component won't fetchData()
-         */
-        "data"?: GeovEntityLabelData | string;
+        "_happy_dom_id"?: string;
         /**
           * entityId ID number of entity, e.g. 'i315800'
          */
@@ -295,10 +292,7 @@ declare namespace LocalJSX {
         "sparqlEndpoint"?: string;
     }
     interface GeovEntityLabel {
-        /**
-          * data (optional) if provided, component won't fetchData()
-         */
-        "data"?: GeovEntityLabelData | string;
+        "_happy_dom_id"?: string;
         /**
           * entityId ID number of entity, e.g. 'i315800'
          */

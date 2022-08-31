@@ -12,6 +12,7 @@ The components are coded as Stencil components. Doing so, we have Angular, React
 * [@geovistory/design-system-web](https://www.npmjs.com/package/@geovistory/design-system-web): Web components
 * [@geovistory/design-system-react](https://www.npmjs.com/package/@geovistory/design-system-react): React components
 * [@geovistory/design-system-angular](https://www.npmjs.com/package/@geovistory/design-system-angular): Angular components
+* [@geovistory/design-system-happy-dom](https://www.npmjs.com/package/@geovistory/design-system-happy-dom): HappyDom worker for server side rendering
 
 
 ---

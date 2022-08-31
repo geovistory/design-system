@@ -25,8 +25,9 @@
     "build:docs": "npm run build:components && npm --prefix packages/design-system-web run build:docs",
     "build:components": "npm --prefix packages/design-system-web run build",
     "build:post": "node .build/banner.js build:post && concurrently \"npm:build:post:*\"",
-    "build:post:react__": "npm --prefix packages/design-system-react run build",
-    "build:post:angular": "npm --prefix packages/design-system-angular run build",
+    "build:post:react___": "npm --prefix packages/design-system-react run build",
+    "build:post:angular_": "npm --prefix packages/design-system-angular run build",
+    "build:post:happydom": "npm --prefix packages/design-system-happy-dom run build",
     "==================== DOCUMENTATION ====================": "================================",
     "storybook": "node .build/banner.js storybook:build && npm run build:docs"
   },
