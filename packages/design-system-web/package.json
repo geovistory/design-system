@@ -1,6 +1,6 @@
 {
   "name": "@geovistory/design-system-web",
-  "version": "1.1.1-pr-18.2",
+  "version": "1.1.1-pr-18.21+8dc5228",
   "description": "geovistory.org's design system: web components",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -64,8 +64,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
-    "@ionic/core": "6.0.14",
     "@geovistory/react-output-target": "^0.4.3-9",
+    "@ionic/core": "6.0.14",
     "@stencil/angular-output-target": "^0.4.0",
     "@stencil/sass": "^1.5.2",
     "@storybook/addon-actions": "^6.5.9",
@@ -86,5 +86,6 @@
     "react-dom": "^17.0.2",
     "storybook-design-token": "^2.2.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "8dc5228046d1120dd7dfad32f6891ff5ad126de3"
 }

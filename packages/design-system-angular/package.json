@@ -1,6 +1,6 @@
 {
   "name": "@geovistory/design-system-angular",
-  "version": "1.1.1-pr-18.2",
+  "version": "1.1.1-pr-18.21+8dc5228",
   "description": "geovistory.org's design system: web components",
   "repository": {
     "type": "git",
@@ -51,5 +51,6 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "ng-packagr": "^13.0.0",
     "typescript": "~4.6.2"
-  }
+  },
+  "gitHead": "8dc5228046d1120dd7dfad32f6891ff5ad126de3"
 }

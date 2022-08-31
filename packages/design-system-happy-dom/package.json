@@ -1,7 +1,7 @@
 {
   "name": "@geovistory/design-system-happy-dom",
   "sideEffects": false,
-  "version": "1.1.1-pr-18.2",
+  "version": "1.1.1-pr-18.21+8dc5228",
   "description": "geovistory.org's design system: HappyDOM worker",
   "repository": {
     "type": "git",
@@ -51,5 +51,6 @@
       "node_modules",
       "dist"
     ]
-  }
+  },
+  "gitHead": "8dc5228046d1120dd7dfad32f6891ff5ad126de3"
 }
