@@ -1,1 +1,1 @@
-export * from "./components/react-component-lib/utils/useSSE"
+export { useSSE } from "./components/react-component-lib/utils/useSSE"

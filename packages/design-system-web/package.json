@@ -64,8 +64,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
-    "@geovistory/react-output-target": "^0.4.3-9",
     "@ionic/core": "6.0.14",
+    "@geovistory/react-output-target": "^0.4.3-9",
     "@stencil/angular-output-target": "^0.4.0",
     "@stencil/sass": "^1.5.2",
     "@storybook/addon-actions": "^6.5.9",

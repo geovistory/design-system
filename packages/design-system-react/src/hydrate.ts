@@ -1,1 +1,0 @@
-export * from '@geovistory/design-system-web/hydrate';
