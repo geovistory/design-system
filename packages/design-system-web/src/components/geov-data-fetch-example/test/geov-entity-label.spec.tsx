@@ -1,18 +1,18 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { GeovEntityLabel } from '../geov-data-fetch-example';
+import { GeovDataFetchExample } from '../geov-data-fetch-example';
 
-describe('geov-entity-label', () => {
+describe('geov-data-fetch-example', () => {
   it('renders', async () => {
     const page = await newSpecPage({
-      components: [GeovEntityLabel],
-      html: `<geov-entity-label></geov-entity-label>`,
+      components: [GeovDataFetchExample],
+      html: `<geov-data-fetch-example></geov-data-fetch-example>`,
     });
     expect(page.root).toEqualHtml(`
-      <geov-entity-label>
+      <geov-data-fetch-example>
         <mock:shadow-root>
           <slot></slot>
         </mock:shadow-root>
-      </geov-entity-label>
+      </geov-data-fetch-example>
     `);
   });
 });

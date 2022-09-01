@@ -57,12 +57,14 @@ const start = async () => {
       document.body.removeChild(div)
       // @ts-ignore
       const data = wrapper.data
+      // @ts-ignore
+      const _happy_dom_id = wrapper._happy_dom_id
       // console.log(data);
 
       // Do something when all async tasks are completed.
       const html = wrapper?.getInnerHTML({ includeShadowRoots: true })
       // console.log(html);
-      return { data, html }
+      return { data, html, _happy_dom_id }
   });
 
 

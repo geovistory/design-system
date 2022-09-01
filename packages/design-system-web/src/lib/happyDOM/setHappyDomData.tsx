@@ -5,12 +5,15 @@
  */
 
 export function setHappyDomData(data: any, _happy_dom_id: string, element: any) {
-
   // @ts-ignore
   if (!window.happyDOM) return;
 
   const wrapper = getWrapper(element);
   if (wrapper) {
+
+    // set the _happy_dom_id of the first element on the wrapper
+    if (!wrapper._happy_dom_id) wrapper._happy_dom_id = _happy_dom_id;
+
     wrapper.data = {
       ...wrapper.data,
       [_happy_dom_id]: data,
@@ -19,6 +22,7 @@ export function setHappyDomData(data: any, _happy_dom_id: string, element: any) 
 }
 
 export interface DataElement extends Element {
+  _happy_dom_id?: string;
   data: any;
 }
 
