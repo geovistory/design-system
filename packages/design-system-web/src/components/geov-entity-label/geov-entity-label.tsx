@@ -1,6 +1,6 @@
 import { Component, h, Host, Method, Prop, State, Element } from '@stencil/core';
 import { FetchResponse } from '../../lib/FetchResponse';
-import { createHappyDomId } from '../../lib/happyDOM/createHappyDomId';
+import { setHappyDomId } from '../../lib/happyDOM/setHappyDomId';
 import { endHappyDomTask } from '../../lib/happyDOM/endHappyDomTask';
 import { getHappyDomData } from '../../lib/happyDOM/getHappyDomData';
 import { setHappyDomData } from '../../lib/happyDOM/setHappyDomData';
@@ -29,14 +29,12 @@ export interface GeovEntityLabelData extends FetchResponse {
   // shadow: true,
 })
 export class GeovEntityLabel {
-  @Prop({ reflect: true }) _happy_dom_id?: string = createHappyDomId();
+  @Prop({ reflect: true }) _happy_dom_id?: string;
   @Element() private element: HTMLElement;
+  constructor(){
+    setHappyDomId(this)
+  }
 
-  // /**
-  //  * data (optional)
-  //  * if provided, component won't fetchData()
-  //  */
-  // @Prop({ mutable: true }) data?: GeovEntityLabelData | string;
   /**
    * sparqlEndpoint
    * URL of the sparql endpoint
