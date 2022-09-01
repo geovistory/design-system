@@ -64,7 +64,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
-    "@geovistory/react-output-target": "^0.4.3-10",
+    "@geovistory/react-output-target": "^0.4.3-11",
     "@ionic/core": "6.0.14",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.1.3",
