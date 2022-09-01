@@ -20,3 +20,21 @@ The components are coded as Stencil components. Doing so, we have Angular, React
 
 [Checkout our documentation](https://design.geovistory.org/)
 
+
+## Publication
+
+The packages are published to npm on each release by the Release workflow.
+
+For manual publications of pre-releases for PR you can run these commands:
+
+```bash
+# clean install dependencies
+npm ci
+
+# build
+npm run build
+
+# publish: replace <XYZ> with number of current PR
+lerna publish prerelease --canary --no-changelog --preid pr-<XYZ> --dist-tag pr-<XYZ>
+
+```
