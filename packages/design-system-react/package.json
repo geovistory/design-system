@@ -44,7 +44,7 @@
     "typescript": "^3.3.4000"
   },
   "dependencies": {
-    "@geovistory/design-system-web": "1.1.1-pr-18.0",
+    "@geovistory/design-system-web": "1.1.1-pr-18.4",
     "@ionic/core": "6.0.14"
   },
   "peerDependencies": {

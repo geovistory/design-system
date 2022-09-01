@@ -42,7 +42,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@geovistory/design-system-web": "1.1.1-pr-18.0",
+    "@geovistory/design-system-web": "1.1.1-pr-18.4",
     "happy-dom": "^6.0.4"
   },
   "jest": {
