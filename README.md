@@ -25,7 +25,13 @@ The components are coded as Stencil components. Doing so, we have Angular, React
 
 The packages are published to npm on each release by the Release workflow.
 
-For manual publications of pre-releases for PR you can run these commands:
+For manual publications of dockerized PR do the following:
+
+1. Let the Dockerize workflow run
+
+2. Pull the changes to your local repo
+
+3. Run this command:
 
 ```bash
 # clean install dependencies
@@ -34,7 +40,7 @@ npm ci
 # build
 npm run build
 
-# publish: replace <XYZ> with number of current PR
-lerna publish prerelease --canary --no-changelog --preid pr-<XYZ> --dist-tag pr-<XYZ>
+# publish: replace <XYZ> with version number you find in lerna.json -> version
+lerna publish <XYZ> --no-git-tag-version  --no-changelog
 
 ```
