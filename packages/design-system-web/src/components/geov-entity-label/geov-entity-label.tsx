@@ -31,8 +31,8 @@ export interface GeovEntityLabelData extends FetchResponse {
 export class GeovEntityLabel {
   @Prop({ reflect: true }) _happy_dom_id?: string;
   @Element() private element: HTMLElement;
-  constructor(){
-    setHappyDomId(this)
+  constructor() {
+    setHappyDomId(this);
   }
 
   /**
@@ -49,7 +49,7 @@ export class GeovEntityLabel {
   @State() d?: GeovEntityLabelData;
   @State() msg: string;
 
-  componentWillLoad() {
+  async componentWillLoad() {
     this.d = getHappyDomData(this._happy_dom_id);
     if (!this.d) {
       //   // parse data given by the @Prop 'data'
@@ -60,13 +60,17 @@ export class GeovEntityLabel {
 
       const t = startHappyDomTask();
 
-      this.fetchData()
+      await this.fetchData()
         .then(d => {
           this.d = d;
           setHappyDomData(d, this._happy_dom_id, this.element);
           endHappyDomTask(t);
+          return d;
         })
-        .catch(d => (this.d = d));
+        .catch(d => {
+          this.d = d;
+          return d;
+        });
     }
   }
 
@@ -108,6 +112,7 @@ export class GeovEntityLabel {
         {this.d.loading ? `loading...` : ``}
         {this.d.error ? `error!` : ``}
         {!this.d.label && !this.d.loading && !this.d.error ? <span class="no-label-found">no label found</span> : ``}
+        <slot />
       </Host>
     );
   }
