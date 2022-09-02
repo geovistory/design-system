@@ -31,11 +31,12 @@ export const config: Config = {
     }),
     angularGenerator(),
     reactGenerator({
-      customElementsDir: 'dist/components-cjs',
-      enableSSR: true,
-      individualComponentFiles: true,
-      individualComponentFilesDir: '../design-system-react/src/components',
-      individualComponentDefineCustomElement: true
+
+      // customElementsDir: 'dist/components-cjs',
+      // enableSSR: true,
+      // individualComponentFiles: true,
+      // individualComponentFilesDir: '../design-system-react/src/components',
+      // individualComponentDefineCustomElement: true
     }),
   ],
 };
