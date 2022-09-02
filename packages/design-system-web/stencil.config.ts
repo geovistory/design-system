@@ -31,8 +31,9 @@ export const config: Config = {
     }),
     angularGenerator(),
     reactGenerator({
-
-      // customElementsDir: 'dist/components-cjs',
+      includeImportCustomElements: true,
+      includeDefineCustomElements: false,
+      customElementsDir: 'dist/components-cjs',
       // enableSSR: true,
       // individualComponentFiles: true,
       // individualComponentFilesDir: '../design-system-react/src/components',
