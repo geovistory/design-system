@@ -6,6 +6,7 @@ import { getHappyDomData } from '../../lib/happyDOM/getHappyDomData';
 import { setHappyDomData } from '../../lib/happyDOM/setHappyDomData';
 import { startHappyDomTask } from '../../lib/happyDOM/startHappyDomTask';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
+import { Build } from '@stencil/core';
 
 const qrLabel = (id: string) => `
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -30,6 +31,7 @@ export interface GeovEntityLabelData extends FetchResponse {
 })
 export class GeovEntityLabel {
   @Prop({ reflect: true }) _happy_dom_id?: string;
+  @Prop({ reflect: true }) _data_server_fetched?: boolean;
   @Element() private element: HTMLElement;
   constructor() {
     setHappyDomId(this);
@@ -51,7 +53,7 @@ export class GeovEntityLabel {
 
   async componentWillLoad() {
     this.d = getHappyDomData(this._happy_dom_id);
-    if (!this.d) {
+    if (!this._data_server_fetched) {
       //   // parse data given by the @Prop 'data'
       //   this.parseDataProp();
       // } else {
@@ -63,6 +65,9 @@ export class GeovEntityLabel {
       await this.fetchData()
         .then(d => {
           this.d = d;
+          if (Build.isServer) {
+            this._data_server_fetched = true;
+          }
           setHappyDomData(d, this._happy_dom_id, this.element);
           endHappyDomTask(t);
           return d;

@@ -133,6 +133,7 @@ export namespace Components {
         "sparqlEndpoint": string;
     }
     interface GeovEntityLabel {
+        "_data_server_fetched"?: boolean;
         "_happy_dom_id"?: string;
         /**
           * entityId ID number of entity, e.g. 'i315800'
@@ -292,6 +293,7 @@ declare namespace LocalJSX {
         "sparqlEndpoint"?: string;
     }
     interface GeovEntityLabel {
+        "_data_server_fetched"?: boolean;
         "_happy_dom_id"?: string;
         /**
           * entityId ID number of entity, e.g. 'i315800'

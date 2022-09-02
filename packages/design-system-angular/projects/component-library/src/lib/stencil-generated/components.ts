@@ -55,14 +55,14 @@ export declare interface GeovEntityLabel extends Components.GeovEntityLabel {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['_happy_dom_id', 'entityId', 'sparqlEndpoint'],
+  inputs: ['_data_server_fetched', '_happy_dom_id', 'entityId', 'sparqlEndpoint'],
   methods: ['fetchData']
 })
 @Component({
   selector: 'geov-entity-label',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['_happy_dom_id', 'entityId', 'sparqlEndpoint']
+  inputs: ['_data_server_fetched', '_happy_dom_id', 'entityId', 'sparqlEndpoint']
 })
 export class GeovEntityLabel {
   protected el: HTMLElement;
