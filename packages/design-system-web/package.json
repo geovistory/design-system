@@ -61,7 +61,9 @@
     "react-copy-to-clipboard": "^5.1.0",
     "react-icons": "^4.3.1",
     "react-syntax-highlighter": "^15.5.0",
+    "patch-package": "^6.4.7",
     "swiper": "^8.3.0"
+
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
@@ -85,7 +87,6 @@
     "ionicons": "^6.0.2",
     "jest": "^27.4.5",
     "jest-cli": "^27.4.5",
-    "patch-package": "^6.4.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rollup": "^2.79.0",
