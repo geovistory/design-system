@@ -18,10 +18,10 @@ EntityLabel.args = args;
 const TemplateInitData = (args: JSX.GeovEntityLabel) => (
     <GeovEntityLabel {...args}></GeovEntityLabel>
 );
-export const EntityLabelPreloaded = TemplateInitData.bind({});
-const preloaded: JSX.GeovEntityLabel = {
+export const EntityLabelDataGiven = TemplateInitData.bind({});
+const dataGiven: JSX.GeovEntityLabel = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   entityId: 'i315800',
-  _happy_dom_id: '8wrr2f'
+  _ssrId: '8wrr2f'
 };
-EntityLabelPreloaded.args = preloaded;
+EntityLabelDataGiven.args = dataGiven;

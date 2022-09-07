@@ -1,12 +1,9 @@
-import { Component, h, Host, Method, Prop, State, Element } from '@stencil/core';
+import { Component, h, Host, Method, Prop, State } from '@stencil/core';
 import { FetchResponse } from '../../lib/FetchResponse';
-import { setHappyDomId } from '../../lib/happyDOM/setHappyDomId';
-import { endHappyDomTask } from '../../lib/happyDOM/endHappyDomTask';
-import { getHappyDomData } from '../../lib/happyDOM/getHappyDomData';
-import { setHappyDomData } from '../../lib/happyDOM/setHappyDomData';
-import { startHappyDomTask } from '../../lib/happyDOM/startHappyDomTask';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
-import { Build } from '@stencil/core';
+import { getSSRData } from '../../lib/ssr/getSSRData';
+import { setSSRData } from '../../lib/ssr/setSSRData';
+import { setSSRId } from '../../lib/ssr/setSSRId';
 
 const qrLabel = (id: string) => `
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -27,16 +24,10 @@ export interface GeovEntityLabelData extends FetchResponse {
 @Component({
   tag: 'geov-entity-label',
   styleUrl: 'geov-entity-label.css',
-  // shadow: true,
+  shadow: true,
 })
 export class GeovEntityLabel {
-  @Prop({ reflect: true }) _happy_dom_id?: string;
-  @Prop({ reflect: true }) _data_server_fetched?: boolean;
-  @Element() private element: HTMLElement;
-  constructor() {
-    setHappyDomId(this);
-  }
-
+  @Prop({ reflect: true }) _ssrId?: string;
   /**
    * sparqlEndpoint
    * URL of the sparql endpoint
@@ -48,47 +39,39 @@ export class GeovEntityLabel {
    */
   @Prop() entityId: string;
 
-  @State() d?: GeovEntityLabelData;
-  @State() msg: string;
+  /**
+   * the data (or model) used in the view
+   */
+  @State() data?: GeovEntityLabelData;
+
+  constructor() {
+    setSSRId(this);
+  }
 
   async componentWillLoad() {
-    this.d = getHappyDomData(this._happy_dom_id);
-    if (!this._data_server_fetched) {
-      //   // parse data given by the @Prop 'data'
-      //   this.parseDataProp();
-      // } else {
-      // fetch data via http
-      this.d = { loading: true };
+    // try to get data from ssr
+    this.data = getSSRData(this._ssrId);
 
-      const t = startHappyDomTask();
+    // if no data found, fetchData
+    if (!this.data) {
+      // set data to loading (in immutable way)
+      this.data = { loading: true };
 
       await this.fetchData()
         .then(d => {
-          this.d = d;
-          if (Build.isServer) {
-            this._data_server_fetched = true;
-          }
-          setHappyDomData(d, this._happy_dom_id, this.element);
-          endHappyDomTask(t);
+          this.data = d;
+          setSSRData(this._ssrId, d);
           return d;
         })
         .catch(d => {
-          this.d = d;
+          this.data = d;
           return d;
         });
     }
   }
 
-  // @Watch('data')
-  // parseDataProp() {
-  //   if (this.data) {
-  //     if (typeof this.data === 'string') this.d = JSON.parse(this.data);
-  //     else this.d = { ...this.data };
-  //   }
-  // }
-
   /**
-   * does the sparql request(s)
+   * Do the sparql request(s)
    * @returns a Promise with the data for this component
    */
   @Method()
@@ -96,14 +79,14 @@ export class GeovEntityLabel {
     return sparqlJson<{ o: SparqlBinding<string> }>(this.sparqlEndpoint, qrLabel(this.entityId))
       .then(res => {
         return {
-          ...this.d,
+          ...this.data,
           label: res?.results?.bindings?.[0]?.o?.value,
           loading: false,
         };
       })
       .catch(_ => {
         return {
-          ...this.d,
+          ...this.data,
           error: true,
           loading: false,
         };
@@ -113,10 +96,10 @@ export class GeovEntityLabel {
   render() {
     return (
       <Host>
-        {this.d.label}
-        {this.d.loading ? `loading...` : ``}
-        {this.d.error ? `error!` : ``}
-        {!this.d.label && !this.d.loading && !this.d.error ? <span class="no-label-found">no label found</span> : ``}
+        {this.data.label}
+        {this.data.loading && `loading...`}
+        {this.data.error && `error!`}
+        {!this.data.label && !this.data.loading && !this.data.error && <span class="no-label-found">no label found</span>}
         <slot />
       </Host>
     );

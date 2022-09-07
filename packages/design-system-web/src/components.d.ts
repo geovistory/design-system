@@ -115,15 +115,15 @@ export namespace Components {
     }
     interface GeovDataFetchExample {
         /**
-          * data (optional) if provided, component won't fetchData()
+          * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
          */
-        "data"?: GeovDataFetchExampleData | string;
+        "_ssrId"?: string;
         /**
           * entityId ID number of entity, e.g. 'i315800'
          */
         "entityId": string;
         /**
-          * does the sparql request(s)
+          * Do the sparql request(s)
           * @returns a Promise with the data for this component
          */
         "fetchData": () => Promise<GeovDataFetchExampleData>;
@@ -133,14 +133,13 @@ export namespace Components {
         "sparqlEndpoint": string;
     }
     interface GeovEntityLabel {
-        "_data_server_fetched"?: boolean;
-        "_happy_dom_id"?: string;
+        "_ssrId"?: string;
         /**
           * entityId ID number of entity, e.g. 'i315800'
          */
         "entityId": string;
         /**
-          * does the sparql request(s)
+          * Do the sparql request(s)
           * @returns a Promise with the data for this component
          */
         "fetchData": () => Promise<GeovEntityLabelData>;
@@ -280,9 +279,9 @@ declare namespace LocalJSX {
     }
     interface GeovDataFetchExample {
         /**
-          * data (optional) if provided, component won't fetchData()
+          * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
          */
-        "data"?: GeovDataFetchExampleData | string;
+        "_ssrId"?: string;
         /**
           * entityId ID number of entity, e.g. 'i315800'
          */
@@ -293,8 +292,7 @@ declare namespace LocalJSX {
         "sparqlEndpoint"?: string;
     }
     interface GeovEntityLabel {
-        "_data_server_fetched"?: boolean;
-        "_happy_dom_id"?: string;
+        "_ssrId"?: string;
         /**
           * entityId ID number of entity, e.g. 'i315800'
          */
@@ -313,7 +311,102 @@ declare namespace LocalJSX {
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
-        interface IntrinsicElements {
+      interface IntrinsicElements {
+            "ion-accordion": LocalJSX.IonAccordion & JSXBase.HTMLAttributes<HTMLIonAccordionElement>
+            "ion-accordion-group": LocalJSX.IonAccordionGroup & JSXBase.HTMLAttributes<HTMLIonAccordionGroupElement>
+            "ion-action-sheet": LocalJSX.IonActionSheet & JSXBase.HTMLAttributes<HTMLIonActionSheetElement>
+            "ion-alert": LocalJSX.IonAlert & JSXBase.HTMLAttributes<HTMLIonAlertElement>
+            "ion-app": LocalJSX.IonApp & JSXBase.HTMLAttributes<HTMLIonAppElement>
+            "ion-avatar": LocalJSX.IonAvatar & JSXBase.HTMLAttributes<HTMLIonAvatarElement>
+            "ion-back-button": LocalJSX.IonBackButton & JSXBase.HTMLAttributes<HTMLIonBackButtonElement>
+            "ion-backdrop": LocalJSX.IonBackdrop & JSXBase.HTMLAttributes<HTMLIonBackdropElement>
+            "ion-badge": LocalJSX.IonBadge & JSXBase.HTMLAttributes<HTMLIonBadgeElement>
+            "ion-breadcrumb": LocalJSX.IonBreadcrumb & JSXBase.HTMLAttributes<HTMLIonBreadcrumbElement>
+            "ion-breadcrumbs": LocalJSX.IonBreadcrumbs & JSXBase.HTMLAttributes<HTMLIonBreadcrumbsElement>
+            "ion-button": LocalJSX.IonButton & JSXBase.HTMLAttributes<HTMLIonButtonElement>
+            "ion-buttons": LocalJSX.IonButtons & JSXBase.HTMLAttributes<HTMLIonButtonsElement>
+            "ion-card": LocalJSX.IonCard & JSXBase.HTMLAttributes<HTMLIonCardElement>
+            "ion-card-content": LocalJSX.IonCardContent & JSXBase.HTMLAttributes<HTMLIonCardContentElement>
+            "ion-card-header": LocalJSX.IonCardHeader & JSXBase.HTMLAttributes<HTMLIonCardHeaderElement>
+            "ion-card-subtitle": LocalJSX.IonCardSubtitle & JSXBase.HTMLAttributes<HTMLIonCardSubtitleElement>
+            "ion-card-title": LocalJSX.IonCardTitle & JSXBase.HTMLAttributes<HTMLIonCardTitleElement>
+            "ion-checkbox": LocalJSX.IonCheckbox & JSXBase.HTMLAttributes<HTMLIonCheckboxElement>
+            "ion-chip": LocalJSX.IonChip & JSXBase.HTMLAttributes<HTMLIonChipElement>
+            "ion-col": LocalJSX.IonCol & JSXBase.HTMLAttributes<HTMLIonColElement>
+            "ion-content": LocalJSX.IonContent & JSXBase.HTMLAttributes<HTMLIonContentElement>
+            "ion-datetime": LocalJSX.IonDatetime & JSXBase.HTMLAttributes<HTMLIonDatetimeElement>
+            "ion-fab": LocalJSX.IonFab & JSXBase.HTMLAttributes<HTMLIonFabElement>
+            "ion-fab-button": LocalJSX.IonFabButton & JSXBase.HTMLAttributes<HTMLIonFabButtonElement>
+            "ion-fab-list": LocalJSX.IonFabList & JSXBase.HTMLAttributes<HTMLIonFabListElement>
+            "ion-footer": LocalJSX.IonFooter & JSXBase.HTMLAttributes<HTMLIonFooterElement>
+            "ion-grid": LocalJSX.IonGrid & JSXBase.HTMLAttributes<HTMLIonGridElement>
+            "ion-header": LocalJSX.IonHeader & JSXBase.HTMLAttributes<HTMLIonHeaderElement>
+            "ion-icon": LocalJSX.IonIcon & JSXBase.HTMLAttributes<HTMLIonIconElement>
+            "ion-img": LocalJSX.IonImg & JSXBase.HTMLAttributes<HTMLIonImgElement>
+            "ion-infinite-scroll": LocalJSX.IonInfiniteScroll & JSXBase.HTMLAttributes<HTMLIonInfiniteScrollElement>
+            "ion-infinite-scroll-content": LocalJSX.IonInfiniteScrollContent & JSXBase.HTMLAttributes<HTMLIonInfiniteScrollContentElement>
+            "ion-input": LocalJSX.IonInput & JSXBase.HTMLAttributes<HTMLIonInputElement>
+            "ion-item": LocalJSX.IonItem & JSXBase.HTMLAttributes<HTMLIonItemElement>
+            "ion-item-divider": LocalJSX.IonItemDivider & JSXBase.HTMLAttributes<HTMLIonItemDividerElement>
+            "ion-item-group": LocalJSX.IonItemGroup & JSXBase.HTMLAttributes<HTMLIonItemGroupElement>
+            "ion-item-option": LocalJSX.IonItemOption & JSXBase.HTMLAttributes<HTMLIonItemOptionElement>
+            "ion-item-options": LocalJSX.IonItemOptions & JSXBase.HTMLAttributes<HTMLIonItemOptionsElement>
+            "ion-item-sliding": LocalJSX.IonItemSliding & JSXBase.HTMLAttributes<HTMLIonItemSlidingElement>
+            "ion-label": LocalJSX.IonLabel & JSXBase.HTMLAttributes<HTMLIonLabelElement>
+            "ion-list": LocalJSX.IonList & JSXBase.HTMLAttributes<HTMLIonListElement>
+            "ion-list-header": LocalJSX.IonListHeader & JSXBase.HTMLAttributes<HTMLIonListHeaderElement>
+            "ion-loading": LocalJSX.IonLoading & JSXBase.HTMLAttributes<HTMLIonLoadingElement>
+            "ion-menu": LocalJSX.IonMenu & JSXBase.HTMLAttributes<HTMLIonMenuElement>
+            "ion-menu-button": LocalJSX.IonMenuButton & JSXBase.HTMLAttributes<HTMLIonMenuButtonElement>
+            "ion-menu-toggle": LocalJSX.IonMenuToggle & JSXBase.HTMLAttributes<HTMLIonMenuToggleElement>
+            "ion-modal": LocalJSX.IonModal & JSXBase.HTMLAttributes<HTMLIonModalElement>
+            "ion-nav": LocalJSX.IonNav & JSXBase.HTMLAttributes<HTMLIonNavElement>
+            "ion-nav-link": LocalJSX.IonNavLink & JSXBase.HTMLAttributes<HTMLIonNavLinkElement>
+            "ion-note": LocalJSX.IonNote & JSXBase.HTMLAttributes<HTMLIonNoteElement>
+            "ion-picker": LocalJSX.IonPicker & JSXBase.HTMLAttributes<HTMLIonPickerElement>
+            "ion-picker-column": LocalJSX.IonPickerColumn & JSXBase.HTMLAttributes<HTMLIonPickerColumnElement>
+            "ion-picker-column-internal": LocalJSX.IonPickerColumnInternal & JSXBase.HTMLAttributes<HTMLIonPickerColumnInternalElement>
+            "ion-picker-internal": LocalJSX.IonPickerInternal & JSXBase.HTMLAttributes<HTMLIonPickerInternalElement>
+            "ion-popover": LocalJSX.IonPopover & JSXBase.HTMLAttributes<HTMLIonPopoverElement>
+            "ion-progress-bar": LocalJSX.IonProgressBar & JSXBase.HTMLAttributes<HTMLIonProgressBarElement>
+            "ion-radio": LocalJSX.IonRadio & JSXBase.HTMLAttributes<HTMLIonRadioElement>
+            "ion-radio-group": LocalJSX.IonRadioGroup & JSXBase.HTMLAttributes<HTMLIonRadioGroupElement>
+            "ion-range": LocalJSX.IonRange & JSXBase.HTMLAttributes<HTMLIonRangeElement>
+            "ion-refresher": LocalJSX.IonRefresher & JSXBase.HTMLAttributes<HTMLIonRefresherElement>
+            "ion-refresher-content": LocalJSX.IonRefresherContent & JSXBase.HTMLAttributes<HTMLIonRefresherContentElement>
+            "ion-reorder": LocalJSX.IonReorder & JSXBase.HTMLAttributes<HTMLIonReorderElement>
+            "ion-reorder-group": LocalJSX.IonReorderGroup & JSXBase.HTMLAttributes<HTMLIonReorderGroupElement>
+            "ion-ripple-effect": LocalJSX.IonRippleEffect & JSXBase.HTMLAttributes<HTMLIonRippleEffectElement>
+            "ion-route": LocalJSX.IonRoute & JSXBase.HTMLAttributes<HTMLIonRouteElement>
+            "ion-route-redirect": LocalJSX.IonRouteRedirect & JSXBase.HTMLAttributes<HTMLIonRouteRedirectElement>
+            "ion-router": LocalJSX.IonRouter & JSXBase.HTMLAttributes<HTMLIonRouterElement>
+            "ion-router-link": LocalJSX.IonRouterLink & JSXBase.HTMLAttributes<HTMLIonRouterLinkElement>
+            "ion-router-outlet": LocalJSX.IonRouterOutlet & JSXBase.HTMLAttributes<HTMLIonRouterOutletElement>
+            "ion-row": LocalJSX.IonRow & JSXBase.HTMLAttributes<HTMLIonRowElement>
+            "ion-searchbar": LocalJSX.IonSearchbar & JSXBase.HTMLAttributes<HTMLIonSearchbarElement>
+            "ion-segment": LocalJSX.IonSegment & JSXBase.HTMLAttributes<HTMLIonSegmentElement>
+            "ion-segment-button": LocalJSX.IonSegmentButton & JSXBase.HTMLAttributes<HTMLIonSegmentButtonElement>
+            "ion-select": LocalJSX.IonSelect & JSXBase.HTMLAttributes<HTMLIonSelectElement>
+            "ion-select-option": LocalJSX.IonSelectOption & JSXBase.HTMLAttributes<HTMLIonSelectOptionElement>
+            "ion-select-popover": LocalJSX.IonSelectPopover & JSXBase.HTMLAttributes<HTMLIonSelectPopoverElement>
+            "ion-skeleton-text": LocalJSX.IonSkeletonText & JSXBase.HTMLAttributes<HTMLIonSkeletonTextElement>
+            "ion-slide": LocalJSX.IonSlide & JSXBase.HTMLAttributes<HTMLIonSlideElement>
+            "ion-slides": LocalJSX.IonSlides & JSXBase.HTMLAttributes<HTMLIonSlidesElement>
+            "ion-spinner": LocalJSX.IonSpinner & JSXBase.HTMLAttributes<HTMLIonSpinnerElement>
+            "ion-split-pane": LocalJSX.IonSplitPane & JSXBase.HTMLAttributes<HTMLIonSplitPaneElement>
+            "ion-tab": LocalJSX.IonTab & JSXBase.HTMLAttributes<HTMLIonTabElement>
+            "ion-tab-bar": LocalJSX.IonTabBar & JSXBase.HTMLAttributes<HTMLIonTabBarElement>
+            "ion-tab-button": LocalJSX.IonTabButton & JSXBase.HTMLAttributes<HTMLIonTabButtonElement>
+            "ion-tabs": LocalJSX.IonTabs & JSXBase.HTMLAttributes<HTMLIonTabsElement>
+            "ion-text": LocalJSX.IonText & JSXBase.HTMLAttributes<HTMLIonTextElement>
+            "ion-textarea": LocalJSX.IonTextarea & JSXBase.HTMLAttributes<HTMLIonTextareaElement>
+            "ion-thumbnail": LocalJSX.IonThumbnail & JSXBase.HTMLAttributes<HTMLIonThumbnailElement>
+            "ion-title": LocalJSX.IonTitle & JSXBase.HTMLAttributes<HTMLIonTitleElement>
+            "ion-toast": LocalJSX.IonToast & JSXBase.HTMLAttributes<HTMLIonToastElement>
+            "ion-toggle": LocalJSX.IonToggle & JSXBase.HTMLAttributes<HTMLIonToggleElement>
+            "ion-toolbar": LocalJSX.IonToolbar & JSXBase.HTMLAttributes<HTMLIonToolbarElement>
+            "ion-virtual-scroll": LocalJSX.IonVirtualScroll & JSXBase.HTMLAttributes<HTMLIonVirtualScrollElement>
+
             "geov-carousel": LocalJSX.GeovCarousel & JSXBase.HTMLAttributes<HTMLGeovCarouselElement>;
             "geov-data-fetch-example": LocalJSX.GeovDataFetchExample & JSXBase.HTMLAttributes<HTMLGeovDataFetchExampleElement>;
             "geov-entity-label": LocalJSX.GeovEntityLabel & JSXBase.HTMLAttributes<HTMLGeovEntityLabelElement>;

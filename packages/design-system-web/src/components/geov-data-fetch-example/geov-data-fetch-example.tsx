@@ -1,6 +1,9 @@
-import { Component, h, Host, Method, Prop, State, Watch } from '@stencil/core';
+import { Component, h, Host, Method, Prop, State } from '@stencil/core';
 import { FetchResponse } from '../../lib/FetchResponse';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
+import { getSSRData } from '../../lib/ssr/getSSRData';
+import { setSSRData } from '../../lib/ssr/setSSRData';
+import { setSSRId } from '../../lib/ssr/setSSRId';
 
 const qrLabel = (id: string) => `
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -25,10 +28,13 @@ export interface GeovDataFetchExampleData extends FetchResponse {
 })
 export class GeovDataFetchExample {
   /**
-   * data (optional)
-   * if provided, component won't fetchData()
+   * _ssrId is short for server side rendering id and
+   * identifies this component and the fetched data
+   * respectively. Set this only if you want to
+   * enable this component to fetch serve side
    */
-  @Prop({ mutable: true }) data?: GeovDataFetchExampleData | string;
+  @Prop({ reflect: true }) _ssrId?: string;
+
   /**
    * sparqlEndpoint
    * URL of the sparql endpoint
@@ -40,66 +46,82 @@ export class GeovDataFetchExample {
    */
   @Prop() entityId: string;
 
-
-  @State() d?: GeovDataFetchExampleData;
+  @State() data?: GeovDataFetchExampleData;
   @State() msg: string;
 
-  componentWillLoad() {
-    if (this.data) {
-      // parse data given by the @Prop 'data'
-      this.parseDataProp();
-      this.msg = 'component data was given by Input';
-    } else {
+  constructor() {
+    // set id for server side rendering of dynamic data
+    setSSRId(this);
+  }
+
+  /**
+   * called once when component is ready. good for data fetching.
+   * if `componentWillLoad()` returns a promise, stencil hydrate
+   * awaits this promise for server side rendering. See:
+   * https://stenciljs.com/docs/static-site-generation-basics
+   */
+  async componentWillLoad() {
+    // try to get data from ssr
+    this.data = getSSRData(this._ssrId);
+    // if no data found, fetchData
+
+    if (!this.data) {
+      // set data to loading (in immutable way)
+      this.data = { loading: true };
+
       // fetch data via http
-      this.d = { loading: true };
-      this.fetchData()
-      .then(d => (this.d = d))
-      .catch(d => (this.d = d));
+      await this.fetchData() // <- await this promise!
+        .then(d => {
+          this.data = d;
+          setSSRData(this._ssrId, d);
+          return d;
+        })
+        .catch(d => {
+          this.data = d;
+          return d;
+        });
       this.msg = 'component data was fetched by component';
     }
   }
 
-  @Watch('data')
-  parseDataProp() {
-    if (this.data) {
-      if (typeof this.data === 'string') this.d = JSON.parse(this.data);
-      else this.d = {...this.data};
-    }
-  }
-
   /**
-   * does the sparql request(s)
+   * Do the sparql request(s)
    * @returns a Promise with the data for this component
    */
   @Method()
   async fetchData(): Promise<GeovDataFetchExampleData> {
     return sparqlJson<{ o: SparqlBinding<string> }>(this.sparqlEndpoint, qrLabel(this.entityId))
       .then(res => {
+        // process and return the data in case of success
         return {
-          ...this.d,
-          // TODO: remove timestamp
+          ...this.data,
           label: res?.results?.bindings?.[0]?.o?.value + ' fetched at: ' + new Date().toTimeString(),
           loading: false,
         };
       })
       .catch(_ => {
+        // process and return the data in case of error
         return {
-          ...this.d,
+          ...this.data,
           error: true,
           loading: false,
         };
       });
   }
 
+  buttonClick = (e: MouseEvent) => {
+    this.msg = 'clicked' + e.offsetX;
+  };
+
   render() {
     return (
       <Host>
         <div>{this.msg}</div>
-        {this.d.label}
-        {this.d.loading ? `loading...` : ``}
-        {this.d.error ? `error!` : ``}
-        {!this.d.label && !this.d.loading && !this.d.error ? <span class="no-label-found">no label found</span> : ``}
-        <button onClick={()=>this.msg="clicked"}>click me!</button>
+        {this.data.label}
+        {this.data.loading ? `loading...` : ``}
+        {this.data.error ? `error!` : ``}
+        {!this.data.label && !this.data.loading && !this.data.error ? <span class="no-label-found">no label found</span> : ``}
+        <button onClick={this.buttonClick}>click me!</button>
         <slot></slot>
       </Host>
     );

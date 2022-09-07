@@ -13,7 +13,19 @@ const imports = `import { JSX as IonJSX } from '@ionic/core';
 import { Components as IonComponents } from '@ionic/core';
 `;
 
-/** Ionic JSX Types */
+/** Module Ionic JSX intrinsicElements */
+const clueModuleJSX = /export namespace JSX {\n[\s\t]*interface IntrinsicElements {/gm;
+const newModuleJSX = `export namespace JSX {
+      interface IntrinsicElements {
+${components
+  .map(tagName => {
+    const pascalCase = dashToPascalCase(tagName);
+    return `            "${tagName}": LocalJSX.${pascalCase} & JSXBase.HTMLAttributes<HTML${pascalCase}Element>`;
+  })
+  .join('\n')}
+`;
+
+/** Local Ionic JSX Types */
 const clueLocalJSX = 'declare namespace LocalJSX {';
 const newJSX = `
 ${clueLocalJSX}
@@ -41,7 +53,10 @@ for (let path_ of paths) {
   const path = __dirname + path_;
 
   let content = fs.readFileSync(path, 'utf-8');
-  content = imports + content.replace(clueLocalJSX, newJSX).replace(clueComponents,newComponents);
+  content = imports + content
+  .replace(clueLocalJSX, newJSX)
+  .replace(clueModuleJSX, newModuleJSX)
+  .replace(clueComponents, newComponents);
 
   if (fs.existsSync(path)) fs.unlinkSync(path);
   fs.writeFileSync(path, content, 'utf-8');
@@ -73,3 +88,24 @@ export const defineCustomElement: () => void;
   if (fs.existsSync(path)) fs.unlinkSync(path);
   fs.writeFileSync(path, content, 'utf-8');
 }
+
+/**********************************************************************
+ * Add tsx intrinsic elements to Global UMD in separate file
+ **********************************************************************/
+let source = fs.readFileSync( __dirname + paths[0], 'utf-8');
+const result =source.replace('declare module "@stencil\/core"', `
+declare namespace JSXBase {
+  interface HTMLAttributes {
+    children?: Element | Element[]
+  }
+}
+declare global`)
+
+//  const result = `
+// declare global {
+//   ${namsepaceJSX}
+// `;
+
+  const path = __dirname + `/../dist/types/global-umd.d.ts`;
+  if (fs.existsSync(path)) fs.unlinkSync(path);
+  fs.writeFileSync(path, result, 'utf-8');
