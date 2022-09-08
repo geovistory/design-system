@@ -7,6 +7,7 @@ const dashToPascalCase = require('./post-build/dashToPascalCase');
  * Modify components types
  **********************************************************************/
 const paths = ['/../src/components.d.ts', '/../dist/types/components.d.ts'];
+exports.paths = paths;
 
 /** imports */
 const imports = `import { JSX as IonJSX } from '@ionic/core';
@@ -53,10 +54,7 @@ for (let path_ of paths) {
   const path = __dirname + path_;
 
   let content = fs.readFileSync(path, 'utf-8');
-  content = imports + content
-  .replace(clueLocalJSX, newJSX)
-  .replace(clueModuleJSX, newModuleJSX)
-  .replace(clueComponents, newComponents);
+  content = imports + content.replace(clueLocalJSX, newJSX).replace(clueModuleJSX, newModuleJSX).replace(clueComponents, newComponents);
 
   if (fs.existsSync(path)) fs.unlinkSync(path);
   fs.writeFileSync(path, content, 'utf-8');
@@ -90,22 +88,6 @@ export const defineCustomElement: () => void;
 }
 
 /**********************************************************************
- * Add tsx intrinsic elements to Global UMD in separate file
+ * Add jsx support for using components in react in separate file
  **********************************************************************/
-let source = fs.readFileSync( __dirname + paths[0], 'utf-8');
-const result =source.replace('declare module "@stencil\/core"', `
-declare namespace JSXBase {
-  interface HTMLAttributes {
-    children?: Element | Element[]
-  }
-}
-declare global`)
-
-//  const result = `
-// declare global {
-//   ${namsepaceJSX}
-// `;
-
-  const path = __dirname + `/../dist/types/global-umd.d.ts`;
-  if (fs.existsSync(path)) fs.unlinkSync(path);
-  fs.writeFileSync(path, result, 'utf-8');
+require('./post-build/createReactJSX');

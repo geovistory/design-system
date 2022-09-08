@@ -10,6 +10,9 @@
  * document.__STENCIL_DATA__ = {}
  * ```
  *
+ * If the _ssrId is already set, it will not be overridden. This allows
+ * you to have a predictable key to retrieve the fetched data with.
+ *
  * Example:
  * ```ts
  * export class MyComponent {
@@ -27,7 +30,7 @@
  */
 export const setSSRId = (component: { _ssrId?: string }) => {
   // @ts-ignore
-  if (document?.__STENCIL_DATA__) {
+  if (document?.__STENCIL_DATA__ && !component._ssrId) {
     component._ssrId = generateUID();
   }
 };
