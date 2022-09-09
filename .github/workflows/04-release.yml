@@ -69,7 +69,7 @@ jobs:
       - name: Publish to NPM
         id: lerna
         run: |
-          lerna publish ${{ github.event.inputs.incrementType }} --yes
+          lerna publish ${{ github.event.inputs.incrementType }} --create-release --yes
           echo ::set-output name=tag::$(cd ./packages/design-system-web && cat package.json | jq -r '.version')
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}

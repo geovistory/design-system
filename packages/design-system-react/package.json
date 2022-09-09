@@ -1,7 +1,7 @@
 {
   "name": "@geovistory/design-system-react",
   "sideEffects": false,
-  "version": "1.1.0",
+  "version": "1.1.1-pr-18.35",
   "description": "geovistory.org's design system: React components",
   "repository": {
     "type": "git",
@@ -23,7 +23,8 @@
     "clean": "rm -rf dist",
     "compile": "npm run tsc",
     "tsc": "tsc -p .",
-    "rollup": "rollup -c"
+    "rollup": "rollup -c",
+    "release": "np --help"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -43,7 +44,8 @@
     "typescript": "^3.3.4000"
   },
   "dependencies": {
-    "@geovistory/design-system-web": "1.1.0"
+    "@geovistory/design-system-web": "1.1.1-pr-18.35",
+    "@ionic/core": "6.0.14"
   },
   "peerDependencies": {
     "react": "^17.0.2",
@@ -56,5 +58,6 @@
       "node_modules",
       "dist"
     ]
-  }
+  },
+  "gitHead": "8dc5228046d1120dd7dfad32f6891ff5ad126de3"
 }

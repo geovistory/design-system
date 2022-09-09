@@ -1,13 +1,15 @@
-import { reactOutputTarget as react } from "@stencil/react-output-target";
+import { OutputTargetReact, reactOutputTarget as react } from "@geovistory/react-output-target";
 
 
 export const reactGenerator = (
-    componentCorePackage = '@geovistory/design-system-web',
-    loaderDir = '/loader',
-    proxiesFile = '../design-system-react/src/components/stencil-generated/index.ts',
+  config?: Partial<OutputTargetReact>
 ) => react({
-        componentCorePackage: componentCorePackage,
-        proxiesFile: proxiesFile,
-        includeDefineCustomElements: true,
-        loaderDir
-    })
+  // defaults
+  componentCorePackage: '@geovistory/design-system-web',
+  loaderDir: '/loader',
+  proxiesFile: '../design-system-react/src/components/index.ts',
+  includeDefineCustomElements: true,
+
+  // override with custom config
+  ...config
+})

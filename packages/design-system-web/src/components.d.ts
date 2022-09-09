@@ -1,5 +1,5 @@
 import { JSX as IonJSX } from '@ionic/core';
-
+import { Components as IonComponents } from '@ionic/core';
 /* eslint-disable */
 /* tslint:disable */
 /**
@@ -7,12 +7,168 @@ import { JSX as IonJSX } from '@ionic/core';
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { GeovDataFetchExampleData } from "./components/geov-data-fetch-example/geov-data-fetch-example";
+import { SparqlBinding } from "./lib/sparqlJson";
+import { GeovEntityLabelData } from "./components/geov-entity-label/geov-entity-label";
+
 export namespace Components {
+    export interface IonAccordion extends IonComponents.IonAccordion { }
+    export interface IonAccordionGroup extends IonComponents.IonAccordionGroup { }
+    export interface IonActionSheet extends IonComponents.IonActionSheet { }
+    export interface IonAlert extends IonComponents.IonAlert { }
+    export interface IonApp extends IonComponents.IonApp { }
+    export interface IonAvatar extends IonComponents.IonAvatar { }
+    export interface IonBackButton extends IonComponents.IonBackButton { }
+    export interface IonBackdrop extends IonComponents.IonBackdrop { }
+    export interface IonBadge extends IonComponents.IonBadge { }
+    export interface IonBreadcrumb extends IonComponents.IonBreadcrumb { }
+    export interface IonBreadcrumbs extends IonComponents.IonBreadcrumbs { }
+    export interface IonButton extends IonComponents.IonButton { }
+    export interface IonButtons extends IonComponents.IonButtons { }
+    export interface IonCard extends IonComponents.IonCard { }
+    export interface IonCardContent extends IonComponents.IonCardContent { }
+    export interface IonCardHeader extends IonComponents.IonCardHeader { }
+    export interface IonCardSubtitle extends IonComponents.IonCardSubtitle { }
+    export interface IonCardTitle extends IonComponents.IonCardTitle { }
+    export interface IonCheckbox extends IonComponents.IonCheckbox { }
+    export interface IonChip extends IonComponents.IonChip { }
+    export interface IonCol extends IonComponents.IonCol { }
+    export interface IonContent extends IonComponents.IonContent { }
+    export interface IonDatetime extends IonComponents.IonDatetime { }
+    export interface IonFab extends IonComponents.IonFab { }
+    export interface IonFabButton extends IonComponents.IonFabButton { }
+    export interface IonFabList extends IonComponents.IonFabList { }
+    export interface IonFooter extends IonComponents.IonFooter { }
+    export interface IonGrid extends IonComponents.IonGrid { }
+    export interface IonHeader extends IonComponents.IonHeader { }
+    export interface IonIcon extends IonComponents.IonIcon { }
+    export interface IonImg extends IonComponents.IonImg { }
+    export interface IonInfiniteScroll extends IonComponents.IonInfiniteScroll { }
+    export interface IonInfiniteScrollContent extends IonComponents.IonInfiniteScrollContent { }
+    export interface IonInput extends IonComponents.IonInput { }
+    export interface IonItem extends IonComponents.IonItem { }
+    export interface IonItemDivider extends IonComponents.IonItemDivider { }
+    export interface IonItemGroup extends IonComponents.IonItemGroup { }
+    export interface IonItemOption extends IonComponents.IonItemOption { }
+    export interface IonItemOptions extends IonComponents.IonItemOptions { }
+    export interface IonItemSliding extends IonComponents.IonItemSliding { }
+    export interface IonLabel extends IonComponents.IonLabel { }
+    export interface IonList extends IonComponents.IonList { }
+    export interface IonListHeader extends IonComponents.IonListHeader { }
+    export interface IonLoading extends IonComponents.IonLoading { }
+    export interface IonMenu extends IonComponents.IonMenu { }
+    export interface IonMenuButton extends IonComponents.IonMenuButton { }
+    export interface IonMenuToggle extends IonComponents.IonMenuToggle { }
+    export interface IonModal extends IonComponents.IonModal { }
+    export interface IonNav extends IonComponents.IonNav { }
+    export interface IonNavLink extends IonComponents.IonNavLink { }
+    export interface IonNote extends IonComponents.IonNote { }
+    export interface IonPicker extends IonComponents.IonPicker { }
+    export interface IonPickerColumn extends IonComponents.IonPickerColumn { }
+    export interface IonPickerColumnInternal extends IonComponents.IonPickerColumnInternal { }
+    export interface IonPickerInternal extends IonComponents.IonPickerInternal { }
+    export interface IonPopover extends IonComponents.IonPopover { }
+    export interface IonProgressBar extends IonComponents.IonProgressBar { }
+    export interface IonRadio extends IonComponents.IonRadio { }
+    export interface IonRadioGroup extends IonComponents.IonRadioGroup { }
+    export interface IonRange extends IonComponents.IonRange { }
+    export interface IonRefresher extends IonComponents.IonRefresher { }
+    export interface IonRefresherContent extends IonComponents.IonRefresherContent { }
+    export interface IonReorder extends IonComponents.IonReorder { }
+    export interface IonReorderGroup extends IonComponents.IonReorderGroup { }
+    export interface IonRippleEffect extends IonComponents.IonRippleEffect { }
+    export interface IonRoute extends IonComponents.IonRoute { }
+    export interface IonRouteRedirect extends IonComponents.IonRouteRedirect { }
+    export interface IonRouter extends IonComponents.IonRouter { }
+    export interface IonRouterLink extends IonComponents.IonRouterLink { }
+    export interface IonRouterOutlet extends IonComponents.IonRouterOutlet { }
+    export interface IonRow extends IonComponents.IonRow { }
+    export interface IonSearchbar extends IonComponents.IonSearchbar { }
+    export interface IonSegment extends IonComponents.IonSegment { }
+    export interface IonSegmentButton extends IonComponents.IonSegmentButton { }
+    export interface IonSelect extends IonComponents.IonSelect { }
+    export interface IonSelectOption extends IonComponents.IonSelectOption { }
+    export interface IonSelectPopover extends IonComponents.IonSelectPopover { }
+    export interface IonSkeletonText extends IonComponents.IonSkeletonText { }
+    export interface IonSlide extends IonComponents.IonSlide { }
+    export interface IonSlides extends IonComponents.IonSlides { }
+    export interface IonSpinner extends IonComponents.IonSpinner { }
+    export interface IonSplitPane extends IonComponents.IonSplitPane { }
+    export interface IonTab extends IonComponents.IonTab { }
+    export interface IonTabBar extends IonComponents.IonTabBar { }
+    export interface IonTabButton extends IonComponents.IonTabButton { }
+    export interface IonTabs extends IonComponents.IonTabs { }
+    export interface IonText extends IonComponents.IonText { }
+    export interface IonTextarea extends IonComponents.IonTextarea { }
+    export interface IonThumbnail extends IonComponents.IonThumbnail { }
+    export interface IonTitle extends IonComponents.IonTitle { }
+    export interface IonToast extends IonComponents.IonToast { }
+    export interface IonToggle extends IonComponents.IonToggle { }
+    export interface IonToolbar extends IonComponents.IonToolbar { }
+    export interface IonVirtualScroll extends IonComponents.IonVirtualScroll { }
+
     interface GeovCarousel {
         /**
           * array of image URLs passed to src attribute of the <img src="">
          */
         "images": string[];
+    }
+    interface GeovDataFetchExample {
+        /**
+          * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
+         */
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId": string;
+        /**
+          * Do the sparql request(s)
+          * @returns a Promise with the data for this component
+         */
+        "fetchData": () => Promise<GeovDataFetchExampleData>;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+    }
+    interface GeovEntityClassLabel {
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId": string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+    }
+    interface GeovEntityDefinition {
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId": string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+    }
+    interface GeovEntityLabel {
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId": string;
+        /**
+          * Do the sparql request(s)
+          * @returns a Promise with the data for this component
+         */
+        "fetchData": () => Promise<GeovEntityLabelData>;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
     }
 }
 declare global {
@@ -22,14 +178,40 @@ declare global {
         prototype: HTMLGeovCarouselElement;
         new (): HTMLGeovCarouselElement;
     };
+    interface HTMLGeovDataFetchExampleElement extends Components.GeovDataFetchExample, HTMLStencilElement {
+    }
+    var HTMLGeovDataFetchExampleElement: {
+        prototype: HTMLGeovDataFetchExampleElement;
+        new (): HTMLGeovDataFetchExampleElement;
+    };
+    interface HTMLGeovEntityClassLabelElement extends Components.GeovEntityClassLabel, HTMLStencilElement {
+    }
+    var HTMLGeovEntityClassLabelElement: {
+        prototype: HTMLGeovEntityClassLabelElement;
+        new (): HTMLGeovEntityClassLabelElement;
+    };
+    interface HTMLGeovEntityDefinitionElement extends Components.GeovEntityDefinition, HTMLStencilElement {
+    }
+    var HTMLGeovEntityDefinitionElement: {
+        prototype: HTMLGeovEntityDefinitionElement;
+        new (): HTMLGeovEntityDefinitionElement;
+    };
+    interface HTMLGeovEntityLabelElement extends Components.GeovEntityLabel, HTMLStencilElement {
+    }
+    var HTMLGeovEntityLabelElement: {
+        prototype: HTMLGeovEntityLabelElement;
+        new (): HTMLGeovEntityLabelElement;
+    };
     interface HTMLElementTagNameMap {
         "geov-carousel": HTMLGeovCarouselElement;
+        "geov-data-fetch-example": HTMLGeovDataFetchExampleElement;
+        "geov-entity-class-label": HTMLGeovEntityClassLabelElement;
+        "geov-entity-definition": HTMLGeovEntityDefinitionElement;
+        "geov-entity-label": HTMLGeovEntityLabelElement;
     }
 }
 
 declare namespace LocalJSX {
-    export interface IonIcon extends IonJSX.IonIcon { }
-    export interface IonButton extends IonJSX.IonButton { }
     export interface IonAccordion extends IonJSX.IonAccordion { }
     export interface IonAccordionGroup extends IonJSX.IonAccordionGroup { }
     export interface IonActionSheet extends IonJSX.IonActionSheet { }
@@ -59,6 +241,7 @@ declare namespace LocalJSX {
     export interface IonFooter extends IonJSX.IonFooter { }
     export interface IonGrid extends IonJSX.IonGrid { }
     export interface IonHeader extends IonJSX.IonHeader { }
+    export interface IonIcon extends IonJSX.IonIcon { }
     export interface IonImg extends IonJSX.IonImg { }
     export interface IonInfiniteScroll extends IonJSX.IonInfiniteScroll { }
     export interface IonInfiniteScrollContent extends IonJSX.IonInfiniteScrollContent { }
@@ -130,15 +313,165 @@ declare namespace LocalJSX {
          */
         "images"?: string[];
     }
+    interface GeovDataFetchExample {
+        /**
+          * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
+         */
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+    }
+    interface GeovEntityClassLabel {
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+    }
+    interface GeovEntityDefinition {
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+    }
+    interface GeovEntityLabel {
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+    }
     interface IntrinsicElements {
         "geov-carousel": GeovCarousel;
+        "geov-data-fetch-example": GeovDataFetchExample;
+        "geov-entity-class-label": GeovEntityClassLabel;
+        "geov-entity-definition": GeovEntityDefinition;
+        "geov-entity-label": GeovEntityLabel;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
-        interface IntrinsicElements {
+      interface IntrinsicElements {
+            "ion-accordion": LocalJSX.IonAccordion & JSXBase.HTMLAttributes<HTMLIonAccordionElement>
+            "ion-accordion-group": LocalJSX.IonAccordionGroup & JSXBase.HTMLAttributes<HTMLIonAccordionGroupElement>
+            "ion-action-sheet": LocalJSX.IonActionSheet & JSXBase.HTMLAttributes<HTMLIonActionSheetElement>
+            "ion-alert": LocalJSX.IonAlert & JSXBase.HTMLAttributes<HTMLIonAlertElement>
+            "ion-app": LocalJSX.IonApp & JSXBase.HTMLAttributes<HTMLIonAppElement>
+            "ion-avatar": LocalJSX.IonAvatar & JSXBase.HTMLAttributes<HTMLIonAvatarElement>
+            "ion-back-button": LocalJSX.IonBackButton & JSXBase.HTMLAttributes<HTMLIonBackButtonElement>
+            "ion-backdrop": LocalJSX.IonBackdrop & JSXBase.HTMLAttributes<HTMLIonBackdropElement>
+            "ion-badge": LocalJSX.IonBadge & JSXBase.HTMLAttributes<HTMLIonBadgeElement>
+            "ion-breadcrumb": LocalJSX.IonBreadcrumb & JSXBase.HTMLAttributes<HTMLIonBreadcrumbElement>
+            "ion-breadcrumbs": LocalJSX.IonBreadcrumbs & JSXBase.HTMLAttributes<HTMLIonBreadcrumbsElement>
+            "ion-button": LocalJSX.IonButton & JSXBase.HTMLAttributes<HTMLIonButtonElement>
+            "ion-buttons": LocalJSX.IonButtons & JSXBase.HTMLAttributes<HTMLIonButtonsElement>
+            "ion-card": LocalJSX.IonCard & JSXBase.HTMLAttributes<HTMLIonCardElement>
+            "ion-card-content": LocalJSX.IonCardContent & JSXBase.HTMLAttributes<HTMLIonCardContentElement>
+            "ion-card-header": LocalJSX.IonCardHeader & JSXBase.HTMLAttributes<HTMLIonCardHeaderElement>
+            "ion-card-subtitle": LocalJSX.IonCardSubtitle & JSXBase.HTMLAttributes<HTMLIonCardSubtitleElement>
+            "ion-card-title": LocalJSX.IonCardTitle & JSXBase.HTMLAttributes<HTMLIonCardTitleElement>
+            "ion-checkbox": LocalJSX.IonCheckbox & JSXBase.HTMLAttributes<HTMLIonCheckboxElement>
+            "ion-chip": LocalJSX.IonChip & JSXBase.HTMLAttributes<HTMLIonChipElement>
+            "ion-col": LocalJSX.IonCol & JSXBase.HTMLAttributes<HTMLIonColElement>
+            "ion-content": LocalJSX.IonContent & JSXBase.HTMLAttributes<HTMLIonContentElement>
+            "ion-datetime": LocalJSX.IonDatetime & JSXBase.HTMLAttributes<HTMLIonDatetimeElement>
+            "ion-fab": LocalJSX.IonFab & JSXBase.HTMLAttributes<HTMLIonFabElement>
+            "ion-fab-button": LocalJSX.IonFabButton & JSXBase.HTMLAttributes<HTMLIonFabButtonElement>
+            "ion-fab-list": LocalJSX.IonFabList & JSXBase.HTMLAttributes<HTMLIonFabListElement>
+            "ion-footer": LocalJSX.IonFooter & JSXBase.HTMLAttributes<HTMLIonFooterElement>
+            "ion-grid": LocalJSX.IonGrid & JSXBase.HTMLAttributes<HTMLIonGridElement>
+            "ion-header": LocalJSX.IonHeader & JSXBase.HTMLAttributes<HTMLIonHeaderElement>
+            "ion-icon": LocalJSX.IonIcon & JSXBase.HTMLAttributes<HTMLIonIconElement>
+            "ion-img": LocalJSX.IonImg & JSXBase.HTMLAttributes<HTMLIonImgElement>
+            "ion-infinite-scroll": LocalJSX.IonInfiniteScroll & JSXBase.HTMLAttributes<HTMLIonInfiniteScrollElement>
+            "ion-infinite-scroll-content": LocalJSX.IonInfiniteScrollContent & JSXBase.HTMLAttributes<HTMLIonInfiniteScrollContentElement>
+            "ion-input": LocalJSX.IonInput & JSXBase.HTMLAttributes<HTMLIonInputElement>
+            "ion-item": LocalJSX.IonItem & JSXBase.HTMLAttributes<HTMLIonItemElement>
+            "ion-item-divider": LocalJSX.IonItemDivider & JSXBase.HTMLAttributes<HTMLIonItemDividerElement>
+            "ion-item-group": LocalJSX.IonItemGroup & JSXBase.HTMLAttributes<HTMLIonItemGroupElement>
+            "ion-item-option": LocalJSX.IonItemOption & JSXBase.HTMLAttributes<HTMLIonItemOptionElement>
+            "ion-item-options": LocalJSX.IonItemOptions & JSXBase.HTMLAttributes<HTMLIonItemOptionsElement>
+            "ion-item-sliding": LocalJSX.IonItemSliding & JSXBase.HTMLAttributes<HTMLIonItemSlidingElement>
+            "ion-label": LocalJSX.IonLabel & JSXBase.HTMLAttributes<HTMLIonLabelElement>
+            "ion-list": LocalJSX.IonList & JSXBase.HTMLAttributes<HTMLIonListElement>
+            "ion-list-header": LocalJSX.IonListHeader & JSXBase.HTMLAttributes<HTMLIonListHeaderElement>
+            "ion-loading": LocalJSX.IonLoading & JSXBase.HTMLAttributes<HTMLIonLoadingElement>
+            "ion-menu": LocalJSX.IonMenu & JSXBase.HTMLAttributes<HTMLIonMenuElement>
+            "ion-menu-button": LocalJSX.IonMenuButton & JSXBase.HTMLAttributes<HTMLIonMenuButtonElement>
+            "ion-menu-toggle": LocalJSX.IonMenuToggle & JSXBase.HTMLAttributes<HTMLIonMenuToggleElement>
+            "ion-modal": LocalJSX.IonModal & JSXBase.HTMLAttributes<HTMLIonModalElement>
+            "ion-nav": LocalJSX.IonNav & JSXBase.HTMLAttributes<HTMLIonNavElement>
+            "ion-nav-link": LocalJSX.IonNavLink & JSXBase.HTMLAttributes<HTMLIonNavLinkElement>
+            "ion-note": LocalJSX.IonNote & JSXBase.HTMLAttributes<HTMLIonNoteElement>
+            "ion-picker": LocalJSX.IonPicker & JSXBase.HTMLAttributes<HTMLIonPickerElement>
+            "ion-picker-column": LocalJSX.IonPickerColumn & JSXBase.HTMLAttributes<HTMLIonPickerColumnElement>
+            "ion-picker-column-internal": LocalJSX.IonPickerColumnInternal & JSXBase.HTMLAttributes<HTMLIonPickerColumnInternalElement>
+            "ion-picker-internal": LocalJSX.IonPickerInternal & JSXBase.HTMLAttributes<HTMLIonPickerInternalElement>
+            "ion-popover": LocalJSX.IonPopover & JSXBase.HTMLAttributes<HTMLIonPopoverElement>
+            "ion-progress-bar": LocalJSX.IonProgressBar & JSXBase.HTMLAttributes<HTMLIonProgressBarElement>
+            "ion-radio": LocalJSX.IonRadio & JSXBase.HTMLAttributes<HTMLIonRadioElement>
+            "ion-radio-group": LocalJSX.IonRadioGroup & JSXBase.HTMLAttributes<HTMLIonRadioGroupElement>
+            "ion-range": LocalJSX.IonRange & JSXBase.HTMLAttributes<HTMLIonRangeElement>
+            "ion-refresher": LocalJSX.IonRefresher & JSXBase.HTMLAttributes<HTMLIonRefresherElement>
+            "ion-refresher-content": LocalJSX.IonRefresherContent & JSXBase.HTMLAttributes<HTMLIonRefresherContentElement>
+            "ion-reorder": LocalJSX.IonReorder & JSXBase.HTMLAttributes<HTMLIonReorderElement>
+            "ion-reorder-group": LocalJSX.IonReorderGroup & JSXBase.HTMLAttributes<HTMLIonReorderGroupElement>
+            "ion-ripple-effect": LocalJSX.IonRippleEffect & JSXBase.HTMLAttributes<HTMLIonRippleEffectElement>
+            "ion-route": LocalJSX.IonRoute & JSXBase.HTMLAttributes<HTMLIonRouteElement>
+            "ion-route-redirect": LocalJSX.IonRouteRedirect & JSXBase.HTMLAttributes<HTMLIonRouteRedirectElement>
+            "ion-router": LocalJSX.IonRouter & JSXBase.HTMLAttributes<HTMLIonRouterElement>
+            "ion-router-link": LocalJSX.IonRouterLink & JSXBase.HTMLAttributes<HTMLIonRouterLinkElement>
+            "ion-router-outlet": LocalJSX.IonRouterOutlet & JSXBase.HTMLAttributes<HTMLIonRouterOutletElement>
+            "ion-row": LocalJSX.IonRow & JSXBase.HTMLAttributes<HTMLIonRowElement>
+            "ion-searchbar": LocalJSX.IonSearchbar & JSXBase.HTMLAttributes<HTMLIonSearchbarElement>
+            "ion-segment": LocalJSX.IonSegment & JSXBase.HTMLAttributes<HTMLIonSegmentElement>
+            "ion-segment-button": LocalJSX.IonSegmentButton & JSXBase.HTMLAttributes<HTMLIonSegmentButtonElement>
+            "ion-select": LocalJSX.IonSelect & JSXBase.HTMLAttributes<HTMLIonSelectElement>
+            "ion-select-option": LocalJSX.IonSelectOption & JSXBase.HTMLAttributes<HTMLIonSelectOptionElement>
+            "ion-select-popover": LocalJSX.IonSelectPopover & JSXBase.HTMLAttributes<HTMLIonSelectPopoverElement>
+            "ion-skeleton-text": LocalJSX.IonSkeletonText & JSXBase.HTMLAttributes<HTMLIonSkeletonTextElement>
+            "ion-slide": LocalJSX.IonSlide & JSXBase.HTMLAttributes<HTMLIonSlideElement>
+            "ion-slides": LocalJSX.IonSlides & JSXBase.HTMLAttributes<HTMLIonSlidesElement>
+            "ion-spinner": LocalJSX.IonSpinner & JSXBase.HTMLAttributes<HTMLIonSpinnerElement>
+            "ion-split-pane": LocalJSX.IonSplitPane & JSXBase.HTMLAttributes<HTMLIonSplitPaneElement>
+            "ion-tab": LocalJSX.IonTab & JSXBase.HTMLAttributes<HTMLIonTabElement>
+            "ion-tab-bar": LocalJSX.IonTabBar & JSXBase.HTMLAttributes<HTMLIonTabBarElement>
+            "ion-tab-button": LocalJSX.IonTabButton & JSXBase.HTMLAttributes<HTMLIonTabButtonElement>
+            "ion-tabs": LocalJSX.IonTabs & JSXBase.HTMLAttributes<HTMLIonTabsElement>
+            "ion-text": LocalJSX.IonText & JSXBase.HTMLAttributes<HTMLIonTextElement>
+            "ion-textarea": LocalJSX.IonTextarea & JSXBase.HTMLAttributes<HTMLIonTextareaElement>
+            "ion-thumbnail": LocalJSX.IonThumbnail & JSXBase.HTMLAttributes<HTMLIonThumbnailElement>
+            "ion-title": LocalJSX.IonTitle & JSXBase.HTMLAttributes<HTMLIonTitleElement>
+            "ion-toast": LocalJSX.IonToast & JSXBase.HTMLAttributes<HTMLIonToastElement>
+            "ion-toggle": LocalJSX.IonToggle & JSXBase.HTMLAttributes<HTMLIonToggleElement>
+            "ion-toolbar": LocalJSX.IonToolbar & JSXBase.HTMLAttributes<HTMLIonToolbarElement>
+            "ion-virtual-scroll": LocalJSX.IonVirtualScroll & JSXBase.HTMLAttributes<HTMLIonVirtualScrollElement>
+
             "geov-carousel": LocalJSX.GeovCarousel & JSXBase.HTMLAttributes<HTMLGeovCarouselElement>;
+            "geov-data-fetch-example": LocalJSX.GeovDataFetchExample & JSXBase.HTMLAttributes<HTMLGeovDataFetchExampleElement>;
+            "geov-entity-class-label": LocalJSX.GeovEntityClassLabel & JSXBase.HTMLAttributes<HTMLGeovEntityClassLabelElement>;
+            "geov-entity-definition": LocalJSX.GeovEntityDefinition & JSXBase.HTMLAttributes<HTMLGeovEntityDefinitionElement>;
+            "geov-entity-label": LocalJSX.GeovEntityLabel & JSXBase.HTMLAttributes<HTMLGeovEntityLabelElement>;
         }
     }
 }

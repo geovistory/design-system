@@ -1,0 +1,48 @@
+diff --git a/node_modules/@stencil/core/internal/hydrate/index.js b/node_modules/@stencil/core/internal/hydrate/index.js
+index eda160e..e6bafa1 100644
+--- a/node_modules/@stencil/core/internal/hydrate/index.js
++++ b/node_modules/@stencil/core/internal/hydrate/index.js
+@@ -983,19 +983,30 @@ const callRender = (e, t, o) => {
+    staticComponents: new Set(t)
+   }, n = [];
+   parseVNodeAnnotations(e, e.body, o, n), n.forEach((t => {
+-   if (null != t) {
+-    const n = t["s-nr"];
+-    let s = n["s-host-id"], l = n["s-node-id"], a = `${s}.${l}`;
+-    if (null == s) if (s = 0, o.rootLevelIds++, l = o.rootLevelIds, a = `${s}.${l}`, 
+-    1 === n.nodeType) n.setAttribute("c-id", a); else if (3 === n.nodeType) {
+-     if (0 === s && "" === n.nodeValue.trim()) return void t.remove();
+-     const o = e.createComment(a);
+-     o.nodeValue = `t.${a}`, n.parentNode.insertBefore(o, n);
+-    }
+-    let r = `o.${a}`;
+-    const i = t.parentElement;
+-    i && ("" === i["s-en"] ? r += "." : "c" === i["s-en"] && (r += ".c")), t.nodeValue = r;
+-   }
++    if (null != t) {
++        const n = t["s-nr"];
++        let s = n["s-host-id"], l = n["s-node-id"], a = `${s}.${l}`;
++        // modified in @stencil/core
++        if (null == s) {
++          if(n.nodeType === 1 && 
++            n.hasAttribute('s-id') 
++            && !isNaN(parseInt(n.getAttribute('s-id')))){
++              s = parseInt(n.getAttribute('s-id')) - 1;
++              
++           }else{
++            s=0;
++           }
++          o.rootLevelIds++, l = o.rootLevelIds, a = `${s}.${l}`;
++          if (1 === n.nodeType) n.setAttribute("c-id", a); else if (3 === n.nodeType) {
++            if (0 === s && "" === n.nodeValue.trim()) return void t.remove();
++            const o = e.createComment(a);
++            o.nodeValue = `t.${a}`, n.parentNode.insertBefore(o, n);
++            }
++        }
++        let r = `o.${a}`;
++        const i = t.parentElement;
++        i && ("" === i["s-en"] ? r += "." : "c" === i["s-en"] && (r += ".c")), t.nodeValue = r;
++       }
+   }));
+  }
+ }, parseVNodeAnnotations = (e, t, o, n) => {

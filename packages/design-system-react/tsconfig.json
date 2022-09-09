@@ -6,8 +6,8 @@
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "esModuleInterop": true,
-      "lib": ["dom", "es2015"],
-      "module": "commonjs",
+      "lib": ["dom", "ES2015"],
+      "module": "CommonJS",
       "moduleResolution": "node",
       "noImplicitAny": true,
       "noImplicitReturns": true,
@@ -17,11 +17,12 @@
       "removeComments": false,
       "sourceMap": true,
       "jsx": "react",
-      "target": "es2015"
+      "target": "ES2015",
     },
     "include": [
       "src/**/*.ts",
-      "src/**/*.tsx"
+      "src/**/*.tsx",
+      "node_modules/@geovistory/design-system-web/dist/components/*.js"
     ],
     "exclude": [
       "**/__tests__/**"

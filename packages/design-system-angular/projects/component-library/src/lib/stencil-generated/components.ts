@@ -29,6 +29,92 @@ export class GeovCarousel {
 }
 
 
+export declare interface GeovDataFetchExample extends Components.GeovDataFetchExample {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint'],
+  methods: ['fetchData']
+})
+@Component({
+  selector: 'geov-data-fetch-example',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint']
+})
+export class GeovDataFetchExample {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface GeovEntityClassLabel extends Components.GeovEntityClassLabel {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint']
+})
+@Component({
+  selector: 'geov-entity-class-label',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint']
+})
+export class GeovEntityClassLabel {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface GeovEntityDefinition extends Components.GeovEntityDefinition {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint']
+})
+@Component({
+  selector: 'geov-entity-definition',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint']
+})
+export class GeovEntityDefinition {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface GeovEntityLabel extends Components.GeovEntityLabel {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint'],
+  methods: ['fetchData']
+})
+@Component({
+  selector: 'geov-entity-label',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint']
+})
+export class GeovEntityLabel {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
 export declare interface IonAccordion extends Components.IonAccordion {}
 
 @ProxyCmp({

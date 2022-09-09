@@ -10,7 +10,7 @@ export class GeovCarousel {
   containerEl: HTMLElement;
   paginationEl: HTMLElement;
   /** array of image URLs passed to src attribute of the <img src="">  */
-  @Prop() images: string[];
+  @Prop({mutable:true}) images: string[];
 
   componentDidRender() {
     const infinitLoop: SwiperOptions = {
@@ -36,7 +36,7 @@ export class GeovCarousel {
       <Host>
         <div class="swiper" ref={el => (this.containerEl = el)}>
           <div class="swiper-wrapper">
-            {this.images.map(ref => (
+            {this.images?.map(ref => (
               <div class="swiper-slide">
                 <img src={ref} />
               </div>
