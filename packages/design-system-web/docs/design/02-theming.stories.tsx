@@ -1,5 +1,5 @@
-import { IonApp, IonContent, IonGrid, IonHeader, IonItem, IonList, IonText, IonTitle } from '../../.storybook/stencil-generated/component';
 import SyntaxHighlighter from 'react-syntax-highlighter';
+import { IonApp, IonContent, IonGrid } from '../../.storybook/stencil-generated/component';
 
 export default {
   title: 'Design/Theming',

@@ -51,6 +51,48 @@ export class GeovDataFetchExample {
 }
 
 
+export declare interface GeovEntityClassLabel extends Components.GeovEntityClassLabel {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint']
+})
+@Component({
+  selector: 'geov-entity-class-label',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint']
+})
+export class GeovEntityClassLabel {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface GeovEntityDefinition extends Components.GeovEntityDefinition {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint']
+})
+@Component({
+  selector: 'geov-entity-definition',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint']
+})
+export class GeovEntityDefinition {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
 export declare interface GeovEntityLabel extends Components.GeovEntityLabel {}
 
 @ProxyCmp({

@@ -132,6 +132,28 @@ export namespace Components {
          */
         "sparqlEndpoint": string;
     }
+    interface GeovEntityClassLabel {
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId": string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+    }
+    interface GeovEntityDefinition {
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId": string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+    }
     interface GeovEntityLabel {
         "_ssrId"?: string;
         /**
@@ -162,6 +184,18 @@ declare global {
         prototype: HTMLGeovDataFetchExampleElement;
         new (): HTMLGeovDataFetchExampleElement;
     };
+    interface HTMLGeovEntityClassLabelElement extends Components.GeovEntityClassLabel, HTMLStencilElement {
+    }
+    var HTMLGeovEntityClassLabelElement: {
+        prototype: HTMLGeovEntityClassLabelElement;
+        new (): HTMLGeovEntityClassLabelElement;
+    };
+    interface HTMLGeovEntityDefinitionElement extends Components.GeovEntityDefinition, HTMLStencilElement {
+    }
+    var HTMLGeovEntityDefinitionElement: {
+        prototype: HTMLGeovEntityDefinitionElement;
+        new (): HTMLGeovEntityDefinitionElement;
+    };
     interface HTMLGeovEntityLabelElement extends Components.GeovEntityLabel, HTMLStencilElement {
     }
     var HTMLGeovEntityLabelElement: {
@@ -171,6 +205,8 @@ declare global {
     interface HTMLElementTagNameMap {
         "geov-carousel": HTMLGeovCarouselElement;
         "geov-data-fetch-example": HTMLGeovDataFetchExampleElement;
+        "geov-entity-class-label": HTMLGeovEntityClassLabelElement;
+        "geov-entity-definition": HTMLGeovEntityDefinitionElement;
         "geov-entity-label": HTMLGeovEntityLabelElement;
     }
 }
@@ -291,6 +327,28 @@ declare namespace LocalJSX {
          */
         "sparqlEndpoint"?: string;
     }
+    interface GeovEntityClassLabel {
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+    }
+    interface GeovEntityDefinition {
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+    }
     interface GeovEntityLabel {
         "_ssrId"?: string;
         /**
@@ -305,6 +363,8 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "geov-carousel": GeovCarousel;
         "geov-data-fetch-example": GeovDataFetchExample;
+        "geov-entity-class-label": GeovEntityClassLabel;
+        "geov-entity-definition": GeovEntityDefinition;
         "geov-entity-label": GeovEntityLabel;
     }
 }
@@ -409,6 +469,8 @@ declare module "@stencil/core" {
 
             "geov-carousel": LocalJSX.GeovCarousel & JSXBase.HTMLAttributes<HTMLGeovCarouselElement>;
             "geov-data-fetch-example": LocalJSX.GeovDataFetchExample & JSXBase.HTMLAttributes<HTMLGeovDataFetchExampleElement>;
+            "geov-entity-class-label": LocalJSX.GeovEntityClassLabel & JSXBase.HTMLAttributes<HTMLGeovEntityClassLabelElement>;
+            "geov-entity-definition": LocalJSX.GeovEntityDefinition & JSXBase.HTMLAttributes<HTMLGeovEntityDefinitionElement>;
             "geov-entity-label": LocalJSX.GeovEntityLabel & JSXBase.HTMLAttributes<HTMLGeovEntityLabelElement>;
         }
     }
