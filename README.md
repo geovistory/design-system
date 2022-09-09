@@ -41,6 +41,7 @@ npm ci
 npm run build
 
 # publish: replace <XYZ> with version number you find in lerna.json -> version
-lerna publish <XYZ> --no-git-tag-version  --no-changelog
+# example for <XYZ>: 1.1.1-pr-18.32 
+lerna publish <XYZ> --no-git-tag-version  --no-changelog --dist-tag next
 
 ```
