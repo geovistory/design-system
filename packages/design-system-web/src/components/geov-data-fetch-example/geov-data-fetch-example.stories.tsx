@@ -3,7 +3,7 @@ import { DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparql
 import { GeovDataFetchExample } from '../../../.storybook/stencil-generated/component';
 
 export default {
-  title: 'Basic Components/DataFetchExamle',
+  title: 'Components/DataFetchExamle',
   component: GeovDataFetchExample,
 };
 const Template = (args: JSX.GeovDataFetchExample) => <GeovDataFetchExample {...args}></GeovDataFetchExample>;

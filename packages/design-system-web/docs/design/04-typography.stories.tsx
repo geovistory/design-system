@@ -5,7 +5,12 @@ import { IonApp, IonContent, IonGrid } from '../../.storybook/stencil-generated/
 export default {
   title: 'Design/Typography',
   parameters: {
-    previewTabs: { canvas: { hidden: true } },
+    previewTabs: {
+      'docs': { hidden: true },
+      'storybook/docs/panel': {
+        hidden: true,
+      },
+    },
     options: { showPanel: true },
   },
 };

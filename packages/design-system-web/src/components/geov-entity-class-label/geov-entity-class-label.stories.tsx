@@ -4,7 +4,7 @@ import { GeovEntityClassLabel } from '../../../.storybook/stencil-generated/comp
 import { DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
 
 export default {
-  title: 'Basic Components/EntityClassLabel',
+  title: 'Entity Components/EntityClassLabel',
   component: GeovEntityClassLabel,
 };
 const Template = (args: JSX.GeovEntityClassLabel) => <GeovEntityClassLabel {...args}></GeovEntityClassLabel>;

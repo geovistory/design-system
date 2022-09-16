@@ -1,12 +1,16 @@
 import React from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { IonApp, IonButton, IonContent, IonGrid } from '../../../.storybook/stencil-generated/component';
+import { GeovCode, IonApp, IonButton, IonContent, IonGrid } from '../../../.storybook/stencil-generated/component';
 import { files } from './tutorial.snippets';
 export default {
   title: 'Contributing/Tutorial/Setup',
   parameters: {
-    previewTabs: { canvas: { hidden: true } },
-    options: { showPanel: false },
+    previewTabs: {
+      'docs': { hidden: true },
+      'storybook/docs/panel': {
+        hidden: true,
+      },
+    },    options: { showPanel: false },
   },
 };
 
@@ -29,11 +33,11 @@ export const Setup = () => (
         <h4>Install node.js</h4>
         <p>
           Open a terminal and run
-          <SyntaxHighlighter language="bash">node -v</SyntaxHighlighter>
+          <GeovCode language="bash" code="node -v"></GeovCode>
         </p>
         <p>
           If the output is similar to this, you're good to go:
-          <SyntaxHighlighter language="bash">v16.17.0</SyntaxHighlighter>
+          <GeovCode language="bash" code="v16.17.0"></GeovCode>
         </p>
         <p>
           Else install{' '}
@@ -53,7 +57,7 @@ export const Setup = () => (
             repository
           </a>{' '}
           from GitHub:
-          <SyntaxHighlighter language="bash">git clone https://github.com/geovistory/design-system.git</SyntaxHighlighter>
+          <GeovCode language="bash" code="git clone https://github.com/geovistory/design-system.git"></GeovCode>
         </p>
         <h4>Open the folder in your IDE </h4>
         <p>
@@ -62,31 +66,31 @@ export const Setup = () => (
             Visual Studio Code
           </a>{' '}
           as your code editor. But use the tool you prefer. To open the folder in VS Code run:
-          <SyntaxHighlighter language="bash">code design-sytem</SyntaxHighlighter>
+          <GeovCode language="bash" code="code design-sytem"></GeovCode>
         </p>
         <h4>Install the node modules</h4>
         <p>
           From the root folder of the repo run
-          <SyntaxHighlighter language="bash">npm install</SyntaxHighlighter>
+          <GeovCode language="bash" code="npm install"></GeovCode>
           This will install the dependencies of all packages located in <code>packages/</code>
         </p>
         <h4>Open the correct folder</h4>
         <p>
           The packages folder contains different packages.
-          <SyntaxHighlighter language="bash">{files}</SyntaxHighlighter>
+          <GeovCode language="bash" code={files}></GeovCode>
           The components are developed in <code>design-system-web</code>. The other packages are derivates. Change into the correct directory to start the development
-          <SyntaxHighlighter language="bash">cd packages/design-system-web</SyntaxHighlighter>
+          <GeovCode language="bash" code="cd packages/design-system-web"></GeovCode>
         </p>
         <h4>Start storybook</h4>
         <p>
           To see the geovistory components in a browser, start the storybook locally.
-          <SyntaxHighlighter language="bash">npm run dev</SyntaxHighlighter>
+          <GeovCode language="bash" code="npm run dev"></GeovCode>
           If you have trouble starting the server, stopping and restarting might help.
         </p>
         <h4>Verification</h4>
         <p>If you see the storybook at 'localhost:6006' in your browser, you're done with the setup! Congrats.</p>
         <p>
-          <IonButton href="/?path=/story/contributing-tutorial-hello-world--hello-world" lines="full">
+          <IonButton href="/?path=/story/contributing-tutorial-create-component--create-component" lines="full">
             Next: Create a Hello World Component
           </IonButton>
         </p>
