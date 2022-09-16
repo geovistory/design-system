@@ -5,7 +5,10 @@ export default {
   title: 'Design/Theming',
   parameters: {
     previewTabs: {
-      canvas: { hidden: true },
+      'docs': { hidden: true },
+      'storybook/docs/panel': {
+        hidden: true,
+      },
     },
     options: {
       showPanel: false,

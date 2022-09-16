@@ -1,8 +1,8 @@
 export const files = `packages
-  |- design-system-angular
-  |- design-system-happy-dom
-  |- design-system-react
-  |- design-system-web          <- Here we develop!
+|- design-system-angular
+|- design-system-happy-dom
+|- design-system-react
+|- design-system-web          <- Here we develop!
 `;
 export const step1 = `# Make sure you are in 'packages/design-system-web' and run
 npm run generate
@@ -28,7 +28,7 @@ export const componentfiles = `src
         |- readme.md
 `;
 
-export const story = ` // geov-entity-class-label.stories.tsx
+export const story = `// geov-entity-class-label.stories.tsx
 
 import React from 'react';
 import { JSX } from '../..';

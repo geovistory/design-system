@@ -29,6 +29,27 @@ export class GeovCarousel {
 }
 
 
+export declare interface GeovCode extends Components.GeovCode {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['code', 'copyButton', 'language']
+})
+@Component({
+  selector: 'geov-code',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['code', 'copyButton', 'language']
+})
+export class GeovCode {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
 export declare interface GeovDataFetchExample extends Components.GeovDataFetchExample {}
 
 @ProxyCmp({

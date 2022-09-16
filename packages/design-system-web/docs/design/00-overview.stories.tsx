@@ -3,8 +3,12 @@ import { IonApp, IonContent, IonGrid, IonItem, IonList, IonIcon } from '../../.s
 export default {
   title: 'Design/Overview',
   parameters: {
-    previewTabs: { canvas: { hidden: true } },
-    options: { showPanel: false },
+    previewTabs: {
+      'docs': { hidden: true },
+      'storybook/docs/panel': {
+        hidden: true,
+      },
+    },    options: { showPanel: false },
   },
 };
 

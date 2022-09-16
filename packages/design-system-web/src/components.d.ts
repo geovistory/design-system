@@ -7,6 +7,7 @@ import { Components as IonComponents } from '@ionic/core';
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Languages } from "./components/geov-code/geov-code";
 import { GeovDataFetchExampleData } from "./components/geov-data-fetch-example/geov-data-fetch-example";
 import { SparqlBinding } from "./lib/sparqlJson";
 import { GeovEntityLabelData } from "./components/geov-entity-label/geov-entity-label";
@@ -113,6 +114,11 @@ export namespace Components {
          */
         "images": string[];
     }
+    interface GeovCode {
+        "code": string;
+        "copyButton": boolean;
+        "language": Languages;
+    }
     interface GeovDataFetchExample {
         /**
           * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
@@ -178,6 +184,12 @@ declare global {
         prototype: HTMLGeovCarouselElement;
         new (): HTMLGeovCarouselElement;
     };
+    interface HTMLGeovCodeElement extends Components.GeovCode, HTMLStencilElement {
+    }
+    var HTMLGeovCodeElement: {
+        prototype: HTMLGeovCodeElement;
+        new (): HTMLGeovCodeElement;
+    };
     interface HTMLGeovDataFetchExampleElement extends Components.GeovDataFetchExample, HTMLStencilElement {
     }
     var HTMLGeovDataFetchExampleElement: {
@@ -204,6 +216,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "geov-carousel": HTMLGeovCarouselElement;
+        "geov-code": HTMLGeovCodeElement;
         "geov-data-fetch-example": HTMLGeovDataFetchExampleElement;
         "geov-entity-class-label": HTMLGeovEntityClassLabelElement;
         "geov-entity-definition": HTMLGeovEntityDefinitionElement;
@@ -313,6 +326,11 @@ declare namespace LocalJSX {
          */
         "images"?: string[];
     }
+    interface GeovCode {
+        "code"?: string;
+        "copyButton"?: boolean;
+        "language"?: Languages;
+    }
     interface GeovDataFetchExample {
         /**
           * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
@@ -362,6 +380,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "geov-carousel": GeovCarousel;
+        "geov-code": GeovCode;
         "geov-data-fetch-example": GeovDataFetchExample;
         "geov-entity-class-label": GeovEntityClassLabel;
         "geov-entity-definition": GeovEntityDefinition;
@@ -468,6 +487,7 @@ declare module "@stencil/core" {
             "ion-virtual-scroll": LocalJSX.IonVirtualScroll & JSXBase.HTMLAttributes<HTMLIonVirtualScrollElement>
 
             "geov-carousel": LocalJSX.GeovCarousel & JSXBase.HTMLAttributes<HTMLGeovCarouselElement>;
+            "geov-code": LocalJSX.GeovCode & JSXBase.HTMLAttributes<HTMLGeovCodeElement>;
             "geov-data-fetch-example": LocalJSX.GeovDataFetchExample & JSXBase.HTMLAttributes<HTMLGeovDataFetchExampleElement>;
             "geov-entity-class-label": LocalJSX.GeovEntityClassLabel & JSXBase.HTMLAttributes<HTMLGeovEntityClassLabelElement>;
             "geov-entity-definition": LocalJSX.GeovEntityDefinition & JSXBase.HTMLAttributes<HTMLGeovEntityDefinitionElement>;

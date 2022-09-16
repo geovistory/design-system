@@ -3,7 +3,12 @@ import { IonApp, IonContent, IonGrid } from '../../.storybook/stencil-generated/
 export default {
   title: 'Contributing/CI And CD Workflow',
   parameters: {
-    previewTabs: { canvas: { hidden: true } },
+    previewTabs: {
+      'docs': { hidden: true },
+      'storybook/docs/panel': {
+        hidden: true,
+      },
+    },
     options: { showPanel: false },
   },
 };
@@ -14,8 +19,11 @@ export const CI_andCDWorkflow = () => (
       <IonGrid fixed>
         <h1>CI/CD Workflow</h1>
         <p className="lead">
-          CI/CD stands for continuous integration and continuous delivery (<a target="_blank" href="https://en.wikipedia.org/wiki/CI/CD">wikipedia</a>). We use GitHub to
-          realize a simple and powerful CI/CD workflow for the integration and delivery of this design system.
+          CI/CD stands for continuous integration and continuous delivery (
+          <a target="_blank" href="https://en.wikipedia.org/wiki/CI/CD">
+            wikipedia
+          </a>
+          ). We use GitHub to realize a simple and powerful CI/CD workflow for the integration and delivery of this design system.
         </p>
 
         <h4>Pull Request</h4>

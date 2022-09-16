@@ -4,7 +4,12 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 export default {
   title: 'Design/Theme Generator',
   parameters: {
-    previewTabs: { canvas: { hidden: true } },
+    previewTabs: {
+      'docs': { hidden: true },
+      'storybook/docs/panel': {
+        hidden: true,
+      },
+    },
     options: { showPanel: true },
   },
 };
@@ -154,7 +159,8 @@ export const ThemeGenerator = () => {
           </p>
           <h2>Global CSS variables</h2>
           <p>
-            Use the Design Tokens on this page to play around and see the effect of the global CSS variables. To apply it on your page, place the result in css <code>{code}</code> selector.
+            Use the Design Tokens on this page to play around and see the effect of the global CSS variables. To apply it on your page, place the result in css <code>{code}</code>{' '}
+            selector.
           </p>
           <h4>
             Colors &nbsp;&nbsp;

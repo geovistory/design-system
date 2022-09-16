@@ -3,7 +3,12 @@ import { IonApp, IonContent, IonGrid, IonIcon, IonItem, IonList } from '../../.s
 export default {
   title: 'Contributing/Tutorial',
   parameters: {
-    previewTabs: { canvas: { hidden: true } },
+    previewTabs: {
+      'docs': { hidden: true },
+      'storybook/docs/panel': {
+        hidden: true,
+      },
+    },
     options: { showPanel: false },
   },
 };
@@ -14,7 +19,6 @@ export const Introduction = () => (
       <IonGrid fixed>
         <h1>Tutorial: Create a Geovistory Component </h1>
         <p className="lead">This page helps you to get started as Geovistory component developer.</p>
-
 
         <h4>Goal of the tutorial</h4>
         <p>
@@ -32,8 +36,8 @@ export const Introduction = () => (
             <IonItem href="/?path=/story/contributing-tutorial-setup--setup" lines="full">
               Setup – setup your developer environment.
             </IonItem>
-            <IonItem href="/?path=/story/contributing-tutorial-hello-world--hello-world" lines="full">
-              Hello World – create a basic component.
+            <IonItem href="/?path=/story/contributing-tutorial-create-component--create-component" lines="full">
+              Create Component – create a basic component.
             </IonItem>
             <IonItem href="/?path=/story/contributing-tutorial-data-fetching--data-fetching" lines="full">
               Data Fetching – fetch and display data from SPARQL entpoint.
