@@ -16,8 +16,8 @@ import 'prismjs/components/prism-plsql';
 import 'prismjs/components/prism-turtle';
 import 'prismjs/components/prism-sparql';
 import 'prismjs/components/prism-typescript';
-
 import 'prismjs/components/prism-xquery';
+import { copyOutline } from 'ionicons/icons';
 export type Languages =
   | 'markup'
   | 'html'
@@ -68,7 +68,7 @@ export class GeovCode {
         </pre>
         {this.copyButton && (
           <ion-button class="copy-btn" size="small" fill="clear" onClick={() => this.copyToClipboard()} title="Copy to clipboard">
-            <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
+            <ion-icon slot="icon-only" icon={copyOutline}></ion-icon>
           </ion-button>
         )}
         <div class="copied" ref={el => (this.copiedEl = el as HTMLDivElement)}>
