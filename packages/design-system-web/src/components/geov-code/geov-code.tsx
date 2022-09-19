@@ -1,22 +1,7 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
 import Prism from 'prismjs';
-import 'prismjs/components/prism-bash';
-import 'prismjs/components/prism-git';
-import 'prismjs/components/prism-http';
-import 'prismjs/components/prism-ignore';
-import 'prismjs/components/prism-json';
-import 'prismjs/components/prism-json5';
-import 'prismjs/components/prism-python';
-import 'prismjs/components/prism-jsx';
-import 'prismjs/components/prism-tsx';
-import 'prismjs/components/prism-sass';
-import 'prismjs/components/prism-scss';
-import 'prismjs/components/prism-sql';
-import 'prismjs/components/prism-plsql';
-import 'prismjs/components/prism-turtle';
-import 'prismjs/components/prism-sparql';
-import 'prismjs/components/prism-typescript';
-import 'prismjs/components/prism-xquery';
+import {extendPrism} from './prism.js'
+extendPrism(Prism)
 import { copyOutline } from 'ionicons/icons';
 export type Languages =
   | 'markup'
