@@ -6,7 +6,7 @@ export interface GeovClassSelectItem {
   instanceCount: number;
 }
 
-interface ClassSelectEvent {
+export interface ClassSelectEvent {
   selectedClassUris: string[];
 }
 

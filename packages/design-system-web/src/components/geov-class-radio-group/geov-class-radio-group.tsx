@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop, State, Event, EventEmitter } from '@stencil/core';
 import { GeovClassSelectItem } from '../geov-class-select/geov-class-select';
-interface GeovClassRadioGroupEvent {
+export interface GeovClassRadioGroupEvent {
   value: GeovClassSelectItem;
 }
 @Component({
