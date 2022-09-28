@@ -1,0 +1,32 @@
+:host {
+  display: block;
+}
+
+.entity-count-col {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.entity-count-label {
+  padding-inline-start: calc(var(--ion-safe-area-left, 0px) + 20px);
+}
+
+.entity-count-sm {
+  margin-top: 2px;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+ion-searchbar {
+  padding-bottom: 0;
+}
+
+.paginator-container {
+  margin-top: 1rem;
+  align-items: center;
+}
+
+.paginator {
+  margin-left: auto;
+}

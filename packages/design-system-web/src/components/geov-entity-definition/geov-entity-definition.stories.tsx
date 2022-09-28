@@ -4,7 +4,7 @@ import { GeovEntityDefinition } from '../../../.storybook/stencil-generated/comp
 import { DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
 
 export default {
-  title: 'Entity Components/EntityDefinition',
+  title: 'Data Components/Entity/EntityDefinition',
   component: GeovEntityDefinition,
 };
 const Template = (args: JSX.GeovEntityDefinition) => <GeovEntityDefinition {...args}></GeovEntityDefinition>;

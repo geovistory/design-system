@@ -6,13 +6,12 @@ import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
 
 const qrLabel = (id: string) => `
-PREFIX onto-c: <https://ontome.net/class/>
-PREFIX onto-p: <https://ontome.net/property/>
+PREFIX ontome: <https://ontome.net/ontology/>
 PREFIX geov: <http://geovistory.org/resource/>
 
 SELECT  ?definition
 WHERE {
-  geov:${id} onto-p:1762 / onto-p:1864 ?definition;
+  geov:${id} ontome:p1762 / ontome:p1864 ?definition;
 }
 LIMIT 10
 `;

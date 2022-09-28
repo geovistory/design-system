@@ -8,7 +8,7 @@ export interface SparqlBinding<T> {
 }
 export async function sparqlJson<T>(url: string, query: string) {
   const params = new URLSearchParams({ query: query });
-  // console.log('q', query)
+  console.log('q', query)
   const res = await fetch(`${url}?${params}`, {
     method: 'GET',
     headers: {
