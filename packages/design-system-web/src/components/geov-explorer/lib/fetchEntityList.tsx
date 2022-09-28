@@ -3,11 +3,6 @@ import { SparqlBinding, sparqlJson } from '../../../lib/sparqlJson';
 import { GeovEntityListItem } from '../../geov-entity-list/geov-entity-list';
 import { getTextFilter } from './getTextFilter';
 export type EntityListData = FetchResponse & { items?: GeovEntityListItem[]; error?: boolean };
-export function createFilter(searchString: string) {
-  const filters = [];
-  if (searchString) filters.push(`regex(?entityLabel, "^${searchString}", "i")`);
-  return `FILTER( ${filters.join(' && ')} )`;
-}
 
 export const getQuery = (searchString: string, classUri: string, classLabel: string, limit: number, offset: number) => {
   return `PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
