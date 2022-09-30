@@ -245,13 +245,13 @@ export declare interface GeovExplorer extends Components.GeovExplorer {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['_ssrId', 'sparqlEndpoint']
+  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint']
 })
 @Component({
   selector: 'geov-explorer',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['_ssrId', 'sparqlEndpoint']
+  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint']
 })
 export class GeovExplorer {
   protected el: HTMLElement;

@@ -3,22 +3,22 @@ import { SparqlBinding, sparqlJson } from '../../../lib/sparqlJson';
 import { GeovClassSelectItem } from '../../geov-class-select/geov-class-select';
 import { getTextFilter } from './getTextFilter';
 export type ClassSelectData = FetchResponse & { items?: GeovClassSelectItem[]; error?: boolean };
-export const getQuery = (searchString?: string) => `
+export const getQuery = (searchString?: string) => `# classes
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX text: <http://jena.apache.org/text#>
 
 SELECT ?class ?label ?count
 WHERE {
-  ?class rdfs:label ?label
   {
     SELECT  ?class (count(distinct ?entityUri) as ?count)
     WHERE {
-     ${searchString ? `(?entityUri) text:query ('*${getTextFilter(searchString)}*') . ` : ``}
+      ${searchString ? `(?entityUri) text:query ('*${getTextFilter(searchString)}*') . ` : ``}
  	   ?entityUri a ?class .
     }
     GROUP BY ?class
     ORDER by DESC(?count)
   }
+  ?class rdfs:label ?label
 }
 HAVING(?label != "")
 `;

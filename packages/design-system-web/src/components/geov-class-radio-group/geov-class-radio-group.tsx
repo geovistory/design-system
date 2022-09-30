@@ -1,7 +1,7 @@
 import { Component, Host, h, Prop, State, Event, EventEmitter } from '@stencil/core';
 import { GeovClassSelectItem } from '../geov-class-select/geov-class-select';
 export interface GeovClassRadioGroupEvent {
-  value: GeovClassSelectItem;
+  value?: GeovClassSelectItem;
 }
 @Component({
   tag: 'geov-class-radio-group',
@@ -17,7 +17,8 @@ export class GeovClassRadioGroup {
   @Event() selectionChanged: EventEmitter<GeovClassRadioGroupEvent>;
   maxLength = 6;
 
-  emit(classUri: string) {
+  emit(classUri: string | null) {
+    if (!classUri) this.selectionChanged.emit({});
     const toEmit = this.items.find(item => item.classUri === classUri);
     if (toEmit) this.selectionChanged.emit({ value: toEmit });
   }
@@ -27,14 +28,14 @@ export class GeovClassRadioGroup {
     return (
       <Host>
         <ion-list>
-          <ion-radio-group onIonChange={e => this.emit(e.detail.value)} value={this.initValue?.classUri}>
+          <ion-radio-group onIonChange={e => this.emit(e.detail.value)} value={this.initValue?.classUri ?? null}>
             <ion-item-divider>
-              <ion-label>Class ({this.items?.length ?? 0})</ion-label>
+              <ion-label>Class Filter</ion-label>
             </ion-item-divider>
-            {/* <ion-item>
-              <ion-note>All Classes</ion-note>
+            <ion-item>
+              <ion-note>All classes ({this.items?.length ?? 0})</ion-note>
               <ion-radio slot="end" value={null}></ion-radio>
-            </ion-item> */}
+            </ion-item>
             {this.items?.map((item, index) => (
               <ion-item class={!this.showAll && index >= this.maxLength ? 'hide' : ''}>
                 <ion-label>{item.classLabel}</ion-label>

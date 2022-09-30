@@ -1,7 +1,7 @@
 import { Component, Event, EventEmitter, h, Host, Prop } from '@stencil/core';
 import { GeovClassSelectItem } from '../geov-class-select/geov-class-select';
 export interface GeovClassSelectPopupEvent {
-  value: GeovClassSelectItem;
+  value?: GeovClassSelectItem;
 }
 @Component({
   tag: 'geov-class-select-popup',
@@ -14,7 +14,8 @@ export class GeovClassSelectPopup {
 
   @Event() selectionChanged: EventEmitter<GeovClassSelectPopupEvent>;
 
-  emit(classUri: string) {
+  emit(classUri: string | null) {
+    if (!classUri) this.selectionChanged.emit({});
     const toEmit = this.items.find(item => item.classUri === classUri);
     if (toEmit) this.selectionChanged.emit({ value: toEmit });
   }
@@ -24,11 +25,23 @@ export class GeovClassSelectPopup {
       <Host>
         <ion-list>
           <ion-item>
-            <ion-note>Class:</ion-note>
-            <ion-select placeholder="Select class" onIonChange={e => this.emit(e.detail.value)} value={this.initValue?.classUri}>
+            <ion-note>Class Filter:</ion-note>
+            <ion-select
+              placeholder="Select class"
+              onIonChange={e => this.emit(e.detail.value)}
+              value={this.initValue?.classUri ?? null}
+              ref={e =>
+                (e.interfaceOptions = {
+                  header: 'Class Filter',
+                })
+              }
+            >
+              <ion-select-option value={null}>
+                <ion-label slot="start">All classes ({this.items?.length ?? 0})</ion-label>
+              </ion-select-option>
               {this.items?.map(item => (
                 <ion-select-option value={item.classUri}>
-                  <ion-label slot="start">{item.classLabel}</ion-label> {' '}
+                  <ion-label slot="start">{item.classLabel}</ion-label>{' '}
                 </ion-select-option>
               ))}
             </ion-select>

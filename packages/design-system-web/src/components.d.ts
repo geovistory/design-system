@@ -210,6 +210,14 @@ export namespace Components {
          */
         "_ssrId"?: string;
         /**
+          * If true, the component will not render before the initial data is fetched
+         */
+        "fetchBeforeRender": boolean;
+        /**
+          * initialize the component with a given search string
+         */
+        "initSearchString"?: string;
+        /**
           * sparqlEndpoint URL of the sparql endpoint
          */
         "sparqlEndpoint": string;
@@ -511,6 +519,14 @@ declare namespace LocalJSX {
           * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
          */
         "_ssrId"?: string;
+        /**
+          * If true, the component will not render before the initial data is fetched
+         */
+        "fetchBeforeRender"?: boolean;
+        /**
+          * initialize the component with a given search string
+         */
+        "initSearchString"?: string;
         /**
           * sparqlEndpoint URL of the sparql endpoint
          */
