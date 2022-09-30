@@ -1,9 +1,10 @@
+import React from 'react';
 import { JSX } from '../..';
 import { DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
 import { GeovEntityLabel } from '../../../.storybook/stencil-generated/component';
 
 export default {
-  title: 'Entity Components/EntityLabel',
+  title: 'Data Components/Entity/Entity Label',
   component: GeovEntityLabel,
 };
 const Template = (args: JSX.GeovEntityLabel) => <GeovEntityLabel {...args}></GeovEntityLabel>;

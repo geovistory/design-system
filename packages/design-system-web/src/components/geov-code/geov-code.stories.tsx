@@ -3,7 +3,7 @@ import { JSX } from '../..';
 import { GeovCode } from '../../../.storybook/stencil-generated/component';
 
 export default {
-  title: 'Components/Code',
+  title: 'Design Components/Code',
   component: GeovCode,
 };
 const Template = (args: JSX.GeovCode) => <GeovCode {...args}></GeovCode>;

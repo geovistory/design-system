@@ -29,6 +29,90 @@ export class GeovCarousel {
 }
 
 
+export declare interface GeovClassRadioGroup extends Components.GeovClassRadioGroup {
+  /**
+   *  
+   */
+  selectionChanged: EventEmitter<CustomEvent<GeovClassRadioGroupEvent>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['initValue', 'items', 'loading']
+})
+@Component({
+  selector: 'geov-class-radio-group',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['initValue', 'items', 'loading']
+})
+export class GeovClassRadioGroup {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['selectionChanged']);
+  }
+}
+
+
+export declare interface GeovClassSelect extends Components.GeovClassSelect {
+  /**
+   *  
+   */
+  selectionChanged: EventEmitter<CustomEvent<ClassSelectEvent>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['checkedOnInit', 'items', 'loading']
+})
+@Component({
+  selector: 'geov-class-select',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['checkedOnInit', 'items', 'loading']
+})
+export class GeovClassSelect {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['selectionChanged']);
+  }
+}
+
+
+export declare interface GeovClassSelectPopup extends Components.GeovClassSelectPopup {
+  /**
+   *  
+   */
+  selectionChanged: EventEmitter<CustomEvent<GeovClassSelectPopupEvent>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['initValue', 'items']
+})
+@Component({
+  selector: 'geov-class-select-popup',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['initValue', 'items']
+})
+export class GeovClassSelectPopup {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['selectionChanged']);
+  }
+}
+
+
 export declare interface GeovCode extends Components.GeovCode {}
 
 @ProxyCmp({
@@ -132,6 +216,76 @@ export class GeovEntityLabel {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface GeovEntityList extends Components.GeovEntityList {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['defaultPageSize', 'items', 'loading']
+})
+@Component({
+  selector: 'geov-entity-list',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['defaultPageSize', 'items', 'loading']
+})
+export class GeovEntityList {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface GeovExplorer extends Components.GeovExplorer {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['_ssrId', 'sparqlEndpoint']
+})
+@Component({
+  selector: 'geov-explorer',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['_ssrId', 'sparqlEndpoint']
+})
+export class GeovExplorer {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+import type { PageEvent as IGeovPaginatorPageEvent } from '@geovistory/design-system-web';
+export declare interface GeovPaginator extends Components.GeovPaginator {
+  /**
+   *  
+   */
+  pageChanged: EventEmitter<CustomEvent<IGeovPaginatorPageEvent>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['hidePageSize', 'length', 'pageIndex', 'pageSize', 'showFirstLastButtons']
+})
+@Component({
+  selector: 'geov-paginator',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['hidePageSize', 'length', 'pageIndex', 'pageSize', 'showFirstLastButtons']
+})
+export class GeovPaginator {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['pageChanged']);
   }
 }
 
