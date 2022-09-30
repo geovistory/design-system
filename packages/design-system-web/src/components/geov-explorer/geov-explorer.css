@@ -9,6 +9,7 @@
 }
 
 .entity-count-label {
+  height: 1rem;
   padding-inline-start: calc(var(--ion-safe-area-left, 0px) + 20px);
 }
 

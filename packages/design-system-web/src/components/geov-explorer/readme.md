@@ -7,10 +7,12 @@
 
 ## Properties
 
-| Property         | Attribute         | Description                                                                                                                                                                          | Type     | Default     |
-| ---------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ----------- |
-| `_ssrId`         | `_ssr-id`         | _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side | `string` | `undefined` |
-| `sparqlEndpoint` | `sparql-endpoint` | sparqlEndpoint URL of the sparql endpoint                                                                                                                                            | `string` | `undefined` |
+| Property            | Attribute             | Description                                                                                                                                                                          | Type      | Default     |
+| ------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- | ----------- |
+| `_ssrId`            | `_ssr-id`             | _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side | `string`  | `undefined` |
+| `fetchBeforeRender` | `fetch-before-render` | If true, the component will not render before the initial data is fetched                                                                                                            | `boolean` | `false`     |
+| `initSearchString`  | `init-search-string`  | initialize the component with a given search string                                                                                                                                  | `string`  | `undefined` |
+| `sparqlEndpoint`    | `sparql-endpoint`     | sparqlEndpoint URL of the sparql endpoint                                                                                                                                            | `string`  | `undefined` |
 
 
 ## Dependencies

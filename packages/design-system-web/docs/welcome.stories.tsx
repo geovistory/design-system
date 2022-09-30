@@ -23,7 +23,7 @@ export const Welcome = () => (
             v{version}
           </IonText>
         </h1>
-        <p className="lead">Geovistory Design System is a collection components displaying semantic research data created by Geovistory projects.</p>
+        <p className="lead">Geovistory Design System is a collection of components displaying semantic research data created by Geovistory projects.</p>
         <h2>Philosophy</h2>
         <p>
           Geovistory Design System is{' '}

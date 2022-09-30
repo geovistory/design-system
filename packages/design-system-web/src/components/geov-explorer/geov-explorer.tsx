@@ -33,6 +33,17 @@ export class GeovExplorer {
    */
   @Prop() sparqlEndpoint: string;
 
+  /**
+   * If true, the component will not render before the
+   * initial data is fetched
+   */
+  @Prop() fetchBeforeRender = false;
+
+  /**
+   * initialize the component with a given search string
+   */
+  @Prop() initSearchString?: string;
+
   __data: GeovExplorerData;
   set data(d: GeovExplorerData) {
     this.entityList = d?.entityList;
@@ -77,15 +88,15 @@ export class GeovExplorer {
     return this._searchString;
   }
 
-  _selectedClass: GeovClassSelectItem;
-  set selectedClass(val: GeovClassSelectItem) {
-    this._selectedClass = val;
+  _selectedClasses: GeovClassSelectItem[];
+  set selectedClasses(val: GeovClassSelectItem[]) {
+    this._selectedClasses = val;
     this.offset = 0;
     this.fetchEntityListData();
     this.fetchFullCountData();
   }
-  get selectedClass() {
-    return this._selectedClass;
+  get selectedClasses() {
+    return this._selectedClasses;
   }
 
   /**
@@ -94,13 +105,15 @@ export class GeovExplorer {
    * awaits this promise for server side rendering. See:
    * https://stenciljs.com/docs/static-site-generation-basics
    */
-  async componentWillLoad() {
+  componentWillLoad() {
+    this._searchString = this.initSearchString;
+
     // try to get data from ssr
     this.data = getSSRData(this._ssrId);
     // if no data found, fetchData
     if (!this.data) {
       // fetch data via http
-      await this.fetchData() // <- await this promise!
+      const promise = this.fetchData()
         .then(d => {
           this.data = d;
           setSSRData(this._ssrId, d);
@@ -110,6 +123,7 @@ export class GeovExplorer {
           this.data = d;
           return d;
         });
+      if (this.fetchBeforeRender) return promise; // <- await this promise!
     }
   }
   constructor() {
@@ -121,10 +135,10 @@ export class GeovExplorer {
    * @returns a Promise with the data for this component
    */
   async fetchData(): Promise<GeovExplorerData> {
-    const classSelect = await this.fetchClassSelectData();
-    const firstClass = classSelect.items[0];
-    this.selectedClass = firstClass;
-    return Promise.all([this.fetchClassSelectData(), this.fetchEntityListData(), this.fetchFullCountData()]).then(([classSelect, entityList, fullCount]) => {
+    // const classSelect = ;
+    // const firstClass = classSelect.items[0];
+    // this._selectedClasses = [firstClass];
+    return Promise.all([await this.fetchClassSelectData(), this.fetchEntityListData(), this.fetchFullCountData()]).then(([classSelect, entityList, fullCount]) => {
       return { classSelect, entityList, fullCount, loading: false };
     });
   }
@@ -137,13 +151,13 @@ export class GeovExplorer {
 
   private async fetchEntityListData(): Promise<EntityListData> {
     this.entityList = { loading: true };
-    this.entityList = await fetchEntityList(this.sparqlEndpoint, this.searchString, this.selectedClass.classUri, this.selectedClass.classLabel, this.limit, this.offset);
+    this.entityList = await fetchEntityList(this.sparqlEndpoint, this.searchString, this.selectedClasses?.map(c => c.classUri) ?? [], this.limit, this.offset);
     return this.entityList;
   }
 
   private async fetchFullCountData(): Promise<EntityListData> {
     this.fullCount = { loading: true };
-    this.fullCount = await fetchFullCount(this.sparqlEndpoint, this.searchString, this.selectedClass.classUri);
+    this.fullCount = await fetchFullCount(this.sparqlEndpoint, this.searchString, this.selectedClasses?.map(c => c.classUri) ?? []);
     return this.fullCount;
   }
 
@@ -155,6 +169,7 @@ export class GeovExplorer {
             <ion-col sizeMd="0" sizeLg="6" sizeXl="3" class="entity-count-col ion-hide-lg-down"></ion-col>
             <ion-col sizeMd="12" sizeLg="6" sizeXl="9">
               <ion-searchbar
+                value={this.searchString}
                 debounce={300}
                 onIonChange={e => {
                   this.searchString = e.detail.value;
@@ -164,15 +179,15 @@ export class GeovExplorer {
               <geov-class-select-popup
                 class="ion-hide-lg-up"
                 onSelectionChanged={e => {
-                  this.selectedClass = e.detail.value;
+                  this.selectedClasses = e.detail.value ? [e.detail.value] : [];
                 }}
                 ref={el => {
-                  el.initValue = this.selectedClass;
+                  el.initValue = this.selectedClasses?.[0];
                   el.items = this.classSelect?.items;
                 }}
               ></geov-class-select-popup>
               <ion-note class="entity-count-sm entity-count-label">
-                {this.fullCount?.loading ? <ion-skeleton-text animated={true} style={{ width: '40px' }}></ion-skeleton-text> : <small>{this.fullCount?.count} Entities</small>}{' '}
+                {this.fullCount?.loading ? <ion-skeleton-text animated={true} style={{ width: '40px' }}></ion-skeleton-text> : <span>{this.fullCount?.count} Entities</span>}{' '}
               </ion-note>
 
               {/* <ion-item>
@@ -189,10 +204,10 @@ export class GeovExplorer {
             <ion-col sizeMd="0" sizeLg="6" sizeXl="3" class="ion-hide-lg-down">
               <geov-class-radio-group
                 onSelectionChanged={e => {
-                  this.selectedClass = e.detail.value;
+                  this.selectedClasses = e.detail.value ? [e.detail.value] : [];
                 }}
                 ref={el => {
-                  el.initValue = this.selectedClass;
+                  el.initValue = this.selectedClasses?.[0];
                   el.items = this.classSelect?.items;
                   el.loading = this.classSelect?.loading;
                 }}
@@ -213,14 +228,15 @@ export class GeovExplorer {
                 }}
               ></geov-entity-list>
               <ion-item class="paginator-container" lines="none">
-                {this.fullCount.count && !this.fullCount.loading && (
+                {this.fullCount?.count && !this.fullCount?.loading && (
                   <geov-paginator
                     class="paginator"
                     onPageChanged={e => {
+                      console.log('onPageChanged');
                       this.offset = e.detail.pageSize * e.detail.pageIndex;
                     }}
                     pageSize={this.limit}
-                    length={this.fullCount.count}
+                    length={this.fullCount?.count}
                   ></geov-paginator>
                 )}
               </ion-item>
