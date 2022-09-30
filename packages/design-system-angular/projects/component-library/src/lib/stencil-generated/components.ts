@@ -28,12 +28,12 @@ export class GeovCarousel {
   }
 }
 
-
+import type { GeovClassRadioGroupEvent as IGeovClassRadioGroupGeovClassRadioGroupEvent } from '@geovistory/design-system-web';
 export declare interface GeovClassRadioGroup extends Components.GeovClassRadioGroup {
   /**
    *  
    */
-  selectionChanged: EventEmitter<CustomEvent<GeovClassRadioGroupEvent>>;
+  selectionChanged: EventEmitter<CustomEvent<IGeovClassRadioGroupGeovClassRadioGroupEvent>>;
 
 }
 
@@ -56,12 +56,12 @@ export class GeovClassRadioGroup {
   }
 }
 
-
+import type { ClassSelectEvent as IGeovClassSelectClassSelectEvent } from '@geovistory/design-system-web';
 export declare interface GeovClassSelect extends Components.GeovClassSelect {
   /**
    *  
    */
-  selectionChanged: EventEmitter<CustomEvent<ClassSelectEvent>>;
+  selectionChanged: EventEmitter<CustomEvent<IGeovClassSelectClassSelectEvent>>;
 
 }
 
@@ -84,12 +84,12 @@ export class GeovClassSelect {
   }
 }
 
-
+import type { GeovClassSelectPopupEvent as IGeovClassSelectPopupGeovClassSelectPopupEvent } from '@geovistory/design-system-web';
 export declare interface GeovClassSelectPopup extends Components.GeovClassSelectPopup {
   /**
    *  
    */
-  selectionChanged: EventEmitter<CustomEvent<GeovClassSelectPopupEvent>>;
+  selectionChanged: EventEmitter<CustomEvent<IGeovClassSelectPopupGeovClassSelectPopupEvent>>;
 
 }
 
