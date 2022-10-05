@@ -8,7 +8,7 @@ export const step1 = `# Make sure you are in 'packages/design-system-web' and ru
 npm run generate
 
 # Enter a tag name, by convention prefixed with 'geov-'.
-✔ Component tag name (dash-case): … geov-entity-class-label
+✔ Component tag name (dash-case): … geov-check-entity-class-label
 
 # You'll be asked which additional files to generate.
 # This depends on your needs. For a simple component,
@@ -22,28 +22,28 @@ npm run generate
 
 export const componentfiles = `src
  |- components
-    |- geov-entity-class-label
-        |- geov-entity-class-label.css
-        |- geov-entity-class-label.tsx
+    |- geov-check-entity-class-label
+        |- geov-check-entity-class-label.css
+        |- geov-check-entity-class-label.tsx
         |- readme.md
 `;
 
-export const story = `// geov-entity-class-label.stories.tsx
+export const story = `// geov-check-entity-class-label.stories.tsx
 
 import React from 'react';
 import { JSX } from '../..';
-import { GeovEntityClassLabel } from '../../../.storybook/stencil-generated/component';
+import { GeovCheckEntityClassLabel } from '../../../.storybook/stencil-generated/component';
 
 export default {
-  title: 'Basic Components/EntityClassLabel',
-  component: GeovEntityClassLabel,
+  title: 'Basic Components/CheckEntityClassLabel',
+  component: GeovCheckEntityClassLabel,
 };
-const Template = (args: JSX.GeovEntityClassLabel) => <GeovEntityClassLabel {...args}></GeovEntityClassLabel>;
+const Template = (args: JSX.GeovCheckEntityClassLabel) => <GeovCheckEntityClassLabel {...args}></GeovCheckEntityClassLabel>;
 
-export const EntityClassLabel = Template.bind({});
-const args: JSX.GeovEntityClassLabel = {
+export const CheckEntityClassLabel = Template.bind({});
+const args: JSX.GeovCheckEntityClassLabel = {
 };
-EntityClassLabel.args = args;`;
+CheckEntityClassLabel.args = args;`;
 
 export const helloworld = `...
 render() {
@@ -88,11 +88,11 @@ export const r1 = `{
 export const c1 = `import { Component, Host, h, State } from '@stencil/core';
 
 @Component({
-  tag: 'geov-entity-class-label',
-  styleUrl: 'geov-entity-class-label.css',
+  tag: 'geov-check-entity-class-label',
+  styleUrl: 'geov-check-entity-class-label.css',
   shadow: true,
 })
-export class GeovEntityClassLabel {
+export class GeovCheckEntityClassLabel {
 
   @State() label: string = 'initializing...';
 
@@ -120,7 +120,7 @@ import { sparqlJson, SparqlBinding } from '../../lib/sparqlJson';
 import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
-import { GeovEntityLabelData } from '../geov-entity-label/geov-entity-label';
+import { GeovCheckEntityLabelData } from '../geov-check-entity-label/geov-check-entity-label';
 
 const qrLabel = (id: string) => \`
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -134,17 +134,17 @@ WHERE {
 LIMIT 1
 \`;
 
-export interface GeovClassLabelData extends FetchResponse {
+export interface GeovCheckClassLabelData extends FetchResponse {
   label?: string;
   error?: boolean;
 }
 
 @Component({
-  tag: 'geov-entity-class-label',
-  styleUrl: 'geov-entity-class-label.css',
+  tag: 'geov-check-entity-class-label',
+  styleUrl: 'geov-check-entity-class-label.css',
   shadow: true,
 })
-export class GeovEntityClassLabel {
+export class GeovCheckEntityClassLabel {
   @Prop({ reflect: true }) _ssrId?: string;
   /**
    * sparqlEndpoint
@@ -160,7 +160,7 @@ export class GeovEntityClassLabel {
   /**
    * the data (or model) used in the view
    */
-  @State() data?: GeovClassLabelData;
+  @State() data?: GeovCheckClassLabelData;
 
   constructor() {
     setSSRId(this);
@@ -192,7 +192,7 @@ export class GeovEntityClassLabel {
    * Do the sparql request(s)
    * @returns a Promise with the data for this component
    */
-  async fetchData(): Promise<GeovEntityLabelData> {
+  async fetchData(): Promise<GeovCheckEntityLabelData> {
     return sparqlJson<{ classLabel: SparqlBinding<string> }>(this.sparqlEndpoint, qrLabel(this.entityId))
       .then(res => {
         return {
@@ -229,7 +229,7 @@ export const s1 =
 
 ...
 
-const args: JSX.GeovEntityClassLabel = {
+const args: JSX.GeovCheckEntityClassLabel = {
   entityId:"i315803",
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT
 };
