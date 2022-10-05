@@ -120,7 +120,7 @@ import { sparqlJson, SparqlBinding } from '../../lib/sparqlJson';
 import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
-import { GeovEntityClassLabel } from '../../../.storybook/stencil-generated/component';
+import { GeovHelloWorld } from '../../../.storybook/stencil-generated/component';
 
 const qrLabel = (id: string) => \`
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
