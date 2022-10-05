@@ -120,7 +120,7 @@ import { sparqlJson, SparqlBinding } from '../../lib/sparqlJson';
 import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
-import { GeovHelloWorld } from '../../../.storybook/stencil-generated/component';
+import { GeovEntityLabelData } from '../geov-entity-label/geov-entity-label';
 
 const qrLabel = (id: string) => \`
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -192,7 +192,7 @@ export class GeovHelloWorld {
    * Do the sparql request(s)
    * @returns a Promise with the data for this component
    */
-  async fetchData(): Promise<GeovHelloWorldData> {
+  async fetchData(): Promise<GeovEntityLabelData> {
     return sparqlJson<{ classLabel: SparqlBinding<string> }>(this.sparqlEndpoint, qrLabel(this.entityId))
       .then(res => {
         return {
