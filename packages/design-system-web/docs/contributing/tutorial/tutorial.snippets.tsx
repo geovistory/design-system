@@ -8,7 +8,7 @@ export const step1 = `# Make sure you are in 'packages/design-system-web' and ru
 npm run generate
 
 # Enter a tag name, by convention prefixed with 'geov-'.
-✔ Component tag name (dash-case): … geov-entity-class-label
+✔ Component tag name (dash-case): … geov-hello-world
 
 # You'll be asked which additional files to generate.
 # This depends on your needs. For a simple component,
@@ -22,28 +22,28 @@ npm run generate
 
 export const componentfiles = `src
  |- components
-    |- geov-entity-class-label
-        |- geov-entity-class-label.css
-        |- geov-entity-class-label.tsx
+    |- geov-hello-world
+        |- geov-hello-world.css
+        |- geov-hello-world.tsx
         |- readme.md
 `;
 
-export const story = `// geov-entity-class-label.stories.tsx
+export const story = `// geov-hello-world.stories.tsx
 
 import React from 'react';
 import { JSX } from '../..';
-import { GeovEntityClassLabel } from '../../../.storybook/stencil-generated/component';
+import { GeovHelloWorld } from '../../../.storybook/stencil-generated/component';
 
 export default {
-  title: 'Basic Components/EntityClassLabel',
-  component: GeovEntityClassLabel,
+  title: 'Basic Components/HelloWorld',
+  component: GeovHelloWorld,
 };
-const Template = (args: JSX.GeovEntityClassLabel) => <GeovEntityClassLabel {...args}></GeovEntityClassLabel>;
+const Template = (args: JSX.GeovHelloWorld) => <GeovHelloWorld {...args}></GeovHelloWorld>;
 
-export const EntityClassLabel = Template.bind({});
-const args: JSX.GeovEntityClassLabel = {
+export const HelloWorld = Template.bind({});
+const args: JSX.GeovHelloWorld = {
 };
-EntityClassLabel.args = args;`;
+HelloWorld.args = args;`;
 
 export const helloworld = `...
 render() {
@@ -88,11 +88,11 @@ export const r1 = `{
 export const c1 = `import { Component, Host, h, State } from '@stencil/core';
 
 @Component({
-  tag: 'geov-entity-class-label',
-  styleUrl: 'geov-entity-class-label.css',
+  tag: 'geov-hello-world',
+  styleUrl: 'geov-hello-world.css',
   shadow: true,
 })
-export class GeovEntityClassLabel {
+export class GeovHelloWorld {
 
   @State() label: string = 'initializing...';
 
@@ -134,17 +134,17 @@ WHERE {
 LIMIT 1
 \`;
 
-export interface GeovClassLabelData extends FetchResponse {
+export interface GeovHelloWorldData extends FetchResponse {
   label?: string;
   error?: boolean;
 }
 
 @Component({
-  tag: 'geov-entity-class-label',
-  styleUrl: 'geov-entity-class-label.css',
+  tag: 'geov-hello-world',
+  styleUrl: 'geov-hello-world.css',
   shadow: true,
 })
-export class GeovEntityClassLabel {
+export class GeovHelloWorld {
   @Prop({ reflect: true }) _ssrId?: string;
   /**
    * sparqlEndpoint
@@ -160,7 +160,7 @@ export class GeovEntityClassLabel {
   /**
    * the data (or model) used in the view
    */
-  @State() data?: GeovClassLabelData;
+  @State() data?: GeovHelloWorldData;
 
   constructor() {
     setSSRId(this);
@@ -229,7 +229,7 @@ export const s1 =
 
 ...
 
-const args: JSX.GeovEntityClassLabel = {
+const args: JSX.GeovHelloWorld = {
   entityId:"i315803",
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT
 };
