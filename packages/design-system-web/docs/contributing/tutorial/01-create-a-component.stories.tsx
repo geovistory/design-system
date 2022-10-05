@@ -55,7 +55,7 @@ export const CreateComponent = () => (
         </p>{' '}
         <h4>Add Hello World</h4>
         <p>
-          Open the file <code>geov-check-entity-class-label.tsx</code> and modify its render function:
+          Open the file <code>geov-hello-world.tsx</code> and modify its render function:
         </p>
         <p>
           <GeovCode language="typescript" code={helloworld}></GeovCode>
@@ -67,7 +67,7 @@ export const CreateComponent = () => (
         </p>
         <h4>Verification</h4>
         <p>
-          If you see your component in the storybook at <code>Basic Components / Check Entity Class Label</code> you're good to go! Congrats.
+          If you see your component in the storybook at <code>Basic Components / Hello World</code> you're good to go! Congrats.
         </p>
         <p>
           <IonButton href="/?path=/story/contributing-tutorial-data-fetching--data-fetching" lines="full">
