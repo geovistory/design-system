@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+
+.toc {
+  display: none;
+}
+
+/* lg and up */
+@media screen and (min-width: 1200px) {
+  .toc {
+    display: inline;
+    position: fixed;
+    max-width: 300px;
+    right: 2rem
+  }
+}

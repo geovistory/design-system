@@ -159,4 +159,10 @@
   /** Swiper colors */
   --swiper-theme-color: var(--ion-color-primary);
 
+  --gv-color-background-code: #f5f2f0
+
+}
+
+geov-code {
+  --background-color: var(--gv-color-background-code)
 }
