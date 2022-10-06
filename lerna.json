@@ -1,5 +1,5 @@
 {
-  "version": "1.4.2",
+  "version": "1.4.3-pr-26.1",
   "command": {
     "version": {
       "message": "chore(release): %s",

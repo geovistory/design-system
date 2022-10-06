@@ -85,36 +85,9 @@ export const r1 = `{
   }
 }`;
 
-export const c1 = `import { Component, Host, h, State } from '@stencil/core';
 
-@Component({
-  tag: 'geov-hello-world',
-  styleUrl: 'geov-hello-world.css',
-  shadow: true,
-})
-export class GeovHelloWorld {
 
-  @State() label: string = 'initializing...';
-
-  async componentWillLoad() {
-    this.label = await new Promise(resolve => {
-      setTimeout(() => {
-        resolve('This label was loaded async');
-      }, 2000);
-    });
-  }
-
-  render() {
-    return (
-      <Host>
-        {this.label}
-      </Host>
-    );
-  }
-}`;
-
-export const c2 =
-`import { Component, Host, h, State, Prop } from '@stencil/core';
+export const c2 = `import { Component, Host, h, State, Prop } from '@stencil/core';
 import { FetchResponse } from '../../lib/FetchResponse';
 import { sparqlJson, SparqlBinding } from '../../lib/sparqlJson';
 import { getSSRData } from '../../lib/ssr/getSSRData';
@@ -222,10 +195,9 @@ export class GeovHelloWorld {
     );
   }
 }
-`
+`;
 
-export const s1 =
-`import { DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
+export const s1 = `import { DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
 
 ...
 
@@ -235,4 +207,75 @@ const args: JSX.GeovHelloWorld = {
 };
 
 ...
+`;
+
+export const c0 = `...
+export class GeovHelloWorld {
+
+  label: string;
+
+  componentWillLoad() {
+    setTimeout(() => {this.label = 'loaded async'}, 2000);
+  }
+  render() {
+    return (
+      <Host>
+        {this.label}
+      </Host>
+    );
+  }
+}
+`;
+
+export const c3 = `@State() label: string;`;
+
+export const c1 = `import { Component, Host, h, State } from '@stencil/core'; // <- import State
+  ...
+  @State() label: string; // <- add decorator
+  ...
+}`;
+
+export const c5 = `
+function sparqlJson<T>(url: string, query: string): Promise<SparqlRes<T>>
 `
+
+
+export const c6 = `
+...
+const qrLabel = (id: string) => \`
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX geov: <http://geovistory.org/resource/>
+
+SELECT ?classLabel
+WHERE {
+  geov:\${id} rdf:type/rdfs:label ?classLabel
+}
+LIMIT 1
+\`;
+...
+@Component({
+`
+
+
+export const c7 = `
+export class GeovHelloWorld {
+
+  @State() label: string;
+
+  sparqlEndpoint = 'https://sparql.geovistory.org/api_v1_community_data';
+
+  entityId = 'i315803';
+
+  componentWillLoad() {
+    sparqlJson<{ classLabel: SparqlBinding<string> }>(this.sparqlEndpoint, qrLabel(this.entityId))
+      .then(res => {
+        this.label = res?.results?.bindings?.[0]?.classLabel?.value
+      })
+  }
+ ...
+`;
+
+export const c8 = `.then(res => {
+  this.label = res?.results?.bindings?.[0]?.classLabel?.value
+})`
