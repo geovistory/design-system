@@ -229,6 +229,9 @@ export namespace Components {
         "pageSize": number;
         "showFirstLastButtons": boolean;
     }
+    interface GeovToc {
+        "indentPx": number;
+    }
 }
 export interface GeovClassRadioGroupCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -319,6 +322,12 @@ declare global {
         prototype: HTMLGeovPaginatorElement;
         new (): HTMLGeovPaginatorElement;
     };
+    interface HTMLGeovTocElement extends Components.GeovToc, HTMLStencilElement {
+    }
+    var HTMLGeovTocElement: {
+        prototype: HTMLGeovTocElement;
+        new (): HTMLGeovTocElement;
+    };
     interface HTMLElementTagNameMap {
         "geov-carousel": HTMLGeovCarouselElement;
         "geov-class-radio-group": HTMLGeovClassRadioGroupElement;
@@ -332,6 +341,7 @@ declare global {
         "geov-entity-list": HTMLGeovEntityListElement;
         "geov-explorer": HTMLGeovExplorerElement;
         "geov-paginator": HTMLGeovPaginatorElement;
+        "geov-toc": HTMLGeovTocElement;
     }
 }
 
@@ -540,6 +550,9 @@ declare namespace LocalJSX {
         "pageSize"?: number;
         "showFirstLastButtons"?: boolean;
     }
+    interface GeovToc {
+        "indentPx"?: number;
+    }
     interface IntrinsicElements {
         "geov-carousel": GeovCarousel;
         "geov-class-radio-group": GeovClassRadioGroup;
@@ -553,6 +566,7 @@ declare namespace LocalJSX {
         "geov-entity-list": GeovEntityList;
         "geov-explorer": GeovExplorer;
         "geov-paginator": GeovPaginator;
+        "geov-toc": GeovToc;
     }
 }
 export { LocalJSX as JSX };
@@ -666,6 +680,7 @@ declare module "@stencil/core" {
             "geov-entity-list": LocalJSX.GeovEntityList & JSXBase.HTMLAttributes<HTMLGeovEntityListElement>;
             "geov-explorer": LocalJSX.GeovExplorer & JSXBase.HTMLAttributes<HTMLGeovExplorerElement>;
             "geov-paginator": LocalJSX.GeovPaginator & JSXBase.HTMLAttributes<HTMLGeovPaginatorElement>;
+            "geov-toc": LocalJSX.GeovToc & JSXBase.HTMLAttributes<HTMLGeovTocElement>;
         }
     }
 }

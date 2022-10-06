@@ -290,6 +290,27 @@ export class GeovPaginator {
 }
 
 
+export declare interface GeovToc extends Components.GeovToc {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['indentPx']
+})
+@Component({
+  selector: 'geov-toc',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['indentPx']
+})
+export class GeovToc {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
 export declare interface IonAccordion extends Components.IonAccordion {}
 
 @ProxyCmp({
