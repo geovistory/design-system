@@ -103,7 +103,7 @@ export const DataFetching = () => (
             </ul>
           </p>
           <p>
-            If you safe and reload storybook one could expect the component to render the string <code>loaded async</code>. But no! Wyh?
+            If you safe and reload storybook one could expect the component to render the string <code>loaded async</code>. But no! Why?
           </p>
           <h4 id="state-decorator">@State() Decorator</h4>
           <p>

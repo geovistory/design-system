@@ -214,10 +214,8 @@ export class GeovHelloWorld {
 
   label: string;
 
-  async componentWillLoad() {
-    this.label = await new Promise(resolve => {
-      setTimeout(() => { resolve('loaded async') }, 2000);
-    });
+  componentWillLoad() {
+    setTimeout(() => {this.label = 'loaded async'}, 2000);
   }
   render() {
     return (
@@ -237,12 +235,12 @@ export const c1 = `import { Component, Host, h, State } from '@stencil/core'; //
   ...
 }`;
 
-export const c5=`
+export const c5 = `
 function sparqlJson<T>(url: string, query: string): Promise<SparqlRes<T>>
 `
 
 
-export const c6=`
+export const c6 = `
 ...
 const qrLabel = (id: string) => \`
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -263,21 +261,21 @@ LIMIT 1
 export const c7 = `
 export class GeovHelloWorld {
 
-  label: string;
+  @State() label: string;
 
   sparqlEndpoint = 'https://sparql.geovistory.org/api_v1_community_data';
 
   entityId = 'i315803';
 
-  async componentWillLoad() {
-    this.label = await sparqlJson<{ classLabel: SparqlBinding<string> }>(this.sparqlEndpoint, qrLabel(this.entityId))
+  componentWillLoad() {
+    sparqlJson<{ classLabel: SparqlBinding<string> }>(this.sparqlEndpoint, qrLabel(this.entityId))
       .then(res => {
-        return res?.results?.bindings?.[0]?.classLabel?.value
+        this.label = res?.results?.bindings?.[0]?.classLabel?.value
       })
   }
  ...
 `;
 
-export const c8 =`.then(res => {
-  return res?.results?.bindings?.[0]?.classLabel?.value
+export const c8 = `.then(res => {
+  this.label = res?.results?.bindings?.[0]?.classLabel?.value
 })`
