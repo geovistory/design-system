@@ -2,7 +2,7 @@ import React from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { GeovCode, GeovToc, IonApp, IonButton, IonContent, IonGrid, IonIcon } from '../../../.storybook/stencil-generated/component';
 
-import { c0, c1, c2, c5, c6, c7, c8, q1, r1, s1 } from './tutorial.snippets';
+import { c0, c1, c5, c6, c7, c8, q1, r1 } from './tutorial.snippets';
 export default {
   title: 'Contributing/Tutorial/Data Fetching',
   parameters: {
@@ -169,8 +169,8 @@ export const DataFetching = () => (
             If you see your component in the storybook printing <code>Person</code> you're good to go! Congrats.
           </p>
           <p>
-            <IonButton>
-              Next: coming soon...
+            <IonButton href="/?path=/story/contributing-tutorial-component-props--component-props">
+              Next: Component Props
             </IonButton>
           </p>
           {/* <h2>@Prop() Decorator</h2>
