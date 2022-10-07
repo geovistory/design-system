@@ -118,3 +118,99 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 
 export default Home;
 `
+
+export const s04_6=`...
+import { getSSRData } from '../../lib/ssr/getSSRData';
+import { setSSRData } from '../../lib/ssr/setSSRData';
+import { setSSRId } from '../../lib/ssr/setSSRId';
+...
+
+export class GeovEntityClassLabel {
+  @Prop({ reflect: true }) _ssrId?: string;         // <- declares an _ssrId property that is reflected as attribute
+
+  @State() data?: GeovClassLabelData;               // <- declares data as state
+
+  constructor() {
+    setSSRId(this);                                 // <- assigns an id to the component
+  }
+
+  async componentWillLoad() {
+
+    this.data = getSSRData(this._ssrId);            // <- try to get data from ssr
+
+    if (!this.data) {                               // <- if no data found...
+      ...
+      await this.fetchData()                        // <- fetchData on client side
+        .then(d => {
+          this.data = d;
+          setSSRData(this._ssrId, d);
+          return d;
+        })
+        .catch(d => {
+          this.data = d;
+          return d;
+        });
+    }
+  }
+ ...
+}
+`
+
+export const s04_7=`export const setSSRId = (component: { _ssrId?: string }) => {
+  // @ts-ignore
+  if (document?.__STENCIL_DATA__ && !component._ssrId) {
+    component._ssrId = generateUID();
+  }
+};`
+
+
+export const s04_8=`export function getSSRData(key: string): any {
+  if (key) {
+    // @ts-ignore
+    return window?.__NEXT_DATA__?.props?.pageProps?._ssrData?.[key];
+  }
+}`
+
+export const s04_9=`export function setSSRData(key: string, val: any) {
+  // @ts-ignore
+  if (typeof document?.__STENCIL_DATA__ === 'object') document.__STENCIL_DATA__[key] = val;
+}`
+
+
+export const s04_10=`export async function serverRender(
+ ...
+  const stencilHydrateOutput = await renderToString(html, {
+    removeHtmlComments: true,
+    beforeHydrate: (doc) => {
+      doc.__STENCIL_DATA__ = {};                  // <- Make document.__STENCIL_DATA__ an object
+    },
+    afterHydrate: (doc) => {
+      serverFetchedData = doc.__STENCIL_DATA__;   // <- document.__STENCIL_DATA__ contains fetched data
+    },
+  });
+
+  return { bodyInnerHtml: bodyInnerHtml, headInnerHtml, serverFetchedData }; // <- return fetched data
+}`
+
+
+export const s04_11=`...
+interface HomeProps {
+  _ssrHtmlBody: string;
+  _ssrHtmlHead: string;
+  _ssrData: { [key: string]: any };         <- add this line
+}
+...
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const res = await serverRender(ssr());
+
+  return {
+    props: {
+      _ssrHtmlBody: res.bodyInnerHtml,
+      _ssrHtmlHead: res.headInnerHtml,
+      _ssrData: res.serverFetchedData        <- add this line
+    },
+    revalidate: 10,
+  };
+};
+...
+`

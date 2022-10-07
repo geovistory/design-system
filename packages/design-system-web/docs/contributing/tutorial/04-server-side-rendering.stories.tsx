@@ -1,8 +1,9 @@
 import React from 'react';
 import { GeovCode, GeovToc, IonApp, IonButton, IonContent, IonGrid } from '../../../.storybook/stencil-generated/component';
-import { s04_1, s04_2, s04_3, s04_4, s04_5 } from './04.snippets';
+import { s04_1, s04_10, s04_2, s04_3, s04_4, s04_5, s04_6, s04_7, s04_8, s04_9 } from './04.snippets';
 import network1 from './04-network-1.jpg';
 import disableJs from './04-disable-js.png';
+import verification from './04-verification.png';
 
 export default {
   title: 'Contributing/Tutorial/Server Side Rendering',
@@ -37,8 +38,8 @@ export const ServerSideRendering = () => (
               <li>Have a small next.js application doing SSR and hydration</li>
             </ul>
           </p>
-          <h2 id="stencil-hydrate">Introduction</h2>
-          <h3>Client Side Rendering problems</h3>
+          <h2 id="introduction">Introduction</h2>
+          <h3 id="csr-problems">Client Side Rendering problems</h3>
           <p>
             Web pages can be much more then static html pages. Frameworks like Angular, React and Vue allow the creation of single page apps, that are fully client side rendered
             (CSR). This approach allows to create app-like web pages with inteactive user interfaces.
@@ -50,17 +51,17 @@ export const ServerSideRendering = () => (
               <li>Performance: Initial page loads may be slow (load html, load js, render) </li>
             </ul>
           </p>
-          <h3>What is SSR?</h3>
+          <h3 id="what-is-ssr">What is SSR?</h3>
           <p>
             Server Side Rendering (SSR) is the process of rendering content to a client based on an HTTP request. A client makes a request and the server processes it, returning
             rendered HTML back to the client. This way, the requesting users and search engines have the content immediately present.
           </p>
-          <h3>What is hyration?</h3>
+          <h3 id="what-is-hydration">What is hyration?</h3>
           <p>
             Hydration is a process running on the client: The client takes the SSR HTML and bootstraps the client-side JS app, basically by adding event listeners to the existing
             DOM elements.
           </p>
-          <h3>Summary</h3>
+          <h3 id="intro-summary">Summary</h3>
           <p>
             SSR and hydration combine the best of both worlds:
             <ul>
@@ -89,7 +90,7 @@ export const ServerSideRendering = () => (
             In the following steps we'll create a next.js app and setup SSR and hydration and learn what we can do in the web components to make this process even better than
             usual.
           </p>
-          <h3>Create a next.js app</h3>
+          <h3 id="create-next-app">Create a next.js app</h3>
           <p>In your terminal run:</p>
           <p>
             <GeovCode language="bash" code="npx create-next-app@latest --typescript"></GeovCode>
@@ -157,14 +158,14 @@ export const ServerSideRendering = () => (
               <li>The class label (Person) was not fetched</li>
             </ul>{' '}
           </p>
-          <h3 id="stencil-hydrate">Add server side data fetching</h3>
+          <h3 id="add-ssr-data-fetching">Add server side data fetching</h3>
           <p>In our example the amount of text loaded by the web component is minimal. We could live with the current situation.</p>
           <p>
             If we loaded much more content via web components, the loading performance and the SEO performance would suffer significantly. Let's therefore enable component level
             data fetching on the server using stencil hydrate.
           </p>
 
-          <h4>Add a serverRender method</h4>
+          <h4 id="add-server-render-fn">Add serverRender()</h4>
           <p>
             What need a method that can interpret the web components, wait for them to fetch data and render it to html, before sending it to the client. That's where stencil
             hydrate comes in.
@@ -204,19 +205,99 @@ export const ServerSideRendering = () => (
           </p>
           <p>If you now reload your page, without Java Script in the browser, you'll see that the class Label (Person) was fetched and rendered on the server.</p>
           <p>Great!</p>
-          <h3 id="stencil-hydrate">Hydrate SSR fetched data</h3>
-          <p>Let's now look at the hydration</p>
+          <h3 id="hydrate-ssr-fetched-data">Hydrate SSR fetched data</h3>
+          <p>But perfect? No!</p>
+          <p>
+            The component <code>geov-entity-class-label</code> fetches the code on the server – and then again on the client. This is not only a waste of resources, it may also
+            cause unwanted effects, if the component renders child components based on the fetched data, which fetch data themselves.{' '}
+          </p>
+          <p>
+            So we need a way to extract the data from server side rendering and inject them to component on the client, so that the component does not have to refetch a second
+            time.{' '}
+          </p>
+          <p>
+            For the Geovistory.org website and the Geovistory web components we defined a custom strategy to pass data from server to client components. This strategy is lightwight
+            and does by no means hinder the usage of Geovistory web components without server side rendering.
+          </p>
+          <h4 id="component-side">Component side</h4>
+          <p>
+            A data fetching component therefore implements three specific functions, available in <code>lib/ssr/</code>
+            <ul>
+              <li>setSSRId</li>
+              <li>setSSRData</li>
+              <li>getSSRData</li>
+            </ul>
+          </p>
+          <p>
+            Lets look at the relevant parts of the implementation of <code>geov-entity-class-label</code> (find the{' '}
+            <a
+              href="https://github.com/geovistory/design-system/blob/8a62d1193fde514e33795280264ed7e620c81751/packages/design-system-web/src/components/geov-entity-class-label/geov-entity-class-label.tsx"
+              target={'_blank'}
+            >
+              components code on GitHub
+            </a>
+            ):
+          </p>
+          <p>
+            <GeovCode language="typescript" code={s04_6}></GeovCode>
+          </p>
+          <p>
+            On constructing the component, we set the _ssrId by calling <code> setSSRId(this)</code>
+          </p>
+          <p>
+            <GeovCode language="typescript" code={s04_7}></GeovCode>
+          </p>
+          <p>
+            <code>setSSRId()</code> generates and assigns an _ssrId to the component, if document?.__STENCIL_DATA__ is not falsy and the component does not yet have an _ssrId. This
+            way we can make sure the _ssrId is set on server side and not overriden by the client.
+          </p>
+          <p>
+            In <code>componentWillLoad()</code> we try to get data provided by server side rendering by calling <code>getSSRData(this._ssrId); </code>
+          </p>
+          <p>
+            <GeovCode language="typescript" code={s04_8}></GeovCode>
+          </p>
+          <p>
+            <code>getSSRData()</code> looks at a specific object on window.__NEXT_DATA__...[_ssrId].
+          </p>
+          <p>
+            If this object is set by the server, it will be used by the component on the client and prevent an extra data fetching. (We'll see in a minute how to do this with
+            Nextjs).{' '}
+          </p>
+          <p>
+            If this object is not set (probably because we are on the server), the data will be fetched and then passed to <code>setSSRData()</code>
+          </p>
+          <p>
+            <GeovCode language="typescript" code={s04_9}></GeovCode>
+          </p>
+          <p>
+            <code>setSSRData()</code> takes the ssrId as key and the fetched data as value and assigns it to <code>document.__STENCIL_DATA__[key]</code>
+          </p>
+          <h4 id="nextjs-side">Next.js Side</h4>
+          <p>
+            Let's look at the part on Nextjs and implement the missing parts. In <code>serverRender()</code>:
+          </p>
+          <p>
+            <GeovCode language="typescript" code={s04_9}></GeovCode>
+          </p>
+          <p>Before stencil does the server side data we prepare __STENCIL_DATA__. Afterwards we extract that data and return it to the function caller.</p>
+          <p>
+            To make use of this, modify <code>pages/index.tsx</code> so:
+          </p>
+          <p>
+            <GeovCode language="typescript" code={s04_10}></GeovCode>
+          </p>
+          <p>Reload the page and watch the Network. The component did not fetch the data on the client side.</p>
+          <p>Perfect!</p>
           <h2 id="verification">Verification</h2>
-          <p>If you understood, you're good to go! Congrats.</p>
+
+          <p>
+            <img src={verification} alt="dev-tools-network" />
+          </p>
+          <p>If you see the ionic card printing Person and in the network no request to the sparql.geovistory.org, you're good to go! Congrats.</p>
           <p>
             <IonButton>Next: coming soon...</IonButton>
           </p>
-          {/* <h2>@Prop() Decorator</h2>
-          <h2>Error and Loading</h2>
-          <h2>Story</h2>
-          <p>
-            <GeovCode language="typescript" code={s1}></GeovCode>
-          </p> */}
         </GeovToc>
       </IonGrid>
     </IonContent>
