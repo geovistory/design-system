@@ -1,7 +1,7 @@
 {
   "name": "@geovistory/design-system-react",
   "sideEffects": false,
-  "version": "1.4.3",
+  "version": "1.4.4-pr-27.0",
   "description": "geovistory.org's design system: React components",
   "repository": {
     "type": "git",
@@ -44,7 +44,7 @@
     "typescript": "^3.3.4000"
   },
   "dependencies": {
-    "@geovistory/design-system-web": "1.4.3",
+    "@geovistory/design-system-web": "1.4.4-pr-27.0",
     "@ionic/core": "6.0.14"
   },
   "peerDependencies": {
