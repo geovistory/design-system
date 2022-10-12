@@ -1,6 +1,6 @@
 import React from 'react';
 import { GeovCode, GeovToc, IonApp, IonButton, IonContent, IonGrid } from '../../../.storybook/stencil-generated/component';
-import { s04_1, s04_10, s04_2, s04_3, s04_4, s04_5, s04_6, s04_7, s04_8, s04_9 } from './04.snippets';
+import { s04_1, s04_10, s04_11, s04_2, s04_3, s04_4, s04_5, s04_6, s04_7, s04_8, s04_9 } from './04.snippets';
 import network1 from './04-network-1.jpg';
 import disableJs from './04-disable-js.png';
 import verification from './04-verification.png';
@@ -56,7 +56,7 @@ export const ServerSideRendering = () => (
             Server Side Rendering (SSR) is the process of rendering content to a client based on an HTTP request. A client makes a request and the server processes it, returning
             rendered HTML back to the client. This way, the requesting users and search engines have the content immediately present.
           </p>
-          <h3 id="what-is-hydration">What is hyration?</h3>
+          <h3 id="what-is-hydration">What is hydration?</h3>
           <p>
             Hydration is a process running on the client: The client takes the SSR HTML and bootstraps the client-side JS app, basically by adding event listeners to the existing
             DOM elements.
@@ -171,7 +171,7 @@ export const ServerSideRendering = () => (
             hydrate comes in.
           </p>
           <p>
-            Create a file <code>lib/serverRender</code> and paste this content:
+            Create a file <code>lib/serverRender.tsx</code> and paste this content:
           </p>
           <p>
             <GeovCode language="typescript" code={s04_4}></GeovCode>
@@ -198,7 +198,7 @@ export const ServerSideRendering = () => (
           </p>
 
           <p>
-            Let's modify <code>pages/index.ts as follows:</code>
+            Let's modify <code>pages/index.tsx</code> as follows:
           </p>
           <p>
             <GeovCode language="typescript" code={s04_5}></GeovCode>
@@ -278,14 +278,14 @@ export const ServerSideRendering = () => (
             Let's look at the part on Nextjs and implement the missing parts. In <code>serverRender()</code>:
           </p>
           <p>
-            <GeovCode language="typescript" code={s04_9}></GeovCode>
+            <GeovCode language="typescript" code={s04_10}></GeovCode>
           </p>
           <p>Before stencil does the server side data we prepare __STENCIL_DATA__. Afterwards we extract that data and return it to the function caller.</p>
           <p>
             To make use of this, modify <code>pages/index.tsx</code> so:
           </p>
           <p>
-            <GeovCode language="typescript" code={s04_10}></GeovCode>
+            <GeovCode language="typescript" code={s04_11}></GeovCode>
           </p>
           <p>Reload the page and watch the Network. The component did not fetch the data on the client side.</p>
           <p>Perfect!</p>
@@ -295,6 +295,7 @@ export const ServerSideRendering = () => (
             <img src={verification} alt="dev-tools-network" />
           </p>
           <p>If you see the ionic card printing Person and in the network no request to the sparql.geovistory.org, you're good to go! Congrats.</p>
+          <p>Nota bene: JavaScript is enabled here, so that the ionic component can be rendered. Otherwise, we just have a subtitle with an answer, without any style.</p>
           <p>
             <IonButton>Next: coming soon...</IonButton>
           </p>

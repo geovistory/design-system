@@ -47,7 +47,7 @@ export const ComponentProps = () => (
             </a>
             , props are custom attributes/properties exposed publicly on an HTML element. They allow developers to pass data to a component to render or otherwise use.
           </p>
-          <p>We declare the Prosps on the component using Stencil's @Prop() decorator, like so:</p>
+          <p>We declare the Props on the component using Stencil's @Prop() decorator, like so:</p>
           <p>
             <GeovCode language="typescript" code={c10}></GeovCode>
           </p>
@@ -59,7 +59,7 @@ export const ComponentProps = () => (
           </p>
           <h2 id="verification">Verification</h2>
           <p>
-            If you see two stories in the storybook, one printing <code>Person</code> and one printing <code>Geographical Place</code> you're good to go! Congrats.
+            If you see two stories in the storybook, one printing <code>Person</code> and one printing <code>Group</code> you're good to go! Congrats.
           </p>
           <p>
             <IonButton href="/?path=/story/contributing-tutorial-server-side-rendering--server-side-rendering">Next: Server Side Rendering</IonButton>
