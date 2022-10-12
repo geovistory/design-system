@@ -258,7 +258,7 @@ LIMIT 1
 export const c7 = `
 export class GeovHelloWorld {
 
-  @State() @State() label: string;
+  @State() label: string;
 
   sparqlEndpoint = 'https://sparql.geovistory.org/api_v1_community_data';
 
