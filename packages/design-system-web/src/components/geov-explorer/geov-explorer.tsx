@@ -44,6 +44,12 @@ export class GeovExplorer {
    */
   @Prop() initSearchString?: string;
 
+  /**
+   * urlAppend will be appended to the URIs used as links to the geovistory entity pages.
+   * Example: '?p=84760' will be redirected to the entity page of project 84760
+   */
+  @Prop() urlAppend = '';
+
   __data: GeovExplorerData;
   set data(d: GeovExplorerData) {
     this.entityList = d?.entityList;
@@ -222,6 +228,7 @@ export class GeovExplorer {
             <ion-col sizeMd="12" sizeLg="6" sizeXl="9">
               <geov-entity-list
                 defaultPageSize={this.limit}
+                urlAppend={this.urlAppend}
                 ref={el => {
                   el.items = this.entityList?.items;
                   el.loading = this.entityList?.loading;

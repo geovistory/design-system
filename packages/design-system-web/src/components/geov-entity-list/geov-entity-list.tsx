@@ -14,6 +14,11 @@ export class GeovEntityList {
   @Prop() items?: GeovEntityListItem[];
   @Prop() loading?: boolean;
   @Prop() defaultPageSize = 5;
+  /**
+   * urlAppend will be appended to the URIs used as links to the geovistory entity pages.
+   * Example: '?p=84760' will be redirected to the entity page of project 84760
+   */
+  @Prop() urlAppend = '';
 
   render() {
     const iterator = [];
@@ -25,7 +30,7 @@ export class GeovEntityList {
       <Host>
         <ion-list lines="full">
           {this.items?.map(item => (
-            <ion-item href={item.entityUri} target="_blank" rel="noreferrer">
+            <ion-item href={item.entityUri+this.urlAppend} target="_blank" rel="noreferrer">
               <ion-label>
                 <h2>{item.entityLabel}</h2>
                 <p>{item.classLabel}</p>
