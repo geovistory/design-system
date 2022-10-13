@@ -13,6 +13,7 @@
 | `fetchBeforeRender` | `fetch-before-render` | If true, the component will not render before the initial data is fetched                                                                                                            | `boolean` | `false`     |
 | `initSearchString`  | `init-search-string`  | initialize the component with a given search string                                                                                                                                  | `string`  | `undefined` |
 | `sparqlEndpoint`    | `sparql-endpoint`     | sparqlEndpoint URL of the sparql endpoint                                                                                                                                            | `string`  | `undefined` |
+| `urlAppend`         | `url-append`          | urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760                      | `string`  | `''`        |
 
 
 ## Dependencies

@@ -22,3 +22,12 @@ const args2: JSX.GeovExplorer = {
   initSearchString: 'Anna Maria',
 };
 ExplorerInitSearch.args = args2;
+
+export const ExplorerProject84760 = Template.bind({});
+
+const args3: JSX.GeovExplorer = {
+  sparqlEndpoint: 'https://sparql.geovistory.org/api_v1_project_84760',
+  initSearchString: 'Jakarta',
+  urlAppend: '?p=84760',
+};
+ExplorerProject84760.args = args3;
