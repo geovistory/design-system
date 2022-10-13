@@ -90,6 +90,13 @@ export const ServerSideRendering = () => (
             In the following steps we'll create a next.js app and setup SSR and hydration and learn what we can do in the web components to make this process even better than
             usual.
           </p>
+          <p>
+            Find here the source code of the{' '}
+            <a href="https://github.com/geovistory/stencil-next-hydrate-example" target={'_blank'} rel="noreferrer">
+              completed tutorial
+            </a>
+            .{' '}
+          </p>
           <h3 id="create-next-app">Create a next.js app</h3>
           <p>In your terminal run:</p>
           <p>
