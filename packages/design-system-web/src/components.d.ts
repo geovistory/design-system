@@ -203,6 +203,10 @@ export namespace Components {
         "defaultPageSize": number;
         "items"?: GeovEntityListItem[];
         "loading"?: boolean;
+        /**
+          * urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760
+         */
+        "urlAppend": string;
     }
     interface GeovExplorer {
         /**
@@ -221,6 +225,10 @@ export namespace Components {
           * sparqlEndpoint URL of the sparql endpoint
          */
         "sparqlEndpoint": string;
+        /**
+          * urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760
+         */
+        "urlAppend": string;
     }
     interface GeovPaginator {
         "hidePageSize": boolean;
@@ -523,6 +531,10 @@ declare namespace LocalJSX {
         "defaultPageSize"?: number;
         "items"?: GeovEntityListItem[];
         "loading"?: boolean;
+        /**
+          * urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760
+         */
+        "urlAppend"?: string;
     }
     interface GeovExplorer {
         /**
@@ -541,6 +553,10 @@ declare namespace LocalJSX {
           * sparqlEndpoint URL of the sparql endpoint
          */
         "sparqlEndpoint"?: string;
+        /**
+          * urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760
+         */
+        "urlAppend"?: string;
     }
     interface GeovPaginator {
         "hidePageSize"?: boolean;

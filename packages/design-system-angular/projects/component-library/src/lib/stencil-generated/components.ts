@@ -224,13 +224,13 @@ export declare interface GeovEntityList extends Components.GeovEntityList {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['defaultPageSize', 'items', 'loading']
+  inputs: ['defaultPageSize', 'items', 'loading', 'urlAppend']
 })
 @Component({
   selector: 'geov-entity-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['defaultPageSize', 'items', 'loading']
+  inputs: ['defaultPageSize', 'items', 'loading', 'urlAppend']
 })
 export class GeovEntityList {
   protected el: HTMLElement;
@@ -245,13 +245,13 @@ export declare interface GeovExplorer extends Components.GeovExplorer {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint']
+  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint', 'urlAppend']
 })
 @Component({
   selector: 'geov-explorer',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint']
+  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint', 'urlAppend']
 })
 export class GeovExplorer {
   protected el: HTMLElement;
