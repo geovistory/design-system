@@ -85,8 +85,6 @@ export const r1 = `{
   }
 }`;
 
-
-
 export const c2 = `import { Component, Host, h, State, Prop } from '@stencil/core';
 import { FetchResponse } from '../../lib/FetchResponse';
 import { sparqlJson, SparqlBinding } from '../../lib/sparqlJson';
@@ -237,7 +235,7 @@ export const c1 = `import { Component, Host, h, State } from '@stencil/core'; //
 
 export const c5 = `
 function sparqlJson<T>(url: string, query: string): Promise<SparqlRes<T>>
-`
+`;
 
 
 export const c6 = `
@@ -255,8 +253,7 @@ LIMIT 1
 \`;
 ...
 @Component({
-`
-
+`;
 
 export const c7 = `
 export class GeovHelloWorld {
@@ -278,4 +275,44 @@ export class GeovHelloWorld {
 
 export const c8 = `.then(res => {
   this.label = res?.results?.bindings?.[0]?.classLabel?.value
-})`
+})`;
+
+export const c9 = `
+export class GeovHelloWorld {
+
+  sparqlEndpoint = 'https://sparql.geovistory.org/api_v1_community_data';  ...
+
+  entityId = 'i315803'
+  ...`;
+
+export const c10 = `
+export class GeovHelloWorld {
+
+  @Prop() sparqlEndpoint: string;
+
+  @Prop() entityId: string;
+  ...`;
+
+export const s2 = `import { DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
+import { GeovHelloWorld } from '../../../.storybook/stencil-generated/component';
+
+export default {
+  title: 'Basic Components/HelloWorld',
+  component: GeovHelloWorld,
+};
+const Template = (args: JSX.GeovHelloWorld) => <GeovHelloWorld {...args}></GeovHelloWorld>;
+
+export const HelloWorldPerson = Template.bind({});
+const args1: JSX.GeovHelloWorld = {
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  entityId: 'i315800',
+};
+HelloWorldPerson.args = args1;
+
+export const HelloWorldGroup = Template.bind({});
+const args2: JSX.GeovHelloWorld = {
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  entityId: 'i1929590',
+};
+HelloWorldGroup.args = args2;
+`;
