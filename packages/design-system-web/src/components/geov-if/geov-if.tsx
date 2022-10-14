@@ -3,30 +3,18 @@ import { FetchResponse } from '../../lib/FetchResponse';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
 import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
-import { setSSRId } from '../../lib/ssr/setSSRId';
 
-const qrLabel = (id: string) => `
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX geov: <http://geovistory.org/resource/>
-
-SELECT ?o
-WHERE {
-  geov:${id} rdfs:label ?o .
-}
-LIMIT 1
-`;
-
-export interface GeovEntityLabelData extends FetchResponse {
-  label?: string;
+export interface GeovIfData extends FetchResponse {
+  showChildren: boolean;
   error?: boolean;
 }
 
 @Component({
-  tag: 'geov-entity-label',
-  styleUrl: 'geov-entity-label.css',
+  tag: 'geov-if',
+  styleUrl: 'geov-if.css',
   shadow: true,
 })
-export class GeovEntityLabel {
+export class GeovIf {
   @Prop({ reflect: true }) _ssrId?: string;
   /**
    * sparqlEndpoint
@@ -34,19 +22,32 @@ export class GeovEntityLabel {
    */
   @Prop() sparqlEndpoint: string;
   /**
-   * entityId
-   * ID number of entity, e.g. 'i315800'
+   * A sparql query with binding ?condition of type ^^xsd:bolean.
+   * If the first ?condition of response is true,
+   * the children of the element are rendered, otherwise not.
+   *
+   * Example:
+   * ```sparql
+   * # check if geov:i836507 is annotated entity (ontome:p1875)
+   * # of an annotation in text (ontome:p1875)
+   * PREFIX ontome: <https://ontome.net/ontology/>
+   * PREFIX geov: <http://geovistory.org/resource/>
+   *
+   * SELECT  ((count(?subject ) > 0)as ?condition)
+   * WHERE {
+   *   ?subject ontome:p1875 geov:i836507 .
+   *   ?subject a ontome:c933
+   * }
+   * GROUP BY ?subject
+   * LIMIT 1
+   * ```
    */
-  @Prop() entityId: string;
+  @Prop() sparqlQuery: string;
 
   /**
    * the data (or model) used in the view
    */
-  @State() data?: GeovEntityLabelData;
-
-  constructor() {
-    setSSRId(this);
-  }
+  @State() data: GeovIfData = { loading: true, showChildren: false };
 
   async componentWillLoad() {
     // try to get data from ssr
@@ -55,7 +56,7 @@ export class GeovEntityLabel {
     // if no data found, fetchData
     if (!this.data) {
       // set data to loading (in immutable way)
-      this.data = { loading: true };
+      this.data = { loading: true, showChildren: false };
 
       await this.fetchData()
         .then(d => {
@@ -74,12 +75,12 @@ export class GeovEntityLabel {
    * Do the sparql request(s)
    * @returns a Promise with the data for this component
    */
-  async fetchData(): Promise<GeovEntityLabelData> {
-    return sparqlJson<{ o: SparqlBinding<string> }>(this.sparqlEndpoint, qrLabel(this.entityId))
+  async fetchData(): Promise<GeovIfData> {
+    return sparqlJson<{ condition: SparqlBinding<boolean> }>(this.sparqlEndpoint, this.sparqlQuery)
       .then(res => {
         return {
           ...this.data,
-          label: res?.results?.bindings?.[0]?.o?.value,
+          showChildren: res?.results?.bindings?.[0]?.condition?.value ?? false,
           loading: false,
         };
       })
@@ -93,14 +94,15 @@ export class GeovEntityLabel {
   }
 
   render() {
-    return (
-      <Host>
-        {this.data.label}
-        {this.data.loading && `loading...`}
-        {this.data.error && `error!`}
-        {!this.data.label && !this.data.loading && !this.data.error && <span class="no-label-found">no label found</span>}
-        <slot />
-      </Host>
-    );
+    if (this.data.showChildren)
+      return (
+        <Host>
+          <slot></slot>
+        </Host>
+      );
+    else
+      return (
+        <Host></Host>
+      );
   }
 }
