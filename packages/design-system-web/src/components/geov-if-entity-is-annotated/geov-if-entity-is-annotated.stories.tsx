@@ -1,10 +1,9 @@
 import React from 'react';
 import { JSX } from '../..';
-import { DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
 import { GeovIfEntityIsAnnotated } from '../../../.storybook/stencil-generated/component';
 
 export default {
-  title: 'Data Components/Helpers/IfEntityIsAnnotated',
+  title: 'Data Components/Entity/If Entity Is Annotated',
   component: GeovIfEntityIsAnnotated,
 };
 const Template = (args: JSX.GeovIfEntityIsAnnotated) => (
