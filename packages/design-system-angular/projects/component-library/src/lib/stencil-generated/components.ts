@@ -202,8 +202,7 @@ export declare interface GeovEntityLabel extends Components.GeovEntityLabel {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint'],
-  methods: ['fetchData']
+  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint']
 })
 @Component({
   selector: 'geov-entity-label',
@@ -254,6 +253,48 @@ export declare interface GeovExplorer extends Components.GeovExplorer {}
   inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint', 'urlAppend']
 })
 export class GeovExplorer {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface GeovIf extends Components.GeovIf {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['_ssrId', 'sparqlEndpoint', 'sparqlQuery']
+})
+@Component({
+  selector: 'geov-if',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['_ssrId', 'sparqlEndpoint', 'sparqlQuery']
+})
+export class GeovIf {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface GeovIfEntityIsAnnotated extends Components.GeovIfEntityIsAnnotated {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['entityId', 'sparqlEndpoint']
+})
+@Component({
+  selector: 'geov-if-entity-is-annotated',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['entityId', 'sparqlEndpoint']
+})
+export class GeovIfEntityIsAnnotated {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();

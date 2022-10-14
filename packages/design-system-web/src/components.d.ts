@@ -14,7 +14,6 @@ import { GeovClassSelectPopupEvent } from "./components/geov-class-select-popup/
 import { Languages } from "./components/geov-code/geov-code";
 import { GeovDataFetchExampleData } from "./components/geov-data-fetch-example/geov-data-fetch-example";
 import { SparqlBinding } from "./lib/sparqlJson";
-import { GeovEntityLabelData } from "./components/geov-entity-label/geov-entity-label";
 import { GeovEntityListItem } from "./components/geov-entity-list/geov-entity-list";
 import { PageEvent } from "./components/geov-paginator/geov-paginator";
 
@@ -190,11 +189,6 @@ export namespace Components {
          */
         "entityId": string;
         /**
-          * Do the sparql request(s)
-          * @returns a Promise with the data for this component
-         */
-        "fetchData": () => Promise<GeovEntityLabelData>;
-        /**
           * sparqlEndpoint URL of the sparql endpoint
          */
         "sparqlEndpoint": string;
@@ -229,6 +223,27 @@ export namespace Components {
           * urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760
          */
         "urlAppend": string;
+    }
+    interface GeovIf {
+        "_ssrId"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+        /**
+          * A sparql query with binding ?condition of type ^^xsd:bolean. If the first ?condition of response is true, the children of the element are rendered, otherwise not.  Example: ```sparql # check if geov:i836507 is annotated entity (ontome:p1875) # of an annotation in text (ontome:p1875) PREFIX ontome: <https://ontome.net/ontology/> PREFIX geov: <http://geovistory.org/resource/>  SELECT  ((count(?subject ) > 0)as ?condition) WHERE {   ?subject ontome:p1875 geov:i836507 .   ?subject a ontome:c933 } GROUP BY ?subject LIMIT 1 ```
+         */
+        "sparqlQuery": string;
+    }
+    interface GeovIfEntityIsAnnotated {
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId": string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
     }
     interface GeovPaginator {
         "hidePageSize": boolean;
@@ -324,6 +339,18 @@ declare global {
         prototype: HTMLGeovExplorerElement;
         new (): HTMLGeovExplorerElement;
     };
+    interface HTMLGeovIfElement extends Components.GeovIf, HTMLStencilElement {
+    }
+    var HTMLGeovIfElement: {
+        prototype: HTMLGeovIfElement;
+        new (): HTMLGeovIfElement;
+    };
+    interface HTMLGeovIfEntityIsAnnotatedElement extends Components.GeovIfEntityIsAnnotated, HTMLStencilElement {
+    }
+    var HTMLGeovIfEntityIsAnnotatedElement: {
+        prototype: HTMLGeovIfEntityIsAnnotatedElement;
+        new (): HTMLGeovIfEntityIsAnnotatedElement;
+    };
     interface HTMLGeovPaginatorElement extends Components.GeovPaginator, HTMLStencilElement {
     }
     var HTMLGeovPaginatorElement: {
@@ -348,6 +375,8 @@ declare global {
         "geov-entity-label": HTMLGeovEntityLabelElement;
         "geov-entity-list": HTMLGeovEntityListElement;
         "geov-explorer": HTMLGeovExplorerElement;
+        "geov-if": HTMLGeovIfElement;
+        "geov-if-entity-is-annotated": HTMLGeovIfEntityIsAnnotatedElement;
         "geov-paginator": HTMLGeovPaginatorElement;
         "geov-toc": HTMLGeovTocElement;
     }
@@ -558,6 +587,27 @@ declare namespace LocalJSX {
          */
         "urlAppend"?: string;
     }
+    interface GeovIf {
+        "_ssrId"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+        /**
+          * A sparql query with binding ?condition of type ^^xsd:bolean. If the first ?condition of response is true, the children of the element are rendered, otherwise not.  Example: ```sparql # check if geov:i836507 is annotated entity (ontome:p1875) # of an annotation in text (ontome:p1875) PREFIX ontome: <https://ontome.net/ontology/> PREFIX geov: <http://geovistory.org/resource/>  SELECT  ((count(?subject ) > 0)as ?condition) WHERE {   ?subject ontome:p1875 geov:i836507 .   ?subject a ontome:c933 } GROUP BY ?subject LIMIT 1 ```
+         */
+        "sparqlQuery"?: string;
+    }
+    interface GeovIfEntityIsAnnotated {
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+    }
     interface GeovPaginator {
         "hidePageSize"?: boolean;
         "length"?: number;
@@ -581,6 +631,8 @@ declare namespace LocalJSX {
         "geov-entity-label": GeovEntityLabel;
         "geov-entity-list": GeovEntityList;
         "geov-explorer": GeovExplorer;
+        "geov-if": GeovIf;
+        "geov-if-entity-is-annotated": GeovIfEntityIsAnnotated;
         "geov-paginator": GeovPaginator;
         "geov-toc": GeovToc;
     }
@@ -695,6 +747,8 @@ declare module "@stencil/core" {
             "geov-entity-label": LocalJSX.GeovEntityLabel & JSXBase.HTMLAttributes<HTMLGeovEntityLabelElement>;
             "geov-entity-list": LocalJSX.GeovEntityList & JSXBase.HTMLAttributes<HTMLGeovEntityListElement>;
             "geov-explorer": LocalJSX.GeovExplorer & JSXBase.HTMLAttributes<HTMLGeovExplorerElement>;
+            "geov-if": LocalJSX.GeovIf & JSXBase.HTMLAttributes<HTMLGeovIfElement>;
+            "geov-if-entity-is-annotated": LocalJSX.GeovIfEntityIsAnnotated & JSXBase.HTMLAttributes<HTMLGeovIfEntityIsAnnotatedElement>;
             "geov-paginator": LocalJSX.GeovPaginator & JSXBase.HTMLAttributes<HTMLGeovPaginatorElement>;
             "geov-toc": LocalJSX.GeovToc & JSXBase.HTMLAttributes<HTMLGeovTocElement>;
         }
