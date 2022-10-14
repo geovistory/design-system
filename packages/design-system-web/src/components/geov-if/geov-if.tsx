@@ -3,6 +3,7 @@ import { FetchResponse } from '../../lib/FetchResponse';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
 import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
+import { setSSRId } from '../../lib/ssr/setSSRId';
 
 export interface GeovIfData extends FetchResponse {
   showChildren: boolean;
@@ -12,7 +13,7 @@ export interface GeovIfData extends FetchResponse {
 @Component({
   tag: 'geov-if',
   styleUrl: 'geov-if.css',
-  shadow: true,
+  shadow: false,
 })
 export class GeovIf {
   @Prop({ reflect: true }) _ssrId?: string;
@@ -49,6 +50,10 @@ export class GeovIf {
    */
   @State() data: GeovIfData = { loading: true, showChildren: false };
 
+  constructor() {
+    setSSRId(this);
+  }
+
   async componentWillLoad() {
     // try to get data from ssr
     this.data = getSSRData(this._ssrId);
@@ -76,11 +81,18 @@ export class GeovIf {
    * @returns a Promise with the data for this component
    */
   async fetchData(): Promise<GeovIfData> {
-    return sparqlJson<{ condition: SparqlBinding<boolean> }>(this.sparqlEndpoint, this.sparqlQuery)
+    const q = this.sparqlQuery
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&apos;/g, "'");
+    return sparqlJson<{ condition: SparqlBinding<string> }>(this.sparqlEndpoint, q)
       .then(res => {
+        const showChildren = res?.results?.bindings?.[0]?.condition?.value === 'true' ? true : false;
         return {
           ...this.data,
-          showChildren: res?.results?.bindings?.[0]?.condition?.value ?? false,
+          showChildren,
           loading: false,
         };
       })
@@ -94,15 +106,15 @@ export class GeovIf {
   }
 
   render() {
-    if (this.data.showChildren)
-      return (
-        <Host>
+
+    const display = this.data.showChildren ? 'initital' : 'none';
+
+    return (
+      <Host>
+        <div style={{ display: display }}>
           <slot></slot>
-        </Host>
-      );
-    else
-      return (
-        <Host></Host>
-      );
+        </div>
+      </Host>
+    );
   }
 }

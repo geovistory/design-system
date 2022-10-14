@@ -28,4 +28,4 @@ const args2: JSX.GeovIf = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   sparqlQuery: query2,
 };
-IfTrue.args = args2;
+IfFalse.args = args2;
