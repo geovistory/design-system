@@ -281,27 +281,6 @@ export class GeovIf {
   }
 }
 
-
-export declare interface GeovIfEntityIsAnnotated extends Components.GeovIfEntityIsAnnotated {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['entityId', 'sparqlEndpoint']
-})
-@Component({
-  selector: 'geov-if-entity-is-annotated',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['entityId', 'sparqlEndpoint']
-})
-export class GeovIfEntityIsAnnotated {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
 import type { PageEvent as IGeovPaginatorPageEvent } from '@geovistory/design-system-web';
 export declare interface GeovPaginator extends Components.GeovPaginator {
   /**

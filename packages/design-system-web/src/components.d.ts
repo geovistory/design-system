@@ -235,16 +235,6 @@ export namespace Components {
          */
         "sparqlQuery": string;
     }
-    interface GeovIfEntityIsAnnotated {
-        /**
-          * entityId ID number of entity, e.g. 'i315800'
-         */
-        "entityId": string;
-        /**
-          * sparqlEndpoint URL of the sparql endpoint
-         */
-        "sparqlEndpoint": string;
-    }
     interface GeovPaginator {
         "hidePageSize": boolean;
         "length": number;
@@ -345,12 +335,6 @@ declare global {
         prototype: HTMLGeovIfElement;
         new (): HTMLGeovIfElement;
     };
-    interface HTMLGeovIfEntityIsAnnotatedElement extends Components.GeovIfEntityIsAnnotated, HTMLStencilElement {
-    }
-    var HTMLGeovIfEntityIsAnnotatedElement: {
-        prototype: HTMLGeovIfEntityIsAnnotatedElement;
-        new (): HTMLGeovIfEntityIsAnnotatedElement;
-    };
     interface HTMLGeovPaginatorElement extends Components.GeovPaginator, HTMLStencilElement {
     }
     var HTMLGeovPaginatorElement: {
@@ -376,7 +360,6 @@ declare global {
         "geov-entity-list": HTMLGeovEntityListElement;
         "geov-explorer": HTMLGeovExplorerElement;
         "geov-if": HTMLGeovIfElement;
-        "geov-if-entity-is-annotated": HTMLGeovIfEntityIsAnnotatedElement;
         "geov-paginator": HTMLGeovPaginatorElement;
         "geov-toc": HTMLGeovTocElement;
     }
@@ -598,16 +581,6 @@ declare namespace LocalJSX {
          */
         "sparqlQuery"?: string;
     }
-    interface GeovIfEntityIsAnnotated {
-        /**
-          * entityId ID number of entity, e.g. 'i315800'
-         */
-        "entityId"?: string;
-        /**
-          * sparqlEndpoint URL of the sparql endpoint
-         */
-        "sparqlEndpoint"?: string;
-    }
     interface GeovPaginator {
         "hidePageSize"?: boolean;
         "length"?: number;
@@ -632,7 +605,6 @@ declare namespace LocalJSX {
         "geov-entity-list": GeovEntityList;
         "geov-explorer": GeovExplorer;
         "geov-if": GeovIf;
-        "geov-if-entity-is-annotated": GeovIfEntityIsAnnotated;
         "geov-paginator": GeovPaginator;
         "geov-toc": GeovToc;
     }
@@ -748,7 +720,6 @@ declare module "@stencil/core" {
             "geov-entity-list": LocalJSX.GeovEntityList & JSXBase.HTMLAttributes<HTMLGeovEntityListElement>;
             "geov-explorer": LocalJSX.GeovExplorer & JSXBase.HTMLAttributes<HTMLGeovExplorerElement>;
             "geov-if": LocalJSX.GeovIf & JSXBase.HTMLAttributes<HTMLGeovIfElement>;
-            "geov-if-entity-is-annotated": LocalJSX.GeovIfEntityIsAnnotated & JSXBase.HTMLAttributes<HTMLGeovIfEntityIsAnnotatedElement>;
             "geov-paginator": LocalJSX.GeovPaginator & JSXBase.HTMLAttributes<HTMLGeovPaginatorElement>;
             "geov-toc": LocalJSX.GeovToc & JSXBase.HTMLAttributes<HTMLGeovTocElement>;
         }
