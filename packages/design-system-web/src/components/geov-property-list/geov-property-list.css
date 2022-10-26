@@ -1,0 +1,4 @@
+@import '../../../node_modules/@ionic/core/css/core.css';
+:host {
+  display: block;
+}
