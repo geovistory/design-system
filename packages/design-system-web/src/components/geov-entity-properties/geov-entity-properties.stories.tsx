@@ -19,3 +19,30 @@ const args: JSX.GeovEntityProperties = {
   fetchBeforeRender: true,
 };
 EntityProperties.args = args;
+
+export const EntityProperties2 = Template.bind({});
+const args2: JSX.GeovEntityProperties = {
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  entityId: 'i209502',
+  language: 'en',
+  fetchBeforeRender: true,
+};
+EntityProperties2.args = args2;
+
+export const EntityProperties3 = Template.bind({});
+const args3: JSX.GeovEntityProperties = {
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  entityId: 'i253594',
+  language: 'en',
+  fetchBeforeRender: true,
+};
+EntityProperties3.args = args3;
+
+export const EntityProperties4 = Template.bind({});
+const args4: JSX.GeovEntityProperties = {
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  entityId: 'i151089ts',
+  language: 'en',
+  fetchBeforeRender: true,
+};
+EntityProperties4.args = args4;

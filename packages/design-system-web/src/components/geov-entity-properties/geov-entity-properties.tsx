@@ -13,7 +13,7 @@ WHERE {
 LIMIT 1
 `;
 
-const qrOutgoingProps = (id: string) => `
+const qrTypeAndLabel = (id: string) => `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -24,13 +24,32 @@ PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX ontome: <https://ontome.net/ontology/>
 PREFIX geov: <http://geovistory.org/resource/>
 
-SELECT ?subject ?predicate ?predicateLabel ?object ?dt
+SELECT ?subject ?subjectLabel ?objectLabel
+WHERE {
+  {SELECT ?subject WHERE {geov:${id} rdf:type ?subject.} LIMIT 1}.
+  ?subject rdfs:label ?objectLabel .
+  geov:${id} rdfs:label ?subjectLabel.
+}
+`;
+
+const qrOutgoingPropsWithCount = (id: string) => `
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xml: <http://www.w3.org/XML/1998/namespace>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX ontome: <https://ontome.net/ontology/>
+PREFIX geov: <http://geovistory.org/resource/>
+
+SELECT ?predicate ?predicateLabel (count(distinct ?subject) as ?count) 
 WHERE {
   geov:${id} ?predicate ?object .
   ?predicate rdfs:label ?predicateLabel
-  BIND (datatype(?object) AS ?dt)
 }
-LIMIT 10
+GROUP BY ?predicate ?predicateLabel
+LIMIT 100
 `;
 
 const qrIncomingPropsWithCount = (id: string) => `
@@ -56,6 +75,7 @@ LIMIT 100
 export interface Binding<T> {
   subject?: {
     type: T,
+    datatype: T,
     value: T
   },
   subjectLabel?: {
@@ -80,6 +100,14 @@ export interface Binding<T> {
     value: T
   },
   count?: {
+    type: T,
+    value: T
+  },
+  classLabel?: {
+    type: T,
+    value: T
+  },
+  dt?: {
     type: T,
     value: T
   }
@@ -112,11 +140,13 @@ export class GeovEntityProperties {
   */
   @Prop() fetchBeforeRender: boolean; 
 
-  @State() outgoingProps: Binding<string>[];
+  @State() outgoingPropsWithCount: Binding<string>[];
   
   @State() ontomeURI: string; 
 
   @State() incomingPropsWithCount: Binding<string>[];
+
+  @State() typeAndLabel: Binding<string>;
 
   async componentWillLoad() {
 
@@ -126,9 +156,15 @@ export class GeovEntityProperties {
       }
     );
 
-    sparqlJson<Binding<string>>(this.sparqlEndpoint, qrOutgoingProps(this.entityId))
+    sparqlJson<Binding<string>>(this.sparqlEndpoint, qrTypeAndLabel(this.entityId))
       .then(res => {
-        this.outgoingProps = res?.results?.bindings.filter(b => b.predicateLabel['xml:lang'] == this.language);
+        this.typeAndLabel = res?.results?.bindings?.[0];
+      }
+    );
+
+    sparqlJson<Binding<string>>(this.sparqlEndpoint, qrOutgoingPropsWithCount(this.entityId))
+      .then(res => {
+        this.outgoingPropsWithCount = res?.results?.bindings.filter(b => b.predicateLabel['xml:lang'] == this.language);
       }
     );
 
@@ -147,15 +183,15 @@ export class GeovEntityProperties {
           <ion-label>rdf:type</ion-label>
         </ion-item>
         <ion-item lines="none" href={this.ontomeURI} target="_blank">
-          <ion-label><geov-entity-class-label sparqlEndpoint={this.sparqlEndpoint} entityId={this.entityId}></geov-entity-class-label></ion-label>
+          <ion-label>{this.typeAndLabel?.objectLabel.value}</ion-label>
         </ion-item>
         <ion-item color="light" lines="none">
           <ion-label>rdf:label</ion-label>
         </ion-item>
         <ion-item lines="none">
-          <ion-label><geov-entity-label sparqlEndpoint={this.sparqlEndpoint} entityId={this.entityId}></geov-entity-label></ion-label>
+          <ion-label>{this.typeAndLabel?.subjectLabel.value}</ion-label>
         </ion-item>
-        {this.outgoingProps?.map(b => (
+        {this.outgoingPropsWithCount?.map(b => (
           <geov-entity-props-by-predicate 
             sparqlEndpoint={this.sparqlEndpoint} entityId={this.entityId} props={b} isOutgoing={true}></geov-entity-props-by-predicate>
         ))}

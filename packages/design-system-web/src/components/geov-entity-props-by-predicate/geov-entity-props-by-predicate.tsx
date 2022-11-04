@@ -15,12 +15,13 @@ PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX ontome: <https://ontome.net/ontology/>
 PREFIX geov: <http://geovistory.org/resource/>
 
-SELECT ?subject ?subjectLabel
+SELECT ?subject ?subjectLabel ?classLabel ?object
 WHERE {
-  geov:${objectId} <${predicateId}> ?subject .
-  OPTIONAL {?subject rdfs:label ?subjectLabel.}
+  {SELECT ?subject WHERE {geov:${objectId} <${predicateId}> ?subject .} LIMIT ${pageSize} OFFSET ${offset}} .
+  OPTIONAL {?subject rdfs:label ?subjectLabel.} .
+  OPTIONAL {?subject rdf:type ?object.} .
+  OPTIONAL {?object rdfs:label ?classLabel.} .
 }
-LIMIT ${pageSize} OFFSET ${offset}
 `;
 
 const qrIncomingProps = (predicateId: string, objectId: string, pageSize: number, offset: number) => `
@@ -34,12 +35,13 @@ PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX ontome: <https://ontome.net/ontology/>
 PREFIX geov: <http://geovistory.org/resource/>
 
-SELECT ?subject ?subjectLabel
+SELECT ?subject ?subjectLabel ?classLabel ?object
 WHERE {
- ?subject <${predicateId}> geov:${objectId} .
- OPTIONAL {?subject rdfs:label ?subjectLabel.}
+  {SELECT ?subject WHERE {?subject <${predicateId}> geov:${objectId} .} LIMIT ${pageSize} OFFSET ${offset}} .
+  OPTIONAL {?subject rdfs:label ?subjectLabel.} .
+  OPTIONAL {?subject rdf:type ?object.} .
+  OPTIONAL {?object rdfs:label ?classLabel.} .
 }
-LIMIT ${pageSize} OFFSET ${offset}
 `;
 
 @Component({
@@ -100,9 +102,6 @@ export class GeovEntityPropsByPredicate {
     sparqlJson<Binding<string>>(this.sparqlEndpoint, qr)
       .then(res => {
         this.properties = res?.results?.bindings;
-        if(this.properties.length == 0){
-          console.log(qrOutgoingProps(this.props.predicate.value, this.entityId, this.pageSize, this.pageIndex)); // For verification if nothing return...
-        }
       }
     );
   }
@@ -116,10 +115,10 @@ export class GeovEntityPropsByPredicate {
           </ion-item>
           {this.properties?.map((property) => {
             return <ion-item lines="none" href={property.subject.value}>
-              <ion-label>
-                <h2>{property.subjectLabel?.value || '(no label found)'}</h2>
-                <p><geov-entity-class-label sparqlEndpoint={this.sparqlEndpoint} entityId={property.subject.value.replace('http://geovistory.org/resource/', '')}></geov-entity-class-label></p>
-              </ion-label>
+                {property.subject?.datatype == "http://www.opengis.net/ont/geosparql#wktLiteral" && <ion-label><geov-display-geosparl-wktliteral value={property.subject?.value}></geov-display-geosparl-wktliteral></ion-label>}
+                {property.object?.value == "http://www.w3.org/2006/time#DateTimeDescription" && <ion-label><h2><geov-display-time-datetimedescription value={property.object?.value }></geov-display-time-datetimedescription></h2><p>DateTimeDescription</p></ion-label>}
+                {property.object?.value == "http://www.w3.org/2006/time#DateTimeDescription" && console.log(property)}
+                {property.subjectLabel && property.classLabel && <ion-label><h2>{property.subjectLabel?.value}</h2><p>{property.classLabel?.value}</p></ion-label>}
             </ion-item>
           })}
           {this.props.count && Number(this.props.count.value) > 1 &&
@@ -136,3 +135,4 @@ export class GeovEntityPropsByPredicate {
   }
 
 }
+
