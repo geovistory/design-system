@@ -8,7 +8,7 @@ PREFIX geov: <http://geovistory.org/resource/>
 
 SELECT ?object
 WHERE {
-  geov:${id} rdf:type ?object .
+  OPTIONAL{geov:${id} rdf:type ?object .}
 }
 LIMIT 1
 `;
@@ -149,10 +149,9 @@ export class GeovEntityProperties {
   @State() typeAndLabel: Binding<string>;
 
   async componentWillLoad() {
-
     sparqlJson<Binding<string>>(this.sparqlEndpoint, qrOntomeURI(this.entityId))
       .then(res => {
-        this.ontomeURI = res?.results?.bindings?.[0].object.value;
+        this.ontomeURI = res?.results?.bindings?.[0].object?.value || '#';
       }
     );
 
@@ -183,14 +182,14 @@ export class GeovEntityProperties {
           <ion-label>rdf:type</ion-label>
         </ion-item>
         <ion-item lines="none" href={this.ontomeURI} target="_blank">
-          <ion-label>{this.typeAndLabel?.objectLabel.value}</ion-label>
+          <ion-label>{this.typeAndLabel?.objectLabel.value || '(no type found)'}</ion-label>
         </ion-item>
-        <ion-item color="light" lines="none">
-          <ion-label>rdf:label</ion-label>
-        </ion-item>
-        <ion-item lines="none">
+        {this.typeAndLabel?.subjectLabel && <ion-item color="light" lines="none">
+          <ion-label>rdfs:label</ion-label>
+        </ion-item>}
+        {this.typeAndLabel?.subjectLabel && <ion-item lines="none">
           <ion-label>{this.typeAndLabel?.subjectLabel.value}</ion-label>
-        </ion-item>
+        </ion-item>}
         {this.outgoingPropsWithCount?.map(b => (
           <geov-entity-props-by-predicate 
             sparqlEndpoint={this.sparqlEndpoint} entityId={this.entityId} props={b} isOutgoing={true}></geov-entity-props-by-predicate>

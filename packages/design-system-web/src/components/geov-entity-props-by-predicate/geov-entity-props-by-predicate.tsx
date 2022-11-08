@@ -22,6 +22,7 @@ WHERE {
   OPTIONAL {?subject rdf:type ?object.} .
   OPTIONAL {?object rdfs:label ?classLabel.} .
 }
+LIMIT 50
 `;
 
 const qrIncomingProps = (predicateId: string, objectId: string, pageSize: number, offset: number) => `
@@ -42,6 +43,7 @@ WHERE {
   OPTIONAL {?subject rdf:type ?object.} .
   OPTIONAL {?object rdfs:label ?classLabel.} .
 }
+LIMIT 50
 `;
 
 @Component({
@@ -89,7 +91,6 @@ export class GeovEntityPropsByPredicate {
   changePage(pageEvent: GeovPaginatorCustomEvent<PageEvent>){
     this.pageIndex = pageEvent.detail.pageIndex;
     this.pageReload(this.isOutgoing);
-    
   }
 
   pageReload(isOutgoing: boolean) {
@@ -116,9 +117,8 @@ export class GeovEntityPropsByPredicate {
           {this.properties?.map((property) => {
             return <ion-item lines="none" href={property.subject.value}>
                 {property.subject?.datatype == "http://www.opengis.net/ont/geosparql#wktLiteral" && <ion-label><geov-display-geosparl-wktliteral value={property.subject?.value}></geov-display-geosparl-wktliteral></ion-label>}
-                {property.object?.value == "http://www.w3.org/2006/time#DateTimeDescription" && <ion-label><h2><geov-display-time-datetimedescription value={property.object?.value }></geov-display-time-datetimedescription></h2><p>DateTimeDescription</p></ion-label>}
-                {property.object?.value == "http://www.w3.org/2006/time#DateTimeDescription" && console.log(property)}
-                {property.subjectLabel && property.classLabel && <ion-label><h2>{property.subjectLabel?.value}</h2><p>{property.classLabel?.value}</p></ion-label>}
+                {property.object?.value == "http://www.w3.org/2006/time#DateTimeDescription" && <ion-label><h2><geov-display-time-datetimedescription entityId={property.subject?.value.replace("http://geovistory.org/resource/", "") } sparqlEndpoint={this.sparqlEndpoint}></geov-display-time-datetimedescription></h2><p>DateTimeDescription</p></ion-label>}
+                {property.subjectLabel && property.classLabel && <ion-label><h2>{property.subjectLabel?.value}</h2><p>{property.classLabel?.value }</p></ion-label>}
             </ion-item>
           })}
           {this.props.count && Number(this.props.count.value) > 1 &&
