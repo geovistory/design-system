@@ -43,7 +43,7 @@ PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX ontome: <https://ontome.net/ontology/>
 PREFIX geov: <http://geovistory.org/resource/>
 
-SELECT ?predicate ?predicateLabel (count(distinct ?subject) as ?count) 
+SELECT ?predicate ?predicateLabel (count(distinct ?object) as ?count) 
 WHERE {
   geov:${id} ?predicate ?object .
   ?predicate rdfs:label ?predicateLabel
@@ -103,7 +103,11 @@ export interface Binding<T> {
     type: T,
     value: T
   },
-  classLabel?: {
+  subjectType?: {
+    type: T,
+    value: T
+  },
+  subjectTypeLabel?: {
     type: T,
     value: T
   },
@@ -169,7 +173,7 @@ export class GeovEntityProperties {
 
     sparqlJson<Binding<string>>(this.sparqlEndpoint, qrIncomingPropsWithCount(this.entityId))
       .then(res => {
-        this.incomingPropsWithCount = res?.results?.bindings.filter(b => b.predicateLabel['xml:lang'] == this.language)
+        this.incomingPropsWithCount = res?.results?.bindings.filter(b => b.predicateLabel['xml:lang'] == this.language);
       }
     );
   }
@@ -177,13 +181,12 @@ export class GeovEntityProperties {
   render() {
     return (
       <Host>
-        geov:{this.entityId}
-        <ion-item color="light" lines="none">
+        {this.typeAndLabel?.objectLabel && <ion-item color="light" lines="none">
           <ion-label>rdf:type</ion-label>
-        </ion-item>
-        <ion-item lines="none" href={this.ontomeURI} target="_blank">
-          <ion-label>{this.typeAndLabel?.objectLabel.value || '(no type found)'}</ion-label>
-        </ion-item>
+        </ion-item>}
+        {this.typeAndLabel?.objectLabel && <ion-item lines="none" href={this.ontomeURI} target="_blank">
+          <ion-label>{this.typeAndLabel?.objectLabel.value}</ion-label>
+        </ion-item>}
         {this.typeAndLabel?.subjectLabel && <ion-item color="light" lines="none">
           <ion-label>rdfs:label</ion-label>
         </ion-item>}

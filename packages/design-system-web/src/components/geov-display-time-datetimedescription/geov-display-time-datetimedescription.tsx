@@ -34,7 +34,6 @@ export class GeovDisplayTimeDatetimedescription {
   @State() day: String;
 
   async componentWillLoad() {
-
     sparqlJson<Binding<string>>(this.sparqlEndpoint, qrPropertiesDateTimeDescription(this.entityId))
       .then(res => {
         res?.results?.bindings.forEach(b => {
