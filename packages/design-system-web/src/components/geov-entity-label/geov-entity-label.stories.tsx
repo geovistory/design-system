@@ -16,13 +16,11 @@ const args: JSX.GeovEntityLabel = {
 };
 EntityLabel.args = args;
 
-const TemplateInitData = (args: JSX.GeovEntityLabel) => (
-    <GeovEntityLabel {...args}></GeovEntityLabel>
-);
+const TemplateInitData = (args: JSX.GeovEntityLabel) => <GeovEntityLabel {...args}></GeovEntityLabel>;
 export const EntityLabelDataGiven = TemplateInitData.bind({});
 const dataGiven: JSX.GeovEntityLabel = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   entityId: 'i315800',
-  _ssrId: '8wrr2f'
+  _ssrId: '8wrr2f',
 };
 EntityLabelDataGiven.args = dataGiven;

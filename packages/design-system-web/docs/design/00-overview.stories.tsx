@@ -8,7 +8,8 @@ export default {
       'storybook/docs/panel': {
         hidden: true,
       },
-    },    options: { showPanel: false },
+    },
+    options: { showPanel: false },
   },
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonApp, IonContent, IonGrid, IonIcon, IonItem, IonList } from '../../.storybook/stencil-generated/component';
+import { IonApp, IonContent, IonGrid, IonItem, IonList } from '../../.storybook/stencil-generated/component';
 export default {
   title: 'Contributing/Tutorial',
   parameters: {

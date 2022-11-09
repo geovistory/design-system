@@ -74,47 +74,47 @@ LIMIT 100
 
 export interface Binding<T> {
   subject?: {
-    type: T,
-    datatype: T,
-    value: T
-  },
+    type: T;
+    datatype: T;
+    value: T;
+  };
   subjectLabel?: {
-    type: T,
-    value: T
-  },
+    type: T;
+    value: T;
+  };
   predicate?: {
-    type: T,
-    value: T
-  },
+    type: T;
+    value: T;
+  };
   predicateLabel?: {
-    type: T,
-    'xml:lang': T,
-    value: T
-  },
+    'type': T;
+    'xml:lang': T;
+    'value': T;
+  };
   object?: {
-    type: T,
-    value: T
-  },
+    type: T;
+    value: T;
+  };
   objectLabel?: {
-    type: T,
-    value: T
-  },
+    type: T;
+    value: T;
+  };
   count?: {
-    type: T,
-    value: T
-  },
+    type: T;
+    value: T;
+  };
   subjectType?: {
-    type: T,
-    value: T
-  },
+    type: T;
+    value: T;
+  };
   subjectTypeLabel?: {
-    type: T,
-    value: T
-  },
+    type: T;
+    value: T;
+  };
   dt?: {
-    type: T,
-    value: T
-  }
+    type: T;
+    value: T;
+  };
 }
 
 @Component({
@@ -129,81 +129,78 @@ export class GeovEntityProperties {
    */
   @Prop() sparqlEndpoint: string;
   /**
-  * entityId
-  * ID number of entity, e.g. 'i315800'
-  */
+   * entityId
+   * ID number of entity, e.g. 'i315800'
+   */
   @Prop() entityId: string;
   /**
-  * language
-  * prints the label with the language or english, if not found, e.g. 'en'
-  */
-  @Prop() language = "en";
+   * language
+   * prints the label with the language or english, if not found, e.g. 'en'
+   */
+  @Prop() language = 'en';
   /*
-  * fetchBeforRender
-  * if true, componentWillLoad() returns a promise for the loading of all data [default: true]
-  */
-  @Prop() fetchBeforeRender: boolean; 
+   * fetchBeforRender
+   * if true, componentWillLoad() returns a promise for the loading of all data [default: true]
+   */
+  @Prop() fetchBeforeRender: boolean;
 
   @State() outgoingPropsWithCount: Binding<string>[];
-  
-  @State() ontomeURI: string; 
+
+  @State() ontomeURI: string;
 
   @State() incomingPropsWithCount: Binding<string>[];
 
   @State() typeAndLabel: Binding<string>;
 
   async componentWillLoad() {
-    sparqlJson<Binding<string>>(this.sparqlEndpoint, qrOntomeURI(this.entityId))
-      .then(res => {
-        this.ontomeURI = res?.results?.bindings?.[0].object?.value || '#';
-      }
-    );
+    sparqlJson<Binding<string>>(this.sparqlEndpoint, qrOntomeURI(this.entityId)).then(res => {
+      this.ontomeURI = res?.results?.bindings?.[0].object?.value || '#';
+    });
 
-    sparqlJson<Binding<string>>(this.sparqlEndpoint, qrTypeAndLabel(this.entityId))
-      .then(res => {
-        this.typeAndLabel = res?.results?.bindings?.[0];
-      }
-    );
+    sparqlJson<Binding<string>>(this.sparqlEndpoint, qrTypeAndLabel(this.entityId)).then(res => {
+      this.typeAndLabel = res?.results?.bindings?.[0];
+    });
 
-    sparqlJson<Binding<string>>(this.sparqlEndpoint, qrOutgoingPropsWithCount(this.entityId))
-      .then(res => {
-        this.outgoingPropsWithCount = res?.results?.bindings.filter(b => b.predicateLabel['xml:lang'] == this.language);
-      }
-    );
+    sparqlJson<Binding<string>>(this.sparqlEndpoint, qrOutgoingPropsWithCount(this.entityId)).then(res => {
+      this.outgoingPropsWithCount = res?.results?.bindings.filter(b => b.predicateLabel['xml:lang'] == this.language);
+    });
 
-    sparqlJson<Binding<string>>(this.sparqlEndpoint, qrIncomingPropsWithCount(this.entityId))
-      .then(res => {
-        this.incomingPropsWithCount = res?.results?.bindings.filter(b => b.predicateLabel['xml:lang'] == this.language);
-      }
-    );
+    sparqlJson<Binding<string>>(this.sparqlEndpoint, qrIncomingPropsWithCount(this.entityId)).then(res => {
+      this.incomingPropsWithCount = res?.results?.bindings.filter(b => b.predicateLabel['xml:lang'] == this.language);
+    });
   }
 
   render() {
     return (
       <Host>
-        {this.typeAndLabel?.objectLabel && <ion-item color="light" lines="none">
-          <ion-label>rdf:type</ion-label>
-        </ion-item>}
-        {this.typeAndLabel?.objectLabel && <ion-item lines="none" href={this.ontomeURI} target="_blank">
-          <ion-label>{this.typeAndLabel?.objectLabel.value}</ion-label>
-        </ion-item>}
-        {this.typeAndLabel?.subjectLabel && <ion-item color="light" lines="none">
-          <ion-label>rdfs:label</ion-label>
-        </ion-item>}
-        {this.typeAndLabel?.subjectLabel && <ion-item lines="none">
-          <ion-label>{this.typeAndLabel?.subjectLabel.value}</ion-label>
-        </ion-item>}
+        {this.typeAndLabel?.objectLabel && (
+          <ion-item color="light" lines="none">
+            <ion-label>rdf:type</ion-label>
+          </ion-item>
+        )}
+        {this.typeAndLabel?.objectLabel && (
+          <ion-item lines="none" href={this.ontomeURI} target="_blank">
+            <ion-label>{this.typeAndLabel?.objectLabel.value}</ion-label>
+          </ion-item>
+        )}
+        {this.typeAndLabel?.subjectLabel && (
+          <ion-item color="light" lines="none">
+            <ion-label>rdfs:label</ion-label>
+          </ion-item>
+        )}
+        {this.typeAndLabel?.subjectLabel && (
+          <ion-item lines="none">
+            <ion-label>{this.typeAndLabel?.subjectLabel.value}</ion-label>
+          </ion-item>
+        )}
         {this.outgoingPropsWithCount?.map(b => (
-          <geov-entity-props-by-predicate 
-            sparqlEndpoint={this.sparqlEndpoint} entityId={this.entityId} props={b} isOutgoing={true}></geov-entity-props-by-predicate>
+          <geov-entity-props-by-predicate sparqlEndpoint={this.sparqlEndpoint} entityId={this.entityId} props={b} isOutgoing={true}></geov-entity-props-by-predicate>
         ))}
         {this.incomingPropsWithCount?.map(b => (
-          <geov-entity-props-by-predicate 
-            sparqlEndpoint={this.sparqlEndpoint} entityId={this.entityId}  props={b} isOutgoing={false}></geov-entity-props-by-predicate>
+          <geov-entity-props-by-predicate sparqlEndpoint={this.sparqlEndpoint} entityId={this.entityId} props={b} isOutgoing={false}></geov-entity-props-by-predicate>
         ))}
         <slot></slot>
       </Host>
     );
   }
-
 }

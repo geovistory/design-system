@@ -4,7 +4,7 @@ export interface SparqlRes<T> {
   };
 }
 export interface SparqlBinding<T> {
-   value: T
+  value: T;
 }
 export async function sparqlJson<T>(url: string, query: string): Promise<SparqlRes<T>> {
   const params = new URLSearchParams({ query: query });

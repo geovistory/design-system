@@ -11,7 +11,7 @@ const Template = (args: JSX.GeovEntityClassLabel) => <GeovEntityClassLabel {...a
 
 export const EntityClassLabel = Template.bind({});
 const args: JSX.GeovEntityClassLabel = {
-  entityId:"i315803",
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT
+  entityId: 'i315803',
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
 };
 EntityClassLabel.args = args;

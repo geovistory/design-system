@@ -30,7 +30,7 @@ export class GeovEntityList {
       <Host>
         <ion-list lines="full">
           {this.items?.map(item => (
-            <ion-item href={item.entityUri+this.urlAppend} target="_blank" rel="noreferrer">
+            <ion-item href={item.entityUri + this.urlAppend} target="_blank" rel="noreferrer">
               <ion-label>
                 <h2>{item.entityLabel}</h2>
                 <p>{item.classLabel}</p>

@@ -10,7 +10,7 @@ export class GeovCarousel {
   containerEl: HTMLElement;
   paginationEl: HTMLElement;
   /** array of image URLs passed to src attribute of the <img src="">  */
-  @Prop({mutable:true}) images: string[];
+  @Prop({ mutable: true }) images: string[];
 
   componentDidRender() {
     const infinitLoop: SwiperOptions = {

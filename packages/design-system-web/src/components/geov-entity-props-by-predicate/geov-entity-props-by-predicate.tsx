@@ -53,88 +53,111 @@ LIMIT ${pageSize} OFFSET ${offset}
 })
 export class GeovEntityPropsByPredicate {
   /**
-  * label
-  */
+   * label
+   */
   @Prop() entityId: string;
   /**
-  * label
-  */
+   * label
+   */
   @Prop() props: Binding<string>;
-   /**
+  /**
    * label
    */
-   @Prop() isOutgoing: boolean;
-   /**
+  @Prop() isOutgoing: boolean;
+  /**
    * label
    */
-   @Prop() pageSize = 10;
-   /**
+  @Prop() pageSize = 10;
+  /**
    * label
    */
-   @Prop() sparqlEndpoint: string;
-   /**
+  @Prop() sparqlEndpoint: string;
+  /**
    * language
    * prints the label with the language or english, if not found, e.g. 'en'
    */
-   @Prop() language: string;
+  @Prop() language: string;
 
-   @State() properties: Binding<string>[];
+  @State() properties: Binding<string>[];
 
-   @State() pageIndex = 0;
+  @State() pageIndex = 0;
 
-   @Event() pageChanged: EventEmitter<PageEvent>;
-   
-   async componentWillLoad() {
+  @Event() pageChanged: EventEmitter<PageEvent>;
+
+  async componentWillLoad() {
     this.pageReload(this.isOutgoing);
   }
 
-  changePage(pageEvent: GeovPaginatorCustomEvent<PageEvent>){
+  changePage(pageEvent: GeovPaginatorCustomEvent<PageEvent>) {
     this.pageIndex = pageEvent.detail.pageIndex;
     this.pageReload(this.isOutgoing);
   }
 
   pageReload(isOutgoing: boolean) {
-    if(isOutgoing){
-      var qr = qrOutgoingProps(this.props.predicate.value, this.entityId, this.pageSize, this.pageIndex);
+    let qr: string;
+    if (isOutgoing) {
+      qr = qrOutgoingProps(this.props.predicate.value, this.entityId, this.pageSize, this.pageIndex);
+    } else {
+      qr = qrIncomingProps(this.props.predicate.value, this.entityId, this.pageSize, this.pageIndex);
     }
-    else{
-      var qr = qrIncomingProps(this.props.predicate.value, this.entityId, this.pageSize, this.pageIndex);
-    }
-    sparqlJson<Binding<string>>(this.sparqlEndpoint, qr)
-      .then(res => {
-        this.properties = res?.results?.bindings;
-        console.log(this.properties);
-        console.log(qr);
-      }
-    );
+    sparqlJson<Binding<string>>(this.sparqlEndpoint, qr).then(res => {
+      this.properties = res?.results?.bindings;
+    });
   }
 
   render() {
     return (
       <Host>
-        <ion-list>  
+        <ion-list>
           <ion-item color="light" lines="none">
-            <ion-label>{this.props.predicateLabel?.value} {this.props.count && Number(this.props.count?.value) > 10 ? '('+this.props.count.value+')' : ''}</ion-label>
+            <ion-label>
+              {this.props.predicateLabel?.value} {this.props.count && Number(this.props.count?.value) > 10 ? '(' + this.props.count.value + ')' : ''}
+            </ion-label>
           </ion-item>
-          {this.properties?.map((property) => {
-            return <ion-item lines="none" href={property.subject.value}>
-                {property.subject?.datatype == "http://www.opengis.net/ont/geosparql#wktLiteral" && <ion-label><geov-display-geosparl-wktliteral value={property.subject?.value}></geov-display-geosparl-wktliteral></ion-label>}
-                {property.subjectType?.value == "http://www.w3.org/2006/time#DateTimeDescription" && <ion-label><h2><geov-display-time-datetimedescription entityId={property.subject?.value.replace("http://geovistory.org/resource/", "") } sparqlEndpoint={this.sparqlEndpoint}></geov-display-time-datetimedescription></h2><p>DateTimeDescription</p></ion-label>}
-                {property.subject?.datatype != "http://www.opengis.net/ont/geosparql#wktLiteral" && property.subjectType?.value != "http://www.w3.org/2006/time#DateTimeDescription" && <ion-label><h2>{property.subjectLabel?.value || '(no label)'}</h2><p>{property.subjectTypeLabel?.value }</p></ion-label>}
-            </ion-item>
+          {this.properties?.map(property => {
+            return (
+              <ion-item lines="none" href={property.subject.value}>
+                {property.subject?.datatype == 'http://www.opengis.net/ont/geosparql#wktLiteral' && (
+                  <ion-label>
+                    <geov-display-geosparl-wktliteral value={property.subject?.value}></geov-display-geosparl-wktliteral>
+                  </ion-label>
+                )}
+                {property.subjectType?.value == 'http://www.w3.org/2006/time#DateTimeDescription' && (
+                  <ion-label>
+                    <h2>
+                      <geov-display-time-datetimedescription
+                        entityId={property.subject?.value.replace('http://geovistory.org/resource/', '')}
+                        sparqlEndpoint={this.sparqlEndpoint}
+                      ></geov-display-time-datetimedescription>
+                    </h2>
+                    <p>DateTimeDescription</p>
+                  </ion-label>
+                )}
+                {property.subject?.datatype != 'http://www.opengis.net/ont/geosparql#wktLiteral' &&
+                  property.subjectType?.value != 'http://www.w3.org/2006/time#DateTimeDescription' && (
+                    <ion-label>
+                      <h2>{property.subjectLabel?.value || '(no label)'}</h2>
+                      <p>{property.subjectTypeLabel?.value}</p>
+                    </ion-label>
+                  )}
+              </ion-item>
+            );
           })}
-          {this.props.count && Number(this.props.count.value) > 1 &&
+          {this.props.count && Number(this.props.count.value) > 1 && (
             <ion-item lines="none">
-              {Number(this.props.count?.value) > this.pageSize && // If there are exactly or less than 'pageSize' lines, no paginator is needed
-                <geov-paginator length={Number(this.props.count.value)} pageSize={this.pageSize} pageIndex={this.pageIndex} onPageChanged={(ev) => this.changePage(ev)}></geov-paginator>
-              }
+              {Number(this.props.count?.value) > this.pageSize && ( // If there are exactly or less than 'pageSize' lines, no paginator is needed
+                <geov-paginator
+                  length={Number(this.props.count.value)}
+                  pageSize={this.pageSize}
+                  pageIndex={this.pageIndex}
+                  onPageChanged={ev => this.changePage(ev)}
+                ></geov-paginator>
+              )}
             </ion-item>
-          }
+          )}
         </ion-list>
         <slot></slot>
       </Host>
     );
   }
-
 }
-

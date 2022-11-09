@@ -237,7 +237,6 @@ export const c5 = `
 function sparqlJson<T>(url: string, query: string): Promise<SparqlRes<T>>
 `;
 
-
 export const c6 = `
 ...
 const qrLabel = (id: string) => \`

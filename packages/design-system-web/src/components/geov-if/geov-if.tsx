@@ -106,7 +106,6 @@ export class GeovIf {
   }
 
   render() {
-
     const display = this.data.showChildren ? 'initital' : 'none';
 
     return (

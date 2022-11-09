@@ -25,32 +25,29 @@ LIMIT 10
   tag: 'geov-display-time-datetimedescription',
   shadow: true,
 })
-
 export class GeovDisplayTimeDatetimedescription {
   @Prop() sparqlEndpoint: string;
   @Prop() entityId: string;
-  @State() year: String;
-  @State() month: String;
-  @State() day: String;
+  @State() year: string;
+  @State() month: string;
+  @State() day: string;
 
   async componentWillLoad() {
-    sparqlJson<Binding<string>>(this.sparqlEndpoint, qrPropertiesDateTimeDescription(this.entityId))
-      .then(res => {
-        res?.results?.bindings.forEach(b => {
-          if(b.predicate.value == "http://www.w3.org/2006/time#day"){
-            this.day = b.object.value.replace("---", "");
-          }
-          if(b.predicate.value == "http://www.w3.org/2006/time#month"){
-            this.month = b.object.value.replace("--", "");
-          }
-          if(b.predicate.value == "http://www.w3.org/2006/time#year"){
-            this.year = b.object.value;
-          }
-        });
-      }
-    );
+    sparqlJson<Binding<string>>(this.sparqlEndpoint, qrPropertiesDateTimeDescription(this.entityId)).then(res => {
+      res?.results?.bindings.forEach(b => {
+        if (b.predicate.value == 'http://www.w3.org/2006/time#day') {
+          this.day = b.object.value.replace('---', '');
+        }
+        if (b.predicate.value == 'http://www.w3.org/2006/time#month') {
+          this.month = b.object.value.replace('--', '');
+        }
+        if (b.predicate.value == 'http://www.w3.org/2006/time#year') {
+          this.year = b.object.value;
+        }
+      });
+    });
   }
-  
+
   render() {
     return (
       <Host>
@@ -59,5 +56,4 @@ export class GeovDisplayTimeDatetimedescription {
       </Host>
     );
   }
-
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter';
 import { GeovCode, IonApp, IonButton, IonContent, IonGrid } from '../../../.storybook/stencil-generated/component';
 import { files } from './tutorial.snippets';
 export default {
@@ -10,7 +9,8 @@ export default {
       'storybook/docs/panel': {
         hidden: true,
       },
-    },    options: { showPanel: false },
+    },
+    options: { showPanel: false },
   },
 };
 
