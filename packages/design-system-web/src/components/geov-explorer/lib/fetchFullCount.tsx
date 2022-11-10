@@ -34,11 +34,11 @@ WHERE {
 };
 
 export async function fetchFullCount(sparqlEndpoint: string, searchString: string, classUris: string[]) {
-  return sparqlJson<{ count: SparqlBinding<number> }>(sparqlEndpoint, getQuery(searchString, classUris))
+  return sparqlJson<{ count: SparqlBinding }>(sparqlEndpoint, getQuery(searchString, classUris))
     .then(res => {
       // process and return the data in case of success
       const x: FullCountData = {
-        count: res?.results?.bindings?.[0]?.count.value,
+        count: Number(res?.results?.bindings?.[0]?.count.value),
         loading: false,
       };
       return x;

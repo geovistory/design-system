@@ -87,7 +87,7 @@ export class GeovIf {
       .replace(/&gt;/g, '>')
       .replace(/&quot;/g, '"')
       .replace(/&apos;/g, "'");
-    return sparqlJson<{ condition: SparqlBinding<string> }>(this.sparqlEndpoint, q)
+    return sparqlJson<{ condition: SparqlBinding }>(this.sparqlEndpoint, q)
       .then(res => {
         const showChildren = res?.results?.bindings?.[0]?.condition?.value === 'true' ? true : false;
         return {

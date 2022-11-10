@@ -90,7 +90,7 @@ export class GeovDataFetchExample {
    */
   @Method()
   async fetchData(): Promise<GeovDataFetchExampleData> {
-    return sparqlJson<{ o: SparqlBinding<string> }>(this.sparqlEndpoint, qrLabel(this.entityId))
+    return sparqlJson<{ o: SparqlBinding }>(this.sparqlEndpoint, qrLabel(this.entityId))
       .then(res => {
         // process and return the data in case of success
         return {

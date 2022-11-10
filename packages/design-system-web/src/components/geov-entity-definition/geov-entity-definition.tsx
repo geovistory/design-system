@@ -76,7 +76,7 @@ export class GeovEntityDefinition {
    * @returns a Promise with the data for this component
    */
   async fetchData(): Promise<GeovEntityDefinitionData> {
-    return sparqlJson<{ definition: SparqlBinding<string> }>(this.sparqlEndpoint, qrLabel(this.entityId))
+    return sparqlJson<{ definition: SparqlBinding }>(this.sparqlEndpoint, qrLabel(this.entityId))
       .then(res => {
         return {
           ...this.data,

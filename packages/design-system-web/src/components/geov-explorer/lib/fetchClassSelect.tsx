@@ -24,11 +24,11 @@ HAVING(?label != "")
 `;
 
 export async function fetchClassSelect(sparqlEndpoint: string, searchString: string) {
-  return sparqlJson<{ class: SparqlBinding<string>; label: SparqlBinding<string>; count: SparqlBinding<number> }>(sparqlEndpoint, getQuery(searchString))
+  return sparqlJson<{ class: SparqlBinding; label: SparqlBinding; count: SparqlBinding }>(sparqlEndpoint, getQuery(searchString))
     .then(res => {
       // process and return the data in case of success
       const x: ClassSelectData = {
-        items: res?.results?.bindings?.map(b => ({ classLabel: b.label.value, classUri: b.class.value, instanceCount: b.count.value })),
+        items: res?.results?.bindings?.map(b => ({ classLabel: b.label.value, classUri: b.class.value, instanceCount: Number(b.count.value) })),
         loading: false,
       };
       return x;

@@ -1,6 +1,5 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { sparqlJson } from '../../lib/sparqlJson';
-import { Binding } from '../geov-entity-properties/geov-entity-properties';
+import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
 
 const qrPropertiesDateTimeDescription = (id: string) => `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -21,19 +20,34 @@ geov:${id} ?predicate ?object .
 LIMIT 10
 `;
 
+export interface DateBinding {
+  subject: SparqlBinding;
+  predicate: SparqlBinding;
+  object: SparqlBinding;
+}
+
 @Component({
   tag: 'geov-display-time-datetimedescription',
   shadow: true,
 })
 export class GeovDisplayTimeDatetimedescription {
-  @Prop() sparqlEndpoint: string;
+  /**
+   * entityId
+   * ID number of entity, e.g. 'iXXX'
+   */
   @Prop() entityId: string;
-  @State() year: string;
-  @State() month: string;
+  /**
+   * sparqlEndpoint
+   * URL of the sparql endpoint
+   */
+  @Prop() sparqlEndpoint: string;
   @State() day: string;
+  @State() month: string;
+  @State() year: string;
 
   async componentWillLoad() {
-    sparqlJson<Binding<string>>(this.sparqlEndpoint, qrPropertiesDateTimeDescription(this.entityId)).then(res => {
+    console.log(qrPropertiesDateTimeDescription(this.entityId));
+    sparqlJson<DateBinding>(this.sparqlEndpoint, qrPropertiesDateTimeDescription(this.entityId)).then(res => {
       res?.results?.bindings.forEach(b => {
         if (b.predicate.value == 'http://www.w3.org/2006/time#day') {
           this.day = b.object.value.replace('---', '');

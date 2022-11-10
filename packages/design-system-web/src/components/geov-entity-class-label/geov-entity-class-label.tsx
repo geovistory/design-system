@@ -77,7 +77,7 @@ export class GeovEntityClassLabel {
    * @returns a Promise with the data for this component
    */
   async fetchData(): Promise<GeovEntityLabelData> {
-    return sparqlJson<{ classLabel: SparqlBinding<string> }>(this.sparqlEndpoint, qrLabel(this.entityId))
+    return sparqlJson<{ classLabel: SparqlBinding }>(this.sparqlEndpoint, qrLabel(this.entityId))
       .then(res => {
         return {
           ...this.data,
