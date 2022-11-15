@@ -12,7 +12,7 @@ PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX ontome: <https://ontome.net/ontology/>
 PREFIX geov: <http://geovistory.org/resource/>
 
-SELECT ?predicate ?predicateLabel ?object (count(distinct ?object) as ?count) 
+SELECT ?predicate ?predicateLabel ?object (count(distinct ?object) as ?count)
 WHERE {
   geov:${id} ?predicate ?object .
   OPTIONAL {?predicate rdfs:label ?predicateLabel}
@@ -32,7 +32,7 @@ PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX ontome: <https://ontome.net/ontology/>
 PREFIX geov: <http://geovistory.org/resource/>
 
-SELECT   ?predicate ?predicateLabel (count(distinct ?subject) as ?count) 
+SELECT   ?predicate ?predicateLabel (count(distinct ?subject) as ?count)
 WHERE {
  ?subject ?predicate geov:${id} .
  ?predicate rdfs:label ?predicateLabel
@@ -75,6 +75,24 @@ export class GeovEntityProperties {
    */
   @Prop() fetchBeforeRender: boolean;
 
+  /**
+   * uriRegex
+   * Optional regex with capturing groups to transform
+   * the uri into the desired url. To use together
+   * with uriReplace.
+   */
+  @Prop() uriRegex?: string;
+  /**
+   * uriReplace
+   * String used to replace the uriRegex.
+   *
+   * Example (pseudo code):
+   * const uriRegex = (http:\/\/geovistory.org\/)(.*)
+   * const uriReplace = "http://dev.geovistory.org/resource/$2?p=123"
+   * http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+   */
+  @Prop() uriReplace?: string;
+
   @State() outgoingPropsWithCount: PropsWithCountBindings[];
 
   @State() incomingPropsWithCount: PropsWithCountBindings[];
@@ -104,6 +122,8 @@ export class GeovEntityProperties {
                 ? b.predicateLabel?.value
                 : b.predicate.value.replace('http://www.w3.org/2000/01/rdf-schema#', 'rdfs:').replace('http://www.w3.org/1999/02/22-rdf-syntax-ns#', 'rdf:')
             }
+            uriRegex={this.uriRegex}
+            uriReplace={this.uriReplace}
           ></geov-entity-props-by-predicate>
         ))}
         {this.incomingPropsWithCount?.map(b => (
@@ -118,6 +138,8 @@ export class GeovEntityProperties {
                 ? b.predicateLabel?.value
                 : b.predicate.value.replace('http://www.w3.org/2000/01/rdf-schema#', 'rdfs:').replace('http://www.w3.org/1999/02/22-rdf-syntax-ns#', 'rdf:')
             }
+            uriRegex={this.uriRegex}
+            uriReplace={this.uriReplace}
           ></geov-entity-props-by-predicate>
         ))}
         <slot></slot>

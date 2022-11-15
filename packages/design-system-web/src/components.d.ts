@@ -233,6 +233,14 @@ export namespace Components {
           * sparqlEndpoint URL of the sparql endpoint
          */
         "sparqlEndpoint": string;
+        /**
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
+         */
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
     }
     interface GeovEntityPropsByPredicate {
         /**
@@ -684,6 +692,14 @@ declare namespace LocalJSX {
           * sparqlEndpoint URL of the sparql endpoint
          */
         "sparqlEndpoint"?: string;
+        /**
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
+         */
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
     }
     interface GeovEntityPropsByPredicate {
         /**

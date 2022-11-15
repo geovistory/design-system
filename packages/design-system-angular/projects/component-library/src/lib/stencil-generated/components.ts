@@ -286,13 +286,13 @@ export declare interface GeovEntityProperties extends Components.GeovEntityPrope
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['entityId', 'fetchBeforeRender', 'language', 'sparqlEndpoint']
+  inputs: ['entityId', 'fetchBeforeRender', 'language', 'sparqlEndpoint', 'uriRegex', 'uriReplace']
 })
 @Component({
   selector: 'geov-entity-properties',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['entityId', 'fetchBeforeRender', 'language', 'sparqlEndpoint']
+  inputs: ['entityId', 'fetchBeforeRender', 'language', 'sparqlEndpoint', 'uriRegex', 'uriReplace']
 })
 export class GeovEntityProperties {
   protected el: HTMLElement;
