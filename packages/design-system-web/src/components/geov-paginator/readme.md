@@ -27,6 +27,7 @@
 
 ### Used by
 
+ - [geov-entity-props-by-predicate](../geov-entity-props-by-predicate)
  - [geov-explorer](../geov-explorer)
 
 ### Depends on
@@ -44,6 +45,7 @@ graph TD;
   geov-paginator --> ion-button
   geov-paginator --> ion-icon
   ion-button --> ion-ripple-effect
+  geov-entity-props-by-predicate --> geov-paginator
   geov-explorer --> geov-paginator
   style geov-paginator fill:#f9f,stroke:#333,stroke-width:4px
 ```

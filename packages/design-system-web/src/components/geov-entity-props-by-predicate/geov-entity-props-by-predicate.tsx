@@ -49,6 +49,7 @@ interface Bindings {
   entityLabel?: SparqlBinding;
   entityType?: SparqlBinding;
   entityTypeLabel?: SparqlBinding;
+  dt?: SparqlBinding;
   count: SparqlBinding;
 }
 
@@ -99,6 +100,23 @@ export class GeovEntityPropsByPredicate {
    */
   @Prop() predicateLabel?: string;
   /**
+   * uriRegex
+   * Optional regex with capturing groups to transform
+   * the uri into the desired url. To use together
+   * with uriReplace.
+   */
+  @Prop() uriRegex?: string;
+  /**
+   * uriReplace
+   * String used to replace the uriRegex.
+   *
+   * Example (pseudo code):
+   * const uriRegex = (http:\/\/geovistory.org\/)(.*)
+   * const uriReplace = "http://dev.geovistory.org/resource/$2?p=123"
+   * http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+   */
+  @Prop() uriReplace?: string;
+  /**
    * pageIndex
    * Index of the page. By default: 0 = First page.
    */
@@ -138,46 +156,113 @@ export class GeovEntityPropsByPredicate {
   render() {
     return (
       <Host>
-        <ion-list>
-          <ion-item color="light" lines="none">
+        <ion-list lines="none">
+          {/* Header */}
+          <ion-item color="light">
             <ion-label>
               {this.predicateLabel} {this.totalCount && this.totalCount > this.pageSize ? '(' + this.totalCount + ')' : ''}
             </ion-label>
           </ion-item>
-          {this.entities?.map(entity => (
-            <ion-item lines="none" href={entity.entity.value}>
-              {entity.entity?.datatype == 'http://www.opengis.net/ont/geosparql#wktLiteral' ? (
-                <ion-label>
-                  <geov-display-geosparql-wktliteral value={entity.entity?.value}></geov-display-geosparql-wktliteral>
-                </ion-label>
-              ) : entity.entityType?.value == 'http://www.w3.org/2006/time#DateTimeDescription' ? (
-                <ion-label>
-                  <h2>
-                    <geov-display-time-datetimedescription
-                      entityId={entity.entity?.value.replace('http://geovistory.org/resource/', '')}
-                      sparqlEndpoint={this.sparqlEndpoint}
-                    ></geov-display-time-datetimedescription>
-                  </h2>
-                  <p>DateTimeDescription</p>
-                </ion-label>
-              ) : (
-                <ion-label>
-                  <h2>{entity.entityLabel?.value || '(no label)'}</h2>
-                  <p>{entity.entityTypeLabel?.value}</p>
-                </ion-label>
-              )}
-            </ion-item>
-          ))}
-          {this.totalCount && this.totalCount > 1 && (
-            <ion-item lines="none">
-              {this.totalCount > this.pageSize && ( // If there are exactly or less than 'pageSize' lines, no paginator is needed
-                <geov-paginator length={this.totalCount} pageSize={this.pageSize} pageIndex={this.pageIndex} onPageChanged={ev => this.changePage(ev)}></geov-paginator>
-              )}
-            </ion-item>
-          )}
+
+          {/* List */}
+          {this.entities?.map(entity => this.renderItem(entity))}
+
+          {/* Paginator */}
+          {this.totalCount && this.totalCount > 1 && this.renderPaginator()}
         </ion-list>
         <slot></slot>
       </Host>
+    );
+  }
+
+  private renderItem(item: Bindings): JSX.Element {
+    const isUri = item.entity.type === 'uri';
+    let url = item.entity.value;
+    console.log('asd');
+    if (this.uriRegex && this.uriReplace) {
+      const r = new RegExp(this.uriRegex);
+      url = url.replace(r, this.uriReplace);
+    }
+    if (isUri) return <ion-item href={url}> {this.renderUri(item)} </ion-item>;
+    return <ion-item> {this.renderLiteral(item)}</ion-item>;
+  }
+
+  private renderUri(item: Bindings) {
+    const klass = item.entityType?.value;
+
+    switch (klass) {
+      case 'http://www.w3.org/2006/time#DateTimeDescription':
+        return this.renderDateTimeDescription(item);
+
+      // here you can add more class-specific renderings
+
+      default:
+        return this.renderGenericEntity(item);
+    }
+  }
+
+  private renderGenericEntity(item: Bindings) {
+    return (
+      <ion-label>
+        <h2>{item.entityLabel?.value || '(no label)'}</h2>
+        <p>{item.entityTypeLabel?.value}</p>
+      </ion-label>
+    );
+  }
+
+  private renderDateTimeDescription(item: Bindings) {
+    return (
+      <ion-label>
+        <h2>
+          <geov-display-time-datetimedescription
+            entityId={item.entity?.value.replace('http://geovistory.org/resource/', '')}
+            sparqlEndpoint={this.sparqlEndpoint}
+          ></geov-display-time-datetimedescription>
+        </h2>
+        <p>DateTimeDescription</p>
+      </ion-label>
+    );
+  }
+
+  private renderLiteral(item: Bindings) {
+    const dataType = item.dt?.value;
+
+    switch (dataType) {
+      case 'http://www.opengis.net/ont/geosparql#wktLiteral':
+        return this.renderWktLiteral(item);
+      case 'http://www.w3.org/1999/02/22-rdf-syntax-ns#langString':
+        return this.renderLangStringLiteral(item);
+      default:
+        return this.renderXsdStringLiteral(item);
+    }
+  }
+
+  private renderWktLiteral(item: Bindings) {
+    return (
+      <ion-label>
+        <geov-display-geosparql-wktliteral value={item.entity?.value}></geov-display-geosparql-wktliteral>
+      </ion-label>
+    );
+  }
+  private renderXsdStringLiteral(item: Bindings) {
+    return <ion-label>{item.entity.value}</ion-label>;
+  }
+  private renderLangStringLiteral(item: Bindings) {
+    return (
+      <ion-label>
+        <h2>{item.entity.value}</h2>
+        <p>@{item.entity?.['xml:lang']}</p>
+      </ion-label>
+    );
+  }
+
+  private renderPaginator(): JSX.Element {
+    return (
+      <ion-item lines="none">
+        {this.totalCount > this.pageSize && ( // If there are exactly or less than 'pageSize' lines, no paginator is needed
+          <geov-paginator length={this.totalCount} pageSize={this.pageSize} pageIndex={this.pageIndex} onPageChanged={ev => this.changePage(ev)}></geov-paginator>
+        )}
+      </ion-item>
     );
   }
 }

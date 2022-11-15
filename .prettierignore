@@ -4,9 +4,11 @@ dist/
 dist-transpiled/
 temp/
 generated/
+stencil-generated/
 public/
 storybook/
 storybook-static/
+CHANGELOG.md
 
 packages/design-system-web/src/components.d.ts
 packages/icons/src/icons.ts

@@ -16,6 +16,7 @@ import { GeovDataFetchExampleData } from "./components/geov-data-fetch-example/g
 import { SparqlBinding } from "./lib/sparqlJson";
 import { GeovEntityListItem } from "./components/geov-entity-list/geov-entity-list";
 import { PageEvent } from "./components/geov-paginator/geov-paginator";
+import { PageEvent as PageEvent1 } from "./components/geov-paginator/geov-paginator";
 
 export namespace Components {
     export interface IonAccordion extends IonComponents.IonAccordion { }
@@ -160,6 +161,22 @@ export namespace Components {
          */
         "sparqlEndpoint": string;
     }
+    interface GeovDisplayGeosparqlWktliteral {
+        /**
+          * the opengis value
+         */
+        "value": string;
+    }
+    interface GeovDisplayTimeDatetimedescription {
+        /**
+          * entityId ID number of entity, e.g. 'iXXX'
+         */
+        "entityId": string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+    }
     interface GeovEntityClassLabel {
         "_ssrId"?: string;
         /**
@@ -201,6 +218,63 @@ export namespace Components {
           * urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760
          */
         "urlAppend": string;
+    }
+    interface GeovEntityProperties {
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId": string;
+        "fetchBeforeRender": boolean;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language": string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+    }
+    interface GeovEntityPropsByPredicate {
+        /**
+          * entityId ID number of entity, e.g. 'iXXX'
+         */
+        "entityId": string;
+        /**
+          * isOutgoing determine if this property is outgoing or incoming
+         */
+        "isOutgoing": boolean;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language": string;
+        /**
+          * pageSize Page size if too many resultat for a property, default 10
+         */
+        "pageSize": number;
+        /**
+          * predicateLabel Label of the predicate
+         */
+        "predicateLabel"?: string;
+        /**
+          * predicateUri URI of the predicate
+         */
+        "predicateUri": string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+        /**
+          * totalCount Total number of entity from this property
+         */
+        "totalCount": number;
+        /**
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
+         */
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
     }
     interface GeovExplorer {
         /**
@@ -258,6 +332,10 @@ export interface GeovClassSelectPopupCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLGeovClassSelectPopupElement;
 }
+export interface GeovEntityPropsByPredicateCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLGeovEntityPropsByPredicateElement;
+}
 export interface GeovPaginatorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLGeovPaginatorElement;
@@ -299,6 +377,18 @@ declare global {
         prototype: HTMLGeovDataFetchExampleElement;
         new (): HTMLGeovDataFetchExampleElement;
     };
+    interface HTMLGeovDisplayGeosparqlWktliteralElement extends Components.GeovDisplayGeosparqlWktliteral, HTMLStencilElement {
+    }
+    var HTMLGeovDisplayGeosparqlWktliteralElement: {
+        prototype: HTMLGeovDisplayGeosparqlWktliteralElement;
+        new (): HTMLGeovDisplayGeosparqlWktliteralElement;
+    };
+    interface HTMLGeovDisplayTimeDatetimedescriptionElement extends Components.GeovDisplayTimeDatetimedescription, HTMLStencilElement {
+    }
+    var HTMLGeovDisplayTimeDatetimedescriptionElement: {
+        prototype: HTMLGeovDisplayTimeDatetimedescriptionElement;
+        new (): HTMLGeovDisplayTimeDatetimedescriptionElement;
+    };
     interface HTMLGeovEntityClassLabelElement extends Components.GeovEntityClassLabel, HTMLStencilElement {
     }
     var HTMLGeovEntityClassLabelElement: {
@@ -322,6 +412,18 @@ declare global {
     var HTMLGeovEntityListElement: {
         prototype: HTMLGeovEntityListElement;
         new (): HTMLGeovEntityListElement;
+    };
+    interface HTMLGeovEntityPropertiesElement extends Components.GeovEntityProperties, HTMLStencilElement {
+    }
+    var HTMLGeovEntityPropertiesElement: {
+        prototype: HTMLGeovEntityPropertiesElement;
+        new (): HTMLGeovEntityPropertiesElement;
+    };
+    interface HTMLGeovEntityPropsByPredicateElement extends Components.GeovEntityPropsByPredicate, HTMLStencilElement {
+    }
+    var HTMLGeovEntityPropsByPredicateElement: {
+        prototype: HTMLGeovEntityPropsByPredicateElement;
+        new (): HTMLGeovEntityPropsByPredicateElement;
     };
     interface HTMLGeovExplorerElement extends Components.GeovExplorer, HTMLStencilElement {
     }
@@ -354,10 +456,14 @@ declare global {
         "geov-class-select-popup": HTMLGeovClassSelectPopupElement;
         "geov-code": HTMLGeovCodeElement;
         "geov-data-fetch-example": HTMLGeovDataFetchExampleElement;
+        "geov-display-geosparql-wktliteral": HTMLGeovDisplayGeosparqlWktliteralElement;
+        "geov-display-time-datetimedescription": HTMLGeovDisplayTimeDatetimedescriptionElement;
         "geov-entity-class-label": HTMLGeovEntityClassLabelElement;
         "geov-entity-definition": HTMLGeovEntityDefinitionElement;
         "geov-entity-label": HTMLGeovEntityLabelElement;
         "geov-entity-list": HTMLGeovEntityListElement;
+        "geov-entity-properties": HTMLGeovEntityPropertiesElement;
+        "geov-entity-props-by-predicate": HTMLGeovEntityPropsByPredicateElement;
         "geov-explorer": HTMLGeovExplorerElement;
         "geov-if": HTMLGeovIfElement;
         "geov-paginator": HTMLGeovPaginatorElement;
@@ -506,6 +612,22 @@ declare namespace LocalJSX {
          */
         "sparqlEndpoint"?: string;
     }
+    interface GeovDisplayGeosparqlWktliteral {
+        /**
+          * the opengis value
+         */
+        "value"?: string;
+    }
+    interface GeovDisplayTimeDatetimedescription {
+        /**
+          * entityId ID number of entity, e.g. 'iXXX'
+         */
+        "entityId"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+    }
     interface GeovEntityClassLabel {
         "_ssrId"?: string;
         /**
@@ -547,6 +669,67 @@ declare namespace LocalJSX {
           * urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760
          */
         "urlAppend"?: string;
+    }
+    interface GeovEntityProperties {
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId"?: string;
+        "fetchBeforeRender"?: boolean;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+    }
+    interface GeovEntityPropsByPredicate {
+        /**
+          * entityId ID number of entity, e.g. 'iXXX'
+         */
+        "entityId"?: string;
+        /**
+          * isOutgoing determine if this property is outgoing or incoming
+         */
+        "isOutgoing"?: boolean;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language"?: string;
+        /**
+          * pageChanged Listener of change page
+         */
+        "onPageChanged"?: (event: GeovEntityPropsByPredicateCustomEvent<PageEvent>) => void;
+        /**
+          * pageSize Page size if too many resultat for a property, default 10
+         */
+        "pageSize"?: number;
+        /**
+          * predicateLabel Label of the predicate
+         */
+        "predicateLabel"?: string;
+        /**
+          * predicateUri URI of the predicate
+         */
+        "predicateUri"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+        /**
+          * totalCount Total number of entity from this property
+         */
+        "totalCount"?: number;
+        /**
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
+         */
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
     }
     interface GeovExplorer {
         /**
@@ -599,10 +782,14 @@ declare namespace LocalJSX {
         "geov-class-select-popup": GeovClassSelectPopup;
         "geov-code": GeovCode;
         "geov-data-fetch-example": GeovDataFetchExample;
+        "geov-display-geosparql-wktliteral": GeovDisplayGeosparqlWktliteral;
+        "geov-display-time-datetimedescription": GeovDisplayTimeDatetimedescription;
         "geov-entity-class-label": GeovEntityClassLabel;
         "geov-entity-definition": GeovEntityDefinition;
         "geov-entity-label": GeovEntityLabel;
         "geov-entity-list": GeovEntityList;
+        "geov-entity-properties": GeovEntityProperties;
+        "geov-entity-props-by-predicate": GeovEntityPropsByPredicate;
         "geov-explorer": GeovExplorer;
         "geov-if": GeovIf;
         "geov-paginator": GeovPaginator;
@@ -714,10 +901,14 @@ declare module "@stencil/core" {
             "geov-class-select-popup": LocalJSX.GeovClassSelectPopup & JSXBase.HTMLAttributes<HTMLGeovClassSelectPopupElement>;
             "geov-code": LocalJSX.GeovCode & JSXBase.HTMLAttributes<HTMLGeovCodeElement>;
             "geov-data-fetch-example": LocalJSX.GeovDataFetchExample & JSXBase.HTMLAttributes<HTMLGeovDataFetchExampleElement>;
+            "geov-display-geosparql-wktliteral": LocalJSX.GeovDisplayGeosparqlWktliteral & JSXBase.HTMLAttributes<HTMLGeovDisplayGeosparqlWktliteralElement>;
+            "geov-display-time-datetimedescription": LocalJSX.GeovDisplayTimeDatetimedescription & JSXBase.HTMLAttributes<HTMLGeovDisplayTimeDatetimedescriptionElement>;
             "geov-entity-class-label": LocalJSX.GeovEntityClassLabel & JSXBase.HTMLAttributes<HTMLGeovEntityClassLabelElement>;
             "geov-entity-definition": LocalJSX.GeovEntityDefinition & JSXBase.HTMLAttributes<HTMLGeovEntityDefinitionElement>;
             "geov-entity-label": LocalJSX.GeovEntityLabel & JSXBase.HTMLAttributes<HTMLGeovEntityLabelElement>;
             "geov-entity-list": LocalJSX.GeovEntityList & JSXBase.HTMLAttributes<HTMLGeovEntityListElement>;
+            "geov-entity-properties": LocalJSX.GeovEntityProperties & JSXBase.HTMLAttributes<HTMLGeovEntityPropertiesElement>;
+            "geov-entity-props-by-predicate": LocalJSX.GeovEntityPropsByPredicate & JSXBase.HTMLAttributes<HTMLGeovEntityPropsByPredicateElement>;
             "geov-explorer": LocalJSX.GeovExplorer & JSXBase.HTMLAttributes<HTMLGeovExplorerElement>;
             "geov-if": LocalJSX.GeovIf & JSXBase.HTMLAttributes<HTMLGeovIfElement>;
             "geov-paginator": LocalJSX.GeovPaginator & JSXBase.HTMLAttributes<HTMLGeovPaginatorElement>;

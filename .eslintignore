@@ -4,6 +4,7 @@ dist/
 dist-transpiled/
 temp/
 generated/
+stencil-generated/
 public/
 storybook/
 storybook-static/
