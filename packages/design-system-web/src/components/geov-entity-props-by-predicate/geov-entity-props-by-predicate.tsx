@@ -178,7 +178,6 @@ export class GeovEntityPropsByPredicate {
   private renderItem(item: Bindings): JSX.Element {
     const isUri = item.entity.type === 'uri';
     let url = item.entity.value;
-    console.log('asd');
     if (this.uriRegex && this.uriReplace) {
       const r = new RegExp(this.uriRegex);
       url = url.replace(r, this.uriReplace);

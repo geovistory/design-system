@@ -20,6 +20,14 @@ const args: JSX.GeovEntityProperties = {
 };
 EntityPropertiesTeEn.args = args;
 
+export const EntityPropertiesRammekensToJakarta = Template.bind({});
+const args1: JSX.GeovEntityProperties = {
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  entityId: 'i152157',
+  language: 'en',
+  fetchBeforeRender: true,
+};
+EntityPropertiesRammekensToJakarta.args = args1;
 export const EntityPropertiesPeIt = Template.bind({});
 const args2: JSX.GeovEntityProperties = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,

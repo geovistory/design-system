@@ -12,12 +12,12 @@ PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX ontome: <https://ontome.net/ontology/>
 PREFIX geov: <http://geovistory.org/resource/>
 
-SELECT ?predicate ?predicateLabel ?object (count(distinct ?object) as ?count)
+SELECT ?predicate ?predicateLabel (count(distinct ?object) as ?count)
 WHERE {
   geov:${id} ?predicate ?object .
   OPTIONAL {?predicate rdfs:label ?predicateLabel}
 }
-GROUP BY ?predicate ?predicateLabel ?object
+GROUP BY ?predicate ?predicateLabel
 LIMIT 100
 `;
 
@@ -44,7 +44,6 @@ LIMIT 100
 export interface PropsWithCountBindings {
   predicate: SparqlBinding;
   predicateLabel?: SparqlBinding;
-  object?: SparqlBinding;
   count: SparqlBinding;
 }
 
