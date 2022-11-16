@@ -25,13 +25,14 @@ const args2: JSX.GeovEntityList = {
 };
 EntityListLoading.args = args2;
 
-export const EntityListUrlAppend = Template.bind({});
+export const EntityListUrlReplace = Template.bind({});
 
 const args3: JSX.GeovEntityList = {
   items: [
     { entityLabel: 'Maria Zimmermann', classLabel: 'Person', entityUri: 'http://geovistory.org/resource/i90000', classUri: 'https://ontome.net/ontology/c21' },
     { entityLabel: 'Max Zimmermann', classLabel: 'Person', entityUri: 'http://geovistory.org/resource/i90000', classUri: 'https://ontome.net/ontology/c21' },
   ],
-  urlAppend: '?p=84760',
+  uriRegex: '(http://geovistory.org/resource/)(.*)',
+  uriReplace: 'http://dev.geovistory.org/resource/$2?p=123',
 };
-EntityListUrlAppend.args = args3;
+EntityListUrlReplace.args = args3;

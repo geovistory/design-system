@@ -1,4 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
+import { regexReplace } from '../../lib/regexReplace';
 export interface GeovEntityListItem {
   entityUri: string;
   entityLabel: string;
@@ -15,10 +16,22 @@ export class GeovEntityList {
   @Prop() loading?: boolean;
   @Prop() defaultPageSize = 5;
   /**
-   * urlAppend will be appended to the URIs used as links to the geovistory entity pages.
-   * Example: '?p=84760' will be redirected to the entity page of project 84760
+   * uriRegex
+   * Optional regex with capturing groups to transform
+   * the uri into the desired url. To use together
+   * with uriReplace.
    */
-  @Prop() urlAppend = '';
+  @Prop() uriRegex?: string;
+  /**
+   * uriReplace
+   * String used to replace the uriRegex.
+   *
+   * Example (pseudo code):
+   * const uriRegex = (http:\/\/geovistory.org\/)(.*)
+   * const uriReplace = "http://dev.geovistory.org/resource/$2?p=123"
+   * http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+   */
+  @Prop() uriReplace?: string;
 
   render() {
     const iterator = [];
@@ -30,7 +43,7 @@ export class GeovEntityList {
       <Host>
         <ion-list lines="full">
           {this.items?.map(item => (
-            <ion-item href={item.entityUri + this.urlAppend} target="_blank" rel="noreferrer">
+            <ion-item href={regexReplace(item.entityUri, this.uriRegex, this.uriReplace)} target="_blank" rel="noreferrer">
               <ion-label>
                 <h2>{item.entityLabel}</h2>
                 <p>{item.classLabel}</p>

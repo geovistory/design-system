@@ -265,13 +265,13 @@ export declare interface GeovEntityList extends Components.GeovEntityList {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['defaultPageSize', 'items', 'loading', 'urlAppend']
+  inputs: ['defaultPageSize', 'items', 'loading', 'uriRegex', 'uriReplace']
 })
 @Component({
   selector: 'geov-entity-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['defaultPageSize', 'items', 'loading', 'urlAppend']
+  inputs: ['defaultPageSize', 'items', 'loading', 'uriRegex', 'uriReplace']
 })
 export class GeovEntityList {
   protected el: HTMLElement;
@@ -336,13 +336,13 @@ export declare interface GeovExplorer extends Components.GeovExplorer {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint', 'urlAppend']
+  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint', 'uriRegex', 'uriReplace']
 })
 @Component({
   selector: 'geov-explorer',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint', 'urlAppend']
+  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint', 'uriRegex', 'uriReplace']
 })
 export class GeovExplorer {
   protected el: HTMLElement;

@@ -1,7 +1,8 @@
-import { Component, Host, h, Prop, State, EventEmitter, Event } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Host, Prop, State } from '@stencil/core';
 import { GeovPaginatorCustomEvent } from '../../components';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
 import { PageEvent } from '../geov-paginator/geov-paginator';
+import { regexReplace } from '../../lib/regexReplace';
 
 const qrOutgoingProps = (predicateId: string, objectId: string, pageSize: number, offset: number) => `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -177,11 +178,9 @@ export class GeovEntityPropsByPredicate {
 
   private renderItem(item: Bindings): JSX.Element {
     const isUri = item.entity.type === 'uri';
-    let url = item.entity.value;
-    if (this.uriRegex && this.uriReplace) {
-      const r = new RegExp(this.uriRegex);
-      url = url.replace(r, this.uriReplace);
-    }
+    const regex = this.uriRegex;
+    const replace = this.uriReplace;
+    const url = regexReplace(item.entity.value, regex, replace);
     if (isUri) return <ion-item href={url}> {this.renderUri(item)} </ion-item>;
     return <ion-item> {this.renderLiteral(item)}</ion-item>;
   }
