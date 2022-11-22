@@ -3,6 +3,10 @@ import { GeovPaginatorCustomEvent } from '../../components';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
 import { PageEvent } from '../geov-paginator/geov-paginator';
 import { regexReplace } from '../../lib/regexReplace';
+import { getSSRData } from '../../lib/ssr/getSSRData';
+import { setSSRData } from '../../lib/ssr/setSSRData';
+import { setSSRId } from '../../lib/ssr/setSSRId';
+import { FetchResponse } from '../../lib/FetchResponse';
 
 const qrOutgoingProps = (predicateId: string, objectId: string, pageSize: number, offset: number) => `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -54,12 +58,25 @@ interface Bindings {
   count: SparqlBinding;
 }
 
+export interface GeovEntityPropsByPredicateData extends FetchResponse {
+  entities?: Bindings[];
+  error?: boolean;
+}
+
 @Component({
   tag: 'geov-entity-props-by-predicate',
   styleUrl: 'geov-entity-props-by-predicate.css',
   shadow: true,
 })
 export class GeovEntityPropsByPredicate {
+  /**
+   * declares an _ssrId property that is reflected as attribute
+   */
+  @Prop({ reflect: true }) _ssrId?: string;
+  /**
+   * declares data as state
+   */
+  @State() data?: GeovEntityPropsByPredicateData;
   /**
    * entityId
    * ID number of entity, e.g. 'iXXX'
@@ -133,25 +150,73 @@ export class GeovEntityPropsByPredicate {
    */
   @Event() pageChanged: EventEmitter<PageEvent>;
 
+  /*
+   * assigns an id to the component
+   */
+  constructor() {
+    setSSRId(this);
+  }
+
   async componentWillLoad() {
+    /**
+     * try to get data from ssr
+     */
+    this.data = getSSRData(this._ssrId);
+
+    // if no data found, fetchData
+    if (!this.data) {
+      // set data to loading (in immutable way)
+      this.data = { loading: true };
+
+      await this.pageReload()
+        .then(d => {
+          this.data = d;
+          setSSRData(this._ssrId, d);
+          return d;
+        })
+        .catch(d => {
+          this.data = d;
+          return d;
+        });
+    }
     this.pageReload();
   }
 
   changePage(pageEvent: GeovPaginatorCustomEvent<PageEvent>) {
     this.pageIndex = pageEvent.detail.pageIndex;
-    this.pageReload();
+    this.data = { loading: true };
+    this.pageReload()
+      .then(d => {
+        this.data = d;
+        setSSRData(this._ssrId, d);
+        return d;
+      })
+      .catch(d => {
+        this.data = d;
+        return d;
+      });
   }
 
-  pageReload() {
+  async pageReload(): Promise<GeovEntityPropsByPredicateData> {
     let qr: string;
     if (this.isOutgoing) {
       qr = qrOutgoingProps(this.predicateUri, this.entityId, this.pageSize, this.pageIndex);
     } else {
       qr = qrIncomingProps(this.predicateUri, this.entityId, this.pageSize, this.pageIndex);
     }
-    sparqlJson<Bindings>(this.sparqlEndpoint, qr).then(res => {
-      this.entities = res?.results?.bindings;
-    });
+    return sparqlJson<Bindings>(this.sparqlEndpoint, qr)
+      .then(res => {
+        return {
+          entities: res?.results?.bindings,
+          loading: false,
+        };
+      })
+      .catch(_ => {
+        return {
+          error: true,
+          loading: false,
+        };
+      });
   }
 
   render() {
@@ -166,7 +231,7 @@ export class GeovEntityPropsByPredicate {
           </ion-item>
 
           {/* List */}
-          {this.entities?.map(entity => this.renderItem(entity))}
+          {this.data?.entities?.map(entity => this.renderItem(entity))}
 
           {/* Paginator */}
           {this.totalCount && this.totalCount > 1 && this.renderPaginator()}
@@ -178,10 +243,12 @@ export class GeovEntityPropsByPredicate {
 
   private renderItem(item: Bindings): JSX.Element {
     const isUri = item.entity.type === 'uri';
-    const regex = this.uriRegex;
-    const replace = this.uriReplace;
-    const url = regexReplace(item.entity.value, regex, replace);
-    if (isUri) return <ion-item href={url}> {this.renderUri(item)} </ion-item>;
+    if (isUri) {
+      const regex = this.uriRegex;
+      const replace = this.uriReplace;
+      const url = regexReplace(item.entity.value, regex, replace);
+      return <ion-item href={url}> {this.renderUri(item)} </ion-item>;
+    }
     return <ion-item> {this.renderLiteral(item)}</ion-item>;
   }
 
