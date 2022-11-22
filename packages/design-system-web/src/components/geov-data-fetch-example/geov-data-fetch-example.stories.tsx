@@ -20,5 +20,6 @@ export const DataFetchExamlePreloaded = Template.bind({});
 const preloaded: JSX.GeovDataFetchExample = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   entityId: 'i315800',
+  _ssrId: 'data-fetch-examle-1',
 };
 DataFetchExamlePreloaded.args = preloaded;
