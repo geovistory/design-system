@@ -78,6 +78,10 @@ export class GeovEntityPropsByPredicate {
    */
   @State() data?: GeovEntityPropsByPredicateData;
   /**
+   * if true, componentWillLoad() returns a promise for the loading of all data [default: true]
+   */
+  @Prop() fetchBeforeRender = true;
+  /**
    * entityId
    * ID number of entity, e.g. 'iXXX'
    */
@@ -158,12 +162,14 @@ export class GeovEntityPropsByPredicate {
   }
 
   async componentWillLoad() {
-    /**
-     * try to get data from ssr
-     */
-    this.data = getSSRData(this._ssrId);
+    if (this.fetchBeforeRender) {
+      /**
+       * try to get data from ssr
+       */
+      this.data = getSSRData(this._ssrId);
+    }
 
-    // if no data found, fetchData
+    // if no data found (or fetchBeforeRender is false), fetchData
     if (!this.data) {
       // set data to loading (in immutable way)
       this.data = { loading: true };
@@ -179,7 +185,6 @@ export class GeovEntityPropsByPredicate {
           return d;
         });
     }
-    this.pageReload();
   }
 
   changePage(pageEvent: GeovPaginatorCustomEvent<PageEvent>) {

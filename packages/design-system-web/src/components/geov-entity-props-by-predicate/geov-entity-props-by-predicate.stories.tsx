@@ -18,6 +18,7 @@ const args: JSX.GeovEntityPropsByPredicate = {
   language: 'en',
   predicateUri: 'https://ontome.net/ontology/p1359',
   predicateLabel: 'participated in',
+  fetchBeforeRender: false,
 };
 EntityPropsWithPerson.args = args;
 
@@ -32,6 +33,7 @@ const args1: JSX.GeovEntityPropsByPredicate = {
   predicateLabel: 'participated in',
   uriRegex: '(http://geovistory.org/resource/)(.*)',
   uriReplace: 'http://dev.geovistory.org/resource/$2?p=123',
+  fetchBeforeRender: false,
 };
 EntityPropsWithUriRegex.args = args1;
 
@@ -44,6 +46,7 @@ const args2: JSX.GeovEntityPropsByPredicate = {
   language: 'en',
   predicateUri: 'https://ontome.net/ontology/p1335',
   predicateLabel: 'had departure place',
+  fetchBeforeRender: false,
 };
 EntityPropsWithPaginatedShipVoyages.args = args2;
 
@@ -56,6 +59,7 @@ const args3: JSX.GeovEntityPropsByPredicate = {
   language: 'en',
   predicateUri: 'https://ontome.net/ontology/p150',
   predicateLabel: 'end of the begin',
+  fetchBeforeRender: false,
 };
 EntityPropsWithDateTimeDescription.args = args3;
 
@@ -68,8 +72,10 @@ const args4: JSX.GeovEntityPropsByPredicate = {
   language: 'en',
   predicateUri: 'https://ontome.net/ontology/p1113',
   predicateLabel: 'refers to name',
+  fetchBeforeRender: false,
 };
 EntityPropsWithXsdString.args = args4;
+EntityPropsWithDateTimeDescription.args = args3;
 
 export const EntityPropsWithLangString = Template.bind({});
 const args5: JSX.GeovEntityPropsByPredicate = {
@@ -80,5 +86,20 @@ const args5: JSX.GeovEntityPropsByPredicate = {
   language: 'en',
   predicateUri: 'https://ontome.net/ontology/p1761',
   predicateLabel: 'has short title',
+  fetchBeforeRender: false,
 };
 EntityPropsWithLangString.args = args5;
+
+export const EntityPropsWithXsdStringPreloaded = Template.bind({});
+const args6: JSX.GeovEntityPropsByPredicate = {
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  entityId: 'i215635',
+  isOutgoing: true,
+  totalCount: 1,
+  language: 'en',
+  predicateUri: 'https://ontome.net/ontology/p1113',
+  predicateLabel: 'refers to name',
+  fetchBeforeRender: true,
+  _ssrId: 'data-entity-props-by-predicate-1',
+};
+EntityPropsWithXsdStringPreloaded.args = args6;
