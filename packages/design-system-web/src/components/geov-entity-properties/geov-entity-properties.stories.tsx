@@ -16,7 +16,7 @@ const args: JSX.GeovEntityProperties = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   entityId: 'i151089',
   language: 'en',
-  fetchBeforeRender: true,
+  fetchBeforeRender: false,
 };
 EntityPropertiesTeEn.args = args;
 
@@ -25,7 +25,7 @@ const args1: JSX.GeovEntityProperties = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   entityId: 'i152157',
   language: 'en',
-  fetchBeforeRender: true,
+  fetchBeforeRender: false,
 };
 EntityPropertiesRammekensToJakarta.args = args1;
 export const EntityPropertiesPeIt = Template.bind({});
@@ -33,7 +33,7 @@ const args2: JSX.GeovEntityProperties = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   entityId: 'i209502',
   language: 'en',
-  fetchBeforeRender: true,
+  fetchBeforeRender: false,
 };
 EntityPropertiesPeIt.args = args2;
 
@@ -42,7 +42,7 @@ const args3: JSX.GeovEntityProperties = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   entityId: 'i253594',
   language: 'en',
-  fetchBeforeRender: true,
+  fetchBeforeRender: false,
 };
 EntityPropertiesPresence.args = args3;
 
@@ -51,6 +51,16 @@ const args4: JSX.GeovEntityProperties = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   entityId: 'i151089ts',
   language: 'en',
-  fetchBeforeRender: true,
+  fetchBeforeRender: false,
 };
 EntityPropertiesTimeSpan.args = args4;
+
+export const EntityPropertiesRammekensToJakartaPreloaded = Template.bind({});
+const args5: JSX.GeovEntityProperties = {
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  entityId: 'i152157',
+  language: 'en',
+  fetchBeforeRender: true,
+  _ssrId: 'data-entity-properties-1',
+};
+EntityPropertiesRammekensToJakartaPreloaded.args = args5;

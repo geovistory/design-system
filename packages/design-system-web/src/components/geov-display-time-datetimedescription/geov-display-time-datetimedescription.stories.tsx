@@ -12,6 +12,16 @@ const Template = (args: JSX.GeovDisplayTimeDatetimedescription) => <GeovDisplayT
 export const DisplayTimeDatetimedescription = Template.bind({});
 const args: JSX.GeovDisplayTimeDatetimedescription = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  fetchBeforeRender: false,
   entityId: 'i271905',
 };
 DisplayTimeDatetimedescription.args = args;
+
+export const DisplayTimeDatetimedescriptionPreloaded = Template.bind({});
+const args2: JSX.GeovDisplayTimeDatetimedescription = {
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  entityId: 'i271905',
+  fetchBeforeRender: true,
+  _ssrId: 'data-display-time-datetimedescription-1',
+};
+DisplayTimeDatetimedescriptionPreloaded.args = args2;

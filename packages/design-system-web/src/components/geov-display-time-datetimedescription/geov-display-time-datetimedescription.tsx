@@ -1,4 +1,9 @@
-import { Component, Host, h, Prop, State } from '@stencil/core';
+/* eslint-disable prettier/prettier */
+import { Component, Host, h, Prop, State, Method } from '@stencil/core';
+import { getSSRData } from '../../lib/ssr/getSSRData';
+import { setSSRData } from '../../lib/ssr/setSSRData';
+import { setSSRId } from '../../lib/ssr/setSSRId';
+import { FetchResponse } from '../../lib/FetchResponse';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
 
 const qrPropertiesDateTimeDescription = (id: string) => `
@@ -26,11 +31,25 @@ export interface DateBinding {
   object: SparqlBinding;
 }
 
+export interface DateData extends FetchResponse {
+  year?: string;
+  month?: string;
+  day?: string;
+  error?: boolean;
+}
+
 @Component({
   tag: 'geov-display-time-datetimedescription',
   shadow: true,
 })
 export class GeovDisplayTimeDatetimedescription {
+  /**
+   * _ssrId is short for server side rendering id and
+   * identifies this component and the fetched data
+   * respectively. Set this only if you want to
+   * enable this component to fetch serve side
+   */
+  @Prop({ reflect: true }) _ssrId?: string;
   /**
    * entityId
    * ID number of entity, e.g. 'iXXX'
@@ -41,31 +60,80 @@ export class GeovDisplayTimeDatetimedescription {
    * URL of the sparql endpoint
    */
   @Prop() sparqlEndpoint: string;
-  @State() day: string;
-  @State() month: string;
-  @State() year: string;
+  /*
+   * fetchBeforRender
+   * if true, componentWillLoad() returns a promise for the loading of all data [default: true]
+   */
+  @Prop() fetchBeforeRender = true;
+
+  @State() data?: DateData;
+
+  constructor() {
+    setSSRId(this);
+  }
 
   async componentWillLoad() {
-    console.log(qrPropertiesDateTimeDescription(this.entityId));
-    sparqlJson<DateBinding>(this.sparqlEndpoint, qrPropertiesDateTimeDescription(this.entityId)).then(res => {
-      res?.results?.bindings.forEach(b => {
-        if (b.predicate.value == 'http://www.w3.org/2006/time#day') {
-          this.day = b.object.value.replace('---', '');
-        }
-        if (b.predicate.value == 'http://www.w3.org/2006/time#month') {
-          this.month = b.object.value.replace('--', '');
-        }
-        if (b.predicate.value == 'http://www.w3.org/2006/time#year') {
-          this.year = b.object.value;
-        }
+    if (this.fetchBeforeRender) {
+      /**
+       * try to get data from ssr
+       */
+      this.data = getSSRData(this._ssrId);
+    }
+
+    if (!this.data) {
+      // set data to loading (in immutable way)
+      this.data = { loading: true };
+
+      // fetch data via http
+      await this.fetchData() // <- await this promise!
+        .then(d => {
+          this.data = d;
+          setSSRData(this._ssrId, d);
+          return d;
+        })
+        .catch(d => {
+          this.data = d;
+          return d;
+        });
+    }
+  }
+
+  /**
+   * Do the sparql request(s)
+   * @returns a Promise with the data for this component
+   */
+  @Method()
+  async fetchData(): Promise<DateData> {
+    let d: DateData = { loading: true };
+    await sparqlJson<DateBinding>(this.sparqlEndpoint, qrPropertiesDateTimeDescription(this.entityId))
+      .then(res => {
+        res?.results?.bindings.forEach(b => {
+          const txt = b.object.value;
+          const numb = txt.replace(/\D/g, ''); //Remove the superfluous and keep the number
+          if (b.predicate.value == 'http://www.w3.org/2006/time#day') {
+            d.day = numb;
+          }
+          if (b.predicate.value == 'http://www.w3.org/2006/time#month') {
+            d.month = numb;
+          }
+          if (b.predicate.value == 'http://www.w3.org/2006/time#year') {
+            d.year = numb;
+          }
+        });
+      })
+      .catch(_ => {
+        d = {
+          loading: false,
+          error: true,
+        };
       });
-    });
+    return d;
   }
 
   render() {
     return (
       <Host>
-        {this.year}-{this.month}-{this.day}
+        {this.data.year}-{this.data.month}-{this.data.day}
         <slot></slot>
       </Host>
     );

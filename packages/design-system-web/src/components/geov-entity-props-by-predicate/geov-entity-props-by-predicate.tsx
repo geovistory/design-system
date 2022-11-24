@@ -205,9 +205,9 @@ export class GeovEntityPropsByPredicate {
   async pageReload(): Promise<GeovEntityPropsByPredicateData> {
     let qr: string;
     if (this.isOutgoing) {
-      qr = qrOutgoingProps(this.predicateUri, this.entityId, this.pageSize, this.pageIndex);
+      qr = qrOutgoingProps(this.predicateUri, this.entityId, this.pageSize, this.pageIndex * this.pageSize);
     } else {
-      qr = qrIncomingProps(this.predicateUri, this.entityId, this.pageSize, this.pageIndex);
+      qr = qrIncomingProps(this.predicateUri, this.entityId, this.pageSize, this.pageIndex * this.pageSize);
     }
     return sparqlJson<Bindings>(this.sparqlEndpoint, qr)
       .then(res => {
@@ -252,6 +252,13 @@ export class GeovEntityPropsByPredicate {
       const regex = this.uriRegex;
       const replace = this.uriReplace;
       const url = regexReplace(item.entity.value, regex, replace);
+      if (!url.includes('geovistory.org')) {
+        return (
+          <ion-item href={url} target="_blank">
+            {this.renderUri(item)}
+          </ion-item>
+        );
+      }
       return <ion-item href={url}> {this.renderUri(item)} </ion-item>;
     }
     return <ion-item> {this.renderLiteral(item)}</ion-item>;
