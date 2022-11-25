@@ -121,6 +121,8 @@ export class GeovEntityProperties {
        * try to get data from ssr
        */
       this.data = getSSRData(this._ssrId);
+      this.data.outgoingPropsWithCount = this.filterByLanguage(this.data.outgoingPropsWithCount, this.language);
+      this.data.incomingPropsWithCount = this.filterByLanguage(this.data.incomingPropsWithCount, this.language);
     }
 
     if (!this.data) {
@@ -142,6 +144,18 @@ export class GeovEntityProperties {
   }
 
   private filterByLanguage(props: PropsWithCountBindings[], lang: string) {
+    //If we have 2 labels in the same language, concatenate for one and deactivate for the other
+    props.map(pr => {
+      props
+        .filter(anpr => {
+          return pr.predicate.value == anpr.predicate.value && pr != anpr && pr.predicateLabel['xml:lang'] == anpr.predicateLabel['xml:lang'];
+        })
+        .forEach(anpr => {
+          pr.predicateLabel.value += ', ' + anpr.predicateLabel.value;
+          anpr.predicateLabel['xml:lang'] = 'deactivate'; //It's just a trick
+        });
+    });
+
     return props.filter(pr => {
       // Find if there are other identical predicates
       if (
