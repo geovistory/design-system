@@ -19,7 +19,10 @@ PREFIX geov: <http://geovistory.org/resource/>
 SELECT ?predicate ?predicateLabel (count(distinct ?object) as ?count)
 WHERE {
   geov:${id} ?predicate ?object .
-  OPTIONAL {?predicate rdfs:label ?predicateLabel . FILTER(LANG(?predicateLabel) IN ("${language}", "en"))} .
+  OPTIONAL {
+    ?predicate rdfs:label ?predicateLabel .
+    FILTER(LANG(?predicateLabel) IN ("${language}", "en"))
+  } .
 }
 GROUP BY ?predicate ?predicateLabel
 LIMIT 100
@@ -39,8 +42,10 @@ PREFIX geov: <http://geovistory.org/resource/>
 SELECT   ?predicate ?predicateLabel (count(distinct ?subject) as ?count)
 WHERE {
  ?subject ?predicate geov:${id} .
- ?predicate rdfs:label ?predicateLabel . 
- FILTER(LANG(?predicateLabel) IN ("${language}", "en"))
+ OPTIONAL {
+    ?predicate ^owl:inverseOf/rdfs:label ?predicateLabel .
+    FILTER(LANG(?predicateLabel) IN ("${language}", "en"))
+  }
 }
 GROUP BY ?predicate ?predicateLabel
 LIMIT 100
