@@ -7,8 +7,9 @@ import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
 import { FetchResponse } from '../../lib/FetchResponse';
+import { Color } from '@ionic/core';
 
-const qrOutgoingProps = (predicateId: string, objectId: string, pageSize: number, offset: number) => `
+const qrProps = (predicateId: string, objectId: string, pageSize: number, offset: number) => `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -25,26 +26,6 @@ WHERE {
   OPTIONAL {?entity rdfs:label ?entityLabel .}
   OPTIONAL {?entity rdf:type ?entityType . OPTIONAL {?entityType rdfs:label ?entityTypeLabel .}}
   BIND (datatype(?entity) AS ?dt) .
-}
-LIMIT ${pageSize} OFFSET ${offset}
-`;
-
-const qrIncomingProps = (predicateId: string, objectId: string, pageSize: number, offset: number) => `
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX xml: <http://www.w3.org/XML/1998/namespace>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX geo: <http://www.opengis.net/ont/geosparql#>
-PREFIX time: <http://www.w3.org/2006/time#>
-PREFIX ontome: <https://ontome.net/ontology/>
-PREFIX geov: <http://geovistory.org/resource/>
-
-SELECT DISTINCT ?entity ?entityLabel ?entityType ?entityTypeLabel ?dt
-WHERE {
-  ?entity <${predicateId}> geov:${objectId} .
-  OPTIONAL {?entity rdfs:label ?entityLabel .}
-  OPTIONAL {?entity rdf:type ?entityType . OPTIONAL {?entityType rdfs:label ?entityTypeLabel .}}
 }
 LIMIT ${pageSize} OFFSET ${offset}
 `;
@@ -92,20 +73,15 @@ export class GeovEntityPropsByPredicate {
    */
   @Prop() sparqlEndpoint: string;
   /**
-   * isOutgoing
-   * determine if this property is outgoing or incoming
-   */
-  @Prop() isOutgoing: boolean;
-  /**
    * totalCount
    * Total number of entity from this property
    */
   @Prop() totalCount: number;
   /**
    * pageSize
-   * Page size if too many resultat for a property, default 10
+   * Page size if too many resultat for a property, default 3
    */
-  @Prop() pageSize = 10;
+  @Prop() pageSize = 3;
   /**
    * language
    * prints the label with the language or english, if not found, e.g. 'en'
@@ -138,6 +114,9 @@ export class GeovEntityPropsByPredicate {
    * http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
    */
   @Prop() uriReplace?: string;
+
+  @Prop() color: Color = '';
+
   /**
    * pageIndex
    * Index of the page. By default: 0 = First page.
@@ -203,12 +182,8 @@ export class GeovEntityPropsByPredicate {
   }
 
   async pageReload(): Promise<GeovEntityPropsByPredicateData> {
-    let qr: string;
-    if (this.isOutgoing) {
-      qr = qrOutgoingProps(this.predicateUri, this.entityId, this.pageSize, this.pageIndex * this.pageSize);
-    } else {
-      qr = qrIncomingProps(this.predicateUri, this.entityId, this.pageSize, this.pageIndex * this.pageSize);
-    }
+    const qr = qrProps(this.predicateUri, this.entityId, this.pageSize, this.pageIndex * this.pageSize);
+
     return sparqlJson<Bindings>(this.sparqlEndpoint, qr)
       .then(res => {
         return {
@@ -225,23 +200,24 @@ export class GeovEntityPropsByPredicate {
   }
 
   render() {
+    const showPaginator = this.totalCount > this.pageSize;
+    const contentMinHeight = showPaginator ? this.pageSize * 62 : 0;
     return (
       <Host>
-        <ion-list lines="none">
+        <ion-card color={this.color}>
           {/* Header */}
-          <ion-item color="light">
-            <ion-label>
+          <ion-card-header>
+            <ion-card-subtitle>
               {this.predicateLabel} {this.totalCount && this.totalCount > this.pageSize ? '(' + this.totalCount + ')' : ''}
-            </ion-label>
-          </ion-item>
-
+            </ion-card-subtitle>
+          </ion-card-header>
           {/* List */}
-          {this.data?.entities?.map(entity => this.renderItem(entity))}
-
+          <ion-card-content style={{ 'min-height': `${contentMinHeight}px` }}>
+            <ion-list lines="none">{this.data?.entities?.map(entity => this.renderItem(entity))}</ion-list>
+          </ion-card-content>
           {/* Paginator */}
-          {this.totalCount && this.totalCount > 1 && this.renderPaginator()}
-        </ion-list>
-        <slot></slot>
+          {showPaginator && this.renderPaginator()}
+        </ion-card>
       </Host>
     );
   }
@@ -252,16 +228,14 @@ export class GeovEntityPropsByPredicate {
       const regex = this.uriRegex;
       const replace = this.uriReplace;
       const url = regexReplace(item.entity.value, regex, replace);
-      if (!url.includes('geovistory.org')) {
-        return (
-          <ion-item href={url} target="_blank">
-            {this.renderUri(item)}
-          </ion-item>
-        );
-      }
-      return <ion-item href={url}> {this.renderUri(item)} </ion-item>;
+      const target = url.includes('geovistory.org') ? '' : '_blank';
+      return (
+        <ion-item color={this.color} href={url} target={target}>
+          {this.renderUri(item)}
+        </ion-item>
+      );
     }
-    return <ion-item> {this.renderLiteral(item)}</ion-item>;
+    return <ion-item color={this.color}> {this.renderLiteral(item)}</ion-item>;
   }
 
   private renderUri(item: Bindings) {
@@ -335,10 +309,8 @@ export class GeovEntityPropsByPredicate {
 
   private renderPaginator(): JSX.Element {
     return (
-      <ion-item lines="none">
-        {this.totalCount > this.pageSize && ( // If there are exactly or less than 'pageSize' lines, no paginator is needed
-          <geov-paginator length={this.totalCount} pageSize={this.pageSize} pageIndex={this.pageIndex} onPageChanged={ev => this.changePage(ev)}></geov-paginator>
-        )}
+      <ion-item color={this.color} lines="none">
+        <geov-paginator color={this.color} length={this.totalCount} pageSize={this.pageSize} pageIndex={this.pageIndex} onPageChanged={ev => this.changePage(ev)}></geov-paginator>
       </ion-item>
     );
   }

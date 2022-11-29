@@ -1,0 +1,61 @@
+:host {
+  display: block;
+}
+
+.jumbo {
+  background: var(--header-background, linear-gradient(to right, #121FCF 0%, #2591CF 100%));
+  color: var(--header-color, #fff);
+  padding: var(--ion-padding);
+}
+
+.jumbo>h2 {
+  margin-bottom: 6px;
+}
+
+.jumbo>h1 {
+  margin-top: 0;
+}
+
+geov-entity-properties {
+  margin: 24px 0;
+}
+
+.columns-1 {
+  --column-count: 1;
+  --column-gap: 0px;
+}
+
+.columns-2 {
+  --column-count: 1;
+  --column-gap: 0px;
+}
+
+.columns-3 {
+  --column-count: 1;
+  --column-gap: 0px;
+}
+
+
+/* sm and up */
+@media screen and (min-width: 420px) {}
+
+/* sm and up */
+@media screen and (min-width: 576px) {}
+
+/* md and up */
+@media screen and (min-width: 768px) {}
+
+/* lg and up */
+@media screen and (min-width: 992px) {
+  .columns-3,
+  .columns-2 {
+    --column-count: 2;
+  }
+}
+
+/* xl and up */
+@media screen and (min-width: 1200px) {
+  .columns-3 {
+    --column-count: 3;
+  }
+}

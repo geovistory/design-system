@@ -1,4 +1,18 @@
 @import '../../../node_modules/@ionic/core/css/core.css';
+
 :host {
   display: block;
+  column-count: var(--column-count);
+  column-gap: var(--column-gap);
+  column-rule-style: var(--column-rule-style);
+  column-rule-width: var(--column-rule-width);
+  column-rule-color: var(--column-rule-color);
+  column-rule: var(--column-rule);
+  column-span: var(--column-span);
+  column-width: var(--column-width);
 }
+
+geov-entity-props-by-predicate:first-of-type {
+  margin-top: var(--margin-top-first-item, -24px);
+}
+
