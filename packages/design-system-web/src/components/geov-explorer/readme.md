@@ -88,6 +88,7 @@ graph TD;
   geov-entity-list --> ion-item
   geov-entity-list --> ion-label
   geov-entity-list --> ion-skeleton-text
+  geov-paginator --> ion-item
   geov-paginator --> ion-note
   geov-paginator --> ion-buttons
   geov-paginator --> ion-button

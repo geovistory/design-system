@@ -32,73 +32,85 @@ export class GeovEntity {
   render() {
     return (
       <Host>
-        <div class="jumbo">
-          <h2>
-            <geov-entity-class-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint}></geov-entity-class-label>
-          </h2>
-          <h1>
-            <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint}></geov-entity-label>
-          </h1>
-          <p>
-            <geov-entity-definition entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint}></geov-entity-definition>
-          </p>
+        <div class="container">
+          <div class="header">
+            <ion-grid fixed={true} class="ion-padding">
+              <h5>
+                <geov-entity-class-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint}></geov-entity-class-label>
+              </h5>
+              <h1>
+                <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint}></geov-entity-label>
+              </h1>
+              <p>
+                <geov-entity-definition entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint}></geov-entity-definition>
+              </p>
+            </ion-grid>
+          </div>
+          <div class="section">
+            <ion-grid fixed={true}>
+              {/* <div class="ion-padding">
+              <ion-segment value="default">
+                <ion-segment-button value="default">
+                  <ion-icon icon={listCircleOutline}></ion-icon>
+                </ion-segment-button>
+                <ion-segment-button value="graph">
+                  <ion-icon icon={gitNetworkOutline}></ion-icon>
+                </ion-segment-button>
+              </ion-segment>
+            </div> */}
+
+              {/* Basics */}
+              <geov-entity-properties
+                predicateInclude={this.predicatesBasic.join(',')}
+                class="columns-2"
+                sparqlEndpoint={this.sparqlEndpoint}
+                entityId={this.entityId}
+                language={'en'}
+                fetchBeforeRender={this.fetchBeforeRender}
+              ></geov-entity-properties>
+            </ion-grid>
+          </div>
+          <div class="section">
+            <ion-grid fixed={true}>
+              {/* Rest */}
+              <geov-entity-properties
+                predicateExclude={[...this.predicatesBasic, ...this.predicatesTime].join(',')}
+                class="columns-3"
+                sparqlEndpoint={this.sparqlEndpoint}
+                entityId={this.entityId}
+                language={'en'}
+                fetchBeforeRender={this.fetchBeforeRender}
+              ></geov-entity-properties>
+            </ion-grid>
+          </div>
+          <div class="section">
+            <ion-grid fixed={true}>
+              {/* Time */}
+              <geov-entity-properties
+                predicateInclude={this.predicatesTime.join(',')}
+                class="columns-1"
+                sparqlEndpoint={this.sparqlEndpoint}
+                entityId={this.entityId}
+                language={'en'}
+                fetchBeforeRender={this.fetchBeforeRender}
+              ></geov-entity-properties>
+            </ion-grid>
+          </div>
+          <div class="section">
+            <ion-grid fixed={true}>
+              <ion-card color="tertiary">
+                <ion-card-header>
+                  <ion-card-subtitle>Metadata</ion-card-subtitle>
+                </ion-card-header>
+
+                <ion-card-content>
+                  URI: <a href={`http://geovistory.org/resource/${this.entityId}`}>{`http://geovistory.org/resource/${this.entityId}`}</a>
+                </ion-card-content>
+              </ion-card>
+            </ion-grid>
+          </div>
+          <slot></slot>
         </div>
-        <ion-grid fixed={true}>
-          {/* <div class="ion-padding">
-            <ion-segment value="default">
-              <ion-segment-button value="default">
-                <ion-icon icon={listCircleOutline}></ion-icon>
-              </ion-segment-button>
-              <ion-segment-button value="graph">
-                <ion-icon icon={gitNetworkOutline}></ion-icon>
-              </ion-segment-button>
-            </ion-segment>
-          </div> */}
-
-          {/* Basics */}
-          <geov-entity-properties
-            predicateInclude={this.predicatesBasic.join(',')}
-            class="columns-2"
-            color="primary"
-            sparqlEndpoint={this.sparqlEndpoint}
-            entityId={this.entityId}
-            language={'en'}
-            fetchBeforeRender={this.fetchBeforeRender}
-          ></geov-entity-properties>
-
-          {/* Rest */}
-          <geov-entity-properties
-            predicateExclude={[...this.predicatesBasic, ...this.predicatesTime].join(',')}
-            class="columns-3"
-            color="tertiary"
-            sparqlEndpoint={this.sparqlEndpoint}
-            entityId={this.entityId}
-            language={'en'}
-            fetchBeforeRender={this.fetchBeforeRender}
-          ></geov-entity-properties>
-
-          {/* Time */}
-          <geov-entity-properties
-            predicateInclude={this.predicatesTime.join(',')}
-            class="columns-1"
-            color="secondary"
-            sparqlEndpoint={this.sparqlEndpoint}
-            entityId={this.entityId}
-            language={'en'}
-            fetchBeforeRender={this.fetchBeforeRender}
-          ></geov-entity-properties>
-
-          <ion-card color="secondary">
-            <ion-card-header>
-              <ion-card-subtitle>Metadata</ion-card-subtitle>
-            </ion-card-header>
-
-            <ion-card-content>
-              URI: <a href={`http://geovistory.org/resource/${this.entityId}`}>{`http://geovistory.org/resource/${this.entityId}`}</a>
-            </ion-card-content>
-          </ion-card>
-        </ion-grid>
-        <slot></slot>
       </Host>
     );
   }
