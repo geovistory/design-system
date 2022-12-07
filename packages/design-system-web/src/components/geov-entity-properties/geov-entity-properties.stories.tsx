@@ -28,6 +28,7 @@ const args1: JSX.GeovEntityProperties = {
   fetchBeforeRender: false,
 };
 EntityPropertiesRammekensToJakarta.args = args1;
+
 export const EntityPropertiesPeIt = Template.bind({});
 const args2: JSX.GeovEntityProperties = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
@@ -64,3 +65,36 @@ const args5: JSX.GeovEntityProperties = {
   _ssrId: 'data-entity-properties-1',
 };
 EntityPropertiesRammekensToJakartaPreloaded.args = args5;
+
+export const EntityPropertiesColorPrimary = Template.bind({});
+const args6: JSX.GeovEntityProperties = {
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  entityId: 'i152157',
+  language: 'en',
+  fetchBeforeRender: true,
+  _ssrId: 'data-entity-properties-1',
+  color: 'tertiary',
+};
+EntityPropertiesColorPrimary.args = args6;
+
+export const EntityPropertiesPredicateInclude = Template.bind({});
+const args7: JSX.GeovEntityProperties = {
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  entityId: 'i86177',
+  language: 'en',
+  color: 'tertiary',
+  fetchBeforeRender: true,
+  predicateInclude: ['http://www.w3.org/2000/01/rdf-schema#label', 'https://ontome.net/ontology/p1111i'].join(','),
+};
+EntityPropertiesPredicateInclude.args = args7;
+
+export const EntityPropertiesPredicateExclude = Template.bind({});
+const args8: JSX.GeovEntityProperties = {
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  entityId: 'i86177',
+  language: 'en',
+  color: 'tertiary',
+  fetchBeforeRender: true,
+  predicateExclude: ['http://www.w3.org/2000/01/rdf-schema#label', 'https://ontome.net/ontology/p1111i'].join(','),
+};
+EntityPropertiesPredicateExclude.args = args8;

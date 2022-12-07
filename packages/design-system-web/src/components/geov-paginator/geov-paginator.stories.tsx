@@ -20,3 +20,10 @@ const args1: JSX.GeovPaginator = {
   length: 60,
 };
 Paginator.args = args1;
+
+export const PaginatorColor = Template.bind({});
+const args2: JSX.GeovPaginator = {
+  length: 60,
+  color: 'tertiary',
+};
+PaginatorColor.args = args2;

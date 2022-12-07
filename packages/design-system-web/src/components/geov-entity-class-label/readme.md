@@ -14,6 +14,19 @@
 | `sparqlEndpoint` | `sparql-endpoint` | sparqlEndpoint URL of the sparql endpoint    | `string` | `undefined` |
 
 
+## Dependencies
+
+### Used by
+
+ - [geov-entity](../geov-entity)
+
+### Graph
+```mermaid
+graph TD;
+  geov-entity --> geov-entity-class-label
+  style geov-entity-class-label fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

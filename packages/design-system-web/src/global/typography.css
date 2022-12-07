@@ -146,7 +146,8 @@ h5 + h6 {
   h3 {
     /* 16px x 1.75 = 28px */
     /* font-size: 1.75rem; */
-    /* 16px x 1.5625 = 16px */
+
+    /* 16px x 1.5625 = 25px */
     font-size: 1.5625rem;
     /* font-size: 22px; */
   }

@@ -4,8 +4,62 @@ import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
 import { FetchResponse } from '../../lib/FetchResponse';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
+import { Color } from '@ionic/core';
 
-const qrOutgoingPropsWithCount = (id: string, language: string) => `
+const qrPropsWithCount = (id: string, language: string, predicateInclude?: string, predicateExclude?: string) => {
+  let selectClause: string;
+
+  // Function ot parse comma separated list of URI's
+  const parsePredicateList = (input: string): string[] => {
+    return input.split(',').map(rawPredicate => `${rawPredicate.trim()}`);
+  };
+
+  let filterClause = '';
+  if (predicateExclude) {
+    const excludePredicates = parsePredicateList(predicateExclude);
+    const predicates = excludePredicates.map(predicate => `"${predicate}"`);
+    filterClause = `FILTER (str(?predicate) NOT IN (
+      ${predicates.join(`,
+        `)}
+      ))`;
+  }
+
+  if (predicateInclude) {
+    const includePredicates = parsePredicateList(predicateInclude);
+    const unions = includePredicates.map(
+      predicate => `
+      {
+        SELECT (<${predicate}> as ?predicate) ?predicateLabel (count(distinct ?object) as ?count)
+        WHERE {
+          geov:${id} <${predicate}> ?object .
+          OPTIONAL {
+            <${predicate}> rdfs:label ?predicateLabel .
+            FILTER(LANG(?predicateLabel) IN ("${language}", "en"))
+          } .
+          ${filterClause}
+        }
+        GROUP BY ?predicate ?predicateLabel
+      }`,
+    );
+    selectClause = `SELECT * {
+      ${unions.join('\nUNION\n')}
+    }`;
+  } else {
+    selectClause = `
+    SELECT ?predicate ?predicateLabel (count(distinct ?object) as ?count)
+    WHERE {
+      geov:${id} ?predicate ?object .
+      OPTIONAL {
+        ?predicate rdfs:label ?predicateLabel .
+        FILTER(LANG(?predicateLabel) IN ("${language}", "en"))
+      } .
+      ${filterClause}
+    }
+    GROUP BY ?predicate ?predicateLabel
+    `;
+  }
+
+  return `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -16,35 +70,9 @@ PREFIX time: <http://www.w3.org/2006/time#>
 PREFIX ontome: <https://ontome.net/ontology/>
 PREFIX geov: <http://geovistory.org/resource/>
 
-SELECT ?predicate ?predicateLabel (count(distinct ?object) as ?count)
-WHERE {
-  geov:${id} ?predicate ?object .
-  OPTIONAL {?predicate rdfs:label ?predicateLabel . FILTER(LANG(?predicateLabel) IN ("${language}", "en"))} .
-}
-GROUP BY ?predicate ?predicateLabel
-LIMIT 100
+${selectClause}
 `;
-
-const qrIncomingPropsWithCount = (id: string, language: string) => `
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX xml: <http://www.w3.org/XML/1998/namespace>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX geo: <http://www.opengis.net/ont/geosparql#>
-PREFIX time: <http://www.w3.org/2006/time#>
-PREFIX ontome: <https://ontome.net/ontology/>
-PREFIX geov: <http://geovistory.org/resource/>
-
-SELECT   ?predicate ?predicateLabel (count(distinct ?subject) as ?count)
-WHERE {
- ?subject ?predicate geov:${id} .
- ?predicate rdfs:label ?predicateLabel . 
- FILTER(LANG(?predicateLabel) IN ("${language}", "en"))
-}
-GROUP BY ?predicate ?predicateLabel
-LIMIT 100
-`;
+};
 
 export interface PropsWithCountBindings {
   predicate: SparqlBinding;
@@ -54,7 +82,6 @@ export interface PropsWithCountBindings {
 
 export interface GeovEntityPropertiesData extends FetchResponse {
   outgoingPropsWithCount?: PropsWithCountBindings[];
-  incomingPropsWithCount?: PropsWithCountBindings[];
   error?: boolean;
 }
 
@@ -111,6 +138,28 @@ export class GeovEntityProperties {
    */
   @Prop() uriReplace?: string;
 
+  /**
+   * color
+   * Color of the properties
+   */
+  @Prop() color: Color = '';
+
+  /**
+   * predicateInclude
+   * Comma separated list of predicate URI's to include, e.g:
+   * Fetch only the rdfs:label and p86i (was born)
+   * 'http://www.w3.org/2000/01/rdf-schema#label,https://ontome.net/ontology/p86i'
+   */
+  @Prop() predicateInclude?: string;
+
+  /**
+   * predicateInclude
+   * Comma separated list of predicate URI's to exclude, e.g:
+   * Don't fetch the rdfs:label and p86i (was born)
+   * 'http://www.w3.org/2000/01/rdf-schema#label,https://ontome.net/ontology/p86i'
+   */
+  @Prop() predicateExclude?: string;
+
   constructor() {
     setSSRId(this);
   }
@@ -121,8 +170,6 @@ export class GeovEntityProperties {
        * try to get data from ssr
        */
       this.data = getSSRData(this._ssrId);
-      this.data.outgoingPropsWithCount = this.filterByLanguage(this.data.outgoingPropsWithCount, this.language);
-      this.data.incomingPropsWithCount = this.filterByLanguage(this.data.incomingPropsWithCount, this.language);
     }
 
     if (!this.data) {
@@ -181,12 +228,12 @@ export class GeovEntityProperties {
   @Method()
   async fetchData(): Promise<GeovEntityPropertiesData> {
     let d: GeovEntityPropertiesData = { loading: true };
-    await sparqlJson<PropsWithCountBindings>(this.sparqlEndpoint, qrOutgoingPropsWithCount(this.entityId, this.language))
+    const query = qrPropsWithCount(this.entityId, this.language, this.predicateInclude, this.predicateExclude);
+    await sparqlJson<PropsWithCountBindings>(this.sparqlEndpoint, query)
       .then(res => {
-        const props = this.filterByLanguage(res?.results?.bindings, this.language);
         d = {
           loading: false,
-          outgoingPropsWithCount: props,
+          outgoingPropsWithCount: res?.results?.bindings,
         };
       })
       .catch(_ => {
@@ -196,32 +243,17 @@ export class GeovEntityProperties {
         };
       });
 
-    await sparqlJson<PropsWithCountBindings>(this.sparqlEndpoint, qrIncomingPropsWithCount(this.entityId, this.language))
-      .then(res => {
-        const props = this.filterByLanguage(res?.results?.bindings, this.language);
-        d = {
-          loading: false,
-          outgoingPropsWithCount: d.outgoingPropsWithCount,
-          incomingPropsWithCount: props,
-        };
-      })
-      .catch(_ => {
-        d = {
-          loading: false,
-          error: true,
-        };
-      });
     return d;
   }
 
   render() {
+    const filteredProps = this.filterByLanguage(this.data.outgoingPropsWithCount ?? [], this.language);
     return (
       <Host>
-        {this.data.outgoingPropsWithCount?.map(b => (
+        {filteredProps.map(b => (
           <geov-entity-props-by-predicate
             entityId={this.entityId}
             sparqlEndpoint={this.sparqlEndpoint}
-            isOutgoing={true}
             totalCount={Number(b.count.value)}
             predicateUri={b.predicate.value}
             predicateLabel={
@@ -231,25 +263,9 @@ export class GeovEntityProperties {
             }
             uriRegex={this.uriRegex}
             uriReplace={this.uriReplace}
+            color={this.color}
           ></geov-entity-props-by-predicate>
         ))}
-        {this.data.incomingPropsWithCount?.map(b => (
-          <geov-entity-props-by-predicate
-            entityId={this.entityId}
-            sparqlEndpoint={this.sparqlEndpoint}
-            isOutgoing={false}
-            totalCount={Number(b.count.value)}
-            predicateUri={b.predicate.value}
-            predicateLabel={
-              b.predicateLabel
-                ? b.predicateLabel?.value
-                : b.predicate.value.replace('http://www.w3.org/2000/01/rdf-schema#', 'rdfs:').replace('http://www.w3.org/1999/02/22-rdf-syntax-ns#', 'rdf:')
-            }
-            uriRegex={this.uriRegex}
-            uriReplace={this.uriReplace}
-          ></geov-entity-props-by-predicate>
-        ))}
-        <slot></slot>
       </Host>
     );
   }

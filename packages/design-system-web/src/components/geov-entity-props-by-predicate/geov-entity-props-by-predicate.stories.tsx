@@ -13,7 +13,6 @@ export const EntityPropsWithPerson = Template.bind({});
 const args: JSX.GeovEntityPropsByPredicate = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   entityId: 'i151089',
-  isOutgoing: true,
   totalCount: 1,
   language: 'en',
   predicateUri: 'https://ontome.net/ontology/p1359',
@@ -26,7 +25,6 @@ export const EntityPropsWithUriRegex = Template.bind({});
 const args1: JSX.GeovEntityPropsByPredicate = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   entityId: 'i151089',
-  isOutgoing: true,
   totalCount: 1,
   language: 'en',
   predicateUri: 'https://ontome.net/ontology/p1359',
@@ -41,7 +39,6 @@ export const EntityPropsWithPaginatedShipVoyages = Template.bind({});
 const args2: JSX.GeovEntityPropsByPredicate = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   entityId: 'i209502',
-  isOutgoing: false,
   totalCount: 2980,
   language: 'en',
   predicateUri: 'https://ontome.net/ontology/p1335',
@@ -54,7 +51,6 @@ export const EntityPropsWithDateTimeDescription = Template.bind({});
 const args3: JSX.GeovEntityPropsByPredicate = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   entityId: 'i151089ts',
-  isOutgoing: true,
   totalCount: 1,
   language: 'en',
   predicateUri: 'https://ontome.net/ontology/p150',
@@ -67,7 +63,6 @@ export const EntityPropsWithXsdString = Template.bind({});
 const args4: JSX.GeovEntityPropsByPredicate = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   entityId: 'i215634',
-  isOutgoing: true,
   totalCount: 1,
   language: 'en',
   predicateUri: 'https://ontome.net/ontology/p1113',
@@ -81,7 +76,6 @@ export const EntityPropsWithLangString = Template.bind({});
 const args5: JSX.GeovEntityPropsByPredicate = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   entityId: 'i2345931',
-  isOutgoing: true,
   totalCount: 1,
   language: 'en',
   predicateUri: 'https://ontome.net/ontology/p1761',
@@ -94,7 +88,6 @@ export const EntityPropsWithXsdStringPreloaded = Template.bind({});
 const args6: JSX.GeovEntityPropsByPredicate = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
   entityId: 'i215635',
-  isOutgoing: true,
   totalCount: 1,
   language: 'en',
   predicateUri: 'https://ontome.net/ontology/p1113',

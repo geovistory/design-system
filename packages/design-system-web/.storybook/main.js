@@ -8,7 +8,8 @@ module.exports = {
     'storybook-design-token',
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-interactions"
+    "@storybook/addon-interactions",
+    "storybook-dark-mode"
   ],
   "framework": "@storybook/react",
   "staticDirs": ["../dist/design-system-web"],
