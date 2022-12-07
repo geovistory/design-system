@@ -98,3 +98,13 @@ const args8: JSX.GeovEntityProperties = {
   predicateExclude: ['http://www.w3.org/2000/01/rdf-schema#label', 'https://ontome.net/ontology/p1111i'].join(','),
 };
 EntityPropertiesPredicateExclude.args = args8;
+
+export const EntityPropertiesFixedGrid = Template.bind({});
+const args9: JSX.GeovEntityProperties = {
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  entityId: 'i209502',
+  language: 'en',
+  fetchBeforeRender: false,
+  fixedGrid: true,
+};
+EntityPropertiesFixedGrid.args = args9;

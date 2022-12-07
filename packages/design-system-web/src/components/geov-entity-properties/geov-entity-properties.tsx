@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State, Method } from '@stencil/core';
+import { Component, Host, h, Prop, State, Method, Event, EventEmitter } from '@stencil/core';
 import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
@@ -81,7 +81,7 @@ export interface PropsWithCountBindings {
 }
 
 export interface GeovEntityPropertiesData extends FetchResponse {
-  outgoingPropsWithCount?: PropsWithCountBindings[];
+  propsWithCount?: PropsWithCountBindings[];
   error?: boolean;
 }
 
@@ -160,6 +160,17 @@ export class GeovEntityProperties {
    */
   @Prop() predicateExclude?: string;
 
+  /**
+   * fixedGrid
+   * if true, the content is wrapped in a <ion-grid fixed=true></ion-grid>
+   */
+  @Prop() fixedGrid?: boolean;
+
+  /**
+   * Emits fetched data, after being fetched.
+   */
+  @Event() dataFetched: EventEmitter<GeovEntityPropertiesData>;
+
   constructor() {
     setSSRId(this);
   }
@@ -179,8 +190,11 @@ export class GeovEntityProperties {
       // fetch data via http
       await this.fetchData() // <- await this promise!
         .then(d => {
+          // filter language
+          d.propsWithCount = this.filterByLanguage(d.propsWithCount ?? [], this.language);
           this.data = d;
           setSSRData(this._ssrId, d);
+          this.dataFetched.emit(d);
           return d;
         })
         .catch(d => {
@@ -233,7 +247,7 @@ export class GeovEntityProperties {
       .then(res => {
         d = {
           loading: false,
-          outgoingPropsWithCount: res?.results?.bindings,
+          propsWithCount: res?.results?.bindings,
         };
       })
       .catch(_ => {
@@ -247,26 +261,34 @@ export class GeovEntityProperties {
   }
 
   render() {
-    const filteredProps = this.filterByLanguage(this.data.outgoingPropsWithCount ?? [], this.language);
-    return (
-      <Host>
-        {filteredProps.map(b => (
-          <geov-entity-props-by-predicate
-            entityId={this.entityId}
-            sparqlEndpoint={this.sparqlEndpoint}
-            totalCount={Number(b.count.value)}
-            predicateUri={b.predicate.value}
-            predicateLabel={
-              b.predicateLabel
-                ? b.predicateLabel?.value
-                : b.predicate.value.replace('http://www.w3.org/2000/01/rdf-schema#', 'rdfs:').replace('http://www.w3.org/1999/02/22-rdf-syntax-ns#', 'rdf:')
-            }
-            uriRegex={this.uriRegex}
-            uriReplace={this.uriReplace}
-            color={this.color}
-          ></geov-entity-props-by-predicate>
-        ))}
-      </Host>
-    );
+    if (this.fixedGrid) {
+      return (
+        <Host>
+          <ion-grid fixed={true} class="container">
+            {this.renderCards()}
+          </ion-grid>
+        </Host>
+      );
+    }
+    return <Host class="container">{this.renderCards()}</Host>;
+  }
+
+  renderCards() {
+    return this.data.propsWithCount.map(b => (
+      <geov-entity-props-by-predicate
+        entityId={this.entityId}
+        sparqlEndpoint={this.sparqlEndpoint}
+        totalCount={Number(b.count.value)}
+        predicateUri={b.predicate.value}
+        predicateLabel={
+          b.predicateLabel
+            ? b.predicateLabel?.value
+            : b.predicate.value.replace('http://www.w3.org/2000/01/rdf-schema#', 'rdfs:').replace('http://www.w3.org/1999/02/22-rdf-syntax-ns#', 'rdf:')
+        }
+        uriRegex={this.uriRegex}
+        uriReplace={this.uriReplace}
+        color={this.color}
+      ></geov-entity-props-by-predicate>
+    ));
   }
 }

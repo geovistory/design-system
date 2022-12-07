@@ -54,12 +54,15 @@ export class GeovPaginator {
     const pageCount = Math.floor((this.length - 1) / this.pageSize) + 1;
     const isFirstPage = this.pageIndex <= 0;
     const isLastPage = this.pageIndex + 1 >= pageCount;
+    const firstShownItem = this.pageIndex * this.pageSize + 1;
+    const lastShownItem = this.pageIndex * this.pageSize + this.pageSize;
     return (
       <Host>
-        <ion-item color={this.color}>
+        <ion-item color={this.color} lines="none">
           {!this.hidePageSize && (
             <ion-note>
-              Page {this.pageIndex + 1} of {pageCount.toString()}:
+              {firstShownItem} – {lastShownItem}
+              {/* Page {this.pageIndex + 1} of {pageCount.toString()}: */}
             </ion-note>
           )}
           <ion-buttons>
