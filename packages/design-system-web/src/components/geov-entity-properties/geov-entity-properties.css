@@ -1,6 +1,7 @@
 @import '../../../node_modules/@ionic/core/css/core.css';
 
-:host {
+:host.container,
+.container {
   display: block;
   column-count: var(--column-count);
   column-gap: var(--column-gap);

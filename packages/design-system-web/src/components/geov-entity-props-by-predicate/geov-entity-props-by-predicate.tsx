@@ -212,9 +212,9 @@ export class GeovEntityPropsByPredicate {
             </ion-card-subtitle>
           </ion-card-header>
           {/* List */}
-          <ion-card-content style={{ 'min-height': `${contentMinHeight}px` }}>
-            <ion-list lines="none">{this.data?.entities?.map(entity => this.renderItem(entity))}</ion-list>
-          </ion-card-content>
+          <ion-list lines="none" style={{ 'min-height': `${contentMinHeight}px` }}>
+            {this.data?.entities?.map(entity => this.renderItem(entity))}
+          </ion-list>
           {/* Paginator */}
           {showPaginator && this.renderPaginator()}
         </ion-card>
@@ -310,7 +310,14 @@ export class GeovEntityPropsByPredicate {
   private renderPaginator(): JSX.Element {
     return (
       <ion-item color={this.color} lines="none">
-        <geov-paginator color={this.color} length={this.totalCount} pageSize={this.pageSize} pageIndex={this.pageIndex} onPageChanged={ev => this.changePage(ev)}></geov-paginator>
+        <geov-paginator
+          color={this.color}
+          length={this.totalCount}
+          pageSize={this.pageSize}
+          pageIndex={this.pageIndex}
+          onPageChanged={ev => this.changePage(ev)}
+          showFirstLastButtons={false}
+        ></geov-paginator>
       </ion-item>
     );
   }
