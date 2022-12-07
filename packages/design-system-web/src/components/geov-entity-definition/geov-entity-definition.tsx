@@ -40,6 +40,11 @@ export class GeovEntityDefinition {
   @Prop() entityId: string;
 
   /**
+   * text to be displayed in case no definition is found
+   */
+  @Prop() emptyPlaceholder = '';
+
+  /**
    * the data (or model) used in the view
    */
   @State() data?: GeovEntityDefinitionData;
@@ -101,7 +106,7 @@ export class GeovEntityDefinition {
         ))}
         {this.data.loading && `loading...`}
         {this.data.error && `error!`}
-        {!this.data.definitions.length && !this.data.loading && !this.data.error && <span class="no-label-found">no definition found</span>}
+        {!this.data.definitions.length && !this.data.loading && !this.data.error && this.emptyPlaceholder && <span class="no-label-found">{this.emptyPlaceholder}</span>}
         <slot />
       </Host>
     );
