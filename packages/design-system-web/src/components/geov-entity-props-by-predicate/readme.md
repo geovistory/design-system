@@ -41,7 +41,6 @@
 - ion-card
 - ion-card-header
 - ion-card-subtitle
-- ion-card-content
 - ion-list
 - ion-item
 - ion-label
@@ -55,7 +54,6 @@ graph TD;
   geov-entity-props-by-predicate --> ion-card
   geov-entity-props-by-predicate --> ion-card-header
   geov-entity-props-by-predicate --> ion-card-subtitle
-  geov-entity-props-by-predicate --> ion-card-content
   geov-entity-props-by-predicate --> ion-list
   geov-entity-props-by-predicate --> ion-item
   geov-entity-props-by-predicate --> ion-label

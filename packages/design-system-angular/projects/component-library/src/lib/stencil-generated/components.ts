@@ -203,13 +203,13 @@ export declare interface GeovEntity extends Components.GeovEntity {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['entityId', 'fetchBeforeRender', 'language', 'sparqlEndpoint']
+  inputs: ['entityId', 'fetchBeforeRender', 'language', 'sparqlEndpoint', 'ssrIdPrefix', 'uriRegex', 'uriReplace']
 })
 @Component({
   selector: 'geov-entity',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['entityId', 'fetchBeforeRender', 'language', 'sparqlEndpoint']
+  inputs: ['entityId', 'fetchBeforeRender', 'language', 'sparqlEndpoint', 'ssrIdPrefix', 'uriRegex', 'uriReplace']
 })
 export class GeovEntity {
   protected el: HTMLElement;
@@ -245,13 +245,13 @@ export declare interface GeovEntityDefinition extends Components.GeovEntityDefin
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint']
+  inputs: ['_ssrId', 'emptyPlaceholder', 'entityId', 'sparqlEndpoint']
 })
 @Component({
   selector: 'geov-entity-definition',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint']
+  inputs: ['_ssrId', 'emptyPlaceholder', 'entityId', 'sparqlEndpoint']
 })
 export class GeovEntityDefinition {
   protected el: HTMLElement;
@@ -303,25 +303,32 @@ export class GeovEntityList {
   }
 }
 
+import type { GeovEntityPropertiesData as IGeovEntityPropertiesGeovEntityPropertiesData } from '@geovistory/design-system-web';
+export declare interface GeovEntityProperties extends Components.GeovEntityProperties {
+  /**
+   * Emits fetched data, after being fetched. 
+   */
+  dataFetched: EventEmitter<CustomEvent<IGeovEntityPropertiesGeovEntityPropertiesData>>;
 
-export declare interface GeovEntityProperties extends Components.GeovEntityProperties {}
+}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['_ssrId', 'color', 'entityId', 'fetchBeforeRender', 'language', 'predicateExclude', 'predicateInclude', 'sparqlEndpoint', 'uriRegex', 'uriReplace'],
+  inputs: ['_ssrId', 'color', 'entityId', 'fetchBeforeRender', 'fixedGrid', 'language', 'predicateExclude', 'predicateInclude', 'sparqlEndpoint', 'uriRegex', 'uriReplace'],
   methods: ['fetchData']
 })
 @Component({
   selector: 'geov-entity-properties',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['_ssrId', 'color', 'entityId', 'fetchBeforeRender', 'language', 'predicateExclude', 'predicateInclude', 'sparqlEndpoint', 'uriRegex', 'uriReplace']
+  inputs: ['_ssrId', 'color', 'entityId', 'fetchBeforeRender', 'fixedGrid', 'language', 'predicateExclude', 'predicateInclude', 'sparqlEndpoint', 'uriRegex', 'uriReplace']
 })
 export class GeovEntityProperties {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['dataFetched']);
   }
 }
 
