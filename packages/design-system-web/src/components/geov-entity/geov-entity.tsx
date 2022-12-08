@@ -55,6 +55,7 @@ export class GeovEntity {
 
   predicatesBasic = ['http://www.w3.org/2000/01/rdf-schema#label', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'];
   predicatesTime = ['https://ontome.net/ontology/p4'];
+  excluded = ['https://ontome.net/ontology/p1943'];
   render() {
     return (
       <Host>
@@ -103,7 +104,7 @@ export class GeovEntity {
           {/* Rest */}
           <geov-entity-properties
             onDataFetched={this.removeIfEmpty()}
-            predicateExclude={[...this.predicatesBasic, ...this.predicatesTime].join(',')}
+            predicateExclude={[...this.predicatesBasic, ...this.predicatesTime, ...this.excluded].join(',')}
             fixedGrid={true}
             class="section columns-3"
             sparqlEndpoint={this.sparqlEndpoint}
