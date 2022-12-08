@@ -96,3 +96,15 @@ const args6: JSX.GeovEntityPropsByPredicate = {
   _ssrId: 'data-entity-props-by-predicate-1',
 };
 EntityPropsWithXsdStringPreloaded.args = args6;
+
+export const OwlSameAs = Template.bind({});
+const args7: JSX.GeovEntityPropsByPredicate = {
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  entityId: 'i785518',
+  totalCount: 3,
+  language: 'en',
+  predicateUri: 'http://www.w3.org/2002/07/owl#sameAs',
+  predicateLabel: 'same as',
+  fetchBeforeRender: false,
+};
+OwlSameAs.args = args7;

@@ -8,6 +8,7 @@ import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
 import { FetchResponse } from '../../lib/FetchResponse';
 import { Color } from '@ionic/core';
+import { openOutline } from 'ionicons/icons';
 
 const qrProps = (predicateId: string, objectId: string, pageSize: number, offset: number) => `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -228,9 +229,11 @@ export class GeovEntityPropsByPredicate {
       const regex = this.uriRegex;
       const replace = this.uriReplace;
       const url = regexReplace(item.entity.value, regex, replace);
-      const target = url.includes('geovistory.org') ? '' : '_blank';
+      const isInternal = url.includes('geovistory.org');
+      const target = isInternal ? '' : '_blank';
+      const detailIcon = isInternal ? undefined : openOutline;
       return (
-        <ion-item color={this.color} href={url} target={target}>
+        <ion-item color={this.color} href={url} target={target} detailIcon={detailIcon}>
           {this.renderUri(item)}
         </ion-item>
       );
@@ -242,6 +245,9 @@ export class GeovEntityPropsByPredicate {
     const klass = item.entityType?.value;
 
     switch (klass) {
+      case undefined:
+        return this.renderExternalUri(item);
+
       case 'http://www.w3.org/2006/time#DateTimeDescription':
         return this.renderDateTimeDescription(item);
 
@@ -250,6 +256,13 @@ export class GeovEntityPropsByPredicate {
       default:
         return this.renderGenericEntity(item);
     }
+  }
+  private renderExternalUri(item: Bindings) {
+    return (
+      <ion-label>
+        <p>{item.entity?.value}</p>
+      </ion-label>
+    );
   }
 
   private renderGenericEntity(item: Bindings) {
