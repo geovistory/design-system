@@ -1,5 +1,3 @@
-import { JSX as IonJSX } from '@ionic/core';
-import { Components as IonComponents } from '@ionic/core';
 /* eslint-disable */
 /* tslint:disable */
 /**
@@ -14,105 +12,13 @@ import { GeovClassSelectPopupEvent } from "./components/geov-class-select-popup/
 import { Languages } from "./components/geov-code/geov-code";
 import { GeovDataFetchExampleData } from "./components/geov-data-fetch-example/geov-data-fetch-example";
 import { SparqlBinding } from "./lib/sparqlJson";
+import { DateBinding, DateData } from "./components/geov-display-time-datetimedescription/geov-display-time-datetimedescription";
 import { GeovEntityListItem } from "./components/geov-entity-list/geov-entity-list";
+import { Color } from "@ionic/core";
+import { GeovEntityPropertiesData, PropsWithCountBindings } from "./components/geov-entity-properties/geov-entity-properties";
 import { PageEvent } from "./components/geov-paginator/geov-paginator";
-
+import { PageEvent as PageEvent1 } from "./components/geov-paginator/geov-paginator";
 export namespace Components {
-    export interface IonAccordion extends IonComponents.IonAccordion { }
-    export interface IonAccordionGroup extends IonComponents.IonAccordionGroup { }
-    export interface IonActionSheet extends IonComponents.IonActionSheet { }
-    export interface IonAlert extends IonComponents.IonAlert { }
-    export interface IonApp extends IonComponents.IonApp { }
-    export interface IonAvatar extends IonComponents.IonAvatar { }
-    export interface IonBackButton extends IonComponents.IonBackButton { }
-    export interface IonBackdrop extends IonComponents.IonBackdrop { }
-    export interface IonBadge extends IonComponents.IonBadge { }
-    export interface IonBreadcrumb extends IonComponents.IonBreadcrumb { }
-    export interface IonBreadcrumbs extends IonComponents.IonBreadcrumbs { }
-    export interface IonButton extends IonComponents.IonButton { }
-    export interface IonButtons extends IonComponents.IonButtons { }
-    export interface IonCard extends IonComponents.IonCard { }
-    export interface IonCardContent extends IonComponents.IonCardContent { }
-    export interface IonCardHeader extends IonComponents.IonCardHeader { }
-    export interface IonCardSubtitle extends IonComponents.IonCardSubtitle { }
-    export interface IonCardTitle extends IonComponents.IonCardTitle { }
-    export interface IonCheckbox extends IonComponents.IonCheckbox { }
-    export interface IonChip extends IonComponents.IonChip { }
-    export interface IonCol extends IonComponents.IonCol { }
-    export interface IonContent extends IonComponents.IonContent { }
-    export interface IonDatetime extends IonComponents.IonDatetime { }
-    export interface IonFab extends IonComponents.IonFab { }
-    export interface IonFabButton extends IonComponents.IonFabButton { }
-    export interface IonFabList extends IonComponents.IonFabList { }
-    export interface IonFooter extends IonComponents.IonFooter { }
-    export interface IonGrid extends IonComponents.IonGrid { }
-    export interface IonHeader extends IonComponents.IonHeader { }
-    export interface IonIcon extends IonComponents.IonIcon { }
-    export interface IonImg extends IonComponents.IonImg { }
-    export interface IonInfiniteScroll extends IonComponents.IonInfiniteScroll { }
-    export interface IonInfiniteScrollContent extends IonComponents.IonInfiniteScrollContent { }
-    export interface IonInput extends IonComponents.IonInput { }
-    export interface IonItem extends IonComponents.IonItem { }
-    export interface IonItemDivider extends IonComponents.IonItemDivider { }
-    export interface IonItemGroup extends IonComponents.IonItemGroup { }
-    export interface IonItemOption extends IonComponents.IonItemOption { }
-    export interface IonItemOptions extends IonComponents.IonItemOptions { }
-    export interface IonItemSliding extends IonComponents.IonItemSliding { }
-    export interface IonLabel extends IonComponents.IonLabel { }
-    export interface IonList extends IonComponents.IonList { }
-    export interface IonListHeader extends IonComponents.IonListHeader { }
-    export interface IonLoading extends IonComponents.IonLoading { }
-    export interface IonMenu extends IonComponents.IonMenu { }
-    export interface IonMenuButton extends IonComponents.IonMenuButton { }
-    export interface IonMenuToggle extends IonComponents.IonMenuToggle { }
-    export interface IonModal extends IonComponents.IonModal { }
-    export interface IonNav extends IonComponents.IonNav { }
-    export interface IonNavLink extends IonComponents.IonNavLink { }
-    export interface IonNote extends IonComponents.IonNote { }
-    export interface IonPicker extends IonComponents.IonPicker { }
-    export interface IonPickerColumn extends IonComponents.IonPickerColumn { }
-    export interface IonPickerColumnInternal extends IonComponents.IonPickerColumnInternal { }
-    export interface IonPickerInternal extends IonComponents.IonPickerInternal { }
-    export interface IonPopover extends IonComponents.IonPopover { }
-    export interface IonProgressBar extends IonComponents.IonProgressBar { }
-    export interface IonRadio extends IonComponents.IonRadio { }
-    export interface IonRadioGroup extends IonComponents.IonRadioGroup { }
-    export interface IonRange extends IonComponents.IonRange { }
-    export interface IonRefresher extends IonComponents.IonRefresher { }
-    export interface IonRefresherContent extends IonComponents.IonRefresherContent { }
-    export interface IonReorder extends IonComponents.IonReorder { }
-    export interface IonReorderGroup extends IonComponents.IonReorderGroup { }
-    export interface IonRippleEffect extends IonComponents.IonRippleEffect { }
-    export interface IonRoute extends IonComponents.IonRoute { }
-    export interface IonRouteRedirect extends IonComponents.IonRouteRedirect { }
-    export interface IonRouter extends IonComponents.IonRouter { }
-    export interface IonRouterLink extends IonComponents.IonRouterLink { }
-    export interface IonRouterOutlet extends IonComponents.IonRouterOutlet { }
-    export interface IonRow extends IonComponents.IonRow { }
-    export interface IonSearchbar extends IonComponents.IonSearchbar { }
-    export interface IonSegment extends IonComponents.IonSegment { }
-    export interface IonSegmentButton extends IonComponents.IonSegmentButton { }
-    export interface IonSelect extends IonComponents.IonSelect { }
-    export interface IonSelectOption extends IonComponents.IonSelectOption { }
-    export interface IonSelectPopover extends IonComponents.IonSelectPopover { }
-    export interface IonSkeletonText extends IonComponents.IonSkeletonText { }
-    export interface IonSlide extends IonComponents.IonSlide { }
-    export interface IonSlides extends IonComponents.IonSlides { }
-    export interface IonSpinner extends IonComponents.IonSpinner { }
-    export interface IonSplitPane extends IonComponents.IonSplitPane { }
-    export interface IonTab extends IonComponents.IonTab { }
-    export interface IonTabBar extends IonComponents.IonTabBar { }
-    export interface IonTabButton extends IonComponents.IonTabButton { }
-    export interface IonTabs extends IonComponents.IonTabs { }
-    export interface IonText extends IonComponents.IonText { }
-    export interface IonTextarea extends IonComponents.IonTextarea { }
-    export interface IonThumbnail extends IonComponents.IonThumbnail { }
-    export interface IonTitle extends IonComponents.IonTitle { }
-    export interface IonToast extends IonComponents.IonToast { }
-    export interface IonToggle extends IonComponents.IonToggle { }
-    export interface IonToolbar extends IonComponents.IonToolbar { }
-    export interface IonVirtualScroll extends IonComponents.IonVirtualScroll { }
-
     interface GeovCarousel {
         /**
           * array of image URLs passed to src attribute of the <img src="">
@@ -160,6 +66,47 @@ export namespace Components {
          */
         "sparqlEndpoint": string;
     }
+    interface GeovDisplayGeosparqlWktliteral {
+        /**
+          * the opengis value
+         */
+        "value": string;
+    }
+    interface GeovDisplayTimeDatetimedescription {
+        /**
+          * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
+         */
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'iXXX'
+         */
+        "entityId": string;
+        "fetchBeforeRender": boolean;
+        /**
+          * Do the sparql request(s)
+          * @returns a Promise with the data for this component
+         */
+        "fetchData": () => Promise<DateData>;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+    }
+    interface GeovEntity {
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId": string;
+        "fetchBeforeRender": boolean;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language": string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+    }
     interface GeovEntityClassLabel {
         "_ssrId"?: string;
         /**
@@ -198,9 +145,100 @@ export namespace Components {
         "items"?: GeovEntityListItem[];
         "loading"?: boolean;
         /**
-          * urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
          */
-        "urlAppend": string;
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
+    }
+    interface GeovEntityProperties {
+        /**
+          * declares an _ssrId property that is reflected as attribute
+         */
+        "_ssrId"?: string;
+        /**
+          * color Color of the properties
+         */
+        "color": Color;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId": string;
+        "fetchBeforeRender": boolean;
+        "fetchData": () => Promise<GeovEntityPropertiesData>;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language": string;
+        /**
+          * predicateInclude Comma separated list of predicate URI's to exclude, e.g: Don't fetch the rdfs:label and p86i (was born) 'http://www.w3.org/2000/01/rdf-schema#label,https://ontome.net/ontology/p86i'
+         */
+        "predicateExclude"?: string;
+        /**
+          * predicateInclude Comma separated list of predicate URI's to include, e.g: Fetch only the rdfs:label and p86i (was born) 'http://www.w3.org/2000/01/rdf-schema#label,https://ontome.net/ontology/p86i'
+         */
+        "predicateInclude"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+        /**
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
+         */
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
+    }
+    interface GeovEntityPropsByPredicate {
+        /**
+          * declares an _ssrId property that is reflected as attribute
+         */
+        "_ssrId"?: string;
+        "color": Color;
+        /**
+          * entityId ID number of entity, e.g. 'iXXX'
+         */
+        "entityId": string;
+        /**
+          * if true, componentWillLoad() returns a promise for the loading of all data [default: true]
+         */
+        "fetchBeforeRender": boolean;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language": string;
+        /**
+          * pageSize Page size if too many resultat for a property, default 3
+         */
+        "pageSize": number;
+        /**
+          * predicateLabel Label of the predicate
+         */
+        "predicateLabel"?: string;
+        /**
+          * predicateUri URI of the predicate
+         */
+        "predicateUri": string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+        /**
+          * totalCount Total number of entity from this property
+         */
+        "totalCount": number;
+        /**
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
+         */
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
     }
     interface GeovExplorer {
         /**
@@ -220,9 +258,13 @@ export namespace Components {
          */
         "sparqlEndpoint": string;
         /**
-          * urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
          */
-        "urlAppend": string;
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
     }
     interface GeovIf {
         "_ssrId"?: string;
@@ -236,6 +278,7 @@ export namespace Components {
         "sparqlQuery": string;
     }
     interface GeovPaginator {
+        "color": Color;
         "hidePageSize": boolean;
         "length": number;
         "pageIndex": number;
@@ -257,6 +300,10 @@ export interface GeovClassSelectCustomEvent<T> extends CustomEvent<T> {
 export interface GeovClassSelectPopupCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLGeovClassSelectPopupElement;
+}
+export interface GeovEntityPropsByPredicateCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLGeovEntityPropsByPredicateElement;
 }
 export interface GeovPaginatorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -299,6 +346,24 @@ declare global {
         prototype: HTMLGeovDataFetchExampleElement;
         new (): HTMLGeovDataFetchExampleElement;
     };
+    interface HTMLGeovDisplayGeosparqlWktliteralElement extends Components.GeovDisplayGeosparqlWktliteral, HTMLStencilElement {
+    }
+    var HTMLGeovDisplayGeosparqlWktliteralElement: {
+        prototype: HTMLGeovDisplayGeosparqlWktliteralElement;
+        new (): HTMLGeovDisplayGeosparqlWktliteralElement;
+    };
+    interface HTMLGeovDisplayTimeDatetimedescriptionElement extends Components.GeovDisplayTimeDatetimedescription, HTMLStencilElement {
+    }
+    var HTMLGeovDisplayTimeDatetimedescriptionElement: {
+        prototype: HTMLGeovDisplayTimeDatetimedescriptionElement;
+        new (): HTMLGeovDisplayTimeDatetimedescriptionElement;
+    };
+    interface HTMLGeovEntityElement extends Components.GeovEntity, HTMLStencilElement {
+    }
+    var HTMLGeovEntityElement: {
+        prototype: HTMLGeovEntityElement;
+        new (): HTMLGeovEntityElement;
+    };
     interface HTMLGeovEntityClassLabelElement extends Components.GeovEntityClassLabel, HTMLStencilElement {
     }
     var HTMLGeovEntityClassLabelElement: {
@@ -322,6 +387,18 @@ declare global {
     var HTMLGeovEntityListElement: {
         prototype: HTMLGeovEntityListElement;
         new (): HTMLGeovEntityListElement;
+    };
+    interface HTMLGeovEntityPropertiesElement extends Components.GeovEntityProperties, HTMLStencilElement {
+    }
+    var HTMLGeovEntityPropertiesElement: {
+        prototype: HTMLGeovEntityPropertiesElement;
+        new (): HTMLGeovEntityPropertiesElement;
+    };
+    interface HTMLGeovEntityPropsByPredicateElement extends Components.GeovEntityPropsByPredicate, HTMLStencilElement {
+    }
+    var HTMLGeovEntityPropsByPredicateElement: {
+        prototype: HTMLGeovEntityPropsByPredicateElement;
+        new (): HTMLGeovEntityPropsByPredicateElement;
     };
     interface HTMLGeovExplorerElement extends Components.GeovExplorer, HTMLStencilElement {
     }
@@ -354,113 +431,22 @@ declare global {
         "geov-class-select-popup": HTMLGeovClassSelectPopupElement;
         "geov-code": HTMLGeovCodeElement;
         "geov-data-fetch-example": HTMLGeovDataFetchExampleElement;
+        "geov-display-geosparql-wktliteral": HTMLGeovDisplayGeosparqlWktliteralElement;
+        "geov-display-time-datetimedescription": HTMLGeovDisplayTimeDatetimedescriptionElement;
+        "geov-entity": HTMLGeovEntityElement;
         "geov-entity-class-label": HTMLGeovEntityClassLabelElement;
         "geov-entity-definition": HTMLGeovEntityDefinitionElement;
         "geov-entity-label": HTMLGeovEntityLabelElement;
         "geov-entity-list": HTMLGeovEntityListElement;
+        "geov-entity-properties": HTMLGeovEntityPropertiesElement;
+        "geov-entity-props-by-predicate": HTMLGeovEntityPropsByPredicateElement;
         "geov-explorer": HTMLGeovExplorerElement;
         "geov-if": HTMLGeovIfElement;
         "geov-paginator": HTMLGeovPaginatorElement;
         "geov-toc": HTMLGeovTocElement;
     }
 }
-
 declare namespace LocalJSX {
-    export interface IonAccordion extends IonJSX.IonAccordion { }
-    export interface IonAccordionGroup extends IonJSX.IonAccordionGroup { }
-    export interface IonActionSheet extends IonJSX.IonActionSheet { }
-    export interface IonAlert extends IonJSX.IonAlert { }
-    export interface IonApp extends IonJSX.IonApp { }
-    export interface IonAvatar extends IonJSX.IonAvatar { }
-    export interface IonBackButton extends IonJSX.IonBackButton { }
-    export interface IonBackdrop extends IonJSX.IonBackdrop { }
-    export interface IonBadge extends IonJSX.IonBadge { }
-    export interface IonBreadcrumb extends IonJSX.IonBreadcrumb { }
-    export interface IonBreadcrumbs extends IonJSX.IonBreadcrumbs { }
-    export interface IonButton extends IonJSX.IonButton { }
-    export interface IonButtons extends IonJSX.IonButtons { }
-    export interface IonCard extends IonJSX.IonCard { }
-    export interface IonCardContent extends IonJSX.IonCardContent { }
-    export interface IonCardHeader extends IonJSX.IonCardHeader { }
-    export interface IonCardSubtitle extends IonJSX.IonCardSubtitle { }
-    export interface IonCardTitle extends IonJSX.IonCardTitle { }
-    export interface IonCheckbox extends IonJSX.IonCheckbox { }
-    export interface IonChip extends IonJSX.IonChip { }
-    export interface IonCol extends IonJSX.IonCol { }
-    export interface IonContent extends IonJSX.IonContent { }
-    export interface IonDatetime extends IonJSX.IonDatetime { }
-    export interface IonFab extends IonJSX.IonFab { }
-    export interface IonFabButton extends IonJSX.IonFabButton { }
-    export interface IonFabList extends IonJSX.IonFabList { }
-    export interface IonFooter extends IonJSX.IonFooter { }
-    export interface IonGrid extends IonJSX.IonGrid { }
-    export interface IonHeader extends IonJSX.IonHeader { }
-    export interface IonIcon extends IonJSX.IonIcon { }
-    export interface IonImg extends IonJSX.IonImg { }
-    export interface IonInfiniteScroll extends IonJSX.IonInfiniteScroll { }
-    export interface IonInfiniteScrollContent extends IonJSX.IonInfiniteScrollContent { }
-    export interface IonInput extends IonJSX.IonInput { }
-    export interface IonItem extends IonJSX.IonItem { }
-    export interface IonItemDivider extends IonJSX.IonItemDivider { }
-    export interface IonItemGroup extends IonJSX.IonItemGroup { }
-    export interface IonItemOption extends IonJSX.IonItemOption { }
-    export interface IonItemOptions extends IonJSX.IonItemOptions { }
-    export interface IonItemSliding extends IonJSX.IonItemSliding { }
-    export interface IonLabel extends IonJSX.IonLabel { }
-    export interface IonList extends IonJSX.IonList { }
-    export interface IonListHeader extends IonJSX.IonListHeader { }
-    export interface IonLoading extends IonJSX.IonLoading { }
-    export interface IonMenu extends IonJSX.IonMenu { }
-    export interface IonMenuButton extends IonJSX.IonMenuButton { }
-    export interface IonMenuToggle extends IonJSX.IonMenuToggle { }
-    export interface IonModal extends IonJSX.IonModal { }
-    export interface IonNav extends IonJSX.IonNav { }
-    export interface IonNavLink extends IonJSX.IonNavLink { }
-    export interface IonNote extends IonJSX.IonNote { }
-    export interface IonPicker extends IonJSX.IonPicker { }
-    export interface IonPickerColumn extends IonJSX.IonPickerColumn { }
-    export interface IonPickerColumnInternal extends IonJSX.IonPickerColumnInternal { }
-    export interface IonPickerInternal extends IonJSX.IonPickerInternal { }
-    export interface IonPopover extends IonJSX.IonPopover { }
-    export interface IonProgressBar extends IonJSX.IonProgressBar { }
-    export interface IonRadio extends IonJSX.IonRadio { }
-    export interface IonRadioGroup extends IonJSX.IonRadioGroup { }
-    export interface IonRange extends IonJSX.IonRange { }
-    export interface IonRefresher extends IonJSX.IonRefresher { }
-    export interface IonRefresherContent extends IonJSX.IonRefresherContent { }
-    export interface IonReorder extends IonJSX.IonReorder { }
-    export interface IonReorderGroup extends IonJSX.IonReorderGroup { }
-    export interface IonRippleEffect extends IonJSX.IonRippleEffect { }
-    export interface IonRoute extends IonJSX.IonRoute { }
-    export interface IonRouteRedirect extends IonJSX.IonRouteRedirect { }
-    export interface IonRouter extends IonJSX.IonRouter { }
-    export interface IonRouterLink extends IonJSX.IonRouterLink { }
-    export interface IonRouterOutlet extends IonJSX.IonRouterOutlet { }
-    export interface IonRow extends IonJSX.IonRow { }
-    export interface IonSearchbar extends IonJSX.IonSearchbar { }
-    export interface IonSegment extends IonJSX.IonSegment { }
-    export interface IonSegmentButton extends IonJSX.IonSegmentButton { }
-    export interface IonSelect extends IonJSX.IonSelect { }
-    export interface IonSelectOption extends IonJSX.IonSelectOption { }
-    export interface IonSelectPopover extends IonJSX.IonSelectPopover { }
-    export interface IonSkeletonText extends IonJSX.IonSkeletonText { }
-    export interface IonSlide extends IonJSX.IonSlide { }
-    export interface IonSlides extends IonJSX.IonSlides { }
-    export interface IonSpinner extends IonJSX.IonSpinner { }
-    export interface IonSplitPane extends IonJSX.IonSplitPane { }
-    export interface IonTab extends IonJSX.IonTab { }
-    export interface IonTabBar extends IonJSX.IonTabBar { }
-    export interface IonTabButton extends IonJSX.IonTabButton { }
-    export interface IonTabs extends IonJSX.IonTabs { }
-    export interface IonText extends IonJSX.IonText { }
-    export interface IonTextarea extends IonJSX.IonTextarea { }
-    export interface IonThumbnail extends IonJSX.IonThumbnail { }
-    export interface IonTitle extends IonJSX.IonTitle { }
-    export interface IonToast extends IonJSX.IonToast { }
-    export interface IonToggle extends IonJSX.IonToggle { }
-    export interface IonToolbar extends IonJSX.IonToolbar { }
-    export interface IonVirtualScroll extends IonJSX.IonVirtualScroll { }
-
     interface GeovCarousel {
         /**
           * array of image URLs passed to src attribute of the <img src="">
@@ -506,6 +492,42 @@ declare namespace LocalJSX {
          */
         "sparqlEndpoint"?: string;
     }
+    interface GeovDisplayGeosparqlWktliteral {
+        /**
+          * the opengis value
+         */
+        "value"?: string;
+    }
+    interface GeovDisplayTimeDatetimedescription {
+        /**
+          * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
+         */
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'iXXX'
+         */
+        "entityId"?: string;
+        "fetchBeforeRender"?: boolean;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+    }
+    interface GeovEntity {
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId"?: string;
+        "fetchBeforeRender"?: boolean;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+    }
     interface GeovEntityClassLabel {
         "_ssrId"?: string;
         /**
@@ -544,9 +566,103 @@ declare namespace LocalJSX {
         "items"?: GeovEntityListItem[];
         "loading"?: boolean;
         /**
-          * urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
          */
-        "urlAppend"?: string;
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
+    }
+    interface GeovEntityProperties {
+        /**
+          * declares an _ssrId property that is reflected as attribute
+         */
+        "_ssrId"?: string;
+        /**
+          * color Color of the properties
+         */
+        "color"?: Color;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId"?: string;
+        "fetchBeforeRender"?: boolean;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language"?: string;
+        /**
+          * predicateInclude Comma separated list of predicate URI's to exclude, e.g: Don't fetch the rdfs:label and p86i (was born) 'http://www.w3.org/2000/01/rdf-schema#label,https://ontome.net/ontology/p86i'
+         */
+        "predicateExclude"?: string;
+        /**
+          * predicateInclude Comma separated list of predicate URI's to include, e.g: Fetch only the rdfs:label and p86i (was born) 'http://www.w3.org/2000/01/rdf-schema#label,https://ontome.net/ontology/p86i'
+         */
+        "predicateInclude"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+        /**
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
+         */
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
+    }
+    interface GeovEntityPropsByPredicate {
+        /**
+          * declares an _ssrId property that is reflected as attribute
+         */
+        "_ssrId"?: string;
+        "color"?: Color;
+        /**
+          * entityId ID number of entity, e.g. 'iXXX'
+         */
+        "entityId"?: string;
+        /**
+          * if true, componentWillLoad() returns a promise for the loading of all data [default: true]
+         */
+        "fetchBeforeRender"?: boolean;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language"?: string;
+        /**
+          * pageChanged Listener of change page
+         */
+        "onPageChanged"?: (event: GeovEntityPropsByPredicateCustomEvent<PageEvent>) => void;
+        /**
+          * pageSize Page size if too many resultat for a property, default 3
+         */
+        "pageSize"?: number;
+        /**
+          * predicateLabel Label of the predicate
+         */
+        "predicateLabel"?: string;
+        /**
+          * predicateUri URI of the predicate
+         */
+        "predicateUri"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+        /**
+          * totalCount Total number of entity from this property
+         */
+        "totalCount"?: number;
+        /**
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
+         */
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
     }
     interface GeovExplorer {
         /**
@@ -566,9 +682,13 @@ declare namespace LocalJSX {
          */
         "sparqlEndpoint"?: string;
         /**
-          * urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
          */
-        "urlAppend"?: string;
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
     }
     interface GeovIf {
         "_ssrId"?: string;
@@ -582,6 +702,7 @@ declare namespace LocalJSX {
         "sparqlQuery"?: string;
     }
     interface GeovPaginator {
+        "color"?: Color;
         "hidePageSize"?: boolean;
         "length"?: number;
         "onPageChanged"?: (event: GeovPaginatorCustomEvent<PageEvent>) => void;
@@ -599,10 +720,15 @@ declare namespace LocalJSX {
         "geov-class-select-popup": GeovClassSelectPopup;
         "geov-code": GeovCode;
         "geov-data-fetch-example": GeovDataFetchExample;
+        "geov-display-geosparql-wktliteral": GeovDisplayGeosparqlWktliteral;
+        "geov-display-time-datetimedescription": GeovDisplayTimeDatetimedescription;
+        "geov-entity": GeovEntity;
         "geov-entity-class-label": GeovEntityClassLabel;
         "geov-entity-definition": GeovEntityDefinition;
         "geov-entity-label": GeovEntityLabel;
         "geov-entity-list": GeovEntityList;
+        "geov-entity-properties": GeovEntityProperties;
+        "geov-entity-props-by-predicate": GeovEntityPropsByPredicate;
         "geov-explorer": GeovExplorer;
         "geov-if": GeovIf;
         "geov-paginator": GeovPaginator;
@@ -612,112 +738,22 @@ declare namespace LocalJSX {
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
-      interface IntrinsicElements {
-            "ion-accordion": LocalJSX.IonAccordion & JSXBase.HTMLAttributes<HTMLIonAccordionElement>
-            "ion-accordion-group": LocalJSX.IonAccordionGroup & JSXBase.HTMLAttributes<HTMLIonAccordionGroupElement>
-            "ion-action-sheet": LocalJSX.IonActionSheet & JSXBase.HTMLAttributes<HTMLIonActionSheetElement>
-            "ion-alert": LocalJSX.IonAlert & JSXBase.HTMLAttributes<HTMLIonAlertElement>
-            "ion-app": LocalJSX.IonApp & JSXBase.HTMLAttributes<HTMLIonAppElement>
-            "ion-avatar": LocalJSX.IonAvatar & JSXBase.HTMLAttributes<HTMLIonAvatarElement>
-            "ion-back-button": LocalJSX.IonBackButton & JSXBase.HTMLAttributes<HTMLIonBackButtonElement>
-            "ion-backdrop": LocalJSX.IonBackdrop & JSXBase.HTMLAttributes<HTMLIonBackdropElement>
-            "ion-badge": LocalJSX.IonBadge & JSXBase.HTMLAttributes<HTMLIonBadgeElement>
-            "ion-breadcrumb": LocalJSX.IonBreadcrumb & JSXBase.HTMLAttributes<HTMLIonBreadcrumbElement>
-            "ion-breadcrumbs": LocalJSX.IonBreadcrumbs & JSXBase.HTMLAttributes<HTMLIonBreadcrumbsElement>
-            "ion-button": LocalJSX.IonButton & JSXBase.HTMLAttributes<HTMLIonButtonElement>
-            "ion-buttons": LocalJSX.IonButtons & JSXBase.HTMLAttributes<HTMLIonButtonsElement>
-            "ion-card": LocalJSX.IonCard & JSXBase.HTMLAttributes<HTMLIonCardElement>
-            "ion-card-content": LocalJSX.IonCardContent & JSXBase.HTMLAttributes<HTMLIonCardContentElement>
-            "ion-card-header": LocalJSX.IonCardHeader & JSXBase.HTMLAttributes<HTMLIonCardHeaderElement>
-            "ion-card-subtitle": LocalJSX.IonCardSubtitle & JSXBase.HTMLAttributes<HTMLIonCardSubtitleElement>
-            "ion-card-title": LocalJSX.IonCardTitle & JSXBase.HTMLAttributes<HTMLIonCardTitleElement>
-            "ion-checkbox": LocalJSX.IonCheckbox & JSXBase.HTMLAttributes<HTMLIonCheckboxElement>
-            "ion-chip": LocalJSX.IonChip & JSXBase.HTMLAttributes<HTMLIonChipElement>
-            "ion-col": LocalJSX.IonCol & JSXBase.HTMLAttributes<HTMLIonColElement>
-            "ion-content": LocalJSX.IonContent & JSXBase.HTMLAttributes<HTMLIonContentElement>
-            "ion-datetime": LocalJSX.IonDatetime & JSXBase.HTMLAttributes<HTMLIonDatetimeElement>
-            "ion-fab": LocalJSX.IonFab & JSXBase.HTMLAttributes<HTMLIonFabElement>
-            "ion-fab-button": LocalJSX.IonFabButton & JSXBase.HTMLAttributes<HTMLIonFabButtonElement>
-            "ion-fab-list": LocalJSX.IonFabList & JSXBase.HTMLAttributes<HTMLIonFabListElement>
-            "ion-footer": LocalJSX.IonFooter & JSXBase.HTMLAttributes<HTMLIonFooterElement>
-            "ion-grid": LocalJSX.IonGrid & JSXBase.HTMLAttributes<HTMLIonGridElement>
-            "ion-header": LocalJSX.IonHeader & JSXBase.HTMLAttributes<HTMLIonHeaderElement>
-            "ion-icon": LocalJSX.IonIcon & JSXBase.HTMLAttributes<HTMLIonIconElement>
-            "ion-img": LocalJSX.IonImg & JSXBase.HTMLAttributes<HTMLIonImgElement>
-            "ion-infinite-scroll": LocalJSX.IonInfiniteScroll & JSXBase.HTMLAttributes<HTMLIonInfiniteScrollElement>
-            "ion-infinite-scroll-content": LocalJSX.IonInfiniteScrollContent & JSXBase.HTMLAttributes<HTMLIonInfiniteScrollContentElement>
-            "ion-input": LocalJSX.IonInput & JSXBase.HTMLAttributes<HTMLIonInputElement>
-            "ion-item": LocalJSX.IonItem & JSXBase.HTMLAttributes<HTMLIonItemElement>
-            "ion-item-divider": LocalJSX.IonItemDivider & JSXBase.HTMLAttributes<HTMLIonItemDividerElement>
-            "ion-item-group": LocalJSX.IonItemGroup & JSXBase.HTMLAttributes<HTMLIonItemGroupElement>
-            "ion-item-option": LocalJSX.IonItemOption & JSXBase.HTMLAttributes<HTMLIonItemOptionElement>
-            "ion-item-options": LocalJSX.IonItemOptions & JSXBase.HTMLAttributes<HTMLIonItemOptionsElement>
-            "ion-item-sliding": LocalJSX.IonItemSliding & JSXBase.HTMLAttributes<HTMLIonItemSlidingElement>
-            "ion-label": LocalJSX.IonLabel & JSXBase.HTMLAttributes<HTMLIonLabelElement>
-            "ion-list": LocalJSX.IonList & JSXBase.HTMLAttributes<HTMLIonListElement>
-            "ion-list-header": LocalJSX.IonListHeader & JSXBase.HTMLAttributes<HTMLIonListHeaderElement>
-            "ion-loading": LocalJSX.IonLoading & JSXBase.HTMLAttributes<HTMLIonLoadingElement>
-            "ion-menu": LocalJSX.IonMenu & JSXBase.HTMLAttributes<HTMLIonMenuElement>
-            "ion-menu-button": LocalJSX.IonMenuButton & JSXBase.HTMLAttributes<HTMLIonMenuButtonElement>
-            "ion-menu-toggle": LocalJSX.IonMenuToggle & JSXBase.HTMLAttributes<HTMLIonMenuToggleElement>
-            "ion-modal": LocalJSX.IonModal & JSXBase.HTMLAttributes<HTMLIonModalElement>
-            "ion-nav": LocalJSX.IonNav & JSXBase.HTMLAttributes<HTMLIonNavElement>
-            "ion-nav-link": LocalJSX.IonNavLink & JSXBase.HTMLAttributes<HTMLIonNavLinkElement>
-            "ion-note": LocalJSX.IonNote & JSXBase.HTMLAttributes<HTMLIonNoteElement>
-            "ion-picker": LocalJSX.IonPicker & JSXBase.HTMLAttributes<HTMLIonPickerElement>
-            "ion-picker-column": LocalJSX.IonPickerColumn & JSXBase.HTMLAttributes<HTMLIonPickerColumnElement>
-            "ion-picker-column-internal": LocalJSX.IonPickerColumnInternal & JSXBase.HTMLAttributes<HTMLIonPickerColumnInternalElement>
-            "ion-picker-internal": LocalJSX.IonPickerInternal & JSXBase.HTMLAttributes<HTMLIonPickerInternalElement>
-            "ion-popover": LocalJSX.IonPopover & JSXBase.HTMLAttributes<HTMLIonPopoverElement>
-            "ion-progress-bar": LocalJSX.IonProgressBar & JSXBase.HTMLAttributes<HTMLIonProgressBarElement>
-            "ion-radio": LocalJSX.IonRadio & JSXBase.HTMLAttributes<HTMLIonRadioElement>
-            "ion-radio-group": LocalJSX.IonRadioGroup & JSXBase.HTMLAttributes<HTMLIonRadioGroupElement>
-            "ion-range": LocalJSX.IonRange & JSXBase.HTMLAttributes<HTMLIonRangeElement>
-            "ion-refresher": LocalJSX.IonRefresher & JSXBase.HTMLAttributes<HTMLIonRefresherElement>
-            "ion-refresher-content": LocalJSX.IonRefresherContent & JSXBase.HTMLAttributes<HTMLIonRefresherContentElement>
-            "ion-reorder": LocalJSX.IonReorder & JSXBase.HTMLAttributes<HTMLIonReorderElement>
-            "ion-reorder-group": LocalJSX.IonReorderGroup & JSXBase.HTMLAttributes<HTMLIonReorderGroupElement>
-            "ion-ripple-effect": LocalJSX.IonRippleEffect & JSXBase.HTMLAttributes<HTMLIonRippleEffectElement>
-            "ion-route": LocalJSX.IonRoute & JSXBase.HTMLAttributes<HTMLIonRouteElement>
-            "ion-route-redirect": LocalJSX.IonRouteRedirect & JSXBase.HTMLAttributes<HTMLIonRouteRedirectElement>
-            "ion-router": LocalJSX.IonRouter & JSXBase.HTMLAttributes<HTMLIonRouterElement>
-            "ion-router-link": LocalJSX.IonRouterLink & JSXBase.HTMLAttributes<HTMLIonRouterLinkElement>
-            "ion-router-outlet": LocalJSX.IonRouterOutlet & JSXBase.HTMLAttributes<HTMLIonRouterOutletElement>
-            "ion-row": LocalJSX.IonRow & JSXBase.HTMLAttributes<HTMLIonRowElement>
-            "ion-searchbar": LocalJSX.IonSearchbar & JSXBase.HTMLAttributes<HTMLIonSearchbarElement>
-            "ion-segment": LocalJSX.IonSegment & JSXBase.HTMLAttributes<HTMLIonSegmentElement>
-            "ion-segment-button": LocalJSX.IonSegmentButton & JSXBase.HTMLAttributes<HTMLIonSegmentButtonElement>
-            "ion-select": LocalJSX.IonSelect & JSXBase.HTMLAttributes<HTMLIonSelectElement>
-            "ion-select-option": LocalJSX.IonSelectOption & JSXBase.HTMLAttributes<HTMLIonSelectOptionElement>
-            "ion-select-popover": LocalJSX.IonSelectPopover & JSXBase.HTMLAttributes<HTMLIonSelectPopoverElement>
-            "ion-skeleton-text": LocalJSX.IonSkeletonText & JSXBase.HTMLAttributes<HTMLIonSkeletonTextElement>
-            "ion-slide": LocalJSX.IonSlide & JSXBase.HTMLAttributes<HTMLIonSlideElement>
-            "ion-slides": LocalJSX.IonSlides & JSXBase.HTMLAttributes<HTMLIonSlidesElement>
-            "ion-spinner": LocalJSX.IonSpinner & JSXBase.HTMLAttributes<HTMLIonSpinnerElement>
-            "ion-split-pane": LocalJSX.IonSplitPane & JSXBase.HTMLAttributes<HTMLIonSplitPaneElement>
-            "ion-tab": LocalJSX.IonTab & JSXBase.HTMLAttributes<HTMLIonTabElement>
-            "ion-tab-bar": LocalJSX.IonTabBar & JSXBase.HTMLAttributes<HTMLIonTabBarElement>
-            "ion-tab-button": LocalJSX.IonTabButton & JSXBase.HTMLAttributes<HTMLIonTabButtonElement>
-            "ion-tabs": LocalJSX.IonTabs & JSXBase.HTMLAttributes<HTMLIonTabsElement>
-            "ion-text": LocalJSX.IonText & JSXBase.HTMLAttributes<HTMLIonTextElement>
-            "ion-textarea": LocalJSX.IonTextarea & JSXBase.HTMLAttributes<HTMLIonTextareaElement>
-            "ion-thumbnail": LocalJSX.IonThumbnail & JSXBase.HTMLAttributes<HTMLIonThumbnailElement>
-            "ion-title": LocalJSX.IonTitle & JSXBase.HTMLAttributes<HTMLIonTitleElement>
-            "ion-toast": LocalJSX.IonToast & JSXBase.HTMLAttributes<HTMLIonToastElement>
-            "ion-toggle": LocalJSX.IonToggle & JSXBase.HTMLAttributes<HTMLIonToggleElement>
-            "ion-toolbar": LocalJSX.IonToolbar & JSXBase.HTMLAttributes<HTMLIonToolbarElement>
-            "ion-virtual-scroll": LocalJSX.IonVirtualScroll & JSXBase.HTMLAttributes<HTMLIonVirtualScrollElement>
-
+        interface IntrinsicElements {
             "geov-carousel": LocalJSX.GeovCarousel & JSXBase.HTMLAttributes<HTMLGeovCarouselElement>;
             "geov-class-radio-group": LocalJSX.GeovClassRadioGroup & JSXBase.HTMLAttributes<HTMLGeovClassRadioGroupElement>;
             "geov-class-select": LocalJSX.GeovClassSelect & JSXBase.HTMLAttributes<HTMLGeovClassSelectElement>;
             "geov-class-select-popup": LocalJSX.GeovClassSelectPopup & JSXBase.HTMLAttributes<HTMLGeovClassSelectPopupElement>;
             "geov-code": LocalJSX.GeovCode & JSXBase.HTMLAttributes<HTMLGeovCodeElement>;
             "geov-data-fetch-example": LocalJSX.GeovDataFetchExample & JSXBase.HTMLAttributes<HTMLGeovDataFetchExampleElement>;
+            "geov-display-geosparql-wktliteral": LocalJSX.GeovDisplayGeosparqlWktliteral & JSXBase.HTMLAttributes<HTMLGeovDisplayGeosparqlWktliteralElement>;
+            "geov-display-time-datetimedescription": LocalJSX.GeovDisplayTimeDatetimedescription & JSXBase.HTMLAttributes<HTMLGeovDisplayTimeDatetimedescriptionElement>;
+            "geov-entity": LocalJSX.GeovEntity & JSXBase.HTMLAttributes<HTMLGeovEntityElement>;
             "geov-entity-class-label": LocalJSX.GeovEntityClassLabel & JSXBase.HTMLAttributes<HTMLGeovEntityClassLabelElement>;
             "geov-entity-definition": LocalJSX.GeovEntityDefinition & JSXBase.HTMLAttributes<HTMLGeovEntityDefinitionElement>;
             "geov-entity-label": LocalJSX.GeovEntityLabel & JSXBase.HTMLAttributes<HTMLGeovEntityLabelElement>;
             "geov-entity-list": LocalJSX.GeovEntityList & JSXBase.HTMLAttributes<HTMLGeovEntityListElement>;
+            "geov-entity-properties": LocalJSX.GeovEntityProperties & JSXBase.HTMLAttributes<HTMLGeovEntityPropertiesElement>;
+            "geov-entity-props-by-predicate": LocalJSX.GeovEntityPropsByPredicate & JSXBase.HTMLAttributes<HTMLGeovEntityPropsByPredicateElement>;
             "geov-explorer": LocalJSX.GeovExplorer & JSXBase.HTMLAttributes<HTMLGeovExplorerElement>;
             "geov-if": LocalJSX.GeovIf & JSXBase.HTMLAttributes<HTMLGeovIfElement>;
             "geov-paginator": LocalJSX.GeovPaginator & JSXBase.HTMLAttributes<HTMLGeovPaginatorElement>;

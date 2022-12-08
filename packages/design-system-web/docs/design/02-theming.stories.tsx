@@ -60,8 +60,8 @@ export const Theming = () => {
             Moreover, each ionic component has CSS custom properties. CSS custom properties are documented for each component, see for example{' '}
             <a target="_blank" href="https://ionicframework.com/docs/api/button#css-custom-properties">
               button CSS custom properties
-            </a>.
-            For example you could change the border radius of <code>ion-buttons</code>:
+            </a>
+            . For example you could change the border radius of <code>ion-buttons</code>:
           </p>
           <p>
             <SyntaxHighlighter language="scss">{example2}</SyntaxHighlighter>

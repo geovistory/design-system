@@ -3,8 +3,7 @@ create-next-app@12.3.1
 Ok to proceed? (y) y
 ✔ What is your project named? … stencil-next-hydrate-example`;
 
-
-export const s04_2=`/// <reference path="../node_modules/@geovistory/design-system-web/dist/types/react.d.ts" />
+export const s04_2 = `/// <reference path="../node_modules/@geovistory/design-system-web/dist/types/react.d.ts" />
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { defineCustomElements } from '@geovistory/design-system-web/loader';
@@ -17,9 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp
-`
+`;
 
-export const s04_3=`...
+export const s04_3 = `...
 <main>
   <ion-card>
     <ion-card-header>
@@ -33,9 +32,9 @@ export const s04_3=`...
     </ion-card-header>
   </ion-card>
 </main>
-...`
+...`;
 
-export const s04_4=`import { renderToString } from '@geovistory/design-system-web/hydrate';
+export const s04_4 = `import { renderToString } from '@geovistory/design-system-web/hydrate';
 import type { JSXElementConstructor, ReactElement } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Window } from 'happy-dom';
@@ -60,10 +59,9 @@ export async function serverRender(
   const bodyInnerHtml = happyDomDoc.querySelector('body').getInnerHTML();
   const headInnerHtml = happyDomDoc.querySelector('head').getInnerHTML();
   return { bodyInnerHtml: bodyInnerHtml, headInnerHtml, serverFetchedData };
-}`
+}`;
 
-
-export const s04_5=`import type { GetStaticProps, NextPage } from 'next';
+export const s04_5 = `import type { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import { serverRender } from '../lib/serverRender';
 import styles from '../styles/Home.module.css';
@@ -117,9 +115,9 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 };
 
 export default Home;
-`
+`;
 
-export const s04_6=`...
+export const s04_6 = `...
 import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
@@ -154,30 +152,28 @@ export class GeovEntityClassLabel {
   }
  ...
 }
-`
+`;
 
-export const s04_7=`export const setSSRId = (component: { _ssrId?: string }) => {
+export const s04_7 = `export const setSSRId = (component: { _ssrId?: string }) => {
   // @ts-ignore
   if (document?.__STENCIL_DATA__ && !component._ssrId) {
     component._ssrId = generateUID();
   }
-};`
+};`;
 
-
-export const s04_8=`export function getSSRData(key: string): any {
+export const s04_8 = `export function getSSRData(key: string): any {
   if (key) {
     // @ts-ignore
     return window?.__NEXT_DATA__?.props?.pageProps?._ssrData?.[key];
   }
-}`
+}`;
 
-export const s04_9=`export function setSSRData(key: string, val: any) {
+export const s04_9 = `export function setSSRData(key: string, val: any) {
   // @ts-ignore
   if (typeof document?.__STENCIL_DATA__ === 'object') document.__STENCIL_DATA__[key] = val;
-}`
+}`;
 
-
-export const s04_10=`export async function serverRender(
+export const s04_10 = `export async function serverRender(
  ...
   const stencilHydrateOutput = await renderToString(html, {
     removeHtmlComments: true,
@@ -190,10 +186,9 @@ export const s04_10=`export async function serverRender(
   });
 
   return { bodyInnerHtml: bodyInnerHtml, headInnerHtml, serverFetchedData }; // <- return fetched data
-}`
+}`;
 
-
-export const s04_11=`...
+export const s04_11 = `...
 interface HomeProps {
   _ssrHtmlBody: string;
   _ssrHtmlHead: string;
@@ -213,4 +208,4 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   };
 };
 ...
-`
+`;

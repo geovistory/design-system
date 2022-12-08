@@ -1,5 +1,5 @@
-import { IonApp, IonButton, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonList, IonRow, IonText, IonTitle } from '../../.storybook/stencil-generated/component';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { IonApp, IonButton, IonCol, IonContent, IonGrid, IonIcon, IonRow } from '../../.storybook/stencil-generated/component';
 
 export default {
   title: 'Design/Theme Generator',

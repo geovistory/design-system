@@ -45,10 +45,22 @@ export class GeovExplorer {
   @Prop() initSearchString?: string;
 
   /**
-   * urlAppend will be appended to the URIs used as links to the geovistory entity pages.
-   * Example: '?p=84760' will be redirected to the entity page of project 84760
+   * uriRegex
+   * Optional regex with capturing groups to transform
+   * the uri into the desired url. To use together
+   * with uriReplace.
    */
-  @Prop() urlAppend = '';
+  @Prop() uriRegex?: string;
+  /**
+   * uriReplace
+   * String used to replace the uriRegex.
+   *
+   * Example (pseudo code):
+   * const uriRegex = (http:\/\/geovistory.org\/)(.*)
+   * const uriReplace = "http://dev.geovistory.org/resource/$2?p=123"
+   * http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+   */
+  @Prop() uriReplace?: string;
 
   __data: GeovExplorerData;
   set data(d: GeovExplorerData) {
@@ -228,7 +240,8 @@ export class GeovExplorer {
             <ion-col sizeMd="12" sizeLg="6" sizeXl="9">
               <geov-entity-list
                 defaultPageSize={this.limit}
-                urlAppend={this.urlAppend}
+                uriRegex={this.uriRegex}
+                uriReplace={this.uriReplace}
                 ref={el => {
                   el.items = this.entityList?.items;
                   el.loading = this.entityList?.loading;

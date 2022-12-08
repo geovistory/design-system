@@ -27,7 +27,7 @@ export class GeovToc {
     if (this.el) {
       const getHref = (e: Element) => {
         const id = e?.getAttribute('id');
-        return id ? `#${id}` :undefined;
+        return id ? `#${id}` : undefined;
       };
       const getText = (e: ChildNode) => {
         return e.textContent;
@@ -72,6 +72,12 @@ export class GeovToc {
   }
   createTocItem(level: number, text: string, href?: string) {
     const inner = <div style={{ paddingLeft: `${level * 16}px` }}>{text}</div>;
-    return href ? <ion-item href={href} detail={false}>{inner} </ion-item> : <ion-item>{inner}</ion-item>;
+    return href ? (
+      <ion-item href={href} detail={false}>
+        {inner}{' '}
+      </ion-item>
+    ) : (
+      <ion-item>{inner}</ion-item>
+    );
   }
 }

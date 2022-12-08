@@ -15,3 +15,11 @@ const args: JSX.GeovEntityDefinition = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
 };
 EntityDefinition.args = args;
+
+export const EntityDefinitionNotFound = Template.bind({});
+const args2: JSX.GeovEntityDefinition = {
+  entityId: 'xyz',
+  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  emptyPlaceholder: 'No definition found',
+};
+EntityDefinitionNotFound.args = args2;

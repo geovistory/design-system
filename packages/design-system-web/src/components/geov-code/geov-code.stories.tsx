@@ -45,7 +45,6 @@ const argsJson: JSX.GeovCode = {
 };
 CodeJson.args = argsJson;
 
-
 export const CodeBash = Template.bind({});
 const argsBash: JSX.GeovCode = {
   code: `# install components

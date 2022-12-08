@@ -1,7 +1,7 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
 import Prism from 'prismjs';
-import {extendPrism} from './prism.js'
-extendPrism(Prism)
+import { extendPrism } from './prism.js';
+extendPrism(Prism);
 import { copyOutline } from 'ionicons/icons';
 export type Languages =
   | 'markup'
@@ -36,7 +36,7 @@ export type Languages =
 export class GeovCode {
   @Prop() code: string;
   @Prop() language: Languages;
-  @Prop() copyButton: boolean = true;
+  @Prop() copyButton = true;
 
   @State() copied = false;
   copiedEl!: HTMLDivElement;

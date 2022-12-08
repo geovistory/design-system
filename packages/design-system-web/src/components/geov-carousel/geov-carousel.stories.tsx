@@ -6,7 +6,7 @@ export default {
   title: 'Design Components/Carousel',
   component: GeovCarousel,
 };
-const Template = (args: Components.GeovCarousel) => <GeovCarousel style={{height:400, maxWidth:600}} {...args}></GeovCarousel>;
+const Template = (args: Components.GeovCarousel) => <GeovCarousel style={{ height: 400, maxWidth: 600 }} {...args}></GeovCarousel>;
 
 export const Carousel = Template.bind({});
 const args: Components.GeovCarousel = {
