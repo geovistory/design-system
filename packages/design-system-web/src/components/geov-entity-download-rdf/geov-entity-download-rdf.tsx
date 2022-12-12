@@ -1,10 +1,11 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { downloadOutline } from 'ionicons/icons';
+import { Color } from '@ionic/core';
+import { State } from '@stencil/core/internal';
 
 @Component({
   tag: 'geov-entity-download-rdf',
   styleUrl: 'geov-entity-download-rdf.css',
-  shadow: true,
+  shadow: false,
 })
 export class GeovEntityDownloadRdf {
   /**
@@ -16,24 +17,54 @@ export class GeovEntityDownloadRdf {
    * color
    * color of the button
    */
-  @Prop() color = 'primary';
+  @Prop() color?: Color;
   /**
    * expand
    * expand of the button
    */
-  @Prop() expand: 'block' | 'full';
+  @Prop() expand?: 'block' | 'full';
   /**
    * fill
    * fill of the button
    */
-  @Prop() fill: 'clear' | 'outline' | 'solid' | 'default';
+  @Prop() fill?: 'clear' | 'outline' | 'solid' | 'default';
+  /**
+   * buttonLabel
+   * Label of the button
+   */
+  @Prop() buttonLabel = 'Download RDF';
+  /**
+   * buttonIcon
+   * Icon of the button
+   */
+  @Prop() buttonIcon = 'download-outline';
+  /**
+   * listFormat
+   * List or RDF serialization format
+   */
+  @State() listFormat = {
+    'RDF XML': 'rdf+xml',
+    'JSON-LD': 'ld+json',
+    'N-Triples': 'n-triples',
+    'N-Quads': 'n-quads',
+    'TRIX': 'trix+xml',
+    'Thrift': 'rdf+thrift',
+    'Turtle': 'turtle',
+  };
+  /**
+   * File for download
+   */
+  @State() response: Blob;
 
   modal: HTMLIonModalElement;
 
   render() {
     return (
       <Host>
-        <ion-modal id="example-modal" trigger="open-custom-dialog" ref={element => (this.modal = element)}>
+        <ion-button id="open-custom-dialog" expand={this.expand} fill={this.fill} color={this.color} onClick={() => (this.modal.isOpen = true)}>
+          {this.buttonLabel} <ion-icon name={this.buttonIcon}></ion-icon>
+        </ion-button>
+        <ion-modal id="example-modal" trigger="open-custom-dialog" ref={element => (this.modal = element)} onWillDismiss={() => this.dismiss()}>
           <ion-header>
             <ion-toolbar>
               <ion-buttons slot="start">
@@ -43,19 +74,39 @@ export class GeovEntityDownloadRdf {
             </ion-toolbar>
           </ion-header>
           <ion-content class="ion-padding">
-            <ion-item>
-              <ion-label>RDF XML</ion-label>
-              <ion-button slot="end">
-                <ion-icon slot="icon-only" icon={downloadOutline} size="small"></ion-icon>
-              </ion-button>
-            </ion-item>
+            <ion-list lines="none">{this.renderClickableItem()}</ion-list>
           </ion-content>
         </ion-modal>
         <slot></slot>
       </Host>
     );
   }
+  open() {
+    this.modal.isOpen = true;
+  }
   dismiss() {
     this.modal.dismiss();
+    this.modal.isOpen = false;
+  }
+  async fetchRDF(type) {
+    const headers = new Headers({
+      'Content-Type': 'application/' + type,
+    });
+    const response = await fetch('http://geovistory.org/resource/' + this.entityId, {
+      method: 'GET',
+      headers: headers,
+      mode: 'cors',
+      cache: 'default',
+    });
+    this.response = await response.blob();
+    this.dismiss();
+  }
+  renderClickableItem() {
+    return Object.entries(this.listFormat).map(([b, k]) => (
+      <ion-item button={true} detail={false} onClick={() => this.fetchRDF({ k })} download="Download">
+        <ion-icon name="download"></ion-icon>
+        <ion-label>{b}</ion-label>
+      </ion-item>
+    ));
   }
 }
