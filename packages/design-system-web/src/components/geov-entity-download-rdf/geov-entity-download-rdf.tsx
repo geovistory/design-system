@@ -42,7 +42,7 @@ export class GeovEntityDownloadRdf {
    * listFormat
    * List or RDF serialization format
    */
-  @State() listFormat = {
+  @State() listFormat: Record<string, string> = {
     'RDF XML': 'rdf+xml',
     'JSON-LD': 'ld+json',
     'N-Triples': 'n-triples',
@@ -88,11 +88,13 @@ export class GeovEntityDownloadRdf {
     this.modal.dismiss();
     this.modal.isOpen = false;
   }
-  async fetchRDF(type) {
+  async fetchRDF(type: string) {
+    console.log(type);
     const headers = new Headers({
       'Content-Type': 'application/' + type,
     });
-    const response = await fetch('https://www.geovistory.org/resource/' + this.entityId, {
+    const url = 'https://www.geovistory.org/resource/';
+    const response = await fetch(url + this.entityId, {
       method: 'GET',
       headers: headers,
       mode: 'cors',
@@ -102,10 +104,10 @@ export class GeovEntityDownloadRdf {
     this.dismiss();
   }
   renderClickableItem() {
-    return Object.entries(this.listFormat).map(([b, k]) => (
-      <ion-item button={true} detail={false} onClick={() => this.fetchRDF({ k })} download="Download">
+    return Object.entries(this.listFormat).map(([a, b]) => (
+      <ion-item button={true} detail={false} onClick={() => this.fetchRDF(b)} download="Download">
         <ion-icon name="download"></ion-icon>
-        <ion-label>{b}</ion-label>
+        <ion-label>{a}</ion-label>
       </ion-item>
     ));
   }
