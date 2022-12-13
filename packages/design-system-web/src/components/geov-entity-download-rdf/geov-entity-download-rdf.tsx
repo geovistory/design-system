@@ -92,7 +92,7 @@ export class GeovEntityDownloadRdf {
     const headers = new Headers({
       'Content-Type': 'application/' + type,
     });
-    const response = await fetch('https://geovistory.org/resource/' + this.entityId, {
+    const response = await fetch('https://www.geovistory.org/resource/' + this.entityId, {
       method: 'GET',
       headers: headers,
       mode: 'cors',
