@@ -89,7 +89,6 @@ export class GeovEntityDownloadRdf {
     this.modal.isOpen = false;
   }
   async fetchRDF(type: string) {
-    console.log(type);
     const headers = new Headers({
       'Content-Type': 'application/' + type,
     });
@@ -101,6 +100,10 @@ export class GeovEntityDownloadRdf {
       cache: 'default',
     });
     this.response = await response.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(this.response);
+    a.download = this.entityId;
+    a.click();
     this.dismiss();
   }
   renderClickableItem() {
