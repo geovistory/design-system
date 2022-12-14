@@ -90,9 +90,9 @@ export class GeovEntityDownloadRdf {
   }
   async fetchRDF(type: string) {
     const headers = new Headers({
-      'Accept': 'application/' + type,
+      Accept: type,
     });
-    const url = 'http://geovistory.org/resource/';
+    const url = 'http://www.geovistory.org/resource/';
     const response = await fetch(url + this.entityId, {
       method: 'GET',
       headers: headers,
