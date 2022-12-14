@@ -1,6 +1,7 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import { Color } from '@ionic/core';
 import { State } from '@stencil/core/internal';
+import { downloadOutline } from 'ionicons/icons';
 
 @Component({
   tag: 'geov-entity-download-rdf',
@@ -62,7 +63,7 @@ export class GeovEntityDownloadRdf {
     return (
       <Host>
         <ion-button id="open-custom-dialog" expand={this.expand} fill={this.fill} color={this.color} onClick={() => (this.modal.isOpen = true)}>
-          {this.buttonLabel} <ion-icon name={this.buttonIcon}></ion-icon>
+          {this.buttonLabel} {this.buttonIcon ? <ion-icon name={this.buttonIcon}></ion-icon> : <ion-icon icon={downloadOutline}></ion-icon>}
         </ion-button>
         <ion-modal id="example-modal" trigger="open-custom-dialog" ref={element => (this.modal = element)} onWillDismiss={() => this.dismiss()}>
           <ion-header>
@@ -109,7 +110,7 @@ export class GeovEntityDownloadRdf {
   renderClickableItem() {
     return Object.entries(this.listFormat).map(([a, b]) => (
       <ion-item button={true} detail={false} onClick={() => this.fetchRDF(b)} download="Download">
-        <ion-icon name="download"></ion-icon>
+        {this.buttonIcon ? <ion-icon slot="start" name={this.buttonIcon}></ion-icon> : <ion-icon slot="start" icon={downloadOutline}></ion-icon>}
         <ion-label>{a}</ion-label>
       </ion-item>
     ));
