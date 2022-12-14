@@ -42,14 +42,14 @@ export class GeovEntityDownloadRdf {
    * listFormat
    * List or RDF serialization format
    */
-  @State() listFormat: Record<string, string> = {
-    'RDF XML': 'application/rdf+xml',
-    'JSON-LD': 'application/ld+json',
-    'N-Triples': 'application/n-triples',
-    'N-Quads': 'application/n-quads',
-    'TRIX': 'application/trix+xml',
-    'Thrift': 'application/rdf+thrift',
-    'Turtle': 'text/turtle',
+  @State() listFormat: Record<string, string[]> = {
+    'RDF XML': ['application/rdf+xml', '.rdf'],
+    'JSON-LD': ['application/ld+json', '.jsonld'],
+    'N-Triples': ['application/n-triples', '.nt'],
+    'N-Quads': ['application/n-quads', '.nq'],
+    'TRIX': ['application/trix+xml', '.trix'],
+    'Thrift': ['application/rdf+thrift', '.thrift'],
+    'Turtle': ['text/turtle', '.ttl'],
   };
   /**
    * File for download
@@ -88,11 +88,11 @@ export class GeovEntityDownloadRdf {
     this.modal.dismiss();
     this.modal.isOpen = false;
   }
-  async fetchRDF(type: string) {
+  async fetchRDF(format: string[]) {
     const headers = new Headers({
-      Accept: type,
+      Accept: format[0], //format[0] = Type
     });
-    const url = 'http://www.geovistory.org/resource/';
+    const url = 'https://www.geovistory.org/resource/';
     const response = await fetch(url + this.entityId, {
       method: 'GET',
       headers: headers,
@@ -102,7 +102,7 @@ export class GeovEntityDownloadRdf {
     this.response = await response.blob();
     const a = document.createElement('a');
     a.href = URL.createObjectURL(this.response);
-    a.download = this.entityId;
+    a.download = this.entityId + format[1]; //format[1] = Extension file
     a.click();
     this.dismiss();
   }
