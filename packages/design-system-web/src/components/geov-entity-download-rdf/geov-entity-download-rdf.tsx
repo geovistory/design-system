@@ -43,13 +43,13 @@ export class GeovEntityDownloadRdf {
    * List or RDF serialization format
    */
   @State() listFormat: Record<string, string> = {
-    'RDF XML': 'rdf+xml',
-    'JSON-LD': 'ld+json',
-    'N-Triples': 'n-triples',
-    'N-Quads': 'n-quads',
-    'TRIX': 'trix+xml',
-    'Thrift': 'rdf+thrift',
-    'Turtle': 'turtle',
+    'RDF XML': 'application/rdf+xml',
+    'JSON-LD': 'application/ld+json',
+    'N-Triples': 'application/n-triples',
+    'N-Quads': 'application/n-quads',
+    'TRIX': 'application/trix+xml',
+    'Thrift': 'application/rdf+thrift',
+    'Turtle': 'text/turtle',
   };
   /**
    * File for download
@@ -90,9 +90,9 @@ export class GeovEntityDownloadRdf {
   }
   async fetchRDF(type: string) {
     const headers = new Headers({
-      'Content-Type': 'application/' + type,
+      'Accept': 'application/' + type,
     });
-    const url = 'https://www.geovistory.org/resource/';
+    const url = 'http://geovistory.org/resource/';
     const response = await fetch(url + this.entityId, {
       method: 'GET',
       headers: headers,
