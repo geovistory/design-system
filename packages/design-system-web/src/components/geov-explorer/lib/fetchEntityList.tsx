@@ -56,7 +56,7 @@ export const getQuery = (searchString: string, classUris: string[], limit: numbe
 };
 
 export async function fetchEntityList(sparqlEndpoint: string, searchString: string, classUris: string[], limit: number, offset: number) {
-  return sparqlJson<{ entityLabel: SparqlBinding<string>; entityUri: SparqlBinding<string>; classLabel: SparqlBinding<string>; classUri: SparqlBinding<string> }>(
+  return sparqlJson<{ entityLabel: SparqlBinding; entityUri: SparqlBinding; classLabel: SparqlBinding; classUri: SparqlBinding }>(
     sparqlEndpoint,
     getQuery(searchString, classUris, limit, offset),
   )

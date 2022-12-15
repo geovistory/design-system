@@ -169,9 +169,7 @@ export const DataFetching = () => (
             If you see your component in the storybook printing <code>Person</code> you're good to go! Congrats.
           </p>
           <p>
-            <IonButton href="/?path=/story/contributing-tutorial-component-props--component-props">
-              Next: Component Props
-            </IonButton>
+            <IonButton href="/?path=/story/contributing-tutorial-component-props--component-props">Next: Component Props</IonButton>
           </p>
           {/* <h2>@Prop() Decorator</h2>
           <h2>Error and Loading</h2>

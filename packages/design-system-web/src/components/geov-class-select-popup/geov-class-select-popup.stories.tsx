@@ -17,7 +17,7 @@ const Template = (args: JSX.GeovClassSelectPopup) => (
 
 export const ClassSelectInitVal = Template.bind({});
 const args1: JSX.GeovClassSelectPopup = {
-  initValue:  {
+  initValue: {
     classLabel: 'Class 1',
     classUri: '<uri1>',
     instanceCount: 98443,

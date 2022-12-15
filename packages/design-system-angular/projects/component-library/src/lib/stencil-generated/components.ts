@@ -156,6 +156,70 @@ export class GeovDataFetchExample {
 }
 
 
+export declare interface GeovDisplayGeosparqlWktliteral extends Components.GeovDisplayGeosparqlWktliteral {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['value']
+})
+@Component({
+  selector: 'geov-display-geosparql-wktliteral',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['value']
+})
+export class GeovDisplayGeosparqlWktliteral {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface GeovDisplayTimeDatetimedescription extends Components.GeovDisplayTimeDatetimedescription {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['_ssrId', 'entityId', 'fetchBeforeRender', 'sparqlEndpoint'],
+  methods: ['fetchData']
+})
+@Component({
+  selector: 'geov-display-time-datetimedescription',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['_ssrId', 'entityId', 'fetchBeforeRender', 'sparqlEndpoint']
+})
+export class GeovDisplayTimeDatetimedescription {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface GeovEntity extends Components.GeovEntity {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['entityId', 'fetchBeforeRender', 'language', 'sparqlEndpoint', 'ssrIdPrefix', 'uriRegex', 'uriReplace']
+})
+@Component({
+  selector: 'geov-entity',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['entityId', 'fetchBeforeRender', 'language', 'sparqlEndpoint', 'ssrIdPrefix', 'uriRegex', 'uriReplace']
+})
+export class GeovEntity {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
 export declare interface GeovEntityClassLabel extends Components.GeovEntityClassLabel {}
 
 @ProxyCmp({
@@ -181,13 +245,13 @@ export declare interface GeovEntityDefinition extends Components.GeovEntityDefin
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint']
+  inputs: ['_ssrId', 'emptyPlaceholder', 'entityId', 'sparqlEndpoint']
 })
 @Component({
   selector: 'geov-entity-definition',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['_ssrId', 'entityId', 'sparqlEndpoint']
+  inputs: ['_ssrId', 'emptyPlaceholder', 'entityId', 'sparqlEndpoint']
 })
 export class GeovEntityDefinition {
   protected el: HTMLElement;
@@ -223,13 +287,13 @@ export declare interface GeovEntityList extends Components.GeovEntityList {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['defaultPageSize', 'items', 'loading', 'urlAppend']
+  inputs: ['defaultPageSize', 'items', 'loading', 'uriRegex', 'uriReplace']
 })
 @Component({
   selector: 'geov-entity-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['defaultPageSize', 'items', 'loading', 'urlAppend']
+  inputs: ['defaultPageSize', 'items', 'loading', 'uriRegex', 'uriReplace']
 })
 export class GeovEntityList {
   protected el: HTMLElement;
@@ -239,18 +303,76 @@ export class GeovEntityList {
   }
 }
 
+import type { GeovEntityPropertiesData as IGeovEntityPropertiesGeovEntityPropertiesData } from '@geovistory/design-system-web';
+export declare interface GeovEntityProperties extends Components.GeovEntityProperties {
+  /**
+   * Emits fetched data, after being fetched. 
+   */
+  dataFetched: EventEmitter<CustomEvent<IGeovEntityPropertiesGeovEntityPropertiesData>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['_ssrId', 'color', 'entityId', 'fetchBeforeRender', 'fixedGrid', 'language', 'predicateExclude', 'predicateInclude', 'sparqlEndpoint', 'uriRegex', 'uriReplace'],
+  methods: ['fetchData']
+})
+@Component({
+  selector: 'geov-entity-properties',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['_ssrId', 'color', 'entityId', 'fetchBeforeRender', 'fixedGrid', 'language', 'predicateExclude', 'predicateInclude', 'sparqlEndpoint', 'uriRegex', 'uriReplace']
+})
+export class GeovEntityProperties {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['dataFetched']);
+  }
+}
+
+import type { PageEvent as IGeovEntityPropsByPredicatePageEvent } from '@geovistory/design-system-web';
+export declare interface GeovEntityPropsByPredicate extends Components.GeovEntityPropsByPredicate {
+  /**
+   * pageChanged
+Listener of change page 
+   */
+  pageChanged: EventEmitter<CustomEvent<IGeovEntityPropsByPredicatePageEvent>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['_ssrId', 'color', 'entityId', 'fetchBeforeRender', 'language', 'pageSize', 'predicateLabel', 'predicateUri', 'sparqlEndpoint', 'totalCount', 'uriRegex', 'uriReplace']
+})
+@Component({
+  selector: 'geov-entity-props-by-predicate',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['_ssrId', 'color', 'entityId', 'fetchBeforeRender', 'language', 'pageSize', 'predicateLabel', 'predicateUri', 'sparqlEndpoint', 'totalCount', 'uriRegex', 'uriReplace']
+})
+export class GeovEntityPropsByPredicate {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['pageChanged']);
+  }
+}
+
 
 export declare interface GeovExplorer extends Components.GeovExplorer {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint', 'urlAppend']
+  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint', 'uriRegex', 'uriReplace']
 })
 @Component({
   selector: 'geov-explorer',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint', 'urlAppend']
+  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint', 'uriRegex', 'uriReplace']
 })
 export class GeovExplorer {
   protected el: HTMLElement;
@@ -292,13 +414,13 @@ export declare interface GeovPaginator extends Components.GeovPaginator {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['hidePageSize', 'length', 'pageIndex', 'pageSize', 'showFirstLastButtons']
+  inputs: ['color', 'hidePageSize', 'length', 'pageIndex', 'pageSize', 'showFirstLastButtons']
 })
 @Component({
   selector: 'geov-paginator',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['hidePageSize', 'length', 'pageIndex', 'pageSize', 'showFirstLastButtons']
+  inputs: ['color', 'hidePageSize', 'length', 'pageIndex', 'pageSize', 'showFirstLastButtons']
 })
 export class GeovPaginator {
   protected el: HTMLElement;

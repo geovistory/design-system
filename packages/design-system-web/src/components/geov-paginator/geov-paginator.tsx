@@ -1,3 +1,4 @@
+import { Color } from '@ionic/core';
 import { Component, Event, EventEmitter, h, Host, Prop } from '@stencil/core';
 import { arrowBackOutline, arrowForwardOutline, chevronBackOutline, chevronForwardOutline } from 'ionicons/icons';
 export interface PageEvent {
@@ -38,6 +39,10 @@ export class GeovPaginator {
   @Prop()
   showFirstLastButtons = true;
 
+  /*  Color of the paginator */
+  @Prop()
+  color: Color;
+
   /* Event emitted when the paginator changes the page size or page index. */
   @Event()
   pageChanged: EventEmitter<PageEvent>;
@@ -49,31 +54,36 @@ export class GeovPaginator {
     const pageCount = Math.floor((this.length - 1) / this.pageSize) + 1;
     const isFirstPage = this.pageIndex <= 0;
     const isLastPage = this.pageIndex + 1 >= pageCount;
+    const firstShownItem = this.pageIndex * this.pageSize + 1;
+    const lastShownItem = this.pageIndex * this.pageSize + this.pageSize;
     return (
       <Host>
-        {!this.hidePageSize && (
-          <ion-note>
-            Page {this.pageIndex + 1} of {pageCount.toString()}:
-          </ion-note>
-        )}
-        <ion-buttons>
-          {this.showFirstLastButtons && (
-            <ion-button disabled={isFirstPage} onClick={() => this.changePageTo(0)}>
-              <ion-icon slot="icon-only" icon={arrowBackOutline}></ion-icon>
-            </ion-button>
+        <ion-item color={this.color} lines="none">
+          {!this.hidePageSize && (
+            <ion-note>
+              {firstShownItem} – {lastShownItem}
+              {/* Page {this.pageIndex + 1} of {pageCount.toString()}: */}
+            </ion-note>
           )}
-          <ion-button disabled={isFirstPage} onClick={() => this.changePageTo(this.pageIndex - 1)}>
-            <ion-icon slot="icon-only" icon={chevronBackOutline}></ion-icon>
-          </ion-button>
-          <ion-button disabled={isLastPage} onClick={() => this.changePageTo(this.pageIndex + 1)}>
-            <ion-icon slot="icon-only" icon={chevronForwardOutline}></ion-icon>
-          </ion-button>
-          {this.showFirstLastButtons && (
-            <ion-button disabled={isLastPage} onClick={() => this.changePageTo(pageCount - 1)}>
-              <ion-icon slot="icon-only" icon={arrowForwardOutline}></ion-icon>
+          <ion-buttons>
+            {this.showFirstLastButtons && (
+              <ion-button disabled={isFirstPage} onClick={() => this.changePageTo(0)}>
+                <ion-icon slot="icon-only" icon={arrowBackOutline}></ion-icon>
+              </ion-button>
+            )}
+            <ion-button disabled={isFirstPage} onClick={() => this.changePageTo(this.pageIndex - 1)}>
+              <ion-icon slot="icon-only" icon={chevronBackOutline}></ion-icon>
             </ion-button>
-          )}
-        </ion-buttons>
+            <ion-button disabled={isLastPage} onClick={() => this.changePageTo(this.pageIndex + 1)}>
+              <ion-icon slot="icon-only" icon={chevronForwardOutline}></ion-icon>
+            </ion-button>
+            {this.showFirstLastButtons && (
+              <ion-button disabled={isLastPage} onClick={() => this.changePageTo(pageCount - 1)}>
+                <ion-icon slot="icon-only" icon={arrowForwardOutline}></ion-icon>
+              </ion-button>
+            )}
+          </ion-buttons>
+        </ion-item>
       </Host>
     );
   }

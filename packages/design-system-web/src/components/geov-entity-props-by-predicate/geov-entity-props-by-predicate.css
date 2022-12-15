@@ -1,0 +1,14 @@
+@import '../../../node_modules/@ionic/core/css/core.css';
+
+:host {
+  display: block;
+}
+
+ion-card {
+  box-shadow: none !important;
+  margin: 0 16px !important;
+}
+
+geov-paginator {
+  margin-left: auto;
+}

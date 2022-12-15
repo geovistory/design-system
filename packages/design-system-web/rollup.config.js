@@ -24,9 +24,7 @@ export default {
     peerDepsExternal(),
     sourcemaps(),
     copy({
-      targets: [
-        { src: 'dist/components/*.d.ts', dest: 'dist/components-cjs' },
-      ],
+      targets: [{ src: 'dist/components/*.d.ts', dest: 'dist/components-cjs' }],
     }),
   ],
 };

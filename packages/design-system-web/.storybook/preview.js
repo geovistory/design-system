@@ -15,4 +15,8 @@ export const parameters = {
       ],
     },
   },
+  darkMode: {
+    stylePreview: true,
+    classTarget: 'body'
+  }
 }

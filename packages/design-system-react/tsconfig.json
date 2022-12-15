@@ -1,32 +1,26 @@
 {
-    "compilerOptions": {
-      "allowUnreachableCode": false,
-      "allowSyntheticDefaultImports": true,
-      "declaration": true,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "esModuleInterop": true,
-      "lib": ["dom", "ES2015"],
-      "module": "CommonJS",
-      "moduleResolution": "node",
-      "noImplicitAny": true,
-      "noImplicitReturns": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "outDir": "dist",
-      "removeComments": false,
-      "sourceMap": true,
-      "jsx": "react",
-      "target": "ES2015",
-    },
-    "include": [
-      "src/**/*.ts",
-      "src/**/*.tsx",
-      "node_modules/@geovistory/design-system-web/dist/components/*.js"
-    ],
-    "exclude": [
-      "**/__tests__/**"
-    ],
-    "compileOnSave": false,
-    "buildOnSave": false
-  }
+  "compilerOptions": {
+    "allowUnreachableCode": false,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "lib": ["dom", "ES2015"],
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "dist",
+    "removeComments": false,
+    "sourceMap": true,
+    "jsx": "react",
+    "target": "ES2015"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "node_modules/@geovistory/design-system-web/dist/components/*.js"],
+  "exclude": ["**/__tests__/**"],
+  "compileOnSave": false,
+  "buildOnSave": false
+}

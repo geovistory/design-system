@@ -4,7 +4,6 @@ import { stencilBasicConfig } from './.build/stencil/stencil.basic.config';
 import { reactGenerator } from './.build/stencil.bindings.react';
 import { happyDomOutputTarget } from '@geovistory/happy-dom-output-target';
 
-
 export const config: Config = {
   ...stencilBasicConfig,
   outputTargets: [
@@ -27,7 +26,7 @@ export const config: Config = {
     },
     happyDomOutputTarget({
       outputPath: '../design-system-happy-dom/src/happyDomWorker.ts',
-      loaderPath: '@geovistory/design-system-web/loader'
+      loaderPath: '@geovistory/design-system-web/loader',
     }),
     angularGenerator(),
     reactGenerator({

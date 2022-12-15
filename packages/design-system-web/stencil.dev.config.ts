@@ -3,7 +3,6 @@ import { angularGenerator } from './.build/stencil.bindings.angular';
 import { stencilBasicConfig } from './.build/stencil/stencil.basic.config';
 import { reactGenerator } from './.build/stencil.bindings.react';
 
-
 export const config: Config = {
   ...stencilBasicConfig,
   outputTargets: [
@@ -25,7 +24,7 @@ export const config: Config = {
     reactGenerator({
       componentCorePackage: '../../dist/types',
       loaderDir: '../../loader',
-      proxiesFile: './.storybook/stencil-generated/component.ts'
+      proxiesFile: './.storybook/stencil-generated/component.ts',
     }),
   ],
 };

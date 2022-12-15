@@ -14,8 +14,12 @@ import { GeovClassSelectPopupEvent } from "./components/geov-class-select-popup/
 import { Languages } from "./components/geov-code/geov-code";
 import { GeovDataFetchExampleData } from "./components/geov-data-fetch-example/geov-data-fetch-example";
 import { SparqlBinding } from "./lib/sparqlJson";
+import { DateBinding, DateData } from "./components/geov-display-time-datetimedescription/geov-display-time-datetimedescription";
 import { GeovEntityListItem } from "./components/geov-entity-list/geov-entity-list";
+import { Color } from "@ionic/core";
+import { GeovEntityPropertiesData, PropsWithCountBindings } from "./components/geov-entity-properties/geov-entity-properties";
 import { PageEvent } from "./components/geov-paginator/geov-paginator";
+import { PageEvent as PageEvent1 } from "./components/geov-paginator/geov-paginator";
 
 export namespace Components {
     export interface IonAccordion extends IonComponents.IonAccordion { }
@@ -160,6 +164,56 @@ export namespace Components {
          */
         "sparqlEndpoint": string;
     }
+    interface GeovDisplayGeosparqlWktliteral {
+        /**
+          * the opengis value
+         */
+        "value": string;
+    }
+    interface GeovDisplayTimeDatetimedescription {
+        /**
+          * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
+         */
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'iXXX'
+         */
+        "entityId": string;
+        "fetchBeforeRender": boolean;
+        /**
+          * Do the sparql request(s)
+          * @returns a Promise with the data for this component
+         */
+        "fetchData": () => Promise<DateData>;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+    }
+    interface GeovEntity {
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId": string;
+        "fetchBeforeRender": boolean;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language": string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+        "ssrIdPrefix": string;
+        /**
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
+         */
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
+    }
     interface GeovEntityClassLabel {
         "_ssrId"?: string;
         /**
@@ -173,6 +227,10 @@ export namespace Components {
     }
     interface GeovEntityDefinition {
         "_ssrId"?: string;
+        /**
+          * text to be displayed in case no definition is found
+         */
+        "emptyPlaceholder": string;
         /**
           * entityId ID number of entity, e.g. 'i315800'
          */
@@ -198,9 +256,104 @@ export namespace Components {
         "items"?: GeovEntityListItem[];
         "loading"?: boolean;
         /**
-          * urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
          */
-        "urlAppend": string;
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
+    }
+    interface GeovEntityProperties {
+        /**
+          * declares an _ssrId property that is reflected as attribute
+         */
+        "_ssrId"?: string;
+        /**
+          * color Color of the properties
+         */
+        "color": Color;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId": string;
+        "fetchBeforeRender": boolean;
+        "fetchData": () => Promise<GeovEntityPropertiesData>;
+        /**
+          * fixedGrid if true, the content is wrapped in a <ion-grid fixed=true></ion-grid>
+         */
+        "fixedGrid"?: boolean;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language": string;
+        /**
+          * predicateInclude Comma separated list of predicate URI's to exclude, e.g: Don't fetch the rdfs:label and p86i (was born) 'http://www.w3.org/2000/01/rdf-schema#label,https://ontome.net/ontology/p86i'
+         */
+        "predicateExclude"?: string;
+        /**
+          * predicateInclude Comma separated list of predicate URI's to include, e.g: Fetch only the rdfs:label and p86i (was born) 'http://www.w3.org/2000/01/rdf-schema#label,https://ontome.net/ontology/p86i'
+         */
+        "predicateInclude"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+        /**
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
+         */
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
+    }
+    interface GeovEntityPropsByPredicate {
+        /**
+          * declares an _ssrId property that is reflected as attribute
+         */
+        "_ssrId"?: string;
+        "color": Color;
+        /**
+          * entityId ID number of entity, e.g. 'iXXX'
+         */
+        "entityId": string;
+        /**
+          * if true, componentWillLoad() returns a promise for the loading of all data [default: true]
+         */
+        "fetchBeforeRender": boolean;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language": string;
+        /**
+          * pageSize Page size if too many resultat for a property, default 3
+         */
+        "pageSize": number;
+        /**
+          * predicateLabel Label of the predicate
+         */
+        "predicateLabel"?: string;
+        /**
+          * predicateUri URI of the predicate
+         */
+        "predicateUri": string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint": string;
+        /**
+          * totalCount Total number of entity from this property
+         */
+        "totalCount": number;
+        /**
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
+         */
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
     }
     interface GeovExplorer {
         /**
@@ -220,9 +373,13 @@ export namespace Components {
          */
         "sparqlEndpoint": string;
         /**
-          * urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
          */
-        "urlAppend": string;
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
     }
     interface GeovIf {
         "_ssrId"?: string;
@@ -236,6 +393,7 @@ export namespace Components {
         "sparqlQuery": string;
     }
     interface GeovPaginator {
+        "color": Color;
         "hidePageSize": boolean;
         "length": number;
         "pageIndex": number;
@@ -257,6 +415,14 @@ export interface GeovClassSelectCustomEvent<T> extends CustomEvent<T> {
 export interface GeovClassSelectPopupCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLGeovClassSelectPopupElement;
+}
+export interface GeovEntityPropertiesCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLGeovEntityPropertiesElement;
+}
+export interface GeovEntityPropsByPredicateCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLGeovEntityPropsByPredicateElement;
 }
 export interface GeovPaginatorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -299,6 +465,24 @@ declare global {
         prototype: HTMLGeovDataFetchExampleElement;
         new (): HTMLGeovDataFetchExampleElement;
     };
+    interface HTMLGeovDisplayGeosparqlWktliteralElement extends Components.GeovDisplayGeosparqlWktliteral, HTMLStencilElement {
+    }
+    var HTMLGeovDisplayGeosparqlWktliteralElement: {
+        prototype: HTMLGeovDisplayGeosparqlWktliteralElement;
+        new (): HTMLGeovDisplayGeosparqlWktliteralElement;
+    };
+    interface HTMLGeovDisplayTimeDatetimedescriptionElement extends Components.GeovDisplayTimeDatetimedescription, HTMLStencilElement {
+    }
+    var HTMLGeovDisplayTimeDatetimedescriptionElement: {
+        prototype: HTMLGeovDisplayTimeDatetimedescriptionElement;
+        new (): HTMLGeovDisplayTimeDatetimedescriptionElement;
+    };
+    interface HTMLGeovEntityElement extends Components.GeovEntity, HTMLStencilElement {
+    }
+    var HTMLGeovEntityElement: {
+        prototype: HTMLGeovEntityElement;
+        new (): HTMLGeovEntityElement;
+    };
     interface HTMLGeovEntityClassLabelElement extends Components.GeovEntityClassLabel, HTMLStencilElement {
     }
     var HTMLGeovEntityClassLabelElement: {
@@ -322,6 +506,18 @@ declare global {
     var HTMLGeovEntityListElement: {
         prototype: HTMLGeovEntityListElement;
         new (): HTMLGeovEntityListElement;
+    };
+    interface HTMLGeovEntityPropertiesElement extends Components.GeovEntityProperties, HTMLStencilElement {
+    }
+    var HTMLGeovEntityPropertiesElement: {
+        prototype: HTMLGeovEntityPropertiesElement;
+        new (): HTMLGeovEntityPropertiesElement;
+    };
+    interface HTMLGeovEntityPropsByPredicateElement extends Components.GeovEntityPropsByPredicate, HTMLStencilElement {
+    }
+    var HTMLGeovEntityPropsByPredicateElement: {
+        prototype: HTMLGeovEntityPropsByPredicateElement;
+        new (): HTMLGeovEntityPropsByPredicateElement;
     };
     interface HTMLGeovExplorerElement extends Components.GeovExplorer, HTMLStencilElement {
     }
@@ -354,10 +550,15 @@ declare global {
         "geov-class-select-popup": HTMLGeovClassSelectPopupElement;
         "geov-code": HTMLGeovCodeElement;
         "geov-data-fetch-example": HTMLGeovDataFetchExampleElement;
+        "geov-display-geosparql-wktliteral": HTMLGeovDisplayGeosparqlWktliteralElement;
+        "geov-display-time-datetimedescription": HTMLGeovDisplayTimeDatetimedescriptionElement;
+        "geov-entity": HTMLGeovEntityElement;
         "geov-entity-class-label": HTMLGeovEntityClassLabelElement;
         "geov-entity-definition": HTMLGeovEntityDefinitionElement;
         "geov-entity-label": HTMLGeovEntityLabelElement;
         "geov-entity-list": HTMLGeovEntityListElement;
+        "geov-entity-properties": HTMLGeovEntityPropertiesElement;
+        "geov-entity-props-by-predicate": HTMLGeovEntityPropsByPredicateElement;
         "geov-explorer": HTMLGeovExplorerElement;
         "geov-if": HTMLGeovIfElement;
         "geov-paginator": HTMLGeovPaginatorElement;
@@ -506,6 +707,51 @@ declare namespace LocalJSX {
          */
         "sparqlEndpoint"?: string;
     }
+    interface GeovDisplayGeosparqlWktliteral {
+        /**
+          * the opengis value
+         */
+        "value"?: string;
+    }
+    interface GeovDisplayTimeDatetimedescription {
+        /**
+          * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
+         */
+        "_ssrId"?: string;
+        /**
+          * entityId ID number of entity, e.g. 'iXXX'
+         */
+        "entityId"?: string;
+        "fetchBeforeRender"?: boolean;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+    }
+    interface GeovEntity {
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId"?: string;
+        "fetchBeforeRender"?: boolean;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+        "ssrIdPrefix"?: string;
+        /**
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
+         */
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
+    }
     interface GeovEntityClassLabel {
         "_ssrId"?: string;
         /**
@@ -519,6 +765,10 @@ declare namespace LocalJSX {
     }
     interface GeovEntityDefinition {
         "_ssrId"?: string;
+        /**
+          * text to be displayed in case no definition is found
+         */
+        "emptyPlaceholder"?: string;
         /**
           * entityId ID number of entity, e.g. 'i315800'
          */
@@ -544,9 +794,111 @@ declare namespace LocalJSX {
         "items"?: GeovEntityListItem[];
         "loading"?: boolean;
         /**
-          * urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
          */
-        "urlAppend"?: string;
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
+    }
+    interface GeovEntityProperties {
+        /**
+          * declares an _ssrId property that is reflected as attribute
+         */
+        "_ssrId"?: string;
+        /**
+          * color Color of the properties
+         */
+        "color"?: Color;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId"?: string;
+        "fetchBeforeRender"?: boolean;
+        /**
+          * fixedGrid if true, the content is wrapped in a <ion-grid fixed=true></ion-grid>
+         */
+        "fixedGrid"?: boolean;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language"?: string;
+        /**
+          * Emits fetched data, after being fetched.
+         */
+        "onDataFetched"?: (event: GeovEntityPropertiesCustomEvent<GeovEntityPropertiesData>) => void;
+        /**
+          * predicateInclude Comma separated list of predicate URI's to exclude, e.g: Don't fetch the rdfs:label and p86i (was born) 'http://www.w3.org/2000/01/rdf-schema#label,https://ontome.net/ontology/p86i'
+         */
+        "predicateExclude"?: string;
+        /**
+          * predicateInclude Comma separated list of predicate URI's to include, e.g: Fetch only the rdfs:label and p86i (was born) 'http://www.w3.org/2000/01/rdf-schema#label,https://ontome.net/ontology/p86i'
+         */
+        "predicateInclude"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+        /**
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
+         */
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
+    }
+    interface GeovEntityPropsByPredicate {
+        /**
+          * declares an _ssrId property that is reflected as attribute
+         */
+        "_ssrId"?: string;
+        "color"?: Color;
+        /**
+          * entityId ID number of entity, e.g. 'iXXX'
+         */
+        "entityId"?: string;
+        /**
+          * if true, componentWillLoad() returns a promise for the loading of all data [default: true]
+         */
+        "fetchBeforeRender"?: boolean;
+        /**
+          * language prints the label with the language or english, if not found, e.g. 'en'
+         */
+        "language"?: string;
+        /**
+          * pageChanged Listener of change page
+         */
+        "onPageChanged"?: (event: GeovEntityPropsByPredicateCustomEvent<PageEvent>) => void;
+        /**
+          * pageSize Page size if too many resultat for a property, default 3
+         */
+        "pageSize"?: number;
+        /**
+          * predicateLabel Label of the predicate
+         */
+        "predicateLabel"?: string;
+        /**
+          * predicateUri URI of the predicate
+         */
+        "predicateUri"?: string;
+        /**
+          * sparqlEndpoint URL of the sparql endpoint
+         */
+        "sparqlEndpoint"?: string;
+        /**
+          * totalCount Total number of entity from this property
+         */
+        "totalCount"?: number;
+        /**
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
+         */
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
     }
     interface GeovExplorer {
         /**
@@ -566,9 +918,13 @@ declare namespace LocalJSX {
          */
         "sparqlEndpoint"?: string;
         /**
-          * urlAppend will be appended to the URIs used as links to the geovistory entity pages. Example: '?p=84760' will be redirected to the entity page of project 84760
+          * uriRegex Optional regex with capturing groups to transform the uri into the desired url. To use together with uriReplace.
          */
-        "urlAppend"?: string;
+        "uriRegex"?: string;
+        /**
+          * uriReplace String used to replace the uriRegex.  Example (pseudo code): const uriRegex = (http:\/\/geovistory.org\/)(.*) const uriReplace = "http://dev.geovistory.org/resource/$2?p=123" http://geovistory.org/resource/i54321 => http://dev.geovistory.org/resource/54321?p=123
+         */
+        "uriReplace"?: string;
     }
     interface GeovIf {
         "_ssrId"?: string;
@@ -582,6 +938,7 @@ declare namespace LocalJSX {
         "sparqlQuery"?: string;
     }
     interface GeovPaginator {
+        "color"?: Color;
         "hidePageSize"?: boolean;
         "length"?: number;
         "onPageChanged"?: (event: GeovPaginatorCustomEvent<PageEvent>) => void;
@@ -599,10 +956,15 @@ declare namespace LocalJSX {
         "geov-class-select-popup": GeovClassSelectPopup;
         "geov-code": GeovCode;
         "geov-data-fetch-example": GeovDataFetchExample;
+        "geov-display-geosparql-wktliteral": GeovDisplayGeosparqlWktliteral;
+        "geov-display-time-datetimedescription": GeovDisplayTimeDatetimedescription;
+        "geov-entity": GeovEntity;
         "geov-entity-class-label": GeovEntityClassLabel;
         "geov-entity-definition": GeovEntityDefinition;
         "geov-entity-label": GeovEntityLabel;
         "geov-entity-list": GeovEntityList;
+        "geov-entity-properties": GeovEntityProperties;
+        "geov-entity-props-by-predicate": GeovEntityPropsByPredicate;
         "geov-explorer": GeovExplorer;
         "geov-if": GeovIf;
         "geov-paginator": GeovPaginator;
@@ -714,10 +1076,15 @@ declare module "@stencil/core" {
             "geov-class-select-popup": LocalJSX.GeovClassSelectPopup & JSXBase.HTMLAttributes<HTMLGeovClassSelectPopupElement>;
             "geov-code": LocalJSX.GeovCode & JSXBase.HTMLAttributes<HTMLGeovCodeElement>;
             "geov-data-fetch-example": LocalJSX.GeovDataFetchExample & JSXBase.HTMLAttributes<HTMLGeovDataFetchExampleElement>;
+            "geov-display-geosparql-wktliteral": LocalJSX.GeovDisplayGeosparqlWktliteral & JSXBase.HTMLAttributes<HTMLGeovDisplayGeosparqlWktliteralElement>;
+            "geov-display-time-datetimedescription": LocalJSX.GeovDisplayTimeDatetimedescription & JSXBase.HTMLAttributes<HTMLGeovDisplayTimeDatetimedescriptionElement>;
+            "geov-entity": LocalJSX.GeovEntity & JSXBase.HTMLAttributes<HTMLGeovEntityElement>;
             "geov-entity-class-label": LocalJSX.GeovEntityClassLabel & JSXBase.HTMLAttributes<HTMLGeovEntityClassLabelElement>;
             "geov-entity-definition": LocalJSX.GeovEntityDefinition & JSXBase.HTMLAttributes<HTMLGeovEntityDefinitionElement>;
             "geov-entity-label": LocalJSX.GeovEntityLabel & JSXBase.HTMLAttributes<HTMLGeovEntityLabelElement>;
             "geov-entity-list": LocalJSX.GeovEntityList & JSXBase.HTMLAttributes<HTMLGeovEntityListElement>;
+            "geov-entity-properties": LocalJSX.GeovEntityProperties & JSXBase.HTMLAttributes<HTMLGeovEntityPropertiesElement>;
+            "geov-entity-props-by-predicate": LocalJSX.GeovEntityPropsByPredicate & JSXBase.HTMLAttributes<HTMLGeovEntityPropsByPredicateElement>;
             "geov-explorer": LocalJSX.GeovExplorer & JSXBase.HTMLAttributes<HTMLGeovExplorerElement>;
             "geov-if": LocalJSX.GeovIf & JSXBase.HTMLAttributes<HTMLGeovIfElement>;
             "geov-paginator": LocalJSX.GeovPaginator & JSXBase.HTMLAttributes<HTMLGeovPaginatorElement>;
