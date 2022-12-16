@@ -1,7 +1,7 @@
 {
   "name": "@geovistory/design-system-happy-dom",
   "sideEffects": false,
-  "version": "1.7.1-pr-36.0",
+  "version": "1.7.2",
   "description": "geovistory.org's design system: HappyDOM worker",
   "private": false,
   "repository": {
@@ -42,7 +42,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@geovistory/design-system-web": "1.7.1-pr-36.0",
+    "@geovistory/design-system-web": "1.7.2",
     "happy-dom": "^6.0.4"
   },
   "jest": {
