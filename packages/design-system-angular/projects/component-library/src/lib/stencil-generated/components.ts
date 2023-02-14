@@ -177,28 +177,6 @@ export class GeovDisplayGeosparqlWktliteral {
 }
 
 
-export declare interface GeovDisplayTimeDatetimedescription extends Components.GeovDisplayTimeDatetimedescription {}
-
-@ProxyCmp({
-  defineCustomElementFn: undefined,
-  inputs: ['_ssrId', 'entityId', 'fetchBeforeRender', 'sparqlEndpoint'],
-  methods: ['fetchData']
-})
-@Component({
-  selector: 'geov-display-time-datetimedescription',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  inputs: ['_ssrId', 'entityId', 'fetchBeforeRender', 'sparqlEndpoint']
-})
-export class GeovDisplayTimeDatetimedescription {
-  protected el: HTMLElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
 export declare interface GeovEntity extends Components.GeovEntity {}
 
 @ProxyCmp({
@@ -254,6 +232,27 @@ export declare interface GeovEntityDefinition extends Components.GeovEntityDefin
   inputs: ['_ssrId', 'emptyPlaceholder', 'entityId', 'sparqlEndpoint']
 })
 export class GeovEntityDefinition {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface GeovEntityDownloadRdf extends Components.GeovEntityDownloadRdf {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['buttonIcon', 'buttonLabel', 'color', 'entityId', 'expand', 'fill']
+})
+@Component({
+  selector: 'geov-entity-download-rdf',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['buttonIcon', 'buttonLabel', 'color', 'entityId', 'expand', 'fill']
+})
+export class GeovEntityDownloadRdf {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();

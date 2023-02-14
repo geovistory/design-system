@@ -14,9 +14,8 @@ import { GeovClassSelectPopupEvent } from "./components/geov-class-select-popup/
 import { Languages } from "./components/geov-code/geov-code";
 import { GeovDataFetchExampleData } from "./components/geov-data-fetch-example/geov-data-fetch-example";
 import { SparqlBinding } from "./lib/sparqlJson";
-import { DateBinding, DateData } from "./components/geov-display-time-datetimedescription/geov-display-time-datetimedescription";
-import { GeovEntityListItem } from "./components/geov-entity-list/geov-entity-list";
 import { Color } from "@ionic/core";
+import { GeovEntityListItem } from "./components/geov-entity-list/geov-entity-list";
 import { GeovEntityPropertiesData, PropsWithCountBindings } from "./components/geov-entity-properties/geov-entity-properties";
 import { PageEvent } from "./components/geov-paginator/geov-paginator";
 import { PageEvent as PageEvent1 } from "./components/geov-paginator/geov-paginator";
@@ -170,26 +169,6 @@ export namespace Components {
          */
         "value": string;
     }
-    interface GeovDisplayTimeDatetimedescription {
-        /**
-          * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
-         */
-        "_ssrId"?: string;
-        /**
-          * entityId ID number of entity, e.g. 'iXXX'
-         */
-        "entityId": string;
-        "fetchBeforeRender": boolean;
-        /**
-          * Do the sparql request(s)
-          * @returns a Promise with the data for this component
-         */
-        "fetchData": () => Promise<DateData>;
-        /**
-          * sparqlEndpoint URL of the sparql endpoint
-         */
-        "sparqlEndpoint": string;
-    }
     interface GeovEntity {
         /**
           * entityId ID number of entity, e.g. 'i315800'
@@ -239,6 +218,32 @@ export namespace Components {
           * sparqlEndpoint URL of the sparql endpoint
          */
         "sparqlEndpoint": string;
+    }
+    interface GeovEntityDownloadRdf {
+        /**
+          * buttonIcon Icon of the button
+         */
+        "buttonIcon": string;
+        /**
+          * buttonLabel Label of the button
+         */
+        "buttonLabel": string;
+        /**
+          * color color of the button
+         */
+        "color"?: Color;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId": string;
+        /**
+          * expand expand of the button
+         */
+        "expand"?: 'block' | 'full';
+        /**
+          * fill fill of the button
+         */
+        "fill"?: 'clear' | 'outline' | 'solid' | 'default';
     }
     interface GeovEntityLabel {
         "_ssrId"?: string;
@@ -471,12 +476,6 @@ declare global {
         prototype: HTMLGeovDisplayGeosparqlWktliteralElement;
         new (): HTMLGeovDisplayGeosparqlWktliteralElement;
     };
-    interface HTMLGeovDisplayTimeDatetimedescriptionElement extends Components.GeovDisplayTimeDatetimedescription, HTMLStencilElement {
-    }
-    var HTMLGeovDisplayTimeDatetimedescriptionElement: {
-        prototype: HTMLGeovDisplayTimeDatetimedescriptionElement;
-        new (): HTMLGeovDisplayTimeDatetimedescriptionElement;
-    };
     interface HTMLGeovEntityElement extends Components.GeovEntity, HTMLStencilElement {
     }
     var HTMLGeovEntityElement: {
@@ -494,6 +493,12 @@ declare global {
     var HTMLGeovEntityDefinitionElement: {
         prototype: HTMLGeovEntityDefinitionElement;
         new (): HTMLGeovEntityDefinitionElement;
+    };
+    interface HTMLGeovEntityDownloadRdfElement extends Components.GeovEntityDownloadRdf, HTMLStencilElement {
+    }
+    var HTMLGeovEntityDownloadRdfElement: {
+        prototype: HTMLGeovEntityDownloadRdfElement;
+        new (): HTMLGeovEntityDownloadRdfElement;
     };
     interface HTMLGeovEntityLabelElement extends Components.GeovEntityLabel, HTMLStencilElement {
     }
@@ -551,10 +556,10 @@ declare global {
         "geov-code": HTMLGeovCodeElement;
         "geov-data-fetch-example": HTMLGeovDataFetchExampleElement;
         "geov-display-geosparql-wktliteral": HTMLGeovDisplayGeosparqlWktliteralElement;
-        "geov-display-time-datetimedescription": HTMLGeovDisplayTimeDatetimedescriptionElement;
         "geov-entity": HTMLGeovEntityElement;
         "geov-entity-class-label": HTMLGeovEntityClassLabelElement;
         "geov-entity-definition": HTMLGeovEntityDefinitionElement;
+        "geov-entity-download-rdf": HTMLGeovEntityDownloadRdfElement;
         "geov-entity-label": HTMLGeovEntityLabelElement;
         "geov-entity-list": HTMLGeovEntityListElement;
         "geov-entity-properties": HTMLGeovEntityPropertiesElement;
@@ -713,21 +718,6 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
-    interface GeovDisplayTimeDatetimedescription {
-        /**
-          * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
-         */
-        "_ssrId"?: string;
-        /**
-          * entityId ID number of entity, e.g. 'iXXX'
-         */
-        "entityId"?: string;
-        "fetchBeforeRender"?: boolean;
-        /**
-          * sparqlEndpoint URL of the sparql endpoint
-         */
-        "sparqlEndpoint"?: string;
-    }
     interface GeovEntity {
         /**
           * entityId ID number of entity, e.g. 'i315800'
@@ -777,6 +767,32 @@ declare namespace LocalJSX {
           * sparqlEndpoint URL of the sparql endpoint
          */
         "sparqlEndpoint"?: string;
+    }
+    interface GeovEntityDownloadRdf {
+        /**
+          * buttonIcon Icon of the button
+         */
+        "buttonIcon"?: string;
+        /**
+          * buttonLabel Label of the button
+         */
+        "buttonLabel"?: string;
+        /**
+          * color color of the button
+         */
+        "color"?: Color;
+        /**
+          * entityId ID number of entity, e.g. 'i315800'
+         */
+        "entityId"?: string;
+        /**
+          * expand expand of the button
+         */
+        "expand"?: 'block' | 'full';
+        /**
+          * fill fill of the button
+         */
+        "fill"?: 'clear' | 'outline' | 'solid' | 'default';
     }
     interface GeovEntityLabel {
         "_ssrId"?: string;
@@ -957,10 +973,10 @@ declare namespace LocalJSX {
         "geov-code": GeovCode;
         "geov-data-fetch-example": GeovDataFetchExample;
         "geov-display-geosparql-wktliteral": GeovDisplayGeosparqlWktliteral;
-        "geov-display-time-datetimedescription": GeovDisplayTimeDatetimedescription;
         "geov-entity": GeovEntity;
         "geov-entity-class-label": GeovEntityClassLabel;
         "geov-entity-definition": GeovEntityDefinition;
+        "geov-entity-download-rdf": GeovEntityDownloadRdf;
         "geov-entity-label": GeovEntityLabel;
         "geov-entity-list": GeovEntityList;
         "geov-entity-properties": GeovEntityProperties;
@@ -1077,10 +1093,10 @@ declare module "@stencil/core" {
             "geov-code": LocalJSX.GeovCode & JSXBase.HTMLAttributes<HTMLGeovCodeElement>;
             "geov-data-fetch-example": LocalJSX.GeovDataFetchExample & JSXBase.HTMLAttributes<HTMLGeovDataFetchExampleElement>;
             "geov-display-geosparql-wktliteral": LocalJSX.GeovDisplayGeosparqlWktliteral & JSXBase.HTMLAttributes<HTMLGeovDisplayGeosparqlWktliteralElement>;
-            "geov-display-time-datetimedescription": LocalJSX.GeovDisplayTimeDatetimedescription & JSXBase.HTMLAttributes<HTMLGeovDisplayTimeDatetimedescriptionElement>;
             "geov-entity": LocalJSX.GeovEntity & JSXBase.HTMLAttributes<HTMLGeovEntityElement>;
             "geov-entity-class-label": LocalJSX.GeovEntityClassLabel & JSXBase.HTMLAttributes<HTMLGeovEntityClassLabelElement>;
             "geov-entity-definition": LocalJSX.GeovEntityDefinition & JSXBase.HTMLAttributes<HTMLGeovEntityDefinitionElement>;
+            "geov-entity-download-rdf": LocalJSX.GeovEntityDownloadRdf & JSXBase.HTMLAttributes<HTMLGeovEntityDownloadRdfElement>;
             "geov-entity-label": LocalJSX.GeovEntityLabel & JSXBase.HTMLAttributes<HTMLGeovEntityLabelElement>;
             "geov-entity-list": LocalJSX.GeovEntityList & JSXBase.HTMLAttributes<HTMLGeovEntityListElement>;
             "geov-entity-properties": LocalJSX.GeovEntityProperties & JSXBase.HTMLAttributes<HTMLGeovEntityPropertiesElement>;
