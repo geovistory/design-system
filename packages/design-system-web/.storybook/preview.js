@@ -10,6 +10,7 @@ export const parameters = {
     storySort: {
       order: [
         'Welcome',
+        'Getting Started',
         'Design', ['Overview', 'Layout', 'Typography', 'Theming', 'Theme Generator', 'Theme Generator Color'],
         'Contributing'
       ],

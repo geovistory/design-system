@@ -3,7 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 1.7.1-pr-37.0 (2022-12-12)
+## 1.7.3-pr-36.0 (2022-12-16)
+
+**Note:** Version bump only for package @geovistory/design-system-angular
+
+
+
+
+
+## 1.7.2 (2022-12-16)
+
+**Note:** Version bump only for package @geovistory/design-system-angular
+
+
+
+
+
+## 1.7.1 (2022-12-16)
+
+**Note:** Version bump only for package @geovistory/design-system-angular
+
+
+
+
+
+## 1.7.1-pr-39.0 (2022-12-16)
 
 **Note:** Version bump only for package @geovistory/design-system-angular
 
