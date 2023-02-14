@@ -12,7 +12,6 @@ import { GeovClassSelectPopupEvent } from "./components/geov-class-select-popup/
 import { Languages } from "./components/geov-code/geov-code";
 import { GeovDataFetchExampleData } from "./components/geov-data-fetch-example/geov-data-fetch-example";
 import { SparqlBinding } from "./lib/sparqlJson";
-import { DateBinding, DateData } from "./components/geov-display-time-datetimedescription/geov-display-time-datetimedescription";
 import { Color } from "@ionic/core";
 import { GeovEntityListItem } from "./components/geov-entity-list/geov-entity-list";
 import { GeovEntityPropertiesData, PropsWithCountBindings } from "./components/geov-entity-properties/geov-entity-properties";
@@ -88,26 +87,6 @@ export namespace Components {
           * the opengis value
          */
         "value": string;
-    }
-    interface GeovDisplayTimeDatetimedescription {
-        /**
-          * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
-         */
-        "_ssrId"?: string;
-        /**
-          * entityId ID number of entity, e.g. 'iXXX'
-         */
-        "entityId": string;
-        "fetchBeforeRender": boolean;
-        /**
-          * Do the sparql request(s)
-          * @returns a Promise with the data for this component
-         */
-        "fetchData": () => Promise<DateData>;
-        /**
-          * sparqlEndpoint URL of the sparql endpoint
-         */
-        "sparqlEndpoint": string;
     }
     interface GeovEntity {
         /**
@@ -442,12 +421,6 @@ declare global {
         prototype: HTMLGeovDisplayGeosparqlWktliteralElement;
         new (): HTMLGeovDisplayGeosparqlWktliteralElement;
     };
-    interface HTMLGeovDisplayTimeDatetimedescriptionElement extends Components.GeovDisplayTimeDatetimedescription, HTMLStencilElement {
-    }
-    var HTMLGeovDisplayTimeDatetimedescriptionElement: {
-        prototype: HTMLGeovDisplayTimeDatetimedescriptionElement;
-        new (): HTMLGeovDisplayTimeDatetimedescriptionElement;
-    };
     interface HTMLGeovEntityElement extends Components.GeovEntity, HTMLStencilElement {
     }
     var HTMLGeovEntityElement: {
@@ -536,7 +509,6 @@ declare global {
         "geov-dash-chart": HTMLGeovDashChartElement;
         "geov-data-fetch-example": HTMLGeovDataFetchExampleElement;
         "geov-display-geosparql-wktliteral": HTMLGeovDisplayGeosparqlWktliteralElement;
-        "geov-display-time-datetimedescription": HTMLGeovDisplayTimeDatetimedescriptionElement;
         "geov-entity": HTMLGeovEntityElement;
         "geov-entity-class-label": HTMLGeovEntityClassLabelElement;
         "geov-entity-definition": HTMLGeovEntityDefinitionElement;
@@ -620,21 +592,6 @@ declare namespace LocalJSX {
           * the opengis value
          */
         "value"?: string;
-    }
-    interface GeovDisplayTimeDatetimedescription {
-        /**
-          * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
-         */
-        "_ssrId"?: string;
-        /**
-          * entityId ID number of entity, e.g. 'iXXX'
-         */
-        "entityId"?: string;
-        "fetchBeforeRender"?: boolean;
-        /**
-          * sparqlEndpoint URL of the sparql endpoint
-         */
-        "sparqlEndpoint"?: string;
     }
     interface GeovEntity {
         /**
@@ -907,7 +864,6 @@ declare namespace LocalJSX {
         "geov-dash-chart": GeovDashChart;
         "geov-data-fetch-example": GeovDataFetchExample;
         "geov-display-geosparql-wktliteral": GeovDisplayGeosparqlWktliteral;
-        "geov-display-time-datetimedescription": GeovDisplayTimeDatetimedescription;
         "geov-entity": GeovEntity;
         "geov-entity-class-label": GeovEntityClassLabel;
         "geov-entity-definition": GeovEntityDefinition;
@@ -936,7 +892,6 @@ declare module "@stencil/core" {
             "geov-dash-chart": LocalJSX.GeovDashChart & JSXBase.HTMLAttributes<HTMLGeovDashChartElement>;
             "geov-data-fetch-example": LocalJSX.GeovDataFetchExample & JSXBase.HTMLAttributes<HTMLGeovDataFetchExampleElement>;
             "geov-display-geosparql-wktliteral": LocalJSX.GeovDisplayGeosparqlWktliteral & JSXBase.HTMLAttributes<HTMLGeovDisplayGeosparqlWktliteralElement>;
-            "geov-display-time-datetimedescription": LocalJSX.GeovDisplayTimeDatetimedescription & JSXBase.HTMLAttributes<HTMLGeovDisplayTimeDatetimedescriptionElement>;
             "geov-entity": LocalJSX.GeovEntity & JSXBase.HTMLAttributes<HTMLGeovEntityElement>;
             "geov-entity-class-label": LocalJSX.GeovEntityClassLabel & JSXBase.HTMLAttributes<HTMLGeovEntityClassLabelElement>;
             "geov-entity-definition": LocalJSX.GeovEntityDefinition & JSXBase.HTMLAttributes<HTMLGeovEntityDefinitionElement>;
