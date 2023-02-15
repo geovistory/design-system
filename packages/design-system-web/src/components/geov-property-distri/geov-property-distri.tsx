@@ -5,22 +5,23 @@ import Plotly from 'plotly.js/dist/plotly-basic.min.js';
 const chartColors = ['#322659', '#44337A', '#553C9A', '#6B46C1', '#805AD5', '#9F7AEA', '#B794F4', '#D6BCFA', '#E9D8FD', '#FAF5FF', '#E9D8FD', '#D6BCFA', '#B794F4', '#9F7AEA', '#805AD5', '#6B46C1', '#553C9A', '#44337A']
 
 const qrPropertyCount = () => `
-  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-  SELECT (group_concat(?label;separator=", ") as ?labels) (Max(?count_) as ?count)
-  WHERE {
+    SELECT ?property (group_concat(?propertyname;separator=", ") as ?propertynames) (Max(?propertycount) as ?propertycounts)
+    WHERE {
     {
-      SELECT  ?predicate (count(*) as ?count_)
-      WHERE {
-        ?entityUri ?predicate ?class .
-      }
-      GROUP BY ?predicate
+        SELECT  ?property (count(?entityUri) as ?propertycount)
+        WHERE {
+            ?entityUri ?property ?object .
+            ?property1 <http://www.w3.org/2002/07/owl#inverseOf> ?property .
+        }
+        GROUP BY ?property
     }
-    ?predicate rdfs:label ?label
-    FILTER (lang(?label) = 'en')
-  }
-  GROUP BY ?predicate
-  ORDER by DESC(?count)
+    ?property rdfs:label ?propertyname
+    FILTER (lang(?propertyname) = 'en')
+    }
+    GROUP BY ?property
+    ORDER by DESC(?propertycounts)	
 `;
 
 type SparqlResponse = {
