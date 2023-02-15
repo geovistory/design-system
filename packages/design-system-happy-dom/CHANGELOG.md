@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.8.1-pr-42.1 (2023-02-15)
+
+**Note:** Version bump only for package @geovistory/design-system-happy-dom
+
+
+
+
+
 ## 1.8.1-pr-42.0 (2023-02-14)
 
 **Note:** Version bump only for package @geovistory/design-system-happy-dom
