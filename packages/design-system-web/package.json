@@ -58,7 +58,9 @@
   "dependencies": {
     "@geovistory/happy-dom-output-target": "^1.0.1-3",
     "@stencil/core": "^2.17.4",
+    "@types/plotly.js": "^2.12.13",
     "patch-package": "^6.4.7",
+    "plotly.js": "^2.18.1",
     "prismjs": "^1.29.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-icons": "^4.3.1",
