@@ -7,7 +7,7 @@ const chartColors = ['#322659', '#44337A', '#553C9A', '#6B46C1', '#805AD5', '#9F
 const qrPropertyCount = () => `
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-    SELECT ?property (group_concat(?propertyname;separator=", ") as ?propertynames) (Max(?propertycount) as ?propertycounts)
+    SELECT (group_concat(?propertyname;separator=", ") as ?propertynames) (Max(?propertycount) as ?propertycounts)
     WHERE {
     {
         SELECT  ?property (count(?entityUri) as ?propertycount)
@@ -25,8 +25,8 @@ const qrPropertyCount = () => `
 `;
 
 type SparqlResponse = {
-  labels: SparqlBinding,
-  count: SparqlBinding
+  propertynames: SparqlBinding,
+  propertycounts: SparqlBinding
 }
 
 
@@ -66,8 +66,8 @@ export class GeovPropertyDistri {
 
       // Parse the response
       const response = res?.results?.bindings
-      const labels = response.map(elt => elt.labels.value)
-      const values = response.map(elt => parseInt(elt.count.value))
+      const labels = response.map(elt => elt.propertynames.value)
+      const values = response.map(elt => parseInt(elt.propertycounts.value))
 
       // Prepare colors
       const colors = []
