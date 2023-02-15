@@ -1,14 +1,14 @@
+import { Color } from '@ionic/core';
 import { Component, Event, EventEmitter, h, Host, Prop, State } from '@stencil/core';
+import { openOutline } from 'ionicons/icons';
 import { GeovPaginatorCustomEvent } from '../../components';
-import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
-import { PageEvent } from '../geov-paginator/geov-paginator';
+import { FetchResponse } from '../../lib/FetchResponse';
 import { regexReplace } from '../../lib/regexReplace';
+import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
 import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
-import { FetchResponse } from '../../lib/FetchResponse';
-import { Color } from '@ionic/core';
-import { openOutline } from 'ionicons/icons';
+import { PageEvent } from '../geov-paginator/geov-paginator';
 
 const qrProps = (predicateId: string, objectId: string, pageSize: number, offset: number) => `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -248,9 +248,6 @@ export class GeovEntityPropsByPredicate {
       case undefined:
         return this.renderExternalUri(item);
 
-      case 'http://www.w3.org/2006/time#DateTimeDescription':
-        return this.renderDateTimeDescription(item);
-
       // here you can add more class-specific renderings
 
       default:
@@ -258,11 +255,7 @@ export class GeovEntityPropsByPredicate {
     }
   }
   private renderExternalUri(item: Bindings) {
-    return (
-      <ion-label>
-        <p>{item.entity?.value}</p>
-      </ion-label>
-    );
+    return <ion-label>{item.entityLabel?.value ? <h2>{item.entityLabel?.value}</h2> : <p>{item.entity?.value}</p>}</ion-label>;
   }
 
   private renderGenericEntity(item: Bindings) {
@@ -270,20 +263,6 @@ export class GeovEntityPropsByPredicate {
       <ion-label>
         <h2>{item.entityLabel?.value || '(no label)'}</h2>
         <p>{item.entityTypeLabel?.value}</p>
-      </ion-label>
-    );
-  }
-
-  private renderDateTimeDescription(item: Bindings) {
-    return (
-      <ion-label>
-        <h2>
-          <geov-display-time-datetimedescription
-            entityId={item.entity?.value.replace('http://geovistory.org/resource/', '')}
-            sparqlEndpoint={this.sparqlEndpoint}
-          ></geov-display-time-datetimedescription>
-        </h2>
-        <p>DateTimeDescription</p>
       </ion-label>
     );
   }

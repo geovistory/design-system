@@ -44,7 +44,6 @@ graph TD;
   geov-entity-props-by-predicate --> ion-list
   geov-entity-props-by-predicate --> ion-item
   geov-entity-props-by-predicate --> ion-label
-  geov-entity-props-by-predicate --> geov-display-time-datetimedescription
   geov-entity-props-by-predicate --> geov-display-geosparql-wktliteral
   geov-entity-props-by-predicate --> geov-paginator
   ion-card --> ion-ripple-effect
