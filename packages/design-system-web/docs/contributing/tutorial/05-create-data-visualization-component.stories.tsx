@@ -29,7 +29,7 @@ export const CreateDataVisualizationComponent = () => (
 
                 <p>
                     Before creating a web component giving a nice visualization of your data, it is important to know <b>what do you want to display</b>.<br/>
-                    Questions like <i>what type of chart will I use?</i>, <i>where are my data?</i>, <i>what data do I need?</i> should be cristal clear for you.
+                    Questions like "<i>what type of chart will I use?</i>", "<i>Where are my data?</i>", "<i>What data do I need?</i>" should be cristal clear for you.
                 </p>
 
                 <h5>Make a first version</h5>
@@ -48,14 +48,14 @@ export const CreateDataVisualizationComponent = () => (
                     so that you do not create a component that will take 20 seconds to load.<br />
                     For exemple, the class distribution that we will talk about below takes 17 seconds to load if the logic is done by code,
                     but less than 1 if it is implemented directly in the SPARQL query.<br/>
-                    To help with that, the <a href="https://www.geovistory.org/sparql">Geovistory SPARQL query editor</a> is an very good tool to test your queries (and the perfomance of them).
+                    To help with that, the <a href="https://www.geovistory.org/sparql">Geovistory SPARQL query editor</a> is an very good tool to test your queries (and their perfomance).
                 </p>
 
                 <h3>Create a web component</h3>
 
                 <p>
                     Now that you have a first version of your visual, good performance, and all the logic in mind, let's create a Web Component out of it!<br/>
-                    To understand how to create a web component you first look at the following steps of the tutorial with your data visualization component in mind:
+                    To understand how to create a web component you can first have a look at the following steps of the tutorial with your data visualization component in mind:
                     <ul>
                         <li><a href="https://design.geovistory.org/?path=/story/contributing-tutorial-setup--setup">Set up your web component development environment</a></li>
                         <li><a href="https://design.geovistory.org/?path=/story/contributing-tutorial-create-component--create-component">Create your first component</a></li>
@@ -222,7 +222,7 @@ export const CreateDataVisualizationComponent = () => (
                     </ul>
                     </p>
                 <p>
-                    Because data fetching is not done in instantly, we need to tell the component what to do with the data, but only when he has them.<br/>
+                    Because data fetching is not done in instantly, we need to tell the component what to do with the data, but only when it has them.<br/>
                     That is why there is the <code>.then()</code>.
                     What is written in this function will only be executed when the request to the SPARQL endpoint is made, and the data fetched.<br/>
                     So in the end, what is following will probably be the place where lies the remaining logic of your component and the plotting into a nice chart.
@@ -281,7 +281,7 @@ export const CreateDataVisualizationComponent = () => (
 
                 <p>
                     And this is finally the line that draws the chart!
-                    We can notice the fact that the variable `this.domId` is present, telling the component where to put the chart (in what div, see below).
+                    We can notice the fact that the variable <code>this.domId</code> is present, telling the component where to put the chart (in what div, see below).
                 </p>
 
                 <h5>HTML template</h5>
@@ -334,7 +334,7 @@ export const CreateDataVisualizationComponent = () => (
                 <p>
                     On your local git branch you have created, you can add, commit and push your work.
                     Then it is the time to create a pull request: open the <a href="https://github.com/geovistory/design-system">design system GitHub repository</a><br/>
-                    You can now contact the development team so that they can publish your PR on dev, see how it behaves before going in production!
+                    You can now contact the development team so that they can publish your PR on dev, see how it behaves before going to production!
                 </p>
 
             </IonGrid>

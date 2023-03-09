@@ -56,7 +56,7 @@ export const componentCore = `
 })
 export class GeovClassDistri {
 
-
+    ...
 
 }
 ...
@@ -94,7 +94,7 @@ export const lifecycle = `
 ...
 componentWillLoad() {
 
-
+    ...
 
 }
 ...
@@ -105,7 +105,7 @@ export const sparqlExecution = `
 // Send the request to the provided sparql endpoint
 sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrClassesCount()).then(res => {
 
-
+    ...
 
 });
 ...
