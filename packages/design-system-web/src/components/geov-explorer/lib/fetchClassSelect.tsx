@@ -12,7 +12,7 @@ WHERE {
   {
     SELECT  ?class (count(distinct ?entityUri) as ?count)
     WHERE {
-      ${searchString ? `(?entityUri) text:query ('*${getTextFilter(searchString)}*') . ` : ``}
+      ${searchString ? `(?entityUri) text:query ('${getTextFilter(searchString)}') . ` : ``}
  	   ?entityUri a ?class .
     }
     GROUP BY ?class
