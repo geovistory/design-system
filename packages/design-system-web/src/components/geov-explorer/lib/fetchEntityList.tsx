@@ -18,7 +18,7 @@ export const getQuery = (searchString: string, classUris: string[], limit: numbe
               {
                     SELECT ?entityUri  ?entityLabel
                     {
-                        ${searchString ? `(?entityUri) text:query ('*${getTextFilter(searchString)}*') . ` : ``}
+                        ${searchString ? `(?entityUri) text:query ('${getTextFilter(searchString)}') . ` : ``}
 
                         ${
                           !classUris?.length

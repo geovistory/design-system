@@ -11,7 +11,7 @@ PREFIX text: <http://jena.apache.org/text#>
 
 SELECT (count(distinct ?entityUri) as ?count)
 WHERE {
-  ${searchString ? `(?entityUri) text:query ('*${getTextFilter(searchString)}*') . ` : ``}
+  ${searchString ? `(?entityUri) text:query ('${getTextFilter(searchString)}') . ` : ``}
 
   ${
     !classUris?.length
