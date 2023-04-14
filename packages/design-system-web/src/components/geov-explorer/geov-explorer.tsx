@@ -3,9 +3,9 @@ import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
 import { GeovClassSelectItem } from '../geov-class-select/geov-class-select';
-import { ClassSelectData, fetchClassSelect } from './lib/fetchClassSelect';
-import { EntityListData, fetchEntityList } from './lib/fetchEntityList';
-import { fetchFullCount, FullCountData } from './lib/fetchFullCount';
+import { ClassSelectData, ClassFilterFetcher } from './lib/ClassFilterFetcher';
+import { EntityListData, EntityListFetcher } from './lib/EntityListFetcher';
+import { FullCountFetcher, FullCountData } from './lib/FullCountFetcher';
 
 export interface GeovExplorerData {
   classSelect?: ClassSelectData;
@@ -153,29 +153,56 @@ export class GeovExplorer {
    * @returns a Promise with the data for this component
    */
   async fetchData(): Promise<GeovExplorerData> {
-    // const classSelect = ;
-    // const firstClass = classSelect.items[0];
-    // this._selectedClasses = [firstClass];
     return Promise.all([await this.fetchClassSelectData(), this.fetchEntityListData(), this.fetchFullCountData()]).then(([classSelect, entityList, fullCount]) => {
       return { classSelect, entityList, fullCount, loading: false };
     });
   }
 
+  private fetchClassSelect: ClassFilterFetcher;
   private async fetchClassSelectData(): Promise<ClassSelectData> {
     this.classSelect = { loading: true };
-    this.classSelect = await fetchClassSelect(this.sparqlEndpoint, this.searchString);
+
+    // if there is an ongoing fetch, cancel it
+    if (this.fetchClassSelect) this.fetchClassSelect.promiseWithCancel.cancel();
+
+    this.fetchClassSelect = new ClassFilterFetcher();
+    this.classSelect = await this.fetchClassSelect.fetch(this.sparqlEndpoint, this.searchString);
+
+    // unset ongoing fetch
+    this.fetchClassSelect = undefined;
+
     return this.classSelect;
   }
 
+  private fetchEntityList: EntityListFetcher;
   private async fetchEntityListData(): Promise<EntityListData> {
     this.entityList = { loading: true };
-    this.entityList = await fetchEntityList(this.sparqlEndpoint, this.searchString, this.selectedClasses?.map(c => c.classUri) ?? [], this.limit, this.offset);
+
+    // if there is an ongoing fetch, cancel it
+    if (this.fetchEntityList) this.fetchEntityList.promiseWithCancel.cancel();
+
+    this.fetchEntityList = new EntityListFetcher();
+    this.entityList = await this.fetchEntityList.fetch(this.sparqlEndpoint, this.searchString, this.selectedClasses?.map(c => c.classUri) ?? [], this.limit, this.offset);
+
+    // unset ongoing fetch
+    this.fetchEntityList = undefined;
+
     return this.entityList;
   }
 
+  private fetchFullCount: FullCountFetcher;
   private async fetchFullCountData(): Promise<EntityListData> {
     this.fullCount = { loading: true };
-    this.fullCount = await fetchFullCount(this.sparqlEndpoint, this.searchString, this.selectedClasses?.map(c => c.classUri) ?? []);
+
+    // if there is an ongoing fetch, cancel it
+    if (this.fetchFullCount) this.fetchFullCount.promiseWithCancel.cancel();
+
+    this.fetchFullCount = new FullCountFetcher();
+    this.fullCount = await this.fetchFullCount.fetch(this.sparqlEndpoint, this.searchString, this.selectedClasses?.map(c => c.classUri) ?? []);
+
+    // unset ongoing fetch
+    this.fetchFullCount = undefined;
+
     return this.fullCount;
   }
 
