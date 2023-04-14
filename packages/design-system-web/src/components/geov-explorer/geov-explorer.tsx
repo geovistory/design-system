@@ -106,15 +106,17 @@ export class GeovExplorer {
     return this._searchString;
   }
 
-  _selectedClasses: GeovClassSelectItem[];
-  set selectedClasses(val: GeovClassSelectItem[]) {
-    this._selectedClasses = val;
-    this.offset = 0;
-    this.fetchEntityListData();
-    this.fetchFullCountData();
+  _selectedClass: GeovClassSelectItem;
+  set selectedClass(val: GeovClassSelectItem) {
+    if (this._selectedClass?.classUri !== val?.classUri) {
+      this._selectedClass = val;
+      this._offset = 0;
+      this.fetchEntityListData();
+      this.fetchFullCountData();
+    }
   }
-  get selectedClasses() {
-    return this._selectedClasses;
+  get selectedClass() {
+    return this._selectedClass;
   }
 
   /**
@@ -182,7 +184,7 @@ export class GeovExplorer {
     if (this.fetchEntityList) this.fetchEntityList.promiseWithCancel.cancel();
 
     this.fetchEntityList = new EntityListFetcher();
-    this.entityList = await this.fetchEntityList.fetch(this.sparqlEndpoint, this.searchString, this.selectedClasses?.map(c => c.classUri) ?? [], this.limit, this.offset);
+    this.entityList = await this.fetchEntityList.fetch(this.sparqlEndpoint, this.searchString, this.selectedClass ? [this.selectedClass.classUri] : [], this.limit, this.offset);
 
     // unset ongoing fetch
     this.fetchEntityList = undefined;
@@ -198,7 +200,7 @@ export class GeovExplorer {
     if (this.fetchFullCount) this.fetchFullCount.promiseWithCancel.cancel();
 
     this.fetchFullCount = new FullCountFetcher();
-    this.fullCount = await this.fetchFullCount.fetch(this.sparqlEndpoint, this.searchString, this.selectedClasses?.map(c => c.classUri) ?? []);
+    this.fullCount = await this.fetchFullCount.fetch(this.sparqlEndpoint, this.searchString, this.selectedClass ? [this.selectedClass.classUri] : []);
 
     // unset ongoing fetch
     this.fetchFullCount = undefined;
@@ -224,10 +226,10 @@ export class GeovExplorer {
               <geov-class-select-popup
                 class="ion-hide-lg-up"
                 onSelectionChanged={e => {
-                  this.selectedClasses = e.detail.value ? [e.detail.value] : [];
+                  this.selectedClass = e.detail.value;
                 }}
                 ref={el => {
-                  el.initValue = this.selectedClasses?.[0];
+                  el.initValue = this.selectedClass;
                   el.items = this.classSelect?.items;
                 }}
               ></geov-class-select-popup>
@@ -249,10 +251,10 @@ export class GeovExplorer {
             <ion-col sizeMd="0" sizeLg="6" sizeXl="3" class="ion-hide-lg-down">
               <geov-class-radio-group
                 onSelectionChanged={e => {
-                  this.selectedClasses = e.detail.value ? [e.detail.value] : [];
+                  this.selectedClass = e.detail.value;
                 }}
                 ref={el => {
-                  el.initValue = this.selectedClasses?.[0];
+                  el.initValue = this.selectedClass;
                   el.items = this.classSelect?.items;
                   el.loading = this.classSelect?.loading;
                 }}
