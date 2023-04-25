@@ -12,7 +12,7 @@ export const parameters = {
         'Welcome',
         'Getting Started',
         'Design', ['Overview', 'Layout', 'Typography', 'Theming', 'Theme Generator', 'Theme Generator Color'],
-        'Contributing'
+        'Contributing', ['CI And CD Workflow', 'Tutorial', ['Introduction', 'Setup', 'Create Component', 'Data Fetching', 'Component Props', 'Create Data Visualization Component', 'Server Side Rendering']],
       ],
     },
   },
