@@ -102,7 +102,9 @@ export const ServerSideRendering = () => (
           <p>
             <GeovCode language="bash" code="npx create-next-app@latest --typescript"></GeovCode>
           </p>
-          <p>Follow the instructions:</p>
+          <p>
+            When the prompt asks if you want to use Tailwind CSS, answer <code>no</code>. Use the default for the other questions.
+          </p>
           <p>
             <GeovCode language="bash" code={s04_1}></GeovCode>
           </p>

@@ -1,7 +1,9 @@
 export const s04_1 = `Need to install the following packages:
 create-next-app@12.3.1
 Ok to proceed? (y) y
-✔ What is your project named? … stencil-next-hydrate-example`;
+√ What is your project named? ... test-app
+√ Would you like to use ESLint with this project? ... No / Yes
+√ Would you like to use Tailwind CSS with this project? ... No / Yes`;
 
 export const s04_2 = `/// <reference path="../node_modules/@geovistory/design-system-web/dist/types/react.d.ts" />
 import '../styles/globals.css'

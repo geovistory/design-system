@@ -14,6 +14,6 @@ export const ClassDistribution = Template.bind({});
 const args: JSX.GeovClassDistri = {
   sparqlEndpoint: 'https://sparql.geovistory.org/api_v1_community_data',
   width: 500,
-  height: 500
+  height: 500,
 };
 ClassDistribution.args = args;

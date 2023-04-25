@@ -164,7 +164,7 @@ export class GeovHelloWorld {
    * @returns a Promise with the data for this component
    */
   async fetchData(): Promise<GeovEntityLabelData> {
-    return sparqlJson<{ classLabel: SparqlBinding<string> }>(this.sparqlEndpoint, qrLabel(this.entityId))
+    return sparqlJson<{ classLabel: SparqlBinding }>(this.sparqlEndpoint, qrLabel(this.entityId))
       .then(res => {
         return {
           ...this.data,
@@ -264,7 +264,7 @@ export class GeovHelloWorld {
   entityId = 'i315803';
 
   componentWillLoad() {
-    sparqlJson<{ classLabel: SparqlBinding<string> }>(this.sparqlEndpoint, qrLabel(this.entityId))
+    sparqlJson<{ classLabel: SparqlBinding }>(this.sparqlEndpoint, qrLabel(this.entityId))
       .then(res => {
         this.label = res?.results?.bindings?.[0]?.classLabel?.value
       })
