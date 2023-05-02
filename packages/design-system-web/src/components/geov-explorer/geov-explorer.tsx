@@ -3,9 +3,9 @@ import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
 import { GeovClassSelectItem } from '../geov-class-select/geov-class-select';
-import { ClassSelectData, fetchClassSelect } from './lib/fetchClassSelect';
-import { EntityListData, fetchEntityList } from './lib/fetchEntityList';
-import { fetchFullCount, FullCountData } from './lib/fetchFullCount';
+import { ClassSelectData, ClassFilterFetcher } from './lib/ClassFilterFetcher';
+import { EntityListData, EntityListFetcher } from './lib/EntityListFetcher';
+import { FullCountFetcher, FullCountData } from './lib/FullCountFetcher';
 
 export interface GeovExplorerData {
   classSelect?: ClassSelectData;
@@ -106,15 +106,17 @@ export class GeovExplorer {
     return this._searchString;
   }
 
-  _selectedClasses: GeovClassSelectItem[];
-  set selectedClasses(val: GeovClassSelectItem[]) {
-    this._selectedClasses = val;
-    this.offset = 0;
-    this.fetchEntityListData();
-    this.fetchFullCountData();
+  _selectedClass: GeovClassSelectItem;
+  set selectedClass(val: GeovClassSelectItem) {
+    if (this._selectedClass?.classUri !== val?.classUri) {
+      this._selectedClass = val;
+      this._offset = 0;
+      this.fetchEntityListData();
+      this.fetchFullCountData();
+    }
   }
-  get selectedClasses() {
-    return this._selectedClasses;
+  get selectedClass() {
+    return this._selectedClass;
   }
 
   /**
@@ -153,29 +155,56 @@ export class GeovExplorer {
    * @returns a Promise with the data for this component
    */
   async fetchData(): Promise<GeovExplorerData> {
-    // const classSelect = ;
-    // const firstClass = classSelect.items[0];
-    // this._selectedClasses = [firstClass];
     return Promise.all([await this.fetchClassSelectData(), this.fetchEntityListData(), this.fetchFullCountData()]).then(([classSelect, entityList, fullCount]) => {
       return { classSelect, entityList, fullCount, loading: false };
     });
   }
 
+  private fetchClassSelect: ClassFilterFetcher;
   private async fetchClassSelectData(): Promise<ClassSelectData> {
     this.classSelect = { loading: true };
-    this.classSelect = await fetchClassSelect(this.sparqlEndpoint, this.searchString);
+
+    // if there is an ongoing fetch, cancel it
+    if (this.fetchClassSelect) this.fetchClassSelect.promiseWithCancel.cancel();
+
+    this.fetchClassSelect = new ClassFilterFetcher();
+    this.classSelect = await this.fetchClassSelect.fetch(this.sparqlEndpoint, this.searchString);
+
+    // unset ongoing fetch
+    this.fetchClassSelect = undefined;
+
     return this.classSelect;
   }
 
+  private fetchEntityList: EntityListFetcher;
   private async fetchEntityListData(): Promise<EntityListData> {
     this.entityList = { loading: true };
-    this.entityList = await fetchEntityList(this.sparqlEndpoint, this.searchString, this.selectedClasses?.map(c => c.classUri) ?? [], this.limit, this.offset);
+
+    // if there is an ongoing fetch, cancel it
+    if (this.fetchEntityList) this.fetchEntityList.promiseWithCancel.cancel();
+
+    this.fetchEntityList = new EntityListFetcher();
+    this.entityList = await this.fetchEntityList.fetch(this.sparqlEndpoint, this.searchString, this.selectedClass ? [this.selectedClass.classUri] : [], this.limit, this.offset);
+
+    // unset ongoing fetch
+    this.fetchEntityList = undefined;
+
     return this.entityList;
   }
 
+  private fetchFullCount: FullCountFetcher;
   private async fetchFullCountData(): Promise<EntityListData> {
     this.fullCount = { loading: true };
-    this.fullCount = await fetchFullCount(this.sparqlEndpoint, this.searchString, this.selectedClasses?.map(c => c.classUri) ?? []);
+
+    // if there is an ongoing fetch, cancel it
+    if (this.fetchFullCount) this.fetchFullCount.promiseWithCancel.cancel();
+
+    this.fetchFullCount = new FullCountFetcher();
+    this.fullCount = await this.fetchFullCount.fetch(this.sparqlEndpoint, this.searchString, this.selectedClass ? [this.selectedClass.classUri] : []);
+
+    // unset ongoing fetch
+    this.fetchFullCount = undefined;
+
     return this.fullCount;
   }
 
@@ -197,10 +226,10 @@ export class GeovExplorer {
               <geov-class-select-popup
                 class="ion-hide-lg-up"
                 onSelectionChanged={e => {
-                  this.selectedClasses = e.detail.value ? [e.detail.value] : [];
+                  this.selectedClass = e.detail.value;
                 }}
                 ref={el => {
-                  el.initValue = this.selectedClasses?.[0];
+                  el.initValue = this.selectedClass;
                   el.items = this.classSelect?.items;
                 }}
               ></geov-class-select-popup>
@@ -222,10 +251,10 @@ export class GeovExplorer {
             <ion-col sizeMd="0" sizeLg="6" sizeXl="3" class="ion-hide-lg-down">
               <geov-class-radio-group
                 onSelectionChanged={e => {
-                  this.selectedClasses = e.detail.value ? [e.detail.value] : [];
+                  this.selectedClass = e.detail.value;
                 }}
                 ref={el => {
-                  el.initValue = this.selectedClasses?.[0];
+                  el.initValue = this.selectedClass;
                   el.items = this.classSelect?.items;
                   el.loading = this.classSelect?.loading;
                 }}
