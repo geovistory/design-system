@@ -13,3 +13,5 @@ package-lock.json-e
 storybook/
 storybook-static/
 stencil-generated
+
+packages/design-system-web/src/index.html

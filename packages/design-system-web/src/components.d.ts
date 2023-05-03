@@ -60,9 +60,6 @@ export namespace Components {
         "copyButton": boolean;
         "language": Languages;
     }
-    interface GeovDashChart {
-        "chartName": 'class-distribution' | 'property-distribution';
-    }
     interface GeovDataFetchExample {
         /**
           * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
@@ -305,6 +302,12 @@ export namespace Components {
          */
         "uriReplace"?: string;
     }
+    interface GeovGraph {
+        "height": number;
+        "pkEntity": string;
+        "sparqlEndpoint": string;
+        "width": number;
+    }
     interface GeovIf {
         "_ssrId"?: string;
         /**
@@ -403,12 +406,6 @@ declare global {
         prototype: HTMLGeovCodeElement;
         new (): HTMLGeovCodeElement;
     };
-    interface HTMLGeovDashChartElement extends Components.GeovDashChart, HTMLStencilElement {
-    }
-    var HTMLGeovDashChartElement: {
-        prototype: HTMLGeovDashChartElement;
-        new (): HTMLGeovDashChartElement;
-    };
     interface HTMLGeovDataFetchExampleElement extends Components.GeovDataFetchExample, HTMLStencilElement {
     }
     var HTMLGeovDataFetchExampleElement: {
@@ -475,6 +472,12 @@ declare global {
         prototype: HTMLGeovExplorerElement;
         new (): HTMLGeovExplorerElement;
     };
+    interface HTMLGeovGraphElement extends Components.GeovGraph, HTMLStencilElement {
+    }
+    var HTMLGeovGraphElement: {
+        prototype: HTMLGeovGraphElement;
+        new (): HTMLGeovGraphElement;
+    };
     interface HTMLGeovIfElement extends Components.GeovIf, HTMLStencilElement {
     }
     var HTMLGeovIfElement: {
@@ -506,7 +509,6 @@ declare global {
         "geov-class-select": HTMLGeovClassSelectElement;
         "geov-class-select-popup": HTMLGeovClassSelectPopupElement;
         "geov-code": HTMLGeovCodeElement;
-        "geov-dash-chart": HTMLGeovDashChartElement;
         "geov-data-fetch-example": HTMLGeovDataFetchExampleElement;
         "geov-display-geosparql-wktliteral": HTMLGeovDisplayGeosparqlWktliteralElement;
         "geov-entity": HTMLGeovEntityElement;
@@ -518,6 +520,7 @@ declare global {
         "geov-entity-properties": HTMLGeovEntityPropertiesElement;
         "geov-entity-props-by-predicate": HTMLGeovEntityPropsByPredicateElement;
         "geov-explorer": HTMLGeovExplorerElement;
+        "geov-graph": HTMLGeovGraphElement;
         "geov-if": HTMLGeovIfElement;
         "geov-paginator": HTMLGeovPaginatorElement;
         "geov-property-distri": HTMLGeovPropertyDistriElement;
@@ -569,9 +572,6 @@ declare namespace LocalJSX {
         "code"?: string;
         "copyButton"?: boolean;
         "language"?: Languages;
-    }
-    interface GeovDashChart {
-        "chartName"?: 'class-distribution' | 'property-distribution';
     }
     interface GeovDataFetchExample {
         /**
@@ -817,6 +817,12 @@ declare namespace LocalJSX {
          */
         "uriReplace"?: string;
     }
+    interface GeovGraph {
+        "height"?: number;
+        "pkEntity"?: string;
+        "sparqlEndpoint"?: string;
+        "width"?: number;
+    }
     interface GeovIf {
         "_ssrId"?: string;
         /**
@@ -861,7 +867,6 @@ declare namespace LocalJSX {
         "geov-class-select": GeovClassSelect;
         "geov-class-select-popup": GeovClassSelectPopup;
         "geov-code": GeovCode;
-        "geov-dash-chart": GeovDashChart;
         "geov-data-fetch-example": GeovDataFetchExample;
         "geov-display-geosparql-wktliteral": GeovDisplayGeosparqlWktliteral;
         "geov-entity": GeovEntity;
@@ -873,6 +878,7 @@ declare namespace LocalJSX {
         "geov-entity-properties": GeovEntityProperties;
         "geov-entity-props-by-predicate": GeovEntityPropsByPredicate;
         "geov-explorer": GeovExplorer;
+        "geov-graph": GeovGraph;
         "geov-if": GeovIf;
         "geov-paginator": GeovPaginator;
         "geov-property-distri": GeovPropertyDistri;
@@ -889,7 +895,6 @@ declare module "@stencil/core" {
             "geov-class-select": LocalJSX.GeovClassSelect & JSXBase.HTMLAttributes<HTMLGeovClassSelectElement>;
             "geov-class-select-popup": LocalJSX.GeovClassSelectPopup & JSXBase.HTMLAttributes<HTMLGeovClassSelectPopupElement>;
             "geov-code": LocalJSX.GeovCode & JSXBase.HTMLAttributes<HTMLGeovCodeElement>;
-            "geov-dash-chart": LocalJSX.GeovDashChart & JSXBase.HTMLAttributes<HTMLGeovDashChartElement>;
             "geov-data-fetch-example": LocalJSX.GeovDataFetchExample & JSXBase.HTMLAttributes<HTMLGeovDataFetchExampleElement>;
             "geov-display-geosparql-wktliteral": LocalJSX.GeovDisplayGeosparqlWktliteral & JSXBase.HTMLAttributes<HTMLGeovDisplayGeosparqlWktliteralElement>;
             "geov-entity": LocalJSX.GeovEntity & JSXBase.HTMLAttributes<HTMLGeovEntityElement>;
@@ -901,6 +906,7 @@ declare module "@stencil/core" {
             "geov-entity-properties": LocalJSX.GeovEntityProperties & JSXBase.HTMLAttributes<HTMLGeovEntityPropertiesElement>;
             "geov-entity-props-by-predicate": LocalJSX.GeovEntityPropsByPredicate & JSXBase.HTMLAttributes<HTMLGeovEntityPropsByPredicateElement>;
             "geov-explorer": LocalJSX.GeovExplorer & JSXBase.HTMLAttributes<HTMLGeovExplorerElement>;
+            "geov-graph": LocalJSX.GeovGraph & JSXBase.HTMLAttributes<HTMLGeovGraphElement>;
             "geov-if": LocalJSX.GeovIf & JSXBase.HTMLAttributes<HTMLGeovIfElement>;
             "geov-paginator": LocalJSX.GeovPaginator & JSXBase.HTMLAttributes<HTMLGeovPaginatorElement>;
             "geov-property-distri": LocalJSX.GeovPropertyDistri & JSXBase.HTMLAttributes<HTMLGeovPropertyDistriElement>;

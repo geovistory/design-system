@@ -28,6 +28,27 @@ export class GeovCarousel {
   }
 }
 
+
+export declare interface GeovClassDistri extends Components.GeovClassDistri {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['height', 'sparqlEndpoint', 'width']
+})
+@Component({
+  selector: 'geov-class-distri',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['height', 'sparqlEndpoint', 'width']
+})
+export class GeovClassDistri {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
 import type { GeovClassRadioGroupEvent as IGeovClassRadioGroupGeovClassRadioGroupEvent } from '@geovistory/design-system-web';
 export declare interface GeovClassRadioGroup extends Components.GeovClassRadioGroup {
   /**
@@ -382,6 +403,27 @@ export class GeovExplorer {
 }
 
 
+export declare interface GeovGraph extends Components.GeovGraph {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['height', 'pkEntity', 'sparqlEndpoint', 'width']
+})
+@Component({
+  selector: 'geov-graph',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['height', 'pkEntity', 'sparqlEndpoint', 'width']
+})
+export class GeovGraph {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
 export declare interface GeovIf extends Components.GeovIf {}
 
 @ProxyCmp({
@@ -427,6 +469,27 @@ export class GeovPaginator {
     c.detach();
     this.el = r.nativeElement;
     proxyOutputs(this, this.el, ['pageChanged']);
+  }
+}
+
+
+export declare interface GeovPropertyDistri extends Components.GeovPropertyDistri {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['height', 'sparqlEndpoint', 'width']
+})
+@Component({
+  selector: 'geov-property-distri',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['height', 'sparqlEndpoint', 'width']
+})
+export class GeovPropertyDistri {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
   }
 }
 
