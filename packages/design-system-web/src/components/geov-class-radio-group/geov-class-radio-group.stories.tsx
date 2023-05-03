@@ -59,5 +59,7 @@ const args1: JSX.GeovClassRadioGroup = {
       instanceCount: 98443,
     },
   ],
+  preferredItems: ['<uri1>', '<uri2>'],
+  uriPrefix: '',
 };
 ClassSelectCheckedOnInit.args = args1;

@@ -10,6 +10,8 @@ export interface GeovClassRadioGroupEvent {
 })
 export class GeovClassRadioGroup {
   @Prop({ mutable: true }) items?: GeovClassSelectItem[];
+  @State() preferredItemsList?: GeovClassSelectItem[];
+  @State() restItemsList?: GeovClassSelectItem[];
   @Prop() loading?: boolean;
   @Prop() initValue?: GeovClassSelectItem;
   @Prop() uriPrefix = 'https://ontome.net/ontology/';
@@ -18,8 +20,6 @@ export class GeovClassRadioGroup {
   @State() showAll = false;
   @Event() selectionChanged: EventEmitter<GeovClassRadioGroupEvent>;
   maxLength = 6;
-  preferredItemsList?: GeovClassSelectItem[];
-  restItemsList?: GeovClassSelectItem[];
 
   @Watch('items')
   onItemsChange() {
@@ -33,6 +33,10 @@ export class GeovClassRadioGroup {
         this.restItemsList?.push(item);
       }
     });
+  }
+
+  componentWillLoad() {
+    this.onItemsChange();
   }
 
   emit(classUri: string | null) {

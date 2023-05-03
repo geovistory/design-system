@@ -71,6 +71,15 @@ export class GeovExplorer {
    */
   @Prop() preferredItems?: string[];
 
+  /**
+   * classUriPrefix
+   * Optional prefix for the class uris.
+   * Example: "http://geovistory.org/resource/"
+   * Default: "http://geovistory.org/resource/"
+   * @type {string}
+   */
+  @Prop() classUriPrefix?: string;
+
   __data: GeovExplorerData;
   set data(d: GeovExplorerData) {
     this.entityList = d?.entityList;
@@ -265,6 +274,7 @@ export class GeovExplorer {
                 ref={el => {
                   el.initValue = this.selectedClass;
                   el.preferredItems = this.preferredItems;
+                  if (this.classUriPrefix) el.uriPrefix = this.classUriPrefix;
                   el.items = this.classSelect?.items;
                   el.loading = this.classSelect?.loading;
                 }}

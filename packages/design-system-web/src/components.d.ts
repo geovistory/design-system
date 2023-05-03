@@ -284,6 +284,11 @@ export namespace Components {
          */
         "_ssrId"?: string;
         /**
+          * classUriPrefix Optional prefix for the class uris. Example: "http://geovistory.org/resource/" Default: "http://geovistory.org/resource/"
+          * @type {string}
+         */
+        "classUriPrefix"?: string;
+        /**
           * If true, the component will not render before the initial data is fetched
          */
         "fetchBeforeRender": boolean;
@@ -791,6 +796,11 @@ declare namespace LocalJSX {
           * _ssrId is short for server side rendering id and identifies this component and the fetched data respectively. Set this only if you want to enable this component to fetch serve side
          */
         "_ssrId"?: string;
+        /**
+          * classUriPrefix Optional prefix for the class uris. Example: "http://geovistory.org/resource/" Default: "http://geovistory.org/resource/"
+          * @type {string}
+         */
+        "classUriPrefix"?: string;
         /**
           * If true, the component will not render before the initial data is fetched
          */
