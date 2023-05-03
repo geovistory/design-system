@@ -42,6 +42,8 @@ export namespace Components {
         "initValue"?: GeovClassSelectItem;
         "items"?: GeovClassSelectItem[];
         "loading"?: boolean;
+        "preferredItems"?: string[];
+        "uriPrefix": string;
     }
     interface GeovClassSelect {
         /**
@@ -289,6 +291,10 @@ export namespace Components {
           * initialize the component with a given search string
          */
         "initSearchString"?: string;
+        /**
+          * preferredItems List of preferred items. If set, these items will be shown first in the list of items.  Example: ["c523", "c50"]
+         */
+        "preferredItems"?: string[];
         /**
           * sparqlEndpoint URL of the sparql endpoint
          */
@@ -540,6 +546,8 @@ declare namespace LocalJSX {
         "items"?: GeovClassSelectItem[];
         "loading"?: boolean;
         "onSelectionChanged"?: (event: GeovClassRadioGroupCustomEvent<GeovClassRadioGroupEvent>) => void;
+        "preferredItems"?: string[];
+        "uriPrefix"?: string;
     }
     interface GeovClassSelect {
         /**
@@ -791,6 +799,10 @@ declare namespace LocalJSX {
           * initialize the component with a given search string
          */
         "initSearchString"?: string;
+        /**
+          * preferredItems List of preferred items. If set, these items will be shown first in the list of items.  Example: ["c523", "c50"]
+         */
+        "preferredItems"?: string[];
         /**
           * sparqlEndpoint URL of the sparql endpoint
          */

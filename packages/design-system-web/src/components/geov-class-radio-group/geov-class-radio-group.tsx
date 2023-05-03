@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State, Event, EventEmitter } from '@stencil/core';
+import { Component, Host, h, Prop, State, Event, EventEmitter, Watch } from '@stencil/core';
 import { GeovClassSelectItem } from '../geov-class-select/geov-class-select';
 export interface GeovClassRadioGroupEvent {
   value?: GeovClassSelectItem;
@@ -12,10 +12,28 @@ export class GeovClassRadioGroup {
   @Prop({ mutable: true }) items?: GeovClassSelectItem[];
   @Prop() loading?: boolean;
   @Prop() initValue?: GeovClassSelectItem;
+  @Prop() uriPrefix = 'https://ontome.net/ontology/';
+  @Prop() preferredItems?: string[];
 
   @State() showAll = false;
   @Event() selectionChanged: EventEmitter<GeovClassRadioGroupEvent>;
   maxLength = 6;
+  preferredItemsList?: GeovClassSelectItem[];
+  restItemsList?: GeovClassSelectItem[];
+
+  @Watch('items')
+  onItemsChange() {
+    // divide items into preferred and rest
+    this.preferredItemsList = [];
+    this.restItemsList = [];
+    this.items.forEach(item => {
+      if (this.preferredItems?.includes(item.classUri.substring(this.uriPrefix.length))) {
+        this.preferredItemsList?.push(item);
+      } else {
+        this.restItemsList?.push(item);
+      }
+    });
+  }
 
   emit(classUri: string | null) {
     if (!classUri) this.selectionChanged.emit({});
@@ -24,7 +42,6 @@ export class GeovClassRadioGroup {
   }
 
   render() {
-    console.log(this.initValue);
     return (
       <Host>
         <ion-list>
@@ -36,41 +53,44 @@ export class GeovClassRadioGroup {
               <ion-note>All classes ({this.items?.length ?? 0})</ion-note>
               <ion-radio slot="end" value={null}></ion-radio>
             </ion-item>
-            {this.items?.map((item, index) => (
-              <ion-item class={!this.showAll && index >= this.maxLength ? 'hide' : ''}>
+            {this.preferredItemsList?.map(item => (
+              <ion-item>
                 <ion-label>{item.classLabel}</ion-label>
                 <ion-note slot="end">{item.instanceCount}</ion-note>
                 <ion-radio slot="end" value={item.classUri}></ion-radio>
               </ion-item>
             ))}
-            {!this.items?.length && !this.loading && (
-              <ion-item>
-                <ion-label>No class found</ion-label>
-              </ion-item>
-            )}
-            {this.items?.length > this.maxLength && (
-              <span>
-                {this.showAll === false ? (
-                  <ion-button fill="clear" onClick={() => (this.showAll = true)}>
-                    Show all
-                  </ion-button>
-                ) : (
-                  <ion-button fill="clear" onClick={() => (this.showAll = false)}>
-                    Show less
-                  </ion-button>
-                )}
-              </span>
-            )}
-            {this.loading &&
-              ['', '', '', '', ''].map(_ => (
-                <ion-item>
-                  <ion-label>
-                    <ion-skeleton-text animated={true}></ion-skeleton-text>
-                  </ion-label>
-                </ion-item>
-              ))}
           </ion-radio-group>
         </ion-list>
+        <ion-button fill="clear" onClick={() => (this.showAll = !this.showAll)}>
+          {this.showAll ? 'Show less' : 'Show all classes'}
+        </ion-button>
+        {this.showAll && (
+          <ion-list>
+            <ion-radio-group onIonChange={e => this.emit(e.detail.value)} value={this.initValue?.classUri ?? null}>
+              {this.restItemsList?.map((item, index) => (
+                <ion-item class={!this.showAll && index >= this.maxLength ? 'hide' : ''}>
+                  <ion-label>{item.classLabel}</ion-label>
+                  <ion-note slot="end">{item.instanceCount}</ion-note>
+                  <ion-radio slot="end" value={item.classUri}></ion-radio>
+                </ion-item>
+              ))}
+              {!this.restItemsList?.length && !this.loading && (
+                <ion-item>
+                  <ion-label>No class found</ion-label>
+                </ion-item>
+              )}
+              {this.loading &&
+                ['', '', '', '', ''].map(_ => (
+                  <ion-item>
+                    <ion-label>
+                      <ion-skeleton-text animated={true}></ion-skeleton-text>
+                    </ion-label>
+                  </ion-item>
+                ))}
+            </ion-radio-group>
+          </ion-list>
+        )}
       </Host>
     );
   }
