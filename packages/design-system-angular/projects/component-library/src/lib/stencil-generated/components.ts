@@ -60,13 +60,13 @@ export declare interface GeovClassRadioGroup extends Components.GeovClassRadioGr
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['initValue', 'items', 'loading']
+  inputs: ['initValue', 'items', 'loading', 'preferredItems', 'uriPrefix']
 })
 @Component({
   selector: 'geov-class-radio-group',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['initValue', 'items', 'loading']
+  inputs: ['initValue', 'items', 'loading', 'preferredItems', 'uriPrefix']
 })
 export class GeovClassRadioGroup {
   protected el: HTMLElement;
@@ -386,13 +386,13 @@ export declare interface GeovExplorer extends Components.GeovExplorer {}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint', 'uriRegex', 'uriReplace']
+  inputs: ['_ssrId', 'classUriPrefix', 'fetchBeforeRender', 'initSearchString', 'preferredItems', 'sparqlEndpoint', 'uriRegex', 'uriReplace']
 })
 @Component({
   selector: 'geov-explorer',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['_ssrId', 'fetchBeforeRender', 'initSearchString', 'sparqlEndpoint', 'uriRegex', 'uriReplace']
+  inputs: ['_ssrId', 'classUriPrefix', 'fetchBeforeRender', 'initSearchString', 'preferredItems', 'sparqlEndpoint', 'uriRegex', 'uriReplace']
 })
 export class GeovExplorer {
   protected el: HTMLElement;

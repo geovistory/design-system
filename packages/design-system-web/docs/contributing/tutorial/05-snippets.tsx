@@ -2,8 +2,7 @@ export const imports = `
 import { Component, Host, h, Prop } from '@stencil/core';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
 import Plotly from 'plotly.js/dist/plotly-basic.min.js';
-...`
-
+...`;
 
 export const chartColors = `
 ...
@@ -13,7 +12,7 @@ const chartColors = [
     '#B794F4','#9F7AEA','#805AD5','#6B46C1','#553C9A','#44337A'
 ]
 ...
-`
+`;
 
 export const sparqlQuery = `
 ...
@@ -35,7 +34,7 @@ const qrClassesCount = () => \`
   ORDER by DESC(?classcounts)
 \`;
 ...
-`
+`;
 
 export const responseType = `
 ...
@@ -44,7 +43,7 @@ type SparqlResponse = {
     classcounts: SparqlBinding
 }
 ...
-`
+`;
 
 export const componentCore = `
 ...
@@ -60,7 +59,7 @@ export class GeovClassDistri {
 
 }
 ...
-`
+`;
 
 export const parameters = `
 ...
@@ -82,13 +81,13 @@ export const parameters = `
  */
 @Prop() height: number
 ...
-`
+`;
 
 export const attribute = `
 ...
 domId = 'class-distri-pie-chart';
 ...
-`
+`;
 
 export const lifecycle = `
 ...
@@ -98,7 +97,7 @@ componentWillLoad() {
 
 }
 ...
-`
+`;
 
 export const sparqlExecution = `
 ...
@@ -109,7 +108,7 @@ sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrClassesCount()).then(res => {
 
 });
 ...
-`
+`;
 
 export const parseResponse = `
 ...
@@ -118,7 +117,7 @@ const response = res?.results?.bindings
 const labels = response.map(elt => elt.classnames.value)
 const values = response.map(elt => parseInt(elt.classcounts.value))
 ...
-`
+`;
 
 export const prepareColors = `
 ...
@@ -128,7 +127,7 @@ for(let i = 0; i < values.length; i++) {
   colors.push(chartColors[i % chartColors.length])
 }
 ...
-`
+`;
 
 export const chartParams = `
 ...
@@ -142,7 +141,7 @@ const plotlyData = [{
   marker: { colors: colors }
 }]
 ...
-`
+`;
 
 export const chartLayout = `
 ...
@@ -158,14 +157,14 @@ const layout = {
   showlegend: false
 }
 ...
-`
+`;
 
 export const drawChart = `
 ...
 // Draw the chart
 Plotly.newPlot(this.domId, plotlyData, layout)
 ...
-`
+`;
 
 export const htmlTemplate = `
 ...
@@ -174,4 +173,4 @@ export const htmlTemplate = `
     <slot></slot>
 </Host>
 ...
-`
+`;

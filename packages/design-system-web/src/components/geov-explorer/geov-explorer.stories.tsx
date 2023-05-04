@@ -12,13 +12,14 @@ const Template = (args: JSX.GeovExplorer) => <GeovExplorer {...args}></GeovExplo
 export const Explorer = Template.bind({});
 const args1: JSX.GeovExplorer = {
   sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  preferredItems: ['c21', 'c523'],
 };
 Explorer.args = args1;
 
 export const ExplorerInitSearch = Template.bind({});
 
 const args2: JSX.GeovExplorer = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
+  ...args1,
   initSearchString: 'Anna Maria',
 };
 ExplorerInitSearch.args = args2;
@@ -26,6 +27,7 @@ ExplorerInitSearch.args = args2;
 export const ExplorerProject84760 = Template.bind({});
 
 const args3: JSX.GeovExplorer = {
+  preferredItems: ['c21', 'c523'],
   sparqlEndpoint: 'https://sparql.geovistory.org/api_v1_project_84760',
   initSearchString: 'Jakarta',
   uriRegex: '(http://geovistory.org/resource/)(.*)',

@@ -62,6 +62,24 @@ export class GeovExplorer {
    */
   @Prop() uriReplace?: string;
 
+  /**
+   * preferredItems
+   * List of preferred items. If set, these items will be
+   * shown first in the list of items.
+   *
+   * Example: ["c523", "c50"]
+   */
+  @Prop() preferredItems?: string[];
+
+  /**
+   * classUriPrefix
+   * Optional prefix for the class uris.
+   * Example: "http://geovistory.org/resource/"
+   * Default: "http://geovistory.org/resource/"
+   * @type {string}
+   */
+  @Prop() classUriPrefix?: string;
+
   __data: GeovExplorerData;
   set data(d: GeovExplorerData) {
     this.entityList = d?.entityList;
@@ -255,16 +273,12 @@ export class GeovExplorer {
                 }}
                 ref={el => {
                   el.initValue = this.selectedClass;
+                  el.preferredItems = this.preferredItems;
+                  if (this.classUriPrefix) el.uriPrefix = this.classUriPrefix;
                   el.items = this.classSelect?.items;
                   el.loading = this.classSelect?.loading;
                 }}
               ></geov-class-radio-group>
-              {/* <geov-class-select
-                ref={el => {
-                  el.items = this.classSelect?.items;
-                  el.loading = this.classSelect?.loading;
-                }}
-              ></geov-class-select> */}
             </ion-col>
             <ion-col sizeMd="12" sizeLg="6" sizeXl="9">
               <geov-entity-list
