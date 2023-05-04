@@ -1,5 +1,5 @@
 import { FetchResponse } from '../../../lib/FetchResponse';
-import { SparqlBinding, sparqlJson } from '../../../lib/sparqlJson';
+import { PromiseWithCancel, SparqlBinding, sparqlJson, SparqlRes } from '../../../lib/sparqlJson';
 import { GeovEntityListItem } from '../../geov-entity-list/geov-entity-list';
 import { getTextFilter } from './getTextFilter';
 export type EntityListData = FetchResponse & { items?: GeovEntityListItem[]; error?: boolean };
@@ -54,26 +54,34 @@ export const getQuery = (searchString: string, classUris: string[], limit: numbe
   }
 `;
 };
+interface Bindings {
+  entityLabel: SparqlBinding;
+  entityUri: SparqlBinding;
+  classLabel: SparqlBinding;
+  classUri: SparqlBinding;
+}
 
-export async function fetchEntityList(sparqlEndpoint: string, searchString: string, classUris: string[], limit: number, offset: number) {
-  return sparqlJson<{ entityLabel: SparqlBinding; entityUri: SparqlBinding; classLabel: SparqlBinding; classUri: SparqlBinding }>(
-    sparqlEndpoint,
-    getQuery(searchString, classUris, limit, offset),
-  )
-    .then(res => {
-      // process and return the data in case of success
-      const x: EntityListData = {
-        items: res?.results?.bindings?.map(b => ({ classLabel: b.classLabel.value, entityLabel: b.entityLabel.value, entityUri: b.entityUri.value, classUri: b.classUri.value })),
-        loading: false,
-      };
-      return x;
-    })
-    .catch(_ => {
-      // process and return the data in case of error
-      const x: EntityListData = {
-        error: true,
-        loading: false,
-      };
-      return x;
-    });
+export class EntityListFetcher {
+  public promiseWithCancel: PromiseWithCancel<SparqlRes<Bindings>>;
+
+  async fetch(sparqlEndpoint: string, searchString: string, classUris: string[], limit: number, offset: number) {
+    this.promiseWithCancel = sparqlJson<Bindings>(sparqlEndpoint, getQuery(searchString, classUris, limit, offset));
+    return this.promiseWithCancel
+      .then(res => {
+        // process and return the data in case of success
+        const x: EntityListData = {
+          items: res?.results?.bindings?.map(b => ({ classLabel: b.classLabel.value, entityLabel: b.entityLabel.value, entityUri: b.entityUri.value, classUri: b.classUri.value })),
+          loading: false,
+        };
+        return x;
+      })
+      .catch(_ => {
+        // process and return the data in case of error
+        const x: EntityListData = {
+          error: true,
+          loading: false,
+        };
+        return x;
+      });
+  }
 }

@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
 
-    <script type="module" src="/build/design-system-web.esm.js"></script>
-    <script nomodule src="/build/design-system-web.js"></script>
-    <link rel="stylesheet" href="/build/app.css" />
-  </head>
-  <body>
-    <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+
+  <script type="module" src="/build/design-system-web.esm.js"></script>
+  <script nomodule src="/build/design-system-web.js"></script>
+  <link rel="stylesheet" href="/build/design-system-web.css" />
+</head>
+
+<body mode="ios">
+  <geov-explorer sparql-endpoint="https://sparql.geovistory.org/api_v1_project_84760" , init-search-string="Jakarta" ,
+    uri-regex="(http://geovistory.org/resource/)(.*)" , uri-replace="http://geovistory.org/resource/$2?p=84760">
+</body>
+
 </html>

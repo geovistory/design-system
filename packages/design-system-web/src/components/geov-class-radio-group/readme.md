@@ -7,11 +7,13 @@
 
 ## Properties
 
-| Property    | Attribute | Description | Type                    | Default     |
-| ----------- | --------- | ----------- | ----------------------- | ----------- |
-| `initValue` | --        |             | `GeovClassSelectItem`   | `undefined` |
-| `items`     | --        |             | `GeovClassSelectItem[]` | `undefined` |
-| `loading`   | `loading` |             | `boolean`               | `undefined` |
+| Property         | Attribute    | Description | Type                    | Default                          |
+| ---------------- | ------------ | ----------- | ----------------------- | -------------------------------- |
+| `initValue`      | --           |             | `GeovClassSelectItem`   | `undefined`                      |
+| `items`          | --           |             | `GeovClassSelectItem[]` | `undefined`                      |
+| `loading`        | `loading`    |             | `boolean`               | `undefined`                      |
+| `preferredItems` | --           |             | `string[]`              | `undefined`                      |
+| `uriPrefix`      | `uri-prefix` |             | `string`                | `'https://ontome.net/ontology/'` |
 
 
 ## Events
