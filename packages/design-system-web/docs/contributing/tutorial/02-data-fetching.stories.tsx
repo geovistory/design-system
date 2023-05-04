@@ -83,7 +83,7 @@ export const DataFetching = () => (
           </blockquote>
           <h4 id="component-will-load">ComponentWillLoad hook</h4>
           <p>
-            Lets add <code>componentWillLoad()</code> block:
+            Lets add <code>componentWillLoad()</code> block to geov-hello-world.tsx:
           </p>
           <p>
             <GeovCode language="typescript" code={c0}></GeovCode>
@@ -153,9 +153,9 @@ export const DataFetching = () => (
           </p>
           <h4 id="parse-data">Parse result</h4>
           <p>
-            The function <code>sparqlJson()</code> has a generic Type <code>{'<T>'}</code>. This allows to type the expected resulsts in an easy way: for each bound variable in the
-            sparql query you can add a key in the type. With <code>{'{ classLabel: SparqlBinding<string> }'}</code> we tell TypeScript that we sparql <code>?classLabel</code> of
-            type <code>string</code>{' '}
+            The function <code>sparqlJson()</code> has a generic Type <code>{'<T>'}</code>. This allows to type the expected results in an easy way: for each bound variable in the
+            sparql query you can add a key in the type. With <code>{'{ classLabel: SparqlBinding }'}</code> we tell TypeScript that we sparql <code>?classLabel</code> of type{' '}
+            <code>string</code>{' '}
           </p>
 
           <p>
