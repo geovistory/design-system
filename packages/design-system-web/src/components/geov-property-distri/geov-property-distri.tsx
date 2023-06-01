@@ -1,6 +1,7 @@
-import { Component, Host, h, Prop } from '@stencil/core';
+import { Component, h, Host, Prop } from '@stencil/core';
+import { isNode } from '../../lib/isNode';
+import { importPlotlyBasic } from '../../lib/loadPlotlyBasic';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
-import Plotly from 'plotly.js/dist/plotly-basic.min.js';
 
 const chartColors = [
   '#322659',
@@ -40,7 +41,7 @@ const qrPropertyCount = () => `
     FILTER (lang(?propertyname) = 'en')
     }
     GROUP BY ?property
-    ORDER by DESC(?propertycounts)	
+    ORDER by DESC(?propertycounts)
 `;
 
 type SparqlResponse = {
@@ -74,45 +75,51 @@ export class GeovPropertyDistri {
 
   domId = 'property-distri-pie-chart';
 
-  componentWillLoad() {
-    // Send the request to the provided sparql endpoint
-    sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrPropertyCount()).then(res => {
-      // Parse the response
-      const response = res?.results?.bindings;
-      const labels = response.map(elt => elt.propertynames.value);
-      const values = response.map(elt => parseInt(elt.propertycounts.value));
+  async componentWillLoad() {
+    // If we are in a browser
+    if (!isNode()) {
+      // Load plotly script
+      const Plotly = await importPlotlyBasic();
 
-      // Prepare colors
-      const colors = [];
-      for (let i = 0; i < values.length; i++) {
-        colors.push(chartColors[i % chartColors.length]);
-      }
+      // Send the request to the provided sparql endpoint
+      sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrPropertyCount()).then(res => {
+        // Parse the response
+        const response = res?.results?.bindings;
+        const labels = response.map(elt => elt.propertynames.value);
+        const values = response.map(elt => parseInt(elt.propertycounts.value));
 
-      // Chart data, shape, and parameters
-      const plotlyData = [
-        {
-          labels: labels,
-          values: values,
-          type: 'pie',
-          textinfo: 'label+percent',
-          textposition: 'inside',
-          marker: { colors: colors },
-        },
-      ];
+        // Prepare colors
+        const colors = [];
+        for (let i = 0; i < values.length; i++) {
+          colors.push(chartColors[i % chartColors.length]);
+        }
 
-      // Chart Layout
-      const propNb = values.length;
-      const stmtNb_x1000 = Math.round(values.reduce((a: number, b: number) => a + b, 0) / 1000);
-      const layout = {
-        width: this.width,
-        height: this.height,
-        title: `Distribution of ${propNb} properties (${stmtNb_x1000}k statements)`,
-        showlegend: false,
-      };
+        // Chart data, shape, and parameters
+        const plotlyData: Plotly.Data[] = [
+          {
+            labels: labels,
+            values: values,
+            type: 'pie',
+            textinfo: 'label+percent',
+            textposition: 'inside',
+            marker: { colors: colors },
+          },
+        ];
 
-      // Draw the chart
-      Plotly.newPlot(this.domId, plotlyData, layout);
-    });
+        // Chart Layout
+        const propNb = values.length;
+        const stmtNb_x1000 = Math.round(values.reduce((a: number, b: number) => a + b, 0) / 1000);
+        const layout = {
+          width: this.width,
+          height: this.height,
+          title: `Distribution of ${propNb} properties (${stmtNb_x1000}k statements)`,
+          showlegend: false,
+        };
+
+        // Draw the chart
+        Plotly.newPlot(this.domId, plotlyData, layout);
+      });
+    }
   }
 
   render() {

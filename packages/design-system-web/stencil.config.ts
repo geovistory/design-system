@@ -1,11 +1,11 @@
 import { Config } from '@stencil/core';
 import { angularGenerator } from './.build/stencil.bindings.angular';
-import { stencilBasicConfig } from './.build/stencil/stencil.basic.config';
 import { reactGenerator } from './.build/stencil.bindings.react';
-import { happyDomOutputTarget } from '@geovistory/happy-dom-output-target';
+import { stencilBasicConfig } from './.build/stencil/stencil.basic.config';
 
 export const config: Config = {
   ...stencilBasicConfig,
+  tsconfig: './tsconfig.build.json',
   outputTargets: [
     {
       type: 'dist',
@@ -13,6 +13,7 @@ export const config: Config = {
     },
     {
       type: 'dist-custom-elements',
+      customElementsExportBehavior: 'bundle',
     },
     {
       type: 'dist-hydrate-script',
@@ -24,10 +25,6 @@ export const config: Config = {
       type: 'www',
       serviceWorker: null, // disable service workers
     },
-    happyDomOutputTarget({
-      outputPath: '../design-system-happy-dom/src/happyDomWorker.ts',
-      loaderPath: '@geovistory/design-system-web/loader',
-    }),
     angularGenerator(),
     reactGenerator({
       // includeImportCustomElements: true,

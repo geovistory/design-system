@@ -19,6 +19,18 @@ import { GeovEntityListItem } from "./components/geov-entity-list/geov-entity-li
 import { GeovEntityPropertiesData, PropsWithCountBindings } from "./components/geov-entity-properties/geov-entity-properties";
 import { PageEvent } from "./components/geov-paginator/geov-paginator";
 import { PageEvent as PageEvent1 } from "./components/geov-paginator/geov-paginator";
+export { GeovClassSelectItem } from "./components/geov-class-select/geov-class-select";
+export { GeovClassRadioGroupEvent } from "./components/geov-class-radio-group/geov-class-radio-group";
+export { ClassSelectEvent, GeovClassSelectItem as GeovClassSelectItem1 } from "./components/geov-class-select/geov-class-select";
+export { GeovClassSelectPopupEvent } from "./components/geov-class-select-popup/geov-class-select-popup";
+export { Languages } from "./components/geov-code/geov-code";
+export { GeovDataFetchExampleData } from "./components/geov-data-fetch-example/geov-data-fetch-example";
+export { SparqlBinding } from "./lib/sparqlJson";
+export { Color } from "@ionic/core";
+export { GeovEntityListItem } from "./components/geov-entity-list/geov-entity-list";
+export { GeovEntityPropertiesData, PropsWithCountBindings } from "./components/geov-entity-properties/geov-entity-properties";
+export { PageEvent } from "./components/geov-paginator/geov-paginator";
+export { PageEvent as PageEvent1 } from "./components/geov-paginator/geov-paginator";
 
 export namespace Components {
     export interface IonAccordion extends IonComponents.IonAccordion { }
@@ -148,7 +160,7 @@ export namespace Components {
           * If true, the classes are checked on init, else none is checked on init
          */
         "checkedOnInit": boolean;
-        "items"?: GeovClassSelectItem[];
+        "items"?: GeovClassSelectItem1[];
         "loading"?: boolean;
     }
     interface GeovClassSelectPopup {
@@ -753,7 +765,7 @@ declare namespace LocalJSX {
           * If true, the classes are checked on init, else none is checked on init
          */
         "checkedOnInit"?: boolean;
-        "items"?: GeovClassSelectItem[];
+        "items"?: GeovClassSelectItem1[];
         "loading"?: boolean;
         "onSelectionChanged"?: (event: GeovClassSelectCustomEvent<ClassSelectEvent>) => void;
     }
@@ -1035,7 +1047,7 @@ declare namespace LocalJSX {
         "color"?: Color;
         "hidePageSize"?: boolean;
         "length"?: number;
-        "onPageChanged"?: (event: GeovPaginatorCustomEvent<PageEvent>) => void;
+        "onPageChanged"?: (event: GeovPaginatorCustomEvent<PageEvent1>) => void;
         "pageIndex"?: number;
         "pageSize"?: number;
         "showFirstLastButtons"?: boolean;

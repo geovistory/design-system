@@ -54,6 +54,7 @@ for (let path_ of paths) {
   const path = __dirname + path_;
 
   let content = fs.readFileSync(path, 'utf-8');
+  console.log(content);
   content = imports + content.replace(clueLocalJSX, newJSX).replace(clueModuleJSX, newModuleJSX).replace(clueComponents, newComponents);
 
   if (fs.existsSync(path)) fs.unlinkSync(path);
