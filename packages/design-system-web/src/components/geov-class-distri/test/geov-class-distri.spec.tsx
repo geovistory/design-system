@@ -1,33 +1,9 @@
 import { MockWindow } from '@stencil/core/mock-doc';
-import { mockFetch, newSpecPage } from '@stencil/core/testing';
+import { newSpecPage } from '@stencil/core/testing';
 import { renderToString } from '../../../../hydrate/index';
-import { SparqlBinding } from '../../../components';
-import { SparqlRes } from '../../../lib/sparqlJson';
 import { GeovClassDistri } from '../geov-class-distri';
 
 describe('geov-class-distry', () => {
-  beforeEach(() => {
-    // Mock the data returned by sparql query
-    const mockResponse: SparqlRes<{ classnames: SparqlBinding; classcounts: SparqlBinding }> = {
-      results: {
-        bindings: [
-          {
-            classnames: { type: 'literal', value: 'Person' },
-            classcounts: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#integer', value: '179204' },
-          },
-          {
-            classnames: { type: 'literal', value: 'Definition' },
-            classcounts: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#integer', value: '160877' },
-          },
-        ],
-      },
-    };
-    // Register the mock data for the sparql get request (URL)
-    mockFetch.json(
-      mockResponse,
-      'https://sparql.geovistory.org/api_v1_community_data?query=%0A++PREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0A%0A++SELECT+%28group_concat%28%3Fclassname%3Bseparator%3D%22%2C+%22%29+as+%3Fclassnames%29+%28Max%28%3Fclasscount%29+as+%3Fclasscounts%29%0A++WHERE+%7B%0A++++++%7B%0A++++++++++SELECT+%3Fclassuri+%28count%28%3Fentity%29+as+%3Fclasscount%29%0A++++++++++WHERE+%7B%0A++++++++++++++%3Fentity+a+%3Fclassuri+.%0A++++++++++%7D%0A++++++++++GROUP+BY+%3Fclassuri%0A++++++%7D%0A++++++%3Fclassuri+rdfs%3Alabel+%3Fclassname%0A++%7D%0A++GROUP+BY+%3Fclassuri%0A++ORDER+by+DESC%28%3Fclasscounts%29%0A',
-    );
-  });
 
   it('Client side: fetches data and renders', async () => {
     const page = await newSpecPage({

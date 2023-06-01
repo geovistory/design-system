@@ -16,7 +16,6 @@
     "noUnusedParameters": true,
     "jsx": "react",
     "jsxFactory": "h",
-    "allowUmdGlobalAccess": true,
   },
   "include": [
     "src",
