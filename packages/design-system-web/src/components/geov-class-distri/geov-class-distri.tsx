@@ -1,6 +1,6 @@
 import { Component, h, Host, Prop } from '@stencil/core';
 import { isNode } from '../../lib/isNode';
-import { importPlotlyBasic } from '../../lib/loadPlotlyBasic';
+import { importPlotlyBasic } from '../../lib/importPlotlyBasic';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
 
 const chartColors = [
