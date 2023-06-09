@@ -1,6 +1,7 @@
-import { Component, Host, h, Prop } from '@stencil/core';
+import { Component, h, Host, Prop } from '@stencil/core';
+import { isNode } from '../../lib/isNode';
+import { importPlotlyBasic } from '../../lib/importPlotlyBasic';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
-import Plotly from 'plotly.js/dist/plotly-basic.min.js';
 
 const chartColors = [
   '#322659',
@@ -72,47 +73,54 @@ export class GeovClassDistri {
 
   domId = 'class-distri-pie-chart';
 
-  componentWillLoad() {
-    // Send the request to the provided sparql endpoint
-    sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrClassesCount()).then(res => {
-      // Parse the response
-      const response = res?.results?.bindings;
-      const labels = response.map(elt => elt.classnames.value);
-      const values = response.map(elt => parseInt(elt.classcounts.value));
+  async componentWillLoad() {
+    // If we are in a browser
+    if (!isNode()) {
 
-      // Prepare colors
-      const colors = [];
-      for (let i = 0; i < values.length; i++) {
-        colors.push(chartColors[i % chartColors.length]);
-      }
+      // Load plotly script
+      const Plotly = await importPlotlyBasic();
 
-      // Chart data, shape, and parameters
-      const plotlyData = [
-        {
-          labels: labels,
-          values: values,
-          type: 'pie',
-          textinfo: 'label+percent',
-          textposition: 'inside',
-          marker: { colors: colors },
-        },
-      ];
+      // Send the request to the provided sparql endpoint
+      sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrClassesCount()).then(res => {
+        // Parse the response
+        const response = res?.results?.bindings;
+        const labels = response.map(elt => elt.classnames.value);
+        const values = response.map(elt => parseInt(elt.classcounts.value));
 
-      // Chart Layout - Prepare
-      const classNb = values.length;
-      const entNb_x1000 = Math.round(values.reduce((a: number, b: number) => a + b, 0) / 1000);
+        // Prepare colors
+        const colors = [];
+        for (let i = 0; i < values.length; i++) {
+          colors.push(chartColors[i % chartColors.length]);
+        }
 
-      // Chart Layout - Set
-      const layout = {
-        width: this.width,
-        height: this.height,
-        title: `Distribution of ${classNb} classes (${entNb_x1000}k entities)`,
-        showlegend: false,
-      };
+        // Chart data, shape, and parameters
+        const plotlyData: Plotly.Data[] = [
+          {
+            labels: labels,
+            values: values,
+            type: 'pie',
+            textinfo: 'label+percent',
+            textposition: 'inside',
+            marker: { colors: colors },
+          },
+        ];
 
-      // Draw the chart
-      Plotly.newPlot(this.domId, plotlyData, layout);
-    });
+        // Chart Layout - Prepare
+        const classNb = values.length;
+        const entNb_x1000 = Math.round(values.reduce((a: number, b: number) => a + b, 0) / 1000);
+
+        // Chart Layout - Set
+        const layout = {
+          width: this.width,
+          height: this.height,
+          title: `Distribution of ${classNb} classes (${entNb_x1000}k entities)`,
+          showlegend: false,
+        };
+
+        // Draw the chart
+        if (Plotly) Plotly.newPlot(this.domId, plotlyData, layout);
+      });
+    }
   }
 
   render() {

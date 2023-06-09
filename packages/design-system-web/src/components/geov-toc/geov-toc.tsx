@@ -22,7 +22,7 @@ export class GeovToc {
     );
   }
   createToc() {
-    const tocItems: JSX.Element[] = [];
+    const tocItems: Element[] = [];
 
     if (this.el) {
       const getHref = (e: Element) => {

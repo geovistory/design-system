@@ -223,7 +223,7 @@ export class GeovEntityPropsByPredicate {
     );
   }
 
-  private renderItem(item: Bindings): JSX.Element {
+  private renderItem(item: Bindings): Element {
     const isUri = item.entity.type === 'uri';
     if (isUri) {
       const regex = this.uriRegex;
@@ -299,7 +299,7 @@ export class GeovEntityPropsByPredicate {
     );
   }
 
-  private renderPaginator(): JSX.Element {
+  private renderPaginator(): Element {
     return (
       <ion-item color={this.color} lines="none">
         <geov-paginator
