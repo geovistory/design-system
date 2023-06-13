@@ -1,4 +1,5 @@
 export const parameters = {
+  viewMode: 'docs', // docs tab by default
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {

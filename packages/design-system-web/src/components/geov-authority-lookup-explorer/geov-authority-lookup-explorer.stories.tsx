@@ -3,7 +3,7 @@ import { JSX } from '../..';
 import { GeovAuthorityLookupExplorer } from '../../../.storybook/stencil-generated/component';
 
 export default {
-  title: 'Data Components/Authority Lookup/Authority Lookup Explorer',
+  title: 'Data Components/Authority Lookup Explorer',
   component: GeovAuthorityLookupExplorer,
 };
 const Template = (args: JSX.GeovAuthorityLookupExplorer) => <GeovAuthorityLookupExplorer {...args}></GeovAuthorityLookupExplorer>;

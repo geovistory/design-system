@@ -1,0 +1,66 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { Story, Canvas, Description } from '@storybook/addon-docs';
+import readme from './readme.md';
+
+<Meta title="Data components/Authority Lookup/Documentation" />
+
+# Geov Authority Lookup
+
+A webcomponent which we can lookup URI entities from authority files (IdRef, Wikidata and GND)
+
+<Canvas withSource="open">
+  <Story id="data-components-authority-lookup--basic" />
+</Canvas>
+
+<div class="ion-text-center">
+  <ion-button href="?path=/story/data-components-authority-lookup--basic" target="_self">
+    Go to playground (Canvas)
+  </ion-button>
+</div>
+
+## Examples
+
+### One column
+
+<Canvas>
+  <Story id="data-components-authority-lookup--one-column" />
+</Canvas>
+
+### Three lines max by api
+
+<Canvas>
+  <Story id="data-components-authority-lookup--three-resultats" />
+</Canvas>
+
+### All buttons
+
+<Canvas>
+  <Story id="data-components-authority-lookup--all-buttons" />
+</Canvas>
+
+## Component Api
+
+<Description markdown={readme} />
+
+## Integration
+
+This documentation explains how to implement and use Geovistory Design System components across different technologies.
+
+<div class="ion-text-center">
+  <ion-button href="?path=/story/getting-started-installation--html-5" target="_self">
+    Go to component usage
+  </ion-button>
+</div>
+
+## Theming
+
+<div class="ion-text-center">
+  <ion-button href="?path=/story/design-theming--theming" target="_self">
+    Go to theming page
+  </ion-button>
+</div>
+
+<p>
+  If you experience any issues while using a component, please head over to the <a href="https://github.com/geovistory/design-system/issues">Github page</a> for more guidelines and
+  help.
+</p>

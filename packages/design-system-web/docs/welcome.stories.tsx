@@ -36,7 +36,7 @@ export const Welcome = () => (
           </a>{' '}
           manages and pushes the development of the design system and encourages community contributions of any kind. We will be glad to welcome you're contribution!
         </p>
-        <h2>Types of componets</h2>
+        <h2>Types of components</h2>
         <p>The system consists of two types of components: Ionic components and Geovistory components.</p>
         <h2>Technology</h2>
         <p>

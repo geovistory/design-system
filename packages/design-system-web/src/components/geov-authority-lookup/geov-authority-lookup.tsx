@@ -7,19 +7,50 @@ import { Component, Host, Prop, State, h } from '@stencil/core';
   shadow: true,
 })
 export class GeovAuthorityLookup {
+  /**
+   * APIs to use
+   */
   @Prop() apis: string[] = ['gnd', 'idref', 'wikidata'];
 
+  /**
+   * The list of types
+   */
   @Prop() types: string[] = ['All', 'Person', 'Place', 'Group'];
 
+  /**
+   * The maximum number of occurrences per api
+   */
   @Prop() nbOccurencesMax = 5;
 
+  /**
+   * To show or hide the selection button
+   */
   @Prop() displaySelectBtn = true;
 
+  /**
+   * To show or hide the open button
+   */
   @Prop() displayOpenBtn = true;
 
+  /**
+   * To show or hide the copy button
+   */
   @Prop() displayCopyBtn = false;
 
+  /**
+   * The maximum number of columns in the webcomponent
+   */
   @Prop() nbColMax = 3;
+
+  /**
+   * The initial keywords
+   */
+  @Prop() initSearch: string;
+
+  /**
+   * The initial type
+   */
+  @Prop() initSearchType: string;
 
   @State() keywords = '';
 
@@ -28,6 +59,13 @@ export class GeovAuthorityLookup {
   @State() classForceCol = '';
 
   componentWillLoad() {
+    if (this.initSearch.trim() != '') {
+      this.keywords = this.initSearch.trim();
+    }
+    if (this.initSearchType.trim() != '') {
+      this.type = this.initSearchType.trim();
+    }
+
     if (this.nbColMax == 2) {
       this.classForceCol = 'forceCol2';
     } else if (this.nbColMax == 1) {
@@ -55,6 +93,7 @@ export class GeovAuthorityLookup {
               <ion-list>
                 <ion-item>
                   <ion-select
+                    value={this.type}
                     aria-label="type"
                     placeholder="Select type"
                     onIonChange={e => {

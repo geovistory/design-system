@@ -15,6 +15,7 @@
 @container (width >= 320px) {
   .colButtons {
     text-align: right;
+    white-space: nowrap;
   }
 
   .colMenu {
