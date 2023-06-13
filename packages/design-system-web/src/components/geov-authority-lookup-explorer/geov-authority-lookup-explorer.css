@@ -1,0 +1,32 @@
+:host {
+  display: block;
+}
+
+.colContent {
+  overflow: hidden; /* Masque le contenu qui dépasse */
+  text-overflow: ellipsis; /* Ajoute des points de suspension (...) pour indiquer le contenu coupé */
+  white-space: nowrap; /* Empêche le contenu de passer à la ligne */
+}
+
+.containerResponsive {
+  container-type: inline-size;
+}
+
+@container (width >= 320px) {
+  .colButtons {
+    text-align: right;
+  }
+
+  .colMenu {
+    display: none;
+  }
+}
+
+@container (width < 320px) {
+  .colButtons {
+    display: none;
+  }
+  .colMenu {
+    text-align: right;
+  }
+}

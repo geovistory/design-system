@@ -8,6 +8,56 @@ import { Components } from '@geovistory/design-system-web';
 
 
 @ProxyCmp({
+  inputs: ['apis', 'displayCopyBtn', 'displayOpenBtn', 'displaySelectBtn', 'nbColMax', 'nbOccurencesMax', 'types']
+})
+@Component({
+  selector: 'geov-authority-lookup',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['apis', 'displayCopyBtn', 'displayOpenBtn', 'displaySelectBtn', 'nbColMax', 'nbOccurencesMax', 'types'],
+})
+export class GeovAuthorityLookup {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface GeovAuthorityLookup extends Components.GeovAuthorityLookup {}
+
+
+@ProxyCmp({
+  inputs: ['api', 'displayCopyBtn', 'displayOpenBtn', 'displaySelectBtn', 'keywords', 'nbOccurencesMax', 'type']
+})
+@Component({
+  selector: 'geov-authority-lookup-explorer',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['api', 'displayCopyBtn', 'displayOpenBtn', 'displaySelectBtn', 'keywords', 'nbOccurencesMax', 'type'],
+})
+export class GeovAuthorityLookupExplorer {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['selected']);
+  }
+}
+
+
+import type { itemSelectedEvent as IGeovAuthorityLookupExploreritemSelectedEvent } from '@geovistory/design-system-web';
+
+export declare interface GeovAuthorityLookupExplorer extends Components.GeovAuthorityLookupExplorer {
+
+  selected: EventEmitter<CustomEvent<IGeovAuthorityLookupExploreritemSelectedEvent>>;
+}
+
+
+@ProxyCmp({
   inputs: ['images']
 })
 @Component({
