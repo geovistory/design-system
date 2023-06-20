@@ -9,6 +9,7 @@ export default {
         hidden: true,
       },
     },
+    viewmode: 'story',
     options: { showPanel: false },
   },
 };

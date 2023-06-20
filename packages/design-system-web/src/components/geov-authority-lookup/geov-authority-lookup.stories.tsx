@@ -20,6 +20,7 @@ export default {
     },
   },
   parameters: {
+    viewMode: 'docs',
     docs: {
       page: geovAuthorityLookupDocs, // Use mdx documentation
     },
@@ -59,14 +60,14 @@ const argsThreeResultats: JSX.GeovAuthorityLookup = {
 };
 ThreeResultats.args = argsThreeResultats;
 
-export const OneApi = Template.bind({});
+export const OneAPI = Template.bind({});
 const argsOneApi: JSX.GeovAuthorityLookup = {
   initSearch: 'Johannes Kepler',
   initSearchType: 'Person',
   apis: ['idref'],
   nbColMax: 1,
 };
-OneApi.args = argsOneApi;
+OneAPI.args = argsOneApi;
 
 export const AllButtons = Template.bind({});
 const argsAllButtons: JSX.GeovAuthorityLookup = {
