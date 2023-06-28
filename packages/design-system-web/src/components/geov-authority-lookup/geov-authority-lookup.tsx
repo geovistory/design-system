@@ -1,4 +1,5 @@
-import { Component, Host, Prop, State, h } from '@stencil/core';
+import { Component, Host, Prop, State, Event, h, EventEmitter } from '@stencil/core';
+import { ItemSelectedEvent } from '../geov-authority-lookup-explorer/geov-authority-lookup-explorer';
 //import { popoverController } from '@ionic/core';
 
 @Component({
@@ -58,11 +59,17 @@ export class GeovAuthorityLookup {
 
   @State() classForceCol = '';
 
+  /**
+   * Event emitted when the select button has been clicked.
+   */
+  @Event()
+  selected: EventEmitter<ItemSelectedEvent>;
+
   componentWillLoad() {
-    if (this.initSearch.trim() != '') {
+    if (this.initSearch && this.initSearch.trim() != '') {
       this.keywords = this.initSearch.trim();
     }
-    if (this.initSearchType.trim() != '') {
+    if (this.initSearchType && this.initSearchType.trim() != '') {
       this.type = this.initSearchType.trim();
     }
 
@@ -110,20 +117,21 @@ export class GeovAuthorityLookup {
         <div class="containerResponsive">
           <ion-grid class={this.classForceCol}>
             <ion-row>
-              {this.apis &&
-                this.apis.map(item => (
-                  <ion-col size="1">
-                    <geov-authority-lookup-explorer
-                      api={item}
-                      keywords={this.keywords}
-                      type={this.type}
-                      nbOccurencesMax={this.nbOccurencesMax}
-                      displayCopyBtn={this.displayCopyBtn}
-                      displayOpenBtn={this.displayOpenBtn}
-                      displaySelectBtn={this.displaySelectBtn}
-                    ></geov-authority-lookup-explorer>
-                  </ion-col>
-                ))}
+              {this.keywords.length
+                ? this.apis?.map(item => (
+                    <ion-col size="1">
+                      <geov-authority-lookup-explorer
+                        api={item}
+                        keywords={this.keywords}
+                        type={this.type}
+                        nbOccurencesMax={this.nbOccurencesMax}
+                        displayCopyBtn={this.displayCopyBtn}
+                        displayOpenBtn={this.displayOpenBtn}
+                        displaySelectBtn={this.displaySelectBtn}
+                      ></geov-authority-lookup-explorer>
+                    </ion-col>
+                  ))
+                : ''}
             </ion-row>
           </ion-grid>
         </div>

@@ -16,6 +16,9 @@
     "noUnusedParameters": true,
     "jsx": "react",
     "jsxFactory": "h",
+    "types": [
+      "./types/mdx.d.ts"
+    ]
   },
   "include": [
     "src",
@@ -24,5 +27,5 @@
   "exclude": [
     "node_modules",
     "**/*.stories.*"
-  ]
+  ],
 }

@@ -4,13 +4,25 @@ import readme from './readme.md';
 
 <Meta title="Data components/Authority Lookup/Documentation" />
 
-# Geov Authority Lookup
+# Authority Lookup Component
 
-A webcomponent which we can lookup URI entities from authority files (IdRef, Wikidata and GND)
+This component allows searching for entities in Wikidata, GND, and IdRef. Users can enter a string and optionally choose a type/class. Once the desired entity is found, its URI can be copied to the clipboard or outputted through a DOM event.
+
+Supported Authority Files:
+
+- [Wikidata](https://www.wikidata.org/) is a free and collaborative knowledge graph that serves as a central repository of structured data for Wikimedia projects, including Wikipedia.
+- [GND](https://www.dnb.de/DE/Professionell/Standardisierung/GND/gnd_node.html), which stands for "Gemeinsame Normdatei" in German, is an authority file used in libraries, archives, and museums in German-speaking countries. It is maintained cooperatively by the German National Library, the Austrian National Library, the Swiss National Library, and other institutions.
+- [IdRef](https://www.idref.fr/) is a French authority file that serves as a reference for identifying and managing bibliographic data related to persons, organizations, and works. It is maintained by the Bibliographic Agency for Higher Education (ABES) in France.
+
+The component has a rich API for customization and styling, see below.
+
+Search and select an entity. Open the console to see the selected URI in the logs.
 
 <Canvas withSource="open">
   <Story id="data-components-authority-lookup--basic" />
 </Canvas>
+
+<span id="story--data-components-authority-lookup--number-of-columns" style={{ opacity: 0 }}></span>
 
 <div class="ion-text-center">
   <ion-button href="?path=/story/data-components-authority-lookup--basic" target="_self">
@@ -18,62 +30,84 @@ A webcomponent which we can lookup URI entities from authority files (IdRef, Wik
   </ion-button>
 </div>
 
-## Examples
+# Examples
 
-<span id="story--data-components-authority-lookup--one-column" style={{ opacity: 0 }}></span>
+## Number of columns
 
-### One column
+Define the max. number of columns used to display the search results. (Here: 1)
 
-<Canvas>
-  <Story id="data-components-authority-lookup--one-column" />
+<Canvas withSource="open">
+  <Story id="data-components-authority-lookup--number-of-columns" />
 </Canvas>
 
-<span id="story--data-components-authority-lookup--three-resultats" style={{ opacity: 0 }}></span>
+<span id="story--data-components-authority-lookup--number-of-search-results" style={{ opacity: 0 }}></span>
 
-### Three lines max by api
+## Number of search results
 
-<Canvas>
-  <Story id="data-components-authority-lookup--three-resultats" />
+Define the max. number of items in the list of search results. (Here: 3)
+
+<Canvas withSource="open">
+  <Story id="data-components-authority-lookup--number-of-search-results" />
 </Canvas>
 
-<span id="story--data-components-authority-lookup--one-api" style={{ opacity: 0 }}></span>
+<span id="story--data-components-authority-lookup--customize-searched-apis" style={{ opacity: 0 }}></span>
 
-### One API
+## Customize searched API's
 
-<Canvas>
-  <Story id="data-components-authority-lookup--one-api" />
+Enable/disable specific authority files (APIs). (Here: only IdRef)
+
+<Canvas withSource="open">
+  <Story id="data-components-authority-lookup--customize-searched-apis" />
 </Canvas>
 
-<span id="story--data-components-authority-lookup--all-buttons" style={{ opacity: 0 }}></span>
+<span id="story--data-components-authority-lookup--customize-buttons" style={{ opacity: 0 }}></span>
 
-### All buttons
+## Customize buttons
 
-<Canvas>
-  <Story id="data-components-authority-lookup--all-buttons" />
+Enable/disable action buttons on search results. (Here: enable all buttons)
+
+<Canvas withSource="open">
+  <Story id="data-components-authority-lookup--customize-buttons" />
 </Canvas>
 
-## Component Api
+## Initialize Search
 
-<Description markdown={readme} />
+Set the initial search string and type/class. (Here: Johannes Kepler, Person)
 
-## Integration
+<Canvas withSource="open">
+  <Story id="data-components-authority-lookup--initialize-search" />
+</Canvas>
+
+# Component Api
+
+<Description
+  markdown={readme
+    .replace(/^# .*/, '')
+    //.replaceAll('## ', '### ')
+    .replace(/----------------------------------------------\n\n\*.*\n/, '')}
+/>
+
+# Integration
 
 This documentation explains how to implement and use Geovistory Design System components across different technologies.
 
-<div class="ion-text-center">
+<div>
   <ion-button href="?path=/story/getting-started-installation--html-5" target="_self">
     Go to component usage
   </ion-button>
 </div>
 
-## Theming
+# Theming
 
-<div class="ion-text-center">
+<div>
   <ion-button href="?path=/story/design-theming--theming" target="_self">
     Go to theming page
   </ion-button>
 </div>
 
+<br />
+<br />
+<br />
 <p>
   If you experience any issues while using a component, please head over to the <a href="https://github.com/geovistory/design-system/issues">Github page</a> for more guidelines and
   help.

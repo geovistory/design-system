@@ -37,7 +37,7 @@ interface ItemBinding {
   label: string;
 }
 
-export interface itemSelectedEvent {
+export interface ItemSelectedEvent {
   /* The current total number of items being paged */
   uri: string;
 }
@@ -194,9 +194,12 @@ export class GeovAuthorityLookupExplorer {
     this.isPopoverOpen = false;
   }
 
-  /* Event emitted when the select button has clicked. */
-  @Event()
-  selected: EventEmitter<itemSelectedEvent>;
+  /**
+   * Event emitted when the select button has been clicked.
+   * The event does not bubble up through the DOM.
+   */
+  @Event({ bubbles: false })
+  selected: EventEmitter<ItemSelectedEvent>;
 
   handleSelected(item: ItemBinding) {
     //console.log(item.uri);

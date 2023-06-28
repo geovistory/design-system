@@ -1,5 +1,4 @@
 import React from 'react';
-import { JSX } from '../..';
 import { GeovAuthorityLookup } from '../../../.storybook/stencil-generated/component';
 import geovAuthorityLookupDocs from './geov-authority-lookup.docs.mdx';
 
@@ -27,54 +26,23 @@ export default {
   },
 };
 
-const Template = (args: JSX.GeovAuthorityLookup) => <GeovAuthorityLookup {...args}></GeovAuthorityLookup>;
-
-export const Basic = Template.bind({});
-const args: JSX.GeovAuthorityLookup = {
-  initSearch: 'Johannes Kepler',
-  initSearchType: 'Person',
-  apis: ['gnd', 'idref', 'wikidata'],
-  types: ['All', 'Person', 'Place', 'Group'],
-  nbOccurencesMax: 5,
-  displaySelectBtn: true,
-  displayOpenBtn: true,
-  displayCopyBtn: false,
-  nbColMax: 3,
-};
-
-Basic.args = args;
-
-export const OneColumn = Template.bind({});
-const argsOneCol: JSX.GeovAuthorityLookup = {
-  initSearch: 'Paris',
-  initSearchType: 'Place',
-  nbColMax: 1,
-};
-OneColumn.args = argsOneCol;
-
-export const ThreeResultats = Template.bind({});
-const argsThreeResultats: JSX.GeovAuthorityLookup = {
-  initSearch: 'Library of Congress',
-  initSearchType: 'Group',
-  nbOccurencesMax: 3,
-};
-ThreeResultats.args = argsThreeResultats;
-
-export const OneAPI = Template.bind({});
-const argsOneApi: JSX.GeovAuthorityLookup = {
-  initSearch: 'Johannes Kepler',
-  initSearchType: 'Person',
-  apis: ['idref'],
-  nbColMax: 1,
-};
-OneAPI.args = argsOneApi;
-
-export const AllButtons = Template.bind({});
-const argsAllButtons: JSX.GeovAuthorityLookup = {
-  initSearch: 'Johannes Kepler',
-  initSearchType: 'Person',
-  displayCopyBtn: true,
-  displayOpenBtn: true,
-  displaySelectBtn: true,
-};
-AllButtons.args = argsAllButtons;
+export const Basic = () => (
+  <GeovAuthorityLookup
+    apis={['gnd', 'idref', 'wikidata']}
+    types={['All', 'Person', 'Place', 'Group']}
+    nbOccurencesMax={5}
+    displaySelectBtn={true}
+    displayOpenBtn={true}
+    displayCopyBtn={false}
+    nbColMax={3}
+    onSelected={e => {
+      console.log(e.detail.uri);
+    }}
+  ></GeovAuthorityLookup>
+);
+export const NumberOfColumns = () => <GeovAuthorityLookup nbColMax={1}></GeovAuthorityLookup>;
+export const NumberOfSearchResults = () => <GeovAuthorityLookup nbOccurencesMax={3}></GeovAuthorityLookup>;
+export const CustomizeSearchedApis = () => <GeovAuthorityLookup apis={['idref']} nbColMax={1}></GeovAuthorityLookup>;
+export const CustomizeButtons = () => <GeovAuthorityLookup displayCopyBtn={true} displayOpenBtn={true} displaySelectBtn={true}></GeovAuthorityLookup>;
+export const InitializeSearch = () => <GeovAuthorityLookup initSearch={'Johannes Kepler'} initSearchType={'Person'}></GeovAuthorityLookup>;
+export const Empty = () => <GeovAuthorityLookup></GeovAuthorityLookup>;

@@ -6,7 +6,7 @@ import { sass } from '@stencil/sass';
 export const stencilBasicConfig: Config = {
   namespace: 'design-system-web',
   globalScript: 'src/global/global.ts',
-  globalStyle: 'src/global/global.css',
+  globalStyle: 'src/global/global.scss',
   plugins: [sass()],
   outputTargets: [
     {
