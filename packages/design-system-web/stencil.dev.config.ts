@@ -6,8 +6,8 @@ export const config: Config = {
   tsconfig: './tsconfig.dev.json',
   outputTargets: [
     {
-      type: 'www',
-      serviceWorker: null, // disable service workers
+      type: 'dist-custom-elements',
+      customElementsExportBehavior: 'auto-define-custom-elements',
     },
   ],
 };
