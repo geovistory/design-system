@@ -1,18 +1,18 @@
-import React from 'react';
-import { JSX } from '../..';
-import { GeovToc } from '../../../.storybook/stencil-generated/component';
+import { h } from '@stencil/core';
+import { stencilWrapper } from '../../helpers/stencilWrapper';
+import { defineCustomElement } from '../../../dist/components/geov-property-distri';
+defineCustomElement();
 
 export default {
   title: 'Design Components/Toc',
-  component: GeovToc,
 };
 
-const Template = () => (
+export const Toc = stencilWrapper(
   <div>
     <h1 id="welcome">
       Welcome <small>you!</small>
     </h1>
-    <GeovToc>
+    <geov-toc>
       <h2 id="1-title">1. Title</h2>
       <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio necessitatibus alias, obcaecati unde, molestias ipsam suscipit dolor, ipsum consequuntur ab in aut
@@ -72,10 +72,6 @@ const Template = () => (
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio necessitatibus alias, obcaecati unde, molestias ipsam suscipit dolor, ipsum consequuntur ab in aut
         architecto totam sit tempora! A sunt repellat officiis.
       </p>
-    </GeovToc>
-  </div>
+    </geov-toc>
+  </div>,
 );
-
-export const Toc = Template.bind({});
-const args1: JSX.GeovToc = {};
-Toc.args = args1;

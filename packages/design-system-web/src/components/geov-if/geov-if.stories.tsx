@@ -1,31 +1,29 @@
-import React from 'react';
-import { JSX } from '../..';
+import { h } from '@stencil/core';
+import { stencilWrapper } from '../../helpers/stencilWrapper';
+import { defineCustomElement } from '../../../dist/components/geov-if';
 import { DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
-import { GeovIf } from '../../../.storybook/stencil-generated/component';
+defineCustomElement();
 
 export default {
   title: 'Data Components/Helpers/If',
-  component: GeovIf,
 };
-const Template = (args: JSX.GeovIf) => (
+
+const query1 = `SELECT  ((1=1) as ?condition) WHERE {}`;
+export const IfTrue = stencilWrapper(
   <div>
     If you see a next line, if the condition of the sparqlQuery is met: <br />
-    <GeovIf {...args}>You see this line, because condition is met</GeovIf>
-  </div>
+    <geov-if sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} sparqlQuery={query1}>
+      You see this line, because condition is met
+    </geov-if>
+  </div>,
 );
 
-export const IfTrue = Template.bind({});
-const query1 = `SELECT  ((1=1) as ?condition) WHERE {}`;
-const args1: JSX.GeovIf = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  sparqlQuery: query1,
-};
-IfTrue.args = args1;
-
-export const IfFalse = Template.bind({});
 const query2 = `SELECT  ((0=1) as ?condition) WHERE {}`;
-const args2: JSX.GeovIf = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  sparqlQuery: query2,
-};
-IfFalse.args = args2;
+export const IfFalse = stencilWrapper(
+  <div>
+    If you see a next line, if the condition of the sparqlQuery is met: <br />
+    <geov-if sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} sparqlQuery={query2}>
+      You see this line, because condition is met
+    </geov-if>
+  </div>,
+);

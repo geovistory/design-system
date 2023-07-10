@@ -22,7 +22,6 @@
     ".storybook/lib"
   ],
   "exclude": [
-    "node_modules",
-    "**/*.stories.*"
+    "node_modules"
   ]
 }

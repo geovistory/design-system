@@ -50,7 +50,6 @@ export class GeovEntityDefinition {
   @State() data?: GeovEntityDefinitionData;
 
   constructor() {
-    console.log('def');
     setSSRId(this);
   }
 

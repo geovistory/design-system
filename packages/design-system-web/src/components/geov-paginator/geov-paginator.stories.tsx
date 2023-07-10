@@ -1,29 +1,27 @@
-import React from 'react';
-import { JSX } from '../..';
-import { GeovPaginator } from '../../../.storybook/stencil-generated/component';
+import { h } from '@stencil/core';
+import { stencilWrapper } from '../../helpers/stencilWrapper';
+import { defineCustomElement } from '../../../dist/components/geov-paginator';
+defineCustomElement();
 
 export default {
   title: 'Design Components/Paginator',
-  component: GeovPaginator,
 };
-const Template = (args: JSX.GeovPaginator) => (
-  <GeovPaginator
-    {...args}
+
+export const Paginator = stencilWrapper(
+  <geov-paginator
+    length={60}
     onPageChanged={e => {
       console.log(e.detail);
     }}
-  ></GeovPaginator>
+  ></geov-paginator>,
 );
 
-export const Paginator = Template.bind({});
-const args1: JSX.GeovPaginator = {
-  length: 60,
-};
-Paginator.args = args1;
-
-export const PaginatorColor = Template.bind({});
-const args2: JSX.GeovPaginator = {
-  length: 60,
-  color: 'tertiary',
-};
-PaginatorColor.args = args2;
+export const PaginatorColor = stencilWrapper(
+  <geov-paginator
+    length={60}
+    color="tertiary"
+    onPageChanged={e => {
+      console.log(e.detail);
+    }}
+  ></geov-paginator>,
+);

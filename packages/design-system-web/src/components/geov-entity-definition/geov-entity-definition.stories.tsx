@@ -1,25 +1,12 @@
-import React from 'react';
-import { JSX } from '../..';
-import { GeovEntityDefinition } from '../../../.storybook/stencil-generated/component';
+import { h } from '@stencil/core';
+import { stencilWrapper } from '../../helpers/stencilWrapper';
+import { defineCustomElement } from '../../../dist/components/geov-entity-definition';
 import { DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
-
+defineCustomElement();
 export default {
   title: 'Data Components/Entity/EntityDefinition',
-  component: GeovEntityDefinition,
 };
-const Template = (args: JSX.GeovEntityDefinition) => <GeovEntityDefinition {...args}></GeovEntityDefinition>;
-
-export const EntityDefinition = Template.bind({});
-const args: JSX.GeovEntityDefinition = {
-  entityId: 'i3158616',
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-};
-EntityDefinition.args = args;
-
-export const EntityDefinitionNotFound = Template.bind({});
-const args2: JSX.GeovEntityDefinition = {
-  entityId: 'xyz',
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  emptyPlaceholder: 'No definition found',
-};
-EntityDefinitionNotFound.args = args2;
+export const EntityDefinition = stencilWrapper(<geov-entity-definition entityId="i3158616" sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}></geov-entity-definition>);
+export const EntityDefinitionNotFound = stencilWrapper(
+  <geov-entity-definition entityId="xyz" sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} emptyPlaceholder="No definition found"></geov-entity-definition>,
+);
