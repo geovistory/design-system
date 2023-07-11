@@ -18,7 +18,7 @@ export const Welcome = stencilWrapper(
             v{version}
           </ion-text>
         </h1>
-        <p className="lead">Geovistory Design System is a collection of components displaying semantic research data created by Geovistory projects.</p>
+        <p class="lead">Geovistory Design System is a collection of components displaying semantic research data created by Geovistory projects.</p>
         <h2>Philosophy</h2>
         <p>
           Geovistory Design System is{' '}
@@ -59,10 +59,10 @@ export const Welcome = stencilWrapper(
         <ion-grid>
           <ion-row>
             {/* <IonCol><IonButton>How to use?</IonButton></IonCol> */}
-            <ion-col className="ion-text-center">
+            <ion-col class="ion-text-center">
               <ion-button href="/?path=/story/contributing-ci-and-cd-workflow--ci-and-cd-workflow">Contribute</ion-button>
             </ion-col>
-            <ion-col className="ion-text-center">
+            <ion-col class="ion-text-center">
               <ion-button href="https://github.com/geovistory/design-system">
                 <ion-icon name="logo-github"></ion-icon>&nbsp; Code on GitHub
               </ion-button>
