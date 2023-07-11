@@ -1,4 +1,7 @@
-import { IonApp, IonContent, IonGrid } from '../../.storybook/stencil-generated/component';
+import { h } from '@stencil/core';
+import '../dist/components/ion-app';
+import '../dist/components/ion-content';
+import '../dist/components/ion-grid';
 
 export default {
   title: 'Contributing/CI And CD Workflow',
@@ -14,11 +17,11 @@ export default {
 };
 
 export const CI_andCDWorkflow = () => (
-  <IonApp>
-    <IonContent class="ion-padding">
-      <IonGrid fixed>
+  <ion-app>
+    <ion-content class="ion-padding">
+      <ion-grid fixed>
         <h1>CI/CD Workflow</h1>
-        <p className="lead">
+        <p class="lead">
           CI/CD stands for continuous integration and continuous delivery (
           <a target="_blank" href="https://en.wikipedia.org/wiki/CI/CD">
             wikipedia
@@ -128,7 +131,7 @@ export const CI_andCDWorkflow = () => (
           <code>design-stag.geovistory.org</code> to <code>design.geovistory.org</code> underlies the general mechanism of promoting geovistory apps from staging to production.
           This can only be executed by the geovistory DevOps team.
         </p>
-      </IonGrid>
-    </IonContent>
-  </IonApp>
+      </ion-grid>
+    </ion-content>
+  </ion-app>
 );

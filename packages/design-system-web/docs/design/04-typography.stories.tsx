@@ -1,6 +1,8 @@
+import { h } from '@stencil/core';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-
-import { IonApp, IonContent, IonGrid } from '../../.storybook/stencil-generated/component';
+import '../dist/components/ion-app';
+import '../dist/components/ion-content';
+import '../dist/components/ion-grid';
 
 export default {
   title: 'Design/Typography',
@@ -23,11 +25,11 @@ p, h1, h2, h3, h4, h5, h6 {
 
 export const Typography = () => {
   return (
-    <IonApp>
-      <IonContent class="ion-padding">
-        <IonGrid fixed>
+    <ion-app>
+      <ion-content class="ion-padding">
+        <ion-grid fixed>
           <h1>Typography</h1>
-          <p className="lead">This page is about the typography of this documentation. This paragraph is a lead text. It tells the reader, what a page is about.</p>
+          <p class="lead">This page is about the typography of this documentation. This paragraph is a lead text. It tells the reader, what a page is about.</p>
           <h2>Widths</h2>
           <h3>Texts</h3>
           <p>
@@ -54,8 +56,8 @@ export const Typography = () => {
           <h5>Header 5 (h5)</h5>
 
           <h6>Header 6 (h6)</h6>
-        </IonGrid>
-      </IonContent>
-    </IonApp>
+        </ion-grid>
+      </ion-content>
+    </ion-app>
   );
 };

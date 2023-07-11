@@ -30,7 +30,7 @@ export const componentfiles = `src
 
 export const story = `// geov-hello-world.stories.tsx
 
-import React from 'react';
+import { h } from '@stencil/core';
 import { JSX } from '../..';
 import { GeovHelloWorld } from '../../../.storybook/stencil-generated/component';
 

@@ -1,5 +1,8 @@
+import { h } from '@stencil/core';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { IonApp, IonContent, IonGrid } from '../../.storybook/stencil-generated/component';
+import '../dist/components/ion-app';
+import '../dist/components/ion-content';
+import '../dist/components/ion-grid';
 
 export default {
   title: 'Design/Theming',
@@ -33,11 +36,11 @@ export const Theming = () => {
   `;
 
   return (
-    <IonApp>
-      <IonContent class="ion-padding">
-        <IonGrid fixed>
+    <ion-app>
+      <ion-content class="ion-padding">
+        <ion-grid fixed>
           <h1>Theming</h1>
-          <p className="lead">One advantage of Ionic components is that they are stylable. A custom theme can be defined with CSS variables (without extra compilation).</p>
+          <p class="lead">One advantage of Ionic components is that they are stylable. A custom theme can be defined with CSS variables (without extra compilation).</p>
           <p>
             Ionic components have a default style for colors, border radius, fonts. In this documentation we set CSS variables to implement the Geovistory theme. This CSS is not
             shipped with the npm packages (see below), since it has to be set by the consuming application of the design system.
@@ -73,8 +76,8 @@ export const Theming = () => {
             parameters... as you want, and directly see the result.
           </p>
           <p>Once you are comfortable with every tweak, you can copy-paste the CSS containing the CSS variables and put them in your application.</p>
-        </IonGrid>
-      </IonContent>
-    </IonApp>
+        </ion-grid>
+      </ion-content>
+    </ion-app>
   );
 };

@@ -10,7 +10,7 @@ module.exports = {
     name: "@storybook/web-components-vite",
     options: {}
   },
- // "staticDirs": ["../dist/design-system-web"],
+  "staticDirs": ["../dist/design-system-web"],
   docs: {
     autodocs: 'tag'
   }

@@ -1,9 +1,18 @@
 import { h } from '@stencil/core';
-import { stencilWrapper } from '../src/helpers/stencilWrapper';
-import { defineCustomElement } from '../dist/components/ion-app';
-defineCustomElement();
-
+// import '../dist/components/ion-app';
+// import '../dist/components/ion-content';
+// import '../dist/components/ion-grid';
+// import '../dist/components/ion-text';
+// import '../dist/components/ion-list';
+// import '../dist/components/ion-item';
+// import '../dist/components/ion-icon';
+// import '../dist/components/ion-row';
+// import '../dist/components/ion-col';
+// import '../dist/components/ion-button';
+import { defineCustomElements } from '../loader';
 import { version } from '../package.json';
+import { stencilWrapper } from '../src/helpers/stencilWrapper';
+defineCustomElements();
 export default {
   title: 'Welcome',
 };
@@ -58,7 +67,7 @@ export const Welcome = stencilWrapper(
 
         <ion-grid>
           <ion-row>
-            {/* <IonCol><IonButton>How to use?</IonButton></IonCol> */}
+            {/* <ion-col><ion-button>How to use?</ion-button></ion-col> */}
             <ion-col class="ion-text-center">
               <ion-button href="/?path=/story/contributing-ci-and-cd-workflow--ci-and-cd-workflow">Contribute</ion-button>
             </ion-col>

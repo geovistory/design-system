@@ -1,4 +1,10 @@
-import { IonApp, IonContent, IonGrid, IonItem, IonList, IonIcon } from '../../.storybook/stencil-generated/component';
+import { h } from '@stencil/core';
+import '../dist/components/ion-app';
+import '../dist/components/ion-content';
+import '../dist/components/ion-grid';
+import '../dist/components/ion-icon';
+import '../dist/components/ion-item';
+import '../dist/components/ion-list';
 
 export default {
   title: 'Design/Overview',
@@ -14,11 +20,11 @@ export default {
 };
 
 export const Overview = () => (
-  <IonApp>
-    <IonContent class="ion-padding">
-      <IonGrid fixed>
+  <ion-app>
+    <ion-content class="ion-padding">
+      <ion-grid fixed>
         <h1>Design Overview</h1>
-        <p className="lead">
+        <p class="lead">
           To build beautiful and performant components, we use the basic <a href="https://ionicframework.com/docs/components">components of the Ionic framework</a> (like buttons,
           cards, checkboxes, lists etc.). These are great basic building blocks to create more complex geovistory components.
         </p>
@@ -37,27 +43,27 @@ export const Overview = () => (
         <h2>How to use?</h2>
         <p>Learn how to use and apply the geovistory design system:</p>
         <p>
-          <IonList>
-            <IonItem href="/?path=/story/design-layout--layout" lines="full">
+          <ion-list>
+            <ion-item href="/?path=/story/design-layout--layout" lines="full">
               Layout (header, footer, responsive grid, ...)
-            </IonItem>
-            <IonItem href="/?path=/story/design-theming--theming" lines="full">
+            </ion-item>
+            <ion-item href="/?path=/story/design-theming--theming" lines="full">
               Theming (theory, CSS custom variables, ...)
-            </IonItem>
-            <IonItem href="/?path=/story/design-theme-generator--theme-generator" lines="full">
+            </ion-item>
+            <ion-item href="/?path=/story/design-theme-generator--theme-generator" lines="full">
               Theme generator (play around and change colors, fonts, spacings, ...)
-            </IonItem>
-            <IonItem href="https://ionicframework.com/docs/components" lines="full">
+            </ion-item>
+            <ion-item href="https://ionicframework.com/docs/components" lines="full">
               Ionic Components (official documentation)
-              <IonIcon name="open-outline" slot="end"></IonIcon>
-            </IonItem>
-            <IonItem href="https://ionic.io/ionicons" lines="full">
+              <ion-icon name="open-outline" slot="end"></ion-icon>
+            </ion-item>
+            <ion-item href="https://ionic.io/ion-icons" lines="full">
               Icons (official documentation)
-              <IonIcon name="open-outline" slot="end"></IonIcon>
-            </IonItem>
-          </IonList>
+              <ion-icon name="open-outline" slot="end"></ion-icon>
+            </ion-item>
+          </ion-list>
         </p>
-      </IonGrid>
-    </IonContent>
-  </IonApp>
+      </ion-grid>
+    </ion-content>
+  </ion-app>
 );

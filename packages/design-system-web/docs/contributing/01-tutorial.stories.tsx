@@ -1,5 +1,10 @@
-import React from 'react';
-import { IonApp, IonContent, IonGrid, IonItem, IonList } from '../../.storybook/stencil-generated/component';
+import { h } from '@stencil/core';
+import '../dist/components/ion-app ';
+import '../dist/components/ion-content ';
+import '../dist/components/ion-grid ';
+import '../dist/components/ion-item ';
+import '../dist/components/ion-list';
+
 export default {
   title: 'Contributing/Tutorial',
   parameters: {
@@ -14,11 +19,11 @@ export default {
 };
 
 export const Introduction = () => (
-  <IonApp>
-    <IonContent class="ion-padding">
-      <IonGrid fixed>
+  <ion-app>
+    <ion-content class="ion-padding">
+      <ion-grid fixed>
         <h1>Tutorial: Create a Geovistory Component </h1>
-        <p className="lead">This page helps you to get started as Geovistory component developer.</p>
+        <p class="lead">This page helps you to get started as Geovistory component developer.</p>
 
         <h4>Goal of the tutorial</h4>
         <p>
@@ -32,19 +37,19 @@ export const Introduction = () => (
 
         <h4>Parts of the tutorial</h4>
         <p>
-          <IonList>
-            <IonItem href="/?path=/story/contributing-tutorial-setup--setup" lines="full">
+          <ion-list>
+            <ion-item href="/?path=/story/contributing-tutorial-setup--setup" lines="full">
               Setup – setup your developer environment.
-            </IonItem>
-            <IonItem href="/?path=/story/contributing-tutorial-create-component--create-component" lines="full">
+            </ion-item>
+            <ion-item href="/?path=/story/contributing-tutorial-create-component--create-component" lines="full">
               Create Component – create a basic component.
-            </IonItem>
-            <IonItem href="/?path=/story/contributing-tutorial-data-fetching--data-fetching" lines="full">
+            </ion-item>
+            <ion-item href="/?path=/story/contributing-tutorial-data-fetching--data-fetching" lines="full">
               Data Fetching – fetch and display data from SPARQL entpoint.
-            </IonItem>
-          </IonList>
+            </ion-item>
+          </ion-list>
         </p>
-      </IonGrid>
-    </IonContent>
-  </IonApp>
+      </ion-grid>
+    </ion-content>
+  </ion-app>
 );

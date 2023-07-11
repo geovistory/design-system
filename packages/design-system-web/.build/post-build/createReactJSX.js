@@ -19,7 +19,7 @@ export interface StyleReactProps {
   style?: { [key: string]: any };
 }
 export type StencilReactExternalProps<PropType, ElementType> = PropType &
-  Omit<React.HTMLAttributes<ElementType>, 'style', 'className'> &
+  Omit<React.HTMLAttributes<ElementType>, 'style', 'class'> &
   StyleReactProps;
 
 declare global`,

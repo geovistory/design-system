@@ -1,5 +1,9 @@
-import React from 'react';
-import { GeovCode, IonApp, IonButton, IonContent, IonGrid } from '../../../.storybook/stencil-generated/component';
+import { h } from '@stencil/core';
+import '../dist/components/geov-code';
+import '../dist/components/ion-app';
+import '../dist/components/ion-button';
+import '../dist/components/ion-content';
+import '../dist/components/ion-grid';
 import { files } from './tutorial.snippets';
 export default {
   title: 'Contributing/Tutorial/Setup',
@@ -15,11 +19,11 @@ export default {
 };
 
 export const Setup = () => (
-  <IonApp>
-    <IonContent class="ion-padding">
-      <IonGrid fixed>
+  <ion-app>
+    <ion-content class="ion-padding">
+      <ion-grid fixed>
         <h1>Setup</h1>
-        <p className="lead">Setup your developer environment: install requirements, get and install code and start the storybook.</p>
+        <p class="lead">Setup your developer environment: install requirements, get and install code and start the storybook.</p>
         <p>
           At the end of the setup you should have:
           <ul>
@@ -33,11 +37,11 @@ export const Setup = () => (
         <h4>Install node.js</h4>
         <p>
           Open a terminal and run
-          <GeovCode language="bash" code="node -v"></GeovCode>
+          <geov-code language="bash" code="node -v"></geov-code>
         </p>
         <p>
           If the output is similar to this, you're good to go:
-          <GeovCode language="bash" code="v16.17.0"></GeovCode>
+          <geov-code language="bash" code="v16.17.0"></geov-code>
         </p>
         <p>
           Else install{' '}
@@ -57,7 +61,7 @@ export const Setup = () => (
             repository
           </a>{' '}
           from GitHub:
-          <GeovCode language="bash" code="git clone https://github.com/geovistory/design-system.git"></GeovCode>
+          <geov-code language="bash" code="git clone https://github.com/geovistory/design-system.git"></geov-code>
         </p>
         <h4>Open the folder in your IDE </h4>
         <p>
@@ -66,35 +70,35 @@ export const Setup = () => (
             Visual Studio Code
           </a>{' '}
           as your code editor. But use the tool you prefer. To open the folder in VS Code run:
-          <GeovCode language="bash" code="code design-sytem"></GeovCode>
+          <geov-code language="bash" code="code design-sytem"></geov-code>
         </p>
         <h4>Install the node modules</h4>
         <p>
           From the root folder of the repo run
-          <GeovCode language="bash" code="npm install"></GeovCode>
+          <geov-code language="bash" code="npm install"></geov-code>
           This will install the dependencies of all packages located in <code>packages/</code>
         </p>
         <h4>Open the correct folder</h4>
         <p>
           The packages folder contains different packages.
-          <GeovCode language="bash" code={files}></GeovCode>
+          <geov-code language="bash" code={files}></geov-code>
           The components are developed in <code>design-system-web</code>. The other packages are derivates. Change into the correct directory to start the development
-          <GeovCode language="bash" code="cd packages/design-system-web"></GeovCode>
+          <geov-code language="bash" code="cd packages/design-system-web"></geov-code>
         </p>
         <h4>Start storybook</h4>
         <p>
           To see the geovistory components in a browser, start the storybook locally.
-          <GeovCode language="bash" code="npm run dev"></GeovCode>
+          <geov-code language="bash" code="npm run dev"></geov-code>
           If you have trouble starting the server, stopping and restarting might help.
         </p>
         <h4>Verification</h4>
         <p>If you see the storybook at 'localhost:6006' in your browser, you're done with the setup! Congrats.</p>
         <p>
-          <IonButton href="/?path=/story/contributing-tutorial-create-component--create-component" lines="full">
+          <ion-button href="/?path=/story/contributing-tutorial-create-component--create-component" lines="full">
             Next: Create a Hello World Component
-          </IonButton>
+          </ion-button>
         </p>
-      </IonGrid>
-    </IonContent>
-  </IonApp>
+      </ion-grid>
+    </ion-content>
+  </ion-app>
 );

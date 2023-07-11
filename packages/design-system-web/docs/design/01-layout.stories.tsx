@@ -1,4 +1,7 @@
-import { IonApp, IonContent, IonGrid } from '../../.storybook/stencil-generated/component';
+import { h } from '@stencil/core';
+import '../dist/components/ion-app';
+import '../dist/components/ion-content';
+import '../dist/components/ion-grid';
 
 export default {
   title: 'Design/Layout',
@@ -14,9 +17,9 @@ export default {
 };
 
 export const Layout = () => (
-  <IonApp>
-    <IonContent class="ion-padding">
-      <IonGrid fixed>
+  <ion-app>
+    <ion-content class="ion-padding">
+      <ion-grid fixed>
         <h1>Layouts</h1>
 
         <p>
@@ -32,7 +35,7 @@ export const Layout = () => (
           <a href="https://ionicframework.com/docs/api/footer">Footer</a>, <a href="https://ionicframework.com/docs/api/grid">Grid</a>,{' '}
           <a href="https://ionicframework.com/docs/api/col">Columns</a>, <a href="https://ionicframework.com/docs/api/row">Rows</a>.
         </p>
-      </IonGrid>
-    </IonContent>
-  </IonApp>
+      </ion-grid>
+    </ion-content>
+  </ion-app>
 );

@@ -1,5 +1,8 @@
-import React from 'react';
-import { GeovCode, IonApp, IonContent, IonGrid } from '../../../.storybook/stencil-generated/component';
+import { h } from '@stencil/core';
+import '../dist/components/geov-code';
+import '../dist/components/ion-app';
+import '../dist/components/ion-content';
+import '../dist/components/ion-grid';
 import {
   attribute,
   chartColors,
@@ -32,9 +35,9 @@ export default {
 };
 
 export const CreateDataVisualizationComponent = () => (
-  <IonApp>
-    <IonContent class="ion-padding">
-      <IonGrid fixed>
+  <ion-app>
+    <ion-content class="ion-padding">
+      <ion-grid fixed>
         <h1>Create your Data Visualization Web Component</h1>
 
         <h3>Before creating a web component</h3>
@@ -132,7 +135,7 @@ export const CreateDataVisualizationComponent = () => (
         <h5>Imports</h5>
 
         <p>
-          <GeovCode language="tsx" code={imports}></GeovCode>
+          <geov-code language="tsx" code={imports}></geov-code>
         </p>
 
         <p>
@@ -156,7 +159,7 @@ export const CreateDataVisualizationComponent = () => (
         <h5>Chart colors</h5>
 
         <p>
-          <GeovCode language="tsx" code={chartColors}></GeovCode>
+          <geov-code language="tsx" code={chartColors}></geov-code>
         </p>
 
         <p>
@@ -168,31 +171,31 @@ export const CreateDataVisualizationComponent = () => (
         <h5>SPARQL query</h5>
 
         <p>
-          <GeovCode language="tsx" code={sparqlQuery}></GeovCode>
+          <geov-code language="tsx" code={sparqlQuery}></geov-code>
         </p>
 
         <p>
           This is the query to have the class distribution. As we mentioned before, we have put all the logic in the query in order to be as performant as possible. Note the end
-          columns names : <code>classnames</code> and <code>classcounts</code>
+          columns names : <code>classs</code> and <code>classcounts</code>
         </p>
 
         <h5>Typing the response</h5>
 
         <p>
-          <GeovCode language="tsx" code={responseType}></GeovCode>
+          <geov-code language="tsx" code={responseType}></geov-code>
         </p>
 
         <p>
           The goal here is to tell the code what the response looks like.
           <br />
           Basically, it should list all columns that your query fetch, with the same spelling, all being typed as <code>SparqlBinding</code>.<br />
-          In our case it is <code>classnames</code> and <code>classcounts</code>
+          In our case it is <code>classs</code> and <code>classcounts</code>
         </p>
 
         <h5>Component core</h5>
 
         <p>
-          <GeovCode language="tsx" code={componentCore}></GeovCode>
+          <geov-code language="tsx" code={componentCore}></geov-code>
         </p>
 
         <p>This is were the component is really defined. It is automatically prefilled with the information you provided on generation, so nothing to change here.</p>
@@ -200,7 +203,7 @@ export const CreateDataVisualizationComponent = () => (
         <h5>Component parameters</h5>
 
         <p>
-          <GeovCode language="tsx" code={parameters}></GeovCode>
+          <geov-code language="tsx" code={parameters}></geov-code>
         </p>
 
         <p>
@@ -224,7 +227,7 @@ export const CreateDataVisualizationComponent = () => (
         <h5>Private parameters</h5>
 
         <p>
-          <GeovCode language="tsx" code={attribute}></GeovCode>
+          <geov-code language="tsx" code={attribute}></geov-code>
         </p>
 
         <p>
@@ -236,7 +239,7 @@ export const CreateDataVisualizationComponent = () => (
         <h5>Component life cycle</h5>
 
         <p>
-          <GeovCode language="tsx" code={lifecycle}></GeovCode>
+          <geov-code language="tsx" code={lifecycle}></geov-code>
         </p>
 
         <p>
@@ -248,7 +251,7 @@ export const CreateDataVisualizationComponent = () => (
         <h5>Query results</h5>
 
         <p>
-          <GeovCode language="tsx" code={sparqlExecution}></GeovCode>
+          <geov-code language="tsx" code={sparqlExecution}></geov-code>
         </p>
 
         <p>
@@ -279,7 +282,7 @@ export const CreateDataVisualizationComponent = () => (
         <h5>Parse the response</h5>
 
         <p>
-          <GeovCode language="tsx" code={parseResponse}></GeovCode>
+          <geov-code language="tsx" code={parseResponse}></geov-code>
         </p>
 
         <p>
@@ -291,7 +294,7 @@ export const CreateDataVisualizationComponent = () => (
         <h5>Prepare colors</h5>
 
         <p>
-          <GeovCode language="tsx" code={prepareColors}></GeovCode>
+          <geov-code language="tsx" code={prepareColors}></geov-code>
         </p>
 
         <p>Here we are setting the color of each element we are going to display. Depending on what you type of chart you need, you could also need to tweak this part a bit.</p>
@@ -299,7 +302,7 @@ export const CreateDataVisualizationComponent = () => (
         <h5>Prepare Plotly data</h5>
 
         <p>
-          <GeovCode language="tsx" code={chartParams}></GeovCode>
+          <geov-code language="tsx" code={chartParams}></geov-code>
         </p>
 
         <p>
@@ -310,7 +313,7 @@ export const CreateDataVisualizationComponent = () => (
         <h5>Chart Layout</h5>
 
         <p>
-          <GeovCode language="tsx" code={chartLayout}></GeovCode>
+          <geov-code language="tsx" code={chartLayout}></geov-code>
         </p>
 
         <p>
@@ -320,7 +323,7 @@ export const CreateDataVisualizationComponent = () => (
         <h5>Draw the chart(s)</h5>
 
         <p>
-          <GeovCode language="tsx" code={drawChart}></GeovCode>
+          <geov-code language="tsx" code={drawChart}></geov-code>
         </p>
 
         <p>
@@ -331,7 +334,7 @@ export const CreateDataVisualizationComponent = () => (
         <h5>HTML template</h5>
 
         <p>
-          <GeovCode language="html" code={htmlTemplate}></GeovCode>
+          <geov-code language="html" code={htmlTemplate}></geov-code>
         </p>
 
         <p>
@@ -384,7 +387,7 @@ export const CreateDataVisualizationComponent = () => (
           <br />
           You can now contact the development team so that they can publish your PR on dev, see how it behaves before going to production!
         </p>
-      </IonGrid>
-    </IonContent>
-  </IonApp>
+      </ion-grid>
+    </ion-content>
+  </ion-app>
 );

@@ -27,7 +27,7 @@ const chartColors = [
 const qrClassesCount = () => `
   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-  SELECT (group_concat(?classname;separator=", ") as ?classnames) (Max(?classcount) as ?classcounts)
+  SELECT (group_concat(?class;separator=", ") as ?classs) (Max(?classcount) as ?classcounts)
   WHERE {
       {
           SELECT ?classuri (count(?entity) as ?classcount)
@@ -36,14 +36,14 @@ const qrClassesCount = () => `
           }
           GROUP BY ?classuri
       }
-      ?classuri rdfs:label ?classname
+      ?classuri rdfs:label ?class
   }
   GROUP BY ?classuri
   ORDER by DESC(?classcounts)
 `;
 
 type SparqlResponse = {
-  classnames: SparqlBinding;
+  classs: SparqlBinding;
   classcounts: SparqlBinding;
 };
 
@@ -84,7 +84,7 @@ export class GeovClassDistri {
       sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrClassesCount()).then(res => {
         // Parse the response
         const response = res?.results?.bindings;
-        const labels = response.map(elt => elt.classnames.value);
+        const labels = response.map(elt => elt.classs.value);
         const values = response.map(elt => parseInt(elt.classcounts.value));
 
         // Prepare colors

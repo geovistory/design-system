@@ -1,5 +1,12 @@
+import { h } from '@stencil/core';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { IonApp, IonButton, IonCol, IonContent, IonGrid, IonIcon, IonRow } from '../../.storybook/stencil-generated/component';
+import '../dist/components/ion-app';
+import '../dist/components/ion-button';
+import '../dist/components/ion-col';
+import '../dist/components/ion-content';
+import '../dist/components/ion-grid';
+import '../dist/components/ion-icon';
+import '../dist/components/ion-row';
 
 export default {
   title: 'Design/Theme Generator',
@@ -142,13 +149,13 @@ export const ThemeGenerator = () => {
   }
 
   return (
-    <IonApp>
+    <ion-app>
       <style>{css}</style>
 
-      <IonContent class="ion-padding">
-        <IonGrid fixed>
+      <ion-content class="ion-padding">
+        <ion-grid fixed>
           <h1>Theme Generator</h1>
-          <p className="lead">
+          <p class="lead">
             This theme generator let you play with the <a href="https://ionicframework.com/docs/theming/css-variables#global-variables-1">global CSS variables</a>, see the result,
             and copy the related CSS to put directly in your app.
           </p>
@@ -165,94 +172,94 @@ export const ThemeGenerator = () => {
           <h4>
             Colors &nbsp;&nbsp;
             <CopyToClipboard text={eval(embedCSS(getColorCSS()))} onCopy={() => alert('Colors variables in clibboard!')}>
-              <IonIcon name="copy-outline"></IonIcon>
+              <ion-icon name="copy-outline"></ion-icon>
             </CopyToClipboard>
           </h4>
           <table style={{ borderCollapse: 'separate', borderSpacing: '5px' }}>
             <tr style={{ height: '50px', width: '150px' }}>
-              <td className="box" style={{ background: 'var(--ion-color-primary)', color: 'var(--ion-color-primary-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-primary)', color: 'var(--ion-color-primary-contrast)', textAlign: 'center' }}>
                 Primary
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-secondary)', color: 'var(--ion-color-secondary-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-secondary)', color: 'var(--ion-color-secondary-contrast)', textAlign: 'center' }}>
                 Secondary
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-tertiary)', color: 'var(--ion-color-tertiary-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-tertiary)', color: 'var(--ion-color-tertiary-contrast)', textAlign: 'center' }}>
                 Tertiary
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-success)', color: 'var(--ion-color-success-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-success)', color: 'var(--ion-color-success-contrast)', textAlign: 'center' }}>
                 Success
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-warning)', color: 'var(--ion-color-warning-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-warning)', color: 'var(--ion-color-warning-contrast)', textAlign: 'center' }}>
                 Warning
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-danger)', color: 'var(--ion-color-danger-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-danger)', color: 'var(--ion-color-danger-contrast)', textAlign: 'center' }}>
                 Danger
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-dark)', color: 'var(--ion-color-dark-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-dark)', color: 'var(--ion-color-dark-contrast)', textAlign: 'center' }}>
                 Dark
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-medium)', color: 'var(--ion-color-medium-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-medium)', color: 'var(--ion-color-medium-contrast)', textAlign: 'center' }}>
                 Medium
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-light)', color: 'var(--ion-color-light-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-light)', color: 'var(--ion-color-light-contrast)', textAlign: 'center' }}>
                 Light
               </td>
             </tr>
             <tr style={{ height: '50px', width: '150px' }}>
-              <td className="box" style={{ background: 'var(--ion-color-primary-shade)', color: 'var(--ion-color-primary-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-primary-shade)', color: 'var(--ion-color-primary-contrast)', textAlign: 'center' }}>
                 Primary shade
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-secondary-shade)', color: 'var(--ion-color-secondary-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-secondary-shade)', color: 'var(--ion-color-secondary-contrast)', textAlign: 'center' }}>
                 Secondary shade
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-tertiary-shade)', color: 'var(--ion-color-tertiary-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-tertiary-shade)', color: 'var(--ion-color-tertiary-contrast)', textAlign: 'center' }}>
                 Tertiary shade
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-success-shade)', color: 'var(--ion-color-success-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-success-shade)', color: 'var(--ion-color-success-contrast)', textAlign: 'center' }}>
                 Success shade
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-warning-shade)', color: 'var(--ion-color-warning-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-warning-shade)', color: 'var(--ion-color-warning-contrast)', textAlign: 'center' }}>
                 Warning shade
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-danger-shade)', color: 'var(--ion-color-danger-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-danger-shade)', color: 'var(--ion-color-danger-contrast)', textAlign: 'center' }}>
                 Danger shade
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-dark-shade)', color: 'var(--ion-color-dark-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-dark-shade)', color: 'var(--ion-color-dark-contrast)', textAlign: 'center' }}>
                 Dark shade
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-medium-shade)', color: 'var(--ion-color-medium-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-medium-shade)', color: 'var(--ion-color-medium-contrast)', textAlign: 'center' }}>
                 Medium shade
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-light-shade)', color: 'var(--ion-color-light-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-light-shade)', color: 'var(--ion-color-light-contrast)', textAlign: 'center' }}>
                 Light shade
               </td>
             </tr>
             <tr style={{ height: '50px', width: '150px' }}>
-              <td className="box" style={{ background: 'var(--ion-color-primary-tint)', color: 'var(--ion-color-primary-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-primary-tint)', color: 'var(--ion-color-primary-contrast)', textAlign: 'center' }}>
                 Primary tint
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-secondary-tint)', color: 'var(--ion-color-secondary-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-secondary-tint)', color: 'var(--ion-color-secondary-contrast)', textAlign: 'center' }}>
                 Secondary tint
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-tertiary-tint)', color: 'var(--ion-color-tertiary-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-tertiary-tint)', color: 'var(--ion-color-tertiary-contrast)', textAlign: 'center' }}>
                 Tertiary tint
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-success-tint)', color: 'var(--ion-color-success-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-success-tint)', color: 'var(--ion-color-success-contrast)', textAlign: 'center' }}>
                 Success tint
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-warning-tint)', color: 'var(--ion-color-warning-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-warning-tint)', color: 'var(--ion-color-warning-contrast)', textAlign: 'center' }}>
                 Warning tint
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-danger-tint)', color: 'var(--ion-color-danger-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-danger-tint)', color: 'var(--ion-color-danger-contrast)', textAlign: 'center' }}>
                 Danger tint
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-dark-tint)', color: 'var(--ion-color-dark-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-dark-tint)', color: 'var(--ion-color-dark-contrast)', textAlign: 'center' }}>
                 Dark tint
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-medium-tint)', color: 'var(--ion-color-medium-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-medium-tint)', color: 'var(--ion-color-medium-contrast)', textAlign: 'center' }}>
                 Medium tint
               </td>
-              <td className="box" style={{ background: 'var(--ion-color-light-tint)', color: 'var(--ion-color-light-contrast)', textAlign: 'center' }}>
+              <td class="box" style={{ background: 'var(--ion-color-light-tint)', color: 'var(--ion-color-light-contrast)', textAlign: 'center' }}>
                 Light tint
               </td>
             </tr>
@@ -261,7 +268,7 @@ export const ThemeGenerator = () => {
           <h4>
             Application Variables&nbsp;&nbsp;
             <CopyToClipboard text={eval(embedCSS(getApplicationVariablesCSS()))} onCopy={() => alert('Application variables in clibboard!')}>
-              <IonIcon name="copy-outline"></IonIcon>
+              <ion-icon name="copy-outline"></ion-icon>
             </CopyToClipboard>
           </h4>
           <p>
@@ -275,53 +282,53 @@ export const ThemeGenerator = () => {
           <h4>
             Grid variables&nbsp;&nbsp;
             <CopyToClipboard text={eval(embedCSS(getGridVariablesCSS()))} onCopy={() => alert('Grid variables in clibboard!')}>
-              <IonIcon name="copy-outline"></IonIcon>
+              <ion-icon name="copy-outline"></ion-icon>
             </CopyToClipboard>
           </h4>
-          <IonGrid style={{ border: '1px solid black' }}>
-            <IonRow style={{ border: '1px dashed red' }}>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-            </IonRow>
+          <ion-grid style={{ border: '1px solid black' }}>
+            <ion-row style={{ border: '1px dashed red' }}>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+            </ion-row>
 
-            <IonRow style={{ border: '1px dashed red' }}>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-              <IonCol style={{ border: '1px dotted green' }}>Column in a row</IonCol>
-            </IonRow>
-          </IonGrid>
+            <ion-row style={{ border: '1px dashed red' }}>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+              <ion-col style={{ border: '1px dotted green' }}>Column in a row</ion-col>
+            </ion-row>
+          </ion-grid>
 
           <br />
 
-          <IonRow>
-            <IonCol style={{ textAlign: 'center' }}>
+          <ion-row>
+            <ion-col style={{ textAlign: 'center' }}>
               <CopyToClipboard text={eval(embedCSS(getColorCSS() + getApplicationVariablesCSS() + getGridVariablesCSS()))} onCopy={() => alert('Theme variables in clibboard!')}>
-                <IonButton color="primary">Put the theme in the clipboard</IonButton>
+                <ion-button color="primary">Put the theme in the clipboard</ion-button>
               </CopyToClipboard>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-      </IonContent>
-    </IonApp>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+    </ion-app>
   );
 };

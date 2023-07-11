@@ -240,7 +240,6 @@ export class GeovExplorer {
                   this.searchString = e.detail.value;
                 }}
               ></ion-searchbar>
-
               <geov-class-select-popup
                 class="ion-hide-lg-up"
                 onSelectionChanged={e => {
@@ -254,7 +253,6 @@ export class GeovExplorer {
               <ion-note class="entity-count-sm entity-count-label">
                 {this.fullCount?.loading ? <ion-skeleton-text animated={true} style={{ width: '40px' }}></ion-skeleton-text> : <span>{this.fullCount?.count} Entities</span>}{' '}
               </ion-note>
-
               {/* <ion-item>
                   <ion-label position="stacked">Filtered by class:</ion-label>
                   <ion-select value="person">

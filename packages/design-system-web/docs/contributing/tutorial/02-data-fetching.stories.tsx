@@ -1,8 +1,14 @@
-import React from 'react';
+import { h } from '@stencil/core';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { GeovCode, GeovToc, IonApp, IonButton, IonContent, IonGrid, IonIcon } from '../../../.storybook/stencil-generated/component';
-
+import '../dist/components/geov-code';
+import '../dist/components/geov-toc';
+import '../dist/components/ion-app';
+import '../dist/components/ion-button';
+import '../dist/components/ion-content';
+import '../dist/components/ion-grid';
+import '../dist/components/ion-icon';
 import { c0, c1, c5, c6, c7, c8, q1, r1 } from './tutorial.snippets';
+
 export default {
   title: 'Contributing/Tutorial/Data Fetching',
   parameters: {
@@ -17,18 +23,18 @@ export default {
 };
 
 export const DataFetching = () => (
-  <IonApp>
-    <IonContent class="ion-padding">
-      <IonGrid fixed>
+  <ion-app>
+    <ion-content class="ion-padding">
+      <ion-grid fixed>
         <h1>Data Fetching</h1>
-        <p className="lead">
+        <p class="lead">
           In this step of the <a href="/?path=/story/contributing-tutorial--introduction">tutorial</a> we extend the hello world component: Instead of 'Hello World' it will display
           the class label of a given Geovistory entity.
         </p>
         <p>
           Prerequisite: Successful <a href="/?path=/story/contributing-tutorial-create-component--create-component">Hello World</a>.
         </p>
-        <GeovToc>
+        <geov-toc>
           <h2 id="query">Query the data</h2>
           <p>
             Geovistory exposed data as RDF on SPARQL endpoints. SPARQL is the RDF query language. This tutorial is not about SPARQL. One way to learn it is{' '}
@@ -41,11 +47,11 @@ export const DataFetching = () => (
             </a>{' '}
             , paste the following query and run it (button top right).
             <CopyToClipboard text={{ q1 }} onCopy={() => alert('copied!')}>
-              <IonIcon name="copy-outline"></IonIcon>
+              <ion-icon name="copy-outline"></ion-icon>
             </CopyToClipboard>
           </p>
           <p>
-            <GeovCode language="sparql" code={q1}></GeovCode>
+            <geov-code language="sparql" code={q1}></geov-code>
           </p>
           <p>
             The query starts with the entity <code>geov:i315803</code> (=http://geovistory.org/resource/i315803) and follows the property path to the class (<code>rdf:type</code>)
@@ -54,7 +60,7 @@ export const DataFetching = () => (
           <h3 id="query-result">Query Result</h3>
           <p>If you switch your result from table to response view, you should get something like this:</p>
           <p>
-            <GeovCode language="json" code={r1}></GeovCode>
+            <geov-code language="json" code={r1}></geov-code>
           </p>
           <h2 id="component">Component</h2>
           <p>All we need to do now is to let our component execute the above query and print the resulting classLabel in its view. </p>
@@ -86,7 +92,7 @@ export const DataFetching = () => (
             Lets add <code>componentWillLoad()</code> block to geov-hello-world.tsx:
           </p>
           <p>
-            <GeovCode language="typescript" code={c0}></GeovCode>
+            <geov-code language="typescript" code={c0}></geov-code>
           </p>
           <p>
             Above:
@@ -115,7 +121,7 @@ export const DataFetching = () => (
             decorator, like so:
           </p>
           <p>
-            <GeovCode language="typescript" code={c1}></GeovCode>
+            <geov-code language="typescript" code={c1}></geov-code>
           </p>
           <p> Your component should now wait for 2000&nbsp;ms and then render the label.</p>
 
@@ -126,20 +132,20 @@ export const DataFetching = () => (
             For convenience you find a helper function to make sparql requests in <code>lib/sparqlJson.tsx</code>
           </p>
           <p>
-            <GeovCode language="typescript" code={c5}></GeovCode>
+            <geov-code language="typescript" code={c5}></geov-code>
           </p>
           <p>You can pass in the url of the sparql endpoint and the sparql query as string. The function returns a promise with the results.</p>
           <h4 id="query-builder">Build the query</h4>
           <p>So let's create a function to generate our SPARQL query string, taking an the id of the entity in question as parameter and put it ontop of the class :</p>
           <p>
-            <GeovCode language="typescript" code={c6}></GeovCode>
+            <geov-code language="typescript" code={c6}></geov-code>
           </p>
           <h4 id="fetch">Fetch data</h4>
           <p>
             Now we can use this inside the <code>componentWillLoad()</code> Hook:
           </p>
           <p>
-            <GeovCode language="typescript" code={c7}></GeovCode>
+            <geov-code language="typescript" code={c7}></geov-code>
           </p>
           <p>
             Above
@@ -162,23 +168,23 @@ export const DataFetching = () => (
             This typing makes it easy to parse the result and assign it to <code>this.label</code>:
           </p>
           <p>
-            <GeovCode language="typescript" code={c8}></GeovCode>
+            <geov-code language="typescript" code={c8}></geov-code>
           </p>
           <h2 id="verification">Verification</h2>
           <p>
             If you see your component in the storybook printing <code>Person</code> you're good to go! Congrats.
           </p>
           <p>
-            <IonButton href="/?path=/story/contributing-tutorial-component-props--component-props">Next: Component Props</IonButton>
+            <ion-button href="/?path=/story/contributing-tutorial-component-props--component-props">Next: Component Props</ion-button>
           </p>
           {/* <h2>@Prop() Decorator</h2>
           <h2>Error and Loading</h2>
           <h2>Story</h2>
           <p>
-            <GeovCode language="typescript" code={s1}></GeovCode>
+            <geov-code language="typescript" code={s1}></geov-code>
           </p> */}
-        </GeovToc>
-      </IonGrid>
-    </IonContent>
-  </IonApp>
+        </geov-toc>
+      </ion-grid>
+    </ion-content>
+  </ion-app>
 );

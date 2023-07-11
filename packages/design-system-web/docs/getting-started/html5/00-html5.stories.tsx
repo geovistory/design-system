@@ -1,5 +1,8 @@
-import React from 'react';
-import { GeovCode, IonApp, IonContent, IonGrid } from '../../../.storybook/stencil-generated/component';
+import { h } from '@stencil/core';
+import '../../../dist/components/geov-code';
+import '../../../dist/components/ion-app';
+import '../../../dist/components/ion-content';
+import '../../../dist/components/ion-grid';
 import { html5Cdn, html5NodeModules, startScript } from './install-html5-cdn.snippets';
 
 export default {
@@ -16,11 +19,11 @@ export default {
 };
 
 export const HTML5 = () => (
-  <IonApp>
-    <IonContent class="ion-padding">
-      <IonGrid fixed>
+  <ion-app>
+    <ion-content class="ion-padding">
+      <ion-grid fixed>
         <h1>HTML5 installation</h1>
-        <p className="lead">This section describes how to use the Geovistory Design System in html5.</p>
+        <p class="lead">This section describes how to use the Geovistory Design System in html5.</p>
 
         <h2>CDN</h2>
         <p>
@@ -32,7 +35,7 @@ export const HTML5 = () => (
         </p>
         <p>Copy & paste the following code into a index.html and open it in a browser:</p>
         <p>
-          <GeovCode language="html" code={html5Cdn}></GeovCode>
+          <geov-code language="html" code={html5Cdn}></geov-code>
         </p>
         <p>
           Like <code>geov-entity</code> in this example, you can use all Geovistory components (see Design Components and Data Components) and all{' '}
@@ -48,15 +51,15 @@ export const HTML5 = () => (
           to setup the package.json file.
         </p>
         <p>
-          <GeovCode language="bash" code="npm init"></GeovCode>
+          <geov-code language="bash" code="npm init"></geov-code>
         </p>
         <p>Now lets install the Geovistory Design System.</p>
         <p>
-          <GeovCode language="bash" code="npm install @geovistory/design-system-web --save"></GeovCode>
+          <geov-code language="bash" code="npm install @geovistory/design-system-web --save"></geov-code>
         </p>
         <p>After that we create this index.html file:</p>
         <p>
-          <GeovCode language="html" code={html5NodeModules}></GeovCode>
+          <geov-code language="html" code={html5NodeModules}></geov-code>
         </p>
         <p>
           Like <code>geov-entity</code> in this example, you can use all Geovistory components (see Design Components and Data Components) and all{' '}
@@ -69,14 +72,14 @@ export const HTML5 = () => (
         <h3>HTTP-Server</h3>
         <p>To run the HTML5 application you need a proper HTTP-Server. However, if there is none we recommend to install</p>
         <p>
-          <GeovCode language="bash" code="npm add -D http-server"></GeovCode>
+          <geov-code language="bash" code="npm add -D http-server"></geov-code>
         </p>
         <p>
           After that add define the start script with the http-server package in <code>package.json</code>.
         </p>
         <p>
           {' '}
-          <GeovCode language="json" code={startScript}></GeovCode>
+          <geov-code language="json" code={startScript}></geov-code>
         </p>
         <p>
           Now you can run your server with <code>npm start</code> and the server is available under{' '}
@@ -85,7 +88,7 @@ export const HTML5 = () => (
           </a>
           .
         </p>
-      </IonGrid>
-    </IonContent>
-  </IonApp>
+      </ion-grid>
+    </ion-content>
+  </ion-app>
 );

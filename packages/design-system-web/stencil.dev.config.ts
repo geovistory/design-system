@@ -6,6 +6,10 @@ export const config: Config = {
   tsconfig: './tsconfig.dev.json',
   outputTargets: [
     {
+      type: 'dist',
+      esmLoaderPath: '../loader',
+    },
+    {
       type: 'dist-custom-elements',
       customElementsExportBehavior: 'auto-define-custom-elements',
     },
