@@ -3,11 +3,10 @@ import { stencilBasicConfig } from './.build/stencil/stencil.basic.config';
 
 export const config: Config = {
   ...stencilBasicConfig,
-  tsconfig: './tsconfig.test.json',
+  tsconfig: './tsconfig.dev.json',
   outputTargets: [
     {
-      type: 'dist',
-      esmLoaderPath: '../loader',
+      type: 'dist-hydrate-script',
     },
   ],
 };

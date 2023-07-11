@@ -1,5 +1,5 @@
-import { Component, Host, h, Prop } from '@stencil/core';
-import { Color } from '@ionic/core';
+import type { Color } from '@ionic/core';
+import { Component, h, Host, Prop } from '@stencil/core';
 import { State } from '@stencil/core/internal';
 import { downloadOutline } from 'ionicons/icons';
 
@@ -59,29 +59,6 @@ export class GeovEntityDownloadRdf {
 
   modal: HTMLIonModalElement;
 
-  render() {
-    return (
-      <Host>
-        <ion-button id="open-custom-dialog" expand={this.expand} fill={this.fill} color={this.color} onClick={() => (this.modal.isOpen = true)}>
-          {this.buttonLabel} {this.buttonIcon ? <ion-icon name={this.buttonIcon}></ion-icon> : <ion-icon icon={downloadOutline}></ion-icon>}
-        </ion-button>
-        <ion-modal id="example-modal" trigger="open-custom-dialog" ref={element => (this.modal = element)} onWillDismiss={() => this.dismiss()}>
-          <ion-header>
-            <ion-toolbar>
-              <ion-buttons slot="start">
-                <ion-button onClick={() => this.dismiss()}>Cancel</ion-button>
-              </ion-buttons>
-              <ion-title>Download RDF</ion-title>
-            </ion-toolbar>
-          </ion-header>
-          <ion-content class="ion-padding">
-            <ion-list lines="none">{this.renderClickableItem()}</ion-list>
-          </ion-content>
-        </ion-modal>
-        <slot></slot>
-      </Host>
-    );
-  }
   open() {
     this.modal.isOpen = true;
   }
@@ -114,5 +91,28 @@ export class GeovEntityDownloadRdf {
         <ion-label>{a}</ion-label>
       </ion-item>
     ));
+  }
+  render() {
+    return (
+      <Host>
+        <ion-button id="open-custom-dialog" expand={this.expand} fill={this.fill} color={this.color} onClick={() => (this.modal.isOpen = true)}>
+          {this.buttonLabel} {this.buttonIcon ? <ion-icon name={this.buttonIcon}></ion-icon> : <ion-icon icon={downloadOutline}></ion-icon>}
+        </ion-button>
+        <ion-modal id="example-modal" trigger="open-custom-dialog" ref={element => (this.modal = element)} onWillDismiss={() => this.dismiss()}>
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button onClick={() => this.dismiss()}>Cancel</ion-button>
+              </ion-buttons>
+              <ion-title>Download RDF</ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+            <ion-list lines="none">{this.renderClickableItem()}</ion-list>
+          </ion-content>
+        </ion-modal>
+        <slot></slot>
+      </Host>
+    );
   }
 }
