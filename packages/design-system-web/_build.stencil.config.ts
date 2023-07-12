@@ -1,11 +1,14 @@
 import { Config } from '@stencil/core';
 import { angularGenerator } from './.build/stencil.bindings.angular';
 import { reactGenerator } from './.build/stencil.bindings.react';
-import { stencilBasicConfig } from './.build/stencil/stencil.basic.config';
+import { sass } from '@stencil/sass';
 
 export const config: Config = {
-  ...stencilBasicConfig,
-  tsconfig: './tsconfig.build.json',
+  namespace: 'design-system-web',
+  globalScript: './_build.global.ts',
+  globalStyle: './src/global/global.css',
+  plugins: [sass()],
+  tsconfig: './_build.build.json',
   outputTargets: [
     {
       type: 'dist',

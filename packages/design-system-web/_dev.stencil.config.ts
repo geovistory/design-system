@@ -1,9 +1,12 @@
 import { Config } from '@stencil/core';
-import { stencilBasicConfig } from './.build/stencil/stencil.basic.config';
+import { sass } from '@stencil/sass';
 
 export const config: Config = {
-  ...stencilBasicConfig,
-  tsconfig: './tsconfig.dev.json',
+  namespace: 'design-system-web',
+  globalScript: './_dev.global.ts',
+  globalStyle: './src/global/global.css',
+  tsconfig: './_dev.tsconfig.json',
+  plugins: [sass()],
   transformAliasedImportPaths: true,
   outputTargets: [
     {

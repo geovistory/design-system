@@ -21,7 +21,9 @@
   "include": [
     "src",
     "docs",
-    ".storybook/lib"
+    ".storybook/lib",
+    "_build.global.ts",
+    "_dev.global.ts"
   ],
   "exclude": [
     "node_modules"
