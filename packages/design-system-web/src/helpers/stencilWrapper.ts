@@ -13,7 +13,8 @@ type X = {
 };
 
 export const stencilWrapper = (vnode: VNode): X => {
-  const host = document.createElement('div');
+
+  const host = document.createElement('ion-app');
   renderVdom(
     {
       $ancestorComponent$: undefined,
@@ -21,7 +22,7 @@ export const stencilWrapper = (vnode: VNode): X => {
       $modeName$: undefined,
       $cmpMeta$: {
         $flags$: 0,
-        $tagName$: 'div',
+        $tagName$: 'ion-app',
       },
       $hostElement$: host,
     },

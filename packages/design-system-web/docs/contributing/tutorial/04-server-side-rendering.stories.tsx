@@ -1,10 +1,5 @@
 import { h } from '@stencil/core';
-import '../dist/components/geov-code';
-import '../dist/components/geov-toc';
-import '../dist/components/ion-app';
-import '../dist/components/ion-button';
-import '../dist/components/ion-content';
-import '../dist/components/ion-grid';
+import { stencilWrapper } from '../../../src/helpers/stencilWrapper';
 import disableJs from './04-disable-js.png';
 import network1 from './04-network-1.jpg';
 import verification from './04-verification.png';
@@ -23,7 +18,7 @@ export default {
   },
 };
 
-export const ServerSideRendering = () => (
+export const ServerSideRendering = stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>
@@ -316,5 +311,5 @@ export const ServerSideRendering = () => (
         </geov-toc>
       </ion-grid>
     </ion-content>
-  </ion-app>
+  </ion-app>,
 );

@@ -827,14 +827,14 @@ export declare interface IonBreadcrumbs extends Components.IonBreadcrumbs {
 
 
 @ProxyCmp({
-  inputs: ['buttonType', 'color', 'disabled', 'download', 'expand', 'fill', 'href', 'rel', 'routerAnimation', 'routerDirection', 'shape', 'size', 'strong', 'target', 'type']
+  inputs: ['buttonType', 'color', 'disabled', 'download', 'expand', 'fill', 'form', 'href', 'rel', 'routerAnimation', 'routerDirection', 'shape', 'size', 'strong', 'target', 'type']
 })
 @Component({
   selector: 'ion-button',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['buttonType', 'color', 'disabled', 'download', 'expand', 'fill', 'href', 'rel', 'routerAnimation', 'routerDirection', 'shape', 'size', 'strong', 'target', 'type'],
+  inputs: ['buttonType', 'color', 'disabled', 'download', 'expand', 'fill', 'form', 'href', 'rel', 'routerAnimation', 'routerDirection', 'shape', 'size', 'strong', 'target', 'type'],
 })
 export class IonButton {
   protected el: HTMLElement;
@@ -1097,23 +1097,25 @@ import type { ScrollDetail as IIonContentScrollDetail } from '@geovistory/design
 
 export declare interface IonContent extends Components.IonContent {
   /**
-   * Emitted when the scroll has started.
+   * Emitted when the scroll has started. This event is disabled by default.
+Set `scrollEvents` to `true` to enable.
    */
   ionScrollStart: EventEmitter<CustomEvent<IIonContentScrollBaseDetail>>;
   /**
    * Emitted while scrolling. This event is disabled by default.
-Look at the property: `scrollEvents`
+Set `scrollEvents` to `true` to enable.
    */
   ionScroll: EventEmitter<CustomEvent<IIonContentScrollDetail>>;
   /**
-   * Emitted when the scroll has ended.
+   * Emitted when the scroll has ended. This event is disabled by default.
+Set `scrollEvents` to `true` to enable.
    */
   ionScrollEnd: EventEmitter<CustomEvent<IIonContentScrollBaseDetail>>;
 }
 
 
 @ProxyCmp({
-  inputs: ['cancelText', 'clearText', 'color', 'dayValues', 'disabled', 'doneText', 'firstDayOfWeek', 'hourCycle', 'hourValues', 'locale', 'max', 'min', 'minuteValues', 'monthValues', 'name', 'presentation', 'readonly', 'showClearButton', 'showDefaultButtons', 'showDefaultTimeLabel', 'showDefaultTitle', 'size', 'value', 'yearValues'],
+  inputs: ['cancelText', 'clearText', 'color', 'dayValues', 'disabled', 'doneText', 'firstDayOfWeek', 'highlightedDates', 'hourCycle', 'hourValues', 'isDateEnabled', 'locale', 'max', 'min', 'minuteValues', 'monthValues', 'multiple', 'name', 'preferWheel', 'presentation', 'readonly', 'showClearButton', 'showDefaultButtons', 'showDefaultTimeLabel', 'showDefaultTitle', 'size', 'titleSelectedDatesFormatter', 'value', 'yearValues'],
   methods: ['confirm', 'reset', 'cancel']
 })
 @Component({
@@ -1121,7 +1123,7 @@ Look at the property: `scrollEvents`
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['cancelText', 'clearText', 'color', 'dayValues', 'disabled', 'doneText', 'firstDayOfWeek', 'hourCycle', 'hourValues', 'locale', 'max', 'min', 'minuteValues', 'monthValues', 'name', 'presentation', 'readonly', 'showClearButton', 'showDefaultButtons', 'showDefaultTimeLabel', 'showDefaultTitle', 'size', 'value', 'yearValues'],
+  inputs: ['cancelText', 'clearText', 'color', 'dayValues', 'disabled', 'doneText', 'firstDayOfWeek', 'highlightedDates', 'hourCycle', 'hourValues', 'isDateEnabled', 'locale', 'max', 'min', 'minuteValues', 'monthValues', 'multiple', 'name', 'preferWheel', 'presentation', 'readonly', 'showClearButton', 'showDefaultButtons', 'showDefaultTimeLabel', 'showDefaultTitle', 'size', 'titleSelectedDatesFormatter', 'value', 'yearValues'],
 })
 export class IonDatetime {
   protected el: HTMLElement;
@@ -1153,6 +1155,28 @@ export declare interface IonDatetime extends Components.IonDatetime {
    */
   ionBlur: EventEmitter<CustomEvent<void>>;
 }
+
+
+@ProxyCmp({
+  inputs: ['color', 'datetime', 'disabled']
+})
+@Component({
+  selector: 'ion-datetime-button',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['color', 'datetime', 'disabled'],
+})
+export class IonDatetimeButton {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface IonDatetimeButton extends Components.IonDatetimeButton {}
 
 
 @ProxyCmp({
@@ -1454,14 +1478,14 @@ export declare interface IonInput extends Components.IonInput {
 
 
 @ProxyCmp({
-  inputs: ['button', 'color', 'counter', 'detail', 'detailIcon', 'disabled', 'download', 'fill', 'href', 'lines', 'rel', 'routerAnimation', 'routerDirection', 'shape', 'target', 'type']
+  inputs: ['button', 'color', 'counter', 'counterFormatter', 'detail', 'detailIcon', 'disabled', 'download', 'fill', 'href', 'lines', 'rel', 'routerAnimation', 'routerDirection', 'shape', 'target', 'type']
 })
 @Component({
   selector: 'ion-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['button', 'color', 'counter', 'detail', 'detailIcon', 'disabled', 'download', 'fill', 'href', 'lines', 'rel', 'routerAnimation', 'routerDirection', 'shape', 'target', 'type'],
+  inputs: ['button', 'color', 'counter', 'counterFormatter', 'detail', 'detailIcon', 'disabled', 'download', 'fill', 'href', 'lines', 'rel', 'routerAnimation', 'routerDirection', 'shape', 'target', 'type'],
 })
 export class IonItem {
   protected el: HTMLElement;
@@ -1793,27 +1817,28 @@ export declare interface IonMenuToggle extends Components.IonMenuToggle {}
 
 
 @ProxyCmp({
-  inputs: ['animated', 'backdropBreakpoint', 'backdropDismiss', 'breakpoints', 'enterAnimation', 'handle', 'htmlAttributes', 'initialBreakpoint', 'isOpen', 'keyboardClose', 'leaveAnimation', 'presentingElement', 'showBackdrop', 'swipeToClose', 'trigger'],
-  methods: ['present', 'dismiss', 'onDidDismiss', 'onWillDismiss']
+  inputs: ['animated', 'backdropBreakpoint', 'backdropDismiss', 'breakpoints', 'canDismiss', 'enterAnimation', 'handle', 'handleBehavior', 'htmlAttributes', 'initialBreakpoint', 'isOpen', 'keepContentsMounted', 'keyboardClose', 'leaveAnimation', 'presentingElement', 'showBackdrop', 'swipeToClose', 'trigger'],
+  methods: ['present', 'dismiss', 'onDidDismiss', 'onWillDismiss', 'setCurrentBreakpoint', 'getCurrentBreakpoint']
 })
 @Component({
   selector: 'ion-modal',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['animated', 'backdropBreakpoint', 'backdropDismiss', 'breakpoints', 'enterAnimation', 'handle', 'htmlAttributes', 'initialBreakpoint', 'isOpen', 'keyboardClose', 'leaveAnimation', 'presentingElement', 'showBackdrop', 'swipeToClose', 'trigger'],
+  inputs: ['animated', 'backdropBreakpoint', 'backdropDismiss', 'breakpoints', 'canDismiss', 'enterAnimation', 'handle', 'handleBehavior', 'htmlAttributes', 'initialBreakpoint', 'isOpen', 'keepContentsMounted', 'keyboardClose', 'leaveAnimation', 'presentingElement', 'showBackdrop', 'swipeToClose', 'trigger'],
 })
 export class IonModal {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['ionModalDidPresent', 'ionModalWillPresent', 'ionModalWillDismiss', 'ionModalDidDismiss', 'didPresent', 'willPresent', 'willDismiss', 'didDismiss']);
+    proxyOutputs(this, this.el, ['ionModalDidPresent', 'ionModalWillPresent', 'ionModalWillDismiss', 'ionModalDidDismiss', 'ionBreakpointDidChange', 'didPresent', 'willPresent', 'willDismiss', 'didDismiss']);
   }
 }
 
 
 import type { OverlayEventDetail as IIonModalOverlayEventDetail } from '@geovistory/design-system-web';
+import type { ModalBreakpointChangeEventDetail as IIonModalModalBreakpointChangeEventDetail } from '@geovistory/design-system-web';
 
 export declare interface IonModal extends Components.IonModal {
   /**
@@ -1833,8 +1858,12 @@ export declare interface IonModal extends Components.IonModal {
    */
   ionModalDidDismiss: EventEmitter<CustomEvent<IIonModalOverlayEventDetail>>;
   /**
+   * Emitted after the modal breakpoint has changed.
+   */
+  ionBreakpointDidChange: EventEmitter<CustomEvent<IIonModalModalBreakpointChangeEventDetail>>;
+  /**
    * Emitted after the modal has presented.
-Shorthand for ionModalWillDismiss.
+Shorthand for ionModalDidPresent.
    */
   didPresent: EventEmitter<CustomEvent<void>>;
   /**
@@ -2055,7 +2084,7 @@ export declare interface IonPickerInternal extends Components.IonPickerInternal 
 
 
 @ProxyCmp({
-  inputs: ['alignment', 'animated', 'arrow', 'backdropDismiss', 'component', 'componentProps', 'dismissOnSelect', 'enterAnimation', 'event', 'htmlAttributes', 'isOpen', 'keyboardClose', 'leaveAnimation', 'reference', 'showBackdrop', 'side', 'size', 'translucent', 'trigger', 'triggerAction'],
+  inputs: ['alignment', 'animated', 'arrow', 'backdropDismiss', 'component', 'componentProps', 'dismissOnSelect', 'enterAnimation', 'event', 'htmlAttributes', 'isOpen', 'keepContentsMounted', 'keyboardClose', 'leaveAnimation', 'reference', 'showBackdrop', 'side', 'size', 'translucent', 'trigger', 'triggerAction'],
   methods: ['present', 'dismiss', 'onDidDismiss', 'onWillDismiss']
 })
 @Component({
@@ -2063,7 +2092,7 @@ export declare interface IonPickerInternal extends Components.IonPickerInternal 
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['alignment', 'animated', 'arrow', 'backdropDismiss', 'component', 'componentProps', 'dismissOnSelect', 'enterAnimation', 'event', 'htmlAttributes', 'isOpen', 'keyboardClose', 'leaveAnimation', 'reference', 'showBackdrop', 'side', 'size', 'translucent', 'trigger', 'triggerAction'],
+  inputs: ['alignment', 'animated', 'arrow', 'backdropDismiss', 'component', 'componentProps', 'dismissOnSelect', 'enterAnimation', 'event', 'htmlAttributes', 'isOpen', 'keepContentsMounted', 'keyboardClose', 'leaveAnimation', 'reference', 'showBackdrop', 'side', 'size', 'translucent', 'trigger', 'triggerAction'],
 })
 export class IonPopover {
   protected el: HTMLElement;
@@ -2202,26 +2231,28 @@ export declare interface IonRadioGroup extends Components.IonRadioGroup {
 
 
 @ProxyCmp({
-  inputs: ['color', 'debounce', 'disabled', 'dualKnobs', 'max', 'min', 'name', 'pin', 'pinFormatter', 'snaps', 'step', 'ticks', 'value']
+  inputs: ['activeBarStart', 'color', 'debounce', 'disabled', 'dualKnobs', 'max', 'min', 'name', 'pin', 'pinFormatter', 'snaps', 'step', 'ticks', 'value']
 })
 @Component({
   selector: 'ion-range',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['color', 'debounce', 'disabled', 'dualKnobs', 'max', 'min', 'name', 'pin', 'pinFormatter', 'snaps', 'step', 'ticks', 'value'],
+  inputs: ['activeBarStart', 'color', 'debounce', 'disabled', 'dualKnobs', 'max', 'min', 'name', 'pin', 'pinFormatter', 'snaps', 'step', 'ticks', 'value'],
 })
 export class IonRange {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['ionChange', 'ionFocus', 'ionBlur']);
+    proxyOutputs(this, this.el, ['ionChange', 'ionFocus', 'ionBlur', 'ionKnobMoveStart', 'ionKnobMoveEnd']);
   }
 }
 
 
 import type { RangeChangeEventDetail as IIonRangeRangeChangeEventDetail } from '@geovistory/design-system-web';
+import type { RangeKnobMoveStartEventDetail as IIonRangeRangeKnobMoveStartEventDetail } from '@geovistory/design-system-web';
+import type { RangeKnobMoveEndEventDetail as IIonRangeRangeKnobMoveEndEventDetail } from '@geovistory/design-system-web';
 
 export declare interface IonRange extends Components.IonRange {
   /**
@@ -2236,6 +2267,16 @@ export declare interface IonRange extends Components.IonRange {
    * Emitted when the range loses focus.
    */
   ionBlur: EventEmitter<CustomEvent<void>>;
+  /**
+   * Emitted when the user starts moving the range knob, whether through
+mouse drag, touch gesture, or keyboard interaction.
+   */
+  ionKnobMoveStart: EventEmitter<CustomEvent<IIonRangeRangeKnobMoveStartEventDetail>>;
+  /**
+   * Emitted when the user finishes moving the range knob, whether through
+mouse drag, touch gesture, or keyboard interaction.
+   */
+  ionKnobMoveEnd: EventEmitter<CustomEvent<IIonRangeRangeKnobMoveEndEventDetail>>;
 }
 
 
@@ -2659,7 +2700,7 @@ export class IonSelect {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['ionChange', 'ionCancel', 'ionFocus', 'ionBlur']);
+    proxyOutputs(this, this.el, ['ionChange', 'ionCancel', 'ionDismiss', 'ionFocus', 'ionBlur']);
   }
 }
 
@@ -2675,6 +2716,10 @@ export declare interface IonSelect extends Components.IonSelect {
    * Emitted when the selection is cancelled.
    */
   ionCancel: EventEmitter<CustomEvent<void>>;
+  /**
+   * Emitted when the overlay is dismissed.
+   */
+  ionDismiss: EventEmitter<CustomEvent<void>>;
   /**
    * Emitted when the select has focus.
    */
@@ -2908,7 +2953,7 @@ export declare interface IonSplitPane extends Components.IonSplitPane {
   /**
    * Expression to be called when the split-pane visibility has changed
    */
-  ionSplitPaneVisible: EventEmitter<CustomEvent<{visible: boolean}>>;
+  ionSplitPaneVisible: EventEmitter<CustomEvent<{ visible: boolean }>>;
 }
 
 
@@ -3003,11 +3048,11 @@ export declare interface IonTabs extends Components.IonTabs {
   /**
    * Emitted when the navigation is about to transition to a new component.
    */
-  ionTabsWillChange: EventEmitter<CustomEvent<{tab: string}>>;
+  ionTabsWillChange: EventEmitter<CustomEvent<{ tab: string }>>;
   /**
    * Emitted when the navigation has finished transitioning to a new component.
    */
-  ionTabsDidChange: EventEmitter<CustomEvent<{tab: string}>>;
+  ionTabsDidChange: EventEmitter<CustomEvent<{ tab: string }>>;
 }
 
 
@@ -3120,7 +3165,7 @@ export declare interface IonTitle extends Components.IonTitle {}
 
 
 @ProxyCmp({
-  inputs: ['animated', 'buttons', 'color', 'cssClass', 'duration', 'enterAnimation', 'header', 'htmlAttributes', 'icon', 'keyboardClose', 'leaveAnimation', 'message', 'position', 'translucent'],
+  inputs: ['animated', 'buttons', 'color', 'cssClass', 'duration', 'enterAnimation', 'header', 'htmlAttributes', 'icon', 'keyboardClose', 'layout', 'leaveAnimation', 'message', 'position', 'translucent'],
   methods: ['present', 'dismiss', 'onDidDismiss', 'onWillDismiss']
 })
 @Component({
@@ -3128,7 +3173,7 @@ export declare interface IonTitle extends Components.IonTitle {}
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['animated', 'buttons', 'color', 'cssClass', 'duration', 'enterAnimation', 'header', 'htmlAttributes', 'icon', 'keyboardClose', 'leaveAnimation', 'message', 'position', 'translucent'],
+  inputs: ['animated', 'buttons', 'color', 'cssClass', 'duration', 'enterAnimation', 'header', 'htmlAttributes', 'icon', 'keyboardClose', 'layout', 'leaveAnimation', 'message', 'position', 'translucent'],
 })
 export class IonToast {
   protected el: HTMLElement;
@@ -3163,14 +3208,14 @@ export declare interface IonToast extends Components.IonToast {
 
 
 @ProxyCmp({
-  inputs: ['checked', 'color', 'disabled', 'name', 'value']
+  inputs: ['checked', 'color', 'disabled', 'enableOnOffLabels', 'name', 'value']
 })
 @Component({
   selector: 'ion-toggle',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['checked', 'color', 'disabled', 'name', 'value'],
+  inputs: ['checked', 'color', 'disabled', 'enableOnOffLabels', 'name', 'value'],
 })
 export class IonToggle {
   protected el: HTMLElement;

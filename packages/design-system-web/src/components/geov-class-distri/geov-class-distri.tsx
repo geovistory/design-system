@@ -1,4 +1,4 @@
-import { Component, h, Host, Prop } from '@stencil/core';
+import { Component, h, Host, Prop, State, Element } from '@stencil/core';
 import { isNode } from '../../lib/isNode';
 import { importPlotlyBasic } from '../../lib/importPlotlyBasic';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
@@ -53,6 +53,7 @@ type SparqlResponse = {
   shadow: false,
 })
 export class GeovClassDistri {
+  @Element() el: HTMLElement;
   /**
    * sparqlEndpoint
    * URL of the sparql endpoint
@@ -71,12 +72,12 @@ export class GeovClassDistri {
    */
   @Prop() height: number;
 
-  domId = 'class-distri-pie-chart';
+  @State() loading: boolean;
 
-  async componentWillLoad() {
+  async componentDidLoad() {
     // If we are in a browser
     if (!isNode()) {
-
+      this.loading = true;
       // Load plotly script
       const Plotly = await importPlotlyBasic();
 
@@ -118,7 +119,8 @@ export class GeovClassDistri {
         };
 
         // Draw the chart
-        if (Plotly) Plotly.newPlot(this.domId, plotlyData, layout);
+        if (Plotly) Plotly.newPlot(this.el, plotlyData, layout);
+        this.loading = false;
       });
     }
   }
@@ -126,8 +128,11 @@ export class GeovClassDistri {
   render() {
     return (
       <Host>
-        <div id={this.domId}></div>
-        <slot></slot>
+        {this.loading && (
+          <div style={{ width: this.width + 'px', height: this.height + 'px' }} class="loading">
+            <ion-spinner name="dots"></ion-spinner>
+          </div>
+        )}
       </Host>
     );
   }

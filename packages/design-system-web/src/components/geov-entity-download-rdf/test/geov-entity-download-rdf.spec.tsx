@@ -59,11 +59,11 @@ describe('geov-entity-download-rdf', () => {
     </geov-entity-download-rdf>
     `);
   });
-  it('Server side (hydrate-script): renders initial state', async () => {
+  it.only('Server side (hydrate-script): renders initial state', async () => {
     let serverFetchedData;
-    const html = `<geov-entity-download-rdf entityId="i785518" color="primary" expand="block" fill="outline" button-label="Download RDF" button-icon="download-outline"></geov-entity-download-rdf>`;
+    const html = `<geov-entity-download-rdf entity-id="i785518" color="primary" expand="block" fill="outline" button-label="Download RDF" button-icon="download-outline"></geov-entity-download-rdf>`;
 
-    const rendered = await renderToString(html, {
+    const rendered =await renderToString(html, {
       runtimeLogging: true,
       removeHtmlComments: true,
       beforeHydrate: doc => {
@@ -122,7 +122,7 @@ describe('geov-entity-download-rdf', () => {
     `);
   });
 
-  fit('Client side: fetches data and hydrates prerendered html', async () => {
+  it('Client side: fetches data and hydrates prerendered html', async () => {
     // prerendered html
     const html = `
       <!doctype html>

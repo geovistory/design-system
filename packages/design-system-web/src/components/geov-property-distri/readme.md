@@ -14,6 +14,19 @@
 | `width`          | `width`           | Size in pixel of the final chart          | `number` | `undefined` |
 
 
+## Dependencies
+
+### Depends on
+
+- ion-spinner
+
+### Graph
+```mermaid
+graph TD;
+  geov-property-distri --> ion-spinner
+  style geov-property-distri fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

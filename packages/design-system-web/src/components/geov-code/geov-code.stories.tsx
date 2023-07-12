@@ -1,24 +1,16 @@
 import { h } from '@stencil/core';
 import { stencilWrapper } from '../../helpers/stencilWrapper';
-import { defineCustomElement } from '../../../dist/components/geov-code';
-defineCustomElement();
+
 export default {
   title: 'Design Components/Code',
 };
 
 const codeHtml = '<div><h1>Hello</h1></div>';
 export const CodeHtml = stencilWrapper(<geov-code code={codeHtml} language="html"></geov-code>);
-
-export const CodeXml = stencilWrapper(
-  <geov-code
-    code={
-      <foo:mytag>
-        <foo:bar hi="you" />
-      </foo:mytag>
-    }
-    language="xml"
-  ></geov-code>,
-);
+const codeXml = `<foo:mytag>
+  <foo:bar hi="you" />
+</foo:mytag>`;
+export const CodeXml = stencilWrapper(<geov-code code={codeXml} language="xml"></geov-code>);
 
 export const CodeCss = stencilWrapper(
   <geov-code
@@ -41,12 +33,16 @@ npm i @geovistory/design-system-web"
   ></geov-code>,
 );
 
-/* export const CodeSparql = stencilWrapper(
-  <geov-code
-    code="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX xml: <http://www.w3.org/XML/1998/namespace> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX geo: <http://www.opengis.net/ont/geosparql#> PREFIX time: <http://www.w3.org/2006/time#> PREFIX onto-c: <https://ontome.net/class/> PREFIX onto-p: <https://ontome.net/property/> PREFIX geov: <http://geovistory.org/resource/> SELECT ?subject ?predicate ?object WHERE { ?subject ?predicate ?object . } LIMIT 10"
-    language="sparql"
-  ></geov-code>
-); */
+const sparql = `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX geov: <http://geovistory.org/resource/>
+
+SELECT ?classLabel
+WHERE {
+  geov:i315803 rdf:type/rdfs:label ?classLabel
+}
+LIMIT 1`;
+export const CodeSparql = stencilWrapper(<geov-code code={sparql} language="sparql"></geov-code>);
 
 export const CodeNoButton = stencilWrapper(
   <geov-code
@@ -59,3 +55,114 @@ code {
     copyButton={false}
   ></geov-code>,
 );
+
+const typescript = `import { Component, Host, h, State, Prop } from '@stencil/core';
+import { FetchResponse } from '../../lib/FetchResponse';
+import { sparqlJson, SparqlBinding } from '../../lib/sparqlJson';
+import { getSSRData } from '../../lib/ssr/getSSRData';
+import { setSSRData } from '../../lib/ssr/setSSRData';
+import { setSSRId } from '../../lib/ssr/setSSRId';
+import { GeovEntityLabelData } from '../geov-entity-label/geov-entity-label';
+
+const qrLabel = (id: string) => \`
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX geov: <http://geovistory.org/resource/>
+
+SELECT ?classLabel
+WHERE {
+  geov:\${id} rdf:type/rdfs:label ?classLabel
+}
+LIMIT 1
+\`;
+
+export interface GeovHelloWorldData extends FetchResponse {
+  label?: string;
+  error?: boolean;
+}
+
+@Component({
+  tag: 'geov-hello-world',
+  styleUrl: 'geov-hello-world.css',
+  shadow: true,
+})
+export class GeovHelloWorld {
+  @Prop({ reflect: true }) _ssrId?: string;
+  /**
+   * sparqlEndpoint
+   * URL of the sparql endpoint
+   */
+  @Prop() sparqlEndpoint: string;
+  /**
+   * entityId
+   * ID number of entity, e.g. 'i315800'
+   */
+  @Prop() entityId: string;
+
+  /**
+   * the data (or model) used in the view
+   */
+  @State() data?: GeovHelloWorldData;
+
+  constructor() {
+    setSSRId(this);
+  }
+
+  async componentWillLoad() {
+    // try to get data from ssr
+    this.data = getSSRData(this._ssrId);
+
+    // if no data found, fetchData
+    if (!this.data) {
+      // set data to loading (in immutable way)
+      this.data = { loading: true };
+
+      await this.fetchData()
+        .then(d => {
+          this.data = d;
+          setSSRData(this._ssrId, d);
+          return d;
+        })
+        .catch(d => {
+          this.data = d;
+          return d;
+        });
+    }
+  }
+
+  /**
+   * Do the sparql request(s)
+   * @returns a Promise with the data for this component
+   */
+  async fetchData(): Promise<GeovEntityLabelData> {
+    return sparqlJson<{ classLabel: SparqlBinding }>(this.sparqlEndpoint, qrLabel(this.entityId))
+      .then(res => {
+        return {
+          ...this.data,
+          label: res?.results?.bindings?.[0]?.classLabel?.value,
+          loading: false,
+        };
+      })
+      .catch(_ => {
+        return {
+          ...this.data,
+          error: true,
+          loading: false,
+        };
+      });
+  }
+
+  render() {
+    return (
+      <Host>
+        {this.data.label}
+        {this.data.loading && \`loading...\`}
+        {this.data.error && \`error!\`}
+        {!this.data.label && !this.data.loading && !this.data.error && <span class="no-label-found">no label found</span>}
+        <slot />
+      </Host>
+    );
+  }
+}
+`;
+export const CodeTypeScript = stencilWrapper(<geov-code code={typescript} language="typescript"></geov-code>);

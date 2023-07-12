@@ -1,3 +1,7 @@
+import {defineCustomElements} from '../loader';
+// register geov web components
+defineCustomElements()
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {

@@ -1,7 +1,5 @@
 import { h } from '@stencil/core';
-import '../dist/components/ion-app';
-import '../dist/components/ion-content';
-import '../dist/components/ion-grid';
+import { stencilWrapper } from '../../src/helpers/stencilWrapper';
 
 export default {
   title: 'Contributing/CI And CD Workflow',
@@ -16,7 +14,7 @@ export default {
   },
 };
 
-export const CI_andCDWorkflow = () => (
+export const CI_andCDWorkflow = stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>
@@ -133,5 +131,5 @@ export const CI_andCDWorkflow = () => (
         </p>
       </ion-grid>
     </ion-content>
-  </ion-app>
+  </ion-app>,
 );

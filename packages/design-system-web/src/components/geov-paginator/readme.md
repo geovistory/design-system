@@ -7,14 +7,14 @@
 
 ## Properties
 
-| Property               | Attribute                 | Description | Type      | Default     |
-| ---------------------- | ------------------------- | ----------- | --------- | ----------- |
-| `color`                | `color`                   |             | `string`  | `undefined` |
-| `hidePageSize`         | `hide-page-size`          |             | `boolean` | `undefined` |
-| `length`               | `length`                  |             | `number`  | `0`         |
-| `pageIndex`            | `page-index`              |             | `number`  | `0`         |
-| `pageSize`             | `page-size`               |             | `number`  | `25`        |
-| `showFirstLastButtons` | `show-first-last-buttons` |             | `boolean` | `true`      |
+| Property               | Attribute                 | Description | Type                                                                                                                                             | Default     |
+| ---------------------- | ------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
+| `color`                | `color`                   |             | `"danger" \| "dark" \| "light" \| "medium" \| "primary" \| "secondary" \| "success" \| "tertiary" \| "warning" \| string & Record<never, never>` | `undefined` |
+| `hidePageSize`         | `hide-page-size`          |             | `boolean`                                                                                                                                        | `undefined` |
+| `length`               | `length`                  |             | `number`                                                                                                                                         | `0`         |
+| `pageIndex`            | `page-index`              |             | `number`                                                                                                                                         | `0`         |
+| `pageSize`             | `page-size`               |             | `number`                                                                                                                                         | `25`        |
+| `showFirstLastButtons` | `show-first-last-buttons` |             | `boolean`                                                                                                                                        | `true`      |
 
 
 ## Events

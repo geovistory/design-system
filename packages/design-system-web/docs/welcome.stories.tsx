@@ -1,18 +1,6 @@
 import { h } from '@stencil/core';
-// import '../dist/components/ion-app';
-// import '../dist/components/ion-content';
-// import '../dist/components/ion-grid';
-// import '../dist/components/ion-text';
-// import '../dist/components/ion-list';
-// import '../dist/components/ion-item';
-// import '../dist/components/ion-icon';
-// import '../dist/components/ion-row';
-// import '../dist/components/ion-col';
-// import '../dist/components/ion-button';
-import { defineCustomElements } from '../loader';
 import { version } from '../package.json';
 import { stencilWrapper } from '../src/helpers/stencilWrapper';
-defineCustomElements();
 export default {
   title: 'Welcome',
 };

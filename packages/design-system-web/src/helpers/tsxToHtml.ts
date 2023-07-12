@@ -37,7 +37,9 @@ export function tsxToHTML(tsxSnippet: VNode): string {
 
     let selfId;
 
-    if ($text$) return $text$;
+    // if text, replace < with &lt; and return it
+    if ($text$) return $text$.replace(/</g, '&lt;');
+
     let attributeString = '';
     if ($attrs$)
       attributeString =
@@ -61,9 +63,17 @@ export function tsxToHTML(tsxSnippet: VNode): string {
             return true;
           })
           .map(key => {
-            const value = $attrs$[key];
+            // replace < with &lt; in attribute values to avoid formatting error
+            let value = $attrs$[key].toString().replace(/</g, '&lt;');
 
-            return `${camelToDash(key)}="${value}"`;
+            // replace " with &Prime; in attribute values to avoid formatting error
+            value = value.replace(/"/g, '&Prime;');
+
+            // replace / with &frasl; in attribute values to avoid formatting error
+            value = value.replace(/\//g, '&frasl;');
+
+            const attr = camelToDash(key) + '="' + value + '"';
+            return attr;
           })
           .join(' ');
 
@@ -77,7 +87,7 @@ export function tsxToHTML(tsxSnippet: VNode): string {
 
   let htmlString = convertToHTML(tsxSnippet);
   htmlString = initWrapper(htmlString, complexElements);
-  return format(htmlString, { plugins: [pluginXML], parser: 'xml', singleAttributePerLine: true });
+  return format(htmlString, { plugins: [pluginXML], parser: 'xml', singleQuote: true, singleAttributePerLine: true });
 }
 
 // Convert camelCase to dash-case
@@ -117,24 +127,22 @@ function initWrapper(htmlString: string, complexElements: ComplexElements) {
     <script>
       function initialize() {
         ${Object.keys(complexElements)
-          .map(
-            key => `
+      .map(
+        key => `
         var el${key} = document.getElementById('el-${key}');
-        ${
-          complexElements[key]?.props
+        ${complexElements[key]?.props
             ? `// Add properties of complex types (not strings or numbers)
         ${complexElements[key].props.map(prop => `el${key}['${prop.key}'] = ${JSON.stringify(prop.value)}`)};`
             : ''
-        }
-        ${
-          complexElements[key]?.functions
+          }
+        ${complexElements[key]?.functions
             ? `// Add event listeners
         ${complexElements[key].functions.map(prop => `el${key}.addEventListener('${convertEventHandlerName(prop.key)}', ${prop.value}`)});`
             : ''
-        }
+          }
         `,
-          )
-          .join('')}
+      )
+      .join('')}
       }
     </script>
   </body>

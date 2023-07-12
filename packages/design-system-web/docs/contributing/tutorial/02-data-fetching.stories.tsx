@@ -1,12 +1,5 @@
 import { h } from '@stencil/core';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import '../dist/components/geov-code';
-import '../dist/components/geov-toc';
-import '../dist/components/ion-app';
-import '../dist/components/ion-button';
-import '../dist/components/ion-content';
-import '../dist/components/ion-grid';
-import '../dist/components/ion-icon';
+import { stencilWrapper } from '../../../src/helpers/stencilWrapper';
 import { c0, c1, c5, c6, c7, c8, q1, r1 } from './tutorial.snippets';
 
 export default {
@@ -22,7 +15,7 @@ export default {
   },
 };
 
-export const DataFetching = () => (
+export const DataFetching = stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>
@@ -46,9 +39,6 @@ export const DataFetching = () => (
               SPARQL client
             </a>{' '}
             , paste the following query and run it (button top right).
-            <CopyToClipboard text={{ q1 }} onCopy={() => alert('copied!')}>
-              <ion-icon name="copy-outline"></ion-icon>
-            </CopyToClipboard>
           </p>
           <p>
             <geov-code language="sparql" code={q1}></geov-code>
@@ -186,5 +176,5 @@ export const DataFetching = () => (
         </geov-toc>
       </ion-grid>
     </ion-content>
-  </ion-app>
+  </ion-app>,
 );

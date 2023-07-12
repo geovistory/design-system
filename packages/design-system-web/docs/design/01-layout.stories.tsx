@@ -1,7 +1,5 @@
 import { h } from '@stencil/core';
-import '../dist/components/ion-app';
-import '../dist/components/ion-content';
-import '../dist/components/ion-grid';
+import { stencilWrapper } from '../../src/helpers/stencilWrapper';
 
 export default {
   title: 'Design/Layout',
@@ -16,7 +14,7 @@ export default {
   },
 };
 
-export const Layout = () => (
+export const Layout = stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>
@@ -37,5 +35,5 @@ export const Layout = () => (
         </p>
       </ion-grid>
     </ion-content>
-  </ion-app>
+  </ion-app>,
 );

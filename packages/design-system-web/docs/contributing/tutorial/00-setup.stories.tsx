@@ -1,9 +1,5 @@
 import { h } from '@stencil/core';
-import '../dist/components/geov-code';
-import '../dist/components/ion-app';
-import '../dist/components/ion-button';
-import '../dist/components/ion-content';
-import '../dist/components/ion-grid';
+import { stencilWrapper } from '../../../src/helpers/stencilWrapper';
 import { files } from './tutorial.snippets';
 export default {
   title: 'Contributing/Tutorial/Setup',
@@ -18,7 +14,7 @@ export default {
   },
 };
 
-export const Setup = () => (
+export const Setup = stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>
@@ -100,5 +96,5 @@ export const Setup = () => (
         </p>
       </ion-grid>
     </ion-content>
-  </ion-app>
+  </ion-app>,
 );

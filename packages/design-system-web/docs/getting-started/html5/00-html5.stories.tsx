@@ -1,8 +1,5 @@
 import { h } from '@stencil/core';
-import '../../../dist/components/geov-code';
-import '../../../dist/components/ion-app';
-import '../../../dist/components/ion-content';
-import '../../../dist/components/ion-grid';
+import { stencilWrapper } from '../../../src/helpers/stencilWrapper';
 import { html5Cdn, html5NodeModules, startScript } from './install-html5-cdn.snippets';
 
 export default {
@@ -18,7 +15,7 @@ export default {
   },
 };
 
-export const HTML5 = () => (
+export const HTML5 = stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>
@@ -33,7 +30,7 @@ export const HTML5 = () => (
           </a>
           .
         </p>
-        <p>Copy & paste the following code into a index.html and open it in a browser:</p>
+        <p>Copy and paste the following code into a index.html and open it in a browser:</p>
         <p>
           <geov-code language="html" code={html5Cdn}></geov-code>
         </p>
@@ -90,5 +87,5 @@ export const HTML5 = () => (
         </p>
       </ion-grid>
     </ion-content>
-  </ion-app>
+  </ion-app>,
 );

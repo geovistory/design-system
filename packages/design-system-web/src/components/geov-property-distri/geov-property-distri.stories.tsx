@@ -1,7 +1,5 @@
 import { h } from '@stencil/core';
 import { stencilWrapper } from '../../helpers/stencilWrapper';
-import { defineCustomElement } from '../../../dist/components/geov-property-distri';
-defineCustomElement();
 
 export default {
   title: 'Data Visualization Components/Property Distribution',

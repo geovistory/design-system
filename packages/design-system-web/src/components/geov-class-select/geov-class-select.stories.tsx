@@ -1,7 +1,6 @@
 import { h } from '@stencil/core';
 import { stencilWrapper } from '../../helpers/stencilWrapper';
-import { defineCustomElement } from '../../../dist/components/geov-class-select';
-defineCustomElement();
+
 export default {
   title: 'Data Components/Explorer/Filters/Class Select',
 };

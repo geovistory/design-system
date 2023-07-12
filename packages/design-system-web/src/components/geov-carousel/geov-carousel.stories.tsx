@@ -1,7 +1,5 @@
 import { h } from '@stencil/core';
 import { stencilWrapper } from '../../helpers/stencilWrapper';
-import { defineCustomElement } from '../../../dist/components/geov-carousel';
-defineCustomElement();
 export default {
   title: 'Design Components/Carousel',
   tags: ['autodocs'],

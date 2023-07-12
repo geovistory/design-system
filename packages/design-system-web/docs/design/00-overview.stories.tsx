@@ -1,10 +1,5 @@
 import { h } from '@stencil/core';
-import '../dist/components/ion-app';
-import '../dist/components/ion-content';
-import '../dist/components/ion-grid';
-import '../dist/components/ion-icon';
-import '../dist/components/ion-item';
-import '../dist/components/ion-list';
+import { stencilWrapper } from '../../src/helpers/stencilWrapper';
 
 export default {
   title: 'Design/Overview',
@@ -19,7 +14,7 @@ export default {
   },
 };
 
-export const Overview = () => (
+export const Overview = stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>
@@ -65,5 +60,5 @@ export const Overview = () => (
         </p>
       </ion-grid>
     </ion-content>
-  </ion-app>
+  </ion-app>,
 );

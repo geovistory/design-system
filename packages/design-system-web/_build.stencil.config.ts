@@ -8,7 +8,7 @@ export const config: Config = {
   globalScript: './_build.global.ts',
   globalStyle: './src/global/global.css',
   plugins: [sass()],
-  tsconfig: './_build.build.json',
+  tsconfig: './_build.tsconfig.json',
   outputTargets: [
     {
       type: 'dist',

@@ -16,6 +16,39 @@
         "<node_internals>/**"
       ],
       "type": "node"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "E2E Test Current File",
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/node_modules/.bin/stencil",
+      "args": [
+        "test",
+        "--e2e",
+        "--",
+        "--maxWorkers=0",
+        "${fileBasename}"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Spec Test Current File",
+      "cwd": "${workspaceFolder}/packages/design-system-web",
+      "program": "${workspaceFolder}/packages/design-system-web/node_modules/.bin/stencil",
+      "args": [
+        "test",
+        "--spec",
+        "--config",
+        "_test.stencil.config2.ts",
+        "--",
+        "${fileBasename}"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     }
-  ]
+  ],
 }

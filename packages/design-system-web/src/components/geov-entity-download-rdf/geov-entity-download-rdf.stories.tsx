@@ -1,7 +1,6 @@
 import { h } from '@stencil/core';
 import { stencilWrapper } from '../../helpers/stencilWrapper';
-import { defineCustomElements } from '../../../loader';
-defineCustomElements();
+
 export default {
   title: 'Data Components/Entity/Download RDF',
   tags: ['autodocs'],

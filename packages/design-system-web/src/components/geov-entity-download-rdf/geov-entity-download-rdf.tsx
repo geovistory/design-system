@@ -93,6 +93,7 @@ export class GeovEntityDownloadRdf {
     ));
   }
   render() {
+    debugger;
     return (
       <Host>
         <ion-button id="open-custom-dialog" expand={this.expand} fill={this.fill} color={this.color} onClick={() => (this.modal.isOpen = true)}>

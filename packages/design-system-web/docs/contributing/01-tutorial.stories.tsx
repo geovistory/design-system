@@ -1,9 +1,5 @@
 import { h } from '@stencil/core';
-import '../dist/components/ion-app ';
-import '../dist/components/ion-content ';
-import '../dist/components/ion-grid ';
-import '../dist/components/ion-item ';
-import '../dist/components/ion-list';
+import { stencilWrapper } from '../../src/helpers/stencilWrapper';
 
 export default {
   title: 'Contributing/Tutorial',
@@ -18,7 +14,7 @@ export default {
   },
 };
 
-export const Introduction = () => (
+export const Introduction = stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>
@@ -51,5 +47,5 @@ export const Introduction = () => (
         </p>
       </ion-grid>
     </ion-content>
-  </ion-app>
+  </ion-app>,
 );

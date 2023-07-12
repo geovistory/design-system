@@ -1,7 +1,5 @@
 import { h } from '@stencil/core';
 import { stencilWrapper } from '../../helpers/stencilWrapper';
-import { defineCustomElement } from '../../../dist/components/geov-paginator';
-defineCustomElement();
 
 export default {
   title: 'Design Components/Paginator',

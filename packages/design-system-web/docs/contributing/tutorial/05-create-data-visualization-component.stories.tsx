@@ -1,8 +1,5 @@
 import { h } from '@stencil/core';
-import '../dist/components/geov-code';
-import '../dist/components/ion-app';
-import '../dist/components/ion-content';
-import '../dist/components/ion-grid';
+import { stencilWrapper } from '../../../src/helpers/stencilWrapper';
 import {
   attribute,
   chartColors,
@@ -34,7 +31,7 @@ export default {
   },
 };
 
-export const CreateDataVisualizationComponent = () => (
+export const CreateDataVisualizationComponent = stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>
@@ -389,5 +386,5 @@ export const CreateDataVisualizationComponent = () => (
         </p>
       </ion-grid>
     </ion-content>
-  </ion-app>
+  </ion-app>,
 );
