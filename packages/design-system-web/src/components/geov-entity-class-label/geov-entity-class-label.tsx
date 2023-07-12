@@ -13,7 +13,8 @@ PREFIX geov: <http://geovistory.org/resource/>
 
 SELECT ?classLabel
 WHERE {
-  geov:${id} rdf:type/rdfs:label ?classLabel
+  geov:${id} rdf:type ?t.
+  optional{?t rdfs:label ?classLabel} 
 }
 LIMIT 1
 `;

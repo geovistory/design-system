@@ -22,6 +22,7 @@ module.exports = [
   'ion-col',
   'ion-content',
   'ion-datetime',
+  'ion-datetime-button',
   'ion-fab',
   'ion-fab-button',
   'ion-fab-list',

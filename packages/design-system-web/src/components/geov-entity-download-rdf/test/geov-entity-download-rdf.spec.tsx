@@ -59,7 +59,7 @@ describe('geov-entity-download-rdf', () => {
     </geov-entity-download-rdf>
     `);
   });
-  it.only('Server side (hydrate-script): renders initial state', async () => {
+  it('Server side (hydrate-script): renders initial state', async () => {
     let serverFetchedData;
     const html = `<geov-entity-download-rdf entity-id="i785518" color="primary" expand="block" fill="outline" button-label="Download RDF" button-icon="download-outline"></geov-entity-download-rdf>`;
 
