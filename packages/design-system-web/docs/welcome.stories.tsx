@@ -52,20 +52,14 @@ export const Welcome = stencilWrapper(
             </ion-item>
           </ion-list>
         </p>
+        <h2>Source Code </h2>
 
-        <ion-grid>
-          <ion-row>
-            {/* <ion-col><ion-button>How to use?</ion-button></ion-col> */}
-            <ion-col class="ion-text-center">
-              <ion-button href="/?path=/story/contributing-ci-and-cd-workflow--ci-and-cd-workflow">Contribute</ion-button>
-            </ion-col>
-            <ion-col class="ion-text-center">
-              <ion-button href="https://github.com/geovistory/design-system">
-                <ion-icon name="logo-github"></ion-icon>&nbsp; Code on GitHub
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+        <p>
+          <ion-button href="/?path=/story/contributing-ci-and-cd-workflow--ci-and-cd-workflow">Contribute</ion-button>
+          <ion-button href="https://github.com/geovistory/design-system">
+            <ion-icon name="logo-github"></ion-icon>&nbsp; Code on GitHub
+          </ion-button>
+        </p>
       </ion-grid>
     </ion-content>
   </ion-app>,
