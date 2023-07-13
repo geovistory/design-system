@@ -17,14 +17,12 @@
     "jsx": "react",
     "jsxFactory": "h",
     "resolveJsonModule": true,
-    "types": [
-      "./types/mdx.d.ts"
-    ]
   },
   "include": [
     "src",
     "docs",
     ".storybook/lib",
+    ".storybook/templates",
     "_build.global.ts",
     "_dev.global.ts"
   ],

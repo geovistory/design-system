@@ -120,31 +120,30 @@ function initWrapper(htmlString: string, complexElements: ComplexElements) {
   if (Object.keys(complexElements).length === 0) return htmlString;
 
   return `
-  <body onload="initialize()">
+<body onload="init()">
 
-    ${htmlString}
+  ${htmlString}
 
-    <script>
-      function initialize() {
-        ${Object.keys(complexElements)
+  <script>
+    function init() {
+      ${Object.keys(complexElements)
       .map(
-        key => `
-        var el${key} = document.getElementById('el-${key}');
-        ${complexElements[key]?.props
-            ? `// Add properties of complex types (not strings or numbers)
-        ${complexElements[key].props.map(prop => `el${key}['${prop.key}'] = ${JSON.stringify(prop.value)}`)};`
+        key => `var el${key} = document.getElementById('el-${key}');
+      ${complexElements[key]?.props
+            ? `// Add props
+      ${complexElements[key].props.map(prop => `el${key}['${prop.key}'] = ${JSON.stringify(prop.value)}`).join(`;
+      `)};`
             : ''
-          }
-        ${complexElements[key]?.functions
-            ? `// Add event listeners
-        ${complexElements[key].functions.map(prop => `el${key}.addEventListener('${convertEventHandlerName(prop.key)}', ${prop.value}`)});`
+          }${complexElements[key]?.functions
+            ? `
+      // Add event listeners
+      ${complexElements[key].functions.map(prop => `el${key}.addEventListener('${convertEventHandlerName(prop.key)}', ${prop.value}`)});`
             : ''
-          }
-        `,
+          }`,
       )
       .join('')}
-      }
-    </script>
-  </body>
-  `;
+    }
+  </script>
+</body>
+`;
 }

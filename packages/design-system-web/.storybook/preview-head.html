@@ -9,6 +9,43 @@
     overflow: auto;
     position: relative;
   }
+
+  .geov-custom-toc {
+    position: sticky;
+    top: 0px;
+    width: max-content;
+    margin-left: auto !important;
+    height: 0;
+    z-index: 10;
+  }
+
+  .geov-custom-toc div {
+    background-color: white;
+    padding: 10px;
+  }
+
+  .geov-custom-toc p {
+    margin-top: 0;
+    margin-bottom: 6px;
+  }
+
+  .geov-custom-toc button {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: #029CFD;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .geov-custom-toc ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
 </style>
 <script>
   document.__STENCIL_DATA__ = {};

@@ -1,9 +1,18 @@
 import { h } from '@stencil/core';
-import { stencilWrapper } from '../../helpers/stencilWrapper';
 import { AMPI_SPARQL_ENDPOINT, DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
-
+import { docsTemlpate } from '../../../.storybook/templates/docsTemplate';
+import { stencilWrapper } from '../../helpers/stencilWrapper';
+import componentApi from './docs-component-api.md?raw';
+import overview from './docs-overview.md?raw';
 export default {
   title: 'Data Components/Entity/Entity',
+    tags: ['autodocs'],
+  parameters: {
+    viewMode: 'docs',
+    docs: {
+      page: () => docsTemlpate(overview, componentApi),
+    },
+  },
 };
 export const ShipVoyage = stencilWrapper(<geov-entity sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i151089" language="en" fetchBeforeRender={false}></geov-entity>);
 export const GeographicalPlace = stencilWrapper(<geov-entity sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i209502" language="en" fetchBeforeRender={false}></geov-entity>);

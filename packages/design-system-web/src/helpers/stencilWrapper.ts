@@ -1,19 +1,11 @@
+/** @jsx React.createElement */
+/** @jsxFrag React.Fragment */
 import { VNode } from '@stencil/core';
 import { renderVdom } from '@stencil/core/internal/client';
+import type { StoryObj } from '@storybook/web-components';
 import { tsxToHTML } from './tsxToHtml';
-type X = {
-  (): Element;
-  parameters: {
-    docs: {
-      source: {
-        code: string;
-      };
-    };
-  };
-};
 
-export const stencilWrapper = (vnode: VNode): X => {
-
+export const stencilWrapper = (vnode: VNode): StoryObj => {
   const host = document.createElement('ion-app');
   renderVdom(
     {
@@ -30,7 +22,13 @@ export const stencilWrapper = (vnode: VNode): X => {
   );
   const element = host.children[0];
 
-  const fn: X = () => element;
-  fn.parameters = { docs: { source: { code: tsxToHTML(vnode) } } };
+  const fn: StoryObj = () => element;
+  fn.parameters = {
+    docs: {
+      canvas: { sourceState: 'shown' },
+      source: { code: tsxToHTML(vnode) },
+      story: { inline: true },
+    },
+  };
   return fn;
 };

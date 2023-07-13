@@ -1,7 +1,20 @@
 import { Component, Host, Prop, State, Event, h, EventEmitter } from '@stencil/core';
 import { ItemSelectedEvent } from '../geov-authority-lookup-explorer/geov-authority-lookup-explorer';
-//import { popoverController } from '@ionic/core';
 
+/**
+ * This component allows searching for entities in Wikidata, GND, and IdRef. Users can enter a string and optionally choose a type/class. Once the desired entity is found, its URI can be copied to the clipboard or outputted through a DOM event.
+ *
+ * Supported Authority Files:
+ *
+ * - [Wikidata](https://www.wikidata.org/) is a free and collaborative knowledge graph that serves as a central repository of structured data for Wikimedia projects, including Wikipedia.
+ * - [GND](https://www.dnb.de/DE/Professionell/Standardisierung/GND/gnd_node.html), which stands for "Gemeinsame Normdatei" in German, is an authority file used in libraries, archives, and museums in German-speaking countries. It is maintained cooperatively by the German National Library, the Austrian National Library, the Swiss National Library, and other institutions.
+ * - [IdRef](https://www.idref.fr/) is a French authority file that serves as a reference for identifying and managing bibliographic data related to persons, organizations, and works. It is maintained by the Bibliographic Agency for Higher Education (ABES) in France.
+ *
+ * The component has a rich API for customization and styling, see below.
+ *
+ * Search and select an entity. Open the console to see the selected URI in the logs.
+ *
+ */
 @Component({
   tag: 'geov-authority-lookup',
   styleUrl: 'geov-authority-lookup.css',
