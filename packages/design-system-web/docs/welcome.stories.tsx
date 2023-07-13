@@ -3,6 +3,16 @@ import { version } from '../package.json';
 import { stencilWrapper } from '../src/helpers/stencilWrapper';
 export default {
   title: 'Welcome',
+  parameters: {
+    previewTabs: {
+      'docs': { hidden: true },
+      'storybook/docs/panel': {
+        hidden: true,
+      },
+    },
+    viewmode: 'story',
+    options: { showPanel: false },
+  },
 };
 
 export const Welcome = stencilWrapper(

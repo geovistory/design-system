@@ -8,6 +8,67 @@ import { Components } from '@geovistory/design-system-web';
 
 
 @ProxyCmp({
+  inputs: ['apis', 'displayCopyBtn', 'displayOpenBtn', 'displaySelectBtn', 'initSearch', 'initSearchType', 'nbColMax', 'nbOccurencesMax', 'types']
+})
+@Component({
+  selector: 'geov-authority-lookup',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['apis', 'displayCopyBtn', 'displayOpenBtn', 'displaySelectBtn', 'initSearch', 'initSearchType', 'nbColMax', 'nbOccurencesMax', 'types'],
+})
+export class GeovAuthorityLookup {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['selected']);
+  }
+}
+
+
+import type { ItemSelectedEvent as IGeovAuthorityLookupItemSelectedEvent } from '@geovistory/design-system-web';
+
+export declare interface GeovAuthorityLookup extends Components.GeovAuthorityLookup {
+  /**
+   * Event emitted when the select button has been clicked.
+   */
+  selected: EventEmitter<CustomEvent<IGeovAuthorityLookupItemSelectedEvent>>;
+}
+
+
+@ProxyCmp({
+  inputs: ['api', 'displayCopyBtn', 'displayOpenBtn', 'displaySelectBtn', 'keywords', 'nbOccurencesMax', 'type']
+})
+@Component({
+  selector: 'geov-authority-lookup-explorer',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+  inputs: ['api', 'displayCopyBtn', 'displayOpenBtn', 'displaySelectBtn', 'keywords', 'nbOccurencesMax', 'type'],
+})
+export class GeovAuthorityLookupExplorer {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['selected']);
+  }
+}
+
+
+import type { ItemSelectedEvent as IGeovAuthorityLookupExplorerItemSelectedEvent } from '@geovistory/design-system-web';
+
+export declare interface GeovAuthorityLookupExplorer extends Components.GeovAuthorityLookupExplorer {
+  /**
+   * Event emitted when the select button has been clicked.
+The event does not bubble up through the DOM.
+   */
+  selected: EventEmitter<CustomEvent<IGeovAuthorityLookupExplorerItemSelectedEvent>>;
+}
+
+
+@ProxyCmp({
   inputs: ['images']
 })
 @Component({

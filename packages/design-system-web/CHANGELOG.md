@@ -11,7 +11,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## 1.11.1-pr-65.1 (2023-06-28)
+## 1.11.1-pr-61.2 (2023-06-20)
 
 **Note:** Version bump only for package @geovistory/design-system-web
 
@@ -19,7 +19,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## 1.11.1-pr-65.0 (2023-06-28)
+## 1.11.1-pr-61.1 (2023-06-20)
+
+**Note:** Version bump only for package @geovistory/design-system-web
+
+
+
+
+
+## 1.11.1-pr-61.0 (2023-06-13)
 
 **Note:** Version bump only for package @geovistory/design-system-web
 
