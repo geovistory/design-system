@@ -39,7 +39,7 @@
     "dev:stencil-only": "npx stencil build --config _dev.stencil.config.ts --dev --watch --serve ",
     "sleep5s": "node -e \"setTimeout(() => process.exit(0), 5000)\"",
     "=========================== STENCIL ==========================": "",
-    "generate": "npx stencil generate",
+    "generate": "npx stencil generate --config _dev.stencil.config.ts",
     "==================== BUILD ====================": "================================",
     "build": "npx stencil build --config _build.stencil.config.ts && rollup -c rollup.config.js",
     "build:docs": "storybook build -o ../../storybook  --quiet",

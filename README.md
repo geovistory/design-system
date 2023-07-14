@@ -12,13 +12,49 @@ The components are coded as Stencil components. Doing so, we have Angular, React
 * [@geovistory/design-system-web](https://www.npmjs.com/package/@geovistory/design-system-web): Web components
 * [@geovistory/design-system-react](https://www.npmjs.com/package/@geovistory/design-system-react): React components
 * [@geovistory/design-system-angular](https://www.npmjs.com/package/@geovistory/design-system-angular): Angular components
-* [@geovistory/design-system-happy-dom](https://www.npmjs.com/package/@geovistory/design-system-happy-dom): HappyDom worker for server side rendering
-
 
 ---
 
 
 [Checkout our documentation](https://design.geovistory.org/)
+
+
+
+## Development
+
+Install (all packages)
+
+```bash
+npm i
+```
+
+Start dev servers
+```bash
+npm run dev
+```
+
+Add a component
+```bash
+# open main package
+cd packages/design-system-web 
+
+# generate a component
+npm run generate
+
+# enter component name (starting with geov-*) 
+? Component tag name (dash-case): › geov-my-component
+```
+
+
+Run tests
+```bash
+npm run test
+```
+
+Build
+```bash
+npm run build
+```
 
 
 ## Publication
