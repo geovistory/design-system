@@ -86,7 +86,7 @@ describe('geov-entity-download-rdf', () => {
             </style>
         </head>
 
-        <body><geov-entity-download-rdf entityid="i785518" color="primary" expand="block" fill="outline"
+        <body><geov-entity-download-rdf entity-id="i785518" color="primary" expand="block" fill="outline"
                 button-label="Download RDF" button-icon="download-outline" class="hydrated" s-id="1"><!--r.1--><ion-button
                     id="open-custom-dialog" expand="block" fill="outline" color="primary"
                     c-id="1.0.0.0"><!--t.1.1.1.0-->Download RDF <ion-icon name="download-outline"
@@ -135,7 +135,7 @@ describe('geov-entity-download-rdf', () => {
           </style>
       </head>
 
-      <body><geov-entity-download-rdf entityid="i785518" color="primary" expand="block" fill="outline"
+      <body><geov-entity-download-rdf entity-id="i785518" color="primary" expand="block" fill="outline"
               button-label="Download RDF" button-icon="download-outline" class="hydrated" s-id="1"><!--r.1--><ion-button
                   id="open-custom-dialog" expand="block" fill="outline" color="primary"
                   c-id="1.0.0.0"><!--t.1.1.1.0-->Download RDF <ion-icon name="download-outline"
@@ -177,7 +177,7 @@ describe('geov-entity-download-rdf', () => {
     });
     await page.waitForChanges();
     expect(page.root).toEqualHtml(
-      `<geov-entity-download-rdf entityid="i785518" color="primary" expand="block" fill="outline" button-label="Download RDF"
+      `<geov-entity-download-rdf entity-id="i785518" color="primary" expand="block" fill="outline" button-label="Download RDF"
       button-icon="download-outline" class="hydrated"><!--r.1--><ion-button id="open-custom-dialog" expand="block"
           fill="outline" color="primary">Download RDF <ion-icon name="download-outline"></ion-icon></ion-button><ion-modal
           id="example-modal" trigger="open-custom-dialog"><ion-header><ion-toolbar><ion-buttons

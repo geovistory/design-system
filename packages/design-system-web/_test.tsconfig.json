@@ -6,9 +6,6 @@
     "**/*.spec.tsx"
   ],
   "include": [
-    "src",
-    ".storybook/lib",
-    "_build.global.ts",
-    "src/components/geov-entity-download-rdf/test/geov-entity-download-rdf.spec.tsx"
+    "src"
   ]
 }
