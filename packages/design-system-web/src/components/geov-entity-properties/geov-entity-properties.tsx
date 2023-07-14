@@ -1,10 +1,10 @@
-import { Component, Host, h, Prop, State, Method, Event, EventEmitter } from '@stencil/core';
+import { Color } from '@ionic/core';
+import { Component, Event, EventEmitter, h, Host, Prop, State } from '@stencil/core';
+import { FetchResponse } from '../../lib/FetchResponse';
+import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
 import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
-import { FetchResponse } from '../../lib/FetchResponse';
-import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
-import { Color } from '@ionic/core';
 
 const qrPropsWithCount = (id: string, language: string, predicateInclude?: string, predicateExclude?: string) => {
   let selectClause: string;
@@ -85,6 +85,12 @@ export interface GeovEntityPropertiesData extends FetchResponse {
   error?: boolean;
 }
 
+/**
+ * This component fetches and displays the properties of an entity.
+ * Each predicate is queried and displayed as a paginated list.
+ * The properties `predicateInclude` and `predicateExclude` allow to customize
+ * what predicates to fetch.
+ */
 @Component({
   tag: 'geov-entity-properties',
   styleUrl: 'geov-entity-properties.css',
@@ -239,7 +245,6 @@ export class GeovEntityProperties {
     });
   }
 
-  @Method()
   async fetchData(): Promise<GeovEntityPropertiesData> {
     let d: GeovEntityPropertiesData = { loading: true };
     const query = qrPropsWithCount(this.entityId, this.language, this.predicateInclude, this.predicateExclude);

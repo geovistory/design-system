@@ -1,5 +1,5 @@
 import { h } from '@stencil/core';
-import { stencilWrapper } from '../../../src/helpers/stencilWrapper';
+import { stencilWrapper } from '../../../.storybook/lib/stencilWrapper';
 import { html5Cdn, html5NodeModules, startScript } from './install-html5-cdn.snippets';
 
 export default {

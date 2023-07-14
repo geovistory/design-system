@@ -2,6 +2,10 @@ import { Component, h, Host, Prop } from '@stencil/core';
 import { GeovEntityPropertiesCustomEvent } from '../../components';
 import { GeovEntityPropertiesData } from '../geov-entity-properties/geov-entity-properties';
 
+/**
+ * This component displays the data of a geovistory entity.
+ * It is used to generate entity pages on geovistory.org.
+ */
 @Component({
   tag: 'geov-entity',
   styleUrl: 'geov-entity.css',

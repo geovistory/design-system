@@ -1,6 +1,6 @@
 import { h } from '@stencil/core';
 import { version } from '../package.json';
-import { stencilWrapper } from '../src/helpers/stencilWrapper';
+import { stencilWrapper } from '../.storybook/lib/stencilWrapper';
 export default {
   title: 'Welcome',
   parameters: {

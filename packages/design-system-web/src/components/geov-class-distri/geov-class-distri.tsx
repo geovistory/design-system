@@ -47,6 +47,12 @@ type SparqlResponse = {
   classcounts: SparqlBinding;
 };
 
+/**
+ * This component fetches the frequency of each class (object of `rdfs:type` or `a`)
+ * exsisting on the given sparql endpoint.
+ *
+ * The result is displayed as a pie-chart.
+ */
 @Component({
   tag: 'geov-class-distri',
   styleUrl: 'geov-class-distri.css',

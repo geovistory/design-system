@@ -1,6 +1,10 @@
 import { Component, h, Host, Prop } from '@stencil/core';
 import Swiper, { Autoplay, Pagination, SwiperOptions } from 'swiper';
 
+/**
+ * This component displays a list of images in a carousel. It is implemented with Swiper
+ * and allows dragging/swiping.
+ */
 @Component({
   tag: 'geov-carousel',
   styleUrl: 'geov-carousel.css',

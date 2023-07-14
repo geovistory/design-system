@@ -1,5 +1,5 @@
 import { h } from '@stencil/core';
-import { stencilWrapper } from '../../../src/helpers/stencilWrapper';
+import { stencilWrapper } from '../../../.storybook/lib/stencilWrapper';
 import disableJs from './04-disable-js.png';
 import network1 from './04-network-1.jpg';
 import verification from './04-verification.png';

@@ -14,6 +14,9 @@ export interface PageEvent {
   /* Index of the page that was selected previously. */
   previousPageIndex: number;
 }
+/**
+ * This component is a UI to create paginated lists.
+ */
 @Component({
   tag: 'geov-paginator',
   styleUrl: 'geov-paginator.css',

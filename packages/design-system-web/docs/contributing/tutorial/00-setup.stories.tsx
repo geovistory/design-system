@@ -1,5 +1,5 @@
 import { h } from '@stencil/core';
-import { stencilWrapper } from '../../../src/helpers/stencilWrapper';
+import { stencilWrapper } from '../../../.storybook/lib/stencilWrapper';
 import { files } from './tutorial.snippets';
 export default {
   title: 'Contributing/Tutorial/Setup',

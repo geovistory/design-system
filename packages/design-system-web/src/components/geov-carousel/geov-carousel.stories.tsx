@@ -1,12 +1,11 @@
 import { h } from '@stencil/core';
 import { docsTemlpate } from '../../../.storybook/templates/docsTemplate';
-import { stencilWrapper } from '../../helpers/stencilWrapper';
+import { stencilWrapper } from '../../../.storybook/lib/stencilWrapper';
 import componentApi from './docs-component-api.md?raw';
 import overview from './docs-overview.md?raw';
 export default {
   title: 'Design Components/Carousel',
   tags: ['autodocs'],
-    tags: ['autodocs'],
   parameters: {
     viewMode: 'docs',
     docs: {
@@ -14,6 +13,7 @@ export default {
     },
   },
 };
+
 export const Carousel = stencilWrapper(
   <geov-carousel
     style={{ height: '400px', maxWidth: '600px' }}

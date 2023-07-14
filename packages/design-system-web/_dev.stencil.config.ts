@@ -1,6 +1,7 @@
 import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
-import { docsGenerator } from './src/helpers/md-generator/docsGenerator';
+import { docsGenerator } from './.build/docs-generator/docs-generator';
+import { jsxTypesGenerator } from './.build/jsx-types-generator/jsx-types-generator';
 export const config: Config = {
   namespace: 'design-system-web',
   globalScript: './_dev.global.ts',
@@ -10,6 +11,7 @@ export const config: Config = {
   transformAliasedImportPaths: true,
   outputTargets: [
     docsGenerator,
+    jsxTypesGenerator,
     {
       type: 'dist',
       esmLoaderPath: '../loader',

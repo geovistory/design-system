@@ -1,6 +1,9 @@
 import { Config } from '@stencil/core';
-import { docsGenerator } from './src/helpers/md-generator/docsGenerator';
 import { sass } from '@stencil/sass';
+import { angularGenerator } from './.build/angular-generator';
+import { docsGenerator } from './.build/docs-generator/docs-generator';
+import { jsxTypesGenerator } from './.build/jsx-types-generator/jsx-types-generator';
+import { reactGenerator } from './.build/react-generator';
 
 export const config: Config = {
   namespace: 'design-system-web',
@@ -10,26 +13,26 @@ export const config: Config = {
   tsconfig: './_build.tsconfig.json',
   outputTargets: [
     docsGenerator,
-    // {
-    //   type: 'dist',
-    //   esmLoaderPath: '../loader',
-    // },
-    // {
-    //   type: 'dist-custom-elements',
-    //   customElementsExportBehavior: 'bundle',
-    // },
-    // {
-    //   type: 'dist-hydrate-script',
-    // },
-    // {
-    //   type: 'docs-readme',
-    // },
-    // CustomDocumentationGenerator,
-    // {
-    //   type: 'www',
-    //   serviceWorker: null, // disable service workers
-    // },
-    // angularGenerator(),
-    // reactGenerator(),
+    jsxTypesGenerator,
+    {
+      type: 'dist',
+      esmLoaderPath: '../loader',
+    },
+    {
+      type: 'dist-custom-elements',
+      customElementsExportBehavior: 'bundle',
+    },
+    {
+      type: 'dist-hydrate-script',
+    },
+    {
+      type: 'docs-readme',
+    },
+    {
+      type: 'www',
+      serviceWorker: null, // disable service workers
+    },
+    angularGenerator(),
+    reactGenerator(),
   ],
 };

@@ -69,7 +69,7 @@ const PlaygroundButton = () => {
   if (!stories.length) return <></>;
   const primaryStory = stories[0];
   const md = `
-  <ion-button href={${`/?path=/story/${primaryStory.id}`}} target="_self">
+  <ion-button href="${`?path=/story/${primaryStory.id}`}" target="_self">
       Go to playground (Canvas)
   </ion-button>`;
   return <Markdown>{md}</Markdown>;
@@ -91,7 +91,6 @@ const Usage = () => {
 `;
   return <Markdown>{md}</Markdown>;
 };
-
 
 const Theming = () => {
   const md = `

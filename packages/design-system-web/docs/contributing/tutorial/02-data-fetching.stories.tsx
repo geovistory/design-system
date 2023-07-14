@@ -1,5 +1,5 @@
 import { h } from '@stencil/core';
-import { stencilWrapper } from '../../../src/helpers/stencilWrapper';
+import { stencilWrapper } from '../../../.storybook/lib/stencilWrapper';
 import { c0, c1, c5, c6, c7, c8, q1, r1 } from './tutorial.snippets';
 
 export default {

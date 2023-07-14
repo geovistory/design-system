@@ -12,7 +12,13 @@ export interface GeovExplorerData {
   entityList?: EntityListData;
   fullCount?: FullCountData;
 }
-
+/**
+ * This component is a UI to explore Geovistory entities exposed on a Sparql endpoint.
+ *
+ * Features:
+ * - Filter by class
+ * - Filter by search stirng
+ */
 @Component({
   tag: 'geov-explorer',
   styleUrl: 'geov-explorer.css',

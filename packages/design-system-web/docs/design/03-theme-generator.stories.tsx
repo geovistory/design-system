@@ -1,5 +1,5 @@
 import { h } from '@stencil/core';
-import { stencilWrapper } from '../../src/helpers/stencilWrapper';
+import { stencilWrapper } from '../../.storybook/lib/stencilWrapper';
 
 export default {
   title: 'Design/Theme Generator',

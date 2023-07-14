@@ -3,6 +3,9 @@ import { GeovClassSelectItem } from '../geov-class-select/geov-class-select';
 export interface GeovClassRadioGroupEvent {
   value?: GeovClassSelectItem;
 }
+/**
+ * This component is a single-select UI for classes (with label, uri and count).
+ */
 @Component({
   tag: 'geov-class-radio-group',
   styleUrl: 'geov-class-radio-group.css',

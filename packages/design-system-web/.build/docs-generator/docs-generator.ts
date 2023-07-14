@@ -11,7 +11,8 @@ import { slotsToMarkdown } from './markdown-slots';
 import { usageToMarkdown } from './markdown-usage';
 export const docsGenerator: OutputTargetDocsCustom = {
   type: 'docs-custom',
-  generator: (docs: JsonDocs) => {
+  generator: async (docs: JsonDocs, c) => {
+    console.log('           generate docs-custom started');
     /**
      * Create docs for each component
      */
@@ -26,6 +27,7 @@ export const docsGenerator: OutputTargetDocsCustom = {
       // Component API
       createDocsComponentApi(component);
     }
+    console.log('           generate docs-custom finished');
   },
   strict: true,
 };

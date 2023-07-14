@@ -1,4 +1,4 @@
-import { Component, h, Host, Method, Prop, State } from '@stencil/core';
+import { Component, h, Host, Prop, State } from '@stencil/core';
 import { FetchResponse } from '../../lib/FetchResponse';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
 import { getSSRData } from '../../lib/ssr/getSSRData';
@@ -21,6 +21,12 @@ export interface GeovDataFetchExampleData extends FetchResponse {
   error?: boolean;
 }
 
+/**
+ * This component is an example for developers who want to ceate a component that
+ *
+ * - fetches data from a sparql endpoint
+ * - is prepared for SSR and hydration
+ */
 @Component({
   tag: 'geov-data-fetch-example',
   styleUrl: 'geov-data-fetch-example.css',
@@ -88,7 +94,6 @@ export class GeovDataFetchExample {
    * Do the sparql request(s)
    * @returns a Promise with the data for this component
    */
-  @Method()
   async fetchData(): Promise<GeovDataFetchExampleData> {
     return sparqlJson<{ o: SparqlBinding }>(this.sparqlEndpoint, qrLabel(this.entityId))
       .then(res => {

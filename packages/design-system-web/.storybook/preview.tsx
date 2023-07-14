@@ -25,7 +25,8 @@ const preview: Preview = {
           'Getting Started',
           'Design', ['Overview', 'Layout', 'Typography', 'Theming', 'Theme Generator', 'Theme Generator Color'],
           'Contributing', ['CI And CD Workflow', 'Tutorial', ['Introduction', 'Setup', 'Create Component', 'Data Fetching', 'Component Props', 'Create Data Visualization Component', 'Server Side Rendering']],
-          'Data Components', ['Authority Lookup', 'Authority Lookup Explorer']
+          'Data Components', ['Authority Lookup', 'Authority Lookup Explorer'],
+          'Data Visualization Components'
         ],
       },
     },

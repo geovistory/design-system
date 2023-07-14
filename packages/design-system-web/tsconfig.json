@@ -24,7 +24,8 @@
     ".storybook/lib",
     ".storybook/templates",
     "_build.global.ts",
-    "_dev.global.ts"
+    "_dev.global.ts",
+    ".build"
   ],
   "exclude": [
     "node_modules"

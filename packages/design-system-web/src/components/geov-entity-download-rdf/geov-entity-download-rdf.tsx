@@ -3,6 +3,19 @@ import { Component, h, Host, Prop } from '@stencil/core';
 import { State } from '@stencil/core/internal';
 import { downloadOutline } from 'ionicons/icons';
 
+/**
+ * This component is a UI to fetch and download the RDF of a given Geovistory entity id.
+ * It allows to choose one of the following rdf syntaxes:
+ *
+ * - RDF XML
+ * - JSON-LD
+ * - N-Triples
+ * - N-Quads
+ * - TRIX
+ * - Thrift
+ * - Turtle
+ *
+ */
 @Component({
   tag: 'geov-entity-download-rdf',
   styleUrl: 'geov-entity-download-rdf.css',
@@ -93,7 +106,6 @@ export class GeovEntityDownloadRdf {
     ));
   }
   render() {
-    debugger;
     return (
       <Host>
         <ion-button id="open-custom-dialog" expand={this.expand} fill={this.fill} color={this.color} onClick={() => (this.modal.isOpen = true)}>

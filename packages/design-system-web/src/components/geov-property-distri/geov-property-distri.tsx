@@ -48,7 +48,12 @@ type SparqlResponse = {
   propertynames: SparqlBinding;
   propertycounts: SparqlBinding;
 };
-
+/**
+ * This component fetches the frequency of each predicate
+ * exsisting on the given sparql endpoint.
+ *
+ * The result is displayed as a pie-chart.
+ */
 @Component({
   tag: 'geov-property-distri',
   styleUrl: 'geov-property-distri.css',

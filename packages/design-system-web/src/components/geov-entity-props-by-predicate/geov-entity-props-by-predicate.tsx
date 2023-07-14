@@ -45,6 +45,10 @@ export interface GeovEntityPropsByPredicateData extends FetchResponse {
   error?: boolean;
 }
 
+/**
+ * This component fetches and displays a paginated list of properties
+ * with a given subject and predicate.
+ */
 @Component({
   tag: 'geov-entity-props-by-predicate',
   styleUrl: 'geov-entity-props-by-predicate.css',
