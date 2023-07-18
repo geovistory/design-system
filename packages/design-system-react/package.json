@@ -45,7 +45,8 @@
   },
   "dependencies": {
     "@geovistory/design-system-web": "1.11.1-pr-69.3",
-    "@ionic/core": "6.0.14"
+    "@ionic/core": "6.0.14",
+    "@rollup/plugin-typescript": "^11.1.2"
   },
   "peerDependencies": {
     "react": "^17.0.2",
