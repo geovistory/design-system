@@ -20,7 +20,7 @@ const meta: Meta = {
       control: { type: 'range', min: 1, max: 3, step: 1 },
     },
   },
-    tags: ['autodocs'],
+  tags: ['autodocs'],
   parameters: {
     viewMode: 'docs',
     docs: {
