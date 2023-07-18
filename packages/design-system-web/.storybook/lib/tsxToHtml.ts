@@ -87,9 +87,11 @@ export function tsxToHTML(tsxSnippet: VNode): string {
 
   let htmlString = convertToHTML(tsxSnippet);
   htmlString = initWrapper(htmlString, complexElements);
-  return format(htmlString, { plugins: [pluginXML], parser: 'xml', singleQuote: true, singleAttributePerLine: true })
-  .replace(/&frasl;/g, '/')
-  .replace(/&lt;/g, '<');;
+  let returnvalue: string;
+  format(htmlString, { plugins: [pluginXML], parser: 'xml', singleQuote: true, singleAttributePerLine: true }).then(v => {
+    returnvalue = v.replace(/&frasl;/g, '/').replace(/&lt;/g, '<');
+  });
+  return returnvalue;
 }
 
 // Convert camelCase to dash-case
@@ -129,21 +131,23 @@ function initWrapper(htmlString: string, complexElements: ComplexElements) {
   <script>
     function init() {
       ${Object.keys(complexElements)
-      .map(
-        key => `var el${key} = document.getElementById('el-${key}');
-      ${complexElements[key]?.props
-            ? `// Add props
+        .map(
+          key => `var el${key} = document.getElementById('el-${key}');
+      ${
+        complexElements[key]?.props
+          ? `// Add props
       ${complexElements[key].props.map(prop => `el${key}['${prop.key}'] = ${JSON.stringify(prop.value)}`).join(`;
       `)};`
-            : ''
-          }${complexElements[key]?.functions
-            ? `
+          : ''
+      }${
+            complexElements[key]?.functions
+              ? `
       // Add event listeners
       ${complexElements[key].functions.map(prop => `el${key}.addEventListener('${convertEventHandlerName(prop.key)}', ${prop.value}`)});`
-            : ''
+              : ''
           }`,
-      )
-      .join('')}
+        )
+        .join('')}
     }
   </script>
 </body>
