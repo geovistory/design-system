@@ -1,6 +1,6 @@
 @import '~swiper/swiper.min.css';
-@import '~swiper/modules/autoplay/autoplay.min.css';
-@import '~swiper/modules/pagination/pagination.min.css';
+@import '~swiper/modules/autoplay.min.css';
+@import '~swiper/modules/pagination.min.css';
 
 :host,
 .swiper {
