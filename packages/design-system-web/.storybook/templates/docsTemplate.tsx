@@ -65,7 +65,6 @@ export const docsTemlpate = (overview: string, componentApi: string) => {
 const PlaygroundButton = () => {
   const { componentStories } = useContext(DocsContext);
   const stories = componentStories().filter(story => !story.parameters?.docs?.disable);
-  console.log(componentStories());
   if (!stories.length) return <></>;
   const primaryStory = stories[0];
   const md = `
