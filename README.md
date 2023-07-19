@@ -65,6 +65,21 @@ Build
 npm run build
 ```
 
+## Build Storybook
+
+In order to build the storybook run:
+
+```bash
+npm run storybook
+```
+
+This generates a website in `./storybook`. To serve the built storybook website, run:
+
+```bash
+npm run storybook:serve
+```
+
+
 
 ## Publication
 
