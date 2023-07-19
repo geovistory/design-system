@@ -77,8 +77,6 @@ const PlaygroundButton = () => {
 
 const Usage = () => {
   const md = `
-
-
   # Usage
 
   This documentation explains how to implement and use Geovistory Design System components across different technologies.
@@ -94,8 +92,6 @@ const Usage = () => {
 
 const Theming = () => {
   const md = `
-
-
   # Theming
 
   <div>
@@ -104,10 +100,7 @@ const Theming = () => {
     </ion-button>
   </div>
 
-  <br />
-  <br />
-  <br />
-  <p>
+  <p style="margin-top: 8rem">
     If you experience any issues while using a component, please head over to the <a href="https://github.com/geovistory/design-system/issues">Github page</a> for more guidelines and
     help.
   </p>`;
