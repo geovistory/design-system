@@ -20,7 +20,7 @@ export const docsTemlpate = (overview: string, componentApi: string) => {
   return (
     <>
       <span ref={overviewRef}></span>
-      <div className="geov-custom-toc">
+      <div className="geov-custom-toc sb-unstyled">
         <div>
           <p>Content</p>
           <ul>
