@@ -12,6 +12,6 @@ package-lock.json-e
 # Generate output
 storybook/
 storybook-static/
-stencil-generated
+**/stencil-generated
 .vscode/settings.json
 
