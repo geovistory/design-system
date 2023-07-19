@@ -33,11 +33,6 @@ const preview: Preview = {
     darkMode: {
       stylePreview: true,
       classTarget: 'body'
-    },
-    docs: {
-      story: (...props) => (
-        <>Hello</>
-      )
     }
   }
 }
