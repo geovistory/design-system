@@ -5,10 +5,10 @@ import React, { useContext, useRef } from 'react';
 
 export const docsTemlpate = (overview: string, componentApi: string) => {
   let overviewRef = useRef<HTMLElement>(null);
-  let componentApiRef = useRef<HTMLElement>(null);
+  let componentApiRef = useRef<HTMLHeadingElement>(null);
   let examplesRef = useRef<HTMLElement>(null);
-  let usageRef = useRef<HTMLElement>(null);
-  let themingRef = useRef<HTMLElement>(null);
+  let usageRef = useRef<HTMLHeadingElement>(null);
+  let themingRef = useRef<HTMLHeadingElement>(null);
 
   const scrollTo = (el: React.MutableRefObject<HTMLElement>) => {
     setTimeout(() => {
@@ -53,11 +53,17 @@ export const docsTemlpate = (overview: string, componentApi: string) => {
       {/* <Controls /> */}
       <span ref={examplesRef}></span>
       <Stories includePrimary={false} title={'Examples'} />
-      <span ref={componentApiRef}></span>
+      <h1 ref={componentApiRef} className="sb-unstyled">
+        Component API
+      </h1>
       <Markdown>{componentApi}</Markdown>
-      <span ref={usageRef}></span>
+      <h1 ref={usageRef} className="sb-unstyled">
+        Usage
+      </h1>
       <Usage></Usage>
-      <span ref={themingRef}></span>
+      <h1 ref={themingRef} className="sb-unstyled">
+        Theming
+      </h1>
       <Theming></Theming>
     </>
   );
@@ -76,8 +82,6 @@ const PlaygroundButton = () => {
 
 const Usage = () => {
   const md = `
-  # Usage
-
   This documentation explains how to implement and use Geovistory Design System components across different technologies.
 
   <div>
@@ -91,8 +95,6 @@ const Usage = () => {
 
 const Theming = () => {
   const md = `
-  # Theming
-
   <div>
     <ion-button href="?path=/story/design-theming--theming" target="_self">
       <span>Go to theming page</span>
