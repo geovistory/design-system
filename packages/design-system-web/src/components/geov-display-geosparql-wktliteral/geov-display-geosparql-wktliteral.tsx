@@ -1,5 +1,10 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 
+/**
+ * This Component displays the coordinates given by a WKT literal string of this form:
+ *
+ * `http://www.opengis.net/def/crs/EPSG/0/4326>POINT(4.79583 52.55417)`
+ */
 @Component({
   tag: 'geov-display-geosparql-wktliteral',
   shadow: true,

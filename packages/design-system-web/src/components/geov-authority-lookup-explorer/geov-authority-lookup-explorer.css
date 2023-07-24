@@ -1,0 +1,32 @@
+:host {
+  display: block;
+}
+
+.colContent {
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /*Add suspension points (...) to indicate cut content */
+  white-space: nowrap; /* Prevents content from going to line */
+}
+
+.containerResponsive {
+  container-type: inline-size;
+}
+
+.colButtons {
+  display: none;
+  text-align: right;
+  white-space: nowrap;
+}
+.colMenu {
+  text-align: right;
+}
+
+@container (width >= 320px) {
+  .colButtons {
+    display: block;
+  }
+
+  .colMenu {
+    display: none;
+  }
+}

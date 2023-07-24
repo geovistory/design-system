@@ -25,3 +25,8 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 .env
+
+src/components/**/*.md
+
+# jsx types
+components*.d.ts

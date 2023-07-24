@@ -1,84 +1,24 @@
-// geov-hello-world.stories.tsx
-
-import React from 'react';
-import { JSX } from '../..';
-import { GeovEntity } from '../../../.storybook/stencil-generated/component';
+import { h } from '@stencil/core';
 import { AMPI_SPARQL_ENDPOINT, DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
-
+import { docsTemlpate } from '../../../.storybook/templates/docsTemplate';
+import { stencilWrapper } from '../../../.storybook/lib/stencilWrapper';
+import componentApi from './docs-component-api.md?raw';
+import overview from './docs-overview.md?raw';
 export default {
   title: 'Data Components/Entity/Entity',
-  component: GeovEntity,
+    tags: ['autodocs'],
+  parameters: {
+    viewMode: 'docs',
+    docs: {
+      page: () => docsTemlpate(overview, componentApi),
+    },
+  },
 };
-const Template = (args: JSX.GeovEntity) => <GeovEntity {...args}></GeovEntity>;
-
-export const ShipVoyage = Template.bind({});
-const args: JSX.GeovEntity = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  entityId: 'i151089',
-  language: 'en',
-  fetchBeforeRender: false,
-};
-ShipVoyage.args = args;
-
-export const GeographicalPlace = Template.bind({});
-const args2: JSX.GeovEntity = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  entityId: 'i209502',
-  language: 'en',
-  fetchBeforeRender: false,
-};
-GeographicalPlace.args = args2;
-
-export const JohannesKepler = Template.bind({});
-const args3: JSX.GeovEntity = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  entityId: 'i785518',
-  language: 'en',
-  fetchBeforeRender: false,
-};
-JohannesKepler.args = args3;
-
-export const Birth = Template.bind({});
-const args4: JSX.GeovEntity = {
-  sparqlEndpoint: AMPI_SPARQL_ENDPOINT,
-  entityId: 'i542181',
-  language: 'de',
-  fetchBeforeRender: false,
-};
-Birth.args = args4;
-
-export const TimeSpan = Template.bind({});
-const args5: JSX.GeovEntity = {
-  sparqlEndpoint: AMPI_SPARQL_ENDPOINT,
-  entityId: 'i542181ts',
-  language: 'de',
-  fetchBeforeRender: false,
-};
-TimeSpan.args = args5;
-
-export const DateTimeYear = Template.bind({});
-const arg6: JSX.GeovEntity = {
-  sparqlEndpoint: AMPI_SPARQL_ENDPOINT,
-  entityId: 'i609119',
-  language: 'de',
-  fetchBeforeRender: false,
-};
-DateTimeYear.args = arg6;
-
-export const DateTimeMonth = Template.bind({});
-const arg7: JSX.GeovEntity = {
-  sparqlEndpoint: AMPI_SPARQL_ENDPOINT,
-  entityId: 'i986993',
-  language: 'de',
-  fetchBeforeRender: false,
-};
-DateTimeMonth.args = arg7;
-
-export const DateTimeDay = Template.bind({});
-const arg8: JSX.GeovEntity = {
-  sparqlEndpoint: AMPI_SPARQL_ENDPOINT,
-  entityId: 'i872676',
-  language: 'de',
-  fetchBeforeRender: false,
-};
-DateTimeDay.args = arg8;
+export const ShipVoyage = stencilWrapper(<geov-entity sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i151089" language="en" fetchBeforeRender={false}></geov-entity>);
+export const GeographicalPlace = stencilWrapper(<geov-entity sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i209502" language="en" fetchBeforeRender={false}></geov-entity>);
+export const JohannesKepler = stencilWrapper(<geov-entity sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i785518" language="en" fetchBeforeRender={false}></geov-entity>);
+export const Birth = stencilWrapper(<geov-entity sparqlEndpoint={AMPI_SPARQL_ENDPOINT} entityId="i542181" language="en" fetchBeforeRender={false}></geov-entity>);
+export const TimeSpan = stencilWrapper(<geov-entity sparqlEndpoint={AMPI_SPARQL_ENDPOINT} entityId="i542181ts" language="de" fetchBeforeRender={false}></geov-entity>);
+export const DateTimeYear = stencilWrapper(<geov-entity sparqlEndpoint={AMPI_SPARQL_ENDPOINT} entityId="i609119" language="de" fetchBeforeRender={false}></geov-entity>);
+export const DateTimeMonth = stencilWrapper(<geov-entity sparqlEndpoint={AMPI_SPARQL_ENDPOINT} entityId="i986993" language="de" fetchBeforeRender={false}></geov-entity>);
+export const DateTimeDay = stencilWrapper(<geov-entity sparqlEndpoint={AMPI_SPARQL_ENDPOINT} entityId="i872676" language="de" fetchBeforeRender={false}></geov-entity>);

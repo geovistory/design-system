@@ -1,30 +1,21 @@
-import React from 'react';
-import { JSX } from '../..';
-import { GeovEntityDownloadRdf } from '../../../.storybook/stencil-generated/component';
-
+import { h } from '@stencil/core';
+import { docsTemlpate } from '../../../.storybook/templates/docsTemplate';
+import { stencilWrapper } from '../../../.storybook/lib/stencilWrapper';
+import componentApi from './docs-component-api.md?raw';
+import overview from './docs-overview.md?raw';
 export default {
   title: 'Data Components/Entity/Download RDF',
-  component: GeovEntityDownloadRdf,
+  tags: ['autodocs'],
+  parameters: {
+    viewMode: 'docs',
+    docs: {
+      page: () => docsTemlpate(overview, componentApi),
+    },
+  },
 };
-const Template = (args: JSX.GeovEntityDownloadRdf) => <GeovEntityDownloadRdf {...args}></GeovEntityDownloadRdf>;
-
-export const EntityDownloadRdf = Template.bind({});
-const args: JSX.GeovEntityDownloadRdf = {
-  entityId: 'i785518',
-  color: 'primary',
-  expand: 'block',
-  fill: 'outline',
-  buttonLabel: 'Download RDF',
-  buttonIcon: 'download-outline',
-};
-EntityDownloadRdf.args = args;
-
-export const EntityDownloadRdf2 = Template.bind({});
-const args2: JSX.GeovEntityDownloadRdf = {
-  entityId: 'i785518',
-  color: 'warning',
-  fill: 'outline',
-  buttonLabel: 'Download',
-  buttonIcon: 'download-sharp',
-};
-EntityDownloadRdf2.args = args2;
+export const EntityDownloadRdf = stencilWrapper(
+  <geov-entity-download-rdf entityId="i785518" color="primary" expand="block" fill="outline" buttonLabel="Download RDF" buttonIcon="download-outline" />,
+);
+export const EntityDownloadRdf2 = stencilWrapper(
+  <geov-entity-download-rdf entityId="i785518" color="warning" fill="outline" buttonLabel="Download" buttonIcon="download-sharp"></geov-entity-download-rdf>,
+);

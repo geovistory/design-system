@@ -20,7 +20,9 @@ export interface GeovEntityDefinitionData extends FetchResponse {
   definitions?: string[];
   error?: boolean;
 }
-
+/**
+ * This component fetches and displays the definitions of a given Geovistory entity id.
+ */
 @Component({
   tag: 'geov-entity-definition',
   styleUrl: 'geov-entity-definition.css',
@@ -50,7 +52,6 @@ export class GeovEntityDefinition {
   @State() data?: GeovEntityDefinitionData;
 
   constructor() {
-    console.log('def');
     setSSRId(this);
   }
 

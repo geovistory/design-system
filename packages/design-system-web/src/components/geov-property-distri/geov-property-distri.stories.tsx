@@ -1,19 +1,19 @@
-// geov-hello-world.stories.tsx
-
-import React from 'react';
-import { JSX } from '../..';
-import { GeovPropertyDistri } from '../../../.storybook/stencil-generated/component';
-
+import { h } from '@stencil/core';
+import { docsTemlpate } from '../../../.storybook/templates/docsTemplate';
+import { stencilWrapper } from '../../../.storybook/lib/stencilWrapper';
+import componentApi from './docs-component-api.md?raw';
+import overview from './docs-overview.md?raw';
 export default {
   title: 'Data Visualization Components/Property Distribution',
-  component: GeovPropertyDistri,
+    tags: ['autodocs'],
+  parameters: {
+    viewMode: 'docs',
+    docs: {
+      page: () => docsTemlpate(overview, componentApi),
+    },
+  },
 };
-const Template = (args: JSX.GeovPropertyDistri) => <GeovPropertyDistri {...args}></GeovPropertyDistri>;
 
-export const PropertyDistribution = Template.bind({});
-const args: JSX.GeovPropertyDistri = {
-  sparqlEndpoint: 'https://sparql.geovistory.org/api_v1_community_data',
-  width: 500,
-  height: 500,
-};
-PropertyDistribution.args = args;
+export const PropertyDistribution = stencilWrapper(
+  <geov-property-distri sparqlEndpoint="https://sparql.geovistory.org/api_v1_community_data" width={500} height={500}></geov-property-distri>,
+);

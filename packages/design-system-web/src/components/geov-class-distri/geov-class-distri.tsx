@@ -1,4 +1,4 @@
-import { Component, h, Host, Prop } from '@stencil/core';
+import { Component, h, Host, Prop, State, Element } from '@stencil/core';
 import { isNode } from '../../lib/isNode';
 import { importPlotlyBasic } from '../../lib/importPlotlyBasic';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
@@ -27,7 +27,7 @@ const chartColors = [
 const qrClassesCount = () => `
   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-  SELECT (group_concat(?classname;separator=", ") as ?classnames) (Max(?classcount) as ?classcounts)
+  SELECT (group_concat(?class;separator=", ") as ?classnames) (Max(?classcount) as ?classcounts)
   WHERE {
       {
           SELECT ?classuri (count(?entity) as ?classcount)
@@ -36,7 +36,7 @@ const qrClassesCount = () => `
           }
           GROUP BY ?classuri
       }
-      ?classuri rdfs:label ?classname
+      ?classuri rdfs:label ?class
   }
   GROUP BY ?classuri
   ORDER by DESC(?classcounts)
@@ -47,12 +47,19 @@ type SparqlResponse = {
   classcounts: SparqlBinding;
 };
 
+/**
+ * This component fetches the frequency of each class (object of `rdfs:type` or `a`)
+ * exsisting on the given sparql endpoint.
+ *
+ * The result is displayed as a pie-chart.
+ */
 @Component({
   tag: 'geov-class-distri',
   styleUrl: 'geov-class-distri.css',
   shadow: false,
 })
 export class GeovClassDistri {
+  @Element() el: HTMLElement;
   /**
    * sparqlEndpoint
    * URL of the sparql endpoint
@@ -71,12 +78,12 @@ export class GeovClassDistri {
    */
   @Prop() height: number;
 
-  domId = 'class-distri-pie-chart';
+  @State() loading: boolean;
 
-  async componentWillLoad() {
+  async componentDidLoad() {
     // If we are in a browser
     if (!isNode()) {
-
+      this.loading = true;
       // Load plotly script
       const Plotly = await importPlotlyBasic();
 
@@ -118,7 +125,8 @@ export class GeovClassDistri {
         };
 
         // Draw the chart
-        if (Plotly) Plotly.newPlot(this.domId, plotlyData, layout);
+        if (Plotly) Plotly.newPlot(this.el, plotlyData, layout);
+        this.loading = false;
       });
     }
   }
@@ -126,8 +134,11 @@ export class GeovClassDistri {
   render() {
     return (
       <Host>
-        <div id={this.domId}></div>
-        <slot></slot>
+        {this.loading && (
+          <div style={{ width: this.width + 'px', height: this.height + 'px' }} class="loading">
+            <ion-spinner name="dots"></ion-spinner>
+          </div>
+        )}
       </Host>
     );
   }

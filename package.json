@@ -3,7 +3,7 @@
   "private": true,
   "engines": {
     "npm": ">=7.0.0",
-    "node": ">=16.0.0"
+    "node": ">=18.16.0"
   },
   "scripts": {
     "============================== INSTALLATION / SETUP ==============================": "",
@@ -33,14 +33,15 @@
     "build:post": "node .build/banner.js build:post && concurrently \"npm:build:post:*\"",
     "build:post:react___": "npm --prefix packages/design-system-react run build",
     "build:post:angular_": "npm --prefix packages/design-system-angular run build",
-    "build:post:happydom": "npm --prefix packages/design-system-happy-dom run build",
     "==================== DOCUMENTATION ====================": "================================",
     "storybook": "node .build/banner.js storybook:build && npm run build:docs",
+    "storybook:serve": "cd storybook && npx wds --node-resolve --open",
     "prepare": "husky install"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.42.1",
     "@typescript-eslint/parser": "^5.42.1",
+    "@web/dev-server": "^0.3.0",
     "chalk": "^4.1.2",
     "concurrently": "^7.0.0",
     "conventional-changelog-conventionalcommits": "5.0.0",
@@ -52,7 +53,6 @@
     "lerna": "5.4.3",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "storybook-dark-mode": "^1.1.2",
     "typescript": "^4.8.3"
   }
 }

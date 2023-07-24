@@ -1,110 +1,115 @@
-import React from 'react';
-import { JSX } from '../..';
-import { DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
-import { GeovEntityPropsByPredicate } from '../../../.storybook/stencil-generated/component';
-
+import { h } from '@stencil/core';
+import { DEFAULT_SPARQL_ENDPOINT, MARITIME_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
+import { stencilWrapper } from '../../../.storybook/lib/stencilWrapper';
+import { docsTemlpate } from '../../../.storybook/templates/docsTemplate';
+import componentApi from './docs-component-api.md?raw';
+import overview from './docs-overview.md?raw';
 export default {
   title: 'Data Components/Entity/Entity Props By Predicate',
-  component: GeovEntityPropsByPredicate,
+  tags: ['autodocs'],
+  parameters: {
+    viewMode: 'docs',
+    docs: {
+      page: () => docsTemlpate(overview, componentApi),
+    },
+  },
 };
-const Template = (args: JSX.GeovEntityPropsByPredicate) => <GeovEntityPropsByPredicate {...args}></GeovEntityPropsByPredicate>;
 
-export const EntityPropsWithPerson = Template.bind({});
-const args: JSX.GeovEntityPropsByPredicate = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  entityId: 'i151089',
-  totalCount: 1,
-  language: 'en',
-  predicateUri: 'https://ontome.net/ontology/p1359',
-  predicateLabel: 'participated in',
-  fetchBeforeRender: false,
-};
-EntityPropsWithPerson.args = args;
+export const EntityPropsWithPerson = stencilWrapper(
+  <geov-entity-props-by-predicate
+    sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
+    entityId="i151089"
+    totalCount={1}
+    language="en"
+    predicateUri="https://ontome.net/ontology/p1359"
+    predicateLabel="participated in"
+    fetchBeforeRender={false}
+  ></geov-entity-props-by-predicate>,
+);
 
-export const EntityPropsWithUriRegex = Template.bind({});
-const args1: JSX.GeovEntityPropsByPredicate = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  entityId: 'i151089',
-  totalCount: 1,
-  language: 'en',
-  predicateUri: 'https://ontome.net/ontology/p1359',
-  predicateLabel: 'participated in',
-  uriRegex: '(http://geovistory.org/resource/)(.*)',
-  uriReplace: 'http://dev.geovistory.org/resource/$2?p=123',
-  fetchBeforeRender: false,
-};
-EntityPropsWithUriRegex.args = args1;
+export const EntityPropsWithUriRegex = stencilWrapper(
+  <geov-entity-props-by-predicate
+    sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
+    entityId="i151089"
+    totalCount={1}
+    language="en"
+    predicateUri="https://ontome.net/ontology/p1359"
+    predicateLabel="participated in"
+    uriRegex="(http://geovistory.org/resource/)(.*)"
+    uriReplace="http://dev.geovistory.org/resource/$2?p=123"
+    fetchBeforeRender={false}
+  ></geov-entity-props-by-predicate>,
+);
 
-export const EntityPropsWithPaginatedShipVoyages = Template.bind({});
-const args2: JSX.GeovEntityPropsByPredicate = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  entityId: 'i209502',
-  totalCount: 2980,
-  language: 'en',
-  predicateUri: 'https://ontome.net/ontology/p1335',
-  predicateLabel: 'had departure place',
-  fetchBeforeRender: false,
-};
-EntityPropsWithPaginatedShipVoyages.args = args2;
+export const EntityPropsWithPaginatedShipVoyages = stencilWrapper(
+  <geov-entity-props-by-predicate
+    sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
+    entityId="i209502"
+    totalCount={2980}
+    language="en"
+    predicateUri="https://ontome.net/ontology/p1335i"
+    predicateLabel="had departure place"
+    fetchBeforeRender={false}
+  ></geov-entity-props-by-predicate>,
+);
 
-export const EntityPropsWithDateTimeDescription = Template.bind({});
-const args3: JSX.GeovEntityPropsByPredicate = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  entityId: 'i151089ts',
-  totalCount: 1,
-  language: 'en',
-  predicateUri: 'https://ontome.net/ontology/p150',
-  predicateLabel: 'end of the begin',
-  fetchBeforeRender: false,
-};
-EntityPropsWithDateTimeDescription.args = args3;
+export const EntityPropsWithDateTimeDescription = stencilWrapper(
+  <geov-entity-props-by-predicate
+    sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
+    entityId="i151089ts"
+    totalCount={1}
+    language="en"
+    predicateUri="https://ontome.net/ontology/p150"
+    predicateLabel="end of the begin"
+    fetchBeforeRender={false}
+  ></geov-entity-props-by-predicate>,
+);
 
-export const EntityPropsWithXsdString = Template.bind({});
-const args4: JSX.GeovEntityPropsByPredicate = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  entityId: 'i215634',
-  totalCount: 1,
-  language: 'en',
-  predicateUri: 'https://ontome.net/ontology/p1113',
-  predicateLabel: 'refers to name',
-  fetchBeforeRender: false,
-};
-EntityPropsWithXsdString.args = args4;
-EntityPropsWithDateTimeDescription.args = args3;
+export const EntityPropsWithXsdString = stencilWrapper(
+  <geov-entity-props-by-predicate
+    sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
+    entityId="i215634"
+    totalCount={1}
+    language="en"
+    predicateUri="https://ontome.net/ontology/p1113"
+    predicateLabel="refers to name"
+    fetchBeforeRender={false}
+  ></geov-entity-props-by-predicate>,
+);
 
-export const EntityPropsWithLangString = Template.bind({});
-const args5: JSX.GeovEntityPropsByPredicate = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  entityId: 'i2345931',
-  totalCount: 1,
-  language: 'en',
-  predicateUri: 'https://ontome.net/ontology/p1761',
-  predicateLabel: 'has short title',
-  fetchBeforeRender: false,
-};
-EntityPropsWithLangString.args = args5;
+export const EntityPropsWithLangString = stencilWrapper(
+  <geov-entity-props-by-predicate
+    sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
+    entityId="i2345931"
+    totalCount={1}
+    language="en"
+    predicateUri="https://ontome.net/ontology/p1761"
+    predicateLabel="has short title"
+    fetchBeforeRender={false}
+  ></geov-entity-props-by-predicate>,
+);
 
-export const EntityPropsWithXsdStringPreloaded = Template.bind({});
-const args6: JSX.GeovEntityPropsByPredicate = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  entityId: 'i215635',
-  totalCount: 1,
-  language: 'en',
-  predicateUri: 'https://ontome.net/ontology/p1113',
-  predicateLabel: 'refers to name',
-  fetchBeforeRender: true,
-  _ssrId: 'data-entity-props-by-predicate-1',
-};
-EntityPropsWithXsdStringPreloaded.args = args6;
+export const EntityPropsWithXsdStringPreloaded = stencilWrapper(
+  <geov-entity-props-by-predicate
+    sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
+    entityId="i215635"
+    totalCount={1}
+    language="en"
+    predicateUri="https://ontome.net/ontology/p1113"
+    predicateLabel="refers to name"
+    fetchBeforeRender={true}
+    _ssrId="data-entity-props-by-predicate-1"
+  ></geov-entity-props-by-predicate>,
+);
 
-export const OwlSameAs = Template.bind({});
-const args7: JSX.GeovEntityPropsByPredicate = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  entityId: 'i785518',
-  totalCount: 3,
-  language: 'en',
-  predicateUri: 'http://www.w3.org/2002/07/owl#sameAs',
-  predicateLabel: 'same as',
-  fetchBeforeRender: false,
-};
-OwlSameAs.args = args7;
+export const OwlSameAs = stencilWrapper(
+  <geov-entity-props-by-predicate
+    sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
+    entityId="i81260"
+    totalCount={2}
+    language="en"
+    predicateUri="http://www.w3.org/2002/07/owl#sameAs"
+    predicateLabel="same as"
+    fetchBeforeRender={false}
+  ></geov-entity-props-by-predicate>,
+);

@@ -1,9 +1,9 @@
-import React from 'react';
-import { GeovCode, GeovToc, IonApp, IonButton, IonContent, IonGrid } from '../../../.storybook/stencil-generated/component';
-import { s04_1, s04_10, s04_11, s04_2, s04_3, s04_4, s04_5, s04_6, s04_7, s04_8, s04_9 } from './04.snippets';
-import network1 from './04-network-1.jpg';
+import { h } from '@stencil/core';
+import { stencilWrapper } from '../../../.storybook/lib/stencilWrapper';
 import disableJs from './04-disable-js.png';
+import network1 from './04-network-1.jpg';
 import verification from './04-verification.png';
+import { s04_1, s04_10, s04_11, s04_2, s04_3, s04_4, s04_5, s04_6, s04_7, s04_8, s04_9 } from './04.snippets';
 
 export default {
   title: 'Contributing/Tutorial/Server Side Rendering',
@@ -18,13 +18,13 @@ export default {
   },
 };
 
-export const ServerSideRendering = () => (
-  <IonApp>
-    <IonContent class="ion-padding">
-      <IonGrid fixed>
+export const ServerSideRendering = stencilWrapper(
+  <ion-app>
+    <ion-content class="ion-padding">
+      <ion-grid fixed>
         <h1>Server Side Rendering</h1>
-        <GeovToc>
-          <p className="lead">
+        <geov-toc>
+          <p class="lead">
             In this step of the <a href="/?path=/story/contributing-tutorial--introduction">tutorial</a> we extend our component to support Server Side Rendering (SSR) and
             hydration of data fetched by the server with Next.js.
           </p>
@@ -100,21 +100,21 @@ export const ServerSideRendering = () => (
           <h3 id="create-next-app">Create a next.js app</h3>
           <p>In your terminal run:</p>
           <p>
-            <GeovCode language="bash" code="npx create-next-app@latest --typescript"></GeovCode>
+            <geov-code language="bash" code="npx create-next-app@latest --typescript"></geov-code>
           </p>
           <p>
             When the prompt asks if you want to use Tailwind CSS, answer <code>no</code>. Use the default for the other questions.
           </p>
           <p>
-            <GeovCode language="bash" code={s04_1}></GeovCode>
+            <geov-code language="bash" code={s04_1}></geov-code>
           </p>
           <p>Change in the new directory:</p>
           <p>
-            <GeovCode language="bash" code="cd ./stencil-next-hydrate-example"></GeovCode>
+            <geov-code language="bash" code="cd ./stencil-next-hydrate-example"></geov-code>
           </p>
           <p>Start the app:</p>
           <p>
-            <GeovCode language="bash" code="npm run dev"></GeovCode>
+            <geov-code language="bash" code="npm run dev"></geov-code>
           </p>
           <p>
             Open it in the browser, usualy at <code>http://localhost:3000</code> and you should see the Next.js start screen.
@@ -123,17 +123,17 @@ export const ServerSideRendering = () => (
           <p>Lets add now an existing Geovistory web component. As you can see here, </p>
           <p>Open the root directory in a second terminal and install the Geovistory Web Components:</p>
           <p>
-            <GeovCode language="bash" code="npm install @geovistory/design-system-web"></GeovCode>
+            <geov-code language="bash" code="npm install @geovistory/design-system-web"></geov-code>
           </p>
           <p>
             Now import the web components in <code>pages/_app.tsx</code>
           </p>
           <p>
-            <GeovCode language="typescript" code={s04_2}></GeovCode>
+            <geov-code language="typescript" code={s04_2}></geov-code>
           </p>
           <p>The first line is for Typescript. It adds type support for using the webcomponents in react tsx.</p>
           <p>
-            <GeovCode language="typescript" code={`/// <reference path="../node_modules/@geovistory/design-system-web/dist/types/react.d.ts" />`}></GeovCode>
+            <geov-code language="typescript" code={`/// <reference path="../node_modules/@geovistory/design-system-web/dist/types/react.d.ts" />`}></geov-code>
           </p>
           <p>
             The function <code>defineCustomElements()</code> registers the custom elements in the browser
@@ -143,7 +143,7 @@ export const ServerSideRendering = () => (
             Modify <code>pages/index.tsx</code> and replace the <code>{`<main>...</main>`}</code>element:
           </p>
           <p>
-            <GeovCode language="html" code={s04_3}></GeovCode>
+            <geov-code language="html" code={s04_3}></geov-code>
           </p>
           <p>In your browser you should now see a card showing the class of i315800.</p>
           <p>Open the Network tab in your Dev Tools to see what happens:</p>
@@ -183,7 +183,7 @@ export const ServerSideRendering = () => (
             Create a file <code>lib/serverRender.tsx</code> and paste this content:
           </p>
           <p>
-            <GeovCode language="typescript" code={s04_4}></GeovCode>
+            <geov-code language="typescript" code={s04_4}></geov-code>
           </p>
           <p>This function takes a React Element uses ReactDOMServer and stencil hydrate to render the components.</p>
           <p>
@@ -210,7 +210,7 @@ export const ServerSideRendering = () => (
             Let's modify <code>pages/index.tsx</code> as follows:
           </p>
           <p>
-            <GeovCode language="typescript" code={s04_5}></GeovCode>
+            <geov-code language="typescript" code={s04_5}></geov-code>
           </p>
           <p>If you now reload your page, without Java Script in the browser, you'll see that the class Label (Person) was fetched and rendered on the server.</p>
           <p>Great!</p>
@@ -248,13 +248,13 @@ export const ServerSideRendering = () => (
             ):
           </p>
           <p>
-            <GeovCode language="typescript" code={s04_6}></GeovCode>
+            <geov-code language="typescript" code={s04_6}></geov-code>
           </p>
           <p>
             On constructing the component, we set the _ssrId by calling <code> setSSRId(this)</code>
           </p>
           <p>
-            <GeovCode language="typescript" code={s04_7}></GeovCode>
+            <geov-code language="typescript" code={s04_7}></geov-code>
           </p>
           <p>
             <code>setSSRId()</code> generates and assigns an _ssrId to the component, if document?.__STENCIL_DATA__ is not falsy and the component does not yet have an _ssrId. This
@@ -264,7 +264,7 @@ export const ServerSideRendering = () => (
             In <code>componentWillLoad()</code> we try to get data provided by server side rendering by calling <code>getSSRData(this._ssrId); </code>
           </p>
           <p>
-            <GeovCode language="typescript" code={s04_8}></GeovCode>
+            <geov-code language="typescript" code={s04_8}></geov-code>
           </p>
           <p>
             <code>getSSRData()</code> looks at a specific object on window.__NEXT_DATA__...[_ssrId].
@@ -277,7 +277,7 @@ export const ServerSideRendering = () => (
             If this object is not set (probably because we are on the server), the data will be fetched and then passed to <code>setSSRData()</code>
           </p>
           <p>
-            <GeovCode language="typescript" code={s04_9}></GeovCode>
+            <geov-code language="typescript" code={s04_9}></geov-code>
           </p>
           <p>
             <code>setSSRData()</code> takes the ssrId as key and the fetched data as value and assigns it to <code>document.__STENCIL_DATA__[key]</code>
@@ -287,14 +287,14 @@ export const ServerSideRendering = () => (
             Let's look at the part on Nextjs and implement the missing parts. In <code>serverRender()</code>:
           </p>
           <p>
-            <GeovCode language="typescript" code={s04_10}></GeovCode>
+            <geov-code language="typescript" code={s04_10}></geov-code>
           </p>
           <p>Before stencil does the server side data we prepare __STENCIL_DATA__. Afterwards we extract that data and return it to the function caller.</p>
           <p>
             To make use of this, modify <code>pages/index.tsx</code> so:
           </p>
           <p>
-            <GeovCode language="typescript" code={s04_11}></GeovCode>
+            <geov-code language="typescript" code={s04_11}></geov-code>
           </p>
           <p>Reload the page and watch the Network. The component did not fetch the data on the client side.</p>
           <p>Perfect!</p>
@@ -306,10 +306,10 @@ export const ServerSideRendering = () => (
           <p>If you see the ionic card printing Person and in the network no request to the sparql.geovistory.org, you're good to go! Congrats.</p>
           <p>Nota bene: JavaScript is enabled here, so that the ionic component can be rendered. Otherwise, we just have a subtitle with an answer, without any style.</p>
           <p>
-            <IonButton>Next: coming soon...</IonButton>
+            <ion-button>Next: coming soon...</ion-button>
           </p>
-        </GeovToc>
-      </IonGrid>
-    </IonContent>
-  </IonApp>
+        </geov-toc>
+      </ion-grid>
+    </ion-content>
+  </ion-app>,
 );

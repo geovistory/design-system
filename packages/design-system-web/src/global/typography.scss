@@ -1,0 +1,148 @@
+@import '~@ionic/core/css/typography.css';
+
+*,
+.sbdocs {
+  /*
+  * Reading (medium).
+  * Text set for immersive reading. This usually
+  * includes headings which may need to be sized differently to
+  * set them off from the body text.
+  */
+
+  p.lead {
+    font-size: 1.2rem;
+  }
+  p,
+  blockquote {
+    font-size: 1rem;
+    max-width: 1000px;
+    margin: auto;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    line-height: 1.5;
+  }
+
+  blockquote {
+    padding-left: 1rem;
+    border-left: 2px solid var(--ion-color-step-400);
+    box-sizing: border-box;
+    color: var(--ion-color-step-700);
+  }
+
+  address {
+    font-style: normal;
+    line-height: 1.2rem;
+  }
+
+  small {
+    font-size: 75%;
+  }
+
+  sub,
+  sup {
+    position: relative;
+    font-size: 75%;
+    line-height: 0;
+    vertical-align: baseline;
+  }
+
+  /*
+  * Reference (small).
+  * Reference text includes small print, notes and specialist purposes
+  * such as bibliographies, dictionaries and data presentation.
+  */
+
+  /*
+  * Display (large).
+  * Display text is there to make an impact,
+  * evoke an emotional response and set a tone. It is intended
+  * to be looked at before it is read, and is thus set larger.
+  */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-block-start: 2em;
+    margin-block-end: 0.5em;
+  }
+  h1 {
+    margin-block-start: 1em;
+    font-size: 2.0625rem;
+  }
+
+  h2 {
+    font-size: 1.5625rem;
+  }
+
+  h3 {
+    font-size: 1.3125rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  h6 {
+    font-size: 1rem;
+  }
+  h2 + h3,
+  h3 + h4,
+  h4 + h5,
+  h5 + h6 {
+    margin-block-start: 1rem;
+  }
+
+  @media screen and (min-width: 576px) {
+    h1 {
+      font-size: 3.1875rem;
+    }
+
+    h2 {
+      font-size: 2.0625rem;
+    }
+
+    h3 {
+      font-size: 1.5625rem;
+    }
+
+    h4 {
+      font-size: 1.125rem;
+    }
+
+    h5 {
+      font-size: 1rem;
+    }
+
+    h6 {
+      font-size: 1rem;
+    }
+  }
+
+  .restricted-width {
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  .unrestricted-width {
+    max-width: unset;
+    margin: unset;
+  }
+
+  code {
+    background-color: var(--gv-color-background-code);
+    border-left: 4px solid var(--gv-color-background-code);
+    border-right: 4px solid var(--gv-color-background-code);
+    border-radius: 3px;
+  }
+}

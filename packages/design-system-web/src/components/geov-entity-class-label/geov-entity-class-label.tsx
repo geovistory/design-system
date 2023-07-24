@@ -13,7 +13,8 @@ PREFIX geov: <http://geovistory.org/resource/>
 
 SELECT ?classLabel
 WHERE {
-  geov:${id} rdf:type/rdfs:label ?classLabel
+  geov:${id} rdf:type ?t.
+  optional{?t rdfs:label ?classLabel}
 }
 LIMIT 1
 `;
@@ -23,6 +24,9 @@ export interface GeovClassLabelData extends FetchResponse {
   error?: boolean;
 }
 
+/**
+ * This component fetches and displays the class label of a given Geovistory entity id.
+ */
 @Component({
   tag: 'geov-entity-class-label',
   styleUrl: 'geov-entity-class-label.css',

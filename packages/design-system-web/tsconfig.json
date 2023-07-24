@@ -16,13 +16,18 @@
     "noUnusedParameters": true,
     "jsx": "react",
     "jsxFactory": "h",
+    "resolveJsonModule": true,
   },
   "include": [
     "src",
-    ".storybook/lib"
+    "docs",
+    ".storybook/lib",
+    ".storybook/templates",
+    "_build.global.ts",
+    "_dev.global.ts",
+    ".build"
   ],
   "exclude": [
-    "node_modules",
-    "**/*.stories.*"
+    "node_modules"
   ]
 }

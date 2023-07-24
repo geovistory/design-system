@@ -1,0 +1,31 @@
+:host {
+  display: block;
+}
+
+.containerResponsive {
+  container-type: inline-size;
+}
+
+ion-grid {
+  --ion-grid-columns: 1;
+}
+
+@container (width >= 768px) and (width < 992px) {
+  ion-grid {
+    --ion-grid-columns: 2;
+  }
+}
+
+@container (width >= 992px) {
+  ion-grid {
+    --ion-grid-columns: 3;
+  }
+}
+
+ion-grid.forceCol2 {
+  --ion-grid-columns: 2;
+}
+
+ion-grid.forceCol1 {
+  --ion-grid-columns: 1;
+}

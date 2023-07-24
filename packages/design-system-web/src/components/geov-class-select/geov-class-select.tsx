@@ -9,7 +9,9 @@ export interface GeovClassSelectItem {
 export interface ClassSelectEvent {
   selectedClassUris: string[];
 }
-
+/**
+ * This component is a multi-select UI for classes (with label, uri and count).
+ */
 @Component({
   tag: 'geov-class-select',
   styleUrl: 'geov-class-select.css',

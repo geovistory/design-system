@@ -9,7 +9,12 @@ export interface GeovIfData extends FetchResponse {
   showChildren: boolean;
   error?: boolean;
 }
-
+/**
+ * Small helper component to wrap a piece of html
+ * into a container that does a sparql request and displays
+ * its children, if the request returns `true` on the
+ * `?condition` binding of the first returned record.
+ */
 @Component({
   tag: 'geov-if',
   styleUrl: 'geov-if.css',

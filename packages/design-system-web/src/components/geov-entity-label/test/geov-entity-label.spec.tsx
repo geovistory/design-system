@@ -1,8 +1,7 @@
 import { MockWindow } from '@stencil/core/mock-doc';
 import { mockFetch, newSpecPage } from '@stencil/core/testing';
 import { renderToString } from '../../../../hydrate/index';
-import { SparqlBinding } from '../../../components';
-import { SparqlRes } from '../../../lib/sparqlJson';
+import { SparqlBinding, SparqlRes } from '../../../lib/sparqlJson';
 import { GeovEntityLabel } from '../geov-entity-label';
 
 describe('geov-entity-label', () => {

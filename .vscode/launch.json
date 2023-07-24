@@ -1,20 +1,54 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "type": "node",
-        "request": "launch",
-        "name": "Test",
-        "localRoot": "${workspaceFolder}/packages/design-system-web/",
-        "args": [
-          "${workspaceFolder}/packages/design-system-web/node_modules/@stencil/core/bin/stencil",
-          "test",
-          "--spec"
-        ],
-        "protocol": "inspector",
-      }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "npm run test",
+      "request": "launch",
+      "runtimeArgs": [
+        "run-script",
+        "test"
+      ],
+      "runtimeExecutable": "npm",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "E2E Test Current File",
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/node_modules/.bin/stencil",
+      "args": [
+        "test",
+        "--e2e",
+        "--",
+        "--maxWorkers=0",
+        "${fileBasename}"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Spec Test Current File",
+      "cwd": "${workspaceFolder}/packages/design-system-web",
+      "program": "${workspaceFolder}/packages/design-system-web/node_modules/.bin/stencil",
+      "args": [
+        "test",
+        "--spec",
+        "--config",
+        "_test.stencil.config.ts",
+        "--",
+        "${fileBasename}"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
+    }
+  ],
 }

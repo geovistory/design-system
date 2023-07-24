@@ -3,6 +3,9 @@ import { GeovClassSelectItem } from '../geov-class-select/geov-class-select';
 export interface GeovClassSelectPopupEvent {
   value?: GeovClassSelectItem;
 }
+/**
+ * This component opens a popup with is a single-select UI for classes (with label, uri and count).
+ */
 @Component({
   tag: 'geov-class-select-popup',
   styleUrl: 'geov-class-select-popup.css',

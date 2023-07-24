@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "node_modules",
+    "**/*.stories.*",
+    "**/*.spec.tsx"
+  ],
+  "include": [
+    "src",
+    "docs",
+    ".storybook/lib",
+    "_dev.global.ts"
+  ]
+}

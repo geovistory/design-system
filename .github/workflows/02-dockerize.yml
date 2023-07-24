@@ -46,27 +46,14 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: '16.13.2'
+          node-version: '18.16.1'
           registry-url: 'https://registry.npmjs.org'
-
-# install only dependencies from root package (ignoring postinstall script)
-#      - name: Install dev dependencies
-#        run: npm i --ignore-scripts
 
       - name: Clean install dependencies
         run: npm ci
-#
-#      - name: Build
-#        run: npm run build
-#
-#      - uses: EndBug/add-and-commit@v5
-#        with:
-#          message: 'chore(): update build artifacts'
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#
-#      - name: Show lerna.json
-#        run: cat lerna.json
+
+      - name: Test
+        run: npm run test
 
       - name: Tag this commit with pr
         id: lerna

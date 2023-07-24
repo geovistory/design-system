@@ -1,25 +1,22 @@
-import React from 'react';
-import { JSX } from '../..';
+import { h } from '@stencil/core';
 import { DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
-import { GeovDataFetchExample } from '../../../.storybook/stencil-generated/component';
-
+import { docsTemlpate } from '../../../.storybook/templates/docsTemplate';
+import { stencilWrapper } from '../../../.storybook/lib/stencilWrapper';
+import componentApi from './docs-component-api.md?raw';
+import overview from './docs-overview.md?raw';
 export default {
-  title: 'Data Components/DataFetchExamle',
-  component: GeovDataFetchExample,
+  title: 'Data Components/DataFetchExample',
+    tags: ['autodocs'],
+  parameters: {
+    viewMode: 'docs',
+    docs: {
+      page: () => docsTemlpate(overview, componentApi),
+    },
+  },
 };
-const Template = (args: JSX.GeovDataFetchExample) => <GeovDataFetchExample {...args}></GeovDataFetchExample>;
 
-export const DataFetchExamle = Template.bind({});
-const args: JSX.GeovDataFetchExample = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  entityId: 'i315800',
-};
-DataFetchExamle.args = args;
+export const DataFetchExample = stencilWrapper(<geov-data-fetch-example sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i315800"></geov-data-fetch-example>);
 
-export const DataFetchExamlePreloaded = Template.bind({});
-const preloaded: JSX.GeovDataFetchExample = {
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-  entityId: 'i315800',
-  _ssrId: 'data-fetch-examle-1',
-};
-DataFetchExamlePreloaded.args = preloaded;
+export const DataFetchExamplePreloaded = stencilWrapper(
+  <geov-data-fetch-example sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i315800" _ssrId="data-fetch-examle-1"></geov-data-fetch-example>,
+);

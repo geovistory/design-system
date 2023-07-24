@@ -12,13 +12,73 @@ The components are coded as Stencil components. Doing so, we have Angular, React
 * [@geovistory/design-system-web](https://www.npmjs.com/package/@geovistory/design-system-web): Web components
 * [@geovistory/design-system-react](https://www.npmjs.com/package/@geovistory/design-system-react): React components
 * [@geovistory/design-system-angular](https://www.npmjs.com/package/@geovistory/design-system-angular): Angular components
-* [@geovistory/design-system-happy-dom](https://www.npmjs.com/package/@geovistory/design-system-happy-dom): HappyDom worker for server side rendering
-
 
 ---
 
 
 [Checkout our documentation](https://design.geovistory.org/)
+
+
+
+## Development
+
+Install (all packages)
+
+```bash
+npm i
+```
+
+Start dev servers
+```bash
+npm run dev
+```
+
+In case you see this error:
+
+```
+[📕_STORYBOOK] Failed to resolve import "../dist/esm/polyfills/index.js" from "loader\index.js". Does the file exist?
+```
+
+please cancel and restart the above command.
+
+
+Add a component
+```bash
+# open main package
+cd packages/design-system-web 
+
+# generate a component
+npm run generate
+
+# enter component name (starting with geov-*) 
+? Component tag name (dash-case): › geov-my-component
+```
+
+
+Run tests
+```bash
+npm run test
+```
+
+Build
+```bash
+npm run build
+```
+
+## Build Storybook
+
+In order to build the storybook run:
+
+```bash
+npm run storybook
+```
+
+This generates a website in `./storybook`. To serve the built storybook website, run:
+
+```bash
+npm run storybook:serve
+```
+
 
 
 ## Publication

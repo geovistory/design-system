@@ -1,5 +1,52 @@
+<script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core@6.7.5/dist/ionic/ionic.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core@6.7.5/dist/ionic/ionic.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@6.7.5/css/ionic.bundle.css" />
+<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@6.1.3/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@6.1.3/dist/ionicons/ionicons.js"></script>
 <link rel="stylesheet" href="/design-system-web.css" />
+<style>
+  body {
+    overflow: auto;
+    position: relative;
+  }
 
+  .geov-custom-toc {
+    position: sticky;
+    top: 0px;
+    width: max-content;
+    margin-left: auto;
+    height: 0;
+    z-index: 10;
+  }
+
+  .geov-custom-toc div {
+    background-color: white;
+    padding: 10px;
+  }
+
+  .geov-custom-toc p {
+    margin-top: 0;
+    margin-bottom: 6px;
+  }
+
+  .geov-custom-toc button {
+    background: none;
+    border: none;
+    padding: 0;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: #029CFD;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .geov-custom-toc ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>
 <script>
   document.__STENCIL_DATA__ = {};
   window.__NEXT_DATA__ = {
@@ -7,178 +54,178 @@
       "pageProps": {
         "_ssrData": {
           "data-fetch-examle-1": {
-            "loading": false, 
-            "label": "Ebner Hermann" 
+            "loading": false,
+            "label": "Ebner Hermann"
           },
           "data-entity-properties-1": {
-            "loading": false, 
-            "outgoingPropsWithCount":[
-            {
-              "predicate": {
-                "type": "uri",
-                "value": "http://www.w3.org/2000/01/rdf-schema#label"
+            "loading": false,
+            "outgoingPropsWithCount": [
+              {
+                "predicate": {
+                  "type": "uri",
+                  "value": "http://www.w3.org/2000/01/rdf-schema#label"
+                },
+                "count": {
+                  "type": "literal",
+                  "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+                  "value": "1"
+                }
               },
-              "count": {
-                "type": "literal",
-                "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-                "value": "1"
+              {
+                "predicate": {
+                  "type": "uri",
+                  "value": "https://ontome.net/ontology/p4"
+                },
+                "predicateLabel": {
+                  "type": "literal",
+                  "xml:lang": "de",
+                  "value": "hat Zeitspanne"
+                },
+                "count": {
+                  "type": "literal",
+                  "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+                  "value": "1"
+                }
+              },
+              {
+                "predicate": {
+                  "type": "uri",
+                  "value": "https://ontome.net/ontology/p4"
+                },
+                "predicateLabel": {
+                  "type": "literal",
+                  "xml:lang": "en",
+                  "value": "has time-span 2"
+                },
+                "count": {
+                  "type": "literal",
+                  "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+                  "value": "1"
+                }
+              },
+              {
+                "predicate": {
+                  "type": "uri",
+                  "value": "https://ontome.net/ontology/p1335"
+                },
+                "predicateLabel": {
+                  "type": "literal",
+                  "xml:lang": "en",
+                  "value": "had departure place"
+                },
+                "count": {
+                  "type": "literal",
+                  "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+                  "value": "1"
+                }
+              },
+              {
+                "predicate": {
+                  "type": "uri",
+                  "value": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                },
+                "count": {
+                  "type": "literal",
+                  "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+                  "value": "1"
+                }
+              },
+              {
+                "predicate": {
+                  "type": "uri",
+                  "value": "https://ontome.net/ontology/p1338"
+                },
+                "predicateLabel": {
+                  "type": "literal",
+                  "xml:lang": "en",
+                  "value": "was carried out by"
+                },
+                "count": {
+                  "type": "literal",
+                  "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+                  "value": "1"
+                }
+              },
+              {
+                "predicate": {
+                  "type": "uri",
+                  "value": "https://ontome.net/ontology/p1359"
+                },
+                "predicateLabel": {
+                  "type": "literal",
+                  "xml:lang": "en",
+                  "value": "participated in"
+                },
+                "count": {
+                  "type": "literal",
+                  "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+                  "value": "116"
+                }
+              },
+              {
+                "predicate": {
+                  "type": "uri",
+                  "value": "https://ontome.net/ontology/p1354"
+                },
+                "predicateLabel": {
+                  "type": "literal",
+                  "xml:lang": "en",
+                  "value": "has set up"
+                },
+                "count": {
+                  "type": "literal",
+                  "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+                  "value": "1"
+                }
+              },
+              {
+                "predicate": {
+                  "type": "uri",
+                  "value": "https://ontome.net/ontology/p1336"
+                },
+                "predicateLabel": {
+                  "type": "literal",
+                  "xml:lang": "en",
+                  "value": "had arrival place"
+                },
+                "count": {
+                  "type": "literal",
+                  "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+                  "value": "1"
+                }
+              },
+              {
+                "predicate": {
+                  "type": "uri",
+                  "value": "https://ontome.net/ontology/p4"
+                },
+                "predicateLabel": {
+                  "type": "literal",
+                  "xml:lang": "en",
+                  "value": "has time-span"
+                },
+                "count": {
+                  "type": "literal",
+                  "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+                  "value": "1"
+                }
               }
-            },
-            {
-              "predicate": {
-                "type": "uri",
-                "value": "https://ontome.net/ontology/p4"
-              },
-              "predicateLabel": {
-                "type": "literal",
-                "xml:lang": "de",
-                "value": "hat Zeitspanne"
-              },
-              "count": {
-                "type": "literal",
-                "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-                "value": "1"
-              }
-            },
-            {
-              "predicate": {
-                "type": "uri",
-                "value": "https://ontome.net/ontology/p4"
-              },
-              "predicateLabel": {
-                "type": "literal",
-                "xml:lang": "en",
-                "value": "has time-span 2"
-              },
-              "count": {
-                "type": "literal",
-                "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-                "value": "1"
-              }
-            },
-            {
-              "predicate": {
-                "type": "uri",
-                "value": "https://ontome.net/ontology/p1335"
-              },
-              "predicateLabel": {
-                "type": "literal",
-                "xml:lang": "en",
-                "value": "had departure place"
-              },
-              "count": {
-                "type": "literal",
-                "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-                "value": "1"
-              }
-            },
-            {
-              "predicate": {
-                "type": "uri",
-                "value": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-              },
-              "count": {
-                "type": "literal",
-                "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-                "value": "1"
-              }
-            },
-            {
-              "predicate": {
-                "type": "uri",
-                "value": "https://ontome.net/ontology/p1338"
-              },
-              "predicateLabel": {
-                "type": "literal",
-                "xml:lang": "en",
-                "value": "was carried out by"
-              },
-              "count": {
-                "type": "literal",
-                "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-                "value": "1"
-              }
-            },
-            {
-              "predicate": {
-                "type": "uri",
-                "value": "https://ontome.net/ontology/p1359"
-              },
-              "predicateLabel": {
-                "type": "literal",
-                "xml:lang": "en",
-                "value": "participated in"
-              },
-              "count": {
-                "type": "literal",
-                "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-                "value": "116"
-              }
-            },
-            {
-              "predicate": {
-                "type": "uri",
-                "value": "https://ontome.net/ontology/p1354"
-              },
-              "predicateLabel": {
-                "type": "literal",
-                "xml:lang": "en",
-                "value": "has set up"
-              },
-              "count": {
-                "type": "literal",
-                "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-                "value": "1"
-              }
-            },
-            {
-              "predicate": {
-                "type": "uri",
-                "value": "https://ontome.net/ontology/p1336"
-              },
-              "predicateLabel": {
-                "type": "literal",
-                "xml:lang": "en",
-                "value": "had arrival place"
-              },
-              "count": {
-                "type": "literal",
-                "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-                "value": "1"
-              }
-            },
-            {
-              "predicate": {
-                "type": "uri",
-                "value": "https://ontome.net/ontology/p4"
-              },
-              "predicateLabel": {
-                "type": "literal",
-                "xml:lang": "en",
-                "value": "has time-span"
-              },
-              "count": {
-                "type": "literal",
-                "datatype": "http://www.w3.org/2001/XMLSchema#integer",
-                "value": "1"
-              }
-            }
             ],
-            "incomingPropsWithCount":[]
+            "incomingPropsWithCount": []
           },
-          "data-entity-props-by-predicate-1" : { 
-            "loading": false, 
+          "data-entity-props-by-predicate-1": {
+            "loading": false,
             "entities": [
               {
                 "entity": {
-                  "value": "Aabenraa DK", 
+                  "value": "Aabenraa DK",
                   "type": "literal"
-                }, 
+                },
                 "count": "1"
               }
             ]
           },
-          "data-display-time-datetimedescription-1" : {
+          "data-display-time-datetimedescription-1": {
             "loading": false,
             "year": "2022",
             "month": "11",

@@ -6,6 +6,15 @@ export interface GeovEntityListItem {
   classUri: string;
   classLabel: string;
 }
+/**
+ * This component is a UI to display entities in a list.
+ * Each item displays the entity label (first line) and class label (second line)
+ * On click on an item, the passed in URI is opened in a new browser tab.
+ * The components supports
+ * - pagination
+ * - loading state
+ * - drop-in regex to modify the uri (useful for staging environments).
+ */
 @Component({
   tag: 'geov-entity-list',
   styleUrl: 'geov-entity-list.css',

@@ -1,17 +1,17 @@
-import React from 'react';
-import { JSX } from '../..';
-import { GeovEntityClassLabel } from '../../../.storybook/stencil-generated/component';
+import { h } from '@stencil/core';
 import { DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
-
+import { docsTemlpate } from '../../../.storybook/templates/docsTemplate';
+import { stencilWrapper } from '../../../.storybook/lib/stencilWrapper';
+import componentApi from './docs-component-api.md?raw';
+import overview from './docs-overview.md?raw';
 export default {
   title: 'Data Components/Entity/EntityClassLabel',
-  component: GeovEntityClassLabel,
+    tags: ['autodocs'],
+  parameters: {
+    viewMode: 'docs',
+    docs: {
+      page: () => docsTemlpate(overview, componentApi),
+    },
+  },
 };
-const Template = (args: JSX.GeovEntityClassLabel) => <GeovEntityClassLabel {...args}></GeovEntityClassLabel>;
-
-export const EntityClassLabel = Template.bind({});
-const args: JSX.GeovEntityClassLabel = {
-  entityId: 'i315803',
-  sparqlEndpoint: DEFAULT_SPARQL_ENDPOINT,
-};
-EntityClassLabel.args = args;
+export const EntityClassLabel = stencilWrapper(<geov-entity-class-label entityId="i315803" sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}></geov-entity-class-label>);

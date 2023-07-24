@@ -20,7 +20,9 @@ export interface GeovEntityLabelData extends FetchResponse {
   label?: string;
   error?: boolean;
 }
-
+/**
+ * This component fetches and displays the entity label of a given Geovistory entity id.
+ */
 @Component({
   tag: 'geov-entity-label',
   styleUrl: 'geov-entity-label.css',
