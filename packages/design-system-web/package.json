@@ -32,7 +32,7 @@
   "scripts": {
     "postinstall": "patch-package",
     "start": "npm run start:storybook",
-    "prepare": "echo export namespace Components {}; export namespace JSX {}; > src/components-all.d.ts",
+    "prepare": "node .build/prepare.js",
     "=========================== DEV ==========================": "",
     "dev": "concurrently --names \"🧩_STENCIL__,📕_STORYBOOK\" -c \"blue,magenta\" \"npm run dev:stencil\" \"npm run sleep5s && npm run dev:storybook\"",
     "dev:stencil": "npm run prepare && stencil build --config _dev.stencil.config.ts --watch",
