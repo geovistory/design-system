@@ -3,9 +3,9 @@
 }
 
 .colContent {
-  overflow: hidden; /* Masque le contenu qui dépasse */
-  text-overflow: ellipsis; /* Ajoute des points de suspension (...) pour indiquer le contenu coupé */
-  white-space: nowrap; /* Empêche le contenu de passer à la ligne */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /*Add suspension points (...) to indicate cut content */
+  white-space: nowrap; /* Prevents content from going to line */
 }
 
 .containerResponsive {
