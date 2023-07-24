@@ -109,7 +109,6 @@ export class GeovAuthorityLookupExplorer {
       fetch(queryApiGnd)
         .then(response => response.json())
         .then(data => {
-          // console.log(data);
           this.uriData = data.map((obj: any) => ({ uri: obj.id, label: obj.label }));
         })
         .catch(error => {
@@ -135,7 +134,6 @@ export class GeovAuthorityLookupExplorer {
 
       sparqlJson<WikidataBindings>(ENDPOINT_SPARQL_WIKIDATA, qrWD)
         .then(data => {
-          // console.log(data.results?.bindings)
           this.uriData = data.results?.bindings.map((obj: any) => ({ uri: obj.item.value, label: obj.name.value }));
         })
         .catch(error => {
@@ -151,19 +149,18 @@ export class GeovAuthorityLookupExplorer {
       const kw = this.keywords.trim().split(' ').join(' AND ');
 
       let queryApiIdRef = BASE_URI_IDREF + TYPE_ALL_IDREF + '(' + kw + ')' + SIZE_IDREF + this.nbOccurencesMax + FORMAT_OUTPUT_IDREF;
-      if (this.type !== null && this.type == 'Person') {
+      if (this.type !== null && this.type === 'Person') {
         queryApiIdRef = BASE_URI_IDREF + TYPE_PERSON_IDREF + '(' + kw + ')' + SIZE_IDREF + this.nbOccurencesMax + FORMAT_OUTPUT_IDREF;
       }
-      if (this.type !== null && this.type == 'Place') {
+      if (this.type !== null && this.type === 'Place') {
         queryApiIdRef = BASE_URI_IDREF + TYPE_PLACE_IDREF + '(' + kw + ')' + SIZE_IDREF + this.nbOccurencesMax + FORMAT_OUTPUT_IDREF;
       }
-      if (this.type !== null && this.type == 'Group') {
+      if (this.type !== null && this.type === 'Group') {
         queryApiIdRef = BASE_URI_IDREF + TYPE_GROUP_IDREF + '(' + kw + ')' + SIZE_IDREF + this.nbOccurencesMax + FORMAT_OUTPUT_IDREF;
       }
       fetch(queryApiIdRef)
         .then(response => response.json())
         .then(data => {
-          //console.log(data);
           this.uriData = data.response.docs?.map((obj: any) => ({ uri: URL_IDREF + obj.ppn_z, label: obj.affcourt_z }));
         })
         .catch(error => {
@@ -202,7 +199,6 @@ export class GeovAuthorityLookupExplorer {
   selected: EventEmitter<ItemSelectedEvent>;
 
   handleSelected(item: ItemBinding) {
-    //console.log(item.uri);
     this.selected.emit({
       uri: item.uri,
     });
