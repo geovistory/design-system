@@ -97,13 +97,13 @@ export class GeovAuthorityLookupExplorer {
     this.uriData = [];
     if (this.keywords.trim() != '') {
       let queryApiGnd = BASE_URI_GND + this.keywords + SIZE_GND + this.nbOccurencesMax + FORMAT_OUTPUT_GND;
-      if (this.type !== null && this.type == 'Person') {
+      if (this.type !== null && this.type === 'Person') {
         queryApiGnd = queryApiGnd + TYPE_PERSON_GND;
       }
-      if (this.type !== null && this.type == 'Place') {
+      if (this.type !== null && this.type === 'Place') {
         queryApiGnd = queryApiGnd + TYPE_PLACE_GND;
       }
-      if (this.type !== null && this.type == 'Group') {
+      if (this.type !== null && this.type === 'Group') {
         queryApiGnd = queryApiGnd + TYPE_GROUP_GND;
       }
       fetch(queryApiGnd)
@@ -122,13 +122,13 @@ export class GeovAuthorityLookupExplorer {
     this.uriData = [];
     if (this.keywords.trim() != '') {
       let qrWD = QR_SPARQL_WIKIDATA(this.keywords, '', this.nbOccurencesMax);
-      if (this.type !== null && this.type == 'Person') {
+      if (this.type !== null && this.type === 'Person') {
         qrWD = QR_SPARQL_WIKIDATA(this.keywords, TYPE_PERSON_WIKIDATA, this.nbOccurencesMax);
       }
-      if (this.type !== null && this.type == 'Place') {
+      if (this.type !== null && this.type === 'Place') {
         qrWD = QR_SPARQL_WIKIDATA(this.keywords, TYPE_PLACE_WIKIDATA, this.nbOccurencesMax);
       }
-      if (this.type !== null && this.type == 'Group') {
+      if (this.type !== null && this.type === 'Group') {
         qrWD = QR_SPARQL_WIKIDATA(this.keywords, TYPE_GROUP_WIKIDATA, this.nbOccurencesMax);
       }
 
