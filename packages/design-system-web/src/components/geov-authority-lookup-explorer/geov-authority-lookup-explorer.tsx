@@ -24,12 +24,24 @@ import {
   TYPE_GROUP_IDREF,
   TYPE_ALL_IDREF,
   URL_IDREF,
+  TITLE_GEOVISTORY,
+  ENDPOINT_SPARQL_GEOVISTORY,
+  QR_SPARQL_GEOVISTORY,
+  TYPE_PERSON_GEOVISTORY,
+  TYPE_PLACE_GEOVISTORY,
+  TYPE_GROUP_GEOVISTORY,
 } from './lib/const';
 
 interface WikidataBindings {
   item: SparqlBinding;
   num: SparqlBinding;
   name: SparqlBinding;
+}
+
+interface GeovistoryBindings {
+  item: SparqlBinding;
+  name: SparqlBinding;
+  classUri: SparqlBinding;
 }
 
 interface ItemBinding {
@@ -49,7 +61,7 @@ export interface ItemSelectedEvent {
 })
 export class GeovAuthorityLookupExplorer {
   @Prop() api!: string;
-  apiAllowedValues: string[] = ['gnd', 'wikidata', 'idref'];
+  apiAllowedValues: string[] = ['gnd', 'wikidata', 'idref', 'geovistory'];
   @Watch('api')
   validateApiValue(newValue: string, oldValue: string) {
     if (!this.apiAllowedValues.includes(newValue)) {
@@ -169,6 +181,32 @@ export class GeovAuthorityLookupExplorer {
     }
   }
 
+  getGeovistoryData() {
+    this.title = TITLE_GEOVISTORY;
+    this.uriData = [];
+    const kw = this.keywords.trim().split(' ').map(word => `*${word}*`).join(' AND ');
+    if (kw.trim() != '') {
+      let qrGV = QR_SPARQL_GEOVISTORY(kw, '', this.nbOccurencesMax);
+      if (this.type !== null && this.type === 'Person') {
+        qrGV = QR_SPARQL_GEOVISTORY(kw, TYPE_PERSON_GEOVISTORY, this.nbOccurencesMax);
+      }
+      if (this.type !== null && this.type === 'Place') {
+        qrGV = QR_SPARQL_GEOVISTORY(kw, TYPE_PLACE_GEOVISTORY, this.nbOccurencesMax);
+      }
+      if (this.type !== null && this.type === 'Group') {
+        qrGV = QR_SPARQL_GEOVISTORY(kw, TYPE_GROUP_GEOVISTORY, this.nbOccurencesMax);
+      }
+
+      sparqlJson<GeovistoryBindings>(ENDPOINT_SPARQL_GEOVISTORY, qrGV)
+        .then(data => {
+          this.uriData = data.results?.bindings.map((obj: any) => ({ uri: obj.item.value, label: obj.name.value }));
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  }
+
   executeAllQueries() {
     if (this.api == 'gnd') {
       this.getDataGND();
@@ -180,6 +218,10 @@ export class GeovAuthorityLookupExplorer {
 
     if (this.api == 'idref') {
       this.getDataIdRef();
+    }
+
+    if (this.api == 'geovistory') {
+      this.getGeovistoryData();
     }
   }
 
@@ -220,6 +262,10 @@ export class GeovAuthorityLookupExplorer {
 
     if (this.api == 'idref') {
       this.getDataIdRef();
+    }
+
+    if (this.api == 'geovistory') {
+      this.getGeovistoryData();
     }
   }
 
