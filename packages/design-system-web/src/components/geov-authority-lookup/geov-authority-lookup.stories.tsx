@@ -20,7 +20,7 @@ const meta: Meta = {
       control: { type: 'range', min: 1, max: 3, step: 1 },
     },
   },
-    tags: ['autodocs'],
+  tags: ['autodocs'],
   parameters: {
     viewMode: 'docs',
     docs: {
@@ -57,6 +57,12 @@ export const NumberOfSearchResults = stencilWrapper(<geov-authority-lookup nbOcc
 export const CustomizeSearchedApis = stencilWrapper(<geov-authority-lookup apis={['idref']} nbColMax={1}></geov-authority-lookup>);
 /**
  * Enable/disable action buttons on search results. (Here: enable all buttons)
+ *
+ * The buttons have this behavior:
+ *
+ * - **Select**: Emits the URI of the selected entity as a DOM event.
+ * - **Copy**: Copies the URI of the selected entity to the clipboard.
+ * - **Open**: Opens the URI of the selected entity in a new browser tab.
  */
 export const CustomizeButtons = stencilWrapper(<geov-authority-lookup displayCopyBtn={true} displayOpenBtn={true} displaySelectBtn={true}></geov-authority-lookup>);
 /**
