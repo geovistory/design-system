@@ -32,7 +32,7 @@ export default meta;
 
 export const Basic = stencilWrapper(
   <geov-authority-lookup
-    apis={['gnd', 'idref', 'wikidata', 'geovistory']}
+    apis={['geovistory', 'gnd', 'idref', 'wikidata']}
     types={['All', 'Person', 'Place', 'Group']}
     nbOccurencesMax={5}
     displaySelectBtn={true}

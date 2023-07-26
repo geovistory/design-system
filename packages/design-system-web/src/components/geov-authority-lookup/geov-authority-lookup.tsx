@@ -88,7 +88,7 @@ export class GeovAuthorityLookup {
 
   @State() type = '';
 
-  @State() classForceCol = '';
+  @State() classForceCol = 'masonry-container';
 
   /**
    * Event emitted when the select button has been clicked.
@@ -105,11 +105,11 @@ export class GeovAuthorityLookup {
     }
 
     if (this.nbColMax == 2) {
-      this.classForceCol = 'forceCol2';
+      this.classForceCol = 'masonry-container forceCol2';
     } else if (this.nbColMax == 1) {
-      this.classForceCol = 'forceCol1';
+      this.classForceCol = 'masonry-container forceCol1';
     } else {
-      this.classForceCol = '';
+      this.classForceCol = 'masonry-container';
     }
   }
 
@@ -146,11 +146,10 @@ export class GeovAuthorityLookup {
           </ion-row>
         </ion-grid>
         <div class="containerResponsive">
-          <ion-grid class={this.classForceCol}>
-            <ion-row>
+          <div class={this.classForceCol}>
               {this.keywords.length
                 ? this.apis?.map(item => (
-                    <ion-col size="1">
+                    <div class="masonry-item">
                       <geov-authority-lookup-explorer
                         api={item}
                         keywords={this.keywords}
@@ -160,11 +159,10 @@ export class GeovAuthorityLookup {
                         displayOpenBtn={this.displayOpenBtn}
                         displaySelectBtn={this.displaySelectBtn}
                       ></geov-authority-lookup-explorer>
-                    </ion-col>
+                    </div>
                   ))
                 : ''}
-            </ion-row>
-          </ion-grid>
+            </div>
         </div>
         <slot></slot>
       </Host>

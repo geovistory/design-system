@@ -6,26 +6,31 @@
   container-type: inline-size;
 }
 
-ion-grid {
-  --ion-grid-columns: 1;
+div.masonry-container{
+  column-count: 1;
+}
+
+div.masonry-item{
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @container (width >= 768px) and (width < 992px) {
-  ion-grid {
-    --ion-grid-columns: 2;
+  div.masonry-container {
+    column-count: 2;
   }
 }
 
 @container (width >= 992px) {
-  ion-grid {
-    --ion-grid-columns: 3;
+  div.masonry-container {
+    column-count: 3;
   }
 }
 
-ion-grid.forceCol2 {
-  --ion-grid-columns: 2;
+div.forceCol2{
+  column-count: 2;
 }
 
-ion-grid.forceCol1 {
-  --ion-grid-columns: 1;
+div.forceCol1{
+  column-count: 1;
 }
