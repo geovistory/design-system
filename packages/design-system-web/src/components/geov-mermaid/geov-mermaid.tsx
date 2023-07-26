@@ -1,5 +1,6 @@
-import { Component, h, Host, State, Prop } from '@stencil/core';
+import { Component, h, Host, Prop, State } from '@stencil/core';
 import type { Mermaid } from 'mermaid';
+import { importMermaid } from '../../lib/importMermaid';
 /**
  * This is a simple wrapper around [mermaid.js](https://mermaid.js.org).
  *
@@ -18,8 +19,7 @@ export class GeovMermaid {
   @State() error: string;
 
   async componentWillLoad() {
-    const x: any = await import('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs');
-    this.mermaid = x.default as Mermaid;
+    this.mermaid = await importMermaid();
   }
 
   async componentDidLoad() {
@@ -35,6 +35,7 @@ export class GeovMermaid {
   }
 
   async createSVG() {
+    if (!this.mermaid) return;
     const chart = this.extractChartString();
     try {
       const { svg } = await this.mermaid.render('graphDiv', chart);
