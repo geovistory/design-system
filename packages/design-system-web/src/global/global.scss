@@ -30,14 +30,14 @@
   --ion-color-primary-shade: #5e3eaa;
   --ion-color-primary-tint: #7a59c7;
 
-  --ion-color-secondary: #CFDDE7;
+  --ion-color-secondary: #cfdde7;
   --ion-color-secondary-rgb: 207, 221, 231;
   --ion-color-secondary-contrast: #000000;
   --ion-color-secondary-contrast-rgb: 0, 0, 0;
   --ion-color-secondary-shade: #b6c2cb;
   --ion-color-secondary-tint: #d4e0e9;
 
-  --ion-color-tertiary: #EFEFEF;
+  --ion-color-tertiary: #efefef;
   --ion-color-tertiary-rgb: 239, 239, 239;
   --ion-color-tertiary-contrast: #000000;
   --ion-color-tertiary-contrast-rgb: 0, 0, 0;
@@ -114,7 +114,7 @@
     * @tokens Font
     * @presenter FontFamily
     */
-  --ion-font-family: "Nunito Sans",-apple-system,".SFNSText-Regular","San Francisco",BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --ion-font-family: 'Nunito Sans', -apple-system, '.SFNSText-Regular', 'San Francisco', BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   /**
     * @tokens Spacing
@@ -165,11 +165,10 @@ geov-code {
   --background-color: var(--gv-color-background-code);
 }
 
-
 @media (prefers-color-scheme: dark) {
   :root {
     /* dark mode variables go here */
-    --ion-color-tertiary: #60798B;
+    --ion-color-tertiary: #60798b;
     --ion-color-tertiary-rgb: 96, 121, 139;
     --ion-color-tertiary-contrast: #ffffff;
     --ion-color-tertiary-contrast-rgb: 255, 255, 255;
@@ -180,7 +179,7 @@ geov-code {
 
 body.dark {
   /* dark mode variables go here */
-  --ion-color-tertiary: #60798B;
+  --ion-color-tertiary: #60798b;
   --ion-color-tertiary-rgb: 96, 121, 139;
   --ion-color-tertiary-contrast: #ffffff;
   --ion-color-tertiary-contrast-rgb: 255, 255, 255;

@@ -34,4 +34,3 @@ export const jsxTypesGenerator: OutputTargetCustom = {
     createJsxForReact('components.d.ts', 'components-react.d.ts');
   },
 };
-

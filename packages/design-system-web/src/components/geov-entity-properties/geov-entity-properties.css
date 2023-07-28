@@ -17,6 +17,6 @@
   margin-top: var(--margin-top-first-item, -24px);
 } */
 
-geov-entity-props-by-predicate~geov-entity-props-by-predicate {
+geov-entity-props-by-predicate ~ geov-entity-props-by-predicate {
   margin-top: 24px;
 }
