@@ -43,7 +43,7 @@
         "test",
         "--spec",
         "--config",
-        "_test.stencil.config2.ts",
+        "_test.stencil.config.ts",
         "--",
         "${fileBasename}"
       ],

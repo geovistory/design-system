@@ -3,31 +3,30 @@
 }
 
 .colContent {
-  overflow: hidden; /* Masque le contenu qui dépasse */
-  text-overflow: ellipsis; /* Ajoute des points de suspension (...) pour indiquer le contenu coupé */
-  white-space: nowrap; /* Empêche le contenu de passer à la ligne */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /*Add suspension points (...) to indicate cut content */
+  white-space: nowrap; /* Prevents content from going to line */
 }
 
 .containerResponsive {
   container-type: inline-size;
 }
 
-@container (width >= 320px) {
-  .colButtons {
-    text-align: right;
-    white-space: nowrap;
-  }
-
-  .colMenu {
-    display: none;
-  }
+.colButtons {
+  display: none;
+  text-align: right;
+  white-space: nowrap;
+}
+.colMenu {
+  text-align: right;
 }
 
-@container (width < 320px) {
+@container (width >= 320px) {
   .colButtons {
-    display: none;
+    display: block;
   }
+
   .colMenu {
-    text-align: right;
+    display: none;
   }
 }

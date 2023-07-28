@@ -33,6 +33,15 @@ Start dev servers
 npm run dev
 ```
 
+In case you see this error:
+
+```
+[📕_STORYBOOK] Failed to resolve import "../dist/esm/polyfills/index.js" from "loader\index.js". Does the file exist?
+```
+
+please cancel and restart the above command.
+
+
 Add a component
 ```bash
 # open main package
@@ -55,6 +64,21 @@ Build
 ```bash
 npm run build
 ```
+
+## Build Storybook
+
+In order to build the storybook run:
+
+```bash
+npm run storybook
+```
+
+This generates a website in `./storybook`. To serve the built storybook website, run:
+
+```bash
+npm run storybook:serve
+```
+
 
 
 ## Publication

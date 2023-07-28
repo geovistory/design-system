@@ -35,7 +35,6 @@ export const docsGenerator: OutputTargetDocsCustom = {
 function createDocsComponentApi(cmp: JsonDocsComponent) {
   const filePath = cmp.readmePath.replace('readme.md', 'docs-component-api.md');
   const content = [
-    '# Component API',
     ...usageToMarkdown(cmp.usage),
     ...propsToMarkdown(cmp.props),
     ...eventsToMarkdown(cmp.events),

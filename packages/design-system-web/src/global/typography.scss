@@ -9,7 +9,6 @@
   * set them off from the body text.
   */
 
-
   p.lead {
     font-size: 1.2rem;
   }
@@ -59,7 +58,6 @@
   * evoke an emotional response and set a tone. It is intended
   * to be looked at before it is read, and is thus set larger.
   */
-  /* sm and up */
   h1,
   h2,
   h3,
@@ -69,104 +67,65 @@
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
-    /* margin-bottom: 10px; */
-
     font-weight: 500;
     line-height: 1.2;
-    margin-block-start: 2em !important;
-    margin-block-end: 0.5em !important;
+    margin-block-start: 2em;
+    margin-block-end: 0.5em;
   }
-  /* xs */
   h1 {
-    /* margin-top: 20px; */
-    margin-block-start: 1em !important;
-    /* 16px x 2.0625 = 33px */
+    margin-block-start: 1em;
     font-size: 2.0625rem;
   }
 
   h2 {
-    /* margin-top: 18px; */
-    /* 16px x 1.5625 = 16px */
     font-size: 1.5625rem;
   }
 
   h3 {
-    /* 16px x 1.3125 = 21px */
     font-size: 1.3125rem;
   }
 
   h4 {
-    /* 16px x 1 = 16px */
     font-size: 1rem;
   }
 
   h5 {
-    /* 16px x 1 = 16px */
     font-size: 1rem;
-    /* font-size: 18px; */
   }
 
   h6 {
-    /* 16px x 1 = 16px */
     font-size: 1rem;
-    /* font-size: 16px; */
   }
   h2 + h3,
   h3 + h4,
   h4 + h5,
   h5 + h6 {
-    margin-block-start: 1rem !important;
+    margin-block-start: 1rem;
   }
 
-  /* sm and up */
   @media screen and (min-width: 576px) {
     h1 {
-      /* 16px x 4.875 = 78px */
-      /* font-size: 4.875rem; */
-
-      /* 16px x 3.1875 = 51px */
       font-size: 3.1875rem;
-      /* font-size: 26px; */
     }
 
     h2 {
-      /* 16px x 2.75 = 44px */
-      /* font-size: 2.75rem; */
-
-      /* 16px x 2.0625 = 33px */
       font-size: 2.0625rem;
-      /* font-size: 24px; */
     }
 
     h3 {
-      /* 16px x 1.75 = 28px */
-      /* font-size: 1.75rem; */
-
-      /* 16px x 1.5625 = 25px */
       font-size: 1.5625rem;
-      /* font-size: 22px; */
     }
 
     h4 {
-      /* 16px x 1.3125 = 21px */
-      /* font-size: 1.3125rem; */
-
-      /* 16px x 1.125 = 18px */
       font-size: 1.125rem;
-
-      /* font-size: 20px; */
     }
 
     h5 {
-      /* 16px x 1 = 16px */
       font-size: 1rem;
-      /* font-size: 18px; */
     }
 
     h6 {
-      /* 16px x 1 = 16px */
       font-size: 1rem;
-      /* font-size: 16px; */
     }
   }
 

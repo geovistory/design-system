@@ -97,19 +97,18 @@ export class GeovAuthorityLookupExplorer {
     this.uriData = [];
     if (this.keywords.trim() != '') {
       let queryApiGnd = BASE_URI_GND + this.keywords + SIZE_GND + this.nbOccurencesMax + FORMAT_OUTPUT_GND;
-      if (this.type !== null && this.type == 'Person') {
+      if (this.type !== null && this.type === 'Person') {
         queryApiGnd = queryApiGnd + TYPE_PERSON_GND;
       }
-      if (this.type !== null && this.type == 'Place') {
+      if (this.type !== null && this.type === 'Place') {
         queryApiGnd = queryApiGnd + TYPE_PLACE_GND;
       }
-      if (this.type !== null && this.type == 'Group') {
+      if (this.type !== null && this.type === 'Group') {
         queryApiGnd = queryApiGnd + TYPE_GROUP_GND;
       }
       fetch(queryApiGnd)
         .then(response => response.json())
         .then(data => {
-          // console.log(data);
           this.uriData = data.map((obj: any) => ({ uri: obj.id, label: obj.label }));
         })
         .catch(error => {
@@ -123,19 +122,18 @@ export class GeovAuthorityLookupExplorer {
     this.uriData = [];
     if (this.keywords.trim() != '') {
       let qrWD = QR_SPARQL_WIKIDATA(this.keywords, '', this.nbOccurencesMax);
-      if (this.type !== null && this.type == 'Person') {
+      if (this.type !== null && this.type === 'Person') {
         qrWD = QR_SPARQL_WIKIDATA(this.keywords, TYPE_PERSON_WIKIDATA, this.nbOccurencesMax);
       }
-      if (this.type !== null && this.type == 'Place') {
+      if (this.type !== null && this.type === 'Place') {
         qrWD = QR_SPARQL_WIKIDATA(this.keywords, TYPE_PLACE_WIKIDATA, this.nbOccurencesMax);
       }
-      if (this.type !== null && this.type == 'Group') {
+      if (this.type !== null && this.type === 'Group') {
         qrWD = QR_SPARQL_WIKIDATA(this.keywords, TYPE_GROUP_WIKIDATA, this.nbOccurencesMax);
       }
 
       sparqlJson<WikidataBindings>(ENDPOINT_SPARQL_WIKIDATA, qrWD)
         .then(data => {
-          // console.log(data.results?.bindings)
           this.uriData = data.results?.bindings.map((obj: any) => ({ uri: obj.item.value, label: obj.name.value }));
         })
         .catch(error => {
@@ -151,19 +149,18 @@ export class GeovAuthorityLookupExplorer {
       const kw = this.keywords.trim().split(' ').join(' AND ');
 
       let queryApiIdRef = BASE_URI_IDREF + TYPE_ALL_IDREF + '(' + kw + ')' + SIZE_IDREF + this.nbOccurencesMax + FORMAT_OUTPUT_IDREF;
-      if (this.type !== null && this.type == 'Person') {
+      if (this.type !== null && this.type === 'Person') {
         queryApiIdRef = BASE_URI_IDREF + TYPE_PERSON_IDREF + '(' + kw + ')' + SIZE_IDREF + this.nbOccurencesMax + FORMAT_OUTPUT_IDREF;
       }
-      if (this.type !== null && this.type == 'Place') {
+      if (this.type !== null && this.type === 'Place') {
         queryApiIdRef = BASE_URI_IDREF + TYPE_PLACE_IDREF + '(' + kw + ')' + SIZE_IDREF + this.nbOccurencesMax + FORMAT_OUTPUT_IDREF;
       }
-      if (this.type !== null && this.type == 'Group') {
+      if (this.type !== null && this.type === 'Group') {
         queryApiIdRef = BASE_URI_IDREF + TYPE_GROUP_IDREF + '(' + kw + ')' + SIZE_IDREF + this.nbOccurencesMax + FORMAT_OUTPUT_IDREF;
       }
       fetch(queryApiIdRef)
         .then(response => response.json())
         .then(data => {
-          //console.log(data);
           this.uriData = data.response.docs?.map((obj: any) => ({ uri: URL_IDREF + obj.ppn_z, label: obj.affcourt_z }));
         })
         .catch(error => {
@@ -202,7 +199,6 @@ export class GeovAuthorityLookupExplorer {
   selected: EventEmitter<ItemSelectedEvent>;
 
   handleSelected(item: ItemBinding) {
-    //console.log(item.uri);
     this.selected.emit({
       uri: item.uri,
     });
