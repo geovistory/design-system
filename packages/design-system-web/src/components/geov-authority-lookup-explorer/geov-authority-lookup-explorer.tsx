@@ -184,7 +184,11 @@ export class GeovAuthorityLookupExplorer {
   getGeovistoryData() {
     this.title = TITLE_GEOVISTORY;
     this.uriData = [];
-    const kw = this.keywords.trim().split(' ').map(word => `*${word}*`).join(' AND ');
+    const kw = this.keywords
+      .trim()
+      .split(' ')
+      .map(word => `*${word}*`)
+      .join(' AND ');
     if (kw.trim() != '') {
       let qrGV = QR_SPARQL_GEOVISTORY(kw, '', this.nbOccurencesMax);
       if (this.type !== null && this.type === 'Person') {

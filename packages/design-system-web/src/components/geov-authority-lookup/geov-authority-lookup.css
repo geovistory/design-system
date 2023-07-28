@@ -6,13 +6,14 @@
   container-type: inline-size;
 }
 
-div.masonry-container{
+div.masonry-container {
   column-count: 1;
 }
 
-div.masonry-item{
+div.masonry-item {
   width: 100%;
   box-sizing: border-box;
+  padding-top: 0.1px;
 }
 
 @container (width >= 768px) and (width < 992px) {
@@ -25,12 +26,4 @@ div.masonry-item{
   div.masonry-container {
     column-count: 3;
   }
-}
-
-div.forceCol2{
-  column-count: 2;
-}
-
-div.forceCol1{
-  column-count: 1;
 }

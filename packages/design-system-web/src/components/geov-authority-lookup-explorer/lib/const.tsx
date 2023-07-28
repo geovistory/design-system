@@ -53,12 +53,11 @@ WHERE
 {
   	(?item) text:query ('${keywords}') .
   	?item rdfs:label ?name .
-  	?item a ?classUri .
-  	${type}
+  	?item a ?classUri${type} .
 }
 LIMIT ${pageSize}
 OFFSET 0`;
 
-export const TYPE_PERSON_GEOVISTORY = 'FILTER (?classUri = ontome:c21)';
-export const TYPE_PLACE_GEOVISTORY = 'FILTER (?classUri = ontome:c363)';
-export const TYPE_GROUP_GEOVISTORY = 'FILTER (?classUri = ontome:c68)';
+export const TYPE_PERSON_GEOVISTORY = ', ontome:c21';
+export const TYPE_PLACE_GEOVISTORY = ', ontome:c363';
+export const TYPE_GROUP_GEOVISTORY = ', ontome:c68';
