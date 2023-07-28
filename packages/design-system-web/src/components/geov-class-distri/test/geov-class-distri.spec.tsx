@@ -4,7 +4,6 @@ import { renderToString } from '../../../../hydrate/index';
 import { GeovClassDistri } from '../geov-class-distri';
 
 describe('geov-class-distry', () => {
-
   it('Client side: fetches data and renders', async () => {
     const page = await newSpecPage({
       components: [GeovClassDistri],
