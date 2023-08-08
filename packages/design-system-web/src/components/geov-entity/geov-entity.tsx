@@ -97,20 +97,6 @@ export class GeovEntity {
               </ion-segment>
             </div> */}
 
-          {/* Basics */}
-          <geov-entity-properties
-            onDataFetched={this.removeIfEmpty()}
-            predicateInclude={this.predicatesBasic.join(',')}
-            fixedGrid={true}
-            class="section columns-2"
-            sparqlEndpoint={this.sparqlEndpoint}
-            entityId={this.entityId}
-            language={'en'}
-            fetchBeforeRender={this.fetchBeforeRender}
-            uriRegex={this.uriRegex}
-            uriReplace={this.uriReplace}
-          ></geov-entity-properties>
-
           {/* Rest */}
           <geov-entity-properties
             onDataFetched={this.removeIfEmpty()}

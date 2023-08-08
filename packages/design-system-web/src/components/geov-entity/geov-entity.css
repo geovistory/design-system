@@ -33,11 +33,11 @@ geov-entity-label {
 }
 
 .section:nth-child(even) {
-  background: var(--ion-color-tertiary);
+  background: var(--ion-color-tertiary-shade);
 }
 
 .section:nth-child(odd) {
-  background: var(--ion-color-tertiary-shade);
+  background: var(--ion-color-tertiary);
 }
 
 ion-card {
