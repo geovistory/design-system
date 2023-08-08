@@ -66,9 +66,15 @@ export class GeovEntity {
         <div class="container">
           <div class="header">
             <ion-grid fixed={true} class="ion-padding">
-              <h5>
+              <h3>
+                <geov-entity-class-icon
+                  class="ion-float-left ion-margin-end"
+                  entityId={this.entityId}
+                  sparqlEndpoint={this.sparqlEndpoint}
+                  _ssrId={`${this.ssrIdPrefix}class-icon`}
+                ></geov-entity-class-icon>
                 <geov-entity-class-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}class-label`}></geov-entity-class-label>
-              </h5>
+              </h3>
               <h1>
                 <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}entity-label`}></geov-entity-label>
               </h1>
