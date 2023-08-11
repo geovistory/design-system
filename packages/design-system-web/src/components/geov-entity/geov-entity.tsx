@@ -59,7 +59,7 @@ export class GeovEntity {
 
   predicatesBasic = ['http://www.w3.org/2000/01/rdf-schema#label', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'];
   predicatesTime = ['https://ontome.net/ontology/p4'];
-  excluded = ['https://ontome.net/ontology/p1943'];
+  excluded = ['https://ontome.net/ontology/p1943', 'https://ontome.net/ontology/p1762'];
   render() {
     return (
       <Host>
