@@ -24,6 +24,7 @@ const iconLabel = {
   'group': 'people-circle-outline',
   'shipvoyage': 'boat-outline',
   'date-timedescription': 'calendar-outline',
+  'text': 'document-text-outline',
 };
 
 interface GeovClassIconData extends FetchResponse {

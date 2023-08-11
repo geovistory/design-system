@@ -1,5 +1,5 @@
 import { Color } from '@ionic/core';
-import { Component, Event, EventEmitter, h, Host, Prop, State } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Host, Prop, State, Element } from '@stencil/core';
 import { openOutline } from 'ionicons/icons';
 import { GeovPaginatorCustomEvent } from '../../components';
 import { FetchResponse } from '../../lib/FetchResponse';
@@ -138,6 +138,21 @@ export class GeovEntityPropsByPredicate {
    */
   @Event() pageChanged: EventEmitter<PageEvent>;
 
+  /**
+   * State of expand
+   */
+  @State() isExpanded = false;
+
+  /**
+   * Toggle label button expand/collapse
+   */
+  @State() labelButton = ' Expand';
+
+  /**
+   * DOM
+   */
+  @Element() hostElement: HTMLElement;
+
   /*
    * assigns an id to the component
    */
@@ -168,6 +183,26 @@ export class GeovEntityPropsByPredicate {
           this.data = d;
           return d;
         });
+    }
+  }
+
+  componentDidLoad() {
+    // Display Expand button if need. The page must be loaded in order to have the measurements
+    const shadowRoot = this.hostElement.shadowRoot;
+    if (shadowRoot) {
+      const itemLitteral = shadowRoot.querySelector('.litteral-container .litteral-collapsed');
+      const itemButton = shadowRoot.querySelector('.litteral-container .item-button') as HTMLElement;
+
+      if (itemLitteral && itemButton) {
+        itemButton.style.display = 'none';
+        const labelLitteral = itemLitteral.querySelector('ion-label');
+        if (labelLitteral) {
+          // If size of text > size of container
+          if (labelLitteral.scrollWidth > labelLitteral.clientWidth) {
+            itemButton.style.display = 'block';
+          }
+        }
+      }
     }
   }
 
@@ -242,8 +277,25 @@ export class GeovEntityPropsByPredicate {
         </ion-item>
       );
     }
-    return <ion-item color={this.color}> {this.renderLiteral(item)}</ion-item>;
+
+    return (
+      <div class="litteral-container">
+        <ion-item class={this.isExpanded ? 'litteral-expanded' : 'litteral-collapsed'} color={this.color}>
+          {this.renderLiteral(item)}
+        </ion-item>
+        <ion-item class="item-button text-right">
+          <ion-button onClick={this.toggleCollapseLitteral}>
+            <ion-icon name={'chevron-' + this.labelButton.trim().toLowerCase() + '-outline'}></ion-icon> {this.labelButton}
+          </ion-button>
+        </ion-item>
+      </div>
+    );
   }
+
+  private toggleCollapseLitteral = () => {
+    this.isExpanded = !this.isExpanded;
+    this.labelButton = this.isExpanded ? ' Collapse' : ' Expand';
+  };
 
   private renderUri(item: Bindings) {
     const klass = item.entityType?.value;
