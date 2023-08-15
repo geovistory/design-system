@@ -18,7 +18,7 @@ export default {
     return id.startsWith('react') || id.startsWith('@geovistory');
   },
   plugins: [
-    multiInput({ relative: 'dist/components/' }),
+    multiInput.default({ relative: 'dist/components/' }),
     nodeResolve(),
     commonjs(),
     peerDepsExternal(),
@@ -26,7 +26,7 @@ export default {
     copy({
       targets: [
         { src: 'dist/components/*.d.ts', dest: 'dist/components-cjs' },
-        { src: 'src/components-all.d.ts', dest: 'dist/types' }
+        { src: 'src/components-all.d.ts', dest: 'dist/types' },
       ],
     }),
   ],
