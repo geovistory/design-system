@@ -20,7 +20,7 @@ interface ComplexElements {
 }
 
 // Convert TSX to HTML string
-export function tsxToHTML(tsxSnippet: VNode): string {
+export async function tsxToHTML(tsxSnippet: VNode): Promise<string> {
   // Store complex elements
   const complexElements: ComplexElements = {};
 
@@ -87,11 +87,7 @@ export function tsxToHTML(tsxSnippet: VNode): string {
 
   let htmlString = convertToHTML(tsxSnippet);
   htmlString = initWrapper(htmlString, complexElements);
-  let returnvalue: string;
-  format(htmlString, { plugins: [pluginXML], parser: 'xml', singleQuote: true, singleAttributePerLine: true }).then(v => {
-    returnvalue = v.replace(/&frasl;/g, '/').replace(/&lt;/g, '<');
-  });
-  return returnvalue;
+  return (await format(htmlString, { plugins: [pluginXML], parser: 'xml', singleQuote: true, singleAttributePerLine: true })).replace(/&frasl;/g, '/').replace(/&lt;/g, '<');
 }
 
 // Convert camelCase to dash-case
@@ -140,12 +136,12 @@ function initWrapper(htmlString: string, complexElements: ComplexElements) {
       `)};`
           : ''
       }${
-            complexElements[key]?.functions
-              ? `
+        complexElements[key]?.functions
+          ? `
       // Add event listeners
       ${complexElements[key].functions.map(prop => `el${key}.addEventListener('${convertEventHandlerName(prop.key)}', ${prop.value}`)});`
-              : ''
-          }`,
+          : ''
+      }`,
         )
         .join('')}
     }
