@@ -1,6 +1,6 @@
-const chalk = require('chalk')
+import chalk from 'chalk'
 
-const log = {
+export const log = {
   title: text => {
     console.log('')
     console.log(chalk.bold.underline.blue(text))
@@ -43,5 +43,3 @@ const log = {
     return log
   },
 }
-
-module.exports = log
