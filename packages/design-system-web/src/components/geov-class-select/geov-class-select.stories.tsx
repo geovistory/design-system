@@ -58,12 +58,12 @@ const items = [
 /**
  * Open console to see selected items emitted by onSelectionChanged().
  */
-export const ClassSelectCheckedOnInit = stencilWrapper(
+export const ClassSelectCheckedOnInit = await stencilWrapper(
   <geov-class-select checkedOnInit={true} items={items} onSelectionChanged={e => console.log(e.detail.selectedClassUris)}></geov-class-select>,
 );
 /**
  * Open console to see selected items emitted by onSelectionChanged().
  */
-export const ClassSelectUncheckedOnInit = stencilWrapper(
+export const ClassSelectUncheckedOnInit = await stencilWrapper(
   <geov-class-select checkedOnInit={false} items={items} onSelectionChanged={e => console.log(e.detail.selectedClassUris)}></geov-class-select>,
 );

@@ -18,7 +18,7 @@ export default {
   },
 };
 
-export const ServerSideRendering = stencilWrapper(
+export const ServerSideRendering = await stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>

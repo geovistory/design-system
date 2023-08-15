@@ -15,27 +15,27 @@ export default {
   },
 };
 
-export const EntityPropertiesTeEn = stencilWrapper(
+export const EntityPropertiesTeEn = await stencilWrapper(
   <geov-entity-properties sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i151089" language="en" fetchBeforeRender={false}></geov-entity-properties>,
 );
 
-export const EntityPropertiesRammekensToJakarta = stencilWrapper(
+export const EntityPropertiesRammekensToJakarta = await stencilWrapper(
   <geov-entity-properties sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i152157" language="en" fetchBeforeRender={false}></geov-entity-properties>,
 );
 
-export const EntityPropertiesPeIt = stencilWrapper(
+export const EntityPropertiesPeIt = await stencilWrapper(
   <geov-entity-properties sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i209502" language="en" fetchBeforeRender={false}></geov-entity-properties>,
 );
 
-export const EntityPropertiesPresence = stencilWrapper(
+export const EntityPropertiesPresence = await stencilWrapper(
   <geov-entity-properties sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i253594" language="en" fetchBeforeRender={false}></geov-entity-properties>,
 );
 
-export const EntityPropertiesTimeSpan = stencilWrapper(
+export const EntityPropertiesTimeSpan = await stencilWrapper(
   <geov-entity-properties sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i151089ts" language="en" fetchBeforeRender={false}></geov-entity-properties>,
 );
 
-export const EntityPropertiesRammekensToJakartaPreloaded = stencilWrapper(
+export const EntityPropertiesRammekensToJakartaPreloaded = await stencilWrapper(
   <geov-entity-properties
     sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
     entityId="i152157"
@@ -45,7 +45,7 @@ export const EntityPropertiesRammekensToJakartaPreloaded = stencilWrapper(
   ></geov-entity-properties>,
 );
 
-export const EntityPropertiesColorPrimary = stencilWrapper(
+export const EntityPropertiesColorPrimary = await stencilWrapper(
   <geov-entity-properties
     sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
     entityId="i152157"
@@ -56,7 +56,7 @@ export const EntityPropertiesColorPrimary = stencilWrapper(
   ></geov-entity-properties>,
 );
 
-export const EntityPropertiesPredicateInclude = stencilWrapper(
+export const EntityPropertiesPredicateInclude = await stencilWrapper(
   <geov-entity-properties
     sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
     entityId="i86177"
@@ -66,7 +66,7 @@ export const EntityPropertiesPredicateInclude = stencilWrapper(
   ></geov-entity-properties>,
 );
 
-export const EntityPropertiesPredicateExclude = stencilWrapper(
+export const EntityPropertiesPredicateExclude = await stencilWrapper(
   <geov-entity-properties
     sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
     entityId="i86177"
@@ -76,6 +76,6 @@ export const EntityPropertiesPredicateExclude = stencilWrapper(
   ></geov-entity-properties>,
 );
 
-export const EntityPropertiesFixedGrid = stencilWrapper(
+export const EntityPropertiesFixedGrid = await stencilWrapper(
   <geov-entity-properties sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i209502" language="en" fetchBeforeRender={false} fixedGrid={true}></geov-entity-properties>,
 );

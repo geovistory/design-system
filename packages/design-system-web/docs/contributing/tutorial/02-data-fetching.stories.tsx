@@ -15,7 +15,7 @@ export default {
   },
 };
 
-export const DataFetching = stencilWrapper(
+export const DataFetching = await stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>

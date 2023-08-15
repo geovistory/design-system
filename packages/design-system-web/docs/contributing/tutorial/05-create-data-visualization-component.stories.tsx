@@ -31,7 +31,7 @@ export default {
   },
 };
 
-export const CreateDataVisualizationComponent = stencilWrapper(
+export const CreateDataVisualizationComponent = await stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>

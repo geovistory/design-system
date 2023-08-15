@@ -13,7 +13,7 @@ export default {
     },
   },
 };
-export const ClassSelectCheckedOnInit = stencilWrapper(
+export const ClassSelectCheckedOnInit = await stencilWrapper(
   <geov-class-radio-group
     items={[
       {
