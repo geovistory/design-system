@@ -13,6 +13,6 @@ export default {
     },
   },
 };
-export const DisplayGeosparqlWktliteral = stencilWrapper(
+export const DisplayGeosparqlWktliteral = await stencilWrapper(
   <geov-display-geosparql-wktliteral value="http://www.opengis.net/def/crs/EPSG/0/4326>POINT(4.79583 52.55417)"></geov-display-geosparql-wktliteral>,
 );

@@ -14,7 +14,7 @@ export default {
   },
 };
 
-export const CI_andCDWorkflow = stencilWrapper(
+export const CI_andCDWorkflow = await stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>

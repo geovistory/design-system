@@ -14,7 +14,7 @@ export default {
   },
 };
 
-export const Toc = stencilWrapper(
+export const Toc = await stencilWrapper(
   <div>
     <h1 id="welcome">
       Welcome <small>you!</small>

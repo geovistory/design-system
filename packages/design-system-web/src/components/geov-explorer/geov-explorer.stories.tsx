@@ -15,13 +15,13 @@ export default {
   },
 };
 
-export const Explorer = stencilWrapper(<geov-explorer sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} preferredItems={['c21', 'c523']}></geov-explorer>);
+export const Explorer = await stencilWrapper(<geov-explorer sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} preferredItems={['c21', 'c523']}></geov-explorer>);
 
-export const ExplorerInitSearch = stencilWrapper(
+export const ExplorerInitSearch = await stencilWrapper(
   <geov-explorer sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} preferredItems={['c21', 'c523']} initSearchString="Anna Maria"></geov-explorer>,
 );
 
-export const ExplorerProject84760 = stencilWrapper(
+export const ExplorerProject84760 = await stencilWrapper(
   <geov-explorer
     sparqlEndpoint="https://sparql.geovistory.org/api_v1_project_84760"
     preferredItems={['c21', 'c523']}

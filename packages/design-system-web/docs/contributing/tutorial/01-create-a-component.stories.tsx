@@ -15,7 +15,7 @@ export default {
   },
 };
 
-export const CreateComponent = stencilWrapper(
+export const CreateComponent = await stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>
