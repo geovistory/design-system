@@ -15,7 +15,6 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
-      // Add dependencies to pre-optimization
       build: {
         // our stories require top level await support
         // here we set the minimum targets supporting top level await,
