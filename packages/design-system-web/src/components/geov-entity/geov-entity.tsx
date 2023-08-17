@@ -23,6 +23,11 @@ export class GeovEntity {
    */
   @Prop() entityId: string;
   /**
+   * projectId
+   * ID number of project, e.g. '123123'
+   */
+  @Prop() projectId: number | undefined;
+  /**
    * language
    * prints the label with the language or english, if not found, e.g. 'en'
    */
@@ -132,6 +137,11 @@ export class GeovEntity {
             uriRegex={this.uriRegex}
             uriReplace={this.uriReplace}
           ></geov-entity-properties>
+
+          {/* Download RDF button */}
+          <div class="section columns-1 ion-text-center">
+            <geov-entity-download-rdf entityId={this.entityId} projectId={this.projectId} color="primary" fill="outline" buttonLabel="Download RDF" buttonIcon="download-outline" />
+          </div>
 
           <slot name="body-end"></slot>
         </div>
