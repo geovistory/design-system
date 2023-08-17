@@ -190,15 +190,14 @@ export class GeovEntityPropsByPredicate {
     // Display Expand button if need. The page must be loaded in order to have the measurements
     const shadowRoot = this.hostElement.shadowRoot;
     if (shadowRoot) {
-      const itemLitteral = shadowRoot.querySelector('.litteral-container .litteral-collapsed');
-      const itemButton = shadowRoot.querySelector('.litteral-container .item-button') as HTMLElement;
+      const itemLiteral = shadowRoot.querySelector('.literal-container .literal-collapsed');
+      const itemButton = shadowRoot.querySelector('.literal-container .item-button') as HTMLElement;
 
-      if (itemLitteral && itemButton) {
-        itemButton.style.display = 'none';
-        const labelLitteral = itemLitteral.querySelector('ion-label');
-        if (labelLitteral) {
+      if (itemLiteral && itemButton) {
+        const labelLiteral = itemLiteral.querySelector('ion-label');
+        if (labelLiteral) {
           // If size of text > size of container
-          if (labelLitteral.scrollWidth > labelLitteral.clientWidth) {
+          if (labelLiteral.scrollWidth > labelLiteral.clientWidth) {
             itemButton.style.display = 'block';
           }
         }
@@ -279,12 +278,12 @@ export class GeovEntityPropsByPredicate {
     }
 
     return (
-      <div class="litteral-container">
-        <ion-item class={this.isExpanded ? 'litteral-expanded' : 'litteral-collapsed'} color={this.color}>
+      <div class="literal-container">
+        <ion-item class={this.isExpanded ? 'literal-expanded' : 'literal-collapsed'} color={this.color}>
           {this.renderLiteral(item)}
         </ion-item>
         <ion-item class="item-button text-right">
-          <ion-button onClick={this.toggleCollapseLitteral}>
+          <ion-button onClick={this.toggleCollapseLiteral}>
             <ion-icon name={'chevron-' + this.labelButton.trim().toLowerCase() + '-outline'}></ion-icon> {this.labelButton}
           </ion-button>
         </ion-item>
@@ -292,7 +291,7 @@ export class GeovEntityPropsByPredicate {
     );
   }
 
-  private toggleCollapseLitteral = () => {
+  private toggleCollapseLiteral = () => {
     this.isExpanded = !this.isExpanded;
     this.labelButton = this.isExpanded ? ' Collapse' : ' Expand';
   };

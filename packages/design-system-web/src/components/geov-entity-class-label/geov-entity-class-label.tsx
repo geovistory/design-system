@@ -46,6 +46,12 @@ export class GeovEntityClassLabel {
   @Prop() entityId: string;
 
   /**
+   * withIcon
+   * Add an icon in the left of label
+   */
+  @Prop() withIcon = false;
+
+  /**
    * the data (or model) used in the view
    */
   @State() data?: GeovClassLabelData;
@@ -101,6 +107,7 @@ export class GeovEntityClassLabel {
   render() {
     return (
       <Host>
+        {this.withIcon && <geov-entity-class-icon type={this.data.label?.toLowerCase().replace(/\s+/g, '')}></geov-entity-class-icon>}
         {this.data.label}
         {this.data.loading && `loading...`}
         {this.data.error && `error!`}

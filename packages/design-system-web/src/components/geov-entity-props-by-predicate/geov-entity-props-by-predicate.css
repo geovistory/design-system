@@ -13,16 +13,20 @@ geov-paginator {
   margin-left: auto;
 }
 
-.litteral-container {
+.literal-container {
   overflow: clip;
   width: 100%;
 }
 
-.litteral-expanded ion-label {
-  white-space: normal !important;
+.literal-expanded .sc-ion-label-ios-h,
+.literal-expanded .sc-ion-label-ios-s {
+  white-space: normal;
 }
 
-.text-right {
-  text-align: right !important;
-  margin-left: auto !important;
+.text-right ion-button {
+  margin-left: auto;
+}
+
+.literal-container .item-button {
+  display: none;
 }
