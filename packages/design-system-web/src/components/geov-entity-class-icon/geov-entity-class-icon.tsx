@@ -1,12 +1,13 @@
-import { Component, Host, h, State, Prop } from '@stencil/core';
+import { Component, Host, h, Prop } from '@stencil/core';
+import { boatOutline, calendarOutline, documentTextOutline, navigateCircleOutline, peopleCircleOutline, personCircleOutline } from 'ionicons/icons';
 
-const iconLabel = {
-  'person': 'person-circle-outline',
-  'geographicalplace': 'navigate-circle-outline',
-  'group': 'people-circle-outline',
-  'shipvoyage': 'boat-outline',
-  'date-timedescription': 'calendar-outline',
-  'text': 'document-text-outline',
+const iconMap = {
+  'https://ontome.net/ontology/c21': personCircleOutline, // Person
+  'https://ontome.net/ontology/c363': navigateCircleOutline, // Geographical Place
+  'https://ontome.net/ontology/c68': peopleCircleOutline, // Group
+  'https://ontome.net/ontology/c523': boatOutline, // Ship Voyage
+  'http://www.w3.org/2006/time#DateTimeDescription': calendarOutline, // Date Time Description
+  'https://ontome.net/ontology/c785': documentTextOutline, // Text
 };
 
 /**
@@ -18,22 +19,11 @@ const iconLabel = {
   shadow: true,
 })
 export class GeovEntityClassIcon {
-  @Prop() type: string;
-
-  @State() icon: string;
-
-  componentWillLoad() {
-    if (this.type != undefined && iconLabel[this.type] != undefined) {
-      this.icon = iconLabel[this.type];
-    }
-  }
+  @Prop() classURI: string;
 
   render() {
-    return (
-      <Host>
-        {this.icon && <ion-icon name={this.icon}></ion-icon>}
-        <slot />
-      </Host>
-    );
+    const icon = iconMap[this.classURI];
+
+    return <Host>{icon && <ion-icon icon={icon}></ion-icon>}</Host>;
   }
 }

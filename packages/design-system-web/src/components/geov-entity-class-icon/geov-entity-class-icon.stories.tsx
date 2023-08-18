@@ -1,5 +1,4 @@
 import { h } from '@stencil/core';
-import { DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
 import { docsTemlpate } from '../../../.storybook/templates/docsTemplate';
 import { stencilWrapper } from '../../../.storybook/lib/stencilWrapper';
 import componentApi from './docs-component-api.md?raw';
@@ -14,8 +13,9 @@ export default {
     },
   },
 };
-export const EntityClassIcon = stencilWrapper(<geov-entity-class-icon entityId="i785518" sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}></geov-entity-class-icon>);
-export const EntityClassIconGeographicalPlace = stencilWrapper(<geov-entity-class-icon entityId="i207953" sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}></geov-entity-class-icon>);
-export const EntityClassIconGroup = stencilWrapper(<geov-entity-class-icon entityId="i2215290" sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}></geov-entity-class-icon>);
-export const EntityClassIconShipVoyage = stencilWrapper(<geov-entity-class-icon entityId="i149888" sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}></geov-entity-class-icon>);
-export const EntityClassIconDateTimeDescription = stencilWrapper(<geov-entity-class-icon entityId="i609119" sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}></geov-entity-class-icon>);
+export const EntityClassIcon = stencilWrapper(<geov-entity-class-icon classURI="https://ontome.net/ontology/c21"></geov-entity-class-icon>);
+export const EntityClassIconGeographicalPlace = stencilWrapper(<geov-entity-class-icon classURI="https://ontome.net/ontology/c363"></geov-entity-class-icon>);
+export const EntityClassIconGroup = stencilWrapper(<geov-entity-class-icon classURI="https://ontome.net/ontology/c68"></geov-entity-class-icon>);
+export const EntityClassIconShipVoyage = stencilWrapper(<geov-entity-class-icon classURI="https://ontome.net/ontology/c523"></geov-entity-class-icon>);
+export const EntityClassIconDateTimeDescription = stencilWrapper(<geov-entity-class-icon classURI="http://www.w3.org/2006/time#DateTimeDescription"></geov-entity-class-icon>);
+export const EntityClassIconText = stencilWrapper(<geov-entity-class-icon classURI="https://ontome.net/ontology/c785"></geov-entity-class-icon>);

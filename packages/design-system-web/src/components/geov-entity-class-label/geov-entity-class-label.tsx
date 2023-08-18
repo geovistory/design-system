@@ -11,7 +11,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX geov: <http://geovistory.org/resource/>
 
-SELECT ?classLabel
+SELECT ?classLabel ?t
 WHERE {
   geov:${id} rdf:type ?t.
   optional{?t rdfs:label ?classLabel}
@@ -21,6 +21,7 @@ LIMIT 1
 
 export interface GeovClassLabelData extends FetchResponse {
   label?: string;
+  classURI?: string;
   error?: boolean;
 }
 
@@ -87,11 +88,12 @@ export class GeovEntityClassLabel {
    * @returns a Promise with the data for this component
    */
   async fetchData(): Promise<GeovEntityLabelData> {
-    return sparqlJson<{ classLabel: SparqlBinding }>(this.sparqlEndpoint, qrLabel(this.entityId))
+    return sparqlJson<{ classLabel: SparqlBinding; t: SparqlBinding }>(this.sparqlEndpoint, qrLabel(this.entityId))
       .then(res => {
         return {
           ...this.data,
           label: res?.results?.bindings?.[0]?.classLabel?.value,
+          classURI: res?.results?.bindings?.[0]?.t?.value,
           loading: false,
         };
       })
@@ -107,7 +109,7 @@ export class GeovEntityClassLabel {
   render() {
     return (
       <Host>
-        {this.withIcon && <geov-entity-class-icon type={this.data.label?.toLowerCase().replace(/\s+/g, '')}></geov-entity-class-icon>}
+        {this.withIcon && <geov-entity-class-icon classURI={this.data.classURI}></geov-entity-class-icon>}
         {this.data.label}
         {this.data.loading && `loading...`}
         {this.data.error && `error!`}

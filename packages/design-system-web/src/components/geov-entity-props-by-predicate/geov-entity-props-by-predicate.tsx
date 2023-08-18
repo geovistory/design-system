@@ -1,6 +1,6 @@
 import { Color } from '@ionic/core';
 import { Component, Event, EventEmitter, h, Host, Prop, State, Element } from '@stencil/core';
-import { openOutline } from 'ionicons/icons';
+import { eye, openOutline } from 'ionicons/icons';
 import { GeovPaginatorCustomEvent } from '../../components';
 import { FetchResponse } from '../../lib/FetchResponse';
 import { regexReplace } from '../../lib/regexReplace';
@@ -139,19 +139,11 @@ export class GeovEntityPropsByPredicate {
   @Event() pageChanged: EventEmitter<PageEvent>;
 
   /**
-   * State of expand
-   */
-  @State() isExpanded = false;
-
-  /**
-   * Toggle label button expand/collapse
-   */
-  @State() labelButton = ' Expand';
-
-  /**
    * DOM
    */
   @Element() hostElement: HTMLElement;
+
+  modal: HTMLIonModalElement;
 
   /*
    * assigns an id to the component
@@ -187,14 +179,19 @@ export class GeovEntityPropsByPredicate {
   }
 
   componentDidLoad() {
-    // Display Expand button if need. The page must be loaded in order to have the measurements
     const shadowRoot = this.hostElement.shadowRoot;
-    if (shadowRoot) {
-      const itemLiteral = shadowRoot.querySelector('.literal-container .literal-collapsed');
-      const itemButton = shadowRoot.querySelector('.literal-container .item-button') as HTMLElement;
+    this.resizePage(shadowRoot);
+    window.addEventListener('resize', this.handleResize);
+  }
 
-      if (itemLiteral && itemButton) {
-        const labelLiteral = itemLiteral.querySelector('ion-label');
+  resizePage(shadowRoot: ShadowRoot) {
+    // Display Expand button if need. The page must be loaded in order to have the measurements
+    if (shadowRoot) {
+      const literalContainer = shadowRoot.querySelector('.literal-container');
+      const itemButton = shadowRoot.querySelector('.literal-container ion-button') as HTMLElement;
+
+      if (literalContainer && itemButton) {
+        const labelLiteral = literalContainer.querySelector('ion-label');
         if (labelLiteral) {
           // If size of text > size of container
           if (labelLiteral.scrollWidth > labelLiteral.clientWidth) {
@@ -204,6 +201,11 @@ export class GeovEntityPropsByPredicate {
       }
     }
   }
+
+  handleResize = () => {
+    const shadowRoot = this.hostElement.shadowRoot;
+    this.resizePage(shadowRoot);
+  };
 
   changePage(pageEvent: GeovPaginatorCustomEvent<PageEvent>) {
     this.pageIndex = pageEvent.detail.pageIndex;
@@ -238,6 +240,13 @@ export class GeovEntityPropsByPredicate {
       });
   }
 
+  open() {
+    this.modal.present();
+  }
+  dismiss() {
+    this.modal.dismiss();
+  }
+
   render() {
     const showPaginator = this.totalCount > this.pageSize;
     const contentMinHeight = showPaginator ? this.pageSize * 62 : 0;
@@ -257,6 +266,17 @@ export class GeovEntityPropsByPredicate {
           {/* Paginator */}
           {showPaginator && this.renderPaginator()}
         </ion-card>
+        <ion-modal ref={element => (this.modal = element)} onWillDismiss={() => this.dismiss()} isOpen={false}>
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="end">
+                <ion-button onClick={() => this.dismiss()}>Close</ion-button>
+              </ion-buttons>
+              <ion-title>{this.predicateLabel}</ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">{this.data?.entities?.map(entity => this.renderLiteral(entity))}</ion-content>
+        </ion-modal>
       </Host>
     );
   }
@@ -278,23 +298,14 @@ export class GeovEntityPropsByPredicate {
     }
 
     return (
-      <div class="literal-container">
-        <ion-item class={this.isExpanded ? 'literal-expanded' : 'literal-collapsed'} color={this.color}>
-          {this.renderLiteral(item)}
-        </ion-item>
-        <ion-item class="item-button text-right">
-          <ion-button onClick={this.toggleCollapseLiteral}>
-            <ion-icon name={'chevron-' + this.labelButton.trim().toLowerCase() + '-outline'}></ion-icon> {this.labelButton}
-          </ion-button>
-        </ion-item>
-      </div>
+      <ion-item color={this.color} class="literal-container">
+        {this.renderLiteral(item)}
+        <ion-button onClick={() => this.open()}>
+          <ion-icon icon={eye}></ion-icon>
+        </ion-button>
+      </ion-item>
     );
   }
-
-  private toggleCollapseLiteral = () => {
-    this.isExpanded = !this.isExpanded;
-    this.labelButton = this.isExpanded ? ' Collapse' : ' Expand';
-  };
 
   private renderUri(item: Bindings) {
     const klass = item.entityType?.value;

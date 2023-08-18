@@ -18,15 +18,7 @@ geov-paginator {
   width: 100%;
 }
 
-.literal-expanded .sc-ion-label-ios-h,
-.literal-expanded .sc-ion-label-ios-s {
-  white-space: normal;
-}
-
-.text-right ion-button {
-  margin-left: auto;
-}
-
-.literal-container .item-button {
+.literal-container ion-button {
   display: none;
+  margin-left: auto;
 }
