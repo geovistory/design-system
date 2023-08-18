@@ -31,7 +31,7 @@ export const jsxTypesGenerator: OutputTargetCustom = {
     // write the file
     writeFile('../../src/components-all.d.ts', recomposed);
 
-    createJsxForReact('components.d.ts', 'components-react.d.ts');
+    createJsxForReact('components-all.d.ts', 'components-react.d.ts');
   },
 };
 
