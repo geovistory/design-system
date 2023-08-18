@@ -38,7 +38,7 @@ export const Basic = stencilWrapper(
     displaySelectBtn={true}
     displayOpenBtn={true}
     displayCopyBtn={false}
-    nbColMax={3}
+    nbColMax={2}
     onSelected={e => alert('Selected URI: ' + e.detail.uri)}
   ></geov-authority-lookup>,
 );

@@ -2,7 +2,7 @@ import { Component, Host, Prop, State, Event, h, EventEmitter } from '@stencil/c
 import { ItemSelectedEvent } from '../geov-authority-lookup-explorer/geov-authority-lookup-explorer';
 
 /**
- * This component allows searching for entities in Wikidata, GND, and IdRef. Users can enter a string and optionally choose a type/class. Once the desired entity is found, its URI can be copied to the clipboard or outputted through a DOM event.
+ * This component allows searching for entities in Wikidata, GND, IdRef and Geovistory. Users can enter a string and optionally choose a type/class. Once the desired entity is found, its URI can be copied to the clipboard or outputted through a DOM event.
  *
  * Supported Authority Files:
  *
@@ -72,7 +72,7 @@ export class GeovAuthorityLookup {
   /**
    * The maximum number of columns in the webcomponent
    */
-  @Prop() nbColMax = 3;
+  @Prop() nbColMax = 2;
 
   /**
    * The initial keywords
