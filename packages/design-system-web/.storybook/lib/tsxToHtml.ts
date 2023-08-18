@@ -89,7 +89,8 @@ export function tsxToHTML(tsxSnippet: VNode): string {
   htmlString = initWrapper(htmlString, complexElements);
   return format(htmlString, { plugins: [pluginXML], parser: 'xml', singleQuote: true, singleAttributePerLine: true })
     .replace(/&frasl;/g, '/')
-    .replace(/&lt;/g, '<');
+    .replace(/&lt;/g, '<')
+    .replace(/&Prime;/g, '/"');
 }
 
 // Convert camelCase to dash-case

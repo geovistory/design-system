@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 1.12.1-pr-73.3 (2023-07-28)
+## 1.13.0 (2023-08-18)
 
 **Note:** Version bump only for package @geovistory/design-system-web
 
@@ -11,7 +11,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## 1.12.1-pr-73.2 (2023-07-28)
+## 1.12.1-pr-74.2 (2023-07-26)
 
 **Note:** Version bump only for package @geovistory/design-system-web
 
@@ -19,7 +19,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## 1.12.1-pr-73.1 (2023-07-26)
+## 1.12.1-pr-74.1 (2023-07-26)
 
 **Note:** Version bump only for package @geovistory/design-system-web
 
@@ -27,7 +27,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## 1.12.1-pr-73.0 (2023-07-25)
+## 1.12.1-pr-74.0 (2023-07-26)
 
 **Note:** Version bump only for package @geovistory/design-system-web
 
