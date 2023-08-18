@@ -39,3 +39,25 @@ export const TYPE_ALL_IDREF = 'all:';
 export const TYPE_PERSON_IDREF = 'persname_t:';
 export const TYPE_PLACE_IDREF = 'geogname_t:';
 export const TYPE_GROUP_IDREF = 'corpname_t:';
+
+// Geovistory
+export const TITLE_GEOVISTORY = 'Geovistory';
+export const ENDPOINT_SPARQL_GEOVISTORY = 'https://sparql.geovistory.org/api_v1_community_data';
+export const QR_SPARQL_GEOVISTORY = (keywords: string, type: string, pageSize: number) => `
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX text: <http://jena.apache.org/text#>
+PREFIX ontome: <https://ontome.net/ontology/>
+
+SELECT DISTINCT ?item ?name ?classUri
+WHERE
+{
+  	(?item) text:query ('${keywords}') .
+  	?item rdfs:label ?name .
+  	?item a ?classUri${type} .
+}
+LIMIT ${pageSize}
+OFFSET 0`;
+
+export const TYPE_PERSON_GEOVISTORY = ', ontome:c21';
+export const TYPE_PLACE_GEOVISTORY = ', ontome:c363';
+export const TYPE_GROUP_GEOVISTORY = ', ontome:c68';

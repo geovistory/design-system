@@ -6,7 +6,7 @@ import overview from './docs-overview.md?raw';
 
 export default {
   title: 'Data Visualization Components/Class Distribution',
-    tags: ['autodocs'],
+  tags: ['autodocs'],
   parameters: {
     viewMode: 'docs',
     docs: {
