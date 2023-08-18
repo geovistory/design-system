@@ -104,7 +104,7 @@ export class GeovAuthorityLookupExplorer {
 
   @State() isLoadingData = false;
 
-  getDataGND() {
+  async getDataGND() {
     this.title = TITLE_GND;
     this.uriData = [];
     if (this.keywords.trim() != '') {
@@ -118,18 +118,13 @@ export class GeovAuthorityLookupExplorer {
       if (this.type !== null && this.type === 'Group') {
         queryApiGnd = queryApiGnd + TYPE_GROUP_GND;
       }
-      fetch(queryApiGnd)
-        .then(response => response.json())
-        .then(data => {
-          this.uriData = data.map((obj: any) => ({ uri: obj.id, label: obj.label }));
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      const response = await fetch(queryApiGnd);
+      const data = await response.json();
+      this.uriData = data.map((obj: any) => ({ uri: obj.id, label: obj.label }));
     }
   }
 
-  getDataWikiData() {
+  async getDataWikiData() {
     this.title = TITLE_WIKIDATA;
     this.uriData = [];
     if (this.keywords.trim() != '') {
@@ -144,17 +139,12 @@ export class GeovAuthorityLookupExplorer {
         qrWD = QR_SPARQL_WIKIDATA(this.keywords, TYPE_GROUP_WIKIDATA, this.nbOccurencesMax);
       }
 
-      sparqlJson<WikidataBindings>(ENDPOINT_SPARQL_WIKIDATA, qrWD)
-        .then(data => {
-          this.uriData = data.results?.bindings.map((obj: any) => ({ uri: obj.item.value, label: obj.name.value }));
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      const data = await sparqlJson<WikidataBindings>(ENDPOINT_SPARQL_WIKIDATA, qrWD);
+      this.uriData = data?.results?.bindings.map((obj: any) => ({ uri: obj.item.value, label: obj.name.value }));
     }
   }
 
-  getDataIdRef() {
+  async getDataIdRef() {
     this.title = TITLE_IDREF;
     this.uriData = [];
     if (this.keywords.trim() != '') {
@@ -170,18 +160,13 @@ export class GeovAuthorityLookupExplorer {
       if (this.type !== null && this.type === 'Group') {
         queryApiIdRef = BASE_URI_IDREF + TYPE_GROUP_IDREF + '(' + kw + ')' + SIZE_IDREF + this.nbOccurencesMax + FORMAT_OUTPUT_IDREF;
       }
-      fetch(queryApiIdRef)
-        .then(response => response.json())
-        .then(data => {
-          this.uriData = data.response.docs?.map((obj: any) => ({ uri: URL_IDREF + obj.ppn_z, label: obj.affcourt_z }));
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      const response = await fetch(queryApiIdRef);
+      const data = await response.json();
+      this.uriData = data.response.docs?.map((obj: any) => ({ uri: URL_IDREF + obj.ppn_z, label: obj.affcourt_z }));
     }
   }
 
-  getGeovistoryData() {
+  async getGeovistoryData() {
     this.title = TITLE_GEOVISTORY;
     this.uriData = [];
     const kw = this.keywords
@@ -201,32 +186,31 @@ export class GeovAuthorityLookupExplorer {
         qrGV = QR_SPARQL_GEOVISTORY(kw, TYPE_GROUP_GEOVISTORY, this.nbOccurencesMax);
       }
 
-      sparqlJson<GeovistoryBindings>(ENDPOINT_SPARQL_GEOVISTORY, qrGV)
-        .then(data => {
-          this.uriData = data.results?.bindings.map((obj: any) => ({ uri: obj.item.value, label: obj.name.value }));
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      const data = await sparqlJson<GeovistoryBindings>(ENDPOINT_SPARQL_GEOVISTORY, qrGV);
+      this.uriData = data.results?.bindings.map((obj: any) => ({ uri: obj.item.value, label: obj.name.value }));
     }
   }
 
-  executeAllQueries() {
+  async executeAllQueries() {
+    this.isLoadingData = true;
+
     if (this.api == 'gnd') {
-      this.getDataGND();
+      await this.getDataGND();
     }
 
     if (this.api == 'wikidata') {
-      this.getDataWikiData();
+      await this.getDataWikiData();
     }
 
     if (this.api == 'idref') {
-      this.getDataIdRef();
+      await this.getDataIdRef();
     }
 
     if (this.api == 'geovistory') {
-      this.getGeovistoryData();
+      await this.getGeovistoryData();
     }
+
+    this.isLoadingData = false;
   }
 
   handleClick(item: ItemBinding): void {
@@ -254,27 +238,11 @@ export class GeovAuthorityLookupExplorer {
     navigator.clipboard.writeText(item.uri);
   }
 
-  componentWillLoad() {
-    this.isLoadingData = true;
-    if (this.api == 'gnd') {
-      this.getDataGND();
-    }
-
-    if (this.api == 'wikidata') {
-      this.getDataWikiData();
-    }
-
-    if (this.api == 'idref') {
-      this.getDataIdRef();
-    }
-
-    if (this.api == 'geovistory') {
-      this.getGeovistoryData();
-    }
+  async componentDidLoad() {
+    await this.executeAllQueries();
   }
 
   componentDidRender() {
-    this.isLoadingData = false;
     if (this.isPopoverOpen) {
       this.popoverElement.present();
 
@@ -316,10 +284,14 @@ export class GeovAuthorityLookupExplorer {
             <ion-card-subtitle>{this.title}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            {this.isLoadingData && <p>Test</p>}
+            {this.isLoadingData && (
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <ion-spinner></ion-spinner>
+              </div>
+            )}
             {!this.isLoadingData && (
               <ion-list lines="full">
-                {this.uriData && this.uriData.length === 0 && <ion-item lines="none">No authority notice was found</ion-item>}
+                {this.uriData && this.uriData.length === 0 && <ion-item lines="none">Nothing found</ion-item>}
                 {this.uriData &&
                   this.uriData.map((item, index) => (
                     <ion-item lines={index === this.uriData.length - 1 ? 'none' : 'full'}>
