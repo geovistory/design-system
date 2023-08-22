@@ -24,7 +24,7 @@ export default {
     copy({
       targets: [
         { src: 'dist/components/*.d.ts', dest: 'dist/components-cjs' },
-        { src: 'src/components-all.d.ts', dest: 'dist/types' }
+        { src: 'src/components-all.d.ts', dest: 'dist/types' },
       ],
     }),
   ],

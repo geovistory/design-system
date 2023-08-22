@@ -87,11 +87,11 @@ export async function tsxToHTML(tsxSnippet: VNode): Promise<string> {
 
   let htmlString = convertToHTML(tsxSnippet);
   htmlString = initWrapper(htmlString, complexElements);
-  let returnvalue: string;
-  await format(htmlString, { plugins: [pluginXML], parser: 'xml', singleQuote: true, singleAttributePerLine: true }).then(v => {
-    returnvalue = v.replace(/&frasl;/g, '/').replace(/&lt;/g, '<');
-  });
-  return returnvalue;
+  const formatted = await format(htmlString, { plugins: [pluginXML], parser: 'xml', singleQuote: true, singleAttributePerLine: true });
+  return formatted
+    .replace(/&frasl;/g, '/')
+    .replace(/&lt;/g, '<')
+    .replace(/&Prime;/g, '/"');
 }
 
 // Convert camelCase to dash-case

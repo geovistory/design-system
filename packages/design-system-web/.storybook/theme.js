@@ -1,6 +1,6 @@
 import { create } from '@storybook/theming';
 
-export const storybook_theme =  create({
+export const storybook_theme = create({
   base: 'light',
   brandTitle: 'Geovistory design system',
   brandUrl: 'https://www.geovistory.org',

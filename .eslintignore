@@ -24,6 +24,7 @@ packages/design-system-web/src/assets/fonts
 packages/design-system-web/src/components/**/readme.md
 packages/design-system-web/src/stories/assets/components.json
 packages/design-system-web/src/stories/assets/components.d.ts
+packages/design-system-web/src/components-all.d.ts
 packages/design-system-web/src/stories/utils
 
 packages/design-system-react/src/components

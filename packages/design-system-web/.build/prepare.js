@@ -5,4 +5,4 @@ const path = require('path');
 // the file will be replaced by stencil build
 // but without it, stencil build fails on startup
 const fileContent = 'export namespace Components {}\nexport namespace JSX {}\n';
-fs.writeFileSync(path.join(__dirname,'../src/components-all.d.ts'), fileContent);
+fs.writeFileSync(path.join(__dirname, '../src/components-all.d.ts'), fileContent);
