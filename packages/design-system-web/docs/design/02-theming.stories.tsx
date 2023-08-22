@@ -30,7 +30,7 @@ ion-button {
   --border-radius: 15px;
 }
 `;
-export const Theming = stencilWrapper(
+export const Theming = await stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>

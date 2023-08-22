@@ -20,7 +20,7 @@ interface ComplexElements {
 }
 
 // Convert TSX to HTML string
-export function tsxToHTML(tsxSnippet: VNode): string {
+export async function tsxToHTML(tsxSnippet: VNode): Promise<string> {
   // Store complex elements
   const complexElements: ComplexElements = {};
 
@@ -87,7 +87,8 @@ export function tsxToHTML(tsxSnippet: VNode): string {
 
   let htmlString = convertToHTML(tsxSnippet);
   htmlString = initWrapper(htmlString, complexElements);
-  return format(htmlString, { plugins: [pluginXML], parser: 'xml', singleQuote: true, singleAttributePerLine: true })
+  const formatted = await format(htmlString, { plugins: [pluginXML], parser: 'xml', singleQuote: true, singleAttributePerLine: true });
+  return formatted
     .replace(/&frasl;/g, '/')
     .replace(/&lt;/g, '<')
     .replace(/&Prime;/g, '/"');

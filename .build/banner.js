@@ -1,6 +1,6 @@
-const figlet = require('figlet')
-const chalk = require('chalk')
-const log = require('./log')
+import figlet from 'figlet'
+import chalk from 'chalk'
+import log from './log.js'
 
 const banner = text => {
   return new Promise(resolve => {

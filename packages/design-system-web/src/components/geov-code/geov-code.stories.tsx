@@ -15,13 +15,13 @@ export default {
 };
 
 const codeHtml = '<div><h1>Hello</h1></div>';
-export const CodeHtml = stencilWrapper(<geov-code code={codeHtml} language="html"></geov-code>);
+export const CodeHtml = await stencilWrapper(<geov-code code={codeHtml} language="html"></geov-code>);
 const codeXml = `<foo:mytag>
   <foo:bar hi="you" />
 </foo:mytag>`;
-export const CodeXml = stencilWrapper(<geov-code code={codeXml} language="xml"></geov-code>);
+export const CodeXml = await stencilWrapper(<geov-code code={codeXml} language="xml"></geov-code>);
 
-export const CodeCss = stencilWrapper(
+export const CodeCss = await stencilWrapper(
   <geov-code
     code="pre,
 code {
@@ -32,9 +32,9 @@ code {
   ></geov-code>,
 );
 
-export const CodeJson = stencilWrapper(<geov-code code="{'foo': 1, 'bar': 'myvalue', 'baz': [1,2,3]}" language="json"></geov-code>);
+export const CodeJson = await stencilWrapper(<geov-code code="{'foo': 1, 'bar': 'myvalue', 'baz': [1,2,3]}" language="json"></geov-code>);
 
-export const CodeBash = stencilWrapper(
+export const CodeBash = await stencilWrapper(
   <geov-code
     code="# install components
 npm i @geovistory/design-system-web"
@@ -51,9 +51,9 @@ WHERE {
   geov:i315803 rdf:type/rdfs:label ?classLabel
 }
 LIMIT 1`;
-export const CodeSparql = stencilWrapper(<geov-code code={sparql} language="sparql"></geov-code>);
+export const CodeSparql = await stencilWrapper(<geov-code code={sparql} language="sparql"></geov-code>);
 
-export const CodeNoButton = stencilWrapper(
+export const CodeNoButton = await stencilWrapper(
   <geov-code
     code="pre,
 code {
@@ -174,4 +174,4 @@ export class GeovHelloWorld {
   }
 }
 `;
-export const CodeTypeScript = stencilWrapper(<geov-code code={typescript} language="typescript"></geov-code>);
+export const CodeTypeScript = await stencilWrapper(<geov-code code={typescript} language="typescript"></geov-code>);

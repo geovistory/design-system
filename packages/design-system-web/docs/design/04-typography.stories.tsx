@@ -20,7 +20,7 @@ p, h1, h2, h3, h4, h5, h6 {
   margin:auto;
 }`;
 
-export const Typography = stencilWrapper(
+export const Typography = await stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>

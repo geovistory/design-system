@@ -30,7 +30,7 @@ const meta: Meta = {
 };
 export default meta;
 
-export const Basic = stencilWrapper(
+export const Basic = await stencilWrapper(
   <geov-authority-lookup
     apis={['geovistory', 'gnd', 'idref', 'wikidata']}
     types={['All', 'Person', 'Place', 'Group']}
@@ -46,15 +46,15 @@ export const Basic = stencilWrapper(
 /**
  * Define the max. number of columns used to display the search results. (Here: 1)
  */
-export const NumberOfColumns = stencilWrapper(<geov-authority-lookup nbColMax={1}></geov-authority-lookup>);
+export const NumberOfColumns = await stencilWrapper(<geov-authority-lookup nbColMax={1}></geov-authority-lookup>);
 /**
  * Define the max. number of items in the list of search results. (Here: 3)
  */
-export const NumberOfSearchResults = stencilWrapper(<geov-authority-lookup nbOccurencesMax={3}></geov-authority-lookup>);
+export const NumberOfSearchResults = await stencilWrapper(<geov-authority-lookup nbOccurencesMax={3}></geov-authority-lookup>);
 /**
  * Enable/disable specific authority files (APIs). (Here: only IdRef)
  */
-export const CustomizeSearchedApis = stencilWrapper(<geov-authority-lookup apis={['idref']} nbColMax={1}></geov-authority-lookup>);
+export const CustomizeSearchedApis = await stencilWrapper(<geov-authority-lookup apis={['idref']} nbColMax={1}></geov-authority-lookup>);
 /**
  * Enable/disable action buttons on search results. (Here: enable all buttons)
  *
@@ -64,8 +64,8 @@ export const CustomizeSearchedApis = stencilWrapper(<geov-authority-lookup apis=
  * - **Copy**: Copies the URI of the selected entity to the clipboard.
  * - **Open**: Opens the URI of the selected entity in a new browser tab.
  */
-export const CustomizeButtons = stencilWrapper(<geov-authority-lookup displayCopyBtn={true} displayOpenBtn={true} displaySelectBtn={true}></geov-authority-lookup>);
+export const CustomizeButtons = await stencilWrapper(<geov-authority-lookup displayCopyBtn={true} displayOpenBtn={true} displaySelectBtn={true}></geov-authority-lookup>);
 /**
  * Set the initial search string and type/class. (Here: Johannes Kepler, Person)
  */
-export const InitializeSearch = stencilWrapper(<geov-authority-lookup initSearch={'Johannes Kepler'} initSearchType={'Person'}></geov-authority-lookup>);
+export const InitializeSearch = await stencilWrapper(<geov-authority-lookup initSearch={'Johannes Kepler'} initSearchType={'Person'}></geov-authority-lookup>);

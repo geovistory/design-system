@@ -1,4 +1,4 @@
-const chalk = require('chalk')
+import chalk from 'chalk'
 
 const log = {
   title: text => {
@@ -44,4 +44,4 @@ const log = {
   },
 }
 
-module.exports = log
+export default log;

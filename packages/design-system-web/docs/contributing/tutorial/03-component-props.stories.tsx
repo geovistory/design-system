@@ -15,7 +15,7 @@ export default {
   },
 };
 
-export const ComponentProps = stencilWrapper(
+export const ComponentProps = await stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>

@@ -1,25 +1,25 @@
 {
   "name": "root",
   "private": true,
+  "type": "module",
   "engines": {
     "npm": ">=7.0.0",
     "node": ">=18.16.0"
   },
   "scripts": {
     "============================== INSTALLATION / SETUP ==============================": "",
-    "postinstall": "lerna bootstrap",
-    "bootstrap": "lerna bootstrap",
     "update:lock": "npm run lock:rm && npm run lock:create",
     "lock:rm": "lerna exec -- rm -f package-lock.json",
     "lock:create": "lerna exec --  npm i --package-lock-only",
     "precommit": "lint-staged --allow-empty",
+    "postinstall": "cd packages/design-system-web && npm i && cd ../design-system-react && npm i && cd ../design-system-angular && npm i",
     "==================== FORMATTER / LINTER ====================": "================================",
     "format:check": "prettier --check ./packages",
     "format": "prettier --write ./packages",
     "lint:check": "eslint --ext .tsx,.ts packages/",
     "lint": "eslint --ext .tsx,.ts packages/ --fix",
     "============================== PUBLISH NPM PACKAGES ==============================": "",
-    "publish:prepare": "lerna bootstrap",
+    "publish:prepare": "cd packages/design-system-web && npm i && cd ../design-system-react && npm i && cd ../design-system-angular && npm i",
     "publish:publish": "lerna publish",
     "=========================== STENCIL ==========================": "",
     "generate": "cd packages/design-system-web && npm run generate",
@@ -39,20 +39,20 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.42.1",
-    "@typescript-eslint/parser": "^5.42.1",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
     "@web/dev-server": "^0.3.0",
-    "chalk": "^4.1.2",
-    "concurrently": "^7.0.0",
-    "conventional-changelog-conventionalcommits": "5.0.0",
+    "chalk": "^5.3.0",
+    "concurrently": "^8.2.0",
+    "conventional-changelog-conventionalcommits": "^6.1.0",
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-prettier": "^5.0.0",
     "figlet": "^1.5.2",
     "husky": "^8.0.2",
-    "lerna": "5.4.3",
+    "lerna": "^7.1.4",
     "lint-staged": "^13.0.3",
-    "prettier": "^2.7.1",
-    "typescript": "^4.8.3"
+    "prettier": "^3.0.0",
+    "typescript": "^5.1.6"
   }
 }

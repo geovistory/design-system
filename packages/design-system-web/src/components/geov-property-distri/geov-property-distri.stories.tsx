@@ -14,6 +14,6 @@ export default {
   },
 };
 
-export const PropertyDistribution = stencilWrapper(
+export const PropertyDistribution = await stencilWrapper(
   <geov-property-distri sparqlEndpoint="https://sparql.geovistory.org/api_v1_community_data" width={500} height={500}></geov-property-distri>,
 );
