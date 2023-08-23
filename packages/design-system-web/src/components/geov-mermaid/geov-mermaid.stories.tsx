@@ -14,7 +14,7 @@ export default {
   },
 };
 
-export const Mermaid = stencilWrapper(
+export const Mermaid = await stencilWrapper(
   <geov-mermaid>{`
   mindmap
     root((Hello World))
@@ -33,7 +33,7 @@ export const Mermaid = stencilWrapper(
 `}</geov-mermaid>,
 );
 
-export const Pie = stencilWrapper(
+export const Pie = await stencilWrapper(
   <geov-mermaid>{`
   pie title Pets adopted by volunteers
   "Dogs" : 386
@@ -45,7 +45,7 @@ export const Pie = stencilWrapper(
 /**
  * If you provide wrong input, the component renders an error.
  */
-export const WrongInput = stencilWrapper(
+export const WrongInput = await stencilWrapper(
   <geov-mermaid>{`
   -> no chart <-
 `}</geov-mermaid>,
