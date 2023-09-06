@@ -15,7 +15,7 @@ export default {
   },
 };
 
-export const EntityPropsWithPerson = stencilWrapper(
+export const EntityPropsWithPerson = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
     entityId="i151089"
@@ -27,7 +27,7 @@ export const EntityPropsWithPerson = stencilWrapper(
   ></geov-entity-props-by-predicate>,
 );
 
-export const EntityPropsWithUriRegex = stencilWrapper(
+export const EntityPropsWithUriRegex = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
     entityId="i151089"
@@ -41,7 +41,7 @@ export const EntityPropsWithUriRegex = stencilWrapper(
   ></geov-entity-props-by-predicate>,
 );
 
-export const EntityPropsWithPaginatedShipVoyages = stencilWrapper(
+export const EntityPropsWithPaginatedShipVoyages = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
     entityId="i209502"
@@ -53,7 +53,7 @@ export const EntityPropsWithPaginatedShipVoyages = stencilWrapper(
   ></geov-entity-props-by-predicate>,
 );
 
-export const EntityPropsWithDateTimeDescription = stencilWrapper(
+export const EntityPropsWithDateTimeDescription = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
     entityId="i151089ts"
@@ -65,7 +65,7 @@ export const EntityPropsWithDateTimeDescription = stencilWrapper(
   ></geov-entity-props-by-predicate>,
 );
 
-export const EntityPropsWithXsdString = stencilWrapper(
+export const EntityPropsWithXsdString = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
     entityId="i215634"
@@ -77,7 +77,7 @@ export const EntityPropsWithXsdString = stencilWrapper(
   ></geov-entity-props-by-predicate>,
 );
 
-export const EntityPropsWithLangString = stencilWrapper(
+export const EntityPropsWithLangString = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
     entityId="i2345931"
@@ -89,7 +89,7 @@ export const EntityPropsWithLangString = stencilWrapper(
   ></geov-entity-props-by-predicate>,
 );
 
-export const EntityPropsWithXsdStringPreloaded = stencilWrapper(
+export const EntityPropsWithXsdStringPreloaded = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
     entityId="i215635"
@@ -102,7 +102,7 @@ export const EntityPropsWithXsdStringPreloaded = stencilWrapper(
   ></geov-entity-props-by-predicate>,
 );
 
-export const OwlSameAs = stencilWrapper(
+export const OwlSameAs = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
     entityId="i81260"

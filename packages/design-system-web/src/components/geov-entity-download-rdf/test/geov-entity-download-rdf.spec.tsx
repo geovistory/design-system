@@ -63,7 +63,7 @@ describe('geov-entity-download-rdf', () => {
     let serverFetchedData;
     const html = `<geov-entity-download-rdf entity-id="i785518" color="primary" expand="block" fill="outline" button-label="Download RDF" button-icon="download-outline"></geov-entity-download-rdf>`;
 
-    const rendered =await renderToString(html, {
+    const rendered = await renderToString(html, {
       runtimeLogging: true,
       removeHtmlComments: true,
       beforeHydrate: doc => {

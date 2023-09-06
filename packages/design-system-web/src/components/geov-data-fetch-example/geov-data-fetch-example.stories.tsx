@@ -6,7 +6,7 @@ import componentApi from './docs-component-api.md?raw';
 import overview from './docs-overview.md?raw';
 export default {
   title: 'Data Components/DataFetchExample',
-    tags: ['autodocs'],
+  tags: ['autodocs'],
   parameters: {
     viewMode: 'docs',
     docs: {
@@ -15,8 +15,8 @@ export default {
   },
 };
 
-export const DataFetchExample = stencilWrapper(<geov-data-fetch-example sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i315800"></geov-data-fetch-example>);
+export const DataFetchExample = await stencilWrapper(<geov-data-fetch-example sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i315800"></geov-data-fetch-example>);
 
-export const DataFetchExamplePreloaded = stencilWrapper(
+export const DataFetchExamplePreloaded = await stencilWrapper(
   <geov-data-fetch-example sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i315800" _ssrId="data-fetch-examle-1"></geov-data-fetch-example>,
 );

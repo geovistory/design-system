@@ -11,7 +11,7 @@ export default {
         hidden: true,
       },
     },
-    options: { showPanel: true },
+    options: { showPanel: false },
   },
 };
 
@@ -23,7 +23,7 @@ const html2 = `<ion-icon icon={happyOutline} size="large"></ion-icon>`;
 
 const html3 = `<ion-icon icon={heart} color="danger"></ion-icon>`;
 
-export const IonIcons = stencilWrapper(
+export const IonIcons = await stencilWrapper(
   <ion-app>
     <ion-content class="ion-padding">
       <ion-grid fixed>
