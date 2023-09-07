@@ -1,5 +1,5 @@
 {
-  "version": "1.14.3-pr-85.0",
+  "version": "1.14.3-pr-87.0",
   "command": {
     "version": {
       "message": "chore(release): %s",
@@ -9,13 +9,9 @@
       "forcePublish": true
     },
     "publish": {
-      "ignoreChanges": [
-        "*.md"
-      ],
+      "ignoreChanges": ["*.md"],
       "message": "chore(release): publish"
     }
   },
-  "packages": [
-    "packages/*"
-  ]
+  "packages": ["packages/*"]
 }
