@@ -23,7 +23,7 @@ const preview: Preview = {
           'Welcome',
           'Getting Started',
           'Design',
-          ['Overview', 'Layout', 'Typography', 'Theming', 'Theme Generator', 'Theme Generator Color'],
+          ['Overview', 'Layout', 'Typography', 'Theming', 'Theme Generator', 'Ion Icons', 'Theme Generator Color'],
           'Contributing',
           [
             'CI And CD Workflow',
