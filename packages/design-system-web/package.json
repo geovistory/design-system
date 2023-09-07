@@ -1,6 +1,6 @@
 {
   "name": "@geovistory/design-system-web",
-  "version": "1.14.3-pr-75.0",
+  "version": "1.14.3-pr-87.0",
   "description": "geovistory.org's design system: web components",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
