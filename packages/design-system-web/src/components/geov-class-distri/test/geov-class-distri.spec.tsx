@@ -36,7 +36,7 @@ describe('geov-class-distry', () => {
       <!doctype html>
       <html data-stencil-build="n9evv7qg" class="plt-tablet plt-desktop md hydrated" mode="md">
         <head>
-          <meta charset="utf-8"><style sty-id="sc-geov-class-distri"> :host{display:block;position:relative}.loading{display:flex;align-items:center;justify-content:center;background-color:#fafafa}</style>
+          <meta charset="utf-8"><style sty-id="sc-geov-class-distri"> :host{display:block;position:relative}.loading{display:flex;align-items:center;justify-content:center;background-color:var(--ion-color-light-tint, #fafafa)}</style>
         </head>
         <body>
           <geov-class-distri class="hydrated" height="500" s-id="1" sparql-endpoint="https://sparql.geovistory.org/api_v1_community_data" width="500">
@@ -63,7 +63,7 @@ describe('geov-class-distry', () => {
     const html = `<!doctype html>
     <html data-stencil-build="n9evv7qg" class="plt-tablet plt-desktop md hydrated" mode="md">
       <head>
-        <meta charset="utf-8"><style sty-id="sc-geov-class-distri"> :host{display:block;position:relative}.loading{display:flex;align-items:center;justify-content:center;background-color:#fafafa}</style>
+        <meta charset="utf-8"><style sty-id="sc-geov-class-distri"> :host{display:block;position:relative}.loading{display:flex;align-items:center;justify-content:center;background-color:var(--background-color)}</style>
       </head>
       <body>
         <geov-class-distri class="hydrated" height="500" s-id="1" sparql-endpoint="https://sparql.geovistory.org/api_v1_community_data" width="500">
