@@ -14,7 +14,7 @@ export default {
   },
 };
 
-export const Carousel = stencilWrapper(
+export const Carousel = await stencilWrapper(
   <geov-carousel
     style={{ height: '400px', maxWidth: '600px' }}
     images={[

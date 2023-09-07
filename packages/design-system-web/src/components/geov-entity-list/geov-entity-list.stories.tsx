@@ -5,7 +5,7 @@ import componentApi from './docs-component-api.md?raw';
 import overview from './docs-overview.md?raw';
 export default {
   title: 'Data Components/Explorer/EntityList',
-    tags: ['autodocs'],
+  tags: ['autodocs'],
   parameters: {
     viewMode: 'docs',
     docs: {
@@ -14,7 +14,7 @@ export default {
   },
 };
 
-export const EntityList = stencilWrapper(
+export const EntityList = await stencilWrapper(
   <geov-entity-list
     items={[
       { entityLabel: 'Maria Zimmermann', classLabel: 'Person', entityUri: 'http://geovistory.org/resource/i90000', classUri: 'https://ontome.net/ontology/c21' },
@@ -23,9 +23,9 @@ export const EntityList = stencilWrapper(
   ></geov-entity-list>,
 );
 
-export const EntityListLoading = stencilWrapper(<geov-entity-list loading={true} defaultPageSize={10}></geov-entity-list>);
+export const EntityListLoading = await stencilWrapper(<geov-entity-list loading={true} defaultPageSize={10}></geov-entity-list>);
 
-export const EntityListUrlReplace = stencilWrapper(
+export const EntityListUrlReplace = await stencilWrapper(
   <geov-entity-list
     items={[
       { entityLabel: 'Maria Zimmermann', classLabel: 'Person', entityUri: 'http://geovistory.org/resource/i90000', classUri: 'https://ontome.net/ontology/c21' },

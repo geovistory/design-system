@@ -1,5 +1,7 @@
 import { Component, h, Host, Prop } from '@stencil/core';
-import Swiper, { Autoplay, Pagination, SwiperOptions } from 'swiper';
+import Swiper from 'swiper';
+import { Autoplay, Pagination } from 'swiper/modules';
+import { SwiperOptions } from 'swiper/types';
 
 /**
  * This component displays a list of images in a carousel. It is implemented with Swiper

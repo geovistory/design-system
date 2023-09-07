@@ -136,7 +136,7 @@ function getGridVariablesCSS() {
 \` + (getComputedStyle(document.documentElement).getPropertyValue('--ion-grid-column-padding-xl') ? '' : '/*') + '--ion-grid-column-padding-xl: ' + getComputedStyle(document.documentElement).getPropertyValue('--ion-grid-column-padding-xl') + ';' + (getComputedStyle(document.documentElement).getPropertyValue('--ion-grid-column-padding-xl') ? '' : '*/') + \`
 `;
 }
-export const ThemeGenerator = stencilWrapper(
+export const ThemeGenerator = await stencilWrapper(
   <ion-app>
     <style>{css}</style>
 

@@ -58,7 +58,7 @@ const items = [
 /**
  * Open console to see selected item emitted by onSelectionChanged().
  */
-export const ClassSelectInitVal = stencilWrapper(
+export const ClassSelectInitVal = await stencilWrapper(
   <geov-class-select-popup
     initValue={{
       classLabel: 'Class 1',
@@ -72,4 +72,4 @@ export const ClassSelectInitVal = stencilWrapper(
 /**
  * Open console to see selected item emitted by onSelectionChanged().
  */
-export const ClassSelectNoInitVal = stencilWrapper(<geov-class-select-popup items={items} onSelectionChanged={e => console.log(e.detail.value)}></geov-class-select-popup>);
+export const ClassSelectNoInitVal = await stencilWrapper(<geov-class-select-popup items={items} onSelectionChanged={e => console.log(e.detail.value)}></geov-class-select-popup>);

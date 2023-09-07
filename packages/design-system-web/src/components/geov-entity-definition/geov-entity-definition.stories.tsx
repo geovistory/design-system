@@ -6,7 +6,7 @@ import componentApi from './docs-component-api.md?raw';
 import overview from './docs-overview.md?raw';
 export default {
   title: 'Data Components/Entity/EntityDefinition',
-    tags: ['autodocs'],
+  tags: ['autodocs'],
   parameters: {
     viewMode: 'docs',
     docs: {
@@ -14,7 +14,7 @@ export default {
     },
   },
 };
-export const EntityDefinition = stencilWrapper(<geov-entity-definition entityId="i3158616" sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}></geov-entity-definition>);
-export const EntityDefinitionNotFound = stencilWrapper(
+export const EntityDefinition = await stencilWrapper(<geov-entity-definition entityId="i3158616" sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}></geov-entity-definition>);
+export const EntityDefinitionNotFound = await stencilWrapper(
   <geov-entity-definition entityId="xyz" sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} emptyPlaceholder="No definition found"></geov-entity-definition>,
 );

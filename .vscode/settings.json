@@ -6,5 +6,5 @@
   "files.eol": "\n",
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  }
 }

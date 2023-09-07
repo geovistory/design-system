@@ -5,7 +5,7 @@ import { renderVdom } from '@stencil/core/internal/client';
 import type { StoryObj } from '@storybook/web-components';
 import { tsxToHTML } from './tsxToHtml';
 
-export const stencilWrapper = (vnode: VNode): StoryObj => {
+export const stencilWrapper = async (vnode: VNode): Promise<StoryObj> => {
   const host = document.createElement('ion-app');
   renderVdom(
     {
@@ -26,7 +26,7 @@ export const stencilWrapper = (vnode: VNode): StoryObj => {
   fn.parameters = {
     docs: {
       canvas: { sourceState: 'shown' },
-      source: { code: tsxToHTML(vnode) },
+      source: { code: await tsxToHTML(vnode) },
       story: { inline: true },
     },
   };

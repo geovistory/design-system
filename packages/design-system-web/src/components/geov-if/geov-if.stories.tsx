@@ -6,7 +6,7 @@ import componentApi from './docs-component-api.md?raw';
 import overview from './docs-overview.md?raw';
 export default {
   title: 'Data Components/Helpers/If',
-    tags: ['autodocs'],
+  tags: ['autodocs'],
   parameters: {
     viewMode: 'docs',
     docs: {
@@ -16,7 +16,7 @@ export default {
 };
 
 const query1 = `SELECT  ((1=1) as ?condition) WHERE {}`;
-export const IfTrue = stencilWrapper(
+export const IfTrue = await stencilWrapper(
   <div>
     If you see a next line, if the condition of the sparqlQuery is met: <br />
     <geov-if sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} sparqlQuery={query1}>
@@ -26,7 +26,7 @@ export const IfTrue = stencilWrapper(
 );
 
 const query2 = `SELECT  ((0=1) as ?condition) WHERE {}`;
-export const IfFalse = stencilWrapper(
+export const IfFalse = await stencilWrapper(
   <div>
     If you see a next line, if the condition of the sparqlQuery is met: <br />
     <geov-if sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} sparqlQuery={query2}>

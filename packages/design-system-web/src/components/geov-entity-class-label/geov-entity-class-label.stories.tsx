@@ -6,7 +6,7 @@ import componentApi from './docs-component-api.md?raw';
 import overview from './docs-overview.md?raw';
 export default {
   title: 'Data Components/Entity/EntityClassLabel',
-    tags: ['autodocs'],
+  tags: ['autodocs'],
   parameters: {
     viewMode: 'docs',
     docs: {
@@ -14,4 +14,4 @@ export default {
     },
   },
 };
-export const EntityClassLabel = stencilWrapper(<geov-entity-class-label entityId="i315803" sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}></geov-entity-class-label>);
+export const EntityClassLabel = await stencilWrapper(<geov-entity-class-label entityId="i315803" sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}></geov-entity-class-label>);
