@@ -118,6 +118,9 @@ export class GeovEntityDownloadRdf {
   render() {
     return (
       <Host>
+        <ion-button expand={this.expand} fill={this.fill} color={this.color} onClick={() => this.open()}>
+          {this.buttonLabel} {this.buttonIcon ? <ion-icon name={this.buttonIcon}></ion-icon> : <ion-icon icon={downloadOutline}></ion-icon>}
+        </ion-button>
         <ion-modal ref={element => (this.modal = element)} onWillDismiss={() => this.dismiss()} isOpen={false}>
           <ion-header>
             <ion-toolbar>
@@ -131,9 +134,6 @@ export class GeovEntityDownloadRdf {
             <ion-list lines="none">{this.renderClickableItem()}</ion-list>
           </ion-content>
         </ion-modal>
-        <ion-button expand={this.expand} fill={this.fill} color={this.color} onClick={() => this.open()}>
-          {this.buttonLabel} {this.buttonIcon ? <ion-icon name={this.buttonIcon}></ion-icon> : <ion-icon icon={downloadOutline}></ion-icon>}
-        </ion-button>
         <slot></slot>
       </Host>
     );
