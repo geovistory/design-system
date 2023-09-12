@@ -11,10 +11,10 @@ describe('geov-entity-download-rdf', () => {
     await page.waitForChanges();
     expect(page.root).toEqualHtml(`
     <geov-entity-download-rdf button-icon="download-outline" button-label="Download RDF" color="primary" entityid="i785518" expand="block" fill="outline">
-      <ion-button id="open-custom-dialog" expand="block" fill="outline" color="primary">
+      <ion-button expand="block" fill="outline" color="primary">
         Download RDF <ion-icon name="download-outline"></ion-icon>
       </ion-button>
-      <ion-modal id="example-modal" trigger="open-custom-dialog">
+      <ion-modal>
         <ion-header>
           <ion-toolbar>
             <ion-buttons slot="start">
@@ -63,7 +63,7 @@ describe('geov-entity-download-rdf', () => {
     let serverFetchedData;
     const html = `<geov-entity-download-rdf entity-id="i785518" color="primary" expand="block" fill="outline" button-label="Download RDF" button-icon="download-outline"></geov-entity-download-rdf>`;
 
-    const rendered =await renderToString(html, {
+    const rendered = await renderToString(html, {
       runtimeLogging: true,
       removeHtmlComments: true,
       beforeHydrate: doc => {
@@ -87,11 +87,9 @@ describe('geov-entity-download-rdf', () => {
         </head>
 
         <body><geov-entity-download-rdf entity-id="i785518" color="primary" expand="block" fill="outline"
-                button-label="Download RDF" button-icon="download-outline" class="hydrated" s-id="1"><!--r.1--><ion-button
-                    id="open-custom-dialog" expand="block" fill="outline" color="primary"
+                button-label="Download RDF" button-icon="download-outline" class="hydrated" s-id="1"><!--r.1--><ion-button expand="block" fill="outline" color="primary"
                     c-id="1.0.0.0"><!--t.1.1.1.0-->Download RDF <ion-icon name="download-outline"
-                        c-id="1.2.1.1"></ion-icon></ion-button><ion-modal id="example-modal" trigger="open-custom-dialog"
-                    c-id="1.3.0.1"><ion-header c-id="1.4.1.0"><ion-toolbar c-id="1.5.2.0"><ion-buttons slot="start"
+                        c-id="1.2.1.1"></ion-icon></ion-button><ion-modal c-id="1.3.0.1"><ion-header c-id="1.4.1.0"><ion-toolbar c-id="1.5.2.0"><ion-buttons slot="start"
                                 c-id="1.6.3.0"><ion-button
                                     c-id="1.7.4.0"><!--t.1.8.5.0-->Cancel</ion-button></ion-buttons><ion-title
                                 c-id="1.9.3.1"><!--t.1.10.4.0-->Download RDF</ion-title></ion-toolbar></ion-header><ion-content

@@ -200,6 +200,7 @@ export function cleanupImports(lines: string[]) {
       case 'import { PickerColumnItem } from "@ionic/core";':
       case 'import { PickerInternalChangeEventDetail } from "@ionic/core";':
       case 'import { Color } from "@ionic/core";':
+      case 'export { Color } from "@ionic/core";':
         return false;
       default:
         return true;

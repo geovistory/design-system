@@ -1,6 +1,5 @@
 import type { Color } from '@ionic/core';
-import { Component, h, Host, Prop } from '@stencil/core';
-import { State } from '@stencil/core/internal';
+import { Component, h, Host, Prop, State } from '@stencil/core';
 import { downloadOutline } from 'ionicons/icons';
 
 /**
@@ -27,6 +26,11 @@ export class GeovEntityDownloadRdf {
    * ID number of entity, e.g. 'i315800'
    */
   @Prop() entityId: string;
+  /**
+   * projectId
+   * ID number of project, e.g. '123123'
+   */
+  @Prop() projectId: number | undefined;
   /**
    * color
    * color of the button
@@ -73,18 +77,22 @@ export class GeovEntityDownloadRdf {
   modal: HTMLIonModalElement;
 
   open() {
-    this.modal.isOpen = true;
+    this.modal.present();
   }
   dismiss() {
     this.modal.dismiss();
-    this.modal.isOpen = false;
   }
+
   async fetchRDF(format: string[]) {
     const headers = new Headers({
       Accept: format[0], //format[0] = Type
     });
+    let args = this.entityId;
+    if (this.projectId != undefined) {
+      args += '?p=' + this.projectId;
+    }
     const url = 'https://www.geovistory.org/resource/';
-    const response = await fetch(url + this.entityId, {
+    const response = await fetch(url + args, {
       method: 'GET',
       headers: headers,
       mode: 'cors',
@@ -97,6 +105,7 @@ export class GeovEntityDownloadRdf {
     a.click();
     this.dismiss();
   }
+
   renderClickableItem() {
     return Object.entries(this.listFormat).map(([a, b]) => (
       <ion-item button={true} detail={false} onClick={() => this.fetchRDF(b)} download="Download">
@@ -105,13 +114,14 @@ export class GeovEntityDownloadRdf {
       </ion-item>
     ));
   }
+
   render() {
     return (
       <Host>
-        <ion-button id="open-custom-dialog" expand={this.expand} fill={this.fill} color={this.color} onClick={() => (this.modal.isOpen = true)}>
+        <ion-button expand={this.expand} fill={this.fill} color={this.color} onClick={() => this.open()}>
           {this.buttonLabel} {this.buttonIcon ? <ion-icon name={this.buttonIcon}></ion-icon> : <ion-icon icon={downloadOutline}></ion-icon>}
         </ion-button>
-        <ion-modal id="example-modal" trigger="open-custom-dialog" ref={element => (this.modal = element)} onWillDismiss={() => this.dismiss()}>
+        <ion-modal ref={element => (this.modal = element)} onWillDismiss={() => this.dismiss()} isOpen={false}>
           <ion-header>
             <ion-toolbar>
               <ion-buttons slot="start">

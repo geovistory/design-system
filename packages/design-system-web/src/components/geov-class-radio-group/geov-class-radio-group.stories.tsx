@@ -5,7 +5,7 @@ import componentApi from './docs-component-api.md?raw';
 import overview from './docs-overview.md?raw';
 export default {
   title: 'Data Components/Explorer/Filters/Class Radio Group',
-    tags: ['autodocs'],
+  tags: ['autodocs'],
   parameters: {
     viewMode: 'docs',
     docs: {
@@ -13,7 +13,7 @@ export default {
     },
   },
 };
-export const ClassSelectCheckedOnInit = stencilWrapper(
+export const ClassSelectCheckedOnInit = await stencilWrapper(
   <geov-class-radio-group
     items={[
       {

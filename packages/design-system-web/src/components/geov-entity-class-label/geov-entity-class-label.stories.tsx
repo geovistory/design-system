@@ -14,4 +14,4 @@ export default {
     },
   },
 };
-export const EntityClassLabel = stencilWrapper(<geov-entity-class-label entityId="i315803" sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}></geov-entity-class-label>);
+export const EntityClassLabel = await stencilWrapper(<geov-entity-class-label entityId="i315803" sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}></geov-entity-class-label>);

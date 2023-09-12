@@ -2,9 +2,9 @@
   display: block;
   position: relative;
 }
-.loading{
+.loading {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color:  #fafafa;
+  background-color: var(--ion-color-light-tint, #fafafa);
 }

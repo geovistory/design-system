@@ -5,7 +5,7 @@ import componentApi from './docs-component-api.md?raw';
 import overview from './docs-overview.md?raw';
 export default {
   title: 'Design Components/Paginator',
-    tags: ['autodocs'],
+  tags: ['autodocs'],
   parameters: {
     viewMode: 'docs',
     docs: {
@@ -14,7 +14,7 @@ export default {
   },
 };
 
-export const Paginator = stencilWrapper(
+export const Paginator = await stencilWrapper(
   <geov-paginator
     length={60}
     onPageChanged={e => {
@@ -23,7 +23,7 @@ export const Paginator = stencilWrapper(
   ></geov-paginator>,
 );
 
-export const PaginatorColor = stencilWrapper(
+export const PaginatorColor = await stencilWrapper(
   <geov-paginator
     length={60}
     color="tertiary"

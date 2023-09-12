@@ -6,12 +6,12 @@ on:
       incrementType:
         description: "Type of increment (see: semver.org)"
         required: true
-        default: 'patch'
+        default: "patch"
         type: choice
         options:
-        - major
-        - minor
-        - patch
+          - major
+          - minor
+          - patch
 
 jobs:
   release:
@@ -46,13 +46,10 @@ jobs:
           git fetch --depth=1 origin +refs/tags/*:refs/tags/*
           git pull
 
-      - name: Install Lerna globally
-        run: npm install lerna@5.4.3 --location=global
-
       - uses: actions/setup-node@v2
         with:
-          node-version: '18.16.1'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: "18.16.1"
+          registry-url: "https://registry.npmjs.org"
 
       - name: Clean install dependencies
         run: npm ci
@@ -62,14 +59,14 @@ jobs:
 
       - uses: EndBug/add-and-commit@v5
         with:
-          message: 'chore(): update build artifacts'
+          message: "chore(): update build artifacts"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to NPM
         id: lerna
         run: |
-          lerna publish ${{ github.event.inputs.incrementType }} --create-release github --yes
+          npx lerna publish ${{ github.event.inputs.incrementType }} --create-release github --yes
           echo ::set-output name=tag::$(cd ./packages/design-system-web && cat package.json | jq -r '.version')
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
@@ -79,11 +76,11 @@ jobs:
         run: echo your tag is '${{steps.lerna.outputs.tag}}'
 
       - name: Update Lock files
-        run: 'npm run update:lock'
+        run: "npm run update:lock"
 
       - uses: EndBug/add-and-commit@v5
         with:
-          message: 'chore(): update lock files'
+          message: "chore(): update lock files"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -106,7 +103,6 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/geovistory/design-system:${{steps.lerna.outputs.tag}}
-
 
       - name: Invoke workflow in public-chart to make a staging release
         uses: benc-uk/workflow-dispatch@v1
