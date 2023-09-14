@@ -1,5 +1,5 @@
 import { Color } from '@ionic/core';
-import { Component, Event, EventEmitter, h, Host, Prop, State, Element } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Host, Prop, State } from '@stencil/core';
 import { eye, openOutline } from 'ionicons/icons';
 import { GeovPaginatorCustomEvent } from '../../components';
 import { FetchResponse } from '../../lib/FetchResponse';
@@ -138,12 +138,9 @@ export class GeovEntityPropsByPredicate {
    */
   @Event() pageChanged: EventEmitter<PageEvent>;
 
-  /**
-   * DOM
-   */
-  @Element() hostElement: HTMLElement;
-
   modal: HTMLIonModalElement;
+  literalContainer: HTMLIonItemElement;
+  itemButton: HTMLIonButtonElement;
 
   /*
    * assigns an id to the component
@@ -179,32 +176,27 @@ export class GeovEntityPropsByPredicate {
   }
 
   componentDidLoad() {
-    const shadowRoot = this.hostElement.shadowRoot;
-    this.resizePage(shadowRoot);
+    this.resizePage();
     window.addEventListener('resize', this.handleResize);
   }
 
-  resizePage(shadowRoot: ShadowRoot) {
+  resizePage() {
     // Display Expand button if need. The page must be loaded in order to have the measurements
-    if (shadowRoot) {
-      const literalContainer = shadowRoot.querySelector('.literal-container');
-      const itemButton = shadowRoot.querySelector('.literal-container ion-button') as HTMLElement;
-
-      if (literalContainer && itemButton) {
-        const labelLiteral = literalContainer.querySelector('ion-label');
-        if (labelLiteral) {
-          // If size of text > size of container
-          if (labelLiteral.scrollWidth > labelLiteral.clientWidth) {
-            itemButton.style.display = 'block';
-          }
+    if (this.literalContainer && this.itemButton) {
+      const labelLiteral = this.literalContainer.querySelector('ion-label');
+      if (labelLiteral) {
+        // If size of text > size of container
+        if (labelLiteral.scrollWidth > labelLiteral.clientWidth) {
+          this.itemButton.style.display = 'block';
+        } else {
+          this.itemButton.style.display = 'none';
         }
       }
     }
   }
 
   handleResize = () => {
-    const shadowRoot = this.hostElement.shadowRoot;
-    this.resizePage(shadowRoot);
+    this.resizePage();
   };
 
   changePage(pageEvent: GeovPaginatorCustomEvent<PageEvent>) {
@@ -298,9 +290,9 @@ export class GeovEntityPropsByPredicate {
     }
 
     return (
-      <ion-item color={this.color} class="literal-container">
+      <ion-item color={this.color} class="literal-container" ref={el => (this.literalContainer = el as HTMLIonItemElement)}>
         {this.renderLiteral(item)}
-        <ion-button onClick={() => this.open()}>
+        <ion-button onClick={() => this.open()} ref={el => (this.itemButton = el as HTMLIonButtonElement)}>
           <ion-icon icon={eye}></ion-icon>
         </ion-button>
       </ion-item>
