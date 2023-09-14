@@ -21,8 +21,8 @@ const config: StorybookConfig = {
         // as listed here https://caniuse.com/mdn-javascript_operators_await_top_level
         // and here https://esbuild.github.io/content-types/#javascript
         // (default is ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'])
-        target: ['es2022', 'edge89', 'firefox89', 'chrome89', 'safari15']
-      }
+        target: ['es2022', 'edge89', 'firefox89', 'chrome89', 'safari15'],
+      },
     });
   },
 };
