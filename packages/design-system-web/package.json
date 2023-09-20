@@ -58,6 +58,7 @@
   "dependencies": {
     "@rollup/plugin-typescript": "^11.1.2",
     "@stencil/core": "^4.0.1",
+    "maplibre-gl": "^3.3.1",
     "patch-package": "^7.0.2",
     "prismjs": "^1.29.0",
     "react-copy-to-clipboard": "^5.1.0",

@@ -1,46 +1,7 @@
 import { Component, h, Host, Prop, State, Element } from '@stencil/core';
 import { isNode } from '../../lib/isNode';
-import { importPlotlyBasic } from '../../lib/importPlotlyBasic';
+import { importMapLibre } from '../../lib/importMapLibre';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
-
-const chartColors = [
-  '#322659',
-  '#44337A',
-  '#553C9A',
-  '#6B46C1',
-  '#805AD5',
-  '#9F7AEA',
-  '#B794F4',
-  '#D6BCFA',
-  '#E9D8FD',
-  '#FAF5FF',
-  '#E9D8FD',
-  '#D6BCFA',
-  '#B794F4',
-  '#9F7AEA',
-  '#805AD5',
-  '#6B46C1',
-  '#553C9A',
-  '#44337A',
-];
-
-const qrClassesCount = () => `
-  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-  SELECT (group_concat(?class;separator=", ") as ?classnames) (Max(?classcount) as ?classcounts)
-  WHERE {
-      {
-          SELECT ?classuri (count(?entity) as ?classcount)
-          WHERE {
-              ?entity a ?classuri .
-          }
-          GROUP BY ?classuri
-      }
-      ?classuri rdfs:label ?class
-  }
-  GROUP BY ?classuri
-  ORDER by DESC(?classcounts)
-`;
 
 type SparqlResponse = {
   classnames: SparqlBinding;
@@ -67,16 +28,24 @@ export class GeovMapPlaces {
   @Prop() sparqlEndpoint: string;
 
   /**
-   * Size in pixel
-   * of the final chart
+   * Maximum of Objects fetched (LIMIT)
    */
-  @Prop() width: number;
+  @Prop() limit: number = 1000;
 
   /**
-   * Size in pixel
-   * of the final chart
+   * The center of the map
    */
-  @Prop() height: number;
+  @Prop() center: [number, number];
+
+  /**
+   * The initial zoomlevel of the map
+   */
+  @Prop() zoom: number = 5;
+
+  /**
+   * The results are restricted to the visible part of the map
+   */
+  @Prop() queryBoundingBox: boolean = false;
 
   @State() loading: boolean;
 
@@ -84,48 +53,30 @@ export class GeovMapPlaces {
     // If we are in a browser
     if (!isNode()) {
       this.loading = true;
-      // Load plotly script
-      const Plotly = await importPlotlyBasic();
+      // Load MapLibre script
+      const MapLibre = await importMapLibre();
+      console.log(MapLibre);
+
+      const qrPlaces = `
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX ontome: <https://ontome.net/ontology/>
+
+        SELECT ?subject ?geoPlaceLabel ?long ?lat
+            WHERE {?subject ^ontome:p147 ?presence.
+            ?subject rdfs:label    ?geoPlaceLabel.
+            ?presence ontome:p148 ?place.
+          bind(replace(str(?place), '<http://www.opengis.net/def/crs/EPSG/0/4326>', "", "i") as ?rep)
+          bind( replace( str(?rep), "^[^0-9\.-]*([-]?[0-9\.]+) .*$", "$1" ) as ?long )
+          bind( replace( str(?rep), "^.* ([-]?[0-9\.]+)[^0-9\.]*$", "$1" ) as ?lat )
+        } LIMIT ${this.limit}
+      `;
 
       // Send the request to the provided sparql endpoint
-      sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrClassesCount()).then(res => {
+      sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrPlaces).then(res => {
         // Parse the response
         const response = res?.results?.bindings;
-        const labels = response.map(elt => elt.classnames.value);
-        const values = response.map(elt => parseInt(elt.classcounts.value));
+        console.log(response);
 
-        // Prepare colors
-        const colors = [];
-        for (let i = 0; i < values.length; i++) {
-          colors.push(chartColors[i % chartColors.length]);
-        }
-
-        // Chart data, shape, and parameters
-        const plotlyData: Plotly.Data[] = [
-          {
-            labels: labels,
-            values: values,
-            type: 'pie',
-            textinfo: 'label+percent',
-            textposition: 'inside',
-            marker: { colors: colors },
-          },
-        ];
-
-        // Chart Layout - Prepare
-        const classNb = values.length;
-        const entNb_x1000 = Math.round(values.reduce((a: number, b: number) => a + b, 0) / 1000);
-
-        // Chart Layout - Set
-        const layout = {
-          width: this.width,
-          height: this.height,
-          title: `Distribution of ${classNb} classes (${entNb_x1000}k entities)`,
-          showlegend: false,
-        };
-
-        // Draw the chart
-        if (Plotly) Plotly.newPlot(this.el, plotlyData, layout);
         this.loading = false;
       });
     }
@@ -135,7 +86,7 @@ export class GeovMapPlaces {
     return (
       <Host>
         {this.loading && (
-          <div style={{ width: this.width + 'px', height: this.height + 'px' }} class="loading">
+          <div style={{ width: 100 + 'px', height: 100 + 'px' }} class="loading">
             <ion-spinner name="dots"></ion-spinner>
           </div>
         )}

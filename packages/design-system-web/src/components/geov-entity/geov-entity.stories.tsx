@@ -15,7 +15,9 @@ export default {
   },
 };
 export const ShipVoyage = await stencilWrapper(<geov-entity sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i151089" language="en" fetchBeforeRender={false}></geov-entity>);
-export const GeographicalPlace = await stencilWrapper(<geov-entity sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i209502" language="en" fetchBeforeRender={false}></geov-entity>);
+export const GeographicalPlace = await stencilWrapper(
+  <geov-entity sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i209502" language="en" fetchBeforeRender={false}></geov-entity>,
+);
 export const JohannesKepler = await stencilWrapper(<geov-entity sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i785518" language="en" fetchBeforeRender={false}></geov-entity>);
 export const Birth = await stencilWrapper(<geov-entity sparqlEndpoint={AMPI_SPARQL_ENDPOINT} entityId="i542181" language="en" fetchBeforeRender={false}></geov-entity>);
 export const TimeSpan = await stencilWrapper(<geov-entity sparqlEndpoint={AMPI_SPARQL_ENDPOINT} entityId="i542181ts" language="de" fetchBeforeRender={false}></geov-entity>);
