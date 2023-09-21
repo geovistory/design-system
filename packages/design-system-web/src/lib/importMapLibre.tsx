@@ -33,6 +33,6 @@ export const importMapLibre = async () =>
     link.href = 'https://unpkg.com/maplibre-gl/dist/maplibre-gl.css';
 
     // append script to load Plotly from CDN to document
+    document.head.appendChild(link);
     document.body.appendChild(script);
-    document.body.appendChild(link);
   });

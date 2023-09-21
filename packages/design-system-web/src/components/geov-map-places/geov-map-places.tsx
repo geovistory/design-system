@@ -55,8 +55,13 @@ export class GeovMapPlaces {
       this.loading = true;
       // Load MapLibre script
       const MapLibre = await importMapLibre();
-      console.log(MapLibre);
-
+      const map = new MapLibre.Map({
+        container: this.el,
+        style: 'https://demotiles.maplibre.org/style.json',
+        center: [0, 0],
+        zoom: 1,
+      });
+      console.log(map);
       const qrPlaces = `
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         PREFIX ontome: <https://ontome.net/ontology/>
