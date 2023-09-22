@@ -2,7 +2,7 @@ import { Component, h, Host, Prop, State, Element } from '@stencil/core';
 import { isNode } from '../../lib/isNode';
 import { importMapLibre } from '../../lib/importMapLibre';
 import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
-import { happyOutline } from 'ionicons/icons';
+import { flag } from 'ionicons/icons';
 
 type SparqlResponse = {
   classnames: SparqlBinding;
@@ -75,7 +75,6 @@ export class GeovMapPlaces {
           clusterMaxZoom: 14, // Max zoom to cluster points on
           clusterRadius: 50, // Radius of each cluster when clustering points (defaults to 50)
         });
-        console.log(happyOutline);
 
         map.addLayer({
           id: 'clusters',
@@ -104,13 +103,55 @@ export class GeovMapPlaces {
           },
         });
 
-        map.addLayer({
-          id: 'unclustered-point',
+        // Workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=700533
+        // From https://webcompat.com/issues/64352
+        function ensureSVGWidthHeight(svgElem) {
+          if (!svgElem.getAttribute('width') || !svgElem.getAttribute('height')) {
+            const viewBox = svgElem.getAttribute('viewBox');
+            if (viewBox) {
+              const match = viewBox.match(/\w+ \w+ (\w+) (\w+)/);
+              const viewBoxWidth = match[1];
+              const viewBoxHeight = match[2];
+              svgElem.setAttribute('width', viewBoxWidth + 'px');
+              svgElem.setAttribute('height', viewBoxHeight + 'px');
+            }
+          }
+          return svgElem;
+        }
+
+        function svgStringToImageSrc(svgString) {
+          svgString = svgString.substring(svgString.indexOf('<svg'));
+          const parser = new DOMParser();
+          const svgXML = parser.parseFromString(svgString, 'image/svg+xml');
+          const fixedSvgXML = ensureSVGWidthHeight(svgXML.rootElement);
+          const fixedSvgString = new XMLSerializer().serializeToString(fixedSvgXML);
+          return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(fixedSvgString);
+        }
+
+        const image = new Image(20, 20);
+        image.onload = () => {
+          map.addImage('flag', image, { pixelRatio: window.devicePixelRatio });
+          map.addLayer({
+            id: 'unclustered-point',
+            type: 'symbol',
+            source: 'places',
+            filter: ['!', ['has', 'point_count']],
+            layout: {
+              'icon-image': 'flag',
+              'icon-size': 1,
+              'icon-allow-overlap': true,
+            },
+          });
+        };
+        image.src = svgStringToImageSrc(flag);
+
+        /*map.addLayer({
+          id: 'ununclustered-point',
           type: 'symbol',
           source: 'places',
           filter: ['!', ['has', 'point_count']],
           layout: {
-            'text-size': 12,
+            'text-size': 36,
             'text-field': '*',
             'text-offset': [0, 0],
             'text-anchor': 'top',
@@ -120,7 +161,7 @@ export class GeovMapPlaces {
             'text-halo-color': '#fff',
             'text-halo-width': 2,
           },
-        });
+        });*/
 
         map.on('mouseenter', 'clusters', () => {
           map.getCanvas().style.cursor = 'pointer';
