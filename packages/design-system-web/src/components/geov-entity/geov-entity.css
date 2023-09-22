@@ -11,16 +11,10 @@
   padding: var(--ion-padding);
 }
 
-geov-entity-label {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .header h1 {
   margin-top: 0;
 }
 
-.header geov-entity-label,
 .header geov-entity-class-label,
 .header geov-entity-definition {
   overflow: hidden;
@@ -34,15 +28,11 @@ geov-entity-label {
 }
 
 .section:nth-child(even) {
-  background: var(--ion-color-tertiary);
-}
-
-.section:nth-child(odd) {
   background: var(--ion-color-tertiary-shade);
 }
 
-ion-card {
-  box-shadow: none !important;
+.section:nth-child(odd) {
+  background: var(--ion-color-tertiary);
 }
 
 .columns-1 {
@@ -60,18 +50,6 @@ ion-card {
   --column-gap: 0px;
 }
 
-/* sm and up */
-@media screen and (min-width: 420px) {
-}
-
-/* sm and up */
-@media screen and (min-width: 576px) {
-}
-
-/* md and up */
-@media screen and (min-width: 768px) {
-}
-
 /* lg and up */
 @media screen and (min-width: 992px) {
   .columns-3,
@@ -85,4 +63,8 @@ ion-card {
   .columns-3 {
     --column-count: 3;
   }
+}
+
+p.supertitle geov-entity-class-label {
+  font-size: 1.7rem;
 }

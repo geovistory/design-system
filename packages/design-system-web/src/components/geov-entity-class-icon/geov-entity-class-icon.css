@@ -1,0 +1,9 @@
+:host {
+  display: inline;
+  vertical-align: middle;
+}
+
+ion-icon {
+  --ion-margin: 0.3em;
+  margin-right: var(--ion-margin);
+}

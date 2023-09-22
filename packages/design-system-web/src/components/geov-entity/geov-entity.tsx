@@ -64,16 +64,21 @@ export class GeovEntity {
 
   predicatesBasic = ['http://www.w3.org/2000/01/rdf-schema#label', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'];
   predicatesTime = ['https://ontome.net/ontology/p4'];
-  excluded = ['https://ontome.net/ontology/p1943'];
+  excluded = ['https://ontome.net/ontology/p1943', 'https://ontome.net/ontology/p1762'];
   render() {
     return (
       <Host>
         <div class="container">
           <div class="header">
             <ion-grid fixed={true} class="ion-padding">
-              <h5>
-                <geov-entity-class-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}class-label`}></geov-entity-class-label>
-              </h5>
+              <p class="supertitle">
+                <geov-entity-class-label
+                  entityId={this.entityId}
+                  sparqlEndpoint={this.sparqlEndpoint}
+                  _ssrId={`${this.ssrIdPrefix}class-label`}
+                  withIcon={true}
+                ></geov-entity-class-label>
+              </p>
               <h1>
                 <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}entity-label`}></geov-entity-label>
               </h1>
@@ -95,20 +100,6 @@ export class GeovEntity {
                 </ion-segment-button>
               </ion-segment>
             </div> */}
-
-          {/* Basics */}
-          <geov-entity-properties
-            onDataFetched={this.removeIfEmpty()}
-            predicateInclude={this.predicatesBasic.join(',')}
-            fixedGrid={true}
-            class="section columns-2"
-            sparqlEndpoint={this.sparqlEndpoint}
-            entityId={this.entityId}
-            language={'en'}
-            fetchBeforeRender={this.fetchBeforeRender}
-            uriRegex={this.uriRegex}
-            uriReplace={this.uriReplace}
-          ></geov-entity-properties>
 
           {/* Rest */}
           <geov-entity-properties

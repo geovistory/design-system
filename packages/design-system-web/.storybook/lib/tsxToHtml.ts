@@ -140,12 +140,12 @@ function initWrapper(htmlString: string, complexElements: ComplexElements) {
       `)};`
           : ''
       }${
-            complexElements[key]?.functions
-              ? `
+        complexElements[key]?.functions
+          ? `
       // Add event listeners
       ${complexElements[key].functions.map(prop => `el${key}.addEventListener('${convertEventHandlerName(prop.key)}', ${prop.value}`)});`
-              : ''
-          }`,
+          : ''
+      }`,
         )
         .join('')}
     }

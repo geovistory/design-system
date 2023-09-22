@@ -242,7 +242,22 @@ export class GeovEntityPropsByPredicate {
         </ion-item>
       );
     }
-    return <ion-item color={this.color}> {this.renderLiteral(item)}</ion-item>;
+
+    switch (item.dt?.value) {
+      case 'http://www.opengis.net/ont/geosparql#wktLiteral':
+        return <geov-display-geosparql-wktliteral color={this.color} value={item.entity?.value}></geov-display-geosparql-wktliteral>;
+      case 'http://www.w3.org/1999/02/22-rdf-syntax-ns#langString':
+      case 'http://www.w3.org/2001/XMLSchema#string':
+      default:
+        return (
+          <geov-display-string-literal
+            color={this.color}
+            modalTitle={this.predicateLabel}
+            label={item.entity?.value}
+            language={item.entity?.['xml:lang']}
+          ></geov-display-string-literal>
+        );
+    }
   }
 
   private renderUri(item: Bindings) {
@@ -267,38 +282,6 @@ export class GeovEntityPropsByPredicate {
       <ion-label>
         <h2>{item.entityLabel?.value || '(no label)'}</h2>
         <p>{item.entityTypeLabel?.value}</p>
-      </ion-label>
-    );
-  }
-
-  private renderLiteral(item: Bindings) {
-    const dataType = item.dt?.value;
-
-    switch (dataType) {
-      case 'http://www.opengis.net/ont/geosparql#wktLiteral':
-        return this.renderWktLiteral(item);
-      case 'http://www.w3.org/1999/02/22-rdf-syntax-ns#langString':
-        return this.renderLangStringLiteral(item);
-      default:
-        return this.renderXsdStringLiteral(item);
-    }
-  }
-
-  private renderWktLiteral(item: Bindings) {
-    return (
-      <ion-label>
-        <geov-display-geosparql-wktliteral value={item.entity?.value}></geov-display-geosparql-wktliteral>
-      </ion-label>
-    );
-  }
-  private renderXsdStringLiteral(item: Bindings) {
-    return <ion-label>{item.entity.value}</ion-label>;
-  }
-  private renderLangStringLiteral(item: Bindings) {
-    return (
-      <ion-label>
-        <h2>{item.entity.value}</h2>
-        <p>@{item.entity?.['xml:lang']}</p>
       </ion-label>
     );
   }
