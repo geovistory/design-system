@@ -34,7 +34,6 @@ export class GeovDisplayStringLiteralLiteral {
   @Prop() language: string;
   modal: HTMLIonModalElement;
   labelContainer: Element;
-  literalContainer: HTMLIonItemElement;
   itemButton: HTMLIonButtonElement;
   componentDidLoad() {
     this.resizePage();
@@ -43,14 +42,12 @@ export class GeovDisplayStringLiteralLiteral {
 
   resizePage() {
     // Display Expand button if need. The page must be loaded in order to have the measurements
-    if (this.literalContainer && this.itemButton) {
-      if (this.labelContainer) {
-        // If size of text > size of container
-        if (this.labelContainer.scrollWidth > this.labelContainer.clientWidth) {
-          this.itemButton.style.display = 'block';
-        } else {
-          this.itemButton.style.display = 'none';
-        }
+    if (this.labelContainer && this.itemButton) {
+      // If size of text > size of container
+      if (this.labelContainer.scrollWidth > this.labelContainer.clientWidth) {
+        this.itemButton.style.display = 'block';
+      } else {
+        this.itemButton.style.display = 'none';
       }
     }
   }
@@ -68,7 +65,7 @@ export class GeovDisplayStringLiteralLiteral {
   render() {
     return (
       <Fragment>
-        <ion-item color={this.color} ref={el => (this.literalContainer = el as HTMLIonItemElement)} lines="none">
+        <ion-item color={this.color} lines="none">
           <ion-label class="literal-container">
             <h2 ref={element => (this.labelContainer = element)}>{this.label}</h2>
             {this.language && <p>@{this.language}</p>}
