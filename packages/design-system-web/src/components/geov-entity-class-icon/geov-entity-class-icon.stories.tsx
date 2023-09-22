@@ -13,7 +13,7 @@ export default {
     },
   },
 };
-export const EntityClassIcon = await stencilWrapper(<geov-entity-class-icon classURI="https://ontome.net/ontology/c21"></geov-entity-class-icon>);
+export const EntityClassIconPerson = await stencilWrapper(<geov-entity-class-icon classURI="https://ontome.net/ontology/c21"></geov-entity-class-icon>);
 export const EntityClassIconGeographicalPlace = await stencilWrapper(<geov-entity-class-icon classURI="https://ontome.net/ontology/c363"></geov-entity-class-icon>);
 export const EntityClassIconGroup = await stencilWrapper(<geov-entity-class-icon classURI="https://ontome.net/ontology/c68"></geov-entity-class-icon>);
 export const EntityClassIconShipVoyage = await stencilWrapper(<geov-entity-class-icon classURI="https://ontome.net/ontology/c523"></geov-entity-class-icon>);
