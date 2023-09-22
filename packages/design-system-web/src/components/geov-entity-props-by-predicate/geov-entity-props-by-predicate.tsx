@@ -1,6 +1,6 @@
 import { Color } from '@ionic/core';
 import { Component, Event, EventEmitter, h, Host, Prop, State } from '@stencil/core';
-import { eye, openOutline } from 'ionicons/icons';
+import { openOutline } from 'ionicons/icons';
 import { GeovPaginatorCustomEvent } from '../../components';
 import { FetchResponse } from '../../lib/FetchResponse';
 import { regexReplace } from '../../lib/regexReplace';
@@ -138,10 +138,6 @@ export class GeovEntityPropsByPredicate {
    */
   @Event() pageChanged: EventEmitter<PageEvent>;
 
-  modal: HTMLIonModalElement;
-  literalContainer: HTMLIonItemElement;
-  itemButton: HTMLIonButtonElement;
-
   /*
    * assigns an id to the component
    */
@@ -174,30 +170,6 @@ export class GeovEntityPropsByPredicate {
         });
     }
   }
-
-  componentDidLoad() {
-    this.resizePage();
-    window.addEventListener('resize', this.handleResize);
-  }
-
-  resizePage() {
-    // Display Expand button if need. The page must be loaded in order to have the measurements
-    if (this.literalContainer && this.itemButton) {
-      const labelLiteral = this.literalContainer.querySelector('ion-label');
-      if (labelLiteral) {
-        // If size of text > size of container
-        if (labelLiteral.scrollWidth > labelLiteral.clientWidth) {
-          this.itemButton.style.display = 'block';
-        } else {
-          this.itemButton.style.display = 'none';
-        }
-      }
-    }
-  }
-
-  handleResize = () => {
-    this.resizePage();
-  };
 
   changePage(pageEvent: GeovPaginatorCustomEvent<PageEvent>) {
     this.pageIndex = pageEvent.detail.pageIndex;
@@ -232,13 +204,6 @@ export class GeovEntityPropsByPredicate {
       });
   }
 
-  open() {
-    this.modal.present();
-  }
-  dismiss() {
-    this.modal.dismiss();
-  }
-
   render() {
     const showPaginator = this.totalCount > this.pageSize;
     const contentMinHeight = showPaginator ? this.pageSize * 62 : 0;
@@ -258,17 +223,6 @@ export class GeovEntityPropsByPredicate {
           {/* Paginator */}
           {showPaginator && this.renderPaginator()}
         </ion-card>
-        <ion-modal ref={element => (this.modal = element)} onWillDismiss={() => this.dismiss()} isOpen={false}>
-          <ion-header>
-            <ion-toolbar>
-              <ion-buttons slot="end">
-                <ion-button onClick={() => this.dismiss()}>Close</ion-button>
-              </ion-buttons>
-              <ion-title>{this.predicateLabel}</ion-title>
-            </ion-toolbar>
-          </ion-header>
-          <ion-content class="ion-padding">{this.data?.entities?.map(entity => this.renderLiteral(entity))}</ion-content>
-        </ion-modal>
       </Host>
     );
   }
@@ -289,14 +243,14 @@ export class GeovEntityPropsByPredicate {
       );
     }
 
-    return (
-      <ion-item color={this.color} class="literal-container" ref={el => (this.literalContainer = el as HTMLIonItemElement)}>
-        {this.renderLiteral(item)}
-        <ion-button onClick={() => this.open()} ref={el => (this.itemButton = el as HTMLIonButtonElement)}>
-          <ion-icon icon={eye}></ion-icon>
-        </ion-button>
-      </ion-item>
-    );
+    switch (item.dt.value) {
+      case 'http://www.opengis.net/ont/geosparql#wktLiteral':
+        return <geov-display-geosparql-wktliteral value={item.entity?.value}></geov-display-geosparql-wktliteral>;
+      case 'http://www.w3.org/1999/02/22-rdf-syntax-ns#langString':
+      case 'http://www.w3.org/2001/XMLSchema#string':
+      default:
+        return <geov-display-string-literal modalTitle={this.predicateLabel} label={item.entity?.value} language={item.entity?.['xml:lang']}></geov-display-string-literal>;
+    }
   }
 
   private renderUri(item: Bindings) {
@@ -321,38 +275,6 @@ export class GeovEntityPropsByPredicate {
       <ion-label>
         <h2>{item.entityLabel?.value || '(no label)'}</h2>
         <p>{item.entityTypeLabel?.value}</p>
-      </ion-label>
-    );
-  }
-
-  private renderLiteral(item: Bindings) {
-    const dataType = item.dt?.value;
-
-    switch (dataType) {
-      case 'http://www.opengis.net/ont/geosparql#wktLiteral':
-        return this.renderWktLiteral(item);
-      case 'http://www.w3.org/1999/02/22-rdf-syntax-ns#langString':
-        return this.renderLangStringLiteral(item);
-      default:
-        return this.renderXsdStringLiteral(item);
-    }
-  }
-
-  private renderWktLiteral(item: Bindings) {
-    return (
-      <ion-label>
-        <geov-display-geosparql-wktliteral value={item.entity?.value}></geov-display-geosparql-wktliteral>
-      </ion-label>
-    );
-  }
-  private renderXsdStringLiteral(item: Bindings) {
-    return <ion-label>{item.entity.value}</ion-label>;
-  }
-  private renderLangStringLiteral(item: Bindings) {
-    return (
-      <ion-label>
-        <h2>{item.entity.value}</h2>
-        <p>@{item.entity?.['xml:lang']}</p>
       </ion-label>
     );
   }

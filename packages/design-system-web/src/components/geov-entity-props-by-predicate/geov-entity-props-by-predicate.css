@@ -12,13 +12,3 @@ ion-card {
 geov-paginator {
   margin-left: auto;
 }
-
-.literal-container {
-  overflow: clip;
-  width: 100%;
-}
-
-.literal-container ion-button {
-  display: none;
-  margin-left: auto;
-}

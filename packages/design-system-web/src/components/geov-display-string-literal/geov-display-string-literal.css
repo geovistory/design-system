@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+
+.literal-container {
+  overflow: clip;
+  width: 100%;
+}
+
+.literal-container ion-button {
+  display: none;
+  margin-left: auto;
+}
+
+.label-container {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.label {
+  width: 100%;
+}
