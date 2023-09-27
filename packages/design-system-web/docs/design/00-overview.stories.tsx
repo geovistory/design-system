@@ -1,5 +1,6 @@
 import { h } from '@stencil/core';
 import { stencilWrapper } from '../../.storybook/lib/stencilWrapper';
+import { openOutline } from 'ionicons/icons';
 
 export default {
   title: 'Design/Overview',
@@ -50,11 +51,11 @@ export const Overview = await stencilWrapper(
             </ion-item>
             <ion-item href="https://ionicframework.com/docs/components" lines="full">
               Ionic Components (official documentation)
-              <ion-icon name="open-outline" slot="end"></ion-icon>
+              <ion-icon icon={openOutline} slot="end"></ion-icon>
             </ion-item>
             <ion-item href="https://ionic.io/ion-icons" lines="full">
               Icons (official documentation)
-              <ion-icon name="open-outline" slot="end"></ion-icon>
+              <ion-icon icon={openOutline} slot="end"></ion-icon>
             </ion-item>
           </ion-list>
         </p>

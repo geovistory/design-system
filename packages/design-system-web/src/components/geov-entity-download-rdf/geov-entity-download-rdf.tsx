@@ -55,7 +55,7 @@ export class GeovEntityDownloadRdf {
    * buttonIcon
    * Icon of the button
    */
-  @Prop() buttonIcon = 'download-outline';
+  @Prop() buttonIcon?: string = downloadOutline;
   /**
    * listFormat
    * List or RDF serialization format
@@ -109,7 +109,7 @@ export class GeovEntityDownloadRdf {
   renderClickableItem() {
     return Object.entries(this.listFormat).map(([a, b]) => (
       <ion-item button={true} detail={false} onClick={() => this.fetchRDF(b)} download="Download">
-        {this.buttonIcon ? <ion-icon slot="start" name={this.buttonIcon}></ion-icon> : <ion-icon slot="start" icon={downloadOutline}></ion-icon>}
+        {this.buttonIcon ? <ion-icon slot="start" icon={this.buttonIcon}></ion-icon> : <ion-icon slot="start" icon={downloadOutline}></ion-icon>}
         <ion-label>{a}</ion-label>
       </ion-item>
     ));
@@ -119,7 +119,7 @@ export class GeovEntityDownloadRdf {
     return (
       <Host>
         <ion-button expand={this.expand} fill={this.fill} color={this.color} onClick={() => this.open()}>
-          {this.buttonLabel} {this.buttonIcon ? <ion-icon name={this.buttonIcon}></ion-icon> : <ion-icon icon={downloadOutline}></ion-icon>}
+          {this.buttonLabel} {this.buttonIcon ? <ion-icon icon={this.buttonIcon}></ion-icon> : <ion-icon icon={downloadOutline}></ion-icon>}
         </ion-button>
         <ion-modal ref={element => (this.modal = element)} onWillDismiss={() => this.dismiss()} isOpen={false}>
           <ion-header>

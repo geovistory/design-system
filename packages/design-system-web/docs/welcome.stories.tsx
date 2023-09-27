@@ -1,6 +1,7 @@
 import { h } from '@stencil/core';
 import { version } from '../package.json';
 import { stencilWrapper } from '../.storybook/lib/stencilWrapper';
+import { logoGithub, openOutline } from 'ionicons/icons';
 export default {
   title: 'Welcome',
   parameters: {
@@ -50,15 +51,15 @@ export const Welcome = await stencilWrapper(
           <ion-list>
             <ion-item href="https://www.npmjs.com/package/@geovistory/design-system-web" target="_blank" lines="full">
               @geovistory/design-system-web: web components
-              <ion-icon name="open-outline" slot="end"></ion-icon>
+              <ion-icon icon={openOutline} slot="end"></ion-icon>
             </ion-item>
             <ion-item href="https://www.npmjs.com/package/@geovistory/design-system-react" target="_blank" lines="full">
               @geovistory/design-system-react: react components
-              <ion-icon name="open-outline" slot="end"></ion-icon>
+              <ion-icon icon={openOutline} slot="end"></ion-icon>
             </ion-item>
             <ion-item href="https://www.npmjs.com/package/@geovistory/design-system-angular" target="_blank" lines="full">
               @geovistory/design-system-angular: angular components
-              <ion-icon name="open-outline" slot="end"></ion-icon>
+              <ion-icon icon={openOutline} slot="end"></ion-icon>
             </ion-item>
           </ion-list>
         </p>
@@ -67,7 +68,7 @@ export const Welcome = await stencilWrapper(
         <p>
           <ion-button href="/?path=/story/contributing-ci-and-cd-workflow--ci-and-cd-workflow">Contribute</ion-button>
           <ion-button href="https://github.com/geovistory/design-system">
-            <ion-icon name="logo-github"></ion-icon>&nbsp; Code on GitHub
+            <ion-icon icon={logoGithub}></ion-icon>&nbsp; Code on GitHub
           </ion-button>
         </p>
       </ion-grid>

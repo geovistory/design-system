@@ -31,6 +31,7 @@ import {
   TYPE_PLACE_GEOVISTORY,
   TYPE_GROUP_GEOVISTORY,
 } from './lib/const';
+import { closeCircleOutline, copyOutline, menuOutline, openOutline } from 'ionicons/icons';
 
 interface WikidataBindings {
   item: SparqlBinding;
@@ -265,17 +266,17 @@ export class GeovAuthorityLookupExplorer {
             {this.displayOpenBtn && (
               <ion-button expand="block" href={this.popoverItem.uri} fill="outline" target="_blank">
                 Open
-                <ion-icon name="open-outline" slot="end"></ion-icon>
+                <ion-icon icon={openOutline} slot="end"></ion-icon>
               </ion-button>
             )}
             {this.displayCopyBtn && (
               <ion-button expand="block" fill="clear" onClick={() => this.handleCopy(this.popoverItem)}>
                 Copy
-                <ion-icon name="copy-outline" slot="end"></ion-icon>
+                <ion-icon icon={copyOutline} slot="end"></ion-icon>
               </ion-button>
             )}
             <ion-button expand="block" fill="clear" onClick={() => this.handleDismiss()}>
-              <ion-icon name="close-circle-outline"></ion-icon>
+              <ion-icon icon={closeCircleOutline}></ion-icon>
             </ion-button>
           </ion-popover>
         )}
@@ -307,20 +308,20 @@ export class GeovAuthorityLookupExplorer {
                             {this.displayCopyBtn && (
                               <ion-button fill="clear" onClick={() => this.handleCopy(item)}>
                                 Copy
-                                <ion-icon name="copy-outline" slot="end"></ion-icon>
+                                <ion-icon icon={copyOutline} slot="end"></ion-icon>
                               </ion-button>
                             )}
                             {this.displayOpenBtn && (
                               <ion-button fill="clear" href={item.uri} target="_blank">
                                 Open
-                                <ion-icon name="open-outline" slot="end"></ion-icon>
+                                <ion-icon icon={openOutline} slot="end"></ion-icon>
                               </ion-button>
                             )}
                             {this.displaySelectBtn && <ion-button onClick={() => this.handleSelected(item)}>Select</ion-button>}
                           </ion-col>
                           <ion-col class="colMenu">
                             <ion-button onClick={() => this.handleClick(item)}>
-                              <ion-icon name="menu-outline"></ion-icon>
+                              <ion-icon icon={menuOutline}></ion-icon>
                             </ion-button>
                           </ion-col>
                         </ion-row>
