@@ -3,6 +3,7 @@ import { isNode } from '../../lib/isNode';
 import { importMapLibre } from '../../lib/importMapLibre';
 import { SparqlBinding, SparqlRes, sparqlJson } from '../../lib/sparqlJson';
 import { flag } from 'ionicons/icons';
+import { LngLatBounds } from 'maplibre-gl';
 
 type SparqlResponse = {
   classnames: SparqlBinding;
@@ -74,9 +75,27 @@ export class GeovMapPlaces {
           [100, 90],
         ],
       });
-      const bounds = map.getBounds();
-      const zoom = map.getZoom();
-      console.log(bounds._sw.lat + ' : ' + bounds._ne.lat + ' : ' + bounds._sw.lng + ' : ' + bounds._ne.lng + ' : ' + zoom);
+
+      // request to the provided sparql endpoint
+      const qrPlaces = (bounds: LngLatBounds) => `
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX ontome: <https://ontome.net/ontology/>
+
+      SELECT ?subject ?geoPlaceLabel ?long ?lat
+          WHERE {?subject ^ontome:p147 ?presence.
+          ?subject rdfs:label    ?geoPlaceLabel.
+          ?presence ontome:p148 ?place.
+          bind(replace(str(?place), '<http://www.opengis.net/def/crs/EPSG/0/4326>', "", "i") as ?rep)
+          bind( replace( str(?rep), "^[^0-9\.-]*([-]?[0-9\.]+) .*$", "$1" ) as ?long )
+          bind( replace( str(?rep), "^.* ([-]?[0-9\.]+)[^0-9\.]*$", "$1" ) as ?lat )
+          FILTER (
+            ?lat >= "${bounds._sw.lat}" &&
+            ?lat <= "${bounds._ne.lat}" &&
+            ?long >= "${bounds._sw.lng}" &&
+            ?long <= "${bounds._ne.lng}"
+        )
+        }
+          `;
 
       map.on('load', () => {
         map.addSource('places', {
@@ -162,29 +181,10 @@ export class GeovMapPlaces {
         map.on('mouseleave', 'clusters', () => {
           map.getCanvas().style.cursor = '';
         });
+        // Fetch data from the SPARQL endpoint
+        sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrPlaces(map.getBounds())).then(res => this.parseResponse(res, map));
       });
-      console.log(bounds._sw.lat + ' : ' + bounds._ne.lat + ' : ' + bounds._sw.lng + ' : ' + bounds._ne.lng + ' : ' + zoom);
-      // Send the request to the provided sparql endpoint
-      const qrPlaces = `
-      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-      PREFIX ontome: <https://ontome.net/ontology/>
 
-      SELECT ?subject ?geoPlaceLabel ?long ?lat
-          WHERE {?subject ^ontome:p147 ?presence.
-          ?subject rdfs:label    ?geoPlaceLabel.
-          ?presence ontome:p148 ?place.
-          bind(replace(str(?place), '<http://www.opengis.net/def/crs/EPSG/0/4326>', "", "i") as ?rep)
-          bind( replace( str(?rep), "^[^0-9\.-]*([-]?[0-9\.]+) .*$", "$1" ) as ?long )
-          bind( replace( str(?rep), "^.* ([-]?[0-9\.]+)[^0-9\.]*$", "$1" ) as ?lat )
-          FILTER (
-            ?lat >= "${bounds._sw.lat}" &&
-            ?lat <= "${bounds._ne.lat}" &&
-            ?long >= "${bounds._sw.lng}" &&
-            ?long <= "${bounds._ne.lng}"
-        )
-        }
-          `;
-      sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrPlaces).then(res => this.parseResponse(res));
       // Limit the query whenever vie is moved/zoomed
       map.on('moveend', () => {
         // Get the updated map bounds and zoom level
@@ -192,34 +192,13 @@ export class GeovMapPlaces {
         const zoom = map.getZoom();
         console.log(bounds._sw.lat + ' : ' + bounds._ne.lat + ' : ' + bounds._sw.lng + ' : ' + bounds._ne.lng + ' : ' + zoom);
 
-        const newQuery = `
-          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-          PREFIX ontome: <https://ontome.net/ontology/>
-
-          SELECT ?subject ?geoPlaceLabel ?long ?lat
-          WHERE {
-              ?subject ^ontome:p147 ?presence.
-              ?subject rdfs:label ?geoPlaceLabel.
-              ?presence ontome:p148 ?place.
-              bind(replace(str(?place), '<http://www.opengis.net/def/crs/EPSG/0/4326>', "", "i") as ?rep)
-              bind( replace( str(?rep), "^[^0-9\.-]*([-]?[0-9\.]+) .*$", "$1" ) as ?long )
-              bind( replace( str(?rep), "^.* ([-]?[0-9\.]+)[^0-9\.]*$", "$1" ) as ?lat )
-              FILTER (
-                ?lat > "${bounds._sw.lat}" &&
-                ?lat < "${bounds._ne.lat}" &&
-                ?long > "${bounds._sw.lng}" &&
-                ?long < "${bounds._ne.lng}"
-            )
-          }
-      `;
-
-        // Fetch data from the SPARQL endpoint using the new query
-        sparqlJson<SparqlResponse>(this.sparqlEndpoint, newQuery).then(res => this.parseResponse(res));
+        // Fetch data from the SPARQL endpoint
+        sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrPlaces(map.getBounds())).then(res => this.parseResponse(res, map));
       });
     }
   }
 
-  parseResponse = (res: SparqlRes<SparqlResponse>) => {
+  parseResponse = (res: SparqlRes<SparqlResponse>, mapObject) => {
     // Parse the response and update the markers on the map
     const response = res?.results?.bindings;
 
@@ -228,23 +207,21 @@ export class GeovMapPlaces {
 
       if (!this.markers.ids.has(featureId)) {
         console.log('add marker');
-        this.markers.features = [
-          ...this.markers.features,
-          {
-            type: 'Feature',
-            geometry: {
-              type: 'Point',
-              coordinates: [parseFloat(ele['long'].value), parseFloat(ele['lat'].value)],
-            },
-            properties: {
-              name: ele['geoPlaceLabel'].value,
-              link: ele['subject'].value,
-            },
+        this.markers.features.push({
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [parseFloat(ele['long'].value), parseFloat(ele['lat'].value)],
           },
-        ];
+          properties: {
+            name: ele['geoPlaceLabel'].value,
+            link: ele['subject'].value,
+          },
+        });
         this.markers.ids.add(featureId);
       }
     });
+    mapObject.getSource('places').setData(this.markers);
   };
 
   render() {
