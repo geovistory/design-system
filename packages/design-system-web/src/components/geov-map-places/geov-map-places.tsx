@@ -188,11 +188,6 @@ export class GeovMapPlaces {
 
       // Limit the query whenever vie is moved/zoomed
       map.on('moveend', () => {
-        // Get the updated map bounds and zoom level
-        const bounds = map.getBounds();
-        const zoom = map.getZoom();
-        console.log(bounds._sw.lat + ' : ' + bounds._ne.lat + ' : ' + bounds._sw.lng + ' : ' + bounds._ne.lng + ' : ' + zoom);
-
         // Fetch data from the SPARQL endpoint
         sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrPlaces(map.getBounds())).then(res => this.parseResponse(res, map));
       });
@@ -207,9 +202,6 @@ export class GeovMapPlaces {
       const featureId = ele['subject'].value;
 
       if (!this.markers.ids.has(featureId)) {
-        const bounds = mapObject.getBounds();
-        if (bounds._sw.lng >= ele['long'].value)
-          console.log(`${bounds._sw.lat} <= ${ele['lat'].value} <= ${bounds._ne.lat} && ${bounds._sw.lng} <= ${ele['long'].value} <= ${bounds._ne.lng}`);
         this.markers.features.push({
           type: 'Feature',
           geometry: {
