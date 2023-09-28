@@ -80,6 +80,7 @@ export class GeovMapPlaces {
       const qrPlaces = (bounds: LngLatBounds) => `
       PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
       PREFIX ontome: <https://ontome.net/ontology/>
+      PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
       SELECT ?subject ?geoPlaceLabel ?long ?lat
           WHERE {?subject ^ontome:p147 ?presence.
@@ -89,10 +90,10 @@ export class GeovMapPlaces {
           bind( replace( str(?rep), "^[^0-9\.-]*([-]?[0-9\.]+) .*$", "$1" ) as ?long )
           bind( replace( str(?rep), "^.* ([-]?[0-9\.]+)[^0-9\.]*$", "$1" ) as ?lat )
           FILTER (
-            ?lat >= "${bounds._sw.lat}" &&
-            ?lat <= "${bounds._ne.lat}" &&
-            ?long >= "${bounds._sw.lng}" &&
-            ?long <= "${bounds._ne.lng}"
+            xsd:double(?lat) >= ${bounds._sw.lat.toFixed(3)} &&
+            xsd:double(?lat) <= ${bounds._ne.lat.toFixed(3)} &&
+            xsd:double(?long) >= ${bounds._sw.lng.toFixed(3)} &&
+            xsd:double(?long) <= ${bounds._ne.lng.toFixed(3)}
         )
         }
           `;
@@ -206,7 +207,9 @@ export class GeovMapPlaces {
       const featureId = ele['subject'].value;
 
       if (!this.markers.ids.has(featureId)) {
-        console.log('add marker');
+        const bounds = mapObject.getBounds();
+        if (bounds._sw.lng >= ele['long'].value)
+          console.log(`${bounds._sw.lat} <= ${ele['lat'].value} <= ${bounds._ne.lat} && ${bounds._sw.lng} <= ${ele['long'].value} <= ${bounds._ne.lng}`);
         this.markers.features.push({
           type: 'Feature',
           geometry: {
