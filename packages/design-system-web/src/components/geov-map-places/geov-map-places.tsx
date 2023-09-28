@@ -1,7 +1,7 @@
 import { Component, h, Host, Prop, State, Element } from '@stencil/core';
 import { isNode } from '../../lib/isNode';
 import { importMapLibre } from '../../lib/importMapLibre';
-import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
+import { SparqlBinding, SparqlRes, sparqlJson } from '../../lib/sparqlJson';
 import { flag } from 'ionicons/icons';
 
 type SparqlResponse = {
@@ -53,6 +53,7 @@ export class GeovMapPlaces {
   @State() markers = {
     type: 'FeatureCollection',
     features: [],
+    ids: new Set(),
   };
 
   async componentDidLoad() {
@@ -64,9 +65,19 @@ export class GeovMapPlaces {
       const map = new MapLibre.Map({
         container: this.el,
         style: 'https://demotiles.maplibre.org/style.json',
-        center: [0, 0],
-        zoom: 1,
+        center: [8.2318, 46.7985],
+        zoom: 5,
+        minZoom: 1,
+        maxZoom: 8,
+        maxBounds: [
+          [-180, -90],
+          [100, 90],
+        ],
       });
+      const bounds = map.getBounds();
+      const zoom = map.getZoom();
+      console.log(bounds._sw.lat + ' : ' + bounds._ne.lat + ' : ' + bounds._sw.lng + ' : ' + bounds._ne.lng + ' : ' + zoom);
+
       map.on('load', () => {
         map.addSource('places', {
           type: 'geojson',
@@ -145,24 +156,6 @@ export class GeovMapPlaces {
         };
         image.src = svgStringToImageSrc(flag);
 
-        /*map.addLayer({
-          id: 'ununclustered-point',
-          type: 'symbol',
-          source: 'places',
-          filter: ['!', ['has', 'point_count']],
-          layout: {
-            'text-size': 36,
-            'text-field': '*',
-            'text-offset': [0, 0],
-            'text-anchor': 'top',
-          },
-          paint: {
-            'text-color': '#f16624',
-            'text-halo-color': '#fff',
-            'text-halo-width': 2,
-          },
-        });*/
-
         map.on('mouseenter', 'clusters', () => {
           map.getCanvas().style.cursor = 'pointer';
         });
@@ -170,53 +163,89 @@ export class GeovMapPlaces {
           map.getCanvas().style.cursor = '';
         });
       });
-
+      console.log(bounds._sw.lat + ' : ' + bounds._ne.lat + ' : ' + bounds._sw.lng + ' : ' + bounds._ne.lng + ' : ' + zoom);
       // Send the request to the provided sparql endpoint
       const qrPlaces = `
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX ontome: <https://ontome.net/ontology/>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX ontome: <https://ontome.net/ontology/>
 
-        SELECT ?subject ?geoPlaceLabel ?long ?lat
-            WHERE {?subject ^ontome:p147 ?presence.
-            ?subject rdfs:label    ?geoPlaceLabel.
-            ?presence ontome:p148 ?place.
-            bind(replace(str(?place), '<http://www.opengis.net/def/crs/EPSG/0/4326>', "", "i") as ?rep)
-            bind( replace( str(?rep), "^[^0-9\.-]*([-]?[0-9\.]+) .*$", "$1" ) as ?long )
-            bind( replace( str(?rep), "^.* ([-]?[0-9\.]+)[^0-9\.]*$", "$1" ) as ?lat )
-          } LIMIT ${this.limit}
+      SELECT ?subject ?geoPlaceLabel ?long ?lat
+          WHERE {?subject ^ontome:p147 ?presence.
+          ?subject rdfs:label    ?geoPlaceLabel.
+          ?presence ontome:p148 ?place.
+          bind(replace(str(?place), '<http://www.opengis.net/def/crs/EPSG/0/4326>', "", "i") as ?rep)
+          bind( replace( str(?rep), "^[^0-9\.-]*([-]?[0-9\.]+) .*$", "$1" ) as ?long )
+          bind( replace( str(?rep), "^.* ([-]?[0-9\.]+)[^0-9\.]*$", "$1" ) as ?lat )
+          FILTER (
+            ?lat >= "${bounds._sw.lat}" &&
+            ?lat <= "${bounds._ne.lat}" &&
+            ?long >= "${bounds._sw.lng}" &&
+            ?long <= "${bounds._ne.lng}"
+        )
+        }
           `;
-      sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrPlaces).then(res => {
-        // Parse the response
-        const response = res?.results?.bindings;
-        console.log(response);
-        console.log(this.markers);
+      sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrPlaces).then(res => this.parseResponse(res));
+      // Limit the query whenever vie is moved/zoomed
+      map.on('moveend', () => {
+        // Get the updated map bounds and zoom level
+        const bounds = map.getBounds();
+        const zoom = map.getZoom();
+        console.log(bounds._sw.lat + ' : ' + bounds._ne.lat + ' : ' + bounds._sw.lng + ' : ' + bounds._ne.lng + ' : ' + zoom);
 
-        response.forEach(ele => {
-          this.markers.features = [
-            ...this.markers.features,
-            {
-              type: 'Feature',
-              geometry: {
-                type: 'Point',
-                coordinates: [parseFloat(ele['long'].value), parseFloat(ele['lat'].value)],
-              },
-              properties: {
-                name: ele['geoPlaceLabel'].value,
-                link: ele['subject'].value,
-              },
-            },
-          ];
-        });
+        const newQuery = `
+          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+          PREFIX ontome: <https://ontome.net/ontology/>
 
-        /*for (const ele in response) {
-          // Adding Marker
-          new MapLibre.Marker({ color: 'var(--title-color)' }).setLngLat([parseFloat(response[ele]['long'].value), parseFloat(response[ele]['lat'].value)]).addTo(map);
-        }*/
-        this.loading = false;
-        console.log(this.markers);
+          SELECT ?subject ?geoPlaceLabel ?long ?lat
+          WHERE {
+              ?subject ^ontome:p147 ?presence.
+              ?subject rdfs:label ?geoPlaceLabel.
+              ?presence ontome:p148 ?place.
+              bind(replace(str(?place), '<http://www.opengis.net/def/crs/EPSG/0/4326>', "", "i") as ?rep)
+              bind( replace( str(?rep), "^[^0-9\.-]*([-]?[0-9\.]+) .*$", "$1" ) as ?long )
+              bind( replace( str(?rep), "^.* ([-]?[0-9\.]+)[^0-9\.]*$", "$1" ) as ?lat )
+              FILTER (
+                ?lat > "${bounds._sw.lat}" &&
+                ?lat < "${bounds._ne.lat}" &&
+                ?long > "${bounds._sw.lng}" &&
+                ?long < "${bounds._ne.lng}"
+            )
+          }
+      `;
+
+        // Fetch data from the SPARQL endpoint using the new query
+        sparqlJson<SparqlResponse>(this.sparqlEndpoint, newQuery).then(res => this.parseResponse(res));
       });
     }
   }
+
+  parseResponse = (res: SparqlRes<SparqlResponse>) => {
+    // Parse the response and update the markers on the map
+    const response = res?.results?.bindings;
+
+    response.forEach(ele => {
+      const featureId = ele['subject'].value;
+
+      if (!this.markers.ids.has(featureId)) {
+        console.log('add marker');
+        this.markers.features = [
+          ...this.markers.features,
+          {
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [parseFloat(ele['long'].value), parseFloat(ele['lat'].value)],
+            },
+            properties: {
+              name: ele['geoPlaceLabel'].value,
+              link: ele['subject'].value,
+            },
+          },
+        ];
+        this.markers.ids.add(featureId);
+      }
+    });
+  };
 
   render() {
     return (
