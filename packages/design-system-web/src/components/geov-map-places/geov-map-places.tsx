@@ -197,6 +197,8 @@ export class GeovMapPlaces {
         // Fetch data from the SPARQL endpoint
         sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrPlaces(map.getBounds())).then(res => this.parseResponse(res, map));
       });
+
+      this.loading = false;
     }
   }
 
@@ -229,7 +231,7 @@ export class GeovMapPlaces {
     return (
       <Host>
         {this.loading && (
-          <div style={{ width: 100 + 'px', height: 100 + 'px' }} class="loading">
+          <div style={{ width: 100 + '%', height: 1000 + '%' }} class="loading">
             <ion-spinner name="dots"></ion-spinner>
           </div>
         )}

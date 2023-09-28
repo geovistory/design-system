@@ -15,4 +15,8 @@ export default {
   },
 };
 
-export const MapPlaces = await stencilWrapper(<geov-map-places sparqlEndpoint="https://sparql.geovistory.org/api_v1_project_84760"></geov-map-places>);
+export const MapPlaces = await stencilWrapper(
+  <div style={{ height: '350px' }}>
+    <geov-map-places sparqlEndpoint="https://sparql.geovistory.org/api_v1_project_84760"></geov-map-places>
+  </div>,
+);
