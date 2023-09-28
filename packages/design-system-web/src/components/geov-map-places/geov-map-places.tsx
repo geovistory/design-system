@@ -32,17 +32,17 @@ export class GeovMapPlaces {
   /**
    * Maximum of Objects fetched (LIMIT)
    */
-  @Prop() limit: number = 1000;
+  @Prop() limit: number = 10000;
 
   /**
    * The center of the map
    */
-  @Prop() center: [number, number];
+  @Prop() center: [number, number] = [8.2318, 46.7985];
 
   /**
    * The initial zoomlevel of the map
    */
-  @Prop() zoom: number = 5;
+  @Prop() zoom: number = 6;
 
   /**
    * The results are restricted to the visible part of the map
@@ -66,8 +66,8 @@ export class GeovMapPlaces {
       const map = new MapLibre.Map({
         container: this.el,
         style: 'https://demotiles.maplibre.org/style.json',
-        center: [8.2318, 46.7985],
-        zoom: 5,
+        center: this.center,
+        zoom: this.zoom,
         minZoom: 1,
         maxZoom: 8,
         maxBounds: [
@@ -89,13 +89,19 @@ export class GeovMapPlaces {
           bind(replace(str(?place), '<http://www.opengis.net/def/crs/EPSG/0/4326>', "", "i") as ?rep)
           bind( replace( str(?rep), "^[^0-9\.-]*([-]?[0-9\.]+) .*$", "$1" ) as ?long )
           bind( replace( str(?rep), "^.* ([-]?[0-9\.]+)[^0-9\.]*$", "$1" ) as ?lat )
+          ${
+            this.queryBoundingBox
+              ? `
           FILTER (
             xsd:double(?lat) >= ${bounds._sw.lat.toFixed(3)} &&
             xsd:double(?lat) <= ${bounds._ne.lat.toFixed(3)} &&
             xsd:double(?long) >= ${bounds._sw.lng.toFixed(3)} &&
             xsd:double(?long) <= ${bounds._ne.lng.toFixed(3)}
-        )
+        )`
+              : ''
+          }
         }
+        LIMIT ${this.limit}
           `;
 
       map.on('load', () => {
