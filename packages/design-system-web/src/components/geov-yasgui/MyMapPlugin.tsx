@@ -19,7 +19,7 @@ export default class MyMapPlugin implements Plugin<PluginConfig> {
     this.yasr = yasr;
   }
 
-  // Draw the result set. This plugin simply draws the string 'True' or 'False'
+  // Draw the result set. This plugin creates a <geov-map-one/ data=[...]>
   draw() {
     const el = document.createElement('geov-map-one');
     el.data = this.yasr.results.getBindings();
@@ -30,7 +30,6 @@ export default class MyMapPlugin implements Plugin<PluginConfig> {
   // resultset from yasr
   canHandleResults() {
     return true;
-    // return this.yasr?.results?.getVariables()?.length > 0;
   }
   // A required function, used to identify the plugin, works best with an svg
   getIcon() {
