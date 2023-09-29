@@ -68,12 +68,6 @@ export class GeovMapPlaces {
         style: 'https://demotiles.maplibre.org/style.json',
         center: this.center,
         zoom: this.zoom,
-        minZoom: 1,
-        maxZoom: 8,
-        maxBounds: [
-          [-180, -90],
-          [100, 90],
-        ],
       });
 
       // request to the provided sparql endpoint
@@ -232,7 +226,7 @@ export class GeovMapPlaces {
     return (
       <Host>
         {this.loading && (
-          <div style={{ width: 100 + '%', height: 1000 + '%' }} class="loading">
+          <div style={{ width: 100 + '%', height: 100 + '%' }} class="loading">
             <ion-spinner name="dots"></ion-spinner>
           </div>
         )}
