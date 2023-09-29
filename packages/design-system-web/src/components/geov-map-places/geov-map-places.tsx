@@ -47,7 +47,7 @@ export class GeovMapPlaces {
   /**
    * The results are restricted to the visible part of the map
    */
-  @Prop() queryBoundingBox: boolean = false;
+  @Prop() queryBoundingBox: boolean = true;
 
   @State() loading: boolean;
 
@@ -192,12 +192,13 @@ export class GeovMapPlaces {
         sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrPlaces(map.getBounds())).then(res => this.parseResponse(res, map));
       });
 
-      // Limit the query whenever vie is moved/zoomed
-      map.on('moveend', () => {
-        // Fetch data from the SPARQL endpoint
-        sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrPlaces(map.getBounds())).then(res => this.parseResponse(res, map));
-      });
-
+      if (this.queryBoundingBox) {
+        // Limit the query whenever vie is moved/zoomed
+        map.on('moveend', () => {
+          // Fetch data from the SPARQL endpoint
+          sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrPlaces(map.getBounds())).then(res => this.parseResponse(res, map));
+        });
+      }
       this.loading = false;
     }
   }
