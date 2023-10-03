@@ -63,7 +63,26 @@ export class GeovMapPlaces {
       const MapLibre = await importMapLibre();
       const map = new MapLibre.Map({
         container: this.el,
-        style: 'https://demotiles.maplibre.org/style.json',
+        style: {
+          version: 8,
+          sources: {
+            osm: {
+              type: 'raster',
+              tiles: ['https://basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}.png'],
+              tileSize: 256,
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+              maxzoom: 19,
+            },
+          },
+          layers: [
+            {
+              id: 'osm',
+              type: 'raster',
+              source: 'osm', // This must match the source key above
+            },
+          ],
+          glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+        },
         center: [0, 0],
         zoom: 1,
       });
