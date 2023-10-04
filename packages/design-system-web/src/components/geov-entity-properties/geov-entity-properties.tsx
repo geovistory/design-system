@@ -293,6 +293,7 @@ export class GeovEntityProperties {
         uriRegex={this.uriRegex}
         uriReplace={this.uriReplace}
         color={this.color}
+        _ssrId={`entityPropsByPredicate_${b.predicate.value.split('/').at(-1)}`}
       ></geov-entity-props-by-predicate>
     ));
   }

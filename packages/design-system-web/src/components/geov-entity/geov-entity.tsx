@@ -75,12 +75,12 @@ export class GeovEntity {
                 <geov-entity-class-label
                   entityId={this.entityId}
                   sparqlEndpoint={this.sparqlEndpoint}
-                  _ssrId={`${this.ssrIdPrefix}class-label`}
+                  _ssrId={`${this.ssrIdPrefix}classLabel`}
                   withIcon={true}
                 ></geov-entity-class-label>
               </p>
               <h1>
-                <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}entity-label`}></geov-entity-label>
+                <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}entityLabel`}></geov-entity-label>
               </h1>
               <p>
                 <geov-entity-definition entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}definition`}></geov-entity-definition>
@@ -113,6 +113,7 @@ export class GeovEntity {
             fetchBeforeRender={this.fetchBeforeRender}
             uriRegex={this.uriRegex}
             uriReplace={this.uriReplace}
+            _ssrId={`${this.ssrIdPrefix}rest`}
           ></geov-entity-properties>
 
           {/* Time */}
@@ -127,6 +128,7 @@ export class GeovEntity {
             fetchBeforeRender={this.fetchBeforeRender}
             uriRegex={this.uriRegex}
             uriReplace={this.uriReplace}
+            _ssrId={`${this.ssrIdPrefix}time`}
           ></geov-entity-properties>
 
           {/* Download RDF button */}
