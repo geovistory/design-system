@@ -5,6 +5,10 @@ geov-map-places {
   height: 100%;
 }
 
+geov-map-places ion-toast {
+  --background: var(--ion-color-danger, red);
+}
+
 .loading {
   display: flex;
   align-items: center;

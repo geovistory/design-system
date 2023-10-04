@@ -218,6 +218,8 @@ export class GeovMapPlaces {
       if (this.queryBoundingBox) {
         // Limit the query whenever vie is moved/zoomed
         map.on('moveend', () => {
+          // Remove all toasts
+          this.el.querySelectorAll('ion-toast')?.forEach(ele => ele.dismiss());
           // Fetch data from the SPARQL endpoint
           sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrPlaces(map.getBounds())).then(res => this.parseResponse(res, map));
         });
@@ -229,6 +231,15 @@ export class GeovMapPlaces {
   parseResponse = (res: SparqlRes<SparqlResponse>, mapObject) => {
     // Parse the response and update the markers on the map
     const response = res?.results?.bindings;
+
+    // If there are too many results, show a toast
+    if (response.length >= this.limit) {
+      const toast = document.createElement('ion-toast');
+      toast.message = `Too many results (${response.length}), please zoom in`;
+      toast.duration = 8000;
+      this.el.appendChild(toast);
+      toast.present();
+    }
 
     response.forEach(ele => {
       const featureId = ele['subject'].value;
