@@ -131,9 +131,9 @@ export class GeovMapPlaces {
         });
         const computedStyle = getComputedStyle(this.el);
         const customColors = [
-          computedStyle.getPropertyValue('--ion-color-primary') || 'red',
-          computedStyle.getPropertyValue('--ion-color-secondary') || 'red',
-          computedStyle.getPropertyValue('--ion-color-tertiary') || 'red',
+          computedStyle.getPropertyValue('--circle-color-small') || 'red',
+          computedStyle.getPropertyValue('--circle-color-medium') || 'green',
+          computedStyle.getPropertyValue('--circle-color-large') || 'grey',
         ];
 
         map.addLayer({
@@ -144,9 +144,9 @@ export class GeovMapPlaces {
           paint: {
             // Use step expressions (https://maplibre.org/maplibre-style-spec/#expressions-step)
             // with three steps to implement three types of circles:
-            //   * --ion-color-primary, 20px circles when point count is less than 100
-            //   * --ion-color-secondary, 30px circles when point count is between 100 and 750
-            //   * --ion-color-tertiary, 40px circles when point count is greater than or equal to 750
+            //   * --circle-color-small, 20px circles when point count is less than 100
+            //   * --circle-color-medium, 30px circles when point count is between 100 and 750
+            //   * --circle-color-large, 40px circles when point count is greater than or equal to 750
             'circle-color': ['step', ['get', 'point_count'], customColors[0], 100, customColors[1], 750, customColors[2]],
             'circle-radius': ['step', ['get', 'point_count'], 20, 100, 30, 750, 40],
           },
