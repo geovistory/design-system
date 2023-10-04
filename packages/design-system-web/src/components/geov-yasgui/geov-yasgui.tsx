@@ -1,7 +1,6 @@
 import { Component, Host, h, Element, Prop } from '@stencil/core';
 import type Yasgui from '@triply/yasgui';
 import { importYasgui } from '../../lib/importYasgui';
-import * as MyMapPlugin from './MyMapPlugin';
 
 interface Query {
   name?: string;
@@ -84,7 +83,9 @@ GROUP BY ?label ?long ?lat ?type ?link
     },
   ];
 
-  @Prop() defaultPlugin: 'map' | 'response' | 'table' = 'map';
+  @Prop() plugins: any[] = [];
+
+  @Prop() defaultPlugin: string = 'table';
 
   Y: typeof Yasgui;
 
@@ -135,7 +136,7 @@ GROUP BY ?label ?long ?lat ?type ?link
    */
   setYasrDefaults() {
     this.Y.Yasr.defaults.pluginOrder = ['response', 'table', 'map'];
-    this.Y.Yasr.registerPlugin('map', MyMapPlugin.default as any);
+    this.plugins.forEach(p => this.Y.Yasr.registerPlugin(p.guiName, p));
   }
 
   render() {

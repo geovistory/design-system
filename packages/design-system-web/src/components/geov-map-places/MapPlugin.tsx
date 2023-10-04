@@ -2,9 +2,14 @@ import type Yasr from '@triply/yasr';
 import type { Plugin } from '@triply/yasr';
 import { mapOutline } from 'ionicons/icons';
 
-export interface PluginConfig {}
+export interface PluginConfig {
+  priority: number;
+  hideFromSelection: boolean;
+  yasr: Yasr;
+  guiName: string;
+}
 
-export default class MyMapPlugin implements Plugin<PluginConfig> {
+export default class MapPlugin implements Plugin<PluginConfig> {
   // A priority value. If multiple plugin support rendering of a result, this value is used
   // to select the correct plugin
   priority = 10;
@@ -14,6 +19,9 @@ export default class MyMapPlugin implements Plugin<PluginConfig> {
 
   // Yasr instance
   yasr: Yasr;
+
+  // A required static property, used to identify the plugin
+  static guiName = 'map';
 
   constructor(yasr: Yasr) {
     this.yasr = yasr;
