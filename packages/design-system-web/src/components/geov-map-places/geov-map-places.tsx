@@ -3,7 +3,7 @@ import { isNode } from '../../lib/isNode';
 import { importMapLibre } from '../../lib/importMapLibre';
 import { SparqlBinding, SparqlRes, sparqlJson } from '../../lib/sparqlJson';
 import { flag } from 'ionicons/icons';
-import { LngLatBounds } from 'maplibre-gl';
+import { LngLatBounds, LngLatLike, Popup } from 'maplibre-gl';
 
 type SparqlResponse = {
   classnames: SparqlBinding;
@@ -44,6 +44,13 @@ export class GeovMapPlaces {
    */
   @Prop() zoom: number = 6;
 
+  /**
+   *  The map's actual bounds
+   */
+  @Prop() maxBounds: [LngLatLike, LngLatLike] = [
+    [-180, -90],
+    [179.99, 90],
+  ];
   /**
    * The results are restricted to the visible part of the map
    */
@@ -91,6 +98,7 @@ export class GeovMapPlaces {
         },
         center: this.center,
         zoom: this.zoom,
+        maxBounds: this.maxBounds,
       });
 
       // request to the provided sparql endpoint
@@ -162,6 +170,19 @@ export class GeovMapPlaces {
             'text-size': 12,
           },
         });
+
+        //   Add popups to the markers
+        const handleMarkerClick = e => {
+          const coordinates = e.features[0].geometry.coordinates.slice();
+          const description = e.features[0].properties.name;
+          const link = e.features[0].properties.link;
+
+          // Create a popup with the location name and open it
+          new Popup().setLngLat(coordinates).setHTML(`<div><a href = "${link}">${description}</a></div>`).addTo(map);
+        };
+
+        // An on click event listener for the "unclustered-point" layer
+        map.on('click', 'unclustered-point', handleMarkerClick);
 
         // Workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=700533
         // From https://webcompat.com/issues/64352
@@ -243,6 +264,7 @@ export class GeovMapPlaces {
 
     response.forEach(ele => {
       const featureId = ele['subject'].value;
+      const locName = ele['geoPlaceLabel'].value;
 
       if (!this.markers.ids.has(featureId)) {
         this.markers.features.push({
@@ -252,10 +274,11 @@ export class GeovMapPlaces {
             coordinates: [parseFloat(ele['long'].value), parseFloat(ele['lat'].value)],
           },
           properties: {
-            name: ele['geoPlaceLabel'].value,
-            link: ele['subject'].value,
+            name: locName,
+            link: featureId,
           },
         });
+
         this.markers.ids.add(featureId);
       }
     });
