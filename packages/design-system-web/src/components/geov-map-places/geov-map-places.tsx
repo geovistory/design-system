@@ -49,6 +49,11 @@ export class GeovMapPlaces {
    */
   @Prop() queryBoundingBox: boolean = true;
 
+  /**
+   * The ID of the project to be redirected to
+   */
+  @Prop() projectID: number;
+
   @State() loading: boolean;
 
   @State() markers = {
@@ -168,9 +173,17 @@ export class GeovMapPlaces {
           const coordinates = e.features[0].geometry.coordinates;
           const description = e.features[0].properties.name;
           const link = e.features[0].properties.link;
-
-          // Create a popup with the location name and open it
-          new Popup().setLngLat(coordinates).setHTML(`<div><a href = "${link}">${description}</a></div>`).addTo(map);
+          if (this.projectID) {
+            // In the project whose ID is "projectID"
+            // Create a popup with the location name and open it
+            const pageID = link.split('/').pop();
+            const newLink = `http://geovistory.org/project/${this.projectID}/page/${pageID}?p=${this.projectID}`;
+            new Popup().setLngLat(coordinates).setHTML(`<div><a href = "${newLink}" target="_blank">${description}</a></div>`).addTo(map);
+          } else {
+            // In the original project:
+            // Create a popup with the location name and open it
+            new Popup().setLngLat(coordinates).setHTML(`<div><a href = "${link}" target="_blank">${description}</a></div>`).addTo(map);
+          }
         };
 
         // An on click event listener for the "unclustered-point" layer
