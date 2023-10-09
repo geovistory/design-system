@@ -3,7 +3,7 @@ import { isNode } from '../../lib/isNode';
 import { importMapLibre } from '../../lib/importMapLibre';
 import { SparqlBinding, SparqlRes, sparqlJson } from '../../lib/sparqlJson';
 import { flag } from 'ionicons/icons';
-import { LngLatBounds, LngLatLike, Popup } from 'maplibre-gl';
+import { LngLatBounds, Popup } from 'maplibre-gl';
 
 type SparqlResponse = {
   classnames: SparqlBinding;
@@ -44,13 +44,6 @@ export class GeovMapPlaces {
    */
   @Prop() zoom: number = 6;
 
-  /**
-   *  The map's actual bounds
-   */
-  @Prop() maxBounds: [LngLatLike, LngLatLike] = [
-    [-180, -90],
-    [179.99, 90],
-  ];
   /**
    * The results are restricted to the visible part of the map
    */
@@ -98,7 +91,6 @@ export class GeovMapPlaces {
         },
         center: this.center,
         zoom: this.zoom,
-        maxBounds: this.maxBounds,
       });
 
       // request to the provided sparql endpoint
@@ -173,7 +165,7 @@ export class GeovMapPlaces {
 
         //   Add popups to the markers
         const handleMarkerClick = e => {
-          const coordinates = e.features[0].geometry.coordinates.slice();
+          const coordinates = e.features[0].geometry.coordinates;
           const description = e.features[0].properties.name;
           const link = e.features[0].properties.link;
 
@@ -226,10 +218,10 @@ export class GeovMapPlaces {
         };
         image.src = svgStringToImageSrc(flag);
 
-        map.on('mouseenter', 'clusters', () => {
+        map.on('mouseenter', 'unclustered-point', () => {
           map.getCanvas().style.cursor = 'pointer';
         });
-        map.on('mouseleave', 'clusters', () => {
+        map.on('mouseleave', 'unclustered-point', () => {
           map.getCanvas().style.cursor = '';
         });
         // Fetch data from the SPARQL endpoint
