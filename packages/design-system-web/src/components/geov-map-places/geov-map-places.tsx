@@ -176,8 +176,7 @@ export class GeovMapPlaces {
           if (this.projectID) {
             // In the project whose ID is "projectID"
             // Create a popup with the location name and open it
-            const pageID = link.split('/').pop();
-            const newLink = `http://geovistory.org/project/${this.projectID}/page/${pageID}?p=${this.projectID}`;
+            const newLink = `${link}?p=${this.projectID}`;
             new Popup().setLngLat(coordinates).setHTML(`<div><a href = "${newLink}" target="_blank">${description}</a></div>`).addTo(map);
           } else {
             // In the original project:
