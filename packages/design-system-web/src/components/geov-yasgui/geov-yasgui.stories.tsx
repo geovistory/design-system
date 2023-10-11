@@ -14,4 +14,6 @@ export default {
   },
 };
 
-export const Yasgui = await stencilWrapper(<geov-yasgui></geov-yasgui>);
+export const Default = await stencilWrapper(<geov-yasgui></geov-yasgui>);
+export const WithMapPlugin = await stencilWrapper(<geov-yasgui plugins={['map']}></geov-yasgui>);
+export const WithoutPlugin = await stencilWrapper(<geov-yasgui plugins={[]}></geov-yasgui>);

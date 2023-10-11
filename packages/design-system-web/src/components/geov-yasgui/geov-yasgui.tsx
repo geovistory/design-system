@@ -3,8 +3,12 @@ import type Yasgui from '@triply/yasgui';
 import { importYasgui } from '../../lib/importYasgui';
 import * as MyMapPlugin from './MyMapPlugin';
 
-interface Query {
-  name?: string;
+type CustomPlugin = 'map';
+type BuiltInPlugin = 'response' | 'table';
+type Plugin = BuiltInPlugin | CustomPlugin;
+
+interface QueryTab {
+  name: string;
   sparqlEndpoint: string;
   query: string;
 }
@@ -15,7 +19,26 @@ interface Query {
 export class GeovYasgui {
   @Element() el: HTMLElement;
 
-  @Prop() queries: Query[] = [
+  /**
+   * Plugins to enable (in addition to the built-in plugins: response, table, error, boolean)
+   */
+  @Prop() plugins: CustomPlugin[] = ['map'];
+
+  /**
+   * The plugin initially activated
+   */
+  @Prop() defaultPlugin: Plugin = 'map';
+
+  /**
+   * The order of plugin tabs
+   */
+  @Prop() pluginOrder?: Plugin[] = ['table', 'response'];
+
+  /**
+   * For each item in this array a tab will be added to Yasgui.
+   * `QueryTab: { name: 'Tab name', sparqlEndpoint: 'https://...', query: 'SELECT ?s ?p ?o' }`
+   */
+  @Prop() queryTabs: QueryTab[] = [
     {
       name: 'Origin of Persons',
       sparqlEndpoint: 'https://sparql.geovistory.org/api_v1_project_591',
@@ -84,8 +107,6 @@ GROUP BY ?label ?long ?lat ?type ?link
     },
   ];
 
-  @Prop() defaultPlugin: 'map' | 'response' | 'table' = 'map';
-
   Y: typeof Yasgui;
 
   async componentWillLoad() {
@@ -93,7 +114,7 @@ GROUP BY ?label ?long ?lat ?type ?link
   }
 
   componentDidLoad() {
-    this.setYasrDefaults();
+    this.setupYasr();
     localStorage.removeItem('yagui__config');
     if (!this.el) return;
 
@@ -104,7 +125,7 @@ GROUP BY ?label ?long ?lat ?type ?link
 
     // add tabs
     const tabDefaults = this.Y.Tab.getDefaults();
-    this.queries.forEach((q, i) => {
+    this.queryTabs.forEach((q, i) => {
       yasgui.addTab(
         i === 0,
         {
@@ -129,13 +150,31 @@ GROUP BY ?label ?long ?lat ?type ?link
   }
 
   /**
-   * Setup defaults for yasr.
-   * This will be on window. Side effects expected, with multiple instances
-   * on the same page.
+   * Setup yasr configuration
    */
-  setYasrDefaults() {
-    this.Y.Yasr.defaults.pluginOrder = ['response', 'table', 'map'];
-    this.Y.Yasr.registerPlugin('map', MyMapPlugin.default as any);
+  setupYasr() {
+    this.registerCustomPlugins();
+    this.setPluginOrder();
+  }
+
+  /**
+   * Register custom yasr plugins
+   */
+  registerCustomPlugins() {
+    const customPlugins: { [key in CustomPlugin]: any } = {
+      map: MyMapPlugin.default,
+    };
+
+    this.plugins.forEach(plugin => {
+      if (!!customPlugins[plugin]) this.Y.Yasr.registerPlugin(plugin, customPlugins[plugin]);
+    });
+  }
+
+  /**
+   * Set yasr plugin order
+   */
+  setPluginOrder() {
+    this.Y.Yasr.defaults.pluginOrder = this.pluginOrder;
   }
 
   render() {
