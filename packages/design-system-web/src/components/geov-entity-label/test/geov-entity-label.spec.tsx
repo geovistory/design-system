@@ -56,7 +56,7 @@ describe('geov-entity-label', () => {
       <!doctype html>
       <html data-stencil-build="n9evv7qg" class="plt-tablet plt-desktop md hydrated" mode="md">
         <head>
-          <meta charset="utf-8"><style sty-id="sc-geov-entity-label"> /*!@:host*/.sc-geov-entity-label-h{display:block;white-space:nowrap}</style>
+          <meta charset="utf-8"><style sty-id="sc-geov-entity-label"> /*!@:host*/.sc-geov-entity-label-h{display:block;margin-top:0}</style>
         </head>
         <body>
           <geov-entity-label _ssr-id="myId" entity-id="i315800" sparql-endpoint="https://sparql.geovistory.org/api_v1_community_data" class="sc-geov-entity-label-h sc-geov-entity-label-s hydrated" s-id="1">

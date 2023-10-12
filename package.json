@@ -54,5 +54,8 @@
     "lint-staged": "^13.0.3",
     "prettier": "^3.0.0",
     "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@triply/yasgui": "^4.2.28"
   }
 }

@@ -1,4 +1,5 @@
-import { Component, Host, h, Prop } from '@stencil/core';
+import { Color } from '@ionic/core';
+import { Component, Fragment, Prop, h } from '@stencil/core';
 
 /**
  * This Component displays the coordinates given by a WKT literal string of this form:
@@ -14,6 +15,10 @@ export class GeovDisplayGeosparqlWktliteral {
    * the opengis value
    */
   @Prop() value: string;
+  /**
+   * Color assigned to ion-item
+   */
+  @Prop() color: Color = '';
 
   render() {
     //http://www.opengis.net/def/crs/EPSG/0/4326>POINT(4.79583 52.55417)
@@ -22,12 +27,15 @@ export class GeovDisplayGeosparqlWktliteral {
     const coordonnees = coord.split(' ');
 
     return (
-      <Host>
-        long: {coordonnees[0]}
-        <br />
-        lat: {coordonnees[1]}
-        <slot></slot>
-      </Host>
+      <Fragment>
+        <ion-item color={this.color} lines="none">
+          <ion-label>
+            long: {coordonnees[0]}
+            <br />
+            lat: {coordonnees[1]}
+          </ion-label>
+        </ion-item>
+      </Fragment>
     );
   }
 }

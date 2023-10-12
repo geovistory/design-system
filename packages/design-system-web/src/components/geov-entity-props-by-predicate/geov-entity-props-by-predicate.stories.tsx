@@ -15,7 +15,7 @@ export default {
   },
 };
 
-export const EntityPropsWithPerson = await stencilWrapper(
+export const Person = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
     entityId="i151089"
@@ -27,7 +27,7 @@ export const EntityPropsWithPerson = await stencilWrapper(
   ></geov-entity-props-by-predicate>,
 );
 
-export const EntityPropsWithUriRegex = await stencilWrapper(
+export const UriRegex = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
     entityId="i151089"
@@ -41,7 +41,7 @@ export const EntityPropsWithUriRegex = await stencilWrapper(
   ></geov-entity-props-by-predicate>,
 );
 
-export const EntityPropsWithPaginatedShipVoyages = await stencilWrapper(
+export const PaginatedShipVoyages = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
     entityId="i209502"
@@ -53,7 +53,7 @@ export const EntityPropsWithPaginatedShipVoyages = await stencilWrapper(
   ></geov-entity-props-by-predicate>,
 );
 
-export const EntityPropsWithDateTimeDescription = await stencilWrapper(
+export const DateTimeDescription = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
     entityId="i151089ts"
@@ -65,7 +65,7 @@ export const EntityPropsWithDateTimeDescription = await stencilWrapper(
   ></geov-entity-props-by-predicate>,
 );
 
-export const EntityPropsWithXsdString = await stencilWrapper(
+export const XsdString = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
     entityId="i215634"
@@ -77,7 +77,20 @@ export const EntityPropsWithXsdString = await stencilWrapper(
   ></geov-entity-props-by-predicate>,
 );
 
-export const EntityPropsWithLangString = await stencilWrapper(
+export const XsdStringPreloaded = await stencilWrapper(
+  <geov-entity-props-by-predicate
+    sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
+    entityId="i215635"
+    totalCount={1}
+    language="en"
+    predicateUri="https://ontome.net/ontology/p1113"
+    predicateLabel="refers to name"
+    fetchBeforeRender={true}
+    _ssrId="data-entity-props-by-predicate-1"
+  ></geov-entity-props-by-predicate>,
+);
+
+export const LangString = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
     entityId="i2345931"
@@ -89,16 +102,15 @@ export const EntityPropsWithLangString = await stencilWrapper(
   ></geov-entity-props-by-predicate>,
 );
 
-export const EntityPropsWithXsdStringPreloaded = await stencilWrapper(
+export const WktLiteral = await stencilWrapper(
   <geov-entity-props-by-predicate
-    sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
-    entityId="i215635"
+    sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
+    entityId="i253708"
     totalCount={1}
     language="en"
-    predicateUri="https://ontome.net/ontology/p1113"
-    predicateLabel="refers to name"
+    predicateUri="https://ontome.net/ontology/p148"
+    predicateLabel="WAS WITHIN"
     fetchBeforeRender={true}
-    _ssrId="data-entity-props-by-predicate-1"
   ></geov-entity-props-by-predicate>,
 );
 

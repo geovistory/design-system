@@ -1,6 +1,6 @@
 {
   "name": "@geovistory/design-system-web",
-  "version": "1.15.1-pr-97.0",
+  "version": "1.16.1-pr-95.4",
   "description": "geovistory.org's design system: web components",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -93,7 +93,7 @@
     "concurrently": "^8.2.0",
     "esbuild": "^0.18.14",
     "ionicons": "^7.1.2",
-    "jest": "^27.0.3",
+    "jest": "^27.4.5",
     "jest-cli": "^27.4.5",
     "maplibre-gl": "^3.3.1",
     "mermaid": "^10.3.1",
