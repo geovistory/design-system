@@ -2,8 +2,7 @@ import { Component, h, Host, Prop, State, Element } from '@stencil/core';
 import { isNode } from '../../lib/isNode';
 import { importMapLibre } from '../../lib/importMapLibre';
 import { SparqlBinding, SparqlRes, sparqlJson } from '../../lib/sparqlJson';
-import { flag } from 'ionicons/icons';
-import { LngLatBounds, Popup } from 'maplibre-gl';
+import type { LngLatBounds } from 'maplibre-gl';
 
 type SparqlResponse = {
   classnames: SparqlBinding;
@@ -167,58 +166,31 @@ export class GeovMapPlaces {
           },
         });
 
+        map.addLayer({
+          id: 'unclustered-point',
+          type: 'circle',
+          source: 'places',
+          filter: ['!', ['has', 'point_count']],
+          paint: {
+            //   * --circle-color-small, 20px circles when point count is less than 100
+            //   * --circle-color-medium, 30px circles when point count is between 100 and 750
+            //   * --circle-color-large, 40px circles when point count is greater than or equal to 750
+            'circle-color': customColors[0],
+            'circle-radius': 10,
+          },
+        });
+
         //   Add popups to the markers
         const handleMarkerClick = e => {
-          const coordinates = e.features[0].geometry.coordinates;
-          const description = e.features[0].properties.name;
-          const link = this.projectID ? `${e.features[0].properties.link}?p=${this.projectID}` : e.features[0].properties.link;
-          new Popup().setLngLat(coordinates).setHTML(`<div><a href = "${link}" target="_blank">${description}</a></div>`).addTo(map);
+          const feature = e.features[0];
+          const coordinates = feature.geometry.coordinates;
+          const description = feature.properties.name;
+          const link = this.projectID ? `${feature.properties.link}?p=${this.projectID}` : feature.properties.link;
+          new MapLibre.Popup().setLngLat(coordinates).setHTML(`<div><a href = "${link}" target="_blank">${description}</a></div>`).addTo(map);
         };
 
         // An on click event listener for the "unclustered-point" layer
         map.on('click', 'unclustered-point', handleMarkerClick);
-
-        // Workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=700533
-        // From https://webcompat.com/issues/64352
-        function ensureSVGWidthHeight(svgElem) {
-          if (!svgElem.getAttribute('width') || !svgElem.getAttribute('height')) {
-            const viewBox = svgElem.getAttribute('viewBox');
-            if (viewBox) {
-              const match = viewBox.match(/\w+ \w+ (\w+) (\w+)/);
-              const viewBoxWidth = match[1];
-              const viewBoxHeight = match[2];
-              svgElem.setAttribute('width', viewBoxWidth + 'px');
-              svgElem.setAttribute('height', viewBoxHeight + 'px');
-            }
-          }
-          return svgElem;
-        }
-
-        function svgStringToImageSrc(svgString) {
-          svgString = svgString.substring(svgString.indexOf('<svg'));
-          const parser = new DOMParser();
-          const svgXML = parser.parseFromString(svgString, 'image/svg+xml');
-          const fixedSvgXML = ensureSVGWidthHeight(svgXML.rootElement);
-          const fixedSvgString = new XMLSerializer().serializeToString(fixedSvgXML);
-          return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(fixedSvgString);
-        }
-
-        const image = new Image(20, 20);
-        image.onload = () => {
-          map.addImage('flag', image, { pixelRatio: window.devicePixelRatio });
-          map.addLayer({
-            id: 'unclustered-point',
-            type: 'symbol',
-            source: 'places',
-            filter: ['!', ['has', 'point_count']],
-            layout: {
-              'icon-image': 'flag',
-              'icon-size': 1,
-              'icon-allow-overlap': true,
-            },
-          });
-        };
-        image.src = svgStringToImageSrc(flag);
 
         map.on('mouseenter', 'unclustered-point', () => {
           map.getCanvas().style.cursor = 'pointer';
