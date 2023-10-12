@@ -252,7 +252,6 @@ export class GeovMapPlaces {
     if (response.length >= this.limit) {
       const toast = document.createElement('ion-toast');
       toast.message = `Too many results (${response.length}), please zoom in`;
-      toast.duration = 8000;
       this.el.appendChild(toast);
       toast.present();
     }
