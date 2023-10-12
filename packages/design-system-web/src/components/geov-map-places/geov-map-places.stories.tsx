@@ -22,7 +22,7 @@ export const Basic = await stencilWrapper(
 );
 
 /**
- * If a ProjectID is provided, the markers on the map will be linked to the project.
+ * If a projectID is provided, the markers on the map will be linked to the project.
  */
 export const WithProjectID = await stencilWrapper(
   <div style={{ height: '350px' }}>
@@ -40,10 +40,19 @@ export const LimitExeeded = await stencilWrapper(
 );
 
 /**
- * If there is no bounding box selected, the map will request all Places from the project.
+ * If there is no bounding box selected, the map will request all places from the project.
  */
 export const NoBoundingBox = await stencilWrapper(
   <div style={{ height: '350px' }}>
     <geov-map-places sparqlEndpoint="https://sparql.geovistory.org/api_v1_project_84760" queryBoundingBox={false}></geov-map-places>
+  </div>,
+);
+
+/**
+ * The center and zoom of the map can be set manually.
+ */
+export const SetCenterAndZoom = await stencilWrapper(
+  <div style={{ height: '350px' }}>
+    <geov-map-places sparqlEndpoint="https://sparql.geovistory.org/api_v1_project_84760" center={[103.38973, 2.03661]} zoom={4}></geov-map-places>
   </div>,
 );
