@@ -11,10 +11,9 @@ type SparqlResponse = {
 };
 
 /**
- * This component fetches the frequency of each class (object of `rdfs:type` or `a`)
- * exsisting on the given sparql endpoint.
- *
- * The result is displayed as a pie-chart.
+ * This component fetches places (ontome:p148) from a project and displays them on a map. On the map are linked markers,
+ * which redirect to the place in the project.
+ * The map is based on MapLibre.
  */
 @Component({
   tag: 'geov-map-places',
@@ -81,7 +80,7 @@ export class GeovMapPlaces {
                 'https://c.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{ratio}.png',
               ],
               tileSize: 256,
-              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
               maxzoom: 19,
             },
           },
