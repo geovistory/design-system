@@ -3,7 +3,7 @@ import { isNode } from '../../lib/isNode';
 import { importMapLibre } from '../../lib/importMapLibre';
 import { SparqlBinding, SparqlRes, sparqlJson } from '../../lib/sparqlJson';
 import { flag } from 'ionicons/icons';
-import { LngLatBounds } from 'maplibre-gl';
+import { LngLatBounds, Popup } from 'maplibre-gl';
 
 type SparqlResponse = {
   classnames: SparqlBinding;
@@ -48,6 +48,11 @@ export class GeovMapPlaces {
    * The results are restricted to the visible part of the map
    */
   @Prop() queryBoundingBox: boolean = true;
+
+  /**
+   * The ID of the project to be redirected to
+   */
+  @Prop() projectID: number;
 
   @State() loading: boolean;
 
@@ -163,6 +168,26 @@ export class GeovMapPlaces {
           },
         });
 
+        //   Add popups to the markers
+        const handleMarkerClick = e => {
+          const coordinates = e.features[0].geometry.coordinates;
+          const description = e.features[0].properties.name;
+          const link = e.features[0].properties.link;
+          if (this.projectID) {
+            // In the project whose ID is "projectID"
+            // Create a popup with the location name and open it
+            const newLink = `${link}?p=${this.projectID}`;
+            new Popup().setLngLat(coordinates).setHTML(`<div><a href = "${newLink}" target="_blank">${description}</a></div>`).addTo(map);
+          } else {
+            // In the original project:
+            // Create a popup with the location name and open it
+            new Popup().setLngLat(coordinates).setHTML(`<div><a href = "${link}" target="_blank">${description}</a></div>`).addTo(map);
+          }
+        };
+
+        // An on click event listener for the "unclustered-point" layer
+        map.on('click', 'unclustered-point', handleMarkerClick);
+
         // Workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=700533
         // From https://webcompat.com/issues/64352
         function ensureSVGWidthHeight(svgElem) {
@@ -205,10 +230,10 @@ export class GeovMapPlaces {
         };
         image.src = svgStringToImageSrc(flag);
 
-        map.on('mouseenter', 'clusters', () => {
+        map.on('mouseenter', 'unclustered-point', () => {
           map.getCanvas().style.cursor = 'pointer';
         });
-        map.on('mouseleave', 'clusters', () => {
+        map.on('mouseleave', 'unclustered-point', () => {
           map.getCanvas().style.cursor = '';
         });
         // Fetch data from the SPARQL endpoint
@@ -243,6 +268,7 @@ export class GeovMapPlaces {
 
     response.forEach(ele => {
       const featureId = ele['subject'].value;
+      const locName = ele['geoPlaceLabel'].value;
 
       if (!this.markers.ids.has(featureId)) {
         this.markers.features.push({
@@ -252,10 +278,11 @@ export class GeovMapPlaces {
             coordinates: [parseFloat(ele['long'].value), parseFloat(ele['lat'].value)],
           },
           properties: {
-            name: ele['geoPlaceLabel'].value,
-            link: ele['subject'].value,
+            name: locName,
+            link: featureId,
           },
         });
+
         this.markers.ids.add(featureId);
       }
     });
