@@ -3,6 +3,7 @@ geov-map-places {
   position: relative;
   width: 100%;
   height: 100%;
+  --point-color: var(--ion-color-primary, #3880ff);
   --circle-color-small: #fc8d59;
   --circle-color-medium: #ffffbf;
   --circle-color-large: #91bfdb;

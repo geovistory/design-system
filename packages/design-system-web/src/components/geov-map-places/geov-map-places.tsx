@@ -134,6 +134,7 @@ export class GeovMapPlaces {
         });
         const computedStyle = getComputedStyle(this.el);
         const customColors = [
+          computedStyle.getPropertyValue('--point-color') || 'red',
           computedStyle.getPropertyValue('--circle-color-small') || 'red',
           computedStyle.getPropertyValue('--circle-color-medium') || 'green',
           computedStyle.getPropertyValue('--circle-color-large') || 'grey',
@@ -150,7 +151,7 @@ export class GeovMapPlaces {
             //   * --circle-color-small, 20px circles when point count is less than 100
             //   * --circle-color-medium, 30px circles when point count is between 100 and 750
             //   * --circle-color-large, 40px circles when point count is greater than or equal to 750
-            'circle-color': ['step', ['get', 'point_count'], customColors[0], 100, customColors[1], 750, customColors[2]],
+            'circle-color': ['step', ['get', 'point_count'], customColors[1], 100, customColors[2], 750, customColors[3]],
             'circle-radius': ['step', ['get', 'point_count'], 20, 100, 30, 750, 40],
           },
         });
@@ -172,9 +173,7 @@ export class GeovMapPlaces {
           source: 'places',
           filter: ['!', ['has', 'point_count']],
           paint: {
-            //   * --circle-color-small, 20px circles when point count is less than 100
-            //   * --circle-color-medium, 30px circles when point count is between 100 and 750
-            //   * --circle-color-large, 40px circles when point count is greater than or equal to 750
+            // --point-color
             'circle-color': customColors[0],
             'circle-radius': 10,
           },
