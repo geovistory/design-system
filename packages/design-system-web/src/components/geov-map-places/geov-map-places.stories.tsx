@@ -31,6 +31,23 @@ export const WithProjectID = await stencilWrapper(
 );
 
 /**
+ * Customize colors using css variables.
+ */
+export const CustomColors = await stencilWrapper(
+  <div style={{ height: '350px' }}>
+    <style>{`
+      .custom-colors {
+        --point-color: #c2c92c;
+        --circle-color-small: #59c0fc;
+        --circle-color-medium: #738edf;
+        --circle-color-large: #774fef;
+      }
+    `}</style>
+    <geov-map-places class="custom-colors" sparqlEndpoint="https://sparql.geovistory.org/api_v1_project_84760" queryBoundingBox={false}></geov-map-places>
+  </div>,
+);
+
+/**
  * If the requested number of places exceeds the limit, the map will display a warning message.
  */
 export const LimitExeeded = await stencilWrapper(
