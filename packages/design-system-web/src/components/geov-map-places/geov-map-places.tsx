@@ -205,8 +205,8 @@ export class GeovMapPlaces {
       if (this.queryBoundingBox) {
         // Limit the query whenever vie is moved/zoomed
         map.on('moveend', () => {
-          // Remove all toasts
-          this.el.querySelectorAll('ion-toast')?.forEach(ele => ele.dismiss());
+          // Remove the card
+          this.el.querySelectorAll('ion-card')?.forEach(ele => ele.style.setProperty('display', 'none'));
           // Fetch data from the SPARQL endpoint
           sparqlJson<SparqlResponse>(this.sparqlEndpoint, qrPlaces(map.getBounds())).then(res => this.parseResponse(res, map));
         });
@@ -219,12 +219,11 @@ export class GeovMapPlaces {
     // Parse the response and update the markers on the map
     const response = res?.results?.bindings;
 
-    // If there are too many results, show a toast
+    // If there are too many results, show a card
     if (response.length >= this.limit) {
-      const toast = document.createElement('ion-toast');
-      toast.message = `Too many results (${response.length}), please zoom in`;
-      this.el.appendChild(toast);
-      toast.present();
+      const card = this.el.querySelector('ion-card');
+      card.style.setProperty('display', 'block');
+      card.querySelector('ion-card-title').innerHTML = `Too many results (${response.length})`;
     }
 
     response.forEach(ele => {
@@ -258,6 +257,13 @@ export class GeovMapPlaces {
             <ion-spinner name="dots"></ion-spinner>
           </div>
         )}
+        <ion-card style={{ display: 'none', zIndex: '1000' }}>
+          <ion-card-header>
+            <ion-card-title>Too many results</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>please zoom in to see all available datapoints in a given location</ion-card-content>
+        </ion-card>
       </Host>
     );
   }
