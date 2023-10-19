@@ -12,6 +12,11 @@ interface QueryTab {
   sparqlEndpoint: string;
   query: string;
 }
+/**
+ * Yasgui is a SPARQL query editor and results visualizer.
+ *
+ * The component is a wrapper around the Yasgui library it can also use custom plugins.
+ */
 @Component({
   tag: 'geov-yasgui',
   shadow: false,
