@@ -1,0 +1,21 @@
+geov-map-places {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  --point-color: var(--ion-color-primary, #3880ff);
+  --circle-color-small: #fc8d59;
+  --circle-color-medium: #ffffbf;
+  --circle-color-large: #91bfdb;
+}
+
+geov-map-places ion-toast {
+  --background: var(--ion-color-danger, red);
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--ion-color-light-tint, #fafafa);
+}
