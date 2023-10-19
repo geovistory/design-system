@@ -2,16 +2,16 @@ import { Component, Host, h, Prop } from '@stencil/core';
 import type { Parser } from '@triply/yasr';
 
 @Component({
-  tag: 'geov-map-one',
-  styleUrl: 'geov-map-one.css',
+  tag: 'geov-yasgui-map-circles',
+  styleUrl: 'geov-yasgui-map-circles.css',
   shadow: true,
 })
-export class GeovMapOne {
+export class GeovYasguiMapCircles {
   @Prop() data: Parser.Binding[];
   render() {
     return (
       <Host>
-        Map One
+        Map circles
         {this.data.map(row => (
           <div>
             {row.label.value} – {row.lat.value}

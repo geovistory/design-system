@@ -4,7 +4,7 @@ import { mapOutline } from 'ionicons/icons';
 
 export interface PluginConfig {}
 
-export default class MyMapPlugin implements Plugin<PluginConfig> {
+export default class PluginMapCircles implements Plugin<PluginConfig> {
   // A priority value. If multiple plugin support rendering of a result, this value is used
   // to select the correct plugin
   priority = 10;
@@ -19,9 +19,9 @@ export default class MyMapPlugin implements Plugin<PluginConfig> {
     this.yasr = yasr;
   }
 
-  // Draw the result set. This plugin creates a <geov-map-one/ data=[...]>
+  // Draw the result set. This plugin creates a <geov-yasgui-map-circles/ data=[...]>
   draw() {
-    const el = document.createElement('geov-map-one');
+    const el = document.createElement('geov-yasgui-map-circles');
     el.data = this.yasr.results.getBindings();
     this.yasr.resultsEl.appendChild(el);
   }

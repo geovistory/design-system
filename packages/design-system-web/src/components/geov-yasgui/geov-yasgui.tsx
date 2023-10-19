@@ -1,7 +1,7 @@
 import { Component, Host, h, Element, Prop } from '@stencil/core';
 import type Yasgui from '@triply/yasgui';
 import { importYasgui } from '../../lib/importYasgui';
-import * as MyMapPlugin from './MyMapPlugin';
+import * as PluginMapCircles from './PluginMapCircles';
 
 type CustomPlugin = 'map';
 type BuiltInPlugin = 'response' | 'table';
@@ -162,7 +162,7 @@ GROUP BY ?label ?long ?lat ?type ?link
    */
   registerCustomPlugins() {
     const customPlugins: { [key in CustomPlugin]: any } = {
-      map: MyMapPlugin.default,
+      map: PluginMapCircles.default,
     };
 
     this.plugins.forEach(plugin => {
