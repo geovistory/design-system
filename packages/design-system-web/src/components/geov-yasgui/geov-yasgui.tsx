@@ -22,12 +22,12 @@ export class GeovYasgui {
   /**
    * Plugins to enable (in addition to the built-in plugins: response, table, error, boolean)
    */
-  @Prop() plugins: CustomPlugin[] = ['map'];
+  @Prop() plugins: Set<CustomPlugin>;
 
   /**
    * The plugin initially activated
    */
-  @Prop() defaultPlugin: Plugin = 'map';
+  @Prop() defaultPlugin: Plugin = 'table';
 
   /**
    * The order of plugin tabs
