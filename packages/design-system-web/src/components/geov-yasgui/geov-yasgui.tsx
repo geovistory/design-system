@@ -3,9 +3,9 @@ import type Yasgui from '@triply/yasgui';
 import { importYasgui } from '../../lib/importYasgui';
 import * as PluginMapCircles from './PluginMapCircles';
 
-type CustomPlugin = 'map';
+type CustomPlugin = 'mapCircles';
 type BuiltInPlugin = 'response' | 'table';
-type Plugin = BuiltInPlugin | CustomPlugin;
+export type Plugin = BuiltInPlugin | CustomPlugin;
 
 interface QueryTab {
   name: string;
@@ -167,7 +167,7 @@ GROUP BY ?label ?long ?lat ?type ?link
    */
   registerCustomPlugins() {
     const customPlugins: { [key in CustomPlugin]: any } = {
-      map: PluginMapCircles.default,
+      mapCircles: PluginMapCircles.default,
     };
 
     this.plugins.forEach(plugin => {
