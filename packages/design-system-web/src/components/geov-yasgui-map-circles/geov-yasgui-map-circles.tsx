@@ -145,8 +145,31 @@ export class GeovYasguiMapCircles {
           source: 'places',
           paint: {
             'circle-color': colorSteps as DataDrivenPropertyValueSpecification<string>,
-            'circle-radius': ['interpolate', ['linear'], ['get', 'radius'], 0, 10, maxRadius, 100],
+            'circle-radius': ['interpolate', ['linear'], ['get', 'radius'], 0, 8, maxRadius, 60],
           },
+        });
+
+        //   Add popups to the markers
+        const handleMarkerClick = e => {
+          console.log(e);
+          console.log(e.features);
+          const feature = e.features[0];
+          const coordinates = feature.geometry.coordinates;
+          const label = feature.properties.label;
+          new MapLibre.Popup()
+            .setLngLat(coordinates)
+            .setHTML(`<div><b><a href = "${feature.properties.link}" target="_blank">${label}</a></b></br><p>${feature.properties.number}</p></div>`)
+            .addTo(map);
+        };
+
+        // An on click event listener for the "circles" layer
+        map.on('click', 'circles', handleMarkerClick);
+
+        map.on('mouseenter', 'circles', () => {
+          map.getCanvas().style.cursor = 'pointer';
+        });
+        map.on('mouseleave', 'circles', () => {
+          map.getCanvas().style.cursor = '';
         });
       });
     }
