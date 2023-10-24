@@ -98,12 +98,16 @@ export class GeovYasguiMapCircles {
         },
         zoom: this.zoom,
       });
+
+      /*
+       * move the map to the bounds of the data
+       */
       let minLng = Number.MAX_VALUE;
       let maxLng = Number.MIN_VALUE;
       let minLat = Number.MAX_VALUE;
       let maxLat = Number.MIN_VALUE;
 
-      // Assuming markers is an array of marker objects with latLng properties
+      // Find the bounds of the data
       this.data.forEach(d => {
         const lng = parseFloat(d['long'].value);
         const lat = parseFloat(d['lat'].value);
@@ -120,7 +124,6 @@ export class GeovYasguiMapCircles {
 
       map.fitBounds(bounds, {
         padding: 50, // Optional padding to provide some space around the bounding box
-        maxZoom: 15, // Optional maximum zoom level
       });
 
       map.on('load', () => {
