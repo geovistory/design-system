@@ -5,7 +5,7 @@ import { importMapLibre } from '../../lib/importMapLibre';
 import { DataDrivenPropertyValueSpecification, LngLatBoundsLike } from 'maplibre-gl';
 
 function createGeoJSON(data: Parser.Binding[]) {
-  const labelIndices = [...new Set(data.map(ele => ele['type'].value))];
+  const labelIndices = [...new Set(data.map(ele => ele['type']?.value || 'none'))];
   console.log(labelIndices);
   return {
     type: 'FeatureCollection',
@@ -21,8 +21,8 @@ function createGeoJSON(data: Parser.Binding[]) {
           label: ele['label'].value,
           radius: Math.round(parseFloat(ele['radius'].value) * 10) / 10,
           number: parseInt(ele['number'].value),
-          type: ele['type'].value,
-          typeindex: labelIndices.indexOf(ele['type'].value),
+          type: ele['type']?.value || 'none',
+          typeindex: labelIndices.indexOf(ele['type']?.value || 'none'),
           link: ele['link'].value,
         },
       };
