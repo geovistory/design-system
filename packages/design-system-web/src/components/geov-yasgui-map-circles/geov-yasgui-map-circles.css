@@ -4,3 +4,17 @@ geov-yasgui-map-circles {
   width: 100%;
   height: 50vh;
 }
+
+.maplibregl-popup-content {
+  overflow-y: auto;
+  max-height: 210px;
+}
+
+.maplibregl-popup-content ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.maplibregl-popup-content p {
+  margin: 0;
+}

@@ -146,20 +146,20 @@ export class GeovYasguiMapCircles {
           paint: {
             'circle-color': colorSteps as DataDrivenPropertyValueSpecification<string>,
             'circle-radius': ['interpolate', ['linear'], ['get', 'radius'], 0, 8, maxRadius, 60],
+            'circle-opacity': 0.8,
           },
         });
 
         //   Add popups to the markers
         const handleMarkerClick = e => {
-          console.log(e);
-          console.log(e.features);
-          const feature = e.features[0];
-          const coordinates = feature.geometry.coordinates;
-          const label = feature.properties.label;
-          new MapLibre.Popup()
-            .setLngLat(coordinates)
-            .setHTML(`<div><b><a href = "${feature.properties.link}" target="_blank">${label}</a></b></br><p>${feature.properties.number}</p></div>`)
-            .addTo(map);
+          const coordinates = e.features[0].geometry.coordinates;
+          let html = `<ul>`;
+          e.features.forEach((feature: { properties: { link: string; label: string; number: string } }) => {
+            const props = feature.properties;
+            html += `<li><p><b><a href = "${props.link}" target="_blank">${props.label}</a></b>: ${props.number}</p></li>`;
+          });
+          html += `</ul>`;
+          new MapLibre.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
         };
 
         // An on click event listener for the "circles" layer
