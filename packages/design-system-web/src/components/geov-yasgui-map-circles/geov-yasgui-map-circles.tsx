@@ -58,11 +58,6 @@ export class GeovYasguiMapCircles {
 
   @Prop() colorScale: string[] = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c']; // ColorBrewer2 qualitative 4-class Paired (colorblind safe)
 
-  /**
-   * The initial zoomlevel of the map
-   */
-  @Prop() zoom: number = 6;
-
   async componentDidLoad() {
     // If we are in a browser
     if (!isNode()) {
@@ -96,7 +91,7 @@ export class GeovYasguiMapCircles {
           ],
           glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
         },
-        zoom: this.zoom,
+        zoom: 6,
       });
 
       /*
@@ -156,7 +151,9 @@ export class GeovYasguiMapCircles {
           let html = `<ul>`;
           e.features.forEach((feature: { properties: { link: string; label: string; number: string } }) => {
             const props = feature.properties;
-            html += `<li><p><b><a href = "${props.link}" target="_blank">${props.label}</a></b>: ${props.number}</p></li>`;
+            html += `<li>
+            <p><b><a href = "${props.link}" target="_blank">${props.label}</a></b>: ${props.number}</p>
+            </li>`;
           });
           html += `</ul>`;
           new MapLibre.Popup().setLngLat(coordinates).setHTML(html).addTo(map);

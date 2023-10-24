@@ -29,6 +29,8 @@ export default class PluginMapCircles implements Plugin<PluginConfig> {
   // A required function, used to indicate whether this plugin can draw the current
   // resultset from yasr
   canHandleResults() {
+    //const results = this.yasr.results.getBindings();
+
     return true;
   }
   // A required function, used to identify the plugin, works best with an svg
