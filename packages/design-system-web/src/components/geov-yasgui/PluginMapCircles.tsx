@@ -15,6 +15,8 @@ export default class PluginMapCircles implements Plugin<PluginConfig> {
   // Yasr instance
   yasr: Yasr;
 
+  label?: string = 'Map Circles';
+
   constructor(yasr: Yasr) {
     this.yasr = yasr;
   }
