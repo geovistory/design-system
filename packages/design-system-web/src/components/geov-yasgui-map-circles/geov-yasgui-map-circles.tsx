@@ -6,7 +6,6 @@ import { DataDrivenPropertyValueSpecification, LngLatBoundsLike } from 'maplibre
 
 function createGeoJSON(data: Parser.Binding[]) {
   const labelIndices = [...new Set(data.map(ele => ele['type']?.value || 'none'))];
-  console.log(labelIndices);
   return {
     type: 'FeatureCollection',
     features: data.map(ele => {
@@ -62,6 +61,20 @@ export class GeovYasguiMapCircles {
     // If we are in a browser
     if (!isNode()) {
       this.loading = true;
+
+      const invalidPoints = this.data.filter(d => !d['long'] || !d['lat']);
+      if (invalidPoints.length > 0) {
+        let invalidList = '';
+        if (invalidPoints[0]['label']) {
+          invalidList = invalidPoints.map(d => d['label'].value).join('</li><li>');
+        } else {
+          invalidList = 'there are also labels missing';
+        }
+        const card = this.el.querySelector('ion-card');
+        card.style.setProperty('display', 'block');
+        card.querySelector('ion-card-title').innerHTML = `Unable to render ${invalidPoints.length} results`;
+        card.querySelector('ion-card-content').innerHTML = `<p>not all of the results have longitude and latitude-coordinates:</p><ul><li>${invalidList}</li></ul>`;
+      }
 
       // Load MapLibre script
       const MapLibre = await importMapLibre();
@@ -126,7 +139,6 @@ export class GeovYasguiMapCircles {
           type: 'geojson',
           data: createGeoJSON(this.data),
         });
-        console.log(createGeoJSON(this.data));
         const maxRadius = Math.max(...this.data.map(d => parseInt(d['radius'].value)));
         const colorSteps: Array<string | number | Array<string | number>> = ['step', ['get', 'typeindex']];
         for (let i = 0; i < this.colorScale.length; i++) {
@@ -173,6 +185,16 @@ export class GeovYasguiMapCircles {
   }
 
   render() {
-    return <Host></Host>;
+    return (
+      <Host>
+        <ion-card style={{ display: 'none', zIndex: '1000' }}>
+          <ion-card-header>
+            <ion-card-title>Unable to render (some) results</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>not all of the results have longitude and latitude-coordinates</ion-card-content>
+        </ion-card>
+      </Host>
+    );
   }
 }
