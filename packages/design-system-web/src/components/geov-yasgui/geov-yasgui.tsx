@@ -170,7 +170,7 @@ GROUP BY ?label ?long ?lat ?type ?link
       mapCircles: PluginMapCircles.default,
     };
 
-    this.plugins.forEach(plugin => {
+    this.plugins?.forEach(plugin => {
       if (!!customPlugins[plugin]) this.Y.Yasr.registerPlugin(plugin, customPlugins[plugin]);
     });
   }
