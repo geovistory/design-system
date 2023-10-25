@@ -29,13 +29,7 @@ export default class PluginMapCircles implements Plugin<PluginConfig> {
   // A required function, used to indicate whether this plugin can draw the current
   // resultset from yasr
   canHandleResults() {
-    /*const results = this.yasr.results.getBindings();
-    // loop over results, and check if every result has a lat and long
-    for (const result of results) {
-      if (!result.lat || !result.long) return false;
-    }*/
-
-    return true;
+    return !this.yasr.results.hasError();
   }
   // A required function, used to identify the plugin, works best with an svg
   getIcon() {
