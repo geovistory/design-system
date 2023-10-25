@@ -6,9 +6,23 @@
 
 ion-card {
   box-shadow: none !important;
-  margin: 0 16px !important;
 }
 
 geov-paginator {
   margin-left: auto;
+}
+
+ion-item {
+  border-top: solid 1px #eee;
+}
+
+a,
+a:visited {
+  color: var(--ion-text-color, #000);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--ion-color-primary-shade, #5e3eaa);
+  text-decoration: underline;
 }

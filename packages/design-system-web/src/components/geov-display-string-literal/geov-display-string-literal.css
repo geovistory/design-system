@@ -21,3 +21,7 @@
 .label {
   width: 100%;
 }
+
+ion-item {
+  border-top: solid 1px #eee;
+}

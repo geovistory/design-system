@@ -1,0 +1,46 @@
+:host {
+  display: block;
+}
+
+.itemNested {
+  border-top: solid 1px #eee;
+}
+
+.itemNested ion-label p {
+  color: var(--ion-text-color, #000);
+  margin: 0px 0px 4px;
+  padding: 0px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.itemNested ion-label h3 {
+  color: var(--ion-text-color, #000);
+  margin: 0px;
+  padding: 0px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.nestedProp ion-label p {
+  color: var(--ion-color-primary, #000);
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+.nestedProp ion-label h3 {
+  color: var(--ion-text-color, #000);
+}
+
+a,
+a:visited {
+  color: var(--ion-text-color, #000);
+}
+
+ion-col {
+  padding: 0;
+  margin: 0;
+}

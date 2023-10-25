@@ -106,7 +106,7 @@ export class GeovEntity {
             onDataFetched={this.removeIfEmpty()}
             predicateExclude={[...this.predicatesBasic, ...this.predicatesTime, ...this.excluded].join(',')}
             fixedGrid={true}
-            class="section columns-3"
+            class="section columns-1"
             sparqlEndpoint={this.sparqlEndpoint}
             entityId={this.entityId}
             language={'en'}

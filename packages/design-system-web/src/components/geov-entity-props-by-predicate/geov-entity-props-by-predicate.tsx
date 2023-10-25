@@ -10,7 +10,7 @@ import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
 import { PageEvent } from '../geov-paginator/geov-paginator';
 
-const qrProps = (predicateId: string, objectId: string, pageSize: number, offset: number) => `
+const qrProps = (predicateId: string, objectId: string, pageSize: number, offset: number, language: string) => `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -24,8 +24,8 @@ PREFIX geov: <http://geovistory.org/resource/>
 SELECT DISTINCT ?entity ?entityLabel ?entityType ?entityTypeLabel ?dt
 WHERE {
   geov:${objectId} <${predicateId}> ?entity .
-  OPTIONAL {?entity rdfs:label ?entityLabel .}
-  OPTIONAL {?entity rdf:type ?entityType . OPTIONAL {?entityType rdfs:label ?entityTypeLabel .}}
+  OPTIONAL {?entity rdfs:label ?entityLabel . FILTER(LANG(?entityLabel) IN ("${language}", "en")) .}
+  OPTIONAL {?entity rdf:type ?entityType . OPTIONAL {?entityType rdfs:label ?entityTypeLabel . FILTER(LANG(?entityTypeLabel) IN ("${language}", "en")) .}}
   BIND (datatype(?entity) AS ?dt) .
 }
 LIMIT ${pageSize} OFFSET ${offset}
@@ -187,7 +187,7 @@ export class GeovEntityPropsByPredicate {
   }
 
   async pageReload(): Promise<GeovEntityPropsByPredicateData> {
-    const qr = qrProps(this.predicateUri, this.entityId, this.pageSize, this.pageIndex * this.pageSize);
+    const qr = qrProps(this.predicateUri, this.entityId, this.pageSize, this.pageIndex * this.pageSize, this.language);
 
     return sparqlJson<Bindings>(this.sparqlEndpoint, qr)
       .then(res => {
@@ -206,20 +206,17 @@ export class GeovEntityPropsByPredicate {
 
   render() {
     const showPaginator = this.totalCount > this.pageSize;
-    const contentMinHeight = showPaginator ? this.pageSize * 62 : 0;
+    //const contentMinHeight = showPaginator ? this.pageSize * 62 : 0;
     return (
       <Host>
         <ion-card color={this.color}>
-          {/* Header */}
           <ion-card-header>
-            <ion-card-subtitle>
-              {this.predicateLabel} {this.totalCount && this.totalCount > this.pageSize ? '(' + this.totalCount + ')' : ''}
-            </ion-card-subtitle>
+            <ion-card-title>
+              <a href={this.predicateUri.endsWith('i') ? this.predicateUri.slice(0, -1) : this.predicateUri}>{this.predicateLabel}</a>
+            </ion-card-title>
           </ion-card-header>
           {/* List */}
-          <ion-list lines="none" style={{ 'min-height': `${contentMinHeight}px` }}>
-            {this.data?.entities?.map(entity => this.renderItem(entity))}
-          </ion-list>
+          <ion-list lines="none">{this.data?.entities?.map(entity => this.renderItem(entity))}</ion-list>
           {/* Paginator */}
           {showPaginator && this.renderPaginator()}
         </ion-card>
@@ -230,17 +227,7 @@ export class GeovEntityPropsByPredicate {
   private renderItem(item: Bindings): Element {
     const isUri = item.entity.type === 'uri';
     if (isUri) {
-      const regex = this.uriRegex;
-      const replace = this.uriReplace;
-      const url = regexReplace(item.entity.value, regex, replace);
-      const isInternal = url.includes('geovistory.org');
-      const target = isInternal ? '' : '_blank';
-      const detailIcon = isInternal ? undefined : openOutline;
-      return (
-        <ion-item color={this.color} href={url} target={target} detailIcon={detailIcon}>
-          {this.renderUri(item)}
-        </ion-item>
-      );
+      return this.renderUri(item);
     }
 
     switch (item.dt?.value) {
@@ -262,7 +249,6 @@ export class GeovEntityPropsByPredicate {
 
   private renderUri(item: Bindings) {
     const klass = item.entityType?.value;
-
     switch (klass) {
       case undefined:
         return this.renderExternalUri(item);
@@ -273,16 +259,29 @@ export class GeovEntityPropsByPredicate {
         return this.renderGenericEntity(item);
     }
   }
+
   private renderExternalUri(item: Bindings) {
-    return <ion-label>{item.entityLabel?.value ? <h2>{item.entityLabel?.value}</h2> : <p>{item.entity?.value}</p>}</ion-label>;
+    const regex = this.uriRegex;
+    const replace = this.uriReplace;
+    const url = regexReplace(item.entity.value, regex, replace);
+    const isInternal = url.includes('geovistory.org');
+    const target = isInternal ? '' : '_blank';
+    const detailIcon = isInternal ? undefined : openOutline;
+    return (
+      <ion-item color={this.color} href={url} target={target} detailIcon={detailIcon}>
+        {item.entityLabel?.value ? <p>{item.entityLabel?.value}</p> : <p>{item.entity?.value}</p>}
+      </ion-item>
+    );
   }
 
-  private renderGenericEntity(item: Bindings) {
+  private renderGenericEntity(item) {
     return (
-      <ion-label>
-        <h2>{item.entityLabel?.value || '(no label)'}</h2>
-        <p>{item.entityTypeLabel?.value}</p>
-      </ion-label>
+      <geov-list-item-nested-properties
+        sparqlEndpoint={this.sparqlEndpoint}
+        entityUri={item.entity.value}
+        language="en"
+        fetchBeforeRender={this.fetchBeforeRender}
+      ></geov-list-item-nested-properties>
     );
   }
 
