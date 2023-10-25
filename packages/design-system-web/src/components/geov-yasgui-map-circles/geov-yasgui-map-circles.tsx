@@ -45,11 +45,11 @@ export class GeovYasguiMapCircles {
 
   @Prop() data: Parser.Binding[] = [
     {
-      radiuss: { value: '80.2345', type: 'literal' },
+      radius: { value: '80.2345', type: 'literal' },
       numbers: { value: '0', type: 'literal' },
       types: { value: 'default', type: 'literal' },
-      long: { value: '0', type: 'literal' },
-      lat: { value: '0', type: 'literal' },
+      long: { value: '8.2318', type: 'literal' },
+      lat: { value: '46.7985', type: 'literal' },
       labels: { value: 'default', type: 'literal' },
       link: { value: 'default', type: 'literal' },
     },
@@ -72,7 +72,7 @@ export class GeovYasguiMapCircles {
         }
         const card = this.el.querySelector('ion-card');
         card.style.setProperty('display', 'block');
-        card.querySelector('ion-card-title').innerHTML = `Unable to render ${invalidPoints.length} results`;
+        card.querySelector('ion-card-title').innerHTML = `Unable to render ${invalidPoints.length} result${invalidPoints.length > 1 ? 's' : ''}`;
         card.querySelector('ion-card-content').innerHTML = `<p>not all of the results have longitude and latitude-coordinates:</p><ul><li>${invalidList}</li></ul>`;
       } else {
         // Load MapLibre script
@@ -131,6 +131,7 @@ export class GeovYasguiMapCircles {
 
         map.fitBounds(bounds, {
           padding: 50, // Optional padding to provide some space around the bounding box
+          maxZoom: 10, // Maximum zoom to use
         });
 
         map.on('load', () => {
