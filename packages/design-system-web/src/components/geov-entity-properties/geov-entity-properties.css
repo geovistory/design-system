@@ -13,10 +13,10 @@
   column-width: var(--column-width);
 }
 
-/* geov-entity-props-by-predicate:first-of-type {
-  margin-top: var(--margin-top-first-item, -24px);
-} */
+.predicateContainer {
+  padding: var(--ion-padding);
+}
 
-geov-entity-props-by-predicate ~ geov-entity-props-by-predicate {
-  margin-top: 24px;
+.predicateContainer~.predicateContainer {
+  margin-top: 2rem;
 }

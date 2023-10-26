@@ -95,37 +95,12 @@ export class GeovEntity {
           </div>
           <slot name="body-start"></slot>
 
-          {/* <div class="ion-padding">
-              <ion-segment value="default">
-                <ion-segment-button value="default">
-                  <ion-icon icon={listCircleOutline}></ion-icon>
-                </ion-segment-button>
-                <ion-segment-button value="graph">
-                  <ion-icon icon={gitNetworkOutline}></ion-icon>
-                </ion-segment-button>
-              </ion-segment>
-            </div> */}
-
           {/* Rest */}
           <geov-entity-properties
             onDataFetched={this.removeIfEmpty()}
-            predicateExclude={[...this.predicatesBasic, ...this.predicatesTime, ...this.excluded].join(',')}
-            fixedGrid={true}
-            class="section columns-1"
-            sparqlEndpoint={this.sparqlEndpoint}
-            entityId={this.entityId}
-            language={'en'}
-            fetchBeforeRender={this.fetchBeforeRender}
-            uriRegex={this.uriRegex}
-            uriReplace={this.uriReplace}
-          ></geov-entity-properties>
-
-          {/* Time */}
-          <geov-entity-properties
-            onDataFetched={this.removeIfEmpty()}
-            predicateInclude={this.predicatesTime.join(',')}
-            fixedGrid={true}
-            class="section columns-1"
+            predicateExclude={[...this.predicatesBasic, ...this.excluded].join(',')}
+            fixedGrid={false}
+            class="columns-1"
             sparqlEndpoint={this.sparqlEndpoint}
             entityId={this.entityId}
             language={'en'}

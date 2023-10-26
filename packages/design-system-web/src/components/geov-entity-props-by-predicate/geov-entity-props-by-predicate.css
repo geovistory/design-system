@@ -4,21 +4,23 @@
   display: block;
 }
 
-ion-card {
-  box-shadow: none !important;
+ion-list {
+  --ion-item-background: none;
+}
+
+ion-item.heading {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --ion-item-background: none;
 }
 
 geov-paginator {
   margin-left: auto;
 }
 
-ion-item {
-  border-top: solid 1px #eee;
-}
-
 a.propertyLabel,
 a.propertyLabel:visited {
-  text-decoration: none;
+  text-decoration: var(--gv-property-label-decoration, none);
 }
 
 a.propertyLabel:hover {
@@ -26,6 +28,7 @@ a.propertyLabel:hover {
   text-decoration: underline;
 }
 
-.propertyLabel {
-  color: var(--gv-property-label-color, black)
+a.propertyLabel {
+  color: var(--gv-property-label-color, black);
+  font-size: 1.5rem
 }

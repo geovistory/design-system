@@ -209,23 +209,20 @@ export class GeovEntityPropsByPredicate {
     //const contentMinHeight = showPaginator ? this.pageSize * 62 : 0;
     return (
       <Host>
-        <ion-card color={this.color}>
-          <ion-card-header>
-            <ion-card-title>
-              <a class="propertyLabel" href={this.predicateUri.endsWith('i') ? this.predicateUri.slice(0, -1) : this.predicateUri}>
-                {this.predicateLabel}
-              </a>
-            </ion-card-title>
-          </ion-card-header>
+        <ion-grid fixed={true}>
           {/* List */}
-          <ion-list lines="none">{this.data?.entities?.map(entity => this.renderItem(entity))}</ion-list>
+          <ion-item class="heading" color={this.color} lines="full">
+            <a class="propertyLabel" href={this.predicateUri.endsWith('i') ? this.predicateUri.slice(0, -1) : this.predicateUri}>
+              {this.predicateLabel}
+            </a>
+            {showPaginator && this.renderPaginator()}
+          </ion-item>
+          <ion-list lines="full">{this.data?.entities?.map(entity => this.renderItem(entity))}</ion-list>
           {/* Paginator */}
-          {showPaginator && this.renderPaginator()}
-        </ion-card>
+        </ion-grid>
       </Host>
     );
   }
-
   private renderItem(item: Bindings): Element {
     const isUri = item.entity.type === 'uri';
     if (isUri) {
@@ -268,27 +265,27 @@ export class GeovEntityPropsByPredicate {
 
   private renderGenericEntity(item) {
     return (
-      <geov-list-item-nested-properties
-        sparqlEndpoint={this.sparqlEndpoint}
-        entityUri={item.entity.value}
-        language="en"
-        fetchBeforeRender={this.fetchBeforeRender}
-      ></geov-list-item-nested-properties>
+      <ion-item>
+        <geov-list-item-nested-properties
+          sparqlEndpoint={this.sparqlEndpoint}
+          entityUri={item.entity.value}
+          language="en"
+          fetchBeforeRender={this.fetchBeforeRender}
+        ></geov-list-item-nested-properties>
+      </ion-item>
     );
   }
 
   private renderPaginator(): Element {
     return (
-      <ion-item color={this.color} lines="none">
-        <geov-paginator
-          color={this.color}
-          length={this.totalCount}
-          pageSize={this.pageSize}
-          pageIndex={this.pageIndex}
-          onPageChanged={ev => this.changePage(ev)}
-          showFirstLastButtons={false}
-        ></geov-paginator>
-      </ion-item>
+      <geov-paginator
+        color={this.color}
+        length={this.totalCount}
+        pageSize={this.pageSize}
+        pageIndex={this.pageIndex}
+        onPageChanged={ev => this.changePage(ev)}
+        showFirstLastButtons={false}
+      ></geov-paginator>
     );
   }
   private renderLiteral(item: Bindings) {

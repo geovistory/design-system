@@ -1,38 +1,59 @@
 :host {
   display: block;
+  width: 100%;
+}
+
+geov-display-string-literal {
+  --border-top: none;
+  --padding-start: 0;
+  --min-height: 0;
+  --inner-padding-end: 0;
+}
+
+geov-time-span {
+  display: inline;
+}
+
+ion-item {
+  --padding-start: 0;
+}
+
+.header {
+  padding: 1rem 0 .5rem 0;
+}
+
+.header a.classLabel {
+  color: var(--ion-color-primary, #000);
+  text-decoration: var(--gv-class-label-decoration);
 }
 
 .itemNested {
   border-top: solid 1px #eee;
 }
 
-.itemNested ion-label p {
+.itemNested .propLabelWrapper {
   color: var(--ion-text-color, #000);
   margin: 0px 0px 4px;
   padding: 0px;
   font-size: 0.75rem;
-  font-weight: 700;
+  /* font-weight: 700; */
   letter-spacing: 0.4px;
   text-transform: uppercase;
 }
 
-.itemNested ion-label h3 {
-  color: var(--ion-text-color, #000);
-  margin: 0px;
-  padding: 0px;
-  font-size: 1.1rem;
-  /* font-weight: 700; */
-  line-height: 1.2;
-}
-
-.nestedProp .propLabel {
-  color: var(--ion-color-primary, #000);
+.nestedProp .propLabelWrapper a.propLabel {
+  color: var(--gv-property-label-color, #000);
+  text-decoration: var(--gv-property-label-decoration);
   text-transform: uppercase;
   font-size: 0.7rem;
 }
 
-.classLabel {
-  color: var(--ion-color-primary, #000);
+.itemNested .propLabelWrapper h3 {
+  color: var(--ion-text-color, #000);
+  margin: 0px;
+  padding: 0px;
+  font-size: 1.1rem;
+  line-height: 1.2;
 }
 
 .nestedProp ion-label h3 {
@@ -47,15 +68,4 @@ a:visited {
 ion-col {
   padding: 0;
   margin: 0;
-}
-
-geov-display-string-literal {
-  --border-top: none;
-  --padding-start: 0;
-  --min-height: 0;
-  --inner-padding-end: 0;
-}
-
-geov-time-span {
-  display: inline;
 }

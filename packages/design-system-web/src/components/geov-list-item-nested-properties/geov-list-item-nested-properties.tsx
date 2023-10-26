@@ -184,28 +184,27 @@ export class GeovListItemNestedProperties {
 
     return (
       <Host>
-        <ion-item lines="none" class="itemNested">
-          <ion-label>
-            <p>
+        <div class="container">
+          <div class="header">
+            <div class={'classLabelContainer'}>
               <a href={rdfTypeProp.object.value} target="_blank" class="classLabel">
                 {rdfTypeProp?.objectLabel?.value}
               </a>{' '}
               <geov-time-span sparqlEndpoint={this.sparqlEndpoint} entityUri={getTimeSpanUri(this.entityUri)}></geov-time-span>
-            </p>
-            <h3>
+            </div>
+            <div class={'entityLabelContainer'}>
               <a href={this.prepareUrl(this.entityUri)} target="_blank">
                 {rdfsLabelProp?.object?.value}
               </a>
-            </h3>
-          </ion-label>
-        </ion-item>
-        <ion-grid>
-          <ion-row>
+            </div>
+          </div>
+
+          <ion-row class="content">
             {restProps.map(b => (
               <ion-col>
                 <ion-item lines="none" class="nestedProp">
                   <ion-label>
-                    <p>
+                    <p class="propLabelWrapper">
                       {this.renderPredicateLabel(b.predicateLabel, b.predicate)}
                       {this.renderCount(b.count)}
                     </p>
@@ -215,7 +214,7 @@ export class GeovListItemNestedProperties {
               </ion-col>
             ))}
           </ion-row>
-        </ion-grid>
+        </div>
         <slot></slot>
       </Host>
     );
@@ -239,6 +238,12 @@ export class GeovListItemNestedProperties {
       else if (p.predicate.value === 'http://www.w3.org/2000/01/rdf-schema#label') rdfsLabelProp = p;
       else restProps.push(p);
     }
+    // sort by prop label A-Z
+    restProps.sort((a, b) => {
+      const labelA = a?.predicateLabel?.value ?? '';
+      const labelB = b?.predicateLabel?.value ?? '';
+      return labelA.localeCompare(labelB);
+    });
 
     return {
       rdfTypeProp,

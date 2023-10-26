@@ -162,8 +162,11 @@
 
   /* color of OWL property labels*/
   --gv-property-label-color: var(--ion-color-primary);
+  --gv-property-label-decoration: none;
+
   /* color of OWL class labels*/
   --gv-class-label-color: var(--ion-color-primary);
+  --gv-class-label-decoration: none;
 }
 
 geov-code {

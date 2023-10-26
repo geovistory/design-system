@@ -1,5 +1,10 @@
 :host {
   display: inline;
   vertical-align: middle;
-  color: var(--gv-class-label-color, black)
+
+}
+
+a {
+  color: var(--gv-class-label-color, black);
+  text-decoration: var(--gv-class-label-decoration, none);
 }
