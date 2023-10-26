@@ -46,11 +46,11 @@ export class GeovYasguiMapCircles {
   @Prop() data: Parser.Binding[] = [
     {
       radius: { value: '80.2345', type: 'literal' },
-      numbers: { value: '0', type: 'literal' },
-      types: { value: 'default', type: 'literal' },
+      number: { value: '0', type: 'literal' },
+      type: { value: 'default', type: 'literal' },
       long: { value: '8.2318', type: 'literal' },
       lat: { value: '46.7985', type: 'literal' },
-      labels: { value: 'default', type: 'literal' },
+      label: { value: 'default', type: 'literal' },
       link: { value: 'default', type: 'literal' },
     },
   ];
@@ -62,7 +62,12 @@ export class GeovYasguiMapCircles {
     if (!isNode()) {
       this.loading = true;
 
-      const invalidPoints = this.data.filter(d => !d['long'] || !d['lat']);
+      // Validation
+      const invalidLong = this.data.filter(d => !parseFloat(d['long']?.value));
+      const invalidLat = this.data.filter(d => !parseFloat(d['lat']?.value));
+      const invalidRadius = this.data.filter(d => !parseFloat(d['radius']?.value));
+      const invalidNumber = this.data.filter(d => !parseInt(d['number']?.value));
+      const invalidPoints = [...invalidLong, ...invalidLat, ...invalidRadius, ...invalidNumber];
       if (invalidPoints.length > 0) {
         let invalidList = '';
         if (invalidPoints[0]['label']) {
@@ -73,7 +78,9 @@ export class GeovYasguiMapCircles {
         const card = this.el.querySelector('ion-card');
         card.style.setProperty('display', 'block');
         card.querySelector('ion-card-title').innerHTML = `Unable to render ${invalidPoints.length} result${invalidPoints.length > 1 ? 's' : ''}`;
-        card.querySelector('ion-card-content').innerHTML = `<p>not all of the results have longitude and latitude-coordinates:</p><ul><li>${invalidList}</li></ul>`;
+        card.querySelector(
+          'ion-card-content',
+        ).innerHTML = `<p>not all of the results have longitude and latitude-coordinates or they are not parseable to a floating point number:</p><ul><li>${invalidList}</li></ul>`;
       } else {
         // Load MapLibre script
         const MapLibre = await importMapLibre();
