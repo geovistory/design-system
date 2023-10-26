@@ -20,7 +20,7 @@ geov-paginator {
 
 a.propertyLabel,
 a.propertyLabel:visited {
-  text-decoration: var(--gv-property-label-decoration, none);
+  text-decoration: var(--gv-property-link-decoration, none);
 }
 
 a.propertyLabel:hover {
@@ -29,6 +29,6 @@ a.propertyLabel:hover {
 }
 
 a.propertyLabel {
-  color: var(--gv-property-label-color, black);
+  color: var(--gv-property-link-color, black);
   font-size: 1.5rem
 }

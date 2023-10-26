@@ -160,13 +160,17 @@
 
   --gv-color-background-code: #f5f2f0;
 
-  /* color of OWL property labels*/
-  --gv-property-label-color: var(--ion-color-primary);
-  --gv-property-label-decoration: none;
+  /* style of OWL property links */
+  --gv-property-link-color: var(--ion-color-primary);
+  --gv-property-link-decoration: none;
 
-  /* color of OWL class labels*/
-  --gv-class-label-color: var(--ion-color-primary);
-  --gv-class-label-decoration: none;
+  /* style of OWL class links */
+  --gv-class-link-color: var(--ion-color-primary);
+  --gv-class-link-decoration: none;
+
+  /* style of entity links*/
+  --gv-entity-link-color: var(--ion-text-color);
+  --gv-entity-link-decoration: none;
 }
 
 geov-code {

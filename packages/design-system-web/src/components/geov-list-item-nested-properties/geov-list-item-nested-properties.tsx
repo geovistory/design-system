@@ -187,13 +187,14 @@ export class GeovListItemNestedProperties {
         <div class="container">
           <div class="header">
             <div class={'classLabelContainer'}>
+              <geov-entity-class-icon classURI={rdfTypeProp.object.value} />
               <a href={rdfTypeProp.object.value} target="_blank" class="classLabel">
                 {rdfTypeProp?.objectLabel?.value}
               </a>{' '}
               <geov-time-span sparqlEndpoint={this.sparqlEndpoint} entityUri={getTimeSpanUri(this.entityUri)}></geov-time-span>
             </div>
             <div class={'entityLabelContainer'}>
-              <a href={this.prepareUrl(this.entityUri)} target="_blank">
+              <a href={this.prepareUrl(this.entityUri)} target="_blank" class="entityLink">
                 {rdfsLabelProp?.object?.value}
               </a>
             </div>
@@ -315,7 +316,7 @@ export class GeovListItemNestedProperties {
     // if object is a URI
     if (object?.type === 'uri') {
       return (
-        <a href={this.prepareUrl(object?.value)} target="_blank">
+        <a href={this.prepareUrl(object?.value)} target="_blank" class="entityLink">
           {/* use entity label if available. Else the URI */}
           {objectLabel?.value ?? object?.value}
         </a>

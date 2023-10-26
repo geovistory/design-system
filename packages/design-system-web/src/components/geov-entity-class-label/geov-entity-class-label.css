@@ -5,6 +5,6 @@
 }
 
 a {
-  color: var(--gv-class-label-color, black);
-  text-decoration: var(--gv-class-label-decoration, none);
+  color: var(--gv-class-link-color, black);
+  text-decoration: var(--gv-class-link-decoration, none);
 }
