@@ -62,7 +62,7 @@ export class GeovYasguiMapCircles {
     if (!isNode()) {
       this.loading = true;
       /*
-       * Validation: Long and Lat must be numbers and not 0, they can also not be omitted
+       * Validation: Long and Lat must be numbers and < 540 and > -540, they can also not be omitted
        * Radius must be a number and not 0, it can be omitted
        * Number must be a number, it can be omitted
        */
@@ -72,8 +72,10 @@ export class GeovYasguiMapCircles {
         //@ts-ignore - we want the coercion of isNan
         if (Object.hasOwn(d, 'number') && isNaN(d['number']?.value)) return true;
         return (
-          Number(d['long']?.value) === 0 ||
-          Number(d['lat']?.value) === 0 ||
+          Number(d['long']?.value) < -540 ||
+          Number(d['long']?.value) > 540 ||
+          Number(d['lat']?.value) < -540 ||
+          Number(d['lat']?.value) > 540 ||
           //@ts-ignore - we want the coercion of isNan
           isNaN(d['long']?.value) ||
           //@ts-ignore - we want the coercion of isNan
