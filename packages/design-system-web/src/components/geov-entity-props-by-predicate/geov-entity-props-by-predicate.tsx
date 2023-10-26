@@ -230,21 +230,11 @@ export class GeovEntityPropsByPredicate {
       return this.renderUri(item);
     }
 
-    switch (item.dt?.value) {
-      case 'http://www.opengis.net/ont/geosparql#wktLiteral':
-        return <geov-display-geosparql-wktliteral color={this.color} value={item.entity?.value}></geov-display-geosparql-wktliteral>;
-      case 'http://www.w3.org/1999/02/22-rdf-syntax-ns#langString':
-      case 'http://www.w3.org/2001/XMLSchema#string':
-      default:
-        return (
-          <geov-display-string-literal
-            color={this.color}
-            modalTitle={this.predicateLabel}
-            label={item.entity?.value}
-            language={item.entity?.['xml:lang']}
-          ></geov-display-string-literal>
-        );
-    }
+    return (
+      <ion-item>
+        <ion-label>{this.renderLiteral(item)}</ion-label>
+      </ion-item>
+    );
   }
 
   private renderUri(item: Bindings) {
@@ -298,5 +288,22 @@ export class GeovEntityPropsByPredicate {
         ></geov-paginator>
       </ion-item>
     );
+  }
+  private renderLiteral(item: Bindings) {
+    switch (item.dt?.value) {
+      case 'http://www.opengis.net/ont/geosparql#wktLiteral':
+        return <geov-display-geosparql-wktliteral color={this.color} value={item.entity?.value}></geov-display-geosparql-wktliteral>;
+      case 'http://www.w3.org/1999/02/22-rdf-syntax-ns#langString':
+      case 'http://www.w3.org/2001/XMLSchema#string':
+      default:
+        return (
+          <geov-display-string-literal
+            color={this.color}
+            modalTitle={this.predicateLabel}
+            label={item.entity?.value}
+            language={item.entity?.['xml:lang']}
+          ></geov-display-string-literal>
+        );
+    }
   }
 }

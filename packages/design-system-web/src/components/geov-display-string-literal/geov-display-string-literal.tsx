@@ -1,4 +1,3 @@
-import { Color } from '@ionic/core';
 import { Component, Fragment, Prop, h } from '@stencil/core';
 import { eye } from 'ionicons/icons';
 
@@ -17,10 +16,6 @@ import { eye } from 'ionicons/icons';
 })
 export class GeovDisplayStringLiteralLiteral {
   /**
-   * Color assigned to ion-item
-   */
-  @Prop() color: Color = '';
-  /**
    * Title of the modal, that opens when user clicks on show button
    */
   @Prop() modalTitle: string;
@@ -32,6 +27,7 @@ export class GeovDisplayStringLiteralLiteral {
    * The language to display on the second line. Will be prefixed with @.
    */
   @Prop() language: string;
+
   modal: HTMLIonModalElement;
   labelContainer: Element;
   itemButton: HTMLIonButtonElement;
@@ -65,15 +61,16 @@ export class GeovDisplayStringLiteralLiteral {
   render() {
     return (
       <Fragment>
-        <ion-item color={this.color} lines="none">
-          <ion-label class="literal-container">
-            <h2 ref={element => (this.labelContainer = element)}>{this.label}</h2>
-            {this.language && <p>@{this.language}</p>}
-          </ion-label>
-          <ion-button onClick={() => this.open()} ref={el => (this.itemButton = el as HTMLIonButtonElement)}>
+        <div class="wrapper">
+          <div class="literal-container">
+            <div ref={element => (this.labelContainer = element)}>
+              {this.label} {this.language && <span class="color-light">@{this.language}</span>}
+            </div>
+          </div>
+          <ion-button class="open-modal-btn" size="small" fill="clear" onClick={() => this.open()} ref={el => (this.itemButton = el as HTMLIonButtonElement)}>
             <ion-icon icon={eye}></ion-icon>
           </ion-button>
-        </ion-item>
+        </div>
 
         <ion-modal ref={element => (this.modal = element)} onWillDismiss={() => this.dismiss()} isOpen={false}>
           <ion-header>

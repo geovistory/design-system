@@ -25,7 +25,7 @@
   line-height: 1.2;
 }
 
-.nestedProp ion-label p {
+.nestedProp .propLabel {
   color: var(--ion-color-primary, #000);
   text-transform: uppercase;
   font-size: 0.7rem;
@@ -43,4 +43,11 @@ a:visited {
 ion-col {
   padding: 0;
   margin: 0;
+}
+
+geov-display-string-literal {
+  --border-top: none;
+  --padding-start: 0;
+  --min-height: 0;
+  --inner-padding-end: 0;
 }
