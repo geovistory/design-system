@@ -69,3 +69,12 @@
 p.supertitle geov-entity-class-label {
   font-size: 1.7rem;
 }
+
+a.entityLink {
+  color: var(--gv-entity-link-color, #000);
+  text-decoration: var(--gv-entity-link-decoration);
+}
+
+a.entityLink:hover {
+  text-decoration: underline;
+}

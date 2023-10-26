@@ -86,7 +86,9 @@ export class GeovEntity {
                 ></geov-time-span>
               </p>
               <h1>
-                <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}entity-label`}></geov-entity-label>
+                <a href={'http://geovistory.org/resource/' + this.entityId} target="_blank" class="entityLink">
+                  <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}entity-label`}></geov-entity-label>
+                </a>
               </h1>
               <p>
                 <geov-entity-definition entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}definition`}></geov-entity-definition>
