@@ -1,6 +1,7 @@
 import { Component, h, Host, Prop } from '@stencil/core';
 import { GeovEntityPropertiesCustomEvent } from '../../components';
 import { GeovEntityPropertiesData } from '../geov-entity-properties/geov-entity-properties';
+import { getTimeSpanUri } from '../../lib/getTimeSpanUri';
 
 /**
  * This component displays the data of a geovistory entity.
@@ -78,6 +79,11 @@ export class GeovEntity {
                   _ssrId={`${this.ssrIdPrefix}class-label`}
                   withIcon={true}
                 ></geov-entity-class-label>
+                <geov-time-span
+                  class="restricted-width"
+                  entityUri={getTimeSpanUri('http://geovistory.org/resource/' + this.entityId)}
+                  sparqlEndpoint={this.sparqlEndpoint}
+                ></geov-time-span>
               </p>
               <h1>
                 <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}entity-label`}></geov-entity-label>
@@ -87,7 +93,6 @@ export class GeovEntity {
               </p>
             </ion-grid>
           </div>
-
           <slot name="body-start"></slot>
 
           {/* <div class="ion-padding">

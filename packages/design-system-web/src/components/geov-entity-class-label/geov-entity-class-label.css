@@ -1,4 +1,5 @@
 :host {
   display: inline;
   vertical-align: middle;
+  color: var(--gv-class-label-color, black)
 }

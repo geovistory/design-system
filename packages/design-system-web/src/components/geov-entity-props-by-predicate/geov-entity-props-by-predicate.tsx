@@ -212,7 +212,9 @@ export class GeovEntityPropsByPredicate {
         <ion-card color={this.color}>
           <ion-card-header>
             <ion-card-title>
-              <a href={this.predicateUri.endsWith('i') ? this.predicateUri.slice(0, -1) : this.predicateUri}>{this.predicateLabel}</a>
+              <a class="propertyLabel" href={this.predicateUri.endsWith('i') ? this.predicateUri.slice(0, -1) : this.predicateUri}>
+                {this.predicateLabel}
+              </a>
             </ion-card-title>
           </ion-card-header>
           {/* List */}

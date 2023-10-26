@@ -52,6 +52,7 @@
 
 /* lg and up */
 @media screen and (min-width: 992px) {
+
   .columns-3,
   .columns-2 {
     --column-count: 2;

@@ -159,6 +159,11 @@
   --swiper-theme-color: var(--ion-color-primary);
 
   --gv-color-background-code: #f5f2f0;
+
+  /* color of OWL property labels*/
+  --gv-property-label-color: var(--ion-color-primary);
+  /* color of OWL class labels*/
+  --gv-class-label-color: var(--ion-color-primary);
 }
 
 geov-code {

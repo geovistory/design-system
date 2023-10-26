@@ -16,13 +16,16 @@ ion-item {
   border-top: solid 1px #eee;
 }
 
-a,
-a:visited {
-  color: var(--ion-text-color, #000);
+a.propertyLabel,
+a.propertyLabel:visited {
   text-decoration: none;
 }
 
-a:hover {
+a.propertyLabel:hover {
   color: var(--ion-color-primary-shade, #5e3eaa);
   text-decoration: underline;
+}
+
+.propertyLabel {
+  color: var(--gv-property-label-color, black)
 }

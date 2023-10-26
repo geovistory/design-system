@@ -6,6 +6,7 @@ import { SparqlBinding, sparqlJson } from '../../lib/sparqlJson';
 import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
+import { getTimeSpanUri } from '../../lib/getTimeSpanUri';
 
 const qrNestedProps = (entityUri: string, language: string) => {
   return ` PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -52,7 +53,7 @@ const qrNestedProps = (entityUri: string, language: string) => {
   LIMIT 50`;
 };
 
-export interface NestedProps {
+interface NestedProps {
   predicate: SparqlBinding;
   predicateLabel?: SparqlBinding;
   object?: SparqlBinding;
@@ -60,7 +61,7 @@ export interface NestedProps {
   count?: SparqlBinding;
 }
 
-export interface GeovListItemNestedPropertiesData extends FetchResponse {
+interface GeovListItemNestedPropertiesData extends FetchResponse {
   nestedProps?: NestedProps[];
   error?: boolean;
 }
@@ -77,10 +78,7 @@ export class GeovListItemNestedProperties {
   /**
    * declares an _ssrId property that is reflected as attribute
    */
-  @Prop({
-    reflect: true,
-  })
-  _ssrId?: string;
+  @Prop({ reflect: true }) _ssrId?: string;
   /**
    * declares data as state
    */
@@ -189,9 +187,10 @@ export class GeovListItemNestedProperties {
         <ion-item lines="none" class="itemNested">
           <ion-label>
             <p>
-              <a href={rdfTypeProp.object.value} target="_blank">
+              <a href={rdfTypeProp.object.value} target="_blank" class="classLabel">
                 {rdfTypeProp?.objectLabel?.value}
-              </a>
+              </a>{' '}
+              <geov-time-span sparqlEndpoint={this.sparqlEndpoint} entityUri={getTimeSpanUri(this.entityUri)}></geov-time-span>
             </p>
             <h3>
               <a href={this.prepareUrl(this.entityUri)} target="_blank">
@@ -317,7 +316,6 @@ export class GeovListItemNestedProperties {
         </a>
       );
     }
-    console.log(modalTitle);
     // return object?.value;
     // else it is a literal
     switch (object?.datatype) {
