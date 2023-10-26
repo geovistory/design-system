@@ -18,3 +18,8 @@ geov-yasgui-map-circles {
 .maplibregl-popup-content p {
   margin: 0;
 }
+
+geov-yasgui-map-circles ion-card-content {
+  max-height: 70vh;
+  overflow-y: auto;
+}
