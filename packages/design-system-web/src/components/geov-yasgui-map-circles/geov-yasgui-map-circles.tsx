@@ -61,26 +61,38 @@ export class GeovYasguiMapCircles {
     // If we are in a browser
     if (!isNode()) {
       this.loading = true;
+      /*
+       * Validation: Long and Lat must be numbers and not 0, they can also not be omitted
+       * Radius must be a number and not 0, it can be omitted
+       * Number must be a number, it can be omitted
+       */
+      const invalidPoints = this.data.filter(d => {
+        //@ts-ignore - we want the coercion of isNan
+        if (Object.hasOwn(d, 'radius') && (isNaN(d['radius']?.value) || Number(d['radius']?.value) === 0)) return true;
+        //@ts-ignore - we want the coercion of isNan
+        if (Object.hasOwn(d, 'number') && isNaN(d['number']?.value)) return true;
+        return (
+          Number(d['long']?.value) === 0 ||
+          Number(d['lat']?.value) === 0 ||
+          //@ts-ignore - we want the coercion of isNan
+          isNaN(d['long']?.value) ||
+          //@ts-ignore - we want the coercion of isNan
+          isNaN(d['lat']?.value)
+        );
+      });
 
-      // Validation
-      const invalidLong = this.data.filter(d => !parseFloat(d['long']?.value));
-      const invalidLat = this.data.filter(d => !parseFloat(d['lat']?.value));
-      const invalidRadius = this.data.filter(d => !parseFloat(d['radius']?.value));
-      const invalidNumber = this.data.filter(d => !parseInt(d['number']?.value));
-      const invalidPoints = [...invalidLong, ...invalidLat, ...invalidRadius, ...invalidNumber];
       if (invalidPoints.length > 0) {
         let invalidList = '';
-        if (invalidPoints[0]['label']) {
-          invalidList = invalidPoints.map(d => d['label'].value).join('</li><li>');
-        } else {
-          invalidList = 'there are also labels missing';
-        }
+        invalidPoints.forEach(d => {
+          invalidList += `<li>${d['label']?.value || 'no label'} (long: ${d['long']?.value}, lat: ${d['lat']?.value}, radius: ${d['radius']?.value}, number: ${d['number']
+            ?.value})</li>`;
+        });
         const card = this.el.querySelector('ion-card');
         card.style.setProperty('display', 'block');
         card.querySelector('ion-card-title').innerHTML = `Unable to render ${invalidPoints.length} result${invalidPoints.length > 1 ? 's' : ''}`;
         card.querySelector(
           'ion-card-content',
-        ).innerHTML = `<p>not all of the results have longitude and latitude-coordinates or they are not parseable to a floating point number:</p><ul><li>${invalidList}</li></ul>`;
+        ).innerHTML = `<p>not all of the results have longitude and latitude-coordinates or they are not parseable to a floating point number:</p><ul>${invalidList}</ul>`;
       } else {
         // Load MapLibre script
         const MapLibre = await importMapLibre();
