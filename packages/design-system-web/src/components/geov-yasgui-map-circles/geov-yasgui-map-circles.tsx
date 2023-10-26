@@ -161,10 +161,15 @@ export class GeovYasguiMapCircles {
             data: createGeoJSON(this.data),
           });
           const maxRadius = Math.max(...this.data.map(d => parseInt(d['radius']?.value) || 0)); // get the max radius (if any)
-          const colorSteps: Array<string | number | Array<string | number>> = ['step', ['get', 'typeindex']];
-          for (let i = 0; i < this.colorScale.length; i++) {
-            if (i > 0) colorSteps.push(i);
-            colorSteps.push(this.colorScale[i]);
+          let colorSteps: Array<string | number | Array<string | number>> | string;
+          if (this.colorScale.length < 2) {
+            colorSteps = this.colorScale[0];
+          } else {
+            colorSteps = ['step', ['get', 'typeindex']];
+            for (let i = 0; i < this.colorScale.length; i++) {
+              if (i > 0) colorSteps.push(i);
+              colorSteps.push(this.colorScale[i]);
+            }
           }
 
           map.addLayer({

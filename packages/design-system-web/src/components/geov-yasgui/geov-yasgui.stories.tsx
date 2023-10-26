@@ -84,3 +84,11 @@ GROUP BY ?label ?long ?lat ?type ?link`,
 
 export const Default = await stencilWrapper(<geov-yasgui></geov-yasgui>);
 export const WithMapPlugin = await stencilWrapper(<geov-yasgui plugins={new Set(['mapCircles'])} defaultPlugin={'mapCircles'} queryTabs={tabs}></geov-yasgui>);
+export const WithMapPluginCustomColorScale = await stencilWrapper(
+  <geov-yasgui
+    plugins={new Set(['mapCircles'])}
+    defaultPlugin={'mapCircles'}
+    queryTabs={tabs}
+    pluginConfig={[{ name: 'mapCircles', config: { colorScale: ['#000', '#3246a8'] } }]}
+  ></geov-yasgui>,
+);
