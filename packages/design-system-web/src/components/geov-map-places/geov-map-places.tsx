@@ -10,9 +10,10 @@ type SparqlResponse = {
 };
 
 /**
- * This component fetches places (ontome:p148) from a project and displays them on a map. On the map are linked markers,
- * which redirect to the place in the project.
- * The map is based on MapLibre.
+ * This component fetches <a href="https://ontome.net/ontology/c363">geographical places</a> from a project's SPARQL endpoint and their
+ * <a href="https://ontome.net/ontology/c51">coordinates</a> using <a href="https://ontome.net/ontology/p147">had presence</a>
+ * and <a href="https://ontome.net/ontology/p148">was at</a>) properties, then displays them on a map. The map shows
+ * linked markers that guide users to the respective locations within the project. The map is built using on MapLibre.
  */
 @Component({
   tag: 'geov-map-places',
