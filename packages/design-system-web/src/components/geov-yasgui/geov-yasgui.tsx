@@ -3,11 +3,11 @@ import type Yasgui from '@triply/yasgui';
 import { importYasgui } from '../../lib/importYasgui';
 import * as MyMapPlugin from './MyMapPlugin';
 
-type CustomPlugin = 'map';
-type BuiltInPlugin = 'response' | 'table';
-type Plugin = BuiltInPlugin | CustomPlugin;
+export type CustomPlugin = 'map';
+export type BuiltInPlugin = 'response' | 'table';
+export type YasrPlugin = BuiltInPlugin | CustomPlugin;
 
-interface QueryTab {
+export interface QueryTab {
   name: string;
   sparqlEndpoint: string;
   query: string;
@@ -27,12 +27,12 @@ export class GeovYasgui {
   /**
    * The plugin initially activated
    */
-  @Prop() defaultPlugin: Plugin = 'map';
+  @Prop() defaultPlugin: YasrPlugin = 'map';
 
   /**
    * The order of plugin tabs
    */
-  @Prop() pluginOrder?: Plugin[] = ['table', 'response'];
+  @Prop() pluginOrder?: YasrPlugin[] = ['table', 'response'];
 
   /**
    * For each item in this array a tab will be added to Yasgui.
