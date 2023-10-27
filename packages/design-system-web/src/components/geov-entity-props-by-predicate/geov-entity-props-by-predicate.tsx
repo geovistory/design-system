@@ -10,7 +10,7 @@ import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
 import { PageEvent } from '../geov-paginator/geov-paginator';
 
-const qrProps = (predicateId: string, objectId: string, pageSize: number, offset: number, language: string) => `
+const qrProps = (predicateId: string, subjectId: string, pageSize: number, offset: number, language: string) => `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -23,7 +23,7 @@ PREFIX geov: <http://geovistory.org/resource/>
 
 SELECT DISTINCT ?entity ?entityLabel ?entityType ?entityTypeLabel ?dt
 WHERE {
-  geov:${objectId} <${predicateId}> ?entity .
+  geov:${subjectId} <${predicateId}> ?entity .
   OPTIONAL {?entity rdfs:label ?entityLabel . FILTER(LANG(?entityLabel) IN ("${language}", "en")) .}
   OPTIONAL {?entity rdf:type ?entityType . OPTIONAL {?entityType rdfs:label ?entityTypeLabel . FILTER(LANG(?entityTypeLabel) IN ("${language}", "en")) .}}
   BIND (datatype(?entity) AS ?dt) .
@@ -271,6 +271,7 @@ export class GeovEntityPropsByPredicate {
           entityUri={item.entity.value}
           language="en"
           fetchBeforeRender={this.fetchBeforeRender}
+          parent={{ subjectUri: 'http://geovistory.org/resource/' + this.entityId, predicateUri: this.predicateUri }}
         ></geov-list-item-nested-properties>
       </ion-item>
     );

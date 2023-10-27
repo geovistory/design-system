@@ -141,6 +141,13 @@ export class GeovListItemNestedProperties {
    */
   @Prop() color: Color = '';
 
+  /**
+   * parent subject and predicate
+   * If given, the reversed nested property is hidden, if the parent subject is the only
+   * object of the nested prop
+   */
+  @Prop() parent?: { subjectUri: string; predicateUri: string };
+
   /*
    * assigns an id to the component
    */
@@ -237,7 +244,8 @@ export class GeovListItemNestedProperties {
     for (const p of props) {
       if (p.predicate.value === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type') rdfTypeProp = p;
       else if (p.predicate.value === 'http://www.w3.org/2000/01/rdf-schema#label') rdfsLabelProp = p;
-      else restProps.push(p);
+      // push to rest, unless it is the inverse prop of parent
+      else if (!this.isInverseOfParent(p)) restProps.push(p);
     }
     // sort by prop label A-Z
     restProps.sort((a, b) => {
@@ -251,6 +259,33 @@ export class GeovListItemNestedProperties {
       rdfsLabelProp,
       restProps,
     };
+  }
+  /**
+   * If the property is the inverse of the parent property, return true, else false.
+   *
+   * @param p
+   */
+  isInverseOfParent(p: NestedProps) {
+    if (!this.parent?.predicateUri || !this.parent?.subjectUri) return false;
+
+    // if we have more then one props of this predicate, we in in fact have a
+    // group of properties. This group is not identical to the parent property,
+    // which is only one property by definition
+    if (parseInt(p.count?.value) > 1) return false;
+
+    const thisPredicate = p.predicate.value;
+    const parentPredicate = this.parent.predicateUri;
+
+    const isInversePredicate = () => {
+      const overlapOne = thisPredicate.replace(parentPredicate, '');
+      const overlapTwo = parentPredicate.replace(thisPredicate, '');
+      return overlapOne === 'i' || overlapTwo == 'i';
+    };
+
+    // it is inverse, in case object = parentSubject and predicate isInverseOf parentPredicate
+    if (p.object.value === this.parent.subjectUri && isInversePredicate()) return true;
+
+    return false;
   }
 
   async fetchData(): Promise<GeovListItemNestedPropertiesData> {
