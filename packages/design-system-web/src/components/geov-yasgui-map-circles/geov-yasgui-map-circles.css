@@ -57,3 +57,13 @@ geov-yasgui-map-circles ion-card-content {
   align-items: center;
   margin-right: 10px;
 }
+
+#display-query {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+}
+
+.yasgui .hidden {
+  display: none !important;
+}
