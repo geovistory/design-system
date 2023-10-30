@@ -4,8 +4,7 @@ import type { Parser } from '@triply/yasr';
 import { importMapLibre } from '../../lib/importMapLibre';
 import { DataDrivenPropertyValueSpecification, LngLatBoundsLike } from 'maplibre-gl';
 
-function createGeoJSON(data: Parser.Binding[]) {
-  const labelIndices = [...new Set(data.map(ele => ele['type']?.value || 'none'))];
+function createGeoJSON(data: Parser.Binding[], labelIndices: string[]) {
   return {
     type: 'FeatureCollection',
     features: data.map(ele => {
@@ -55,6 +54,8 @@ export class GeovYasguiMapCircles {
     },
   ];
 
+  @State() labelIndices: string[] = [...new Set(this.data.map(ele => ele['type']?.value || 'none'))];
+
   @Prop() colorScale: string[] = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c']; // ColorBrewer2 qualitative 4-class Paired (colorblind safe)
 
   async componentDidLoad() {
@@ -99,7 +100,7 @@ export class GeovYasguiMapCircles {
         // Load MapLibre script
         const MapLibre = await importMapLibre();
         const map = new MapLibre.Map({
-          container: this.el,
+          container: this.el.querySelector('#map-container') as HTMLElement,
           style: {
             version: 8,
             sources: {
@@ -158,7 +159,7 @@ export class GeovYasguiMapCircles {
         map.on('load', () => {
           map.addSource('places', {
             type: 'geojson',
-            data: createGeoJSON(this.data),
+            data: createGeoJSON(this.data, this.labelIndices),
           });
           const maxRadius = Math.max(...this.data.map(d => parseInt(d['radius']?.value) || 0)); // get the max radius (if any)
           let colorSteps: Array<string | number | Array<string | number>> | string;
@@ -234,6 +235,22 @@ export class GeovYasguiMapCircles {
 
           <ion-card-content>not all of the results have longitude and latitude-coordinates</ion-card-content>
         </ion-card>
+        <ion-card class="legend">
+          <ion-card-content>
+            <ul>
+              {this.labelIndices.map((type, i) => (
+                <li>
+                  <svg height="1rem" width="1rem">
+                    <circle cx="50%" cy="50%" r="50%" fill={this.colorScale[i]} />
+                  </svg>
+                  &nbsp;
+                  {type}
+                </li>
+              ))}
+            </ul>
+          </ion-card-content>
+        </ion-card>
+        <div id="map-container" />
       </Host>
     );
   }
