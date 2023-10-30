@@ -27,6 +27,12 @@ function createGeoJSON(data: Parser.Binding[], labelIndices: string[]) {
     }),
   };
 }
+
+function getRecursiveIndex(i: number, length: number) {
+  if (i < length) return i;
+  else return getRecursiveIndex(i - length, length);
+}
+
 /**
  * This component is used by Yasgui as a plugin. It consumes the data from Yasgui.
  *
@@ -241,7 +247,7 @@ export class GeovYasguiMapCircles {
               {this.labelIndices.map((type, i) => (
                 <li>
                   <svg height="1rem" width="1rem">
-                    <circle cx="50%" cy="50%" r="50%" fill={this.colorScale[i]} />
+                    <circle cx="50%" cy="50%" r="50%" fill={this.colorScale[getRecursiveIndex(i, this.colorScale.length)]} />
                   </svg>
                   &nbsp;
                   {type}
