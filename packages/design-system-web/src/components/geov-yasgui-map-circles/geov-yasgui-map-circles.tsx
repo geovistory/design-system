@@ -95,25 +95,6 @@ export class GeovYasguiMapCircles {
           'ion-card-content',
         ).innerHTML = `<p>not all of the results have longitude and latitude-coordinates or they are not parseable to a floating point number:</p><ul>${invalidList}</ul>`;
       } else {
-        // Display the query button
-        const displayQueryButton = this.el.querySelector('#display-query') as HTMLElement;
-        displayQueryButton.style.setProperty('display', 'unset');
-        // Add the click event listener
-        displayQueryButton.addEventListener('click', e => {
-          const button = e.target as HTMLElement;
-          const icon = button.querySelector('ion-icon');
-          if (icon.getAttribute('name') === 'eye-off-outline') {
-            icon.setAttribute('name', 'eye-outline');
-          } else {
-            icon.setAttribute('name', 'eye-off-outline');
-          }
-          const elementsToSwitchVis = this.el.closest('.yasgui').querySelectorAll('.yasr_header, .yasqe, .tabsList, .controlbar');
-          elementsToSwitchVis.forEach(ele => {
-            console.log(ele);
-            ele.classList.toggle('hidden');
-          });
-        });
-
         // Load MapLibre script
         const MapLibre = await importMapLibre();
         const map = new MapLibre.Map({
@@ -267,9 +248,6 @@ export class GeovYasguiMapCircles {
             </ul>
           </ion-card-content>
         </ion-card>
-        <ion-button id="display-query" style={{ display: 'none' }}>
-          <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
-        </ion-button>
         <div id="map-container" />
       </Host>
     );

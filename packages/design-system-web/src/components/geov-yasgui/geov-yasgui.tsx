@@ -20,6 +20,7 @@ interface QueryTab {
  */
 @Component({
   tag: 'geov-yasgui',
+  styleUrl: 'geov-yasgui.css',
   shadow: false,
 })
 export class GeovYasgui {
@@ -29,6 +30,8 @@ export class GeovYasgui {
    * Plugins to enable (in addition to the built-in plugins: response, table, error, boolean)
    */
   @Prop() plugins: Set<CustomPlugin> = new Set();
+
+  @Prop() collapse: boolean = false;
 
   /**
    * The plugin initially activated
@@ -61,6 +64,27 @@ export class GeovYasgui {
     this.setupYasr();
     localStorage.removeItem('yagui__config');
     if (!this.el) return;
+
+    const toggleVisiblity = () => {
+      const icon = this.el.querySelector('#display-query ion-icon');
+      if (this.collapse) {
+        icon.setAttribute('name', 'eye-outline');
+      } else {
+        icon.setAttribute('name', 'eye-off-outline');
+      }
+      const elementsToSwitchVis = this.el.querySelectorAll('.yasr_header, .yasqe, .tabsList, .controlbar');
+      elementsToSwitchVis.forEach(ele => {
+        ele.classList.toggle('hidden');
+      });
+      this.collapse = !this.collapse;
+    };
+    // Display the query button
+    const displayQueryButton = this.el.querySelector('#display-query') as HTMLElement;
+    if (this.collapse) toggleVisiblity();
+    // Add the click event listener
+    displayQueryButton.addEventListener('click', () => {
+      toggleVisiblity();
+    });
 
     const yasgui = new this.Y(this.el, {});
 
@@ -122,6 +146,12 @@ export class GeovYasgui {
   }
 
   render() {
-    return <Host></Host>;
+    return (
+      <Host>
+        <ion-button id="display-query" size="small">
+          <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+        </ion-button>
+      </Host>
+    );
   }
 }

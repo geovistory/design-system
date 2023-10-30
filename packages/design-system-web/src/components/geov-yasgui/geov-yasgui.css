@@ -1,0 +1,16 @@
+geov-yasgui {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#display-query {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+}
+
+geov-yasgui .hidden {
+  display: none !important;
+}
