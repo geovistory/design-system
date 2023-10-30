@@ -4,7 +4,7 @@ import { stencilWrapper } from '../../../.storybook/lib/stencilWrapper';
 import componentApi from './docs-component-api.md?raw';
 import overview from './docs-overview.md?raw';
 export default {
-  title: 'Design Components/Yasgui',
+  title: 'Data Visualization Components/Yasgui',
   tags: ['autodocs'],
   parameters: {
     viewMode: 'docs',
@@ -84,6 +84,7 @@ GROUP BY ?label ?long ?lat ?type ?link`,
 
 export const Default = await stencilWrapper(<geov-yasgui></geov-yasgui>);
 export const WithMapPlugin = await stencilWrapper(<geov-yasgui plugins={new Set(['mapCircles'])} defaultPlugin={'mapCircles'} queryTabs={tabs}></geov-yasgui>);
+export const WithHiddenYasgui = await stencilWrapper(<geov-yasgui plugins={new Set(['mapCircles'])} defaultPlugin={'mapCircles'} queryTabs={tabs} collapse={true}></geov-yasgui>);
 export const WithMapPluginCustomColorScale = await stencilWrapper(
   <geov-yasgui
     plugins={new Set(['mapCircles'])}

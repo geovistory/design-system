@@ -31,6 +31,9 @@ export class GeovYasgui {
    */
   @Prop() plugins: Set<CustomPlugin> = new Set();
 
+  /**
+   * Collapse the GUI elements of Yasgui
+   */
   @Prop() collapse: boolean = false;
 
   /**
@@ -67,7 +70,7 @@ export class GeovYasgui {
 
     const toggleVisiblity = () => {
       const icon = this.el.querySelector('#display-query ion-icon');
-      if (this.collapse) {
+      if (!this.collapse) {
         icon.setAttribute('name', 'eye-outline');
       } else {
         icon.setAttribute('name', 'eye-off-outline');
@@ -78,10 +81,7 @@ export class GeovYasgui {
       });
       this.collapse = !this.collapse;
     };
-    // Display the query button
     const displayQueryButton = this.el.querySelector('#display-query') as HTMLElement;
-    if (this.collapse) toggleVisiblity();
-    // Add the click event listener
     displayQueryButton.addEventListener('click', () => {
       toggleVisiblity();
     });
@@ -115,6 +115,8 @@ export class GeovYasgui {
 
     // execute query of active tab
     yasgui.getTab().query();
+    // hide GUI elements
+    if (this.collapse) toggleVisiblity();
   }
 
   /**

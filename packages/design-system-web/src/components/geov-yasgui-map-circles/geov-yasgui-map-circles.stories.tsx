@@ -5,7 +5,7 @@ import type { Parser } from '@triply/yasr';
 import componentApi from './docs-component-api.md?raw';
 import overview from './docs-overview.md?raw';
 export default {
-  title: 'Design Components/Yasgui/mapcircles',
+  title: 'Data Visualization Components/Yasgui/mapcircles',
   tags: ['autodocs'],
   parameters: {
     viewMode: 'docs',
