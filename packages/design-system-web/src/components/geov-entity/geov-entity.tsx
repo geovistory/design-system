@@ -90,9 +90,9 @@ export class GeovEntity {
                   <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}entity-label`}></geov-entity-label>
                 </a>
               </h1>
-              <p>
+              <div class="restricted-width">
                 <geov-entity-definition entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}definition`}></geov-entity-definition>
-              </p>
+              </div>
             </ion-grid>
           </div>
           <slot name="body-start"></slot>
@@ -113,7 +113,7 @@ export class GeovEntity {
 
           {/* Download RDF button */}
           <div class="section columns-1 ion-text-center">
-            <geov-entity-download-rdf entityId={this.entityId} projectId={this.projectId} color="primary" fill="outline" buttonLabel="Download RDF" buttonIcon="download-outline" />
+            <geov-entity-download-rdf entityId={this.entityId} projectId={this.projectId} color="primary" fill="outline" buttonLabel="Download RDF" />
           </div>
 
           <slot name="body-end"></slot>

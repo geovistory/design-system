@@ -12,8 +12,8 @@ geov-display-string-literal {
 
 geov-time-span {
   display: inline;
+  padding-left: 1rem;
   color: var(--ion-color-step-600);
-  font-size: 0.75rem;
 }
 
 ion-item {
@@ -22,6 +22,10 @@ ion-item {
 
 .header {
   padding: 1rem 0 0.5rem 0;
+}
+
+.header .classLabelContainer {
+  color: var(--gv-class-link-color, #000);
 }
 
 .header a.classLabel {

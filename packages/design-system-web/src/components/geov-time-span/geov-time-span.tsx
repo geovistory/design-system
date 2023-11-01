@@ -228,10 +228,10 @@ export class GeovTimeSpan {
       case 'http://www.w3.org/2006/time#unitYear':
         return `${timeInfo.year}`;
       case 'http://www.w3.org/2006/time#unitMonth':
-        return `${timeInfo.year}.${timeInfo.month.toString().padStart(2, '0')}`;
+        return `${timeInfo.year}-${timeInfo.month.toString().padStart(2, '0')}`;
       case 'http://www.w3.org/2006/time#unitDay':
       default:
-        return `${timeInfo.year}.${timeInfo.month.toString().padStart(2, '0')}.${timeInfo.day.toString().padStart(2, '0')}`;
+        return `${timeInfo.year}-${timeInfo.month.toString().padStart(2, '0')}-${timeInfo.day.toString().padStart(2, '0')}`;
     }
   }
   render() {

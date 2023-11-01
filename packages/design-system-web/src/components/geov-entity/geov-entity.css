@@ -9,6 +9,7 @@
 
 .header {
   padding: var(--ion-padding);
+  background: var(--ion-color-tertiary-shade);
 }
 
 .header h1 {
@@ -80,4 +81,9 @@ a.entityLink {
 
 a.entityLink:hover {
   text-decoration: underline;
+}
+
+geov-entity geov-entity-properties {
+  display: block;
+  padding-top: 3rem;
 }
