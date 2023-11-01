@@ -5,12 +5,45 @@ geov-yasgui {
   height: 100%;
 }
 
-#display-query {
+.toggle-button {
   position: absolute;
-  z-index: 1;
-  right: 0;
+  z-index: 1000;
+  right: var(--ion-padding, 1rem);
+  top: var(--ion-padding, 1rem);
 }
 
-geov-yasgui .hidden {
-  display: none !important;
+geov-yasgui .tabsList,
+geov-yasgui .yasr_header,
+geov-yasgui .yasqe .resizeWrapper {
+  transition: all .2s ease-in;
+  overflow: hidden;
+}
+
+geov-yasgui .tabsList.collapsed,
+geov-yasgui .yasr_header.collapsed,
+geov-yasgui .yasqe.collapsed .resizeWrapper {
+  height: 0px;
+  transition: all .2s ease-out;
+}
+
+geov-yasgui .controlbar {
+  transition: all .2s ease-in;
+  overflow: hidden;
+}
+
+geov-yasgui .controlbar.collapsed {
+  max-height: 0px;
+  transition: all .2s ease-out;
+}
+
+geov-yasgui .yasqe .CodeMirror {
+  transition: all .2s ease-in;
+  overflow: hidden;
+}
+
+geov-yasgui .yasqe.collapsed .CodeMirror {
+  height: 0px !important;
+  border: none;
+  min-height: 0px;
+  transition: all .2s ease-out;
 }

@@ -2,6 +2,7 @@ import { Component, Host, h, Element, Prop } from '@stencil/core';
 import type Yasgui from '@triply/yasgui';
 import { importYasgui } from '../../lib/importYasgui';
 import generatePluginMapCircles from './PluginMapCircles';
+import { closeOutline, settingsOutline } from 'ionicons/icons';
 
 export type CustomPlugin = 'mapCircles';
 export type BuiltInPlugin = 'response' | 'table';
@@ -68,24 +69,6 @@ export class GeovYasgui {
     localStorage.removeItem('yagui__config');
     if (!this.el) return;
 
-    const toggleVisiblity = () => {
-      const icon = this.el.querySelector('#display-query ion-icon');
-      if (!this.collapse) {
-        icon.setAttribute('name', 'eye-outline');
-      } else {
-        icon.setAttribute('name', 'eye-off-outline');
-      }
-      const elementsToSwitchVis = this.el.querySelectorAll('.yasr_header, .yasqe, .tabsList, .controlbar');
-      elementsToSwitchVis.forEach(ele => {
-        ele.classList.toggle('hidden');
-      });
-      this.collapse = !this.collapse;
-    };
-    const displayQueryButton = this.el.querySelector('#display-query') as HTMLElement;
-    displayQueryButton.addEventListener('click', () => {
-      toggleVisiblity();
-    });
-
     const yasgui = new this.Y(this.el, {});
 
     // close initial tab
@@ -115,10 +98,21 @@ export class GeovYasgui {
 
     // execute query of active tab
     yasgui.getTab().query();
-    // hide GUI elements
-    if (this.collapse) toggleVisiblity();
+    // set Yasque visibility
+    this.setYasqueVisibility();
   }
 
+  toggleVisiblity() {
+    this.collapse = !this.collapse;
+    this.setYasqueVisibility();
+  }
+
+  setYasqueVisibility() {
+    const elementsToSwitchVis = this.el.querySelectorAll('.yasr_header, .yasqe, .tabsList, .controlbar');
+    elementsToSwitchVis.forEach(ele => {
+      this.collapse ? ele.classList.add('collapsed') : ele.classList.remove('collapsed');
+    });
+  }
   /**
    * Setup yasr configuration
    */
@@ -150,8 +144,8 @@ export class GeovYasgui {
   render() {
     return (
       <Host>
-        <ion-button id="display-query" size="small">
-          <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+        <ion-button class="toggle-button" size="small" onClick={() => this.toggleVisiblity()} title={this.collapse ? 'Show query' : 'Hide query'}>
+          {this.collapse ? <ion-icon slot="icon-only" icon={settingsOutline}></ion-icon> : <ion-icon slot="icon-only" icon={closeOutline}></ion-icon>}
         </ion-button>
       </Host>
     );
