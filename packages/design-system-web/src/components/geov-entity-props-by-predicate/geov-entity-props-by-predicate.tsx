@@ -9,6 +9,7 @@ import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
 import { PageEvent } from '../geov-paginator/geov-paginator';
+import { prepareOntomePredicateLink } from '../../lib/prepareOntomePredicateLink';
 
 const qrProps = (predicateId: string, subjectId: string, pageSize: number, offset: number, language: string) => `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -212,7 +213,7 @@ export class GeovEntityPropsByPredicate {
         <ion-grid fixed={true}>
           {/* List */}
           <ion-item class="heading" color={this.color} lines="full">
-            <a class="propertyLabel" href={this.predicateUri.endsWith('i') ? this.predicateUri.slice(0, -1) : this.predicateUri}>
+            <a class="propertyLabel" href={prepareOntomePredicateLink(this.predicateUri)}>
               {this.predicateLabel}
             </a>
             {showPaginator && this.renderPaginator()}
@@ -223,6 +224,7 @@ export class GeovEntityPropsByPredicate {
       </Host>
     );
   }
+
   private renderItem(item: Bindings): Element {
     const isUri = item.entity.type === 'uri';
     if (isUri) {
@@ -272,6 +274,8 @@ export class GeovEntityPropsByPredicate {
           language="en"
           fetchBeforeRender={this.fetchBeforeRender}
           parent={{ subjectUri: 'http://geovistory.org/resource/' + this.entityId, predicateUri: this.predicateUri }}
+          uriRegex={this.uriRegex}
+          uriReplace={this.uriReplace}
         ></geov-list-item-nested-properties>
       </ion-item>
     );

@@ -2,6 +2,7 @@ import { Component, h, Host, Prop } from '@stencil/core';
 import { GeovEntityPropertiesCustomEvent } from '../../components';
 import { GeovEntityPropertiesData } from '../geov-entity-properties/geov-entity-properties';
 import { getTimeSpanUri } from '../../lib/getTimeSpanUri';
+import { regexReplace } from '../../lib/regexReplace';
 
 /**
  * This component displays the data of a geovistory entity.
@@ -86,7 +87,7 @@ export class GeovEntity {
                 ></geov-time-span>
               </div>
               <h1>
-                <a href={'http://geovistory.org/resource/' + this.entityId} target="_blank" class="entityLink">
+                <a href={regexReplace('http://geovistory.org/resource/' + this.entityId, this.uriRegex, this.uriReplace)} target="_blank" class="entityLink">
                   <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}entity-label`}></geov-entity-label>
                 </a>
               </h1>
@@ -96,7 +97,6 @@ export class GeovEntity {
             </ion-grid>
           </div>
           <slot name="body-start"></slot>
-
           {/* Rest */}
           <geov-entity-properties
             onDataFetched={this.removeIfEmpty()}

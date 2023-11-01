@@ -7,6 +7,7 @@ import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
 import { getTimeSpanUri } from '../../lib/getTimeSpanUri';
+import { prepareOntomePredicateLink } from '../../lib/prepareOntomePredicateLink';
 
 const qrNestedProps = (entityUri: string, language: string) => {
   return ` PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -320,7 +321,7 @@ export class GeovListItemNestedProperties {
    */
   renderPredicateLabel(predicateLabel: SparqlBinding, predicate: SparqlBinding) {
     return (
-      <a class="propLabel" href={predicate.value} target="_blank">
+      <a class="propLabel" href={prepareOntomePredicateLink(predicate.value)} target="_blank">
         {this.getPredicateLabel(predicateLabel, predicate)}
       </a>
     );
