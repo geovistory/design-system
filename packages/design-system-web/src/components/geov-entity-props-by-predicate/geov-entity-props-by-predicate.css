@@ -4,25 +4,31 @@
   display: block;
 }
 
-ion-card {
-  box-shadow: none !important;
+ion-list {
+  --ion-item-background: none;
+}
+
+ion-item.heading {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --ion-item-background: none;
 }
 
 geov-paginator {
   margin-left: auto;
 }
 
-ion-item {
-  border-top: solid 1px #eee;
+a.propertyLabel,
+a.propertyLabel:visited {
+  text-decoration: var(--gv-property-link-decoration, none);
 }
 
-a,
-a:visited {
-  color: var(--ion-text-color, #000);
-  text-decoration: none;
-}
-
-a:hover {
+a.propertyLabel:hover {
   color: var(--ion-color-primary-shade, #5e3eaa);
   text-decoration: underline;
+}
+
+a.propertyLabel {
+  color: var(--gv-property-link-color, black);
+  font-size: 1.5rem;
 }

@@ -10,7 +10,7 @@ import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
 import { PageEvent } from '../geov-paginator/geov-paginator';
 
-const qrProps = (predicateId: string, objectId: string, pageSize: number, offset: number, language: string) => `
+const qrProps = (predicateId: string, subjectId: string, pageSize: number, offset: number, language: string) => `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
@@ -23,7 +23,7 @@ PREFIX geov: <http://geovistory.org/resource/>
 
 SELECT DISTINCT ?entity ?entityLabel ?entityType ?entityTypeLabel ?dt
 WHERE {
-  geov:${objectId} <${predicateId}> ?entity .
+  geov:${subjectId} <${predicateId}> ?entity .
   OPTIONAL {?entity rdfs:label ?entityLabel . FILTER(LANG(?entityLabel) IN ("${language}", "en")) .}
   OPTIONAL {?entity rdf:type ?entityType . OPTIONAL {?entityType rdfs:label ?entityTypeLabel . FILTER(LANG(?entityTypeLabel) IN ("${language}", "en")) .}}
   BIND (datatype(?entity) AS ?dt) .
@@ -209,42 +209,31 @@ export class GeovEntityPropsByPredicate {
     //const contentMinHeight = showPaginator ? this.pageSize * 62 : 0;
     return (
       <Host>
-        <ion-card color={this.color}>
-          <ion-card-header>
-            <ion-card-title>
-              <a href={this.predicateUri.endsWith('i') ? this.predicateUri.slice(0, -1) : this.predicateUri}>{this.predicateLabel}</a>
-            </ion-card-title>
-          </ion-card-header>
+        <ion-grid fixed={true}>
           {/* List */}
-          <ion-list lines="none">{this.data?.entities?.map(entity => this.renderItem(entity))}</ion-list>
+          <ion-item class="heading" color={this.color} lines="full">
+            <a class="propertyLabel" href={this.predicateUri.endsWith('i') ? this.predicateUri.slice(0, -1) : this.predicateUri}>
+              {this.predicateLabel}
+            </a>
+            {showPaginator && this.renderPaginator()}
+          </ion-item>
+          <ion-list lines="full">{this.data?.entities?.map(entity => this.renderItem(entity))}</ion-list>
           {/* Paginator */}
-          {showPaginator && this.renderPaginator()}
-        </ion-card>
+        </ion-grid>
       </Host>
     );
   }
-
   private renderItem(item: Bindings): Element {
     const isUri = item.entity.type === 'uri';
     if (isUri) {
       return this.renderUri(item);
     }
 
-    switch (item.dt?.value) {
-      case 'http://www.opengis.net/ont/geosparql#wktLiteral':
-        return <geov-display-geosparql-wktliteral color={this.color} value={item.entity?.value}></geov-display-geosparql-wktliteral>;
-      case 'http://www.w3.org/1999/02/22-rdf-syntax-ns#langString':
-      case 'http://www.w3.org/2001/XMLSchema#string':
-      default:
-        return (
-          <geov-display-string-literal
-            color={this.color}
-            modalTitle={this.predicateLabel}
-            label={item.entity?.value}
-            language={item.entity?.['xml:lang']}
-          ></geov-display-string-literal>
-        );
-    }
+    return (
+      <ion-item>
+        <ion-label>{this.renderLiteral(item)}</ion-label>
+      </ion-item>
+    );
   }
 
   private renderUri(item: Bindings) {
@@ -276,27 +265,45 @@ export class GeovEntityPropsByPredicate {
 
   private renderGenericEntity(item) {
     return (
-      <geov-list-item-nested-properties
-        sparqlEndpoint={this.sparqlEndpoint}
-        entityUri={item.entity.value}
-        language="en"
-        fetchBeforeRender={this.fetchBeforeRender}
-      ></geov-list-item-nested-properties>
+      <ion-item>
+        <geov-list-item-nested-properties
+          sparqlEndpoint={this.sparqlEndpoint}
+          entityUri={item.entity.value}
+          language="en"
+          fetchBeforeRender={this.fetchBeforeRender}
+          parent={{ subjectUri: 'http://geovistory.org/resource/' + this.entityId, predicateUri: this.predicateUri }}
+        ></geov-list-item-nested-properties>
+      </ion-item>
     );
   }
 
   private renderPaginator(): Element {
     return (
-      <ion-item color={this.color} lines="none">
-        <geov-paginator
-          color={this.color}
-          length={this.totalCount}
-          pageSize={this.pageSize}
-          pageIndex={this.pageIndex}
-          onPageChanged={ev => this.changePage(ev)}
-          showFirstLastButtons={false}
-        ></geov-paginator>
-      </ion-item>
+      <geov-paginator
+        color={this.color}
+        length={this.totalCount}
+        pageSize={this.pageSize}
+        pageIndex={this.pageIndex}
+        onPageChanged={ev => this.changePage(ev)}
+        showFirstLastButtons={false}
+      ></geov-paginator>
     );
+  }
+  private renderLiteral(item: Bindings) {
+    switch (item.dt?.value) {
+      case 'http://www.opengis.net/ont/geosparql#wktLiteral':
+        return <geov-display-geosparql-wktliteral color={this.color} value={item.entity?.value}></geov-display-geosparql-wktliteral>;
+      case 'http://www.w3.org/1999/02/22-rdf-syntax-ns#langString':
+      case 'http://www.w3.org/2001/XMLSchema#string':
+      default:
+        return (
+          <geov-display-string-literal
+            color={this.color}
+            modalTitle={this.predicateLabel}
+            label={item.entity?.value}
+            language={item.entity?.['xml:lang']}
+          ></geov-display-string-literal>
+        );
+    }
   }
 }

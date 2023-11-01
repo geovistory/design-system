@@ -4,3 +4,7 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+ion-item {
+  --inner-padding-end: var(--inner-padding-end);
+}

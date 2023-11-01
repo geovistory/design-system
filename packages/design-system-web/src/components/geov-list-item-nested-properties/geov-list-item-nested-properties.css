@@ -1,46 +1,57 @@
 :host {
   display: block;
+  width: 100%;
 }
 
-.itemNested {
-  border-top: solid 1px #eee;
+geov-display-string-literal {
+  --border-top: none;
+  --padding-start: 0;
+  --min-height: 0;
+  --inner-padding-end: 0;
 }
 
-.itemNested ion-label p {
-  color: var(--ion-text-color, #000);
-  margin: 0px 0px 4px;
-  padding: 0px;
+geov-time-span {
+  display: inline;
+  color: var(--ion-color-step-600);
   font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
 }
 
-.itemNested ion-label h3 {
-  color: var(--ion-text-color, #000);
-  margin: 0px;
-  padding: 0px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  line-height: 1.2;
+ion-item {
+  --padding-start: 0;
 }
 
-.nestedProp ion-label p {
-  color: var(--ion-color-primary, #000);
-  text-transform: uppercase;
-  font-size: 0.7rem;
+.header {
+  padding: 1rem 0 0.5rem 0;
 }
 
-.nestedProp ion-label h3 {
-  color: var(--ion-text-color, #000);
+.header a.classLabel {
+  color: var(--gv-class-link-color, #000);
+  text-decoration: var(--gv-class-link-decoration);
 }
 
-a,
-a:visited {
-  color: var(--ion-text-color, #000);
+.header a.classLabel:hover {
+  text-decoration: underline;
+}
+
+.nestedProp .propLabelWrapper a.propLabel {
+  color: var(--gv-property-link-color, #000);
+  text-decoration: var(--gv-property-link-decoration);
+}
+
+.nestedProp .propLabelWrapper a.propLabel:hover {
+  text-decoration: underline;
 }
 
 ion-col {
   padding: 0;
   margin: 0;
+}
+
+a.entityLink {
+  color: var(--gv-entity-link-color, #000);
+  text-decoration: var(--gv-entity-link-decoration);
+}
+
+a.entityLink:hover {
+  text-decoration: underline;
 }
