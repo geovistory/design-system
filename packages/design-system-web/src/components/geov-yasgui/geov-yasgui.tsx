@@ -1,13 +1,16 @@
 import { Component, Host, h, Element, Prop } from '@stencil/core';
 import type Yasgui from '@triply/yasgui';
 import { importYasgui } from '../../lib/importYasgui';
-import generatePluginMapCircles from './PluginMapCircles';
+import generatePluginMapCircles, { MapCircleConfig } from './PluginMapCircles';
 import { closeOutline, settingsOutline } from 'ionicons/icons';
 
 export type CustomPlugin = 'mapCircles';
 export type BuiltInPlugin = 'response' | 'table';
 export type Plugin = BuiltInPlugin | CustomPlugin;
-type PluginConfig = { name: Plugin; config: any };
+
+export interface PluginConfig {
+  mapCircles?: MapCircleConfig;
+}
 
 export interface QueryTab {
   name: string;
@@ -50,7 +53,7 @@ export class GeovYasgui {
   /**
    * The config of plugins
    */
-  @Prop() pluginConfig?: { name: Plugin; config: PluginConfig }[] = [];
+  @Prop() pluginConfig?: PluginConfig = {};
 
   /**
    * For each item in this array a tab will be added to Yasgui.
@@ -126,7 +129,7 @@ export class GeovYasgui {
    */
   registerCustomPlugins() {
     const customPlugins: { [key in CustomPlugin]: any } = {
-      mapCircles: generatePluginMapCircles(this.pluginConfig?.find(p => p.name === 'mapCircles')?.config as any),
+      mapCircles: generatePluginMapCircles(this.pluginConfig.mapCircles),
     };
 
     this.plugins?.forEach(plugin => {
