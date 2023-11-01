@@ -55,7 +55,7 @@ export class GeovEntityDownloadRdf {
    * buttonIcon
    * Icon of the button
    */
-  @Prop() buttonIcon = 'download-outline';
+  @Prop() buttonIcon?: string;
   /**
    * listFormat
    * List or RDF serialization format
@@ -119,7 +119,7 @@ export class GeovEntityDownloadRdf {
     return (
       <Host>
         <ion-button expand={this.expand} fill={this.fill} color={this.color} onClick={() => this.open()}>
-          {this.buttonLabel} {this.buttonIcon ? <ion-icon name={this.buttonIcon}></ion-icon> : <ion-icon icon={downloadOutline}></ion-icon>}
+          {this.buttonLabel} {this.buttonIcon ? <ion-icon slot="end" name={this.buttonIcon}></ion-icon> : <ion-icon slot="end" icon={downloadOutline}></ion-icon>}
         </ion-button>
         <ion-modal ref={element => (this.modal = element)} onWillDismiss={() => this.dismiss()} isOpen={false}>
           <ion-header>
