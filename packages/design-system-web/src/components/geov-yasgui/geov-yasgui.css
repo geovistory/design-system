@@ -5,7 +5,7 @@ geov-yasgui {
   height: 100%;
 }
 
-.toggle-button {
+geov-yasgui .toggle-button {
   position: absolute;
   z-index: 1000;
   right: var(--ion-padding, 1rem);
