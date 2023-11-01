@@ -3,12 +3,12 @@ import type Yasgui from '@triply/yasgui';
 import { importYasgui } from '../../lib/importYasgui';
 import generatePluginMapCircles from './PluginMapCircles';
 
-type CustomPlugin = 'mapCircles';
-type BuiltInPlugin = 'response' | 'table';
-type PluginConfig = { name: Plugin; config: any };
+export type CustomPlugin = 'mapCircles';
+export type BuiltInPlugin = 'response' | 'table';
 export type Plugin = BuiltInPlugin | CustomPlugin;
+type PluginConfig = { name: Plugin; config: any };
 
-interface QueryTab {
+export interface QueryTab {
   name: string;
   sparqlEndpoint: string;
   query: string;

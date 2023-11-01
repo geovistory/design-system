@@ -1,6 +1,6 @@
 {
   "name": "@geovistory/design-system-web",
-  "version": "1.16.1-pr-100.2",
+  "version": "1.17.0",
   "description": "geovistory.org's design system: web components",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -85,6 +85,7 @@
     "@storybook/react-webpack5": "^7.1.0",
     "@storybook/testing-library": "^0.2.0",
     "@storybook/web-components-vite": "^7.1.0",
+    "@triply/yasgui": "^4.2.28",
     "@types/jest": "^27.0.3",
     "@types/plotly.js": "^2.12.24",
     "@types/prismjs": "^1.26.0",
