@@ -49,9 +49,13 @@ export async function tsxToHTML(tsxSnippet: VNode): Promise<string> {
         ' ' +
         Object.keys($attrs$)
           .filter(key => {
-            const value = $attrs$[key];
+            let value = $attrs$[key];
             // Handle objects
             if (typeof value === 'object') {
+              // if value is a Set, convert it to an array to stringify propertly
+              // see: https://stackoverflow.com/a/31190928
+              if (value instanceof Set) value = [...value];
+
               selfId = id;
               // Put key and value in the complexElements
               complexElements[id] = {
