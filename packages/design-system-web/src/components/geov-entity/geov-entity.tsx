@@ -72,7 +72,7 @@ export class GeovEntity {
         <div class="container">
           <div class="header">
             <ion-grid fixed={true} class="ion-padding">
-              <p class="supertitle">
+              <div class="restricted-width supertitle">
                 <geov-entity-class-label
                   entityId={this.entityId}
                   sparqlEndpoint={this.sparqlEndpoint}
@@ -84,7 +84,7 @@ export class GeovEntity {
                   entityUri={getTimeSpanUri('http://geovistory.org/resource/' + this.entityId)}
                   sparqlEndpoint={this.sparqlEndpoint}
                 ></geov-time-span>
-              </p>
+              </div>
               <h1>
                 <a href={'http://geovistory.org/resource/' + this.entityId} target="_blank" class="entityLink">
                   <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}entity-label`}></geov-entity-label>
