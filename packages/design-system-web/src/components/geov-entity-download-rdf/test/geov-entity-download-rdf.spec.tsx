@@ -12,7 +12,7 @@ describe('geov-entity-download-rdf', () => {
     expect(page.root).toEqualHtml(`
     <geov-entity-download-rdf button-icon="download-outline" button-label="Download RDF" color="primary" entityid="i785518" expand="block" fill="outline">
       <ion-button expand="block" fill="outline" color="primary">
-        Download RDF <ion-icon name="download-outline"></ion-icon>
+        Download RDF <ion-icon name="download-outline" slot="end"></ion-icon>
       </ion-button>
       <ion-modal>
         <ion-header>
@@ -88,7 +88,7 @@ describe('geov-entity-download-rdf', () => {
 
         <body><geov-entity-download-rdf entity-id="i785518" color="primary" expand="block" fill="outline"
                 button-label="Download RDF" button-icon="download-outline" class="hydrated" s-id="1"><!--r.1--><ion-button expand="block" fill="outline" color="primary"
-                    c-id="1.0.0.0"><!--t.1.1.1.0-->Download RDF <ion-icon name="download-outline"
+                    c-id="1.0.0.0"><!--t.1.1.1.0-->Download RDF <ion-icon name="download-outline" slot="end"
                         c-id="1.2.1.1"></ion-icon></ion-button><ion-modal c-id="1.3.0.1"><ion-header c-id="1.4.1.0"><ion-toolbar c-id="1.5.2.0"><ion-buttons slot="start"
                                 c-id="1.6.3.0"><ion-button
                                     c-id="1.7.4.0"><!--t.1.8.5.0-->Cancel</ion-button></ion-buttons><ion-title
@@ -177,7 +177,7 @@ describe('geov-entity-download-rdf', () => {
     expect(page.root).toEqualHtml(
       `<geov-entity-download-rdf entity-id="i785518" color="primary" expand="block" fill="outline" button-label="Download RDF"
       button-icon="download-outline" class="hydrated"><!--r.1--><ion-button id="open-custom-dialog" expand="block"
-          fill="outline" color="primary">Download RDF <ion-icon name="download-outline"></ion-icon></ion-button><ion-modal
+          fill="outline" color="primary">Download RDF <ion-icon name="download-outline" slot="end"></ion-icon></ion-button><ion-modal
           id="example-modal" trigger="open-custom-dialog"><ion-header><ion-toolbar><ion-buttons
                       slot="start"><ion-button>Cancel</ion-button></ion-buttons><ion-title>Download
                       RDF</ion-title></ion-toolbar></ion-header><ion-content class="ion-padding"><ion-list
