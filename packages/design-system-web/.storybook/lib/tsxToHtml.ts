@@ -1,6 +1,9 @@
 import { VNode } from '@stencil/core';
 import { format } from 'prettier';
-import pluginXML from '@prettier/plugin-xml';
+import pluginHtml from 'prettier/plugins/html.mjs';
+import pluginBabel from 'prettier/plugins/babel.mjs';
+import pluginEStree from 'prettier/plugins/estree.mjs';
+import pluginTypescript from 'prettier/plugins/typescript.mjs';
 
 // Interface for a complex property
 interface ComplexProperty {
@@ -47,19 +50,26 @@ export async function tsxToHTML(tsxSnippet: VNode): Promise<string> {
         Object.keys($attrs$)
           .filter(key => {
             const value = $attrs$[key];
-            // Handle complex types and functions
-            if (typeof value === 'object' || typeof value === 'function') {
+            // Handle objects
+            if (typeof value === 'object') {
               selfId = id;
-              const slug: keyof ComplexElement = typeof value === 'object' ? 'props' : 'functions';
-
               // Put key and value in the complexElements
               complexElements[id] = {
                 ...complexElements[id],
-                [slug]: [...(complexElements[id]?.[slug] ?? []), { key, value }],
+                props: [...(complexElements[id]?.props ?? []), { key, value: JSON.stringify(value, null, 2).replace(/</g, '&lt;') }],
               };
               return false;
             }
-
+            // Handle functions
+            if (typeof value === 'function') {
+              selfId = id;
+              // Put key and value in the complexElements
+              complexElements[id] = {
+                ...complexElements[id],
+                functions: [...(complexElements[id]?.functions ?? []), { key, value }],
+              };
+              return false;
+            }
             return true;
           })
           .map(key => {
@@ -87,7 +97,12 @@ export async function tsxToHTML(tsxSnippet: VNode): Promise<string> {
 
   let htmlString = convertToHTML(tsxSnippet);
   htmlString = initWrapper(htmlString, complexElements);
-  const formatted = await format(htmlString, { plugins: [pluginXML], parser: 'xml', singleQuote: true, singleAttributePerLine: true });
+  const formatted = await format(htmlString, {
+    plugins: [pluginHtml, pluginBabel, pluginEStree, pluginTypescript],
+    parser: 'html',
+    singleQuote: true,
+    singleAttributePerLine: true,
+  });
   return formatted
     .replace(/&frasl;/g, '/')
     .replace(/&lt;/g, '<')
@@ -136,7 +151,7 @@ function initWrapper(htmlString: string, complexElements: ComplexElements) {
       ${
         complexElements[key]?.props
           ? `// Add props
-      ${complexElements[key].props.map(prop => `el${key}['${prop.key}'] = ${JSON.stringify(prop.value)}`).join(`;
+      ${complexElements[key].props.map(prop => `el${key}['${prop.key}'] = ${prop.value}`).join(`;
       `)};`
           : ''
       }${
