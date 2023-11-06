@@ -1,0 +1,69 @@
+:host,
+geov-yasgui-map-circles {
+  container-type: size;
+  display: block;
+  width: 100%;
+  height: 60vh;
+}
+
+#map-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.maplibregl-popup-content {
+  overflow-y: auto;
+  max-height: 210px;
+}
+
+.maplibregl-popup-content ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.maplibregl-popup-content p {
+  margin: 0;
+}
+
+geov-yasgui-map-circles ion-card-content {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.legend {
+  position: absolute;
+  z-index: 1;
+  width: calc(100% - (16px x 2));
+  margin-top: 10px;
+}
+
+@container (width >= 700px) {
+  .legend {
+    max-width: 300px;
+  }
+}
+
+.legend ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+#display-query {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+}
+
+.yasgui .hidden {
+  display: none !important;
+}
