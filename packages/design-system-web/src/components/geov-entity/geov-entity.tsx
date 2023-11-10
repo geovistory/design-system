@@ -1,6 +1,8 @@
 import { Component, h, Host, Prop } from '@stencil/core';
 import { GeovEntityPropertiesCustomEvent } from '../../components';
 import { GeovEntityPropertiesData } from '../geov-entity-properties/geov-entity-properties';
+import { getTimeSpanUri } from '../../lib/getTimeSpanUri';
+import { regexReplace } from '../../lib/regexReplace';
 
 /**
  * This component displays the data of a geovistory entity.
@@ -71,56 +73,36 @@ export class GeovEntity {
         <div class="container">
           <div class="header">
             <ion-grid fixed={true} class="ion-padding">
-              <p class="supertitle">
+              <div class="restricted-width supertitle">
                 <geov-entity-class-label
                   entityId={this.entityId}
                   sparqlEndpoint={this.sparqlEndpoint}
                   _ssrId={`${this.ssrIdPrefix}class-label`}
                   withIcon={true}
                 ></geov-entity-class-label>
-              </p>
+                <geov-time-span
+                  class="restricted-width"
+                  entityUri={getTimeSpanUri('http://geovistory.org/resource/' + this.entityId)}
+                  sparqlEndpoint={this.sparqlEndpoint}
+                ></geov-time-span>
+              </div>
               <h1>
-                <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}entity-label`}></geov-entity-label>
+                <a href={regexReplace('http://geovistory.org/resource/' + this.entityId, this.uriRegex, this.uriReplace)} target="_blank" class="entityLink">
+                  <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}entity-label`}></geov-entity-label>
+                </a>
               </h1>
-              <p>
+              <div class="restricted-width">
                 <geov-entity-definition entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}definition`}></geov-entity-definition>
-              </p>
+              </div>
             </ion-grid>
           </div>
-
           <slot name="body-start"></slot>
-
-          {/* <div class="ion-padding">
-              <ion-segment value="default">
-                <ion-segment-button value="default">
-                  <ion-icon icon={listCircleOutline}></ion-icon>
-                </ion-segment-button>
-                <ion-segment-button value="graph">
-                  <ion-icon icon={gitNetworkOutline}></ion-icon>
-                </ion-segment-button>
-              </ion-segment>
-            </div> */}
-
           {/* Rest */}
           <geov-entity-properties
             onDataFetched={this.removeIfEmpty()}
-            predicateExclude={[...this.predicatesBasic, ...this.predicatesTime, ...this.excluded].join(',')}
-            fixedGrid={true}
-            class="section columns-3"
-            sparqlEndpoint={this.sparqlEndpoint}
-            entityId={this.entityId}
-            language={'en'}
-            fetchBeforeRender={this.fetchBeforeRender}
-            uriRegex={this.uriRegex}
-            uriReplace={this.uriReplace}
-          ></geov-entity-properties>
-
-          {/* Time */}
-          <geov-entity-properties
-            onDataFetched={this.removeIfEmpty()}
-            predicateInclude={this.predicatesTime.join(',')}
-            fixedGrid={true}
-            class="section columns-1"
+            predicateExclude={[...this.predicatesBasic, ...this.excluded].join(',')}
+            fixedGrid={false}
+            class="columns-1"
             sparqlEndpoint={this.sparqlEndpoint}
             entityId={this.entityId}
             language={'en'}
@@ -131,7 +113,7 @@ export class GeovEntity {
 
           {/* Download RDF button */}
           <div class="section columns-1 ion-text-center">
-            <geov-entity-download-rdf entityId={this.entityId} projectId={this.projectId} color="primary" fill="outline" buttonLabel="Download RDF" buttonIcon="download-outline" />
+            <geov-entity-download-rdf entityId={this.entityId} projectId={this.projectId} color="primary" fill="outline" buttonLabel="Download RDF" />
           </div>
 
           <slot name="body-end"></slot>

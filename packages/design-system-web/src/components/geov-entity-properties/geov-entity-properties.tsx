@@ -280,20 +280,22 @@ export class GeovEntityProperties {
 
   renderCards() {
     return this.data.propsWithCount.map(b => (
-      <geov-entity-props-by-predicate
-        entityId={this.entityId}
-        sparqlEndpoint={this.sparqlEndpoint}
-        totalCount={Number(b.count.value)}
-        predicateUri={b.predicate.value}
-        predicateLabel={
-          b.predicateLabel
-            ? b.predicateLabel?.value
-            : b.predicate.value.replace('http://www.w3.org/2000/01/rdf-schema#', 'rdfs:').replace('http://www.w3.org/1999/02/22-rdf-syntax-ns#', 'rdf:')
-        }
-        uriRegex={this.uriRegex}
-        uriReplace={this.uriReplace}
-        color={this.color}
-      ></geov-entity-props-by-predicate>
+      <div class={'predicateContainer'}>
+        <geov-entity-props-by-predicate
+          entityId={this.entityId}
+          sparqlEndpoint={this.sparqlEndpoint}
+          totalCount={Number(b.count.value)}
+          predicateUri={b.predicate.value}
+          predicateLabel={
+            b.predicateLabel
+              ? b.predicateLabel?.value
+              : b.predicate.value.replace('http://www.w3.org/2000/01/rdf-schema#', 'rdfs:').replace('http://www.w3.org/1999/02/22-rdf-syntax-ns#', 'rdf:')
+          }
+          uriRegex={this.uriRegex}
+          uriReplace={this.uriReplace}
+          color={this.color}
+        ></geov-entity-props-by-predicate>
+      </div>
     ));
   }
 }

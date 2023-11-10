@@ -1,0 +1,61 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+geov-display-string-literal {
+  --border-top: none;
+  --padding-start: 0;
+  --min-height: 0;
+  --inner-padding-end: 0;
+}
+
+geov-time-span {
+  display: inline;
+  padding-left: 1rem;
+  color: var(--ion-color-step-600);
+}
+
+ion-item {
+  --padding-start: 0;
+}
+
+.header {
+  padding: 1rem 0 0.5rem 0;
+}
+
+.header .classLabelContainer {
+  color: var(--gv-class-link-color, #000);
+}
+
+.header a.classLabel {
+  color: var(--gv-class-link-color, #000);
+  text-decoration: var(--gv-class-link-decoration);
+}
+
+.header a.classLabel:hover {
+  text-decoration: underline;
+}
+
+.nestedProp .propLabelWrapper a.propLabel {
+  color: var(--gv-property-link-color, #000);
+  text-decoration: var(--gv-property-link-decoration);
+}
+
+.nestedProp .propLabelWrapper a.propLabel:hover {
+  text-decoration: underline;
+}
+
+ion-col {
+  padding: 0;
+  margin: 0;
+}
+
+a.entityLink {
+  color: var(--gv-entity-link-color, #000);
+  text-decoration: var(--gv-entity-link-decoration);
+}
+
+a.entityLink:hover {
+  text-decoration: underline;
+}

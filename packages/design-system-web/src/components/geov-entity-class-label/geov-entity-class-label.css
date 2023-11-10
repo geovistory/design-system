@@ -1,4 +1,10 @@
 :host {
   display: inline;
   vertical-align: middle;
+
+}
+
+a {
+  color: var(--gv-class-link-color, black);
+  text-decoration: var(--gv-class-link-decoration, none);
 }
