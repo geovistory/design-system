@@ -1,19 +1,30 @@
 import { Component, Host, h, Element, Prop } from '@stencil/core';
 import type Yasgui from '@triply/yasgui';
 import { importYasgui } from '../../lib/importYasgui';
-import * as MyMapPlugin from './MyMapPlugin';
+import generatePluginMapCircles, { MapCircleConfig } from './PluginMapCircles';
+import { closeOutline, settingsOutline } from 'ionicons/icons';
 
-export type CustomPlugin = 'map';
+export type CustomPlugin = 'mapCircles';
 export type BuiltInPlugin = 'response' | 'table';
-export type YasrPlugin = BuiltInPlugin | CustomPlugin;
+export type Plugin = BuiltInPlugin | CustomPlugin;
+
+export interface PluginConfig {
+  mapCircles?: MapCircleConfig;
+}
 
 export interface QueryTab {
   name: string;
   sparqlEndpoint: string;
   query: string;
 }
+/**
+ * Yasgui is a SPARQL query editor and results visualizer.
+ *
+ * The component is a wrapper around the Yasgui library it can also use custom plugins.
+ */
 @Component({
   tag: 'geov-yasgui',
+  styleUrl: 'geov-yasgui.css',
   shadow: false,
 })
 export class GeovYasgui {
@@ -22,90 +33,33 @@ export class GeovYasgui {
   /**
    * Plugins to enable (in addition to the built-in plugins: response, table, error, boolean)
    */
-  @Prop() plugins: CustomPlugin[] = ['map'];
+  @Prop() plugins: Set<CustomPlugin> = new Set();
+
+  /**
+   * Collapse the GUI elements of Yasgui
+   */
+  @Prop() collapse: boolean = false;
 
   /**
    * The plugin initially activated
    */
-  @Prop() defaultPlugin: YasrPlugin = 'map';
+  @Prop() defaultPlugin: Plugin = 'table';
 
   /**
    * The order of plugin tabs
    */
-  @Prop() pluginOrder?: YasrPlugin[] = ['table', 'response'];
+  @Prop() pluginOrder?: Plugin[] = ['table', 'response'];
+
+  /**
+   * The config of plugins
+   */
+  @Prop() pluginConfig?: PluginConfig = {};
 
   /**
    * For each item in this array a tab will be added to Yasgui.
    * `QueryTab: { name: 'Tab name', sparqlEndpoint: 'https://...', query: 'SELECT ?s ?p ?o' }`
    */
-  @Prop() queryTabs: QueryTab[] = [
-    {
-      name: 'Origin of Persons',
-      sparqlEndpoint: 'https://sparql.geovistory.org/api_v1_project_591',
-      query: `PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX ontome: <https://ontome.net/ontology/>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-SELECT ?label ?long ?lat (count(?person) * 0.5 as ?radius) (count(?person) as ?number) ?type ?link
-    WHERE {
-
-    # Geographical Place -had presence-> Presence -was at-> Place (lat/long)
-    ?s ontome:p147i/ontome:p148 ?place.
-
-    # Geographical Place -label-> label
-    ?s rdfs:label ?label.
-
-    # Geographical Place -is origin of-> Person
-    ?s ontome:p1439i ?person.
-
-    # Geographical Place -has type-> Geographical Place Type -label-> label
-    optional{?s ontome:p1110/rdfs:label ?type}
-
-    # Extract lat and long from WKT
-  bind(replace(str(?place), '<http://www.opengis.net/def/crs/EPSG/0/4326>', "", "i") as ?rep)
-    bind(xsd:float(replace(str(?rep), "^[^0-9\\\\.-]*([-]?[0-9\\\\.]+) .*$", "$1" )) as ?long )
-    bind(xsd:float(replace( str(?rep), "^.* ([-]?[0-9\\\\.]+)[^0-9\\\\.]*$", "$1" )) as ?lat )
-
-    # Append the project query param to the URI
-  bind(concat(str(?s), "?p=591") as ?link )
-}
-GROUP BY ?label ?long ?lat ?type ?link
-`,
-    },
-    {
-      name: 'Origin of Persons2',
-      sparqlEndpoint: 'https://sparql.geovistory.org/api_v1_project_591',
-      query: `PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX ontome: <https://ontome.net/ontology/>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-SELECT ?label ?long ?lat (count(?person) * 0.5 as ?radius) (count(?person) as ?number) ?type ?link
-    WHERE {
-
-    # Geographical Place -had presence-> Presence -was at-> Place (lat/long)
-    ?s ontome:p147i/ontome:p148 ?place.
-
-    # Geographical Place -label-> label
-    ?s rdfs:label ?label.
-
-    # Geographical Place -is origin of-> Person
-    ?s ontome:p1439i ?person.
-
-    # Geographical Place -has type-> Geographical Place Type -label-> label
-    optional{?s ontome:p1110/rdfs:label ?type}
-
-    # Extract lat and long from WKT
-  bind(replace(str(?place), '<http://www.opengis.net/def/crs/EPSG/0/4326>', "", "i") as ?rep)
-    bind(xsd:float(replace(str(?rep), "^[^0-9\\\\.-]*([-]?[0-9\\\\.]+) .*$", "$1" )) as ?long )
-    bind(xsd:float(replace( str(?rep), "^.* ([-]?[0-9\\\\.]+)[^0-9\\\\.]*$", "$1" )) as ?lat )
-
-    # Append the project query param to the URI
-  bind(concat(str(?s), "?p=591") as ?link )
-}
-GROUP BY ?label ?long ?lat ?type ?link
-`,
-    },
-  ];
+  @Prop() queryTabs: QueryTab[] = [];
 
   Y: typeof Yasgui;
 
@@ -121,7 +75,7 @@ GROUP BY ?label ?long ?lat ?type ?link
     const yasgui = new this.Y(this.el, {});
 
     // close initial tab
-    yasgui.getTab().close();
+    if (this.queryTabs.length) yasgui.getTab().close();
 
     // add tabs
     const tabDefaults = this.Y.Tab.getDefaults();
@@ -147,8 +101,21 @@ GROUP BY ?label ?long ?lat ?type ?link
 
     // execute query of active tab
     yasgui.getTab().query();
+    // set Yasque visibility
+    this.setYasqueVisibility();
   }
 
+  toggleVisiblity() {
+    this.collapse = !this.collapse;
+    this.setYasqueVisibility();
+  }
+
+  setYasqueVisibility() {
+    const elementsToSwitchVis = this.el.querySelectorAll('.yasr_header, .yasqe, .tabsList, .controlbar');
+    elementsToSwitchVis.forEach(ele => {
+      this.collapse ? ele.classList.add('collapsed') : ele.classList.remove('collapsed');
+    });
+  }
   /**
    * Setup yasr configuration
    */
@@ -162,10 +129,10 @@ GROUP BY ?label ?long ?lat ?type ?link
    */
   registerCustomPlugins() {
     const customPlugins: { [key in CustomPlugin]: any } = {
-      map: MyMapPlugin.default,
+      mapCircles: generatePluginMapCircles(this.pluginConfig.mapCircles),
     };
 
-    this.plugins.forEach(plugin => {
+    this.plugins?.forEach(plugin => {
       if (!!customPlugins[plugin]) this.Y.Yasr.registerPlugin(plugin, customPlugins[plugin]);
     });
   }
@@ -178,6 +145,12 @@ GROUP BY ?label ?long ?lat ?type ?link
   }
 
   render() {
-    return <Host></Host>;
+    return (
+      <Host>
+        <ion-button class="toggle-button" size="small" onClick={() => this.toggleVisiblity()} title={this.collapse ? 'Show query' : 'Hide query'}>
+          {this.collapse ? <ion-icon slot="icon-only" icon={settingsOutline}></ion-icon> : <ion-icon slot="icon-only" icon={closeOutline}></ion-icon>}
+        </ion-button>
+      </Host>
+    );
   }
 }
