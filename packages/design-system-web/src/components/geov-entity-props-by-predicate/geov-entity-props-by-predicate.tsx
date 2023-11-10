@@ -9,7 +9,6 @@ import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
 import { PageEvent } from '../geov-paginator/geov-paginator';
-import { prepareOntomePredicateLink } from '../../lib/prepareOntomePredicateLink';
 
 const qrProps = (predicateId: string, subjectId: string, pageSize: number, offset: number, language: string) => `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -213,7 +212,7 @@ export class GeovEntityPropsByPredicate {
         <ion-grid fixed={true}>
           {/* List */}
           <ion-item class="heading" color={this.color} lines="full">
-            <a class="propertyLabel" href={prepareOntomePredicateLink(this.predicateUri)}>
+            <a class="propertyLabel" href={this.predicateUri}>
               {this.predicateLabel}
             </a>
             {showPaginator && this.renderPaginator()}
