@@ -193,13 +193,15 @@ export class GeovListItemNestedProperties {
       <Host>
         <ion-grid class="container">
           <ion-row>
-            <ion-col class="header" size="auto">
+            <ion-col class="header" size="3">
               <div class={'classLabelContainer'}>
                 <geov-entity-class-icon classURI={rdfTypeProp.object.value} />
                 <a href={rdfTypeProp.object.value} target="_blank" class="classLabel">
                   {rdfTypeProp?.objectLabel?.value}
                 </a>{' '}
-                <geov-time-span sparqlEndpoint={this.sparqlEndpoint} entityUri={getTimeSpanUri(this.entityUri)}></geov-time-span>
+                <div class={'timespanLabel'}>
+                  <geov-time-span sparqlEndpoint={this.sparqlEndpoint} entityUri={getTimeSpanUri(this.entityUri)}></geov-time-span>
+                </div>
               </div>
               <div class={'entityLabelContainer'}>
                 <a href={this.prepareUrl(this.entityUri)} target="_blank" class="entityLink">
@@ -207,7 +209,7 @@ export class GeovListItemNestedProperties {
                 </a>
               </div>
             </ion-col>
-            <ion-col>
+            <ion-col size="9">
               <ion-row class="content">
                 {restProps.map(b => (
                   <ion-col>

@@ -64,3 +64,7 @@ a.entityLink:hover {
 .content {
   padding: 0.5rem 0 0.5rem 1rem;
 }
+
+.timespanLabel geov-time-span {
+  padding: 0;
+}
