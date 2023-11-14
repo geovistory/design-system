@@ -20,27 +20,26 @@ ion-item {
   --padding-start: 0;
 }
 
+.containerForQuery {
+  container-type: inline-size;
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;
-  container-type: inline-size;
 }
 
 .header {
   padding: 1rem 16px 0.5rem 0;
-  flex-basis: 100px;
+  flex-basis: 200px;
   flex-grow: 1;
   flex-shrink: 0;
   border-bottom: dashed 1px var(--border-color);
   border-right: dashed 1px var(--ion-color-tertiary);
 }
 
-@container (width > 432px) {
-  .header {
-    flex-grow: 0;
-    border-right: dashed 1px var(--border-color);
-    border-bottom: none;
-  }
+.content ion-col {
+  flex-basis: 300px;
 }
 
 .content {
@@ -88,4 +87,18 @@ a.entityLink:hover {
 
 .timespanLabel geov-time-span {
   padding: 0;
+}
+
+@container (width > 532px) {
+  .container {
+    flex-wrap: nowrap;
+  }
+  .header {
+    flex-grow: 0;
+    border-right: dashed 1px var(--border-color);
+    border-bottom: none;
+  }
+  .content ion-col {
+    flex-basis: 0px;
+  }
 }
