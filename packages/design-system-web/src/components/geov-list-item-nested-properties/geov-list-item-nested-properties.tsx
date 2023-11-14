@@ -201,9 +201,11 @@ export class GeovListItemNestedProperties {
               <geov-time-span sparqlEndpoint={this.sparqlEndpoint} entityUri={getTimeSpanUri(this.entityUri)}></geov-time-span>
             </div>
             <div class={'entityLabelContainer'}>
-              <a href={this.prepareUrl(this.entityUri)} target="_blank" class="entityLink">
-                {rdfsLabelProp?.object?.value}
-              </a>
+              <h2>
+                <a href={this.prepareUrl(this.entityUri)} target="_blank" class="entityLink">
+                  {rdfsLabelProp?.object?.value}
+                </a>
+              </h2>
             </div>
           </div>
 

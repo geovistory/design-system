@@ -51,6 +51,12 @@ ion-col {
   margin: 0;
 }
 
+div.entityLabelContainer h2 {
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: normal;
+}
+
 a.entityLink {
   color: var(--gv-entity-link-color, #000);
   text-decoration: var(--gv-entity-link-decoration);
@@ -58,4 +64,8 @@ a.entityLink {
 
 a.entityLink:hover {
   text-decoration: underline;
+}
+
+.nestedProp h3 {
+  font-size: 1em;
 }
