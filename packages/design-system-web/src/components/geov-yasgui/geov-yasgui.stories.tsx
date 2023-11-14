@@ -34,8 +34,8 @@ WHERE {
 # Geographical Place -is origin of-> Person
 ?s ontome:p1439i ?person.
 
-# Geographical Place -has type-> Geographical Place Type -label-> label
-optional{?s ontome:p1110/rdfs:label ?type}
+# Geographical Place -is classified by-> Geographical Place Classification -classifies with-> Geographical Place Type -label-> label
+optional{?s ontome:p2124i/ontome:p2125/rdfs:label ?type}
 
 # Extract lat and long from WKT
 bind(replace(str(?place), '<http://www.opengis.net/def/crs/EPSG/0/4326>', "", "i") as ?rep)
@@ -67,8 +67,8 @@ WHERE {
 # Geographical Place -is origin of-> Person
 ?s ontome:p1439i ?person.
 
-# Geographical Place -has type-> Geographical Place Type -label-> label
-optional{?s ontome:p1110/rdfs:label ?type}
+# Geographical Place -is classified by-> Geographical Place Classification -classifies with-> Geographical Place Type -label-> label
+optional{?s ontome:p2124i/ontome:p2125/rdfs:label ?type}
 
 # Extract lat and long from WKT
 bind(replace(str(?place), '<http://www.opengis.net/def/crs/EPSG/0/4326>', "", "i") as ?rep)
