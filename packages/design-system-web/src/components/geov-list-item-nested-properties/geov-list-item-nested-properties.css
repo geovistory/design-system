@@ -20,9 +20,31 @@ ion-item {
   --padding-start: 0;
 }
 
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  container-type: inline-size;
+  container-name: container;
+}
+
 .header {
   padding: 1rem 1rem 0.5rem 0;
-  border-right: dashed 1px var(--border-color);
+  flex-basis: 100px;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+@container container(width >= 400px) {
+  .header {
+    flex-grow: 0;
+  }
+}
+
+.content {
+  padding: 0.5rem 0 0.5rem 1rem;
+  flex-basis: 500px;
+  flex-grow: 1;
+  flex-shrink: 0;
 }
 
 .header .classLabelContainer {
@@ -59,10 +81,6 @@ a.entityLink {
 
 a.entityLink:hover {
   text-decoration: underline;
-}
-
-.content {
-  padding: 0.5rem 0 0.5rem 1rem;
 }
 
 .timespanLabel geov-time-span {

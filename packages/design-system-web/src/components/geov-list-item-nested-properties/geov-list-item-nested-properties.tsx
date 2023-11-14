@@ -191,43 +191,41 @@ export class GeovListItemNestedProperties {
 
     return (
       <Host>
-        <ion-grid class="container">
-          <ion-row>
-            <ion-col class="header" size="3">
-              <div class={'classLabelContainer'}>
-                <geov-entity-class-icon classURI={rdfTypeProp.object.value} />
-                <a href={rdfTypeProp.object.value} target="_blank" class="classLabel">
-                  {rdfTypeProp?.objectLabel?.value}
-                </a>{' '}
-                <div class={'timespanLabel'}>
-                  <geov-time-span sparqlEndpoint={this.sparqlEndpoint} entityUri={getTimeSpanUri(this.entityUri)}></geov-time-span>
-                </div>
+        <div class="container">
+          <div class="header">
+            <div class={'classLabelContainer'}>
+              <geov-entity-class-icon classURI={rdfTypeProp.object.value} />
+              <a href={rdfTypeProp.object.value} target="_blank" class="classLabel">
+                {rdfTypeProp?.objectLabel?.value}
+              </a>{' '}
+              <div class={'timespanLabel'}>
+                <geov-time-span sparqlEndpoint={this.sparqlEndpoint} entityUri={getTimeSpanUri(this.entityUri)}></geov-time-span>
               </div>
-              <div class={'entityLabelContainer'}>
-                <a href={this.prepareUrl(this.entityUri)} target="_blank" class="entityLink">
-                  {rdfsLabelProp?.object?.value}
-                </a>
-              </div>
-            </ion-col>
-            <ion-col size="9">
-              <ion-row class="content">
-                {restProps.map(b => (
-                  <ion-col>
-                    <ion-item lines="none" class="nestedProp">
-                      <ion-label>
-                        <p class="propLabelWrapper">
-                          {this.renderPredicateLabel(b.predicateLabel, b.predicate)}
-                          {this.renderCount(b.count)}
-                        </p>
-                        <h3> {this.renderObject(b.object, b.objectLabel, this.getPredicateLabel(b.predicateLabel, b.predicate))}</h3>
-                      </ion-label>
-                    </ion-item>
-                  </ion-col>
-                ))}
-              </ion-row>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+            </div>
+            <div class={'entityLabelContainer'}>
+              <a href={this.prepareUrl(this.entityUri)} target="_blank" class="entityLink">
+                {rdfsLabelProp?.object?.value}
+              </a>
+            </div>
+          </div>
+          <div class="content">
+            <ion-row>
+              {restProps.map(b => (
+                <ion-col>
+                  <ion-item lines="none" class="nestedProp">
+                    <ion-label>
+                      <p class="propLabelWrapper">
+                        {this.renderPredicateLabel(b.predicateLabel, b.predicate)}
+                        {this.renderCount(b.count)}
+                      </p>
+                      <h3> {this.renderObject(b.object, b.objectLabel, this.getPredicateLabel(b.predicateLabel, b.predicate))}</h3>
+                    </ion-label>
+                  </ion-item>
+                </ion-col>
+              ))}
+            </ion-row>
+          </div>
+        </div>
         <slot></slot>
       </Host>
     );
