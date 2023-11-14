@@ -21,7 +21,8 @@ ion-item {
 }
 
 .header {
-  padding: 1rem 0 0.5rem 0;
+  padding: 1rem 1rem 0.5rem 0;
+  border-right: dashed 1px var(--border-color);
 }
 
 .header .classLabelContainer {
@@ -58,4 +59,8 @@ a.entityLink {
 
 a.entityLink:hover {
   text-decoration: underline;
+}
+
+.content {
+  padding: 0.5rem 0 0.5rem 1rem;
 }
