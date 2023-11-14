@@ -12,9 +12,9 @@ geov-yasgui .toggle-button {
   top: var(--ion-padding, 1rem);
 }
 
-geov-yasgui .tabsList,
-geov-yasgui .yasr_header,
-geov-yasgui .yasqe .resizeWrapper {
+geov-yasgui.toggling .tabsList,
+geov-yasgui.toggling .yasr_header,
+geov-yasgui.toggling .yasqe .resizeWrapper {
   transition: all .2s ease-in;
   overflow: hidden;
 }
@@ -23,10 +23,11 @@ geov-yasgui .tabsList.collapsed,
 geov-yasgui .yasr_header.collapsed,
 geov-yasgui .yasqe.collapsed .resizeWrapper {
   height: 0px;
+  overflow: hidden;
   transition: all .2s ease-out;
 }
 
-geov-yasgui .controlbar {
+geov-yasgui.toggling .controlbar {
   transition: all .2s ease-in;
   overflow: hidden;
 }
@@ -34,9 +35,10 @@ geov-yasgui .controlbar {
 geov-yasgui .controlbar.collapsed {
   max-height: 0px;
   transition: all .2s ease-out;
+  overflow: hidden;
 }
 
-geov-yasgui .yasqe .CodeMirror {
+geov-yasgui.toggling .yasqe .CodeMirror {
   transition: all .2s ease-in;
   overflow: hidden;
 }
@@ -46,4 +48,5 @@ geov-yasgui .yasqe.collapsed .CodeMirror {
   border: none;
   min-height: 0px;
   transition: all .2s ease-out;
+  overflow: hidden;
 }
