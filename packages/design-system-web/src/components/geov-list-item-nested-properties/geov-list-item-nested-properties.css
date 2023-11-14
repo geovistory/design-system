@@ -20,8 +20,33 @@ ion-item {
   --padding-start: 0;
 }
 
+.containerForQuery {
+  container-type: inline-size;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .header {
-  padding: 1rem 0 0.5rem 0;
+  padding: 1rem 16px 0.5rem 0;
+  flex-basis: 200px;
+  flex-grow: 1;
+  flex-shrink: 0;
+  border-bottom: dashed 1px var(--border-color);
+  border-right: dashed 1px var(--ion-color-tertiary);
+}
+
+.content ion-col {
+  flex-basis: 300px;
+}
+
+.content {
+  padding: 0.5rem 0 0.5rem 16px;
+  flex-basis: 300px;
+  flex-grow: 1;
+  flex-shrink: 0;
 }
 
 .header .classLabelContainer {
@@ -58,4 +83,22 @@ a.entityLink {
 
 a.entityLink:hover {
   text-decoration: underline;
+}
+
+.timespanLabel geov-time-span {
+  padding: 0;
+}
+
+@container (width > 532px) {
+  .container {
+    flex-wrap: nowrap;
+  }
+  .header {
+    flex-grow: 0;
+    border-right: dashed 1px var(--border-color);
+    border-bottom: none;
+  }
+  .content ion-col {
+    flex-basis: 0px;
+  }
 }
