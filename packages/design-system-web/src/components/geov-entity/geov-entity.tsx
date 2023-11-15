@@ -87,10 +87,28 @@ export class GeovEntity {
                 ></geov-time-span>
               </div>
               <h1>
-                <a href={regexReplace('http://geovistory.org/resource/' + this.entityId, this.uriRegex, this.uriReplace)} target="_blank" class="entityLink">
-                  <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}entity-label`}></geov-entity-label>
-                </a>
+                <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}entity-label`}></geov-entity-label>
               </h1>
+              <div class="restricted-width">
+                <b>URI</b>:{' '}
+                <a
+                  href={regexReplace('http://geovistory.org/resource/' + this.entityId, this.uriRegex, this.uriReplace).replace('?p=' + this.projectId, '')}
+                  target="_blank"
+                  class="entityLink"
+                >
+                  {regexReplace('http://geovistory.org/resource/' + this.entityId, this.uriRegex, this.uriReplace)}
+                </a>{' '}
+                {this.projectId ? (
+                  <span>
+                    | <b>Project link: </b>
+                    <a href={regexReplace('http://geovistory.org/resource/' + this.entityId, this.uriRegex, this.uriReplace)} target="_blank" class="entityLink">
+                      {regexReplace('http://geovistory.org/resource/' + this.entityId, this.uriRegex, this.uriReplace)}
+                    </a>
+                  </span>
+                ) : (
+                  ''
+                )}
+              </div>
               <div class="restricted-width">
                 <geov-entity-definition entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}definition`}></geov-entity-definition>
               </div>
