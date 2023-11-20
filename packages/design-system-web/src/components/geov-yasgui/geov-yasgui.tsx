@@ -16,6 +16,7 @@ export interface QueryTab {
   name: string;
   sparqlEndpoint: string;
   query: string;
+  selectedPlugin?: Plugin;
 }
 /**
  * Yasgui is a SPARQL query editor and results visualizer.
@@ -91,7 +92,7 @@ export class GeovYasgui {
           yasr: {
             ...tabDefaults.yasr,
             settings: {
-              selectedPlugin: this.defaultPlugin,
+              selectedPlugin: q.selectedPlugin ?? this.defaultPlugin,
             },
           },
         },

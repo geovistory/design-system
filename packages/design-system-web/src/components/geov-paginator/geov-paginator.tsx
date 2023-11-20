@@ -64,7 +64,7 @@ export class GeovPaginator {
         <ion-item color={this.color} lines="none">
           {!this.hidePageSize && (
             <ion-note>
-              {firstShownItem} – {lastShownItem}
+              {firstShownItem} – {lastShownItem <= this.length ? lastShownItem : this.length} of {this.length}
               {/* Page {this.pageIndex + 1} of {pageCount.toString()}: */}
             </ion-note>
           )}

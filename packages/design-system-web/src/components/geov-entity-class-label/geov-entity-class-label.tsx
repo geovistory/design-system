@@ -109,12 +109,13 @@ export class GeovEntityClassLabel {
   render() {
     return (
       <Host>
-        {this.withIcon && <geov-entity-class-icon classURI={this.data.classURI}></geov-entity-class-icon>}
-        {this.data.label}
-        {this.data.loading && `loading...`}
-        {this.data.error && `error!`}
-        {!this.data.label && !this.data.loading && !this.data.error && <span class="no-label-found">no label found</span>}
-        <slot />
+        <a href={this.data.classURI} target="_blank">
+          {this.withIcon && <geov-entity-class-icon classURI={this.data.classURI}></geov-entity-class-icon>}
+          {this.data.label}
+          {this.data.loading && `loading...`}
+          {this.data.error && `error!`}
+          {!this.data.label && !this.data.loading && !this.data.error && <span class="no-label-found">no label found</span>}
+        </a>
       </Host>
     );
   }

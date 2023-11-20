@@ -1,4 +1,3 @@
-import { Color } from '@ionic/core';
 import { Component, Fragment, Prop, h } from '@stencil/core';
 
 /**
@@ -15,26 +14,16 @@ export class GeovDisplayGeosparqlWktliteral {
    * the opengis value
    */
   @Prop() value: string;
-  /**
-   * Color assigned to ion-item
-   */
-  @Prop() color: Color = '';
 
   render() {
     //http://www.opengis.net/def/crs/EPSG/0/4326>POINT(4.79583 52.55417)
-    let coord = this.value.replace('http://www.opengis.net/def/crs/EPSG/0/4326>POINT(', '');
+    let coord = this.value.replace('<http://www.opengis.net/def/crs/EPSG/0/4326>POINT(', '');
     coord = coord.replace(')', '');
     const coordonnees = coord.split(' ');
 
     return (
       <Fragment>
-        <ion-item color={this.color} lines="none">
-          <ion-label>
-            long: {coordonnees[0]}
-            <br />
-            lat: {coordonnees[1]}
-          </ion-label>
-        </ion-item>
+        long: {coordonnees[0]}, lat: {coordonnees[1]}
       </Fragment>
     );
   }

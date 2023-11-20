@@ -159,6 +159,18 @@
   --swiper-theme-color: var(--ion-color-primary);
 
   --gv-color-background-code: #f5f2f0;
+
+  /* style of OWL property links */
+  --gv-property-link-color: var(--ion-color-primary);
+  --gv-property-link-decoration: none;
+
+  /* style of OWL class links */
+  --gv-class-link-color: var(--ion-color-primary);
+  --gv-class-link-decoration: none;
+
+  /* style of entity links*/
+  --gv-entity-link-color: var(--ion-text-color);
+  --gv-entity-link-decoration: none;
 }
 
 geov-code {
