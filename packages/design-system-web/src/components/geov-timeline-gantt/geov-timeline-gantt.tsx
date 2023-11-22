@@ -1,7 +1,15 @@
-import { Component, h, Host } from '@stencil/core';
-import { Chart } from 'chart.js/auto';
+import { Component, h, Host, Prop } from '@stencil/core';
+import Chart from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+
+type timespanData = {
+  entityLabel: string;
+  entityClassLabel: string;
+  entityUri: string;
+  startDate: string;
+  endDate: string;
+};
 
 /**
  * This component displays a timeline of events.
@@ -14,45 +22,26 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 export class GeovTimelineGantt {
   el: HTMLCanvasElement;
 
+  @Prop() data: timespanData[];
+
+  @Prop() lineHeight: number = 20;
+
   componentDidLoad() {
     const ctx = this.el.getContext('2d');
-    new Chart(ctx, {
+    const chart = new Chart(ctx, {
       type: 'bar',
       data: {
         //labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         datasets: [
           {
             label: 'Timeline',
-            data: [
-              { x: ['2022-02-01', '2022-04-03'], y: 'event', name: 'essai1' },
-              { x: ['2022-02-02', '2022-05-04'], y: 'event2', name: 'essai2' },
-              { x: ['2022-02-03', '2022-08-07'], y: 'event3', name: 'essai3' },
-              { x: ['2022-02-06', '2022-09-07'], y: 'event4', name: 'essai4' },
-              { x: ['2022-12-08', '2023-04-12'], y: 'event5', name: 'essai5' },
-              { x: ['2022-02-09', '2022-02-10'], y: 'event6', name: 'essai6' },
-              { x: ['2022-02-09', '2022-02-13'], y: 'event7', name: 'essai7' },
-            ],
-            backgroundColor: [
-              'rgba(255, 26, 104, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)',
-              'rgba(0, 0, 0, 1)',
-            ],
-            borderColor: [
-              'rgba(255, 26, 104, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)',
-              'rgba(0, 0, 0, 1)',
-            ],
-            barPercentage: 0.9,
+            data: this.data.map(item => ({ x: [item.startDate, item.endDate], y: item.entityLabel, name: item.entityClassLabel, entityUri: item.entityUri })),
+            backgroundColor: ['rgba(122, 89, 199)'],
+            borderColor: ['rgba(94, 62, 170)'],
+            barPercentage: 1,
             borderSkipped: false,
             borderRadius: 10,
+            minBarLength: 40,
           },
         ],
       },
@@ -66,6 +55,7 @@ export class GeovTimelineGantt {
               const label = context.y;
               return `${label}`;
             },
+            color: 'white',
           },
         },
         indexAxis: 'y',
@@ -84,12 +74,27 @@ export class GeovTimelineGantt {
       },
       plugins: [ChartDataLabels],
     });
+
+    // Ajoutez un gestionnaire d'événements de clic pour détecter les clics sur les barres du graphique
+    this.el.addEventListener('click', event => {
+      const activeElements = chart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
+      if (activeElements.length > 0) {
+        const clickedElement = activeElements[0];
+        const datasetIndex = clickedElement.datasetIndex;
+        const index = clickedElement.index;
+        const data = chart.data.datasets[datasetIndex].data[index];
+
+        // Récupérez l'URL associée à l'élément cliqué et redirigez la page
+        const entityUri = data.entityUri;
+        window.open(entityUri, '_blank');
+      }
+    });
   }
 
   render() {
     return (
       <Host>
-        <canvas id="myChart" ref={element => (this.el = element)}></canvas>
+        <canvas id="myChart" height={this.data.length * this.lineHeight} ref={element => (this.el = element)}></canvas>
       </Host>
     );
   }
