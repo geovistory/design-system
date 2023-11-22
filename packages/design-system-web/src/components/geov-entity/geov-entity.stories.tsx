@@ -14,16 +14,87 @@ export default {
     },
   },
 };
-export const Text = await stencilWrapper(<geov-entity sparqlEndpoint={AMPI_SPARQL_ENDPOINT} entityId="i2346544" language="de" fetchBeforeRender={false}></geov-entity>);
+
 export const ShipVoyage = await stencilWrapper(<geov-entity sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i151089" language="en" fetchBeforeRender={false}></geov-entity>);
 export const GeographicalPlace = await stencilWrapper(
   <geov-entity sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i209502" language="en" fetchBeforeRender={false}></geov-entity>,
 );
 export const Presence = await stencilWrapper(<geov-entity sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i253708" language="de" fetchBeforeRender={false}></geov-entity>);
-export const JohannesKepler = await stencilWrapper(<geov-entity sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i785518" language="en" fetchBeforeRender={false}></geov-entity>);
-export const Birth = await stencilWrapper(<geov-entity sparqlEndpoint={AMPI_SPARQL_ENDPOINT} entityId="i542181" language="en" fetchBeforeRender={false}></geov-entity>);
 export const Group = await stencilWrapper(<geov-entity sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i2215290" language="en" fetchBeforeRender={false}></geov-entity>);
-export const TimeSpan = await stencilWrapper(<geov-entity sparqlEndpoint={AMPI_SPARQL_ENDPOINT} entityId="i542181ts" language="de" fetchBeforeRender={false}></geov-entity>);
-export const DateTimeYear = await stencilWrapper(<geov-entity sparqlEndpoint={AMPI_SPARQL_ENDPOINT} entityId="i609119" language="de" fetchBeforeRender={false}></geov-entity>);
-export const DateTimeMonth = await stencilWrapper(<geov-entity sparqlEndpoint={AMPI_SPARQL_ENDPOINT} entityId="i986993" language="de" fetchBeforeRender={false}></geov-entity>);
-export const DateTimeDay = await stencilWrapper(<geov-entity sparqlEndpoint={AMPI_SPARQL_ENDPOINT} entityId="i872676" language="de" fetchBeforeRender={false}></geov-entity>);
+export const Text = await stencilWrapper(
+  <geov-entity
+    sparqlEndpoint="https://sparql.geovistory.org/api_v1_project_924033"
+    entityId="i2346544"
+    projectId={924033}
+    uriRegex="(http://geovistory.org/resource/)(.*)"
+    uriReplace="http://geovistory.org/resource/$2?p=924033"
+    language="de"
+    fetchBeforeRender={false}
+  ></geov-entity>,
+);
+export const JohannesKepler = await stencilWrapper(
+  <geov-entity
+    sparqlEndpoint="https://sparql.geovistory.org/api_v1_project_1483135"
+    entityId="i785518"
+    projectId={1483135}
+    language="en"
+    fetchBeforeRender={false}
+    uriRegex="(http://geovistory.org/resource/)(.*)"
+    uriReplace="http://geovistory.org/resource/$2?p=1483135"
+  ></geov-entity>,
+);
+export const Birth = await stencilWrapper(
+  <geov-entity
+    sparqlEndpoint="https://sparql.geovistory.org/api_v1_project_924033"
+    entityId="i542181"
+    projectId={924033}
+    uriRegex="(http://geovistory.org/resource/)(.*)"
+    uriReplace="http://geovistory.org/resource/$2?p=924033"
+    language="en"
+    fetchBeforeRender={false}
+  ></geov-entity>,
+);
+export const TimeSpan = await stencilWrapper(
+  <geov-entity
+    sparqlEndpoint="https://sparql.geovistory.org/api_v1_project_924033"
+    entityId="i542181ts"
+    projectId={924033}
+    uriRegex="(http://geovistory.org/resource/)(.*)"
+    uriReplace="http://geovistory.org/resource/$2?p=924033"
+    language="de"
+    fetchBeforeRender={false}
+  ></geov-entity>,
+);
+export const DateTimeYear = await stencilWrapper(
+  <geov-entity
+    sparqlEndpoint="https://sparql.geovistory.org/api_v1_project_924033"
+    entityId="i609119"
+    projectId={924033}
+    uriRegex="(http://geovistory.org/resource/)(.*)"
+    uriReplace="http://geovistory.org/resource/$2?p=924033"
+    language="de"
+    fetchBeforeRender={false}
+  ></geov-entity>,
+);
+export const DateTimeMonth = await stencilWrapper(
+  <geov-entity
+    sparqlEndpoint="https://sparql.geovistory.org/api_v1_project_924033"
+    entityId="i986993"
+    projectId={924033}
+    uriRegex="(http://geovistory.org/resource/)(.*)"
+    uriReplace="http://geovistory.org/resource/$2?p=924033"
+    language="de"
+    fetchBeforeRender={false}
+  ></geov-entity>,
+);
+export const DateTimeDay = await stencilWrapper(
+  <geov-entity
+    sparqlEndpoint="https://sparql.geovistory.org/api_v1_project_924033"
+    entityId="i872676"
+    projectId={924033}
+    uriRegex="(http://geovistory.org/resource/)(.*)"
+    uriReplace="http://geovistory.org/resource/$2?p=924033"
+    language="de"
+    fetchBeforeRender={false}
+  ></geov-entity>,
+);

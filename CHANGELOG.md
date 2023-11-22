@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.19.4-pr-111.1 (2023-11-22)
+
+**Note:** Version bump only for package root
+
+
+
+
+
+## 1.19.4-pr-112.0 (2023-11-22)
+
+**Note:** Version bump only for package root
+
+
+
+
+
+## 1.19.4-pr-111.0 (2023-11-17)
+
+**Note:** Version bump only for package root
+
+
+
+
+
 ## 1.19.3 (2023-11-14)
 
 **Note:** Version bump only for package root
