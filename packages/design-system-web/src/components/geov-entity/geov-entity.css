@@ -9,6 +9,7 @@
 
 .header {
   padding: var(--ion-padding);
+  padding-top: 2.5rem;
   background: var(--ion-color-tertiary-shade);
 }
 
@@ -20,6 +21,21 @@
 .header geov-entity-definition {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.metadata {
+  padding: 0.5rem 0 0.5rem 0;
+  font-size: .875rem;
+  color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.4);
+}
+
+.metadata a {
+  color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.4);
+  text-decoration: var(--gv-entity-link-decoration);
+}
+
+.metadata a:hover {
+  text-decoration: underline;
 }
 
 .section {

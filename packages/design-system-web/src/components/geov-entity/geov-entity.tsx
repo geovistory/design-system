@@ -1,8 +1,8 @@
 import { Component, h, Host, Prop } from '@stencil/core';
 import { GeovEntityPropertiesCustomEvent } from '../../components';
-import { GeovEntityPropertiesData } from '../geov-entity-properties/geov-entity-properties';
 import { getTimeSpanUri } from '../../lib/getTimeSpanUri';
 import { regexReplace } from '../../lib/regexReplace';
+import { GeovEntityPropertiesData } from '../geov-entity-properties/geov-entity-properties';
 
 /**
  * This component displays the data of a geovistory entity.
@@ -68,49 +68,43 @@ export class GeovEntity {
   predicatesTime = ['https://ontome.net/ontology/p4'];
   excluded = ['https://ontome.net/ontology/p1943', 'https://ontome.net/ontology/p1762'];
   render() {
+    const pageLink = this.getPageLink();
+    const uri = this.getURI();
     return (
       <Host>
         <div class="container">
           <div class="header">
-            <ion-grid fixed={true} class="ion-padding">
-              <div class="restricted-width supertitle">
+            <ion-grid fixed={true}>
+              <div class="supertitle">
                 <geov-entity-class-label
                   entityId={this.entityId}
                   sparqlEndpoint={this.sparqlEndpoint}
                   _ssrId={`${this.ssrIdPrefix}class-label`}
                   withIcon={true}
                 ></geov-entity-class-label>
-                <geov-time-span
-                  class="restricted-width"
-                  entityUri={getTimeSpanUri('http://geovistory.org/resource/' + this.entityId)}
-                  sparqlEndpoint={this.sparqlEndpoint}
-                ></geov-time-span>
+                <geov-time-span entityUri={getTimeSpanUri('http://geovistory.org/resource/' + this.entityId)} sparqlEndpoint={this.sparqlEndpoint}></geov-time-span>
               </div>
-              <h1>
+              <h1 class="unrestricted-width">
                 <geov-entity-label entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}entity-label`}></geov-entity-label>
               </h1>
-              <div class="restricted-width">
-                <b>URI</b>:{' '}
-                <a
-                  href={regexReplace('http://geovistory.org/resource/' + this.entityId, this.uriRegex, this.uriReplace).replace('?p=' + this.projectId, '')}
-                  target="_blank"
-                  class="entityLink"
-                >
-                  {regexReplace('http://geovistory.org/resource/' + this.entityId, this.uriRegex, this.uriReplace)}
-                </a>{' '}
-                {this.projectId ? (
-                  <span>
-                    | <b>Project link: </b>
-                    <a href={regexReplace('http://geovistory.org/resource/' + this.entityId, this.uriRegex, this.uriReplace)} target="_blank" class="entityLink">
-                      {regexReplace('http://geovistory.org/resource/' + this.entityId, this.uriRegex, this.uriReplace)}
-                    </a>
-                  </span>
-                ) : (
-                  ''
-                )}
-              </div>
-              <div class="restricted-width">
+              <div>
                 <geov-entity-definition entityId={this.entityId} sparqlEndpoint={this.sparqlEndpoint} _ssrId={`${this.ssrIdPrefix}definition`}></geov-entity-definition>
+              </div>
+              <div class="metadata">
+                <div>
+                  URI:{' '}
+                  <a href={uri} target="_blank">
+                    {uri}
+                  </a>
+                </div>
+                {this.projectId && (
+                  <div>
+                    Link:{' '}
+                    <a href={pageLink} target="_blank">
+                      {pageLink}
+                    </a>
+                  </div>
+                )}
               </div>
             </ion-grid>
           </div>
@@ -138,6 +132,26 @@ export class GeovEntity {
         </div>
       </Host>
     );
+  }
+
+  /**
+   * Generates the URL of this page by applying the given regex.
+   *
+   * @returns the url to this page
+   */
+  private getPageLink() {
+    return regexReplace('http://geovistory.org/resource/' + this.entityId, this.uriRegex, this.uriReplace);
+  }
+
+  /**
+   * Generates the URI of this resource. This depends on the regex, which allows to override
+   * the real uri to make working links in local, dev or staging environments.
+   * In contrast to getURL it omits the 'p' query parameter.
+   *
+   * @returns the url to this page
+   */
+  private getURI() {
+    return this.getPageLink().replace('?p=' + this.projectId, '');
   }
 
   /**
