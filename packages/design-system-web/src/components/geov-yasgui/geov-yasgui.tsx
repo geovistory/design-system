@@ -62,6 +62,9 @@ export class GeovYasgui {
    */
   @Prop() queryTabs: QueryTab[] = [];
 
+  // True during 200ms of toggling
+  toggling = false;
+
   Y: typeof Yasgui;
 
   async componentWillLoad() {
@@ -107,15 +110,21 @@ export class GeovYasgui {
   }
 
   toggleVisiblity() {
+    if (this.toggling) return;
     this.collapse = !this.collapse;
     this.setYasqueVisibility();
   }
 
-  setYasqueVisibility() {
+  async setYasqueVisibility() {
+    this.toggling = true;
+    this.el.classList.add('toggling');
     const elementsToSwitchVis = this.el.querySelectorAll('.yasr_header, .yasqe, .tabsList, .controlbar');
     elementsToSwitchVis.forEach(ele => {
       this.collapse ? ele.classList.add('collapsed') : ele.classList.remove('collapsed');
     });
+    await new Promise(res => setTimeout(res, 200));
+    this.el.classList.remove('toggling');
+    this.toggling = false;
   }
   /**
    * Setup yasr configuration
