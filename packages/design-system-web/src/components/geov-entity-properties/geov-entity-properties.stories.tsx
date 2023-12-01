@@ -16,29 +16,54 @@ export default {
 };
 
 export const EntityPropertiesTeEn = await stencilWrapper(
-  <geov-entity-properties sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i151089" language="en" fetchBeforeRender={false}></geov-entity-properties>,
+  <geov-entity-properties
+    sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
+    entityUri="http://geovistory.org/resource/i151089"
+    language="en"
+    fetchBeforeRender={false}
+  ></geov-entity-properties>,
 );
 
 export const EntityPropertiesRammekensToJakarta = await stencilWrapper(
-  <geov-entity-properties sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i152157" language="en" fetchBeforeRender={false}></geov-entity-properties>,
+  <geov-entity-properties
+    sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
+    entityUri="http://geovistory.org/resource/i152157"
+    language="en"
+    fetchBeforeRender={false}
+  ></geov-entity-properties>,
 );
 
 export const EntityPropertiesPeIt = await stencilWrapper(
-  <geov-entity-properties sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i209502" language="en" fetchBeforeRender={false}></geov-entity-properties>,
+  <geov-entity-properties
+    sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
+    entityUri="http://geovistory.org/resource/i209502"
+    language="en"
+    fetchBeforeRender={false}
+  ></geov-entity-properties>,
 );
 
 export const EntityPropertiesPresence = await stencilWrapper(
-  <geov-entity-properties sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i253594" language="en" fetchBeforeRender={false}></geov-entity-properties>,
+  <geov-entity-properties
+    sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
+    entityUri="http://geovistory.org/resource/i253594"
+    language="en"
+    fetchBeforeRender={false}
+  ></geov-entity-properties>,
 );
 
 export const EntityPropertiesTimeSpan = await stencilWrapper(
-  <geov-entity-properties sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i151089ts" language="en" fetchBeforeRender={false}></geov-entity-properties>,
+  <geov-entity-properties
+    sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
+    entityUri="http://geovistory.org/resource/i151089ts"
+    language="en"
+    fetchBeforeRender={false}
+  ></geov-entity-properties>,
 );
 
 export const EntityPropertiesRammekensToJakartaPreloaded = await stencilWrapper(
   <geov-entity-properties
     sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
-    entityId="i152157"
+    entityUri="http://geovistory.org/resource/i152157"
     language="en"
     fetchBeforeRender={true}
     _ssrId="data-entity-properties-1"
@@ -48,7 +73,7 @@ export const EntityPropertiesRammekensToJakartaPreloaded = await stencilWrapper(
 export const EntityPropertiesColorPrimary = await stencilWrapper(
   <geov-entity-properties
     sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
-    entityId="i152157"
+    entityUri="http://geovistory.org/resource/i152157"
     language="en"
     fetchBeforeRender={true}
     _ssrId="data-entity-properties-1"
@@ -59,7 +84,7 @@ export const EntityPropertiesColorPrimary = await stencilWrapper(
 export const EntityPropertiesPredicateInclude = await stencilWrapper(
   <geov-entity-properties
     sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
-    entityId="i86177"
+    entityUri="http://geovistory.org/resource/i86177"
     language="en"
     fetchBeforeRender={false}
     predicateInclude={['http://www.w3.org/2000/01/rdf-schema#label', 'https://ontome.net/ontology/p1111i'].join(',')}
@@ -69,7 +94,7 @@ export const EntityPropertiesPredicateInclude = await stencilWrapper(
 export const EntityPropertiesPredicateExclude = await stencilWrapper(
   <geov-entity-properties
     sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
-    entityId="i86177"
+    entityUri="http://geovistory.org/resource/i86177"
     language="en"
     fetchBeforeRender={false}
     predicateExclude={['http://www.w3.org/2000/01/rdf-schema#label', 'https://ontome.net/ontology/p1111i'].join(',')}
@@ -77,5 +102,11 @@ export const EntityPropertiesPredicateExclude = await stencilWrapper(
 );
 
 export const EntityPropertiesFixedGrid = await stencilWrapper(
-  <geov-entity-properties sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT} entityId="i209502" language="en" fetchBeforeRender={false} fixedGrid={true}></geov-entity-properties>,
+  <geov-entity-properties
+    sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
+    entityUri="http://geovistory.org/resource/i209502"
+    language="en"
+    fetchBeforeRender={false}
+    fixedGrid={true}
+  ></geov-entity-properties>,
 );

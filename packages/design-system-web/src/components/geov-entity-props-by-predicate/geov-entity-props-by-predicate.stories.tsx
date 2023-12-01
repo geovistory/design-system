@@ -18,23 +18,23 @@ export default {
 export const Person = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
-    entityId="i151089"
+    entityUri="http://geovistory.org/resource/i151089"
     totalCount={1}
     language="en"
-    predicateUri="https://ontome.net/ontology/p1359"
-    predicateLabel="participated in"
+    predicateUri="https://ontome.net/ontology/p1359i"
+    predicateLabel="had as participant"
     fetchBeforeRender={false}
   ></geov-entity-props-by-predicate>,
 );
 
-export const UriRegex = await stencilWrapper(
+export const PersonUriRegex = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
-    entityId="i151089"
+    entityUri="http://geovistory.org/resource/i151089"
     totalCount={1}
     language="en"
-    predicateUri="https://ontome.net/ontology/p1359"
-    predicateLabel="participated in"
+    predicateUri="https://ontome.net/ontology/p1359i"
+    predicateLabel="had as participant"
     uriRegex="(http://geovistory.org/resource/)(.*)"
     uriReplace="http://dev.geovistory.org/resource/$2?p=123"
     fetchBeforeRender={false}
@@ -44,11 +44,11 @@ export const UriRegex = await stencilWrapper(
 export const PaginatedShipVoyages = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
-    entityId="i209502"
+    entityUri="http://geovistory.org/resource/i209502"
     totalCount={2980}
     language="en"
     predicateUri="https://ontome.net/ontology/p1335i"
-    predicateLabel="had departure place"
+    predicateLabel="was departure place of"
     fetchBeforeRender={false}
   ></geov-entity-props-by-predicate>,
 );
@@ -56,7 +56,7 @@ export const PaginatedShipVoyages = await stencilWrapper(
 export const DateTimeDescription = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
-    entityId="i151089ts"
+    entityUri="http://geovistory.org/resource/i151089ts"
     totalCount={1}
     language="en"
     predicateUri="https://ontome.net/ontology/p150"
@@ -68,7 +68,7 @@ export const DateTimeDescription = await stencilWrapper(
 export const XsdString = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
-    entityId="i215634"
+    entityUri="http://geovistory.org/resource/i215634"
     totalCount={1}
     language="en"
     predicateUri="https://ontome.net/ontology/p1113"
@@ -80,7 +80,7 @@ export const XsdString = await stencilWrapper(
 export const XsdStringPreloaded = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
-    entityId="i215635"
+    entityUri="http://geovistory.org/resource/i215635"
     totalCount={1}
     language="en"
     predicateUri="https://ontome.net/ontology/p1113"
@@ -93,7 +93,7 @@ export const XsdStringPreloaded = await stencilWrapper(
 export const LangString = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={MARITIME_SPARQL_ENDPOINT}
-    entityId="i2345931"
+    entityUri="http://geovistory.org/resource/i2345931"
     totalCount={1}
     language="en"
     predicateUri="https://ontome.net/ontology/p1761"
@@ -105,7 +105,7 @@ export const LangString = await stencilWrapper(
 export const WktLiteral = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
-    entityId="i253708"
+    entityUri="http://geovistory.org/resource/i253708"
     totalCount={1}
     language="en"
     predicateUri="https://ontome.net/ontology/p148"
@@ -117,7 +117,7 @@ export const WktLiteral = await stencilWrapper(
 export const OwlSameAs = await stencilWrapper(
   <geov-entity-props-by-predicate
     sparqlEndpoint={DEFAULT_SPARQL_ENDPOINT}
-    entityId="i81260"
+    entityUri="http://geovistory.org/resource/i81260"
     totalCount={2}
     language="en"
     predicateUri="http://www.w3.org/2002/07/owl#sameAs"

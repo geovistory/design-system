@@ -10,20 +10,13 @@ import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
 import { PageEvent } from '../geov-paginator/geov-paginator';
 
-const qrProps = (predicateId: string, subjectId: string, pageSize: number, offset: number, language: string) => `
+const qrProps = (predicateId: string, subjectUri: string, pageSize: number, offset: number, language: string) => `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX xml: <http://www.w3.org/XML/1998/namespace>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX geo: <http://www.opengis.net/ont/geosparql#>
-PREFIX time: <http://www.w3.org/2006/time#>
-PREFIX ontome: <https://ontome.net/ontology/>
-PREFIX geov: <http://geovistory.org/resource/>
 
 SELECT DISTINCT ?entity ?entityLabel ?entityType ?entityTypeLabel ?dt
 WHERE {
-  geov:${subjectId} <${predicateId}> ?entity .
+  <${subjectUri}> <${predicateId}> ?entity .
   OPTIONAL {?entity rdfs:label ?entityLabel . FILTER(LANG(?entityLabel) IN ("${language}", "en")) .}
   OPTIONAL {?entity rdf:type ?entityType . OPTIONAL {?entityType rdfs:label ?entityTypeLabel . FILTER(LANG(?entityTypeLabel) IN ("${language}", "en")) .}}
   BIND (datatype(?entity) AS ?dt) .
@@ -68,10 +61,10 @@ export class GeovEntityPropsByPredicate {
    */
   @Prop() fetchBeforeRender = true;
   /**
-   * entityId
-   * ID number of entity, e.g. 'iXXX'
+   * entityUri
+   * URI entity, e.g. 'http://geovistory.org/resource/i1234'
    */
-  @Prop() entityId: string;
+  @Prop() entityUri: string;
   /**
    * sparqlEndpoint
    * URL of the sparql endpoint
@@ -187,7 +180,7 @@ export class GeovEntityPropsByPredicate {
   }
 
   async pageReload(): Promise<GeovEntityPropsByPredicateData> {
-    const qr = qrProps(this.predicateUri, this.entityId, this.pageSize, this.pageIndex * this.pageSize, this.language);
+    const qr = qrProps(this.predicateUri, this.entityUri, this.pageSize, this.pageIndex * this.pageSize, this.language);
 
     return sparqlJson<Bindings>(this.sparqlEndpoint, qr)
       .then(res => {
@@ -272,7 +265,7 @@ export class GeovEntityPropsByPredicate {
           entityUri={item.entity.value}
           language="en"
           fetchBeforeRender={this.fetchBeforeRender}
-          parent={{ subjectUri: 'http://geovistory.org/resource/' + this.entityId, predicateUri: this.predicateUri }}
+          parent={{ subjectUri: this.entityUri, predicateUri: this.predicateUri }}
           uriRegex={this.uriRegex}
           uriReplace={this.uriReplace}
         ></geov-list-item-nested-properties>

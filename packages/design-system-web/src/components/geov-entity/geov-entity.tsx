@@ -116,7 +116,7 @@ export class GeovEntity {
             fixedGrid={false}
             class="columns-1"
             sparqlEndpoint={this.sparqlEndpoint}
-            entityId={this.entityId}
+            entityUri={'http://geovistory.org/resource/' + this.entityId}
             language={'en'}
             fetchBeforeRender={this.fetchBeforeRender}
             uriRegex={this.uriRegex}
