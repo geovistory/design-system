@@ -15,51 +15,51 @@ export default {
 };
 
 type timespanData = {
-  entityLabel: string;
-  entityClassLabel: string;
-  entityUri: string;
-  startDate: string;
-  endDate: string;
+  entityLabel: { type: 'literal'; value: string };
+  entityClassLabel: { type: 'literal'; value: string };
+  entityUri: { type: 'uri'; value: string };
+  startDate: { type: 'literal'; datatype: 'http://www.w3.org/2001/XMLSchema#date'; value: string };
+  endDate: { type: 'literal'; datatype: 'http://www.w3.org/2001/XMLSchema#date'; value: string };
 };
 
 const ts1: timespanData = {
-  entityLabel: 'Birth of Johann Kepler',
-  entityClassLabel: 'Birth',
-  entityUri: 'https://example.com/entity',
-  startDate: '1571-12-27',
-  endDate: '1571-12-27',
+  entityLabel: { type: 'literal', value: 'Birth of Johann Kepler' },
+  entityClassLabel: { type: 'literal', value: 'Birth' },
+  entityUri: { type: 'uri', value: 'https://example.com/entity' },
+  startDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1571-12-27' },
+  endDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1571-12-27' },
 };
 
 const ts2: timespanData = {
-  entityLabel: 'Death of Johann Kepler',
-  entityClassLabel: 'Death',
-  entityUri: 'https://example.com/entity',
-  startDate: '1630-11-15',
-  endDate: '1630-11-15',
+  entityLabel: { type: 'literal', value: 'Death of Johann Kepler' },
+  entityClassLabel: { type: 'literal', value: 'Death' },
+  entityUri: { type: 'uri', value: 'https://example.com/entity' },
+  startDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1630-11-15' },
+  endDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1630-11-15' },
 };
 
 const ts3: timespanData = {
-  entityLabel: 'One moment in his life',
-  entityClassLabel: 'Live',
-  entityUri: 'https://example.com/entity',
-  startDate: '1600-01-01',
-  endDate: '1600-12-31',
+  entityLabel: { type: 'literal', value: 'One moment in his life' },
+  entityClassLabel: { type: 'literal', value: 'Live' },
+  entityUri: { type: 'uri', value: 'https://example.com/entity' },
+  startDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1600-01-01' },
+  endDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1600-01-01' },
 };
 
 const ts4: timespanData = {
-  entityLabel: 'Another moment in his life',
-  entityClassLabel: 'Live',
-  entityUri: 'https://example.com/entity',
-  startDate: '1610-01-01',
-  endDate: '1620-12-31',
+  entityLabel: { type: 'literal', value: 'Another moment in his life' },
+  entityClassLabel: { type: 'literal', value: 'Live' },
+  entityUri: { type: 'uri', value: 'https://example.com/entity' },
+  startDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1610-01-01' },
+  endDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1620-12-31' },
 };
 
 const ts5: timespanData = {
-  entityLabel: 'Another moment in his life 2',
-  entityClassLabel: 'Live',
-  entityUri: 'https://example.com/entity',
-  startDate: '1590-01-01',
-  endDate: '1595-12-31',
+  entityLabel: { type: 'literal', value: 'Another moment in his life 2' },
+  entityClassLabel: { type: 'literal', value: 'Live' },
+  entityUri: { type: 'uri', value: 'https://example.com/entity' },
+  startDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1590-01-01' },
+  endDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1595-12-31' },
 };
 
 const dataTimespansTest = [ts1, ts2, ts3, ts4, ts5];
