@@ -1,5 +1,5 @@
 import { h } from '@stencil/core';
-import { AMPI_SPARQL_ENDPOINT, DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
+import { DEFAULT_SPARQL_ENDPOINT } from '../../../.storybook/config/defaulSparqlEndpoint';
 import { docsTemlpate } from '../../../.storybook/templates/docsTemplate';
 import { stencilWrapper } from '../../../.storybook/lib/stencilWrapper';
 import componentApi from './docs-component-api.md?raw';
