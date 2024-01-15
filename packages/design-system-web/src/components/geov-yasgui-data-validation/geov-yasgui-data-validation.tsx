@@ -7,7 +7,11 @@ interface ExpectedKey {
   datatype: string;
   customValidator?: (val: Parser.BindingValue) => Set<string> | undefined;
 }
-
+/**
+ * The component has to validate input data and emit the validation result (valid/invalid).
+ *
+ * In case of invalid data, it has to display understandable warnings/error messages.
+ */
 @Component({
   tag: 'geov-yasgui-data-validation',
   styleUrl: 'geov-yasgui-data-validation.css',
@@ -72,9 +76,11 @@ export class GeovYasguiDataValidation {
         {Object.keys(this.dataIsNotValid).map(key => (
           <div>
             Validation errors for variable ?{key}:
-            {Array.from(this.dataIsNotValid[key]).map(message => (
-              <div>{message}</div>
-            ))}
+            <ul>
+              {Array.from(this.dataIsNotValid[key]).map(message => (
+                <li>{message}</li>
+              ))}
+            </ul>
           </div>
         ))}
         <slot></slot>
