@@ -160,7 +160,9 @@ function initWrapper(htmlString: string, complexElements: ComplexElements, listF
   ${htmlString}
 
   <script>
-    function init() {
+${listKeysFunctions.map(key => `const ${key} = ${listFunctions[key]};`).join('\n\n')}
+
+function init() {
       ${Object.keys(complexElements)
         .map(
           key => `var el${key} = document.getElementById('el-${key}');
@@ -180,8 +182,6 @@ function initWrapper(htmlString: string, complexElements: ComplexElements, listF
         )
         .join('')
         .replace(regex, '$1')}
-
-${listKeysFunctions.map(key => `const ${key} = ${listFunctions[key]};`).join('\n\n')}
   </script>
 </body>
 `;
