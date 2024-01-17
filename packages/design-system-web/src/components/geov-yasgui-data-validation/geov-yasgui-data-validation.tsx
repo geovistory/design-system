@@ -12,7 +12,7 @@ interface ExpectedKey {
  *
  * It requires two inputs: 'data' (the input data to be validated) and 'expectedKeys' (an array of expected keys).
  *
- * The component emits a custom event named "validationCompleted" with a boolean value:
+ * The component emits a custom event named "validationCompleted" with a custom boolean event property "isValid":
  *   - true if the validation passes,
  *   - false if there are validation errors.
  *
