@@ -10,6 +10,12 @@ interface ExpectedKey {
 /**
  * The component has to validate input data and emit the validation result (valid/invalid).
  *
+ * It requires two inputs: 'data' (the input data to be validated) and 'expectedKeys' (an array of expected keys).
+ *
+ * The component emits a custom event named "validationCompleted" with a boolean value:
+ *   - true if the validation passes,
+ *   - false if there are validation errors.
+ *
  * In case of invalid data, it has to display understandable warnings/error messages.
  */
 @Component({
@@ -44,10 +50,10 @@ export class GeovYasguiDataValidation {
       }
 
       this.data.forEach(d => {
-        if (d[expectedKey.name] !== undefined && d[expectedKey.name].datatype !== expectedKey.datatype) {
+        if (d[expectedKey.name]?.datatype !== expectedKey.datatype) {
           this.datatypeMismatch.add(expectedKey.name);
         }
-        if (expectedKey.customValidator !== undefined && d[expectedKey.name] !== undefined && expectedKey.customValidator(d[expectedKey.name]) !== undefined) {
+        if (expectedKey?.customValidator(d[expectedKey?.name])) {
           this.dataIsNotValid[expectedKey.name] = expectedKey.customValidator(d[expectedKey.name]);
         }
       });
@@ -63,14 +69,14 @@ export class GeovYasguiDataValidation {
       <Host>
         {/* Render error messages for requiredMismatch */}
         {Array.from(this.requiredMismatch).map(key => (
-          <div>The variable ?{key} must not return empty values. Currently it is either not bound or it returns empty records.</div>
+          <p>The variable ?{key} must not return empty values. Currently it is either not bound or it returns empty records.</p>
         ))}
 
         {/* Render error messages for datatypeMismatch */}
         {Array.from(this.datatypeMismatch).map(key => (
-          <div>
+          <p>
             The variable ?{key} must be of datatype {this.expectedKeys.find(e => e.name === key)?.datatype}. Some or all records do not match that data type.
-          </div>
+          </p>
         ))}
         {/* Render error messages from customValidator */}
         {Object.keys(this.dataIsNotValid).map(key => (
