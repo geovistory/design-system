@@ -8,15 +8,15 @@ interface ExpectedKey {
   customValidator?: (val: Parser.BindingValue) => Set<string> | undefined;
 }
 /**
- * The component has to validate input data and emit the validation result (valid/invalid).
+ * The component validates data and emits the validation result (valid/invalid).
  *
- * It requires two inputs: 'data' (the input data to be validated) and 'expectedKeys' (an array of expected keys).
+ * It has two required inputs: `data` (the input data to be validated) and 'expectedKeys' (an array of expected keys containing the validation rules).
  *
- * The component emits a custom event named "validationCompleted" with a custom boolean event property "isValid":
+ * The component emits a custom event named "validationCompleted" with a boolean value:
  *   - true if the validation passes,
  *   - false if there are validation errors.
  *
- * In case of invalid data, it has to display understandable warnings/error messages.
+ * In case of invalid data, it displays understandable warnings/error messages.
  */
 @Component({
   tag: 'geov-yasgui-data-validation',
@@ -26,8 +26,7 @@ interface ExpectedKey {
 export class GeovYasguiDataValidation {
   @Prop() data: Parser.Binding[];
   @Prop() expectedKeys: ExpectedKey[];
-
-  @Event() validationCompleted: EventEmitter<{ isValid: boolean }>;
+  @Event() validationCompleted: EventEmitter<boolean>;
 
   requiredMismatch = new Set<string>();
   datatypeMismatch = new Set<string>();
@@ -61,7 +60,7 @@ export class GeovYasguiDataValidation {
 
     // Emit the validationCompleted event with the validation results
     const isValid = this.requiredMismatch.size === 0 && this.datatypeMismatch.size === 0 && Object.keys(this.dataIsNotValid).length === 0;
-    this.validationCompleted.emit({ isValid });
+    this.validationCompleted.emit(isValid);
   }
 
   render() {
