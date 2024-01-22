@@ -1,0 +1,4 @@
+div,
+p {
+  color: var(--ion-color-danger);
+}
