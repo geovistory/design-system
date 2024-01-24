@@ -6,7 +6,7 @@ import { getSSRData } from '../../lib/ssr/getSSRData';
 import { setSSRData } from '../../lib/ssr/setSSRData';
 import { setSSRId } from '../../lib/ssr/setSSRId';
 
-const qrPropsWithCount = (id: string, language: string, predicateInclude?: string, predicateExclude?: string) => {
+const qrPropsWithCount = (uri: string, language: string, predicateInclude?: string, predicateExclude?: string) => {
   let selectClause: string;
 
   // Function ot parse comma separated list of URI's
@@ -31,7 +31,7 @@ const qrPropsWithCount = (id: string, language: string, predicateInclude?: strin
       {
         SELECT (<${predicate}> as ?predicate) ?predicateLabel (count(distinct ?object) as ?count)
         WHERE {
-          geov:${id} <${predicate}> ?object .
+          <${uri}> <${predicate}> ?object .
           OPTIONAL {
             <${predicate}> rdfs:label ?predicateLabel .
             FILTER(LANG(?predicateLabel) IN ("${language}", "en"))
@@ -48,7 +48,7 @@ const qrPropsWithCount = (id: string, language: string, predicateInclude?: strin
     selectClause = `
     SELECT ?predicate ?predicateLabel (count(distinct ?object) as ?count)
     WHERE {
-      geov:${id} ?predicate ?object .
+      <${uri}> ?predicate ?object .
       OPTIONAL {
         ?predicate rdfs:label ?predicateLabel .
         FILTER(LANG(?predicateLabel) IN ("${language}", "en"))
@@ -111,10 +111,10 @@ export class GeovEntityProperties {
    */
   @Prop() sparqlEndpoint: string;
   /**
-   * entityId
-   * ID number of entity, e.g. 'i315800'
+   * entityUri
+   * URI entity, e.g. 'http://geovistory.org/resource/i1234'
    */
-  @Prop() entityId: string;
+  @Prop() entityUri: string;
   /**
    * language
    * prints the label with the language or english, if not found, e.g. 'en'
@@ -247,7 +247,7 @@ export class GeovEntityProperties {
 
   async fetchData(): Promise<GeovEntityPropertiesData> {
     let d: GeovEntityPropertiesData = { loading: true };
-    const query = qrPropsWithCount(this.entityId, this.language, this.predicateInclude, this.predicateExclude);
+    const query = qrPropsWithCount(this.entityUri, this.language, this.predicateInclude, this.predicateExclude);
     await sparqlJson<PropsWithCountBindings>(this.sparqlEndpoint, query)
       .then(res => {
         d = {
@@ -282,7 +282,7 @@ export class GeovEntityProperties {
     return this.data.propsWithCount.map(b => (
       <div class={'predicateContainer'}>
         <geov-entity-props-by-predicate
-          entityId={this.entityId}
+          entityUri={this.entityUri}
           sparqlEndpoint={this.sparqlEndpoint}
           totalCount={Number(b.count.value)}
           predicateUri={b.predicate.value}
