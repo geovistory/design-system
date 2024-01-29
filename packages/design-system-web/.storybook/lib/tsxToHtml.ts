@@ -26,6 +26,7 @@ interface ComplexElements {
 export async function tsxToHTML(tsxSnippet: VNode): Promise<string> {
   // Store complex elements
   const complexElements: ComplexElements = {};
+  global.listFunctions = {};
 
   // Id serial number
   let id = 1;
@@ -60,7 +61,7 @@ export async function tsxToHTML(tsxSnippet: VNode): Promise<string> {
               // Put key and value in the complexElements
               complexElements[id] = {
                 ...complexElements[id],
-                props: [...(complexElements[id]?.props ?? []), { key, value: JSON.stringify(value, null, 2).replace(/</g, '&lt;') }],
+                props: [...(complexElements[id]?.props ?? []), { key, value: JSON.stringify(value, replacer, 2).replace(/</g, '&lt;') }],
               };
               return false;
             }
@@ -100,7 +101,7 @@ export async function tsxToHTML(tsxSnippet: VNode): Promise<string> {
   };
 
   let htmlString = convertToHTML(tsxSnippet);
-  htmlString = initWrapper(htmlString, complexElements);
+  htmlString = initWrapper(htmlString, complexElements, global.listFunctions);
   const formatted = await format(htmlString, {
     plugins: [pluginHtml, pluginBabel, pluginEStree, pluginTypescript],
     parser: 'html',
@@ -116,6 +117,15 @@ export async function tsxToHTML(tsxSnippet: VNode): Promise<string> {
 // Convert camelCase to dash-case
 function camelToDash(str) {
   return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+}
+
+function replacer(_key: string, value: any): any {
+  if (typeof value === 'function') {
+    const functionKey = value.name;
+    global.listFunctions[functionKey] = value.toString();
+    return functionKey; // Return a placeholder or a key to identify the function
+  }
+  return value;
 }
 
 /**
@@ -139,7 +149,9 @@ function convertEventHandlerName(eventName: string) {
  * @param complexElements
  * @returns
  */
-function initWrapper(htmlString: string, complexElements: ComplexElements) {
+function initWrapper(htmlString: string, complexElements: ComplexElements, listFunctions) {
+  const listKeysFunctions = Object.keys(listFunctions);
+  const regex = new RegExp(`['"](${listKeysFunctions.join('|')})['"]`, 'g');
   if (Object.keys(complexElements).length === 0) return htmlString;
 
   return `
@@ -148,7 +160,9 @@ function initWrapper(htmlString: string, complexElements: ComplexElements) {
   ${htmlString}
 
   <script>
-    function init() {
+${listKeysFunctions.map(key => `const ${key} = ${listFunctions[key]};`).join('\n\n')}
+
+function init() {
       ${Object.keys(complexElements)
         .map(
           key => `var el${key} = document.getElementById('el-${key}');
@@ -166,8 +180,8 @@ function initWrapper(htmlString: string, complexElements: ComplexElements) {
           : ''
       }`,
         )
-        .join('')}
-    }
+        .join('')
+        .replace(regex, '$1')}
   </script>
 </body>
 `;

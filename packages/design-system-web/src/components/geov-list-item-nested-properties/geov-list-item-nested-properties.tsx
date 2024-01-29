@@ -1,5 +1,5 @@
 import { Color } from '@ionic/core';
-import { Component, Fragment, Host, Prop, State, h } from '@stencil/core';
+import { Component, Host, Prop, State, h } from '@stencil/core';
 import { FetchResponse } from '../../lib/FetchResponse';
 import { getTimeSpanUri } from '../../lib/getTimeSpanUri';
 import { regexReplace } from '../../lib/regexReplace';
@@ -215,11 +215,13 @@ export class GeovListItemNestedProperties {
                   <ion-col>
                     <ion-item lines="none" class="nestedProp">
                       <ion-label>
-                        <p class="propLabelWrapper">
-                          {this.renderPredicateLabel(b.predicateLabel, b.predicate)}
-                          {this.renderCount(b.count)}
-                        </p>
-                        <h3> {this.renderObject(b.object, b.objectLabel, this.getPredicateLabel(b.predicateLabel, b.predicate))}</h3>
+                        <p class="propLabelWrapper">{this.renderPredicateLabel(b.predicateLabel, b.predicate)}</p>
+
+                        {this.countBiggerThanOne(b.count) ? (
+                          <p>{this.renderModal(b, rdfTypeProp?.objectLabel?.value)}</p>
+                        ) : (
+                          <h3>{this.renderObject(b.object, b.objectLabel, this.getPredicateLabel(b.predicateLabel, b.predicate))}</h3>
+                        )}
                       </ion-label>
                     </ion-item>
                   </ion-col>
@@ -346,10 +348,31 @@ export class GeovListItemNestedProperties {
    * @param count
    * @returns jsx element
    */
-  renderCount(count: SparqlBinding) {
+  renderModal(nestedProps: NestedProps, title: string) {
+    return (
+      <geov-entity-predicate-modal
+        modalTitle={title}
+        sparqlEndpoint={this.sparqlEndpoint}
+        entityUri={this.entityUri}
+        totalCount={parseInt(nestedProps.count?.value)}
+        language={this.language}
+        predicateUri={nestedProps.predicate.value}
+        predicateLabel={nestedProps.predicateLabel.value}
+        fetchBeforeRender={false}
+      >
+        <span class="pointer"> {nestedProps.count?.value} items...</span>
+      </geov-entity-predicate-modal>
+    );
+  }
+
+  /**
+   * Check if count is bigger than 1.
+   * @param count
+   * @returns true if count > 1, else false.
+   */
+  countBiggerThanOne(count: SparqlBinding) {
     const c = parseInt(count?.value);
-    if (c > 1) return <Fragment>&nbsp;({count?.value})</Fragment>;
-    return;
+    return c > 1;
   }
 
   renderObject(object: SparqlBinding, objectLabel: SparqlBinding, modalTitle: string) {

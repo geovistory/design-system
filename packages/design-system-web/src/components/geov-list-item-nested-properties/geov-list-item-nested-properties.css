@@ -89,15 +89,21 @@ a.entityLink:hover {
   padding: 0;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 @container (width > 532px) {
   .container {
     flex-wrap: nowrap;
   }
+
   .header {
     flex-grow: 0;
     border-right: dashed 1px var(--border-color);
     border-bottom: none;
   }
+
   .content ion-col {
     flex-basis: 0px;
   }
