@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.21.1-pr-120.0 (2024-01-29)
+
+**Note:** Version bump only for package @geovistory/design-system-angular
+
+
+
+
+
 ## 1.21.0 (2024-01-24)
 
 **Note:** Version bump only for package @geovistory/design-system-angular
