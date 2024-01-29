@@ -49,11 +49,13 @@ export class GeovYasguiDataValidation {
       }
 
       this.data.forEach(d => {
-        if (d[expectedKey.name]?.datatype !== expectedKey.datatype) {
+        if (d[expectedKey.name]?.datatype !== expectedKey.datatype && Object.keys(d)[0] === expectedKey.name) {
           this.datatypeMismatch.add(expectedKey.name);
         }
-        if (expectedKey?.customValidator(d[expectedKey?.name])) {
-          this.dataIsNotValid[expectedKey.name] = expectedKey.customValidator(d[expectedKey.name]);
+        if (expectedKey?.customValidator && typeof expectedKey.customValidator === 'function' && Object.keys(d)[0] === expectedKey.name) {
+          if (expectedKey.customValidator(d[expectedKey.name])) {
+            this.dataIsNotValid[expectedKey.name] = expectedKey.customValidator(d[expectedKey.name]);
+          }
         }
       });
     });
