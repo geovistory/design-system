@@ -20,17 +20,29 @@ export default function generatePluginTimeline(config: TimelineConfig) {
 
     label?: string = 'Timeline';
 
+    expectedKeys = [
+      { name: 'entityLabel', required: true, datatype: 'string' },
+      { name: 'entityClassLabel', required: true, datatype: 'string' },
+      { name: 'entityUri', required: true, datatype: 'string' },
+      { name: 'startDate', required: true, datatype: 'http://www.w3.org/2001/XMLSchema#date' },
+      { name: 'endDate', required: true, datatype: 'http://www.w3.org/2001/XMLSchema#date' },
+    ];
+
     constructor(yasr: Yasr) {
       this.yasr = yasr;
     }
 
     // Draw the result set. This plugin creates a <geov-timeline-gantt/ data=[...]>
     draw() {
+      const elValidation = document.createElement('geov-yasgui-data-validation');
+      elValidation.data = this.yasr.results.getBindings();
+      elValidation.expectedKeys = this.expectedKeys;
       const el = document.createElement('geov-timeline-gantt');
       el.data = this.yasr.results.getBindings();
       for (const key in config) {
         el[key] = config[key as keyof TimelineConfig];
       }
+      this.yasr.resultsEl.appendChild(elValidation);
       this.yasr.resultsEl.appendChild(el);
     }
 
