@@ -53,7 +53,7 @@ const positiveNumber = (d: Parser.BindingValue): Set<string> | undefined => {
   }
 };
 const dataExample: Parser.Binding[] = [
-  { name: { value: 'Lyon', type: 'literal', datatype: 'string' } },
+  { name: { value: 'Lyon', type: 'literal' } }, // Datatype is missing: it's automatically a string
   { latitude: { value: '45.75', type: 'literal', datatype: 'number' } },
   { longitude: { value: '4.85', type: 'literal', datatype: 'number' } },
   { population: { value: '530000', type: 'literal', datatype: 'number' } },
