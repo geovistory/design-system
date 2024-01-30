@@ -41,19 +41,33 @@ export class GeovYasguiDataValidation {
     this.datatypeMismatch.clear();
     this.dataIsNotValid = {};
 
-    const allDataKeys = Array.from(new Set(this.data.flatMap(obj => Object.keys(obj))));
-
     this.expectedKeys.forEach(expectedKey => {
-      if (expectedKey.required && !allDataKeys.includes(expectedKey.name)) {
-        this.requiredMismatch.add(expectedKey.name);
-      }
-
-      this.data.forEach(d => {
-        if (d[expectedKey.name]?.datatype !== expectedKey.datatype) {
-          this.datatypeMismatch.add(expectedKey.name);
+      // we iterate over rows
+      this.data.forEach(row => {
+        // check if required key is available in this row
+        if (expectedKey.required && row[expectedKey.name] === undefined) {
+          this.requiredMismatch.add(expectedKey.name);
         }
-        if (expectedKey?.customValidator(d[expectedKey?.name])) {
-          this.dataIsNotValid[expectedKey.name] = expectedKey.customValidator(d[expectedKey.name]);
+
+        // iterate over cells in row
+        for (const bindingKey in row) {
+          if (Object.prototype.hasOwnProperty.call(row, bindingKey)) {
+            // get the cell
+            const cell = row[bindingKey];
+
+            // if there is a validation defined for this binding key...
+            if (expectedKey.name === bindingKey) {
+              // ...check datatype
+              if ((cell?.datatype ?? 'string') !== expectedKey.datatype) {
+                this.datatypeMismatch.add(expectedKey.name);
+              }
+              // ...check custom validator
+              if (expectedKey?.customValidator && typeof expectedKey.customValidator === 'function') {
+                const customValidationError = expectedKey.customValidator(cell);
+                if (customValidationError) this.dataIsNotValid[expectedKey.name] = customValidationError;
+              }
+            }
+          }
         }
       });
     });
