@@ -53,31 +53,54 @@ const positiveNumber = (d: Parser.BindingValue): Set<string> | undefined => {
   }
 };
 const dataExample: Parser.Binding[] = [
-  { name: { value: 'Lyon', type: 'literal' } }, // Datatype is missing: it's automatically a string
-  { latitude: { value: '45.75', type: 'literal', datatype: 'number' } },
-  { longitude: { value: '4.85', type: 'literal', datatype: 'number' } },
-  { population: { value: '530000', type: 'literal', datatype: 'number' } },
+  // first row
+  {
+    name: { value: 'Lyon', type: 'literal' }, // Datatype is missing: it's automatically a string
+    latitude: { value: '45.75', type: 'literal', datatype: 'number' },
+    longitude: { value: '4.85', type: 'literal', datatype: 'number' },
+    population: { value: '530000', type: 'literal', datatype: 'number' },
+  },
 ];
 
 const dataMissingLatitudeAndLongitudeExample: Parser.Binding[] = [
-  { name: { value: 'Paris', type: 'literal', datatype: 'string' } },
-  // Missing latitude,
-  // Missing longitude,
-  { population: { value: '2145906', type: 'literal', datatype: 'number' } },
+  // first row
+  {
+    // Missing latitude and Missing longitude
+    name: { value: 'Paris', type: 'literal', datatype: 'string' },
+    population: { value: '2145906', type: 'literal', datatype: 'number' },
+  },
+  // second row
+  {
+    // Missing latitude and Missing longitude, population is not required
+    name: { value: 'Paris', type: 'literal', datatype: 'string' },
+  },
 ];
 
 const dataIncorrectDatatypeLatitudeAndLongitudeExample: Parser.Binding[] = [
-  { name: { value: 'Basel', type: 'literal', datatype: 'string' } },
-  { latitude: { value: '47.56', type: 'literal', datatype: 'string' } }, // Incorrect datatype,
-  { longitude: { value: '7.59', type: 'literal', datatype: 'string' } }, // Another incorrect datatype,
-  { population: { value: '174000', type: 'literal', datatype: 'number' } },
+  // first row
+  {
+    name: { value: 'Basel', type: 'literal', datatype: 'string' },
+    latitude: { value: '47.56', type: 'literal', datatype: 'string' }, // Incorrect datatype,
+    longitude: { value: '7.59', type: 'literal', datatype: 'string' }, // Another incorrect datatype,
+    population: { value: '174000', type: 'literal', datatype: 'number' },
+  },
+  // second row
+  {
+    name: { value: 'Lyon', type: 'literal', datatype: 'string' },
+    latitude: { value: '12.34', type: 'literal', datatype: 'string' }, // Incorrect datatype,
+    longitude: { value: '56.78', type: 'literal', datatype: 'string' }, // Another incorrect datatype,
+    population: { value: '174000', type: 'literal', datatype: 'number' },
+  },
 ];
 
 const dataIncorrectValueLatitudeAndLongitudeExample: Parser.Binding[] = [
-  { name: { value: 'Unknown', type: 'literal', datatype: 'string' } },
-  { latitude: { value: 'Quarante trois', type: 'literal', datatype: 'number' } }, // Incorrect value,
-  { longitude: { value: '-200', type: 'literal', datatype: 'number' } }, // Another incorrect value,
-  { population: { value: '1', type: 'literal', datatype: 'number' } },
+  // first row
+  {
+    name: { value: 'Unknown', type: 'literal', datatype: 'string' },
+    latitude: { value: 'Quarante trois', type: 'literal', datatype: 'number' }, // Incorrect value,
+    longitude: { value: '-200', type: 'literal', datatype: 'number' }, // Another incorrect value,
+    population: { value: '1', type: 'literal', datatype: 'number' },
+  },
 ];
 
 const expectedKeys = [
@@ -90,7 +113,7 @@ const expectedKeys = [
 /**
  * When there is no problem, the webcomponent does not display anything, but can send a success boolean (see console). If the test was not successful, the booleen would be false.
  */
-export const Default = await stencilWrapper(<geov-yasgui-data-validation data={dataExample} expectedKeys={expectedKeys}></geov-yasgui-data-validation>);
+export const validData = await stencilWrapper(<geov-yasgui-data-validation data={dataExample} expectedKeys={expectedKeys}></geov-yasgui-data-validation>);
 
 /**
  * Required data: If the key is not available in the record although it should (required=true), the webcomponent will display this message:
@@ -107,6 +130,6 @@ export const incorrectDatatype = await stencilWrapper(
 /**
  * Custom validator: If the values are incorrect according to the predefined customValidator, the webcomponent will return the messages created by the customValidator
  */
-export const incorrectValue = await stencilWrapper(
+export const customValidatorFailed = await stencilWrapper(
   <geov-yasgui-data-validation data={dataIncorrectValueLatitudeAndLongitudeExample} expectedKeys={expectedKeys}></geov-yasgui-data-validation>,
 );
