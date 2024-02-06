@@ -4,6 +4,7 @@ import 'chartjs-adapter-date-fns';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import type { Parser } from '@triply/yasr';
+import { addCircleOutline, removeCircleOutline } from 'ionicons/icons';
 
 /**
  * This component displays a timeline of events.
@@ -16,6 +17,7 @@ import type { Parser } from '@triply/yasr';
 export class GeovTimelineGantt {
   el: HTMLCanvasElement;
   axisCanvas: HTMLCanvasElement;
+  zoomLevel: number;
 
   @Prop() data: Parser.Binding[] = [
     {
@@ -108,10 +110,8 @@ export class GeovTimelineGantt {
       options: {
         plugins: {
           zoom: {
-            zoom: {
-              wheel: {
-                enabled: true,
-              },
+            pan: {
+              enabled: true,
               mode: 'x',
             },
           },
@@ -119,14 +119,10 @@ export class GeovTimelineGantt {
             display: false,
           },
           tooltip: {
-            enabled: true,
+            //enabled: true,
           },
           datalabels: {
-            formatter: context => {
-              const label = context.name + ', ' + context.y;
-              return `${label}`;
-            },
-            color: 'white',
+            display: false,
           },
         },
         indexAxis: 'y',
@@ -144,7 +140,7 @@ export class GeovTimelineGantt {
           },
           y: {
             ticks: {
-              display: false,
+              display: true,
             },
             beginAtZero: true,
           },
@@ -176,11 +172,22 @@ export class GeovTimelineGantt {
     }
   }
 
+  handleZoomChange(zoomValue) {
+    this.zoomLevel = zoomValue / 100;
+    const chartMain = Chart.getChart(this.el);
+    if (chartMain) {
+      //
+    }
+  }
+
   render() {
-    console.log(this.data);
     return (
       <Host>
         <ion-button onClick={() => this.resetZoom()}>Reset zoom</ion-button>
+        <ion-range aria-label="Zoom" min={0} max={100} value={this.zoomLevel} onIonChange={event => this.handleZoomChange(event.detail.value)}>
+          <ion-icon slot="start" icon={removeCircleOutline}></ion-icon>
+          <ion-icon slot="end" icon={addCircleOutline}></ion-icon>
+        </ion-range>
         <div class="scrollBox">
           <div class="scrollBoxBody">
             <canvas id="chartMain" height={this.data.length * this.lineHeight} ref={element => (this.el = element)}></canvas>

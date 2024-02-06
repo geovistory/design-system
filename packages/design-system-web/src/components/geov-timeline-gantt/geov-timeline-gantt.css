@@ -3,6 +3,12 @@
 }
 
 .scrollBox {
-  max-height: 200px;
   overflow-y: auto;
+  height: 100%;
 }
+
+/*ion-button {
+/*  position: absolute;
+/*  right: 16px;
+/*  top: 8px;
+/*}
