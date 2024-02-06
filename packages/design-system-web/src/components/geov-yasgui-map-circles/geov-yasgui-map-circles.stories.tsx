@@ -5,7 +5,7 @@ import type { Parser } from '@triply/yasr';
 import componentApi from './docs-component-api.md?raw';
 import overview from './docs-overview.md?raw';
 export default {
-  title: 'Data Visualization Components/Yasgui/mapcircles',
+  title: 'Data Visualization Components/Map Circles',
   tags: ['autodocs'],
   parameters: {
     viewMode: 'docs',
@@ -48,6 +48,11 @@ const completeData: Parser.Binding[] = [
     link: {
       type: 'literal',
       value: 'http://geovistory.org/resource/i1690080?p=591',
+    },
+    children: {
+      type: 'literal',
+      value:
+        '[{ "label": "Child 2.1", "url": "http://foo.2.1.bar" },{ "label": "Child 2.2", "url": "http://foo.2.2.bar" }, { "label": "Child 2.2", "url": "http://foo.2.2.bar" },{ "label": "Child 2.2", "url": "http://foo.2.2.bar" },{ "label": "Child 2.2", "url": "http://foo.2.2.bar" }]',
     },
   },
   {
@@ -230,7 +235,12 @@ const missingRadiusAndType: Parser.Binding[] = completeData.map(d => {
 
 const missingLongLat: Parser.Binding[] = [{ ...completeData[0], long: null, lat: null }, ...completeData.slice(1)];
 
-export const Default = await stencilWrapper(<geov-yasgui-map-circles></geov-yasgui-map-circles>);
-export const CompleteData = await stencilWrapper(<geov-yasgui-map-circles data={completeData}></geov-yasgui-map-circles>);
+export const Default = await stencilWrapper(<geov-yasgui-map-circles maxZoom={12}></geov-yasgui-map-circles>);
+export const CompleteData = await stencilWrapper(<geov-yasgui-map-circles data={completeData} radiusMin={2} radiusMax={60}></geov-yasgui-map-circles>);
 export const MissingRadiusAndType = await stencilWrapper(<geov-yasgui-map-circles data={missingRadiusAndType}></geov-yasgui-map-circles>);
 export const MissingLongLat = await stencilWrapper(<geov-yasgui-map-circles data={missingLongLat}></geov-yasgui-map-circles>);
+
+/**
+ * ads
+ */
+export const MinMaxRadius = await stencilWrapper(<geov-yasgui-map-circles data={completeData}></geov-yasgui-map-circles>);
