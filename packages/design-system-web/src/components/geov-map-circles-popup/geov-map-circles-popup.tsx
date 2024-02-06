@@ -27,13 +27,20 @@ export class GeovMapCirclesPopup {
         <ul>
           {this.items.map(i => (
             <li>
-              {i.url ? <a href={i.url}>{i.label}</a> : i.label} {i.suffix && <small>({i.suffix})</small>}
+              {i.url ? (
+                <a target="_blank" href={i.url}>
+                  {i.label}
+                </a>
+              ) : (
+                i.label
+              )}{' '}
+              {i.suffix && <small>({i.suffix})</small>}
               {i?.items?.length > 0 && (
                 <ul>
                   {i.items.map(subitem => (
                     <li>
                       {subitem.url ? (
-                        <a class="subitem" href={subitem.url}>
+                        <a target="_blank" class="subitem" href={subitem.url}>
                           {subitem.label}
                         </a>
                       ) : (
