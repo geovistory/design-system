@@ -15,8 +15,7 @@ geov-yasgui-map-circles {
 .geov-map-circles-container .maplibregl-popup-content {
   overflow-y: auto;
   max-height: 210px;
-  padding-left: 0;
-  padding-right: 0;
+  padding: 0;
 }
 
 
@@ -28,28 +27,32 @@ geov-yasgui-map-circles ion-card-content {
 .legend {
   position: absolute;
   z-index: 1;
-  width: calc(100% - (16px x 2));
+  width: calc(100% - (60px));
   margin-top: 10px;
 }
+
+
+.legend .collapse-button {
+  position: absolute;
+  margin: 0;
+  top: 4px;
+  left: 0;
+  z-index: 9999;
+}
+
+.legend.collapsed {
+  width: 46px;
+
+  ion-card-content {
+    display: none;
+  }
+}
+
 
 @container (width >=700px) {
   .legend {
     max-width: 300px;
   }
-}
-
-.legend ul {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.legend li {
-  display: flex;
-  align-items: center;
-  margin-right: 10px;
 }
 
 #display-query {

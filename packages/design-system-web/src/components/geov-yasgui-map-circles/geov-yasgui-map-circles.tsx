@@ -1,5 +1,6 @@
 import { Component, Host, Prop, State, h } from '@stencil/core';
 import type { Parser } from '@triply/yasr';
+import { closeOutline, expandOutline } from 'ionicons/icons';
 import { DataDrivenPropertyValueSpecification, LngLatBoundsLike } from 'maplibre-gl';
 import { importMapLibre } from '../../lib/importMapLibre';
 import { isNode } from '../../lib/isNode';
@@ -75,6 +76,8 @@ export class GeovYasguiMapCircles {
   @State() labelIndices: string[] = [...new Set(this.data.map(ele => ele['type']?.value || 'none'))];
 
   @Prop() colorScale: string[] = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c']; // ColorBrewer2 qualitative 4-class Paired (colorblind safe)
+
+  @State() ledgendExpanded = true;
 
   async componentDidLoad() {
     // If we are in a browser
@@ -242,19 +245,23 @@ export class GeovYasguiMapCircles {
   render() {
     return (
       <Host>
-        <ion-card class="legend">
+        <ion-card class={`legend ${this.ledgendExpanded ? 'expanded' : 'collapsed'}`}>
+          <ion-card-header>
+            <ion-button size="small" class="collapse-button" fill="clear" onClick={() => (this.ledgendExpanded = !this.ledgendExpanded)}>
+              <ion-icon icon={this.ledgendExpanded ? closeOutline : expandOutline} slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-card-header>
           <ion-card-content>
-            <ul>
+            <ion-list lines={this.labelIndices?.length > 1 ? 'inset' : 'none'}>
               {this.labelIndices.map((type, i) => (
-                <li>
-                  <svg height="1rem" width="1rem">
+                <ion-item>
+                  <svg slot="start" height="1rem" width="1rem">
                     <circle cx="50%" cy="50%" r="50%" fill={this.colorScale[i % this.colorScale.length]} />
                   </svg>
-                  &nbsp;
-                  {type}
-                </li>
+                  <ion-label class="ion-text-wrap">{type}</ion-label>
+                </ion-item>
               ))}
-            </ul>
+            </ion-list>
           </ion-card-content>
         </ion-card>
         <div class="geov-map-circles-container" ref={el => (this.mapContainerEl = el)} />
