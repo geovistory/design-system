@@ -53,7 +53,7 @@ export default function generatePluginMapCircles(config: MapCircleConfig) {
         required: true,
         customValidator: val => {
           const parsed = Number(val?.value);
-          if (parsed >= -180 && parsed <= 180) return;
+          if (parsed >= -90 && parsed <= 90) return;
           return new Set(['must be parsable to a number in the range -90 and +90']);
         },
       },
