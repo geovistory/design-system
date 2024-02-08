@@ -4,7 +4,6 @@ import 'chartjs-adapter-date-fns';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import type { Parser } from '@triply/yasr';
-import { addCircleOutline, removeCircleOutline } from 'ionicons/icons';
 
 /**
  * This component displays a timeline of events.
@@ -29,7 +28,7 @@ export class GeovTimelineGantt {
     },
   ];
 
-  @Prop() lineHeight: number = 20;
+  @Prop() lineHeight: number = 15;
 
   @Prop() barPercentage: number = 1;
 
@@ -39,7 +38,7 @@ export class GeovTimelineGantt {
 
   @Prop() borderWidth: number = 0;
 
-  @Prop() minBarLength: number = 40;
+  @Prop() minBarLength: number = 10;
 
   // Find the earliest date in the data
   getEarliestDate(data: Parser.Binding[]) {
@@ -108,24 +107,6 @@ export class GeovTimelineGantt {
         ],
       },
       options: {
-        plugins: {
-          zoom: {
-            pan: {
-              enabled: true,
-              mode: 'x',
-            },
-          },
-          legend: {
-            display: false,
-          },
-          tooltip: {
-            //enabled: true,
-          },
-          datalabels: {
-            display: false,
-          },
-        },
-        indexAxis: 'y',
         scales: {
           x: {
             min: (this.getEarliestDate(this.data).getFullYear() - 10).toString(),
@@ -135,7 +116,7 @@ export class GeovTimelineGantt {
               unit: 'year',
             },
             ticks: {
-              stepSize: 2,
+              stepSize: 1,
             },
           },
           y: {
@@ -143,6 +124,60 @@ export class GeovTimelineGantt {
               display: true,
             },
             beginAtZero: true,
+          },
+        },
+        indexAxis: 'y',
+        plugins: {
+          zoom: {
+            pan: {
+              enabled: true,
+              mode: 'x',
+            },
+            zoom: {
+              wheel: {
+                enabled: true,
+              },
+              mode: 'x',
+            },
+          },
+          legend: {
+            display: false,
+          },
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              label: function (tooltipItem) {
+                const dataset = tooltipItem.dataset;
+                const dataItem = dataset.data[tooltipItem.dataIndex];
+
+                let dateLabel = '';
+                if (typeof dataItem === 'object') {
+                  if ('x' in dataItem) {
+                    // For data in the format of {x: [startDate, endDate], y: label}
+                    const startDate = new Date(dataItem.x[0]);
+                    const endDate = new Date(dataItem.x[1]);
+                    if (startDate.toDateString() === endDate.toDateString()) {
+                      dateLabel = startDate.toISOString().split('T')[0];
+                    } else {
+                      dateLabel = startDate.toISOString().split('T')[0] + ' to ' + endDate.toISOString().split('T')[0];
+                    }
+                  } else if (Array.isArray(dataItem)) {
+                    // For data in the format of [startDate, endDate]
+                    const startDate = new Date(dataItem[0]);
+                    const endDate = new Date(dataItem[1]);
+                    if (startDate.toDateString() === endDate.toDateString()) {
+                      dateLabel = startDate.toISOString().split('T')[0];
+                    } else {
+                      dateLabel = startDate.toISOString().split('T')[0] + ' to ' + endDate.toISOString().split('T')[0];
+                    }
+                  }
+                }
+                return dateLabel;
+              },
+            },
+          },
+          datalabels: {
+            display: false,
           },
         },
       },
@@ -184,10 +219,6 @@ export class GeovTimelineGantt {
     return (
       <Host>
         <ion-button onClick={() => this.resetZoom()}>Reset zoom</ion-button>
-        <ion-range aria-label="Zoom" min={0} max={100} value={this.zoomLevel} onIonChange={event => this.handleZoomChange(event.detail.value)}>
-          <ion-icon slot="start" icon={removeCircleOutline}></ion-icon>
-          <ion-icon slot="end" icon={addCircleOutline}></ion-icon>
-        </ion-range>
         <div class="scrollBox">
           <div class="scrollBoxBody">
             <canvas id="chartMain" height={this.data.length * this.lineHeight} ref={element => (this.el = element)}></canvas>

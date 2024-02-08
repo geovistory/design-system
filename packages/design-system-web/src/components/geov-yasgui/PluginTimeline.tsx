@@ -46,6 +46,7 @@ export default function generatePluginTimeline(config: TimelineConfig) {
           // create the timeline element
           const elTimeline = document.createElement('geov-timeline-gantt');
           elTimeline.data = data;
+          elTimeline.lineHeight = 15;
 
           // set height of timeline
           elTimeline.style.height = '400px';

@@ -7,8 +7,9 @@
   height: 100%;
 }
 
-/*ion-button {
-/*  position: absolute;
-/*  right: 16px;
-/*  top: 8px;
-/*}
+ion-button {
+  position: absolute;
+  right: 16px;
+  top: 8px;
+  font-size: 0.8rem;
+}
