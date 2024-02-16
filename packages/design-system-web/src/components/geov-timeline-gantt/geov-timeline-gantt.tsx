@@ -1,5 +1,5 @@
 import { Component, h, Host, Prop } from '@stencil/core';
-import Chart from 'chart.js/auto';
+import Chart, { BarController } from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import zoomPlugin from 'chartjs-plugin-zoom';
@@ -15,8 +15,7 @@ import type { Parser } from '@triply/yasr';
 })
 export class GeovTimelineGantt {
   el: HTMLCanvasElement;
-  axisCanvas: HTMLCanvasElement;
-  zoomLevel: number;
+  elAxisX: HTMLCanvasElement;
 
   @Prop() data: Parser.Binding[] = [
     {
@@ -28,17 +27,19 @@ export class GeovTimelineGantt {
     },
   ];
 
-  @Prop() lineHeight: number = 15;
+  @Prop() lineHeight: number = 30;
 
   @Prop() barPercentage: number = 1;
 
-  @Prop() backgroundColor: number[] = [122, 89, 199, 1];
+  @Prop() backgroundColor: number[] = [178, 160, 222, 1];
 
   @Prop() borderColor: number[] = [94, 62, 170, 1];
 
   @Prop() borderWidth: number = 0;
 
   @Prop() minBarLength: number = 10;
+
+  @Prop() chartHeight: number = 240;
 
   // Find the earliest date in the data
   getEarliestDate(data: Parser.Binding[]) {
@@ -81,63 +82,110 @@ export class GeovTimelineGantt {
   }
 
   componentDidLoad() {
+    // -- Patch to realign bars that are supposed to be "minBarLengthed".
+    class CustomBar extends BarController {
+      meta = this.getMeta();
+      static minBarLength = 20;
+
+      // Override draw() function.
+      draw() {
+        // For each bar
+        this.meta.data.forEach(bar => {
+          // If width of bar is less than minBarLength
+          const actualWidth = Math.abs(Math.abs(bar.base) - Math.abs(bar.x)) * 2;
+          if (actualWidth < CustomBar.minBarLength) {
+            // Manage minBarLength here
+            bar.base += (CustomBar.minBarLength - actualWidth / 2) / 2;
+            bar.x -= (CustomBar.minBarLength - actualWidth / 2) / 2;
+            bar.width = CustomBar.minBarLength;
+          }
+        });
+        super.draw();
+      }
+    }
+    CustomBar.id = 'customBar';
+    CustomBar.defaults = BarController.defaults;
+    CustomBar.minBarLength = this.minBarLength;
+    Chart.register(CustomBar);
+    // -- End patch
+
     // Sort by startDate
     this.sortByStartDate(this.data);
+
+    const chartData = [
+      {
+        label: 'Timeline',
+        data: this.data.map(item => ({
+          x: [new Date(item.startDate.value).getTime(), new Date(item.endDate.value).getTime() + 24 * 60 * 60 * 1000 - 1],
+          y: item.entityLabel.value,
+          name: item.entityClassLabel.value,
+          entityUri: item.entityUri.value,
+        })),
+        backgroundColor: ['rgba(' + this.backgroundColor.join(',') + ')'],
+        borderColor: ['rgba(' + this.borderColor.join(',') + ')'],
+        borderWidth: this.borderWidth,
+        barPercentage: this.barPercentage,
+        borderSkipped: false,
+        borderRadius: 10,
+        // Normally we use minBarLength here but ChartJS generates the positioning of these bars incorrectly
+        // See here: https://github.com/chartjs/Chart.js/issues/11667
+        // In the meantime, this part is managed by CustomBar (See above)
+        // minBarLength: this.minBarLength,
+      },
+    ];
+
     const ctxMain = this.el.getContext('2d');
     const chartMain = new Chart(ctxMain, {
-      type: 'bar',
+      type: 'customBar',
       data: {
-        datasets: [
-          {
-            label: 'Timeline',
-            data: this.data.map(item => ({
-              x: [item.startDate.value, item.endDate.value],
-              y: item.entityLabel.value,
-              name: item.entityClassLabel.value,
-              entityUri: item.entityUri.value,
-            })),
-            backgroundColor: ['rgba(' + this.backgroundColor.join(',') + ')'],
-            borderColor: ['rgba(' + this.borderColor.join(',') + ')'],
-            borderWidth: this.borderWidth,
-            barPercentage: this.barPercentage,
-            minBarLength: this.minBarLength,
-            borderSkipped: false,
-            borderRadius: 10,
-          },
-        ],
+        datasets: chartData,
       },
       options: {
+        maintainAspectRatio: false, // https://www.chartjs.org/docs/latest/configuration/responsive.html#responsive-charts
         scales: {
           x: {
-            min: (this.getEarliestDate(this.data).getFullYear() - 10).toString(),
-            max: (this.getLatestDate(this.data).getFullYear() + 10).toString(),
+            offset: false,
+            ticks: {
+              minRotation: 0,
+              maxRotation: 0,
+            },
             type: 'time',
             time: {
               unit: 'year',
             },
-            ticks: {
-              stepSize: 1,
-            },
+            min: new Date(this.getEarliestDate(this.data).getFullYear() + '-01-01').getTime(),
+            max: new Date(this.getLatestDate(this.data).getFullYear() + '-12-31').getTime(),
           },
           y: {
-            ticks: {
-              display: true,
+            grid: {
+              display: false,
             },
-            beginAtZero: true,
+            display: false,
           },
         },
-        indexAxis: 'y',
         plugins: {
+          beforeBuildTicks: function (scale) {
+            scale.options.time.unit = determineTimeUnit(scale);
+          },
           zoom: {
             pan: {
               enabled: true,
               mode: 'x',
+              onPan: function () {
+                drawAxisX();
+              },
             },
             zoom: {
               wheel: {
                 enabled: true,
               },
               mode: 'x',
+              onZoom: function (chart) {
+                const scales = chart.chart.scales;
+                chartMain.options.scales.x.time.unit = determineTimeUnit(scales.x);
+                chartAxisX.options.scales.x.time.unit = determineTimeUnit(scales.x);
+                drawAxisX();
+              },
             },
           },
           legend: {
@@ -177,7 +225,64 @@ export class GeovTimelineGantt {
             },
           },
           datalabels: {
+            display: true,
+            color: 'black',
+            formatter: function (value) {
+              return value.name + ' : ' + value.y;
+            },
+            anchor: 'end',
+            align: 'right',
+            offset: 1,
+          },
+        },
+        indexAxis: 'y',
+      },
+      plugins: [ChartDataLabels, zoomPlugin],
+    });
+
+    // Axis X
+    const ctxAxisX = this.elAxisX.getContext('2d');
+    const chartAxisX = new Chart(ctxAxisX, {
+      type: 'customBar',
+      data: {
+        datasets: null,
+      },
+      options: {
+        maintainAspectRatio: false, // https://www.chartjs.org/docs/latest/configuration/responsive.html#responsive-charts
+        scales: {
+          x: {
+            offset: false,
+            ticks: {
+              minRotation: 0,
+              maxRotation: 0,
+            },
+            type: 'time',
+            time: {
+              unit: 'year',
+            },
+            min: new Date(this.getEarliestDate(this.data).getFullYear() + '-01-01').getTime(),
+            max: new Date(this.getLatestDate(this.data).getFullYear() + '-12-31').getTime(),
+          },
+          y: {
             display: false,
+          },
+        },
+        indexAxis: 'y',
+        plugins: {
+          beforeBuildTicks: function (scale) {
+            scale.options.time.unit = determineTimeUnit(scale);
+          },
+          legend: {
+            display: false,
+          },
+          zoom: {
+            pan: {
+              enabled: true,
+              mode: 'x',
+              onPan: function () {
+                drawAxisX();
+              },
+            },
           },
         },
       },
@@ -198,32 +303,52 @@ export class GeovTimelineGantt {
         window.open(entityUri, '_blank');
       }
     });
+
+    function determineTimeUnit(scale) {
+      if (scale.min && scale.max) {
+        const diff = (scale.max - scale.min) / (1000 * 60 * 60 * 24); // Days difference (milliseconds)
+        if (diff <= 60) {
+          // moins de 31 jours, affiche par jour
+          return 'day';
+        } else if (diff > 60 && diff <= 365 * 5) {
+          // moins de 4 années, affiche par mois
+          return 'month';
+        } else {
+          // plus de 5 années, affiche par année
+          return 'year';
+        }
+      }
+      return 'year';
+    }
+
+    function drawAxisX() {
+      chartAxisX.options.scales.x.min = chartMain.options.scales.x.min;
+      chartAxisX.options.scales.x.max = chartMain.options.scales.x.max;
+      chartAxisX.update();
+    }
   }
 
   resetZoom() {
     const chartMain = Chart.getChart(this.el);
+    const chartAxisX = Chart.getChart(this.elAxisX);
     if (chartMain) {
       chartMain.resetZoom();
-    }
-  }
-
-  handleZoomChange(zoomValue) {
-    this.zoomLevel = zoomValue / 100;
-    const chartMain = Chart.getChart(this.el);
-    if (chartMain) {
-      //
+      chartAxisX.options.scales.x.min = chartMain.options.scales.x.min;
+      chartAxisX.options.scales.x.max = chartMain.options.scales.x.max;
+      chartAxisX.update();
     }
   }
 
   render() {
     return (
       <Host>
-        <ion-button onClick={() => this.resetZoom()}>Reset zoom</ion-button>
-        <div class="scrollBox">
-          <div class="scrollBoxBody">
-            <canvas id="chartMain" height={this.data.length * this.lineHeight} ref={element => (this.el = element)}></canvas>
-          </div>
+        <div class="containerCanvas">
+          <canvas id="chartMain" height={this.data.length * this.lineHeight} ref={element => (this.el = element)}></canvas>
         </div>
+        <div class="containerCanvasAxis">
+          <canvas id="chartAxisX" height={50} ref={element => (this.elAxisX = element)}></canvas>
+        </div>
+        <ion-button onClick={() => this.resetZoom()}>Reset zoom</ion-button>
       </Host>
     );
   }

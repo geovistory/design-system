@@ -2,14 +2,24 @@
   display: block;
 }
 
-.scrollBox {
-  overflow-y: auto;
-  height: 100%;
-}
-
 ion-button {
   position: absolute;
   right: 16px;
   top: 8px;
   font-size: 0.8rem;
+}
+
+canvas {
+  width: 100%;
+}
+
+.containerCanvas {
+  /* https://www.chartjs.org/docs/latest/configuration/responsive.html#responsive-charts */
+  position: relative;
+  width: 100%;
+}
+
+.containerCanvasAxis {
+  position: relative;
+  width: 100%;
 }

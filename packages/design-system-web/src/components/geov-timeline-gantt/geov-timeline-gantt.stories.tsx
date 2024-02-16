@@ -34,8 +34,8 @@ const ts2: timespanData = {
   entityLabel: { type: 'literal', value: 'Death of Johann Kepler' },
   entityClassLabel: { type: 'literal', value: 'Death' },
   entityUri: { type: 'uri', value: 'https://example.com/entity' },
-  startDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1630-11-15' },
-  endDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1630-11-15' },
+  startDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1630-01-01' },
+  endDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1630-12-31' },
 };
 
 const ts3: timespanData = {
@@ -44,6 +44,14 @@ const ts3: timespanData = {
   entityUri: { type: 'uri', value: 'https://example.com/entity' },
   startDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1600-01-01' },
   endDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1600-01-01' },
+};
+
+const ts3bis: timespanData = {
+  entityLabel: { type: 'literal', value: 'One moment in his life 3' },
+  entityClassLabel: { type: 'literal', value: 'Live' },
+  entityUri: { type: 'uri', value: 'https://example.com/entity' },
+  startDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1599-12-25' },
+  endDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1599-12-31' },
 };
 
 const ts4: timespanData = {
@@ -58,11 +66,27 @@ const ts5: timespanData = {
   entityLabel: { type: 'literal', value: 'Another moment in his life 2' },
   entityClassLabel: { type: 'literal', value: 'Live' },
   entityUri: { type: 'uri', value: 'https://example.com/entity' },
-  startDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1590-01-01' },
+  startDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1590-06-01' },
   endDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1595-12-31' },
 };
 
-const dataTimespansTest = [ts1, ts2, ts3, ts4, ts5];
+const ts6: timespanData = {
+  entityLabel: { type: 'literal', value: 'Another moment in his life 5' },
+  entityClassLabel: { type: 'literal', value: 'Live' },
+  entityUri: { type: 'uri', value: 'https://example.com/entity' },
+  startDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1576-09-01' },
+  endDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1576-12-31' },
+};
+
+const ts7: timespanData = {
+  entityLabel: { type: 'literal', value: 'Another moment in his life 4' },
+  entityClassLabel: { type: 'literal', value: 'Live' },
+  entityUri: { type: 'uri', value: 'https://example.com/entity' },
+  startDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1584-06-01' },
+  endDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1585-12-31' },
+};
+
+const dataTimespansTest = [ts1, ts2, ts3, ts3bis, ts4, ts5, ts6, ts7];
 export const Base = await stencilWrapper(<geov-timeline-gantt data={dataTimespansTest}></geov-timeline-gantt>);
 
 /**
