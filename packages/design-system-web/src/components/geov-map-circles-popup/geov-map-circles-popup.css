@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  line-height: 2;
+  font-size: 1rem;
+  padding-right: 1rem;
+
+}
+
+ul {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+ul ul {
+  font-size: .8rem;
+}
+
+a {
+  color: var(--ion-color-primary, #4c51d5);
+  text-decoration: none;
+}

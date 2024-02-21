@@ -1,11 +1,9 @@
 import type Yasr from '@triply/yasr';
 import type { Plugin } from '@triply/yasr';
 import { mapOutline } from 'ionicons/icons';
+import { Components } from '../../components';
 
-export interface MapCircleConfig {
-  // The color scale to use
-  colorScale?: string[];
-}
+export type MapCircleConfig = Partial<Omit<Components.GeovYasguiMapCircles, 'data'>>;
 
 export default function generatePluginMapCircles(config: MapCircleConfig) {
   return class PluginMapCircles implements Plugin<MapCircleConfig> {
@@ -24,15 +22,71 @@ export default function generatePluginMapCircles(config: MapCircleConfig) {
     constructor(yasr: Yasr) {
       this.yasr = yasr;
     }
+    expectedKeys: Components.GeovYasguiDataValidation['expectedKeys'] = [
+      {
+        name: 'radius',
+        required: false,
+        customValidator: val => {
+          if (Number(val?.value) > 0) return;
+          return new Set(['must be parsable to a number, and bigger than 0']);
+        },
+      },
+      {
+        name: 'number',
+        required: false,
+        customValidator: val => {
+          if (!isNaN(Number(val?.value))) return;
+          return new Set(['must be parsable to a number']);
+        },
+      },
+      {
+        name: 'long',
+        required: true,
+        customValidator: val => {
+          const parsed = Number(val?.value);
+          if (parsed >= -180 && parsed <= 180) return;
+          return new Set(['must be parsable to a number in the range -180 and +180']);
+        },
+      },
+      {
+        name: 'lat',
+        required: true,
+        customValidator: val => {
+          const parsed = Number(val?.value);
+          if (parsed >= -90 && parsed <= 90) return;
+          return new Set(['must be parsable to a number in the range -90 and +90']);
+        },
+      },
+    ];
 
     // Draw the result set. This plugin creates a <geov-yasgui-map-circles/ data=[...]>
     draw() {
-      const el = document.createElement('geov-yasgui-map-circles');
-      el.data = this.yasr.results.getBindings();
-      for (const key in config) {
-        el[key] = config[key as keyof MapCircleConfig];
-      }
-      this.yasr.resultsEl.appendChild(el);
+      const elValidation = document.createElement('geov-yasgui-data-validation');
+      const data = this.yasr.results.getBindings();
+      elValidation.data = data;
+      elValidation.expectedKeys = this.expectedKeys;
+      this.yasr.resultsEl.appendChild(elValidation);
+      this.yasr.resultsEl.classList.add('ion-padding');
+
+      // listen for the validation result
+      elValidation.addEventListener('validationCompleted', (isValid: CustomEvent<boolean>) => {
+        // if data is valid ...
+        if (isValid.detail) {
+          // create the timeline element
+          const elVisual = document.createElement('geov-yasgui-map-circles');
+          elVisual.data = data;
+
+          for (const key in config) {
+            elVisual[key] = config[key as keyof MapCircleConfig];
+          }
+          // remove validation element
+          this.yasr.resultsEl.classList.remove('ion-padding');
+          this.yasr.resultsEl.removeChild(elValidation);
+
+          // append timeline element
+          this.yasr.resultsEl.appendChild(elVisual);
+        }
+      });
     }
 
     // A required function, used to indicate whether this plugin can draw the current
