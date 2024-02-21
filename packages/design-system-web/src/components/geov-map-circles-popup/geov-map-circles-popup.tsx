@@ -40,11 +40,11 @@ export class GeovMapCirclesPopup {
                   {i.items.map(subitem => (
                     <li>
                       {subitem.url ? (
-                        <a target="_blank" class="subitem" href={subitem.url}>
+                        <a target="_blank" href={subitem.url}>
                           {subitem.label}
                         </a>
                       ) : (
-                        <span class="subitem">{subitem.label}</span>
+                        subitem.label
                       )}
                     </li>
                   ))}

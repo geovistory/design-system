@@ -16,7 +16,6 @@ export default {
 
 export const Default = await stencilWrapper(
   <geov-map-circles-popup
-    style={{ height: '200px' }}
     items={[
       { label: 'Label 1', items: [{ label: 'Child 1.1' }, { label: 'Child 1.2' }] },
       {

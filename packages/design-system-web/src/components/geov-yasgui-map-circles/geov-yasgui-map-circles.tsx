@@ -1,6 +1,6 @@
 import { Component, Host, Prop, State, h } from '@stencil/core';
 import type { Parser } from '@triply/yasr';
-import { closeOutline, expandOutline } from 'ionicons/icons';
+import { closeOutline, informationCircleOutline } from 'ionicons/icons';
 import { DataDrivenPropertyValueSpecification, LngLatBoundsLike } from 'maplibre-gl';
 import { importMapLibre } from '../../lib/importMapLibre';
 import { isNode } from '../../lib/isNode';
@@ -197,7 +197,7 @@ export class GeovYasguiMapCircles {
           const handleMarkerClick = e => {
             const coordinates = e.features[0].geometry.coordinates;
             // let html = `<ul>`;
-            const pupupData: GeovMapCirclesPopup['items'] = e.features.map(
+            const popupData: GeovMapCirclesPopup['items'] = e.features.map(
               (feature: {
                 properties: {
                   link: string;
@@ -210,7 +210,7 @@ export class GeovYasguiMapCircles {
                 try {
                   children = JSON.parse(feature.properties.children);
                 } catch {}
-                const pupupItem: PopupItem = {
+                const popupItem: PopupItem = {
                   label: feature.properties.label,
                   url: feature.properties.link,
                   suffix: feature.properties.number,
@@ -219,12 +219,12 @@ export class GeovYasguiMapCircles {
                     url: c?.url,
                   })),
                 };
-                return pupupItem;
+                return popupItem;
               },
             );
 
             const el = document.createElement('geov-map-circles-popup');
-            el.items = pupupData;
+            el.items = popupData;
             new MapLibre.Popup().setLngLat(coordinates).setDOMContent(el).setMaxWidth('340px').addTo(map);
           };
 
@@ -248,7 +248,7 @@ export class GeovYasguiMapCircles {
         <ion-card class={`legend ${this.ledgendExpanded ? 'expanded' : 'collapsed'}`}>
           <ion-card-header>
             <ion-button size="small" class="collapse-button" fill="clear" onClick={() => (this.ledgendExpanded = !this.ledgendExpanded)}>
-              <ion-icon icon={this.ledgendExpanded ? closeOutline : expandOutline} slot="icon-only"></ion-icon>
+              <ion-icon icon={this.ledgendExpanded ? closeOutline : informationCircleOutline} slot="icon-only"></ion-icon>
             </ion-button>
           </ion-card-header>
           <ion-card-content>
