@@ -26,11 +26,11 @@ export const importMapLibre = async () =>
     script.onerror = reject;
 
     // set url
-    script.src = 'https://unpkg.com/maplibre-gl@3.4.1/dist/maplibre-gl.js';
+    script.src = 'https://cdn.jsdelivr.net/npm/maplibre-gl@3.4.1/dist/maplibre-gl.js';
 
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = 'https://unpkg.com/maplibre-gl@3.4.1/dist/maplibre-gl.css';
+    link.href = 'https://cdn.jsdelivr.net/npm/maplibre-gl@3.4.1/dist/maplibre-gl.css';
 
     // append script to load Plotly from CDN to document
     document.head.appendChild(link);

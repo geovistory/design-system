@@ -45,3 +45,7 @@ geov-yasgui .yasqe.collapsed .CodeMirror {
   border: none;
   min-height: 0px;
 }
+
+geov-yasgui .yasr.collapsed {
+  margin-top: 0px;
+}

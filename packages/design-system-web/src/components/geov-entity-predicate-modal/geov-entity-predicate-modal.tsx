@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State } from '@stencil/core';
+import { Component, Host, h, Prop, State, Fragment } from '@stencil/core';
 
 /**
  * This component opens a modal displaying "Entity Props By Predicate".
@@ -83,27 +83,29 @@ export class GeovEntityPredicateModal {
           <slot></slot>
         </span>
         <ion-modal ref={e => (this.modal = e)}>
-          <ion-header>
-            <ion-toolbar>
-              <ion-buttons slot="start">
-                <ion-button onClick={() => this.close()}>Close</ion-button>
-              </ion-buttons>
-              <ion-title>{this.modalTitle}</ion-title>
-            </ion-toolbar>
-          </ion-header>
-          <ion-content ref={e => (this.content = e)} class="ion-padding">
-            {this.modalIsOpen && (
-              <geov-entity-props-by-predicate
-                sparqlEndpoint={this.sparqlEndpoint}
-                entityUri={this.entityUri}
-                totalCount={this.totalCount}
-                language={this.language}
-                predicateUri={this.predicateUri}
-                predicateLabel={this.predicateLabel}
-                fetchBeforeRender={this.fetchBeforeRender}
-              ></geov-entity-props-by-predicate>
-            )}
-          </ion-content>
+          {this.modalIsOpen && (
+            <Fragment>
+              <ion-header>
+                <ion-toolbar>
+                  <ion-buttons slot="start">
+                    <ion-button onClick={() => this.close()}>Close</ion-button>
+                  </ion-buttons>
+                  <ion-title>{this.modalTitle}</ion-title>
+                </ion-toolbar>
+              </ion-header>
+              <ion-content ref={e => (this.content = e)} class="ion-padding">
+                <geov-entity-props-by-predicate
+                  sparqlEndpoint={this.sparqlEndpoint}
+                  entityUri={this.entityUri}
+                  totalCount={this.totalCount}
+                  language={this.language}
+                  predicateUri={this.predicateUri}
+                  predicateLabel={this.predicateLabel}
+                  fetchBeforeRender={this.fetchBeforeRender}
+                ></geov-entity-props-by-predicate>
+              </ion-content>
+            </Fragment>
+          )}
         </ion-modal>
       </Host>
     );

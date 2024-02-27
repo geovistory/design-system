@@ -3,7 +3,9 @@ import type { Plugin } from '@triply/yasr';
 import { mapOutline } from 'ionicons/icons';
 import { Components } from '../../components';
 
-export type MapCircleConfig = Partial<Omit<Components.GeovYasguiMapCircles, 'data'>>;
+export type MapCircleConfig = Partial<Omit<Components.GeovYasguiMapCircles, 'data'>> & {
+  mapHeight?: string;
+};
 
 export default function generatePluginMapCircles(config: MapCircleConfig) {
   return class PluginMapCircles implements Plugin<MapCircleConfig> {
@@ -75,7 +77,7 @@ export default function generatePluginMapCircles(config: MapCircleConfig) {
           // create the timeline element
           const elVisual = document.createElement('geov-yasgui-map-circles');
           elVisual.data = data;
-
+          elVisual.style.height = config?.mapHeight ?? '400px';
           for (const key in config) {
             elVisual[key] = config[key as keyof MapCircleConfig];
           }
