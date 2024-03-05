@@ -9,7 +9,7 @@ declare module '*.mdx' {
   export default MDXComponent;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 import { ChartTypeRegistry } from 'chart.js';
 declare module 'chart.js' {
   interface ChartTypeRegistry {

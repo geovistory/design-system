@@ -13,13 +13,25 @@ canvas {
   width: 100%;
 }
 
+.containerContainerCanvas {
+  position: absolute;
+  max-height: 200px;
+  overflow-y: scroll;
+  width: calc(100% - 20px);
+}
+
 .containerCanvas {
   /* https://www.chartjs.org/docs/latest/configuration/responsive.html#responsive-charts */
   position: relative;
   width: 100%;
 }
 
+.containerContainerCanvasAxis {
+  position: absolute;
+  width: calc(100% - 40px);
+  z-index: -1;
+}
+
 .containerCanvasAxis {
   position: relative;
-  width: 100%;
 }

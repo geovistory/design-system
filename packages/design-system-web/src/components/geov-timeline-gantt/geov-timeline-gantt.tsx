@@ -29,6 +29,8 @@ export class GeovTimelineGantt {
 
   @Prop() lineHeight: number = 30;
 
+  @Prop() maxHeight: number = 200;
+
   @Prop() barPercentage: number = 1;
 
   @Prop() backgroundColor: number[] = [178, 160, 222, 1];
@@ -144,6 +146,7 @@ export class GeovTimelineGantt {
         maintainAspectRatio: false, // https://www.chartjs.org/docs/latest/configuration/responsive.html#responsive-charts
         scales: {
           x: {
+            display: false,
             offset: false,
             ticks: {
               minRotation: 0,
@@ -342,11 +345,19 @@ export class GeovTimelineGantt {
   render() {
     return (
       <Host>
-        <div class="containerCanvas">
-          <canvas id="chartMain" height={this.data.length * this.lineHeight} ref={element => (this.el = element)}></canvas>
+        <div class="containerContainerCanvas">
+          <div class="containerCanvas">
+            <canvas id="chartMain" height={this.data.length * this.lineHeight} ref={element => (this.el = element)}></canvas>
+          </div>
         </div>
-        <div class="containerCanvasAxis">
-          <canvas id="chartAxisX" height={50} ref={element => (this.elAxisX = element)}></canvas>
+        <div class="containerContainerCanvasAxis">
+          <div class="containerCanvasAxis">
+            <canvas
+              id="chartAxisX"
+              height={this.data.length * this.lineHeight + 50 > 250 ? 250 : this.data.length * this.lineHeight + 50}
+              ref={element => (this.elAxisX = element)}
+            ></canvas>
+          </div>
         </div>
         <ion-button onClick={() => this.resetZoom()}>Reset zoom</ion-button>
       </Host>
