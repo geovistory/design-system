@@ -1,9 +1,9 @@
 import { Component, h, Host, Prop } from '@stencil/core';
-import Chart, { BarController } from 'chart.js/auto';
+import type { Parser } from '@triply/yasr';
+import Chart, { BarController, ChartDataset, ScaleOptions } from 'chart.js/auto';
 import 'chartjs-adapter-date-fns';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import zoomPlugin from 'chartjs-plugin-zoom';
-import type { Parser } from '@triply/yasr';
 
 /**
  * This component displays a timeline of events.
@@ -16,6 +16,8 @@ import type { Parser } from '@triply/yasr';
 export class GeovTimelineGantt {
   el: HTMLCanvasElement;
   elAxisX: HTMLCanvasElement;
+  chartMain: Chart;
+  chartAxisX: Chart;
 
   @Prop() data: Parser.Binding[] = [
     {
@@ -114,7 +116,14 @@ export class GeovTimelineGantt {
     // Sort by startDate
     this.sortByStartDate(this.data);
 
-    const chartData = [
+    type BarData = {
+      x: number[];
+      y: string;
+      name: string;
+      entityUri: string;
+    };
+
+    const chartData: ChartDataset<'bar', BarData[]>[] = [
       {
         label: 'Timeline',
         data: this.data.map(item => ({
@@ -135,41 +144,51 @@ export class GeovTimelineGantt {
         // minBarLength: this.minBarLength,
       },
     ];
+    const scaleXHidden: ScaleOptions<'time'> = {
+      display: true,
+      offset: false,
+      ticks: {
+        display: false,
+        minRotation: 0,
+        maxRotation: 0,
+      },
+      grid: {
+        display: true,
+      },
+      type: 'time',
+      time: {
+        unit: 'year',
+      },
+      min: new Date(this.getEarliestDate(this.data).getFullYear() + '-01-01').getTime(),
+      max: new Date(this.getLatestDate(this.data).getFullYear() + '-12-31').getTime(),
+    };
+    const scaleXVisible = {
+      ...scaleXHidden,
+      ticks: {
+        display: true,
+        minRotation: 0,
+        maxRotation: 0,
+      },
+    };
 
     const ctxMain = this.el.getContext('2d');
-    const chartMain = new Chart(ctxMain, {
-      type: 'customBar',
+    this.chartMain = new Chart<'bar', BarData[]>(ctxMain, {
+      type: 'customBar' as 'bar',
       data: {
         datasets: chartData,
       },
       options: {
         maintainAspectRatio: false, // https://www.chartjs.org/docs/latest/configuration/responsive.html#responsive-charts
         scales: {
-          x: {
-            display: false,
-            offset: false,
-            ticks: {
-              minRotation: 0,
-              maxRotation: 0,
-            },
-            type: 'time',
-            time: {
-              unit: 'year',
-            },
-            min: new Date(this.getEarliestDate(this.data).getFullYear() + '-01-01').getTime(),
-            max: new Date(this.getLatestDate(this.data).getFullYear() + '-12-31').getTime(),
-          },
+          x: scaleXHidden,
           y: {
             grid: {
-              display: false,
+              display: true,
             },
             display: false,
           },
         },
         plugins: {
-          beforeBuildTicks: function (scale) {
-            scale.options.time.unit = determineTimeUnit(scale);
-          },
           zoom: {
             pan: {
               enabled: true,
@@ -177,17 +196,20 @@ export class GeovTimelineGantt {
               onPan: function () {
                 drawAxisX();
               },
+              onPanComplete: function () {
+                drawAxisX();
+              },
             },
             zoom: {
               wheel: {
-                enabled: true,
+                enabled: false,
               },
               mode: 'x',
               onZoom: function (chart) {
-                const scales = chart.chart.scales;
-                chartMain.options.scales.x.time.unit = determineTimeUnit(scales.x);
-                chartAxisX.options.scales.x.time.unit = determineTimeUnit(scales.x);
-                drawAxisX();
+                redrawTimeUnit(chart);
+              },
+              onZoomComplete: function (chart) {
+                redrawTimeUnit(chart);
               },
             },
           },
@@ -207,15 +229,6 @@ export class GeovTimelineGantt {
                     // For data in the format of {x: [startDate, endDate], y: label}
                     const startDate = new Date(dataItem.x[0]);
                     const endDate = new Date(dataItem.x[1]);
-                    if (startDate.toDateString() === endDate.toDateString()) {
-                      dateLabel = startDate.toISOString().split('T')[0];
-                    } else {
-                      dateLabel = startDate.toISOString().split('T')[0] + ' to ' + endDate.toISOString().split('T')[0];
-                    }
-                  } else if (Array.isArray(dataItem)) {
-                    // For data in the format of [startDate, endDate]
-                    const startDate = new Date(dataItem[0]);
-                    const endDate = new Date(dataItem[1]);
                     if (startDate.toDateString() === endDate.toDateString()) {
                       dateLabel = startDate.toISOString().split('T')[0];
                     } else {
@@ -242,39 +255,24 @@ export class GeovTimelineGantt {
       },
       plugins: [ChartDataLabels, zoomPlugin],
     });
-
+    const _chartMain = this.chartMain;
     // Axis X
     const ctxAxisX = this.elAxisX.getContext('2d');
-    const chartAxisX = new Chart(ctxAxisX, {
-      type: 'customBar',
+    this.chartAxisX = new Chart<'bar'>(ctxAxisX, {
+      type: 'customBar' as 'bar',
       data: {
         datasets: null,
       },
       options: {
         maintainAspectRatio: false, // https://www.chartjs.org/docs/latest/configuration/responsive.html#responsive-charts
         scales: {
-          x: {
-            offset: false,
-            ticks: {
-              minRotation: 0,
-              maxRotation: 0,
-            },
-            type: 'time',
-            time: {
-              unit: 'year',
-            },
-            min: new Date(this.getEarliestDate(this.data).getFullYear() + '-01-01').getTime(),
-            max: new Date(this.getLatestDate(this.data).getFullYear() + '-12-31').getTime(),
-          },
+          x: scaleXVisible,
           y: {
             display: false,
           },
         },
         indexAxis: 'y',
         plugins: {
-          beforeBuildTicks: function (scale) {
-            scale.options.time.unit = determineTimeUnit(scale);
-          },
           legend: {
             display: false,
           },
@@ -283,7 +281,19 @@ export class GeovTimelineGantt {
               enabled: true,
               mode: 'x',
               onPan: function () {
-                drawAxisX();
+                drawMain();
+              },
+              onPanComplete: function () {
+                drawMain();
+              },
+            },
+            zoom: {
+              wheel: {
+                enabled: false,
+              },
+              mode: 'x',
+              onZoom: function (chart) {
+                redrawTimeUnit(chart);
               },
             },
           },
@@ -291,15 +301,36 @@ export class GeovTimelineGantt {
       },
       plugins: [ChartDataLabels, zoomPlugin],
     });
+    const _chartAxisX = this.chartAxisX;
+
+    function drawAxisX() {
+      _chartAxisX.options.scales.x.min = _chartMain.options.scales.x.min;
+      _chartAxisX.options.scales.x.max = _chartMain.options.scales.x.max;
+      _chartAxisX.update();
+    }
+
+    function drawMain() {
+      _chartMain.options.scales.x.min = _chartAxisX.options.scales.x.min;
+      _chartMain.options.scales.x.max = _chartAxisX.options.scales.x.max;
+      _chartMain.update();
+    }
+
+    function redrawTimeUnit(chart) {
+      const scales = chart.chart.scales;
+      _chartAxisX.options.scales.x.time.unit = determineTimeUnit(scales.x);
+      _chartMain.options.scales.x.time.unit = determineTimeUnit(scales.x);
+      _chartAxisX.update();
+      _chartMain.update();
+    }
 
     // Click event handler to detect clicks on graph bars
     this.el.addEventListener('click', event => {
-      const activeElements = chartMain.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
+      const activeElements = this.chartMain.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
       if (activeElements.length > 0) {
         const clickedElement = activeElements[0];
         const datasetIndex = clickedElement.datasetIndex;
         const index = clickedElement.index;
-        const data = chartMain.data.datasets[datasetIndex].data[index];
+        const data = this.chartMain.data.datasets[datasetIndex].data[index];
 
         // Retrieve the URL associated with the clicked element and redirect the page
         const entityUri = data.entityUri;
@@ -323,43 +354,48 @@ export class GeovTimelineGantt {
       }
       return 'year';
     }
-
-    function drawAxisX() {
-      chartAxisX.options.scales.x.min = chartMain.options.scales.x.min;
-      chartAxisX.options.scales.x.max = chartMain.options.scales.x.max;
-      chartAxisX.update();
-    }
   }
 
   resetZoom() {
-    const chartMain = Chart.getChart(this.el);
-    const chartAxisX = Chart.getChart(this.elAxisX);
-    if (chartMain) {
-      chartMain.resetZoom();
-      chartAxisX.options.scales.x.min = chartMain.options.scales.x.min;
-      chartAxisX.options.scales.x.max = chartMain.options.scales.x.max;
-      chartAxisX.update();
-    }
+    this.chartMain.resetZoom();
+    this.chartAxisX.resetZoom();
+  }
+
+  zoomOut() {
+    this.chartMain.zoom(0.5, 'zoom');
+    this.chartAxisX.zoom(0.5, 'zoom');
+  }
+  zoomIn() {
+    this.chartMain.zoom(1.3333, 'zoom');
+    this.chartAxisX.zoom(1.3333, 'zoom');
   }
 
   render() {
     return (
       <Host>
-        <div class="containerContainerCanvas">
-          <div class="containerCanvas">
-            <canvas id="chartMain" height={this.data.length * this.lineHeight} ref={element => (this.el = element)}></canvas>
+        <div class="gantt-buttons">
+          <ion-button size="small" onClick={() => this.resetZoom()}>
+            Reset zoom
+          </ion-button>
+          <ion-button size="small" onClick={() => this.zoomOut()}>
+            -
+          </ion-button>
+          <ion-button size="small" onClick={() => this.zoomIn()}>
+            +
+          </ion-button>
+        </div>
+        <div class="scroll-container">
+          <div class="bar-chart">
+            <div class="containerCanvas">
+              <canvas id="chartMain" height={this.data.length * this.lineHeight} ref={element => (this.el = element)}></canvas>
+            </div>
+          </div>
+          <div class="x-axis">
+            <div class="containerCanvasAxis">
+              <canvas id="chartAxisX" height={50} ref={element => (this.elAxisX = element)}></canvas>
+            </div>
           </div>
         </div>
-        <div class="containerContainerCanvasAxis">
-          <div class="containerCanvasAxis">
-            <canvas
-              id="chartAxisX"
-              height={this.data.length * this.lineHeight + 50 > 250 ? 250 : this.data.length * this.lineHeight + 50}
-              ref={element => (this.elAxisX = element)}
-            ></canvas>
-          </div>
-        </div>
-        <ion-button onClick={() => this.resetZoom()}>Reset zoom</ion-button>
       </Host>
     );
   }
