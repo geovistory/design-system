@@ -31,7 +31,7 @@ export class GeovTimelineGantt {
 
   @Prop() lineHeight: number = 30;
 
-  @Prop() maxHeight: number = 200;
+  @Prop() maxHeight: number = null;
 
   @Prop() barPercentage: number = 1;
 
@@ -367,6 +367,14 @@ export class GeovTimelineGantt {
   }
 
   resetZoom() {
+    const min = new Date(this.getEarliestDate(this.data).getFullYear() + '-01-01').getTime();
+    const max = new Date(this.getLatestDate(this.data).getFullYear() + '-12-31').getTime();
+    this.chartMain.options.scales.x.min = min;
+    this.chartMain.options.scales.x.max = max;
+    this.chartAxisX.options.scales.x.min = min;
+    this.chartAxisX.options.scales.x.max = max;
+    this.chartMain.update();
+    this.chartAxisX.update();
     this.chartMain.resetZoom();
     this.chartAxisX.resetZoom();
   }
@@ -394,7 +402,7 @@ export class GeovTimelineGantt {
             +
           </ion-button>
         </div>
-        <div class="scroll-container">
+        <div class="scroll-container" style={this.maxHeight ? { maxHeight: `${this.maxHeight}px` } : {}}>
           <div class="bar-chart">
             <div class="containerCanvas">
               <canvas id="chartMain" height={this.data.length * this.lineHeight} ref={element => (this.el = element)}></canvas>

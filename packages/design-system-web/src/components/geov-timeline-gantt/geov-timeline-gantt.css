@@ -18,10 +18,10 @@ canvas {
 
 .scroll-container {
   width: 100%;
-  max-height: 200px;
   overflow-y: auto;
   position: relative;
   margin-bottom: 50px;
+  background-color: var(--gantt-timeline-background-color, #fff);
 }
 
 .x-axis {
@@ -30,7 +30,7 @@ canvas {
   position: sticky;
   position: -webkit-sticky;
   bottom: 0;
-  background-color: beige;
+  background-color: var(--gantt-timeline-background-color, #fff);
   /* a background-color is needed to cover the bar-chart */
 }
 

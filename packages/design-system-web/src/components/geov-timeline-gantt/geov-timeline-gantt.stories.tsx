@@ -90,13 +90,23 @@ const dataTimespansTest = [ts1, ts2, ts3, ts3bis, ts4, ts5, ts6, ts7];
 export const Base = await stencilWrapper(<geov-timeline-gantt data={dataTimespansTest}></geov-timeline-gantt>);
 
 /**
- * Use lineHeight to determine the thickness, in pixels, of a line of data, and barPercentage to determine the percentage thickness of the bar in relation to the thickness of its line
+ * Use maxHeight for limit height of canvas, lineHeight to determine the thickness, in pixels, of a line of data, and barPercentage to determine the percentage thickness of the bar in relation to the thickness of its line
  */
-export const lineHeightAndBarPercentage = await stencilWrapper(<geov-timeline-gantt data={dataTimespansTest} lineHeight={50} barPercentage={0.3}></geov-timeline-gantt>);
+export const MaxHeightLineHeightAndBarPercentage = await stencilWrapper(
+  <geov-timeline-gantt data={dataTimespansTest} maxHeight={200} lineHeight={50} barPercentage={0.3}></geov-timeline-gantt>,
+);
 
 /**
  * Use backgroundColor to choose the colour of the bar and borderColor to choose the colour of the border, if borderWidth > 0.
+ * You can use the css var --gantt-timeline-background-color for change the background color.
  */
 export const colors = await stencilWrapper(
-  <geov-timeline-gantt data={dataTimespansTest} backgroundColor={[0, 0, 255, 1]} borderWidth={2} borderColor={[255, 0, 0, 1]}></geov-timeline-gantt>,
+  <div>
+    <style>{`
+  .customBg {
+    --gantt-timeline-background-color: beige;
+  }
+`}</style>
+    <geov-timeline-gantt class="customBg" data={dataTimespansTest} backgroundColor={[0, 0, 255, 1]} borderWidth={2} borderColor={[255, 0, 0, 1]}></geov-timeline-gantt>
+  </div>,
 );
