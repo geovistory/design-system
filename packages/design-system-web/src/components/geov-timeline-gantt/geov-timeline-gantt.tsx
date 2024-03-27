@@ -210,9 +210,11 @@ export class GeovTimelineGantt {
               mode: 'x',
               onZoom: function (chart) {
                 redrawTimeUnit(chart);
+                drawAxisX();
               },
               onZoomComplete: function (chart) {
                 redrawTimeUnit(chart);
+                drawAxisX();
               },
             },
           },
@@ -297,6 +299,11 @@ export class GeovTimelineGantt {
               mode: 'x',
               onZoom: function (chart) {
                 redrawTimeUnit(chart);
+                drawMain();
+              },
+              onZoomComplete: function (chart) {
+                redrawTimeUnit(chart);
+                drawMain();
               },
             },
           },
