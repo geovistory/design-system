@@ -148,7 +148,7 @@ export class GeovTimelineGantt {
       display: true,
       offset: false,
       ticks: {
-        display: false,
+        display: true,
         minRotation: 0,
         maxRotation: 0,
       },
@@ -168,6 +168,9 @@ export class GeovTimelineGantt {
         display: true,
         minRotation: 0,
         maxRotation: 0,
+      },
+      afterFit: ctx => {
+        ctx.height += 24;
       },
     };
 
@@ -258,7 +261,7 @@ export class GeovTimelineGantt {
     const _chartMain = this.chartMain;
     // Axis X
     const ctxAxisX = this.elAxisX.getContext('2d');
-    this.chartAxisX = new Chart<'bar'>(ctxAxisX, {
+    this.chartAxisX = new Chart<'bar', BarData[]>(ctxAxisX, {
       type: 'customBar' as 'bar',
       data: {
         datasets: null,

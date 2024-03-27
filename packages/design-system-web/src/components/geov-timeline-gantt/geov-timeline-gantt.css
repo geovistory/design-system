@@ -30,7 +30,8 @@ canvas {
   position: sticky;
   position: -webkit-sticky;
   bottom: 0;
-  background-color: beige; /* a background-color is needed to cover the bar-chart */
+  background-color: beige;
+  /* a background-color is needed to cover the bar-chart */
 }
 
 .gantt-buttons {
@@ -42,5 +43,6 @@ canvas {
 }
 
 .bar-chart {
-  margin-bottom: -9px; /* Hide horizontal line */
+  /* Hide x-axis */
+  margin-bottom: -29px;
 }
