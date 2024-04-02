@@ -11,14 +11,13 @@ import zoomPlugin from 'chartjs-plugin-zoom';
 @Component({
   tag: 'geov-timeline-gantt',
   styleUrl: 'geov-timeline-gantt.css',
-  shadow: false,
+  shadow: true,
 })
 export class GeovTimelineGantt {
   el: HTMLCanvasElement;
   elAxisX: HTMLCanvasElement;
   chartMain: Chart;
   chartAxisX: Chart;
-  scrollContainer: HTMLElement;
 
   @Prop() data: Parser.Binding[] = [
     {
@@ -363,14 +362,6 @@ export class GeovTimelineGantt {
       }
       return 'year';
     }
-
-    this.adjustHeight();
-  }
-
-  adjustHeight() {
-    const scrollContainerParent = this.scrollContainer.parentElement.parentElement as HTMLElement;
-    const containerHeight = scrollContainerParent.clientHeight > this.scrollContainer.clientHeight ? this.scrollContainer.clientHeight : scrollContainerParent.clientHeight;
-    this.scrollContainer.style.maxHeight = `${containerHeight}px`;
   }
 
   resetZoom() {
@@ -409,7 +400,7 @@ export class GeovTimelineGantt {
             +
           </ion-button>
         </div>
-        <div class="scroll-container" ref={element => (this.scrollContainer = element)}>
+        <div class="scroll-container">
           <div class="bar-chart">
             <div class="containerCanvas">
               <canvas id="chartMain" height={this.data.length * this.lineHeight} ref={element => (this.el = element)}></canvas>

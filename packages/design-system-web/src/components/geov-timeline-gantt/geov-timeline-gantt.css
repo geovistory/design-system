@@ -1,5 +1,7 @@
-:host {
+:host,
+geov-timeline-gantt {
   display: block;
+  height: 100%;
 }
 
 canvas {
@@ -18,9 +20,9 @@ canvas {
 
 .scroll-container {
   width: 100%;
+  height: 100%;
   overflow-y: auto;
   position: relative;
-  margin-bottom: 50px;
   background-color: var(--gantt-timeline-background-color, #fff);
 }
 

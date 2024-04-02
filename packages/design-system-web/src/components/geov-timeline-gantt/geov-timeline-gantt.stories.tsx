@@ -94,7 +94,7 @@ export const Base = await stencilWrapper(<geov-timeline-gantt data={dataTimespan
  * Set value to lineHeight to determine the thickness, in pixels, of a line of data, and barPercentage to determine the percentage thickness of the bar in relation to the thickness of its line
  */
 export const HeightLineHeightAndBarPercentage = await stencilWrapper(
-  <div style={{ height: '200px' }}>
+  <div style={{ height: '200px', border: '1px solid blue' }}>
     <geov-timeline-gantt data={dataTimespansTest} lineHeight={50} barPercentage={0.3}></geov-timeline-gantt>
   </div>,
 );
