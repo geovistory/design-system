@@ -82,6 +82,42 @@ GROUP BY ?label ?long ?lat ?type ?link`,
   },
 ];
 
+const tabsForTimeline = [
+  {
+    name: 'Ship voyages',
+    sparqlEndpoint: 'https://sparql.geovistory.org/api_v1_project_84760',
+    query: `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX owl: <http://www.w3.org/2002/07/owl#>
+    PREFIX xml: <http://www.w3.org/XML/1998/namespace>
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+    PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+    PREFIX time: <http://www.w3.org/2006/time#>
+    PREFIX ontome: <https://ontome.net/ontology/>
+    PREFIX geov: <http://geovistory.org/resource/>
+
+    SELECT ?entityUri (MIN(?date) as ?startDate) (MAX(?date) as ?endDate) (SAMPLE(?l) as ?entityLabel) ?entityClassLabel
+    WHERE {
+      # event is a Ship voyages
+      ?entityUri a ontome:c523 .
+      ontome:c523 rdfs:label ?entityClassLabel .
+      # event -> has -> time span
+      ?entityUri ontome:p4 ?timespan.
+      # time span -> timeprop -> date time description
+      ?timespan ontome:p71|ontome:p72|ontome:p150|ontome:p151|ontome:p152|ontome:p153 ?dtd.
+      # date time description -> year;month;day
+      ?dtd time:year ?y ; time:month ?m  ; time:day ?d .
+      FILTER regex(str(?y), '^-') # necessary because of https://github.com/geovistory/toolbox-streams/issues/124
+      # parse to xsd:date
+      bind(xsd:date(concat(replace(str(?y), "^-", "" ), replace(str(?m), "^-", "" ),replace(str(?d), "^--", "" ))) as ?date)
+      # event -> has -> label
+      ?entityUri rdfs:label ?l .
+    }
+    GROUP BY ?entityUri ?entityClassLabel
+    LIMIT 10`,
+  },
+];
+
 export const Default = await stencilWrapper(<geov-yasgui></geov-yasgui>);
 export const WithMapPlugin = await stencilWrapper(<geov-yasgui plugins={new Set(['mapCircles'])} defaultPlugin={'mapCircles'} queryTabs={tabs}></geov-yasgui>);
 export const WithHiddenYasgui = await stencilWrapper(<geov-yasgui plugins={new Set(['mapCircles'])} defaultPlugin={'mapCircles'} queryTabs={tabs} collapse={true}></geov-yasgui>);
@@ -156,3 +192,4 @@ export const WithMapPopupsNested = await stencilWrapper(
     }}
   ></geov-yasgui>,
 );
+export const WithTimeline = await stencilWrapper(<geov-yasgui plugins={new Set(['timeline'])} defaultPlugin={'timeline'} queryTabs={tabsForTimeline}></geov-yasgui>);

@@ -3,13 +3,15 @@ import type Yasgui from '@triply/yasgui';
 import { importYasgui } from '../../lib/importYasgui';
 import generatePluginMapCircles, { MapCircleConfig } from './PluginMapCircles';
 import { closeOutline, settingsOutline } from 'ionicons/icons';
+import generatePluginTimeline, { TimelineConfig } from './PluginTimeline';
 
-export type CustomPlugin = 'mapCircles';
+export type CustomPlugin = 'mapCircles' | 'timeline';
 export type BuiltInPlugin = 'response' | 'table';
 export type Plugin = BuiltInPlugin | CustomPlugin;
 
 export interface PluginConfig {
   mapCircles?: MapCircleConfig;
+  timeline?: TimelineConfig;
 }
 
 export interface QueryTab {
@@ -140,6 +142,7 @@ export class GeovYasgui {
   registerCustomPlugins() {
     const customPlugins: { [key in CustomPlugin]: any } = {
       mapCircles: generatePluginMapCircles(this.pluginConfig.mapCircles),
+      timeline: generatePluginTimeline(this.pluginConfig.timeline),
     };
 
     this.plugins?.forEach(plugin => {
