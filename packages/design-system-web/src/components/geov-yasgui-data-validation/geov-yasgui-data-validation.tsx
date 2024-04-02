@@ -1,10 +1,10 @@
 import { Component, Host, Prop, h, EventEmitter, Event } from '@stencil/core';
 import type { Parser } from '@triply/yasr';
 
-interface ExpectedKey {
+export interface ExpectedKey {
   name: string;
   required: boolean;
-  datatype: string;
+  datatype?: string;
   customValidator?: (val: Parser.BindingValue) => Set<string> | undefined;
 }
 /**
@@ -58,7 +58,7 @@ export class GeovYasguiDataValidation {
             // if there is a validation defined for this binding key...
             if (expectedKey.name === bindingKey) {
               // ...check datatype
-              if ((cell?.datatype ?? 'string') !== expectedKey.datatype) {
+              if (expectedKey.datatype && (cell?.datatype ?? 'string') !== expectedKey.datatype) {
                 this.datatypeMismatch.add(expectedKey.name);
               }
               // ...check custom validator
@@ -102,7 +102,6 @@ export class GeovYasguiDataValidation {
             </ul>
           </div>
         ))}
-        <slot></slot>
       </Host>
     );
   }

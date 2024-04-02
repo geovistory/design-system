@@ -1,8 +1,10 @@
-import { Component, Host, h, Prop, Element, State } from '@stencil/core';
-import { isNode } from '../../lib/isNode';
+import { Component, Host, Prop, State, h } from '@stencil/core';
 import type { Parser } from '@triply/yasr';
-import { importMapLibre } from '../../lib/importMapLibre';
+import { closeOutline, informationCircleOutline } from 'ionicons/icons';
 import { DataDrivenPropertyValueSpecification, LngLatBoundsLike } from 'maplibre-gl';
+import { importMapLibre } from '../../lib/importMapLibre';
+import { isNode } from '../../lib/isNode';
+import { GeovMapCirclesPopup, PopupItem } from '../geov-map-circles-popup/geov-map-circles-popup';
 
 function createGeoJSON(data: Parser.Binding[], labelIndices: string[]) {
   return {
@@ -22,6 +24,7 @@ function createGeoJSON(data: Parser.Binding[], labelIndices: string[]) {
           type: ele['type']?.value || 'none',
           typeindex: labelIndices.indexOf(ele['type']?.value || 'none'),
           link: ele['link']?.value,
+          children: ele['children']?.value,
         },
       };
     }),
@@ -39,7 +42,8 @@ function createGeoJSON(data: Parser.Binding[], labelIndices: string[]) {
   shadow: false,
 })
 export class GeovYasguiMapCircles {
-  @Element() el: HTMLElement;
+  mapContainerEl: HTMLElement;
+  cardEl: HTMLElement;
 
   @Prop() data: Parser.Binding[] = [
     {
@@ -53,9 +57,27 @@ export class GeovYasguiMapCircles {
     },
   ];
 
+  /**
+   * The minimum radius of a circle.
+   */
+  @Prop() radiusMin = 8;
+
+  /**
+   * The maximum radius of a circle.
+   */
+  @Prop() radiusMax = 20;
+
+  /**
+   * The maximum zoom level to allow when the map view transitions to the specified bounds,
+   * when the map is initialized.
+   */
+  @Prop() maxZoom = 10;
+
   @State() labelIndices: string[] = [...new Set(this.data.map(ele => ele['type']?.value || 'none'))];
 
   @Prop() colorScale: string[] = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c']; // ColorBrewer2 qualitative 4-class Paired (colorblind safe)
+
+  @State() ledgendExpanded = true;
 
   async componentDidLoad() {
     // If we are in a browser
@@ -71,10 +93,10 @@ export class GeovYasguiMapCircles {
         //@ts-ignore - we want the coercion of isNan
         if (Object.hasOwn(d, 'number') && isNaN(d['number']?.value)) return true;
         return (
-          Number(d['long']?.value) < -540 ||
-          Number(d['long']?.value) > 540 ||
-          Number(d['lat']?.value) < -540 ||
-          Number(d['lat']?.value) > 540 ||
+          Number(d['long']?.value) < -180 ||
+          Number(d['long']?.value) > 180 ||
+          Number(d['lat']?.value) < -90 ||
+          Number(d['lat']?.value) > 90 ||
           //@ts-ignore - we want the coercion of isNan
           isNaN(d['long']?.value) ||
           //@ts-ignore - we want the coercion of isNan
@@ -82,23 +104,11 @@ export class GeovYasguiMapCircles {
         );
       });
 
-      if (invalidPoints.length > 0) {
-        let invalidList = '';
-        invalidPoints.forEach(d => {
-          invalidList += `<li>${d['label']?.value || 'no label'} (long: ${d['long']?.value}, lat: ${d['lat']?.value}, radius: ${d['radius']?.value}, number: ${d['number']
-            ?.value})</li>`;
-        });
-        const card = this.el.querySelector('ion-card');
-        card.style.setProperty('display', 'block');
-        card.querySelector('ion-card-title').innerHTML = `Unable to render ${invalidPoints.length} result${invalidPoints.length > 1 ? 's' : ''}`;
-        card.querySelector(
-          'ion-card-content',
-        ).innerHTML = `<p>not all of the results have longitude and latitude-coordinates or they are not parseable to a floating point number:</p><ul>${invalidList}</ul>`;
-      } else {
+      if (!invalidPoints?.length) {
         // Load MapLibre script
         const MapLibre = await importMapLibre();
         const map = new MapLibre.Map({
-          container: this.el.querySelector('#map-container') as HTMLElement,
+          container: this.mapContainerEl,
           style: {
             version: 8,
             sources: {
@@ -151,7 +161,8 @@ export class GeovYasguiMapCircles {
 
         map.fitBounds(bounds, {
           padding: 50, // Optional padding to provide some space around the bounding box
-          maxZoom: 10, // Maximum zoom to use
+          maxZoom: this.maxZoom, // Maximum zoom to use
+          animate: false,
         });
 
         map.on('load', () => {
@@ -177,7 +188,7 @@ export class GeovYasguiMapCircles {
             source: 'places',
             paint: {
               'circle-color': colorSteps as DataDrivenPropertyValueSpecification<string>,
-              'circle-radius': maxRadius ? ['interpolate', ['linear'], ['get', 'radius'], 0, 8, maxRadius, 60] : 8, // if there is no radius, use 8px
+              'circle-radius': maxRadius ? ['interpolate', ['linear'], ['get', 'radius'], 0, this.radiusMin, maxRadius, this.radiusMax] : this.radiusMin, // if there is no radius, use 8px
               'circle-opacity': 0.8,
             },
           });
@@ -185,28 +196,36 @@ export class GeovYasguiMapCircles {
           //   Add popups to the markers
           const handleMarkerClick = e => {
             const coordinates = e.features[0].geometry.coordinates;
-            let html = `<ul>`;
-            e.features.forEach((feature: { properties: { link: string; label: string; number: string } }) => {
-              const props = feature.properties;
-              // differentiate between a few cases: if theres a link, make it clickable, otherwise check if there also is missing a label
-              html += '<li>';
-              if (props?.link) {
-                html += `<p><b><a href = "${props.link}" target="_blank">${props?.label || 'no label'}</a></b>`;
-              } else if (props?.label) {
-                html += `<p><b>${props.label}</b>`;
-              } else {
-                html += `<p><b>no label</b>`;
-              }
+            // let html = `<ul>`;
+            const popupData: GeovMapCirclesPopup['items'] = e.features.map(
+              (feature: {
+                properties: {
+                  link: string;
+                  label: string;
+                  number: string;
+                  children?: string;
+                };
+              }) => {
+                let children = [];
+                try {
+                  children = JSON.parse(feature.properties.children);
+                } catch {}
+                const popupItem: PopupItem = {
+                  label: feature.properties.label,
+                  url: feature.properties.link,
+                  suffix: feature.properties.number,
+                  items: children.map(c => ({
+                    label: c?.label,
+                    url: c?.url,
+                  })),
+                };
+                return popupItem;
+              },
+            );
 
-              if (props?.number) {
-                html += `: ${props.number}</p>`;
-              } else {
-                html += `</p>`;
-              }
-              html += '</li>';
-            });
-            html += `</ul>`;
-            new MapLibre.Popup().setLngLat(coordinates).setHTML(html).addTo(map);
+            const el = document.createElement('geov-map-circles-popup');
+            el.items = popupData;
+            new MapLibre.Popup().setLngLat(coordinates).setDOMContent(el).setMaxWidth('340px').addTo(map);
           };
 
           // An on click event listener for the "circles" layer
@@ -226,29 +245,26 @@ export class GeovYasguiMapCircles {
   render() {
     return (
       <Host>
-        <ion-card style={{ display: 'none', zIndex: '1000' }}>
+        <ion-card class={`legend ${this.ledgendExpanded ? 'expanded' : 'collapsed'}`}>
           <ion-card-header>
-            <ion-card-title>Unable to render (some) results</ion-card-title>
+            <ion-button size="small" class="collapse-button" fill="clear" onClick={() => (this.ledgendExpanded = !this.ledgendExpanded)}>
+              <ion-icon icon={this.ledgendExpanded ? closeOutline : informationCircleOutline} slot="icon-only"></ion-icon>
+            </ion-button>
           </ion-card-header>
-
-          <ion-card-content>not all of the results have longitude and latitude-coordinates</ion-card-content>
-        </ion-card>
-        <ion-card class="legend">
           <ion-card-content>
-            <ul>
+            <ion-list lines={this.labelIndices?.length > 1 ? 'inset' : 'none'}>
               {this.labelIndices.map((type, i) => (
-                <li>
-                  <svg height="1rem" width="1rem">
+                <ion-item>
+                  <svg slot="start" height="1rem" width="1rem">
                     <circle cx="50%" cy="50%" r="50%" fill={this.colorScale[i % this.colorScale.length]} />
                   </svg>
-                  &nbsp;
-                  {type}
-                </li>
+                  <ion-label class="ion-text-wrap">{type}</ion-label>
+                </ion-item>
               ))}
-            </ul>
+            </ion-list>
           </ion-card-content>
         </ion-card>
-        <div id="map-container" />
+        <div class="geov-map-circles-container" ref={el => (this.mapContainerEl = el)} />
       </Host>
     );
   }
