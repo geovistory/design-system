@@ -4,6 +4,14 @@ import Chart, { BarController, ChartDataset, ScaleOptions } from 'chart.js/auto'
 import 'chartjs-adapter-date-fns';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import zoomPlugin from 'chartjs-plugin-zoom';
+import { addOutline, refreshOutline, removeOutline } from 'ionicons/icons';
+
+type BarData = {
+  x: number[];
+  y: string;
+  entityLabel: string;
+  entityClassLabel: string;
+};
 
 /**
  * This component displays a timeline of events.
@@ -23,7 +31,7 @@ export class GeovTimelineGantt {
     {
       entityLabel: { type: 'literal', value: 'Jakarta ID, Vlieland NL, Elburg' },
       entityClassLabel: { type: 'literal', value: 'Ship Voyage' },
-      entityUri: { type: 'uri', value: 'http://geovistory.org/resource/i151562' },
+      entityLink: { type: 'uri', value: 'http://geovistory.org/resource/i151562' },
       startDate: { type: 'literal', datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1666-01-30' },
       endDate: { datatype: 'http://www.w3.org/2001/XMLSchema#date', value: '1666-11-16', type: 'literal' },
     },
@@ -114,21 +122,14 @@ export class GeovTimelineGantt {
     // Sort by startDate
     this.sortByStartDate(this.data);
 
-    type BarData = {
-      x: number[];
-      y: string;
-      name: string;
-      entityUri: string;
-    };
-
     const chartData: ChartDataset<'bar', BarData[]>[] = [
       {
         label: 'Timeline',
         data: this.data.map(item => ({
           x: [new Date(item.startDate.value).getTime(), new Date(item.endDate.value).getTime() + 24 * 60 * 60 * 1000 - 1],
-          y: item.entityLabel.value,
-          name: item.entityClassLabel.value,
-          entityUri: item.entityUri.value,
+          y: item.entityLink.value,
+          entityLabel: item.entityLabel.value,
+          entityClassLabel: item.entityClassLabel.value,
         })),
         backgroundColor: ['rgba(' + this.backgroundColor.join(',') + ')'],
         borderColor: ['rgba(' + this.borderColor.join(',') + ')'],
@@ -142,6 +143,7 @@ export class GeovTimelineGantt {
         // minBarLength: this.minBarLength,
       },
     ];
+    const { min, max } = this.calculateExtend();
     const scaleXHidden: ScaleOptions<'time'> = {
       display: true,
       offset: false,
@@ -157,10 +159,10 @@ export class GeovTimelineGantt {
       time: {
         unit: 'year',
       },
-      min: new Date(this.getEarliestDate(this.data).getFullYear() + '-01-01').getTime(),
-      max: new Date(this.getLatestDate(this.data).getFullYear() + '-12-31').getTime(),
+      min,
+      max,
     };
-    const scaleXVisible = {
+    const scaleXVisible: ScaleOptions<'time'> = {
       ...scaleXHidden,
       ticks: {
         display: true,
@@ -179,6 +181,15 @@ export class GeovTimelineGantt {
         datasets: chartData,
       },
       options: {
+        onHover: (event, chartElement) => {
+          const el = event.native.target as HTMLElement;
+          if (chartElement.length == 1 && el?.style?.cursor) {
+            el.style.cursor = 'pointer';
+          }
+          if (chartElement.length == 0 && el?.style?.cursor) {
+            el.style.cursor = 'default';
+          }
+        },
         maintainAspectRatio: false, // https://www.chartjs.org/docs/latest/configuration/responsive.html#responsive-charts
         scales: {
           x: scaleXHidden,
@@ -241,13 +252,17 @@ export class GeovTimelineGantt {
                 }
                 return dateLabel;
               },
+              title: function (b) {
+                const item = b?.[0]?.raw as BarData;
+                return item.entityLabel;
+              },
             },
           },
           datalabels: {
             display: true,
             color: 'black',
-            formatter: function (value) {
-              return value.name + ' : ' + value.y;
+            formatter: function (value: BarData) {
+              return value.entityClassLabel + ' : ' + value.entityLabel;
             },
             anchor: 'end',
             align: 'right',
@@ -338,11 +353,11 @@ export class GeovTimelineGantt {
         const clickedElement = activeElements[0];
         const datasetIndex = clickedElement.datasetIndex;
         const index = clickedElement.index;
-        const data = this.chartMain.data.datasets[datasetIndex].data[index];
+        const data: BarData = this.chartMain.data.datasets[datasetIndex].data[index];
 
         // Retrieve the URL associated with the clicked element and redirect the page
-        const entityUri = data.entityUri;
-        window.open(entityUri, '_blank');
+        const entityLink = data.y;
+        window.open(entityLink, '_blank');
       }
     });
 
@@ -365,8 +380,7 @@ export class GeovTimelineGantt {
   }
 
   resetZoom() {
-    const min = new Date(this.getEarliestDate(this.data).getFullYear() + '-01-01').getTime();
-    const max = new Date(this.getLatestDate(this.data).getFullYear() + '-12-31').getTime();
+    const { min, max } = this.calculateExtend();
     this.chartMain.options.scales.x.min = min;
     this.chartMain.options.scales.x.max = max;
     this.chartAxisX.options.scales.x.min = min;
@@ -386,29 +400,51 @@ export class GeovTimelineGantt {
     this.chartAxisX.zoom(1.3333, 'zoom');
   }
 
+  calculateExtend(): { min: number; max: number } {
+    let min = new Date(this.getEarliestDate(this.data).getFullYear() + '-01-01').getTime();
+    let max = new Date(this.getLatestDate(this.data).getFullYear() + '-12-31').getTime();
+    const diff = max - min;
+    const spaceStart = (diff / 2) * 0.1;
+    const spaceEnd = (diff / 2) * 0.3;
+    min = min - spaceStart;
+    max = max + spaceEnd;
+    return { min, max };
+  }
+
+  calculateHight(): number {
+    if (this.data?.length) {
+      const uris = this.data.map(item => item.entityLink.value);
+      const unique = new Set(uris);
+      return unique.size * this.lineHeight + 29;
+    } else return 50;
+  }
+
   render() {
+    const height = this.calculateHight();
     return (
       <Host>
-        <div class="gantt-buttons">
-          <ion-button size="small" onClick={() => this.resetZoom()}>
-            Reset zoom
-          </ion-button>
-          <ion-button size="small" onClick={() => this.zoomOut()}>
-            -
-          </ion-button>
-          <ion-button size="small" onClick={() => this.zoomIn()}>
-            +
-          </ion-button>
-        </div>
+        <ion-toolbar class="gantt-buttons">
+          <ion-buttons slot="primary">
+            <ion-button size="small" onClick={() => this.zoomIn()} title="Zoom in">
+              <ion-icon slot="icon-only" icon={addOutline}></ion-icon>
+            </ion-button>
+            <ion-button size="small" onClick={() => this.zoomOut()} title="Zoom out">
+              <ion-icon slot="icon-only" icon={removeOutline}></ion-icon>
+            </ion-button>
+            <ion-button size="small" onClick={() => this.resetZoom()} title="Reset zoom">
+              <ion-icon slot="icon-only" icon={refreshOutline}></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
         <div class="scroll-container">
           <div class="bar-chart">
             <div class="containerCanvas">
-              <canvas id="chartMain" height={this.data.length * this.lineHeight} ref={element => (this.el = element)}></canvas>
+              <canvas id="chartMain" height={height} ref={element => (this.el = element)}></canvas>
             </div>
           </div>
           <div class="x-axis">
             <div class="containerCanvasAxis">
-              <canvas id="chartAxisX" height={50} ref={element => (this.elAxisX = element)}></canvas>
+              <canvas id="chartAxisX" height={30} ref={element => (this.elAxisX = element)}></canvas>
             </div>
           </div>
         </div>

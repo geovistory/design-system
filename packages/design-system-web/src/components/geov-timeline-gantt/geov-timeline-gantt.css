@@ -1,7 +1,8 @@
 :host,
 geov-timeline-gantt {
-  display: block;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 canvas {
@@ -20,7 +21,9 @@ canvas {
 
 .scroll-container {
   width: 100%;
-  height: 100%;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
   overflow-y: auto;
   position: relative;
   background-color: var(--gantt-timeline-background-color, #fff);
@@ -28,7 +31,7 @@ canvas {
 
 .x-axis {
   width: 100%;
-  height: 50px;
+  height: 31px;
   position: sticky;
   position: -webkit-sticky;
   bottom: 0;
@@ -37,11 +40,12 @@ canvas {
 }
 
 .gantt-buttons {
-  position: absolute;
-  right: 40px;
-  padding-top: 8px;
-  padding-right: 8px;
-  z-index: 1000;
+  display: flex;
+  flex-direction: row-reverse;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 40px;
+ /* --background: var(--ion-toolbar-background, var(--ion-color-step-50, #f7f7f7));  */
 }
 
 .bar-chart {

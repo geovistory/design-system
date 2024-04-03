@@ -22,7 +22,7 @@ export default function generatePluginTimeline(config: TimelineConfig) {
     expectedKeys = [
       { name: 'entityLabel', required: true, datatype: 'string' },
       { name: 'entityClassLabel', required: true, datatype: 'string' },
-      { name: 'entityUri', required: true, datatype: 'string' },
+      { name: 'entityLink', required: true, datatype: 'string' },
       { name: 'startDate', required: true, datatype: 'http://www.w3.org/2001/XMLSchema#date' },
       { name: 'endDate', required: true, datatype: 'http://www.w3.org/2001/XMLSchema#date' },
     ];
@@ -50,7 +50,9 @@ export default function generatePluginTimeline(config: TimelineConfig) {
           elTimeline.chartHeight = 300;
 
           // set height of timeline
-          elTimeline.style.height = '400px';
+          elTimeline.style.maxHeight = '350px';
+          elTimeline.style.border = '1px solid rgb(209, 209, 209)';
+          elTimeline.style.marginTop = '5px';
 
           for (const key in config) {
             elTimeline[key] = config[key as keyof TimelineConfig];
