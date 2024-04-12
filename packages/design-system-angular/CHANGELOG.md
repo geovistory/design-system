@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 1.21.1-pr-122.1 (2024-02-27)
+## 1.22.1 (2024-04-03)
 
 **Note:** Version bump only for package @geovistory/design-system-angular
 
@@ -11,7 +11,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## 1.21.1-pr-122.0 (2024-02-22)
+## 1.22.0 (2024-04-02)
+
+**Note:** Version bump only for package @geovistory/design-system-angular
+
+
+
+
+
+## 1.21.1-pr-103.0 (2024-04-02)
 
 **Note:** Version bump only for package @geovistory/design-system-angular
 
@@ -36,6 +44,30 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 ## 1.21.1-pr-121.0 (2024-02-06)
+
+**Note:** Version bump only for package @geovistory/design-system-angular
+
+
+
+
+
+## 1.21.1-pr-103.2 (2024-02-16)
+
+**Note:** Version bump only for package @geovistory/design-system-angular
+
+
+
+
+
+## 1.21.1-pr-103.1 (2024-02-08)
+
+**Note:** Version bump only for package @geovistory/design-system-angular
+
+
+
+
+
+## 1.21.1-pr-103.0 (2024-01-30)
 
 **Note:** Version bump only for package @geovistory/design-system-angular
 
@@ -155,6 +187,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+## 1.19.4-pr-103.0 (2023-11-20)
+
+**Note:** Version bump only for package @geovistory/design-system-angular
+
+
+
+
+
 ## 1.19.3 (2023-11-14)
 
 **Note:** Version bump only for package @geovistory/design-system-angular
@@ -203,6 +243,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+## 1.18.1-pr-103.0 (2023-11-20)
+
+**Note:** Version bump only for package @geovistory/design-system-angular
+
+
+
+
+
 ## 1.18.0 (2023-11-01)
 
 **Note:** Version bump only for package @geovistory/design-system-angular
@@ -236,6 +284,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 ## 1.17.1-pr-100.0 (2023-11-01)
+
+**Note:** Version bump only for package @geovistory/design-system-angular
+
+
+
+
+
+## 1.17.1-pr-103.0 (2023-10-31)
 
 **Note:** Version bump only for package @geovistory/design-system-angular
 
