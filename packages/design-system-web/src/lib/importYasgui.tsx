@@ -26,14 +26,14 @@ export const importYasgui = async () =>
     script.onerror = reject;
 
     // set url
-    script.src = 'https://unpkg.com/@triply/yasgui@4.2.28/build/yasgui.min.js';
+    script.src = 'https://cdn.jsdelivr.net/npm/@triply/yasgui@4.2.28/build/yasgui.min.js';
 
     // append script to load Yasgui JS from CDN to document
     document.body.appendChild(script);
 
     // create new link element
     const link = document.createElement('link');
-    link.href = 'https://unpkg.com/@triply/yasgui@4.2.28/build/yasgui.min.css';
+    link.href = 'https://cdn.jsdelivr.net/npm/@triply/yasgui@4.2.28/build/yasgui.min.css';
     link.rel = 'stylesheet';
     link.type = 'text/css';
 

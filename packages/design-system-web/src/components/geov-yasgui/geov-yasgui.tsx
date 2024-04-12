@@ -3,6 +3,7 @@ import type Yasgui from '@triply/yasgui';
 import { importYasgui } from '../../lib/importYasgui';
 import generatePluginMapCircles, { MapCircleConfig } from './PluginMapCircles';
 import { closeOutline, settingsOutline } from 'ionicons/icons';
+import { isNode } from '../../lib/isNode';
 import generatePluginTimeline, { TimelineConfig } from './PluginTimeline';
 
 export type CustomPlugin = 'mapCircles' | 'timeline';
@@ -64,6 +65,11 @@ export class GeovYasgui {
    */
   @Prop() queryTabs: QueryTab[] = [];
 
+  /**
+   * If true, the button to toggle the query (Yasque) is hidden.
+   */
+  @Prop() hideYasqueToggle = false;
+
   // True during 200ms of toggling
   toggling = false;
 
@@ -74,41 +80,44 @@ export class GeovYasgui {
   }
 
   componentDidLoad() {
-    this.setupYasr();
-    localStorage.removeItem('yagui__config');
-    if (!this.el) return;
+    // If we are in a browser
+    if (!isNode()) {
+      this.setupYasr();
+      localStorage.removeItem('yagui__config');
+      if (!this.el) return;
 
-    const yasgui = new this.Y(this.el, {});
+      const yasgui = new this.Y(this.el, {});
 
-    // close initial tab
-    if (this.queryTabs.length) yasgui.getTab().close();
+      // close initial tab
+      if (this.queryTabs.length) yasgui.getTab().close();
 
-    // add tabs
-    const tabDefaults = this.Y.Tab.getDefaults();
-    this.queryTabs.forEach((q, i) => {
-      yasgui.addTab(
-        i === 0,
-        {
-          ...tabDefaults,
-          id: 'tab' + i,
-          requestConfig: { ...tabDefaults.requestConfig, endpoint: q.sparqlEndpoint },
-          name: q.name,
-          yasqe: { value: q.query },
-          yasr: {
-            ...tabDefaults.yasr,
-            settings: {
-              selectedPlugin: q.selectedPlugin ?? this.defaultPlugin,
+      // add tabs
+      const tabDefaults = this.Y.Tab.getDefaults();
+      this.queryTabs.forEach((q, i) => {
+        yasgui.addTab(
+          i === 0,
+          {
+            ...tabDefaults,
+            id: 'tab' + i,
+            requestConfig: { ...tabDefaults.requestConfig, endpoint: q.sparqlEndpoint },
+            name: q.name,
+            yasqe: { value: q.query },
+            yasr: {
+              ...tabDefaults.yasr,
+              settings: {
+                selectedPlugin: q.selectedPlugin ?? this.defaultPlugin,
+              },
             },
           },
-        },
-        { avoidDuplicateTabs: true },
-      );
-    });
+          { avoidDuplicateTabs: true },
+        );
+      });
 
-    // execute query of active tab
-    yasgui.getTab().query();
-    // set Yasque visibility
-    this.setYasqueVisibility();
+      // execute query of active tab
+      yasgui.getTab().query();
+      // set Yasque visibility
+      this.setYasqueVisibility();
+    }
   }
 
   toggleVisiblity() {
@@ -120,7 +129,7 @@ export class GeovYasgui {
   async setYasqueVisibility() {
     this.toggling = true;
     this.el.classList.add('toggling');
-    const elementsToSwitchVis = this.el.querySelectorAll('.yasr_header, .yasqe, .tabsList, .controlbar');
+    const elementsToSwitchVis = this.el.querySelectorAll('.yasr, .yasr_header, .yasqe, .tabsList, .controlbar');
     elementsToSwitchVis.forEach(ele => {
       this.collapse ? ele.classList.add('collapsed') : ele.classList.remove('collapsed');
     });
@@ -160,9 +169,11 @@ export class GeovYasgui {
   render() {
     return (
       <Host>
-        <ion-button class="toggle-button" size="small" onClick={() => this.toggleVisiblity()} title={this.collapse ? 'Show query' : 'Hide query'}>
-          {this.collapse ? <ion-icon slot="icon-only" icon={settingsOutline}></ion-icon> : <ion-icon slot="icon-only" icon={closeOutline}></ion-icon>}
-        </ion-button>
+        {!this.hideYasqueToggle && (
+          <ion-button class="toggle-button" size="small" onClick={() => this.toggleVisiblity()} title={this.collapse ? 'Show query' : 'Hide query'}>
+            {this.collapse ? <ion-icon slot="icon-only" icon={settingsOutline}></ion-icon> : <ion-icon slot="icon-only" icon={closeOutline}></ion-icon>}
+          </ion-button>
+        )}
       </Host>
     );
   }

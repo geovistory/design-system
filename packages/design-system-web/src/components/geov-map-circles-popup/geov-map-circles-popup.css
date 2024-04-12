@@ -3,7 +3,6 @@
   line-height: 2;
   font-size: 1rem;
   padding-right: 1rem;
-
 }
 
 ul {
@@ -16,6 +15,6 @@ ul ul {
 }
 
 a {
-  color: var(--ion-color-primary, #4c51d5);
+  color: #4c51d5;
   text-decoration: none;
 }

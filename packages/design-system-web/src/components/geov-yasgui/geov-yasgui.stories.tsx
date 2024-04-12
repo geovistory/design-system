@@ -157,9 +157,25 @@ GROUP BY ?e ?classLabel`,
 ];
 
 export const Default = await stencilWrapper(<geov-yasgui></geov-yasgui>);
-export const WithMapPlugin = await stencilWrapper(<geov-yasgui plugins={new Set(['mapCircles'])} defaultPlugin={'mapCircles'} queryTabs={tabs}></geov-yasgui>);
-export const WithHiddenYasgui = await stencilWrapper(<geov-yasgui plugins={new Set(['mapCircles'])} defaultPlugin={'mapCircles'} queryTabs={tabs} collapse={true}></geov-yasgui>);
-export const WithMapPluginCustomized = await stencilWrapper(
+
+export const HideYasgui = await stencilWrapper(<geov-yasgui plugins={new Set(['mapCircles'])} defaultPlugin={'mapCircles'} queryTabs={tabs} collapse={true}></geov-yasgui>);
+export const HideYasguiAndToggle = await stencilWrapper(
+  <geov-yasgui plugins={new Set(['mapCircles'])} defaultPlugin={'mapCircles'} queryTabs={tabs} collapse={true} hideYasqueToggle={true}></geov-yasgui>,
+);
+
+export const PluginMap = await stencilWrapper(<geov-yasgui plugins={new Set(['mapCircles'])} defaultPlugin={'mapCircles'} queryTabs={tabs}></geov-yasgui>);
+export const PluginMapHeight200px = await stencilWrapper(
+  <geov-yasgui
+    plugins={new Set(['mapCircles'])}
+    defaultPlugin={'mapCircles'}
+    queryTabs={tabs}
+    pluginConfig={{
+      mapCircles: { mapHeight: '200px' },
+    }}
+  ></geov-yasgui>,
+);
+
+export const PluginMapCustomized = await stencilWrapper(
   <geov-yasgui
     plugins={new Set(['mapCircles'])}
     defaultPlugin={'mapCircles'}
@@ -170,7 +186,7 @@ export const WithMapPluginCustomized = await stencilWrapper(
   ></geov-yasgui>,
 );
 
-export const WithMapPopupsNested = await stencilWrapper(
+export const PlugingMapPopupsNested = await stencilWrapper(
   <geov-yasgui
     plugins={new Set(['mapCircles'])}
     defaultPlugin={'mapCircles'}
@@ -230,4 +246,33 @@ export const WithMapPopupsNested = await stencilWrapper(
     }}
   ></geov-yasgui>,
 );
+
+export const PluginMapLongLabelInLegend = await stencilWrapper(
+  <geov-yasgui
+    plugins={new Set(['mapCircles'])}
+    defaultPlugin={'mapCircles'}
+    queryTabs={[
+      {
+        name: 'a',
+        query: `SELECT
+( "foo" AS ?label )
+( 11.342778 AS ?long )
+( 44.493889 AS ?lat )
+( 2 as ?radius )
+( 1 as ?number )
+( "Liste jüdischer Handwerker und Kaufleute in Basel" AS ?type )
+( "http://geovistory.org/resource/i1939375?p=1719422" AS ?link )
+WHERE {
+  # This part is empty because we're not actually querying a database
+}`,
+        sparqlEndpoint: 'https://sparql.geovistory.org/api_v1_project_591',
+        selectedPlugin: 'mapCircles',
+      },
+    ]}
+    pluginConfig={{
+      mapCircles: { mapHeight: '200px' },
+    }}
+  ></geov-yasgui>,
+);
+
 export const WithTimeline = await stencilWrapper(<geov-yasgui plugins={new Set(['timeline'])} defaultPlugin={'timeline'} queryTabs={tabsForTimeline}></geov-yasgui>);
