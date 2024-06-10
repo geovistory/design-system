@@ -96,7 +96,7 @@ export async function tsxToHTML(tsxSnippet: VNode): Promise<string> {
 
     let childHTML = '';
     if ($children$) childHTML = $children$.map(child => convertToHTML(child)).join('');
-
+    if ($tag$ == 'br') return `<br />${childHTML}`;
     return `<${$tag$}${selfId ? ` id="el-${selfId}" ` : ''}${attributeString}>${childHTML}</${$tag$}>`;
   };
 
