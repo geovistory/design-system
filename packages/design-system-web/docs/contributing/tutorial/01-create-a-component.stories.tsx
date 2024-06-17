@@ -33,13 +33,11 @@ export const CreateComponent = await stencilWrapper(
         <p>
           Prerequisite: Successful <a href="/?path=/story/contributing-tutorial-setup--setup">Setup</a>.
         </p>
-        <p>
-          At the end of this step you will:
-          <ul>
-            <li>have a new stencil component</li>
-            <li>see the component in storybook (on your broser</li>
-          </ul>
-        </p>
+        <p>At the end of this step you will:</p>
+        <ul>
+          <li>have a new stencil component</li>
+          <li>see the component in storybook (on your broser</li>
+        </ul>
         <h4>Checkout a feature branch</h4>
         <p>Run the following command to checkout a new branch in git.</p>{' '}
         <p>
