@@ -31,14 +31,16 @@ export const CI_andCDWorkflow = await stencilWrapper(
         <p>
           For new developments (features or fixes) we use separated branches resulting in pull-requests. Our development platform listens to pull requests triggering two Github
           workflows:
-          <ul>
-            <li>
-              The workflow <code>Test PR</code> builds and tests the application in separate containers.
-            </li>
-            <li>
-              The workflow <code>Dockerize PR</code> tags the repository with a prerelease tag and creates a docker image.
-            </li>
-          </ul>
+        </p>
+        <ul>
+          <li>
+            The workflow <code>Test PR</code> builds and tests the application in separate containers.
+          </li>
+          <li>
+            The workflow <code>Dockerize PR</code> tags the repository with a prerelease tag and creates a docker image.
+          </li>
+        </ul>
+        <p>
           Tags are generated as follows: a pull request #21 checked out from <code>main</code> in version <code>1.3.0</code> will receive the version tag <code>1.3.0-pr-21.0</code>{' '}
           on the first push,
           <code>1.3.0-pr-21.1</code> on the second, etc. (see existing tags of <a href="https://github.com/geovistory/design-system/tags">design system repository</a>).
@@ -53,15 +55,17 @@ export const CI_andCDWorkflow = await stencilWrapper(
           other developers, data and UX specialists can easily review a pull request and comment, approve or decline changes in the thread of the GitHub pull request.
           <br />
           The preview environments are:
-          <ul>
-            <li>
-              <code>design-dev.geovistory.org</code> Shows the last deployed version (tag).
-            </li>
-            <li>
-              <code>design-stag.geovistory.org</code> Shows the last deployed version (tag). On deploy, this version has to be up to date with the <code>main</code> branch, which
-              is our default branch.
-            </li>
-          </ul>
+        </p>
+        <ul>
+          <li>
+            <code>design-dev.geovistory.org</code> Shows the last deployed version (tag).
+          </li>
+          <li>
+            <code>design-stag.geovistory.org</code> Shows the last deployed version (tag). On deploy, this version has to be up to date with the <code>main</code> branch, which is
+            our default branch.
+          </li>
+        </ul>
+        <p>
           If a maintainer tries to deploy a version to <code>design-stag.geovistory.org</code> that is behind <code>main</code>, the deployment workflow fails. This enforces, we
           deploy only code to staging that contains all commits of <code>main</code> branch without having merged to <code>main</code> already. This way we avoid blocking the
           deployment pipeline, by potentially breaking
@@ -83,12 +87,13 @@ export const CI_andCDWorkflow = await stencilWrapper(
           <br />
           <br />
           In short, choose:
-          <ul>
-            <li>MAJOR when the version contains breaking changes,</li>
-            <li>MINOR when the version adds functionality in a backwards compatible manner, and</li>
-            <li>PATCH when the version adds backwards compatible bug fixes.</li>
-          </ul>
-          <br />
+        </p>
+        <ul>
+          <li>MAJOR when the version contains breaking changes,</li>
+          <li>MINOR when the version adds functionality in a backwards compatible manner, and</li>
+          <li>PATCH when the version adds backwards compatible bug fixes.</li>
+        </ul>
+        <p>
           The <code>Release</code> workflow does the following steps:
           <br />
           <ol>
