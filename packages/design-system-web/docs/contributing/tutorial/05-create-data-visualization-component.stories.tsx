@@ -77,32 +77,30 @@ export const CreateDataVisualizationComponent = await stencilWrapper(
           Now that you have a first version of your visual, good performance, and all the logic in mind, let's create a Web Component out of it!
           <br />
           To understand how to create a web component you can first have a look at the following steps of the tutorial with your data visualization component in mind:
-          <ul>
-            <li>
-              <a href="https://design.geovistory.org/?path=/story/contributing-tutorial-setup--setup">Set up your web component development environment</a>
-            </li>
-            <li>
-              <a href="https://design.geovistory.org/?path=/story/contributing-tutorial-create-component--create-component">Create your first component</a>
-            </li>
-            <li>
-              <a href="https://design.geovistory.org/?path=/story/contributing-tutorial-data-fetching--data-fetching">
-                Understand how data are fetched from the SPARQL endpoint to your component
-              </a>
-            </li>
-          </ul>
         </p>
+        <ul>
+          <li>
+            <a href="https://design.geovistory.org/?path=/story/contributing-tutorial-setup--setup">Set up your web component development environment</a>
+          </li>
+          <li>
+            <a href="https://design.geovistory.org/?path=/story/contributing-tutorial-create-component--create-component">Create your first component</a>
+          </li>
+          <li>
+            <a href="https://design.geovistory.org/?path=/story/contributing-tutorial-data-fetching--data-fetching">
+              Understand how data are fetched from the SPARQL endpoint to your component
+            </a>
+          </li>
+        </ul>
 
         <h3>Add data visualization to your component</h3>
 
         <h5>Prerequisites</h5>
 
-        <p>
-          At this point you should:
-          <ul>
-            <li>Have a running web component with data fetching from the SPARQL endpoint (from the tutorials listed above)</li>
-            <li>A first visual (preferably with Plotly) of your wanted result</li>
-          </ul>
-        </p>
+        <p>At this point you should:</p>
+        <ul>
+          <li>Have a running web component with data fetching from the SPARQL endpoint (from the tutorials listed above)</li>
+          <li>A first visual (preferably with Plotly) of your wanted result</li>
+        </ul>
 
         <p>
           For the rest of the tutorial, we will analyse an exemple of an existing data visualization component:{' '}
@@ -110,22 +108,22 @@ export const CreateDataVisualizationComponent = await stencilWrapper(
           You can find the code of this component in your development folder: <code>design-system/packages/design-system-web/components/geov-class-distri/</code>
           <br />
           In this folder you will find 4 files:
-          <ul>
-            <li>
-              <code>geov-class-distri.css</code>: Style your web component, we will not talk about it, but it is classic CSS applied to your component, so if you want to have
-              titles in red, here is the place to set it.
-            </li>
-            <li>
-              <code>readme.md</code>: This file is auto generated, there is no need to know more.
-            </li>
-            <li>
-              <code>geov-class-distri.tsx</code>: As you already understood, this is where everything happens!
-            </li>
-            <li>
-              <code>geov-class-distri.stories.tsx</code>: And this last file is about rendering your first component in the current web site you are reading from.
-            </li>
-          </ul>
         </p>
+        <ul>
+          <li>
+            <code>geov-class-distri.css</code>: Style your web component, we will not talk about it, but it is classic CSS applied to your component, so if you want to have titles
+            in red, here is the place to set it.
+          </li>
+          <li>
+            <code>readme.md</code>: This file is auto generated, there is no need to know more.
+          </li>
+          <li>
+            <code>geov-class-distri.tsx</code>: As you already understood, this is where everything happens!
+          </li>
+          <li>
+            <code>geov-class-distri.stories.tsx</code>: And this last file is about rendering your first component in the current web site you are reading from.
+          </li>
+        </ul>
 
         <p>Let's dive into the code!</p>
 
@@ -135,17 +133,15 @@ export const CreateDataVisualizationComponent = await stencilWrapper(
           <geov-code language="tsx" code={imports}></geov-code>
         </p>
 
-        <p>
-          We observe 3 lines:
-          <br />
-          <ul>
-            <li>The first one imports code for rendering the component and needed things to generate the component.</li>
-            <li>The second one imports code that we wrote to ease the query to the SPARQL endpoint.</li>
-            <li>
-              The thirst one imports the graphing library: <a href="https://plotly.com/graphing-libraries/">Plotly</a>
-            </li>
-          </ul>
-        </p>
+        <p>We observe 3 lines:</p>
+        <br />
+        <ul>
+          <li>The first one imports code for rendering the component and needed things to generate the component.</li>
+          <li>The second one imports code that we wrote to ease the query to the SPARQL endpoint.</li>
+          <li>
+            The thirst one imports the graphing library: <a href="https://plotly.com/graphing-libraries/">Plotly</a>
+          </li>
+        </ul>
 
         <p>
           During your development, you might have to add additional imports, depending of what do you needs and what your component's logic is. If you want for instance to import
@@ -255,18 +251,18 @@ export const CreateDataVisualizationComponent = await stencilWrapper(
           This is the place where the query (that has been created at the top of the file) is executed.
           <br />
           Few remarks:
-          <ul>
-            <li>
-              <code>&lt;SparqlResponse&gt;</code>: tells the component what response to expect, it is the one that is set above.
-            </li>
-            <li>
-              <code>this.sparqlEndpoint</code>: the value of the input parameters (which SPARQL endpoint to query).
-            </li>
-            <li>
-              <code>qrClassesCount()</code>: this will invoke the query written at the top.
-            </li>
-          </ul>
         </p>
+        <ul>
+          <li>
+            <code>&lt;SparqlResponse&gt;</code>: tells the component what response to expect, it is the one that is set above.
+          </li>
+          <li>
+            <code>this.sparqlEndpoint</code>: the value of the input parameters (which SPARQL endpoint to query).
+          </li>
+          <li>
+            <code>qrClassesCount()</code>: this will invoke the query written at the top.
+          </li>
+        </ul>
         <p>
           Because data fetching is not done in instantly, we need to tell the component what to do with the data, but only when it has them.
           <br />

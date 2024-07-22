@@ -28,13 +28,11 @@ export const ComponentProps = await stencilWrapper(
           <p>
             Prerequisite: Successful <a href="/?path=/story/contributing-tutorial-data-fetching--data-fetching">Component Props</a>.
           </p>
-          <p>
-            At the end of this step you will:
-            <ul>
-              <li>Understand the @Prop() decorator</li>
-              <li>Know how to feed these props in the Storybook.</li>
-            </ul>
-          </p>
+          <p>At the end of this step you will:</p>
+          <ul>
+            <li>Understand the @Prop() decorator</li>
+            <li>Know how to feed these props in the Storybook.</li>
+          </ul>
           <h2 id="props">Add @Prop() decorators</h2>
           <p>In the previous step we hard-coded the two class members:</p>
           <p>

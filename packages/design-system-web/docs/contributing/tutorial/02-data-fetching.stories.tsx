@@ -84,20 +84,18 @@ export const DataFetching = await stencilWrapper(
           <p>
             <geov-code language="typescript" code={c0}></geov-code>
           </p>
-          <p>
-            Above:
-            <ul>
-              <li>
-                We first declare a class variable <code>label</code>
-              </li>
-              <li>
-                In the <code>componentWillLoad()</code> lifecycle hook asynchronously we assign a value to <code>this.label</code> (after 2000 miliseconds).
-              </li>
-              <li>
-                In <code>render()</code> we add <code>this.label</code> to the jsx template string.
-              </li>
-            </ul>
-          </p>
+          <p>Above:</p>
+          <ul>
+            <li>
+              We first declare a class variable <code>label</code>
+            </li>
+            <li>
+              In the <code>componentWillLoad()</code> lifecycle hook asynchronously we assign a value to <code>this.label</code> (after 2000 miliseconds).
+            </li>
+            <li>
+              In <code>render()</code> we add <code>this.label</code> to the jsx template string.
+            </li>
+          </ul>
           <p>
             If you safe and reload storybook one could expect the component to render the string <code>loaded async</code>. But no! Why?
           </p>
@@ -137,16 +135,14 @@ export const DataFetching = await stencilWrapper(
           <p>
             <geov-code language="typescript" code={c7}></geov-code>
           </p>
-          <p>
-            Above
-            <ul>
-              <li>
-                we declare the class members <code>sparqlEndpoint</code> and <code>entityId</code> which will be used to create the sparql request. (We will later expose these two
-                as properties of the web component).{' '}
-              </li>
-              <li>we replace the fake data generator with a function fetches real data. </li>
-            </ul>
-          </p>
+          <p>Above</p>
+          <ul>
+            <li>
+              we declare the class members <code>sparqlEndpoint</code> and <code>entityId</code> which will be used to create the sparql request. (We will later expose these two as
+              properties of the web component).{' '}
+            </li>
+            <li>we replace the fake data generator with a function fetches real data. </li>
+          </ul>
           <h4 id="parse-data">Parse result</h4>
           <p>
             The function <code>sparqlJson()</code> has a generic Type <code>{'<T>'}</code>. This allows to type the expected results in an easy way: for each bound variable in the

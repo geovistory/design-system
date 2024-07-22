@@ -20,16 +20,14 @@ export const Setup = await stencilWrapper(
       <ion-grid fixed>
         <h1>Setup</h1>
         <p class="lead">Setup your developer environment: install requirements, get and install code and start the storybook.</p>
-        <p>
-          At the end of the setup you should have:
-          <ul>
-            <li>node.js (v16+)</li>
-            <li>the source code</li>
-            <li>a correct git branch</li>
-            <li>installed node modules</li>
-            <li>(optional) you have visual studio code as IDE.</li>
-          </ul>
-        </p>
+        <p>At the end of the setup you should have:</p>
+        <ul>
+          <li>node.js (v16+)</li>
+          <li>the source code</li>
+          <li>a correct git branch</li>
+          <li>installed node modules</li>
+          <li>(optional) you have visual studio code as IDE.</li>
+        </ul>
         <h4>Install node.js</h4>
         <p>
           Open a terminal and run

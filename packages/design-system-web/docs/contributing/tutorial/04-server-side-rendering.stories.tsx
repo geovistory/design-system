@@ -31,26 +31,22 @@ export const ServerSideRendering = await stencilWrapper(
           <p>
             Prerequisite: Successful <a href="/?path=/story/contributing-tutorial-component-props--component-props">Component Props</a>.
           </p>
-          <p>
-            At the end of this step you will:
-            <ul>
-              <li>Understand why server side rendering and hydration are useful</li>
-              <li>Have a small next.js application doing SSR and hydration</li>
-            </ul>
-          </p>
+          <p>At the end of this step you will:</p>
+          <ul>
+            <li>Understand why server side rendering and hydration are useful</li>
+            <li>Have a small next.js application doing SSR and hydration</li>
+          </ul>
           <h2 id="introduction">Introduction</h2>
           <h3 id="csr-problems">Client Side Rendering problems</h3>
           <p>
             Web pages can be much more then static html pages. Frameworks like Angular, React and Vue allow the creation of single page apps, that are fully client side rendered
             (CSR). This approach allows to create app-like web pages with inteactive user interfaces.
           </p>
-          <p>
-            CSR has also downsides:
-            <ul>
-              <li>SEO: Search engines receive almost empty html</li>
-              <li>Performance: Initial page loads may be slow (load html, load js, render) </li>
-            </ul>
-          </p>
+          <p>CSR has also downsides:</p>
+          <ul>
+            <li>SEO: Search engines receive almost empty html</li>
+            <li>Performance: Initial page loads may be slow (load html, load js, render) </li>
+          </ul>
           <h3 id="what-is-ssr">What is SSR?</h3>
           <p>
             Server Side Rendering (SSR) is the process of rendering content to a client based on an HTTP request. A client makes a request and the server processes it, returning
@@ -62,14 +58,12 @@ export const ServerSideRendering = await stencilWrapper(
             DOM elements.
           </p>
           <h3 id="intro-summary">Summary</h3>
-          <p>
-            SSR and hydration combine the best of both worlds:
-            <ul>
-              <li>Consistent SEO performance (SSR)</li>
-              <li>Performance benefit for users (SSR)</li>
-              <li>Interactive user interfaces (hydration) </li>
-            </ul>
-          </p>
+          <p>SSR and hydration combine the best of both worlds:</p>
+          <ul>
+            <li>Consistent SEO performance (SSR)</li>
+            <li>Performance benefit for users (SSR)</li>
+            <li>Interactive user interfaces (hydration) </li>
+          </ul>
           <h2 id="tutorial">Tutorial</h2>
           <p>
             Stencil allows to create a module that can be used on a NodeJS server to implement server side rendering (SSR), see{' '}
@@ -159,21 +153,18 @@ export const ServerSideRendering = await stencilWrapper(
             {' '}
             <img src={disableJs} alt="disable-js" />
           </p>
-          <p>
-            Reload the page and see that:{' '}
-            <ul>
-              <li>The card subtitle – Class of entity i315800 – was server side rendered (by Next.js)</li>
-              <li>The ionic components are not rendered</li>
-              <li>The class label (Person) was not fetched</li>
-            </ul>{' '}
-          </p>
+          <p>Reload the page and see that: </p>
+          <ul>
+            <li>The card subtitle – Class of entity i315800 – was server side rendered (by Next.js)</li>
+            <li>The ionic components are not rendered</li>
+            <li>The class label (Person) was not fetched</li>
+          </ul>
           <h3 id="add-ssr-data-fetching">Add server side data fetching</h3>
           <p>In our example the amount of text loaded by the web component is minimal. We could live with the current situation.</p>
           <p>
             If we loaded much more content via web components, the loading performance and the SEO performance would suffer significantly. Let's therefore enable component level
             data fetching on the server using stencil hydrate.
           </p>
-
           <h4 id="add-server-render-fn">Add serverRender()</h4>
           <p>
             What need a method that can interpret the web components, wait for them to fetch data and render it to html, before sending it to the client. That's where stencil
@@ -205,7 +196,6 @@ export const ServerSideRendering = await stencilWrapper(
             </a>
             .
           </p>
-
           <p>
             Let's modify <code>pages/index.tsx</code> as follows:
           </p>
@@ -231,12 +221,12 @@ export const ServerSideRendering = await stencilWrapper(
           <h4 id="component-side">Component side</h4>
           <p>
             A data fetching component therefore implements three specific functions, available in <code>lib/ssr/</code>
-            <ul>
-              <li>setSSRId</li>
-              <li>setSSRData</li>
-              <li>getSSRData</li>
-            </ul>
           </p>
+          <ul>
+            <li>setSSRId</li>
+            <li>setSSRData</li>
+            <li>getSSRData</li>
+          </ul>
           <p>
             Lets look at the relevant parts of the implementation of <code>geov-entity-class-label</code> (find the{' '}
             <a
@@ -299,7 +289,6 @@ export const ServerSideRendering = await stencilWrapper(
           <p>Reload the page and watch the Network. The component did not fetch the data on the client side.</p>
           <p>Perfect!</p>
           <h2 id="verification">Verification</h2>
-
           <p>
             <img src={verification} alt="dev-tools-network" />
           </p>
