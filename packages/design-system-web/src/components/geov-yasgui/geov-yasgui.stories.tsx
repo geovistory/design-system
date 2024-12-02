@@ -276,3 +276,71 @@ WHERE {
 );
 
 export const WithTimeline = await stencilWrapper(<geov-yasgui plugins={new Set(['timeline'])} defaultPlugin={'timeline'} queryTabs={tabsForTimeline}></geov-yasgui>);
+
+export const WithMapLayer = await stencilWrapper(
+  <geov-yasgui
+    plugins={new Set(['mapCircles'])}
+    defaultPlugin={'mapCircles'}
+    queryTabs={[
+      {
+        name: 'a',
+        query: `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ontome: <https://ontome.net/ontology/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT * 
+WHERE {
+  {
+    SELECT 
+    (SAMPLE(?buildingLabel) as ?label) ?lat ?long ?buildingLabel ("Baptist" as ?type) (1 as ?radius)
+    WHERE {
+        # Only the Constructions
+        ?building rdf:type ontome:c441.
+        # Get the Constructions label
+        ?building rdfs:label ?buildingLabel.
+        # Get the type (has tag)
+        ?building ontome:p1440/rdfs:label ?raw_type.
+        # Construction -had presence-> Presence -was at-> Place (lat/long)
+        ?building ontome:p147i/ontome:p148 ?place.
+        FILTER(contains(?raw_type, "Baptist")) 
+        # Extract lat and long from WKT
+        bind(replace(str(?place), '<http://www.opengis.net/def/crs/EPSG/0/4326>', "", "i") as ?rep)
+        bind(xsd:float(replace(str(?rep), "^[^0-9\\\\.-]*([-]?[0-9\\\\.]+) .*$", "$1" )) as ?long )
+        bind(xsd:float(replace( str(?rep), "^.* ([-]?[0-9\\\\.]+)[^0-9\\\\.]*$", "$1" )) as ?lat )
+    }
+    GROUP BY ?building ?long ?lat ?type ?buildingLabel
+  }
+  UNION
+  {
+    SELECT 
+    (SAMPLE(?buildingLabel) as ?label) ?lat ?long ?buildingLabel ?type (1 as ?radius)
+    WHERE {
+        # Only the Constructions
+        ?building rdf:type ontome:c441.
+        # Get the Constructions label
+        ?building rdfs:label ?buildingLabel.
+        # Get the type (has tag)
+        ?building ontome:p1440/rdfs:label ?type.
+        # Construction -had presence-> Presence -was at-> Place (lat/long)
+        ?building ontome:p147i/ontome:p148 ?place.
+        FILTER(!contains(?type, "Baptist"))
+        # Extract lat and long from WKT
+        bind(replace(str(?place), '<http://www.opengis.net/def/crs/EPSG/0/4326>', "", "i") as ?rep)
+        bind(xsd:float(replace(str(?rep), "^[^0-9\\\\.-]*([-]?[0-9\\\\.]+) .*$", "$1" )) as ?long )
+        bind(xsd:float(replace( str(?rep), "^.* ([-]?[0-9\\\\.]+)[^0-9\\\\.]*$", "$1" )) as ?lat )
+    }
+    GROUP BY ?building ?long ?lat ?type ?buildingLabel
+  }
+  FILTER(!contains(?type, "Jew"))
+  FILTER(!contains(?type, "Catholic"))
+}
+ORDER BY ?type`,
+        sparqlEndpoint: 'https://sparql.geovistory.org/api_v1_project_15458106',
+        selectedPlugin: 'mapCircles',
+      },
+    ]}
+    pluginConfig={{
+      mapCircles: { mapHeight: '800px', tilesURL: 'https://mapwarper.net/maps/tile/24220/{z}/{x}/{y}.png' },
+    }}
+  ></geov-yasgui>,
+);

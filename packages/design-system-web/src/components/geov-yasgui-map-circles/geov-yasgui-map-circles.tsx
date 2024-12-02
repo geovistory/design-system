@@ -1,7 +1,7 @@
 import { Component, Host, Prop, State, h } from '@stencil/core';
 import type { Parser } from '@triply/yasr';
 import { closeOutline, informationCircleOutline } from 'ionicons/icons';
-import { DataDrivenPropertyValueSpecification, LngLatBoundsLike } from 'maplibre-gl';
+import { DataDrivenPropertyValueSpecification, LayerSpecification, LngLatBoundsLike, SourceSpecification } from 'maplibre-gl';
 import { importMapLibre } from '../../lib/importMapLibre';
 import { isNode } from '../../lib/isNode';
 import { GeovMapCirclesPopup, PopupItem } from '../geov-map-circles-popup/geov-map-circles-popup';
@@ -73,7 +73,8 @@ export class GeovYasguiMapCircles {
    */
   @Prop() maxZoom = 10;
 
-  @Prop() colorScale: string[] = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c']; // ColorBrewer2 qualitative 4-class Paired (colorblind safe)
+  // @Prop() colorScale: string[] = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c']; // ColorBrewer2 qualitative 4-class Paired (colorblind safe)
+  @Prop() colorScale: string[] = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00'];
 
   /**
    * If true, the legend is expanded, else collapsed
@@ -89,6 +90,11 @@ export class GeovYasguiMapCircles {
    * If true, adds zoom and rotation controls to the map.
    */
   @Prop() displayMapNavigationControls = false;
+
+  /**
+   * If provided, add an additional WMS layer to the map
+   */
+  @Prop() tilesURL = undefined;
 
   @State() labelIndices: string[] = [...new Set(this.data.map(ele => ele['type']?.value || 'none'))];
 
@@ -120,30 +126,57 @@ export class GeovYasguiMapCircles {
       if (!invalidPoints?.length) {
         // Load MapLibre script
         const MapLibre = await importMapLibre();
+
+        // This variable list all sources for the map.
+        // Next lines describes minimal source.
+        const sources: { [_: string]: SourceSpecification } = {
+          osm: {
+            type: 'raster',
+            tiles: [
+              'https://a.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{ratio}.png',
+              'https://b.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{ratio}.png',
+              'https://c.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{ratio}.png',
+            ],
+            tileSize: 256,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            maxzoom: 19,
+          },
+        };
+
+        // In case there is the input param of additional URL, add it to the source
+        if (this.tilesURL) {
+          sources['tilesURL'] = {
+            type: 'raster',
+            tiles: [this.tilesURL],
+          };
+        }
+
+        // This variable list all layers for the map.
+        // Next lines describes minimal layers.
+        const layers: LayerSpecification[] = [
+          {
+            id: 'osm',
+            type: 'raster',
+            source: 'osm', // This must match the source key above
+          },
+        ];
+
+        // In case there is the input param of additional URL, add it to the source
+        if (this.tilesURL) {
+          layers.push({
+            id: 'tilesURL',
+            type: 'raster',
+            source: 'tilesURL',
+          });
+        }
+
+        // Create the map: Add source and layers
         const map = new MapLibre.Map({
           container: this.mapContainerEl,
           style: {
             version: 8,
-            sources: {
-              osm: {
-                type: 'raster',
-                tiles: [
-                  'https://a.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{ratio}.png',
-                  'https://b.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{ratio}.png',
-                  'https://c.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{ratio}.png',
-                ],
-                tileSize: 256,
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                maxzoom: 19,
-              },
-            },
-            layers: [
-              {
-                id: 'osm',
-                type: 'raster',
-                source: 'osm', // This must match the source key above
-              },
-            ],
+            sources: sources,
+            layers: layers,
             glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
           },
           zoom: 6,
