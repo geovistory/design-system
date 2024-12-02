@@ -480,3 +480,40 @@ export const Sizing = await stencilWrapper(
 export const DisableScrollZoom = await stencilWrapper(
   <geov-yasgui-map-circles data={completeData} disableScrollZoom={true} displayMapNavigationControls={true}></geov-yasgui-map-circles>,
 );
+
+const londonData: Parser.Binding[] = [
+  {
+    label: {
+      type: 'literal',
+      value: 'London Point1',
+    },
+    long: {
+      type: 'literal',
+      datatype: 'http://www.w3.org/2001/XMLSchema#float',
+      value: '-0.12',
+    },
+    lat: {
+      type: 'literal',
+      datatype: 'http://www.w3.org/2001/XMLSchema#float',
+      value: '51.5',
+    },
+    radius: {
+      type: 'literal',
+      datatype: 'http://www.w3.org/2001/XMLSchema#decimal',
+      value: '4.5',
+    },
+    number: {
+      type: 'literal',
+      datatype: 'http://www.w3.org/2001/XMLSchema#integer',
+      value: '9',
+    },
+    type: {
+      type: 'literal',
+      value: 'Test Type',
+    },
+  },
+];
+
+export const LondonMap = await stencilWrapper(
+  <geov-yasgui-map-circles data={londonData} tilesURL={'https://mapwarper.net/maps/tile/24220/{z}/{x}/{y}.png'}></geov-yasgui-map-circles>,
+);
