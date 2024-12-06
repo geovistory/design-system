@@ -19,7 +19,7 @@ function createGeoJSON(data: Parser.Binding[], labelIndices: string[]) {
         //set the properties to the .value of the ele
         properties: {
           label: ele['label']?.value,
-          radius: Math.round((parseFloat(ele['radius']?.value) || 0) * 10) / 10,
+          radius: Math.round(parseFloat(ele['radius']?.value) || 0) / 10,
           number: parseInt(ele['number']?.value),
           type: ele['type']?.value || 'none',
           typeindex: labelIndices.indexOf(ele['type']?.value || 'none'),
@@ -181,6 +181,20 @@ export class GeovYasguiMapCircles {
           },
           zoom: 6,
         });
+
+        // Add navigation controls (including the compass)
+        const nav = new MapLibre.NavigationControl({
+          showCompass: true,
+          showZoom: true,
+        });
+        map.addControl(nav, 'bottom-right');
+
+        // Add the scale control
+        const scale = new MapLibre.ScaleControl({
+          maxWidth: 200, // Maximum width of the scale bar (optional)
+          unit: 'metric',
+        });
+        map.addControl(scale, 'bottom-left');
 
         /*
          * move the map to the bounds of the data
