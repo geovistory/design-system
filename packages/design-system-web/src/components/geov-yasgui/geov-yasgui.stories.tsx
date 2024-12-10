@@ -340,7 +340,7 @@ ORDER BY ?type`,
       },
     ]}
     pluginConfig={{
-      mapCircles: { mapHeight: '800px', tilesURL: 'https://mapwarper.net/maps/tile/24220/{z}/{x}/{y}.png' },
+      mapCircles: { mapHeight: '800px', tilesURL: 'https://mapwarper.net/maps/tile/24220/{z}/{x}/{y}.png', zoomLevelThreshold: 15 },
     }}
   ></geov-yasgui>,
 );

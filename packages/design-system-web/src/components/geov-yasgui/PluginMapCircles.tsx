@@ -6,6 +6,7 @@ import { Components } from '../../components';
 export type MapCircleConfig = Partial<Omit<Components.GeovYasguiMapCircles, 'data'>> & {
   mapHeight?: string;
   tilesURL?: string;
+  zoomLevelThreshold?: string;
 };
 
 export default function generatePluginMapCircles(config: MapCircleConfig) {

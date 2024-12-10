@@ -515,5 +515,9 @@ const londonData: Parser.Binding[] = [
 ];
 
 export const LondonMap = await stencilWrapper(
-  <geov-yasgui-map-circles data={londonData} tilesURL={'https://mapwarper.net/maps/tile/24220/{z}/{x}/{y}.png'}></geov-yasgui-map-circles>,
+  <geov-yasgui-map-circles
+    data={londonData}
+    tilesURL={'https://overlays.humap.site/layersoflondon/rocque_LWS_1746/{z}/{x}/{y}.png'}
+    zoomLevelThreshold={15}
+  ></geov-yasgui-map-circles>,
 );
