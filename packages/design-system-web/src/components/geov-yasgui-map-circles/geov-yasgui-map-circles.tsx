@@ -96,7 +96,7 @@ export class GeovYasguiMapCircles {
    */
   @Prop() tilesURL = undefined;
 
-  @Prop() zoomLevelThreshold = 15;
+  @Prop() zoomLevelThreshold = 0;
 
   @State() labelIndices: string[] = [...new Set(this.data.map(ele => ele['type']?.value || 'none'))];
 
@@ -254,15 +254,18 @@ export class GeovYasguiMapCircles {
             }
           }
 
-          map.setLayoutProperty('tilesURL', 'visibility', 'none');
-          map.on('zoom', () => {
-            const zoomLevel = map.getZoom();
-            if (zoomLevel > this.zoomLevelThreshold) {
-              map.setLayoutProperty('tilesURL', 'visibility', 'visible');
-            } else {
-              map.setLayoutProperty('tilesURL', 'visibility', 'none');
-            }
-          });
+          // if there is a map layer, deactivate it if the zoom is above the threshold
+          if (this.tilesURL) {
+            map.setLayoutProperty('tilesURL', 'visibility', 'none');
+            map.on('zoom', () => {
+              const zoomLevel = map.getZoom();
+              if (zoomLevel > this.zoomLevelThreshold) {
+                map.setLayoutProperty('tilesURL', 'visibility', 'visible');
+              } else {
+                map.setLayoutProperty('tilesURL', 'visibility', 'none');
+              }
+            });
+          }
 
           map.addLayer({
             id: 'circles',
