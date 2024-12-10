@@ -96,6 +96,8 @@ export class GeovYasguiMapCircles {
    */
   @Prop() tilesURL = undefined;
 
+  @Prop() zoomLevelThreshold = 15;
+
   @State() labelIndices: string[] = [...new Set(this.data.map(ele => ele['type']?.value || 'none'))];
 
   async componentDidLoad() {
@@ -251,6 +253,16 @@ export class GeovYasguiMapCircles {
               colorSteps.push(this.colorScale[i]);
             }
           }
+
+          map.setLayoutProperty('tilesURL', 'visibility', 'none');
+          map.on('zoom', () => {
+            const zoomLevel = map.getZoom();
+            if (zoomLevel > this.zoomLevelThreshold) {
+              map.setLayoutProperty('tilesURL', 'visibility', 'visible');
+            } else {
+              map.setLayoutProperty('tilesURL', 'visibility', 'none');
+            }
+          });
 
           map.addLayer({
             id: 'circles',
