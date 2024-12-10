@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.25.1-pr-132.0 (2024-12-10)
+
+**Note:** Version bump only for package @geovistory/design-system-web
+
+
+
+
+
 ## 1.25.1-pr-131.0 (2024-12-10)
 
 **Note:** Version bump only for package @geovistory/design-system-web
