@@ -30,7 +30,7 @@ export class GeovClassRadioGroup {
     this.preferredItemsList = [];
     this.restItemsList = [];
     this.items.forEach(item => {
-      if (this.preferredItems?.includes(item.classUri.substring(this.uriPrefix.length))) {
+      if (this.preferredItems?.includes(item.classUri.substring(this.uriPrefix.length)) && !this.preferredItemsList?.map(it => it.classUri).includes(item.classUri)) {
         this.preferredItemsList?.push(item);
       } else {
         this.restItemsList?.push(item);
