@@ -41,7 +41,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT (COUNT(DISTINCT ?entity) AS ?count)
 WHERE {
   ?entity rdfs:label ?label .
-  FILTER(CONTAINS(LCASE(STR(?label)), "${getTextFilter(searchString.toLowerCase())}"))
+  FILTER(CONTAINS(LCASE(STR(?label)), "${searchString.toLowerCase()}"))
 }`;
 };
 interface Bindings {

@@ -33,7 +33,7 @@ WHERE {
     WHERE {
  	    ?entityUri a ?class .
       ?entityUri rdfs:label ?label .
-      FILTER(CONTAINS(LCASE(STR(?label)), "${getTextFilter(searchString.toLowerCase())}"))
+      FILTER(CONTAINS(LCASE(STR(?label)), "${searchString.toLowerCase()}"))
     }
     GROUP BY ?class
     ORDER by DESC(?count)

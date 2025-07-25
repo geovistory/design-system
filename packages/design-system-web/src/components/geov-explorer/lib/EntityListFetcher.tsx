@@ -65,7 +65,7 @@ WHERE {
   	?entityUri rdfs:label ?entityLabel .
   	?entityUri a ?classUri .
   	?classUri rdfs:label ?classLabel .
-  	FILTER(CONTAINS(LCASE(STR(?entityLabel)), "${getTextFilter(searchString.toLowerCase())}"))
+  	FILTER(CONTAINS(LCASE(STR(?entityLabel)), "${searchString.toLowerCase()}"))
 }
 LIMIT ${limit}
 OFFSET ${offset}
