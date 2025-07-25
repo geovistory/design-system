@@ -4,56 +4,73 @@ import { GeovEntityListItem } from '../../geov-entity-list/geov-entity-list';
 import { getTextFilter } from './getTextFilter';
 export type EntityListData = FetchResponse & { items?: GeovEntityListItem[]; error?: boolean };
 
+// export const getQuery = (searchString: string, classUris: string[], limit: number, offset: number) => {
+//   return `# entities
+//   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+//   PREFIX text: <http://jena.apache.org/text#>
+//   SELECT ?entityUri ?entityLabel ?classUri ?classLabel
+//   {
+//     {
+//     SELECT DISTINCT ?entityUri  ?entityLabel ?classUri ?classLabel {
+//         {
+//           SELECT DISTINCT ?entityUri ?entityLabel ?classUri
+//           {
+//               {
+//                     SELECT ?entityUri  ?entityLabel
+//                     {
+//                         ${searchString ? `(?entityUri) text:query ('${getTextFilter(searchString)}') . ` : ``}
+
+//                         ${
+//                           !classUris?.length
+//                             ? `
+//                         {
+//                           {
+//                             SELECT DISTINCT  ?classWithInstances
+//                             WHERE {
+//                               ?entityUri a ?classWithInstances .
+//                             }
+//                             GROUP BY ?classWithInstances
+//                           }
+//                         }
+//                         {?entityUri a ?classWithInstances .}
+//                         `
+//                             : ``
+//                         }
+
+//                         ${classUris.map(x => `{?entityUri a <${x}> .}`).join('\nUNION\n')}
+//                         OPTIONAL {?entityUri rdfs:label ?entityLabel .}
+
+//                   }
+//                   LIMIT ${limit}
+//                   OFFSET ${offset}
+//               }
+//               ?entityUri a ?classUri .
+//           }
+//         }
+//         OPTIONAL { ?classUri rdfs:label ?classLabel .}
+//       }
+//       HAVING (?classLabel!="")
+//     }
+//   }
+// `;
+// };
+
 export const getQuery = (searchString: string, classUris: string[], limit: number, offset: number) => {
   return `# entities
-  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-  PREFIX text: <http://jena.apache.org/text#>
-  SELECT ?entityUri ?entityLabel ?classUri ?classLabel
-  {
-    {
-    SELECT DISTINCT ?entityUri  ?entityLabel ?classUri ?classLabel {
-        {
-          SELECT DISTINCT ?entityUri ?entityLabel ?classUri
-          {
-              {
-                    SELECT ?entityUri  ?entityLabel
-                    {
-                        ${searchString ? `(?entityUri) text:query ('${getTextFilter(searchString)}') . ` : ``}
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-                        ${
-                          !classUris?.length
-                            ? `
-                        {
-                          {
-                            SELECT DISTINCT  ?classWithInstances
-                            WHERE {
-                              ?entityUri a ?classWithInstances .
-                            }
-                            GROUP BY ?classWithInstances
-                          }
-                        }
-                        {?entityUri a ?classWithInstances .}
-                        `
-                            : ``
-                        }
-
-                        ${classUris.map(x => `{?entityUri a <${x}> .}`).join('\nUNION\n')}
-                        OPTIONAL {?entityUri rdfs:label ?entityLabel .}
-
-                  }
-                  LIMIT ${limit}
-                  OFFSET ${offset}
-              }
-              ?entityUri a ?classUri .
-          }
-        }
-        OPTIONAL { ?classUri rdfs:label ?classLabel .}
-      }
-      HAVING (?classLabel!="")
-    }
-  }
+SELECT ?entityUri ?entityLabel ?classUri ?classLabel
+WHERE {
+  	?entityUri rdfs:label ?entityLabel .
+  	?entityUri a ?classUri .
+  	?classUri rdfs:label ?classLabel .
+  	FILTER(CONTAINS(LCASE(STR(?entityLabel)), "${getTextFilter(searchString.toLowerCase())}"))
+}
+LIMIT ${limit}
+OFFSET ${offset}
 `;
 };
+
 interface Bindings {
   entityLabel: SparqlBinding;
   entityUri: SparqlBinding;
