@@ -34,6 +34,7 @@ export type FullCountData = FetchResponse & { count?: number; error?: boolean };
 // };
 
 export const getQuery = (searchString: string, classUris: string[]) => {
+  console.log('classUris', classUris);
   return `# count
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 

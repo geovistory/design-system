@@ -56,6 +56,7 @@ export type EntityListData = FetchResponse & { items?: GeovEntityListItem[]; err
 // };
 
 export const getQuery = (searchString: string, classUris: string[], limit: number, offset: number) => {
+  console.log('classUris', classUris);
   return `# entities
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
