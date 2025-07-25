@@ -24,6 +24,13 @@ export class GeovEntityList {
   @Prop() items?: GeovEntityListItem[];
   @Prop() loading?: boolean;
   @Prop() defaultPageSize = 5;
+
+  /**
+   * sparqlEndpoint
+   * URL of the sparql endpoint to query
+   */
+  @Prop() sparqlEndpoint = '';
+
   /**
    * uriRegex
    * Optional regex with capturing groups to transform
@@ -52,7 +59,7 @@ export class GeovEntityList {
       <Host>
         <ion-list lines="full">
           {this.items?.map(item => (
-            <ion-item href={regexReplace(item.entityUri, this.uriRegex, this.uriReplace)} target="_blank" rel="noreferrer">
+            <ion-item href={regexReplace(item.entityUri, this.uriRegex, this.uriReplace, this.sparqlEndpoint)} target="_blank" rel="noreferrer">
               <ion-label>
                 <h2>{item.entityLabel}</h2>
                 <p>{item.classLabel}</p>

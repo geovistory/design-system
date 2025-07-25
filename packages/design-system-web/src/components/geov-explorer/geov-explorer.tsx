@@ -293,6 +293,7 @@ export class GeovExplorer {
                   el.items = this.entityList?.items;
                   el.loading = this.entityList?.loading;
                 }}
+                sparqlEndpoint={this.sparqlEndpoint}
               ></geov-entity-list>
               <ion-item class="paginator-container" lines="none">
                 {this.fullCount?.count && !this.fullCount?.loading && (
