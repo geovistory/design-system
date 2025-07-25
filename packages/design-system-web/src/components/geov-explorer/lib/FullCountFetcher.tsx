@@ -1,6 +1,5 @@
 import { FetchResponse } from '../../../lib/FetchResponse';
 import { PromiseWithCancel, SparqlBinding, sparqlJson, SparqlRes } from '../../../lib/sparqlJson';
-import { getTextFilter } from './getTextFilter';
 export type FullCountData = FetchResponse & { count?: number; error?: boolean };
 
 // export const getQuery = (searchString: string, classUris: string[]) => {

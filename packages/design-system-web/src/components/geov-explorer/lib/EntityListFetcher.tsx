@@ -1,7 +1,6 @@
 import { FetchResponse } from '../../../lib/FetchResponse';
 import { PromiseWithCancel, SparqlBinding, sparqlJson, SparqlRes } from '../../../lib/sparqlJson';
 import { GeovEntityListItem } from '../../geov-entity-list/geov-entity-list';
-import { getTextFilter } from './getTextFilter';
 export type EntityListData = FetchResponse & { items?: GeovEntityListItem[]; error?: boolean };
 
 // export const getQuery = (searchString: string, classUris: string[], limit: number, offset: number) => {

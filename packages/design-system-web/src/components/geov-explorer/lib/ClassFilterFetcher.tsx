@@ -1,7 +1,6 @@
 import { FetchResponse } from '../../../lib/FetchResponse';
 import { PromiseWithCancel, SparqlBinding, sparqlJson, SparqlRes } from '../../../lib/sparqlJson';
 import { GeovClassSelectItem } from '../../geov-class-select/geov-class-select';
-import { getTextFilter } from './getTextFilter';
 export type ClassSelectData = FetchResponse & { items?: GeovClassSelectItem[]; error?: boolean };
 
 // export const getQuery = (searchString?: string) => `# classes
