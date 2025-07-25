@@ -55,7 +55,6 @@ export type EntityListData = FetchResponse & { items?: GeovEntityListItem[]; err
 // };
 
 export const getQuery = (searchString: string, classUris: string[], limit: number, offset: number) => {
-  console.log('classUris', classUris);
   return `# entities
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
@@ -63,6 +62,7 @@ SELECT ?entityUri ?entityLabel ?classUri ?classLabel
 WHERE {
   	?entityUri rdfs:label ?entityLabel .
   	?entityUri a ?classUri .
+    ${classUris.length > 0 ? 'VALUES ?classUri { ' + classUris.join(', ') + ' }' : ''}
   	?classUri rdfs:label ?classLabel .
   	FILTER(CONTAINS(LCASE(STR(?entityLabel)), "${searchString.toLowerCase()}"))
 }

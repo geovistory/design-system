@@ -11,5 +11,8 @@ export function regexReplace(inputStr: string, regex?: string, replace?: string,
     inputStr = inputStr.replace(r, replace);
   }
   if (!sparqlEndpoint) return inputStr;
-  else return inputStr + '?endpoint=' + sparqlEndpoint;
+  else {
+    if (inputStr.includes('?')) return inputStr + '&endpoint=' + sparqlEndpoint;
+    else return inputStr + '?endpoint=' + sparqlEndpoint;
+  }
 }
