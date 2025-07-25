@@ -39,7 +39,6 @@ WHERE {
   }
   ?class rdfs:label ?label
 }
-HAVING(?label != "")
 `;
 
 interface Bindings {
