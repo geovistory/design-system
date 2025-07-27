@@ -62,7 +62,7 @@ SELECT ?entityUri ?entityLabel ?classUri ?classLabel
 WHERE {
   	?entityUri rdfs:label ?entityLabel .
   	?entityUri a ?classUri .
-    ${classUris.length > 0 ? 'VALUES ?classUri { ' + classUris.join(', ') + ' }' : ''}
+    ${classUris.length > 0 ? 'VALUES ?classUri { <' + classUris.join('>, <') + '> }' : ''}
   	?classUri rdfs:label ?classLabel .
   	FILTER(CONTAINS(LCASE(STR(?entityLabel)), "${searchString.toLowerCase()}"))
 }
